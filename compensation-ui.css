@@ -1,0 +1,14 @@
+/* Build 003 compensation integration styles. Build 002 styles.css remains unchanged. */
+[hidden]{display:none!important}
+.button:disabled{opacity:.42;cursor:not-allowed;border-color:var(--line)}
+.pagination{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 0}
+.pagination>div{display:flex;gap:7px}.pagination .button{min-height:34px;padding:0 10px;font-size:9px}
+.pagination-info{color:var(--faint);font-size:9px;font-variant-numeric:tabular-nums}
+.data-flag{display:block;margin-top:3px;color:var(--amber);font-size:7px;text-transform:uppercase;letter-spacing:.04em}
+.entity-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line-soft)}
+.entity-summary>div{padding:9px;border:1px solid var(--line-soft);border-radius:9px;background:rgba(255,255,255,.015);min-width:0}
+.entity-summary strong,.entity-summary span{display:block}.entity-summary strong{font-size:14px}.entity-summary span{margin-top:3px;color:var(--faint);font-size:8px;line-height:1.35;overflow-wrap:anywhere}
+.compact-rules{gap:7px}.compact-rules>div{padding-bottom:7px}
+.quality-list{display:grid;gap:7px}.quality-row{width:100%;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 11px;border:1px solid rgba(240,187,94,.20);border-radius:9px;background:var(--amber-soft);color:var(--text);text-align:left;cursor:pointer}.quality-row:hover{border-color:rgba(240,187,94,.42)}
+.quality-row strong,.quality-row small{display:block}.quality-row strong{font-size:9px}.quality-row small{margin-top:3px;color:var(--muted);font-size:8px}.quality-delta{color:var(--amber);font-size:10px;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}.quality-delta.negative{color:var(--red)}
+@media(max-width:620px){.entity-summary{grid-template-columns:1fr}.pagination{align-items:flex-start;flex-direction:column}.pagination>div{width:100%}.pagination .button{flex:1}.quality-row{align-items:flex-start}.quality-delta{margin-top:2px}}
