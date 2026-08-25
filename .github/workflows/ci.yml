@@ -21,9 +21,11 @@ jobs:
           node-version: '22'
       - name: Validate JavaScript syntax
         run: |
+          node --check quality-loader.js
           node --check app.js
           node --check compensation-ui.js
           node --check budget-ui.js
+          node --check build005-ui.js
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate checked-in data
