@@ -1,5 +1,6 @@
 name: Budget bootstrap
 
+# Temporary branch-only bootstrap; remove before PR.
 on:
   push:
     branches: ['agent/build-004-budget-actuals-final']
