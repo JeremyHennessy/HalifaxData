@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "assessed_at": "2026-08-25",
+    "based_on_build005_head": "271f3270f8e3a652e25d7c2ca70baf5b0215124a",
+    "policy": "A generated artifact is not UI-ready merely because it exists. Only domains with status=ready may be loaded into analytical views; hold/review domains remain visible as coverage states without rendering their unvalidated facts."
+  },
+  "domains": {
+    "compensation": {
+      "status": "ready",
+      "artifact": "./data/generated/compensation.json",
+      "label": "People & compensation",
+      "boundary": "$100k+ public-compensation disclosures; absence from a year is not zero compensation or proof of departure.",
+      "reason": "Existing compensation validator checks source IDs, disclosure threshold, year/source alignment, duplicates, metadata coverage and source-reported arithmetic discrepancies."
+    },
+    "budget": {
+      "status": "ready",
+      "artifact": "./data/generated/budget.json",
+      "label": "Budget & actuals",
+      "boundary": "Budget-book service areas and audited PSAS rows are separate accounting views and are not force-crosswalked.",
+      "reason": "Build 004 validator checks row contracts, control totals, source arithmetic flags, label normalization and audited statement controls."
+    },
+    "procurement": {
+      "status": "ready",
+      "artifact": "./data/generated/procurement.json",
+      "label": "Public tender awards",
+      "boundary": "Nova Scotia awarded public tenders filtered to HRM/Halifax municipal bodies. This is not a complete accounts-payable ledger and does not include every alternative procurement or later amendment.",
+      "reason": "Structured Socrata award records have explicit solicitation/vendor/entity/value fields and per-record API provenance. Build 005 multidomain validation enforces the UI contract."
+    },
+    "spending": {
+      "status": "hold",
+      "artifact": "./data/generated/spending.json",
+      "label": "Quarterly financial summaries",
+      "boundary": "Official quarterly summary-table rows only; not transaction-level accounts payable.",
+      "reason": "Verified parser defect: merged PDF cells containing several financial columns are currently passed to the generic money parser, concatenating digits into impossible magnitudes. Monetary analysis is blocked until the parser is corrected and the artifact is regenerated."
+    },
+    "capital": {
+      "status": "hold",
+      "artifact": "./data/generated/capital.json",
+      "label": "Capital projects",
+      "boundary": "Historical ArcGIS project records plus project-level capital-plan extraction; proposed/draft source status must remain explicit.",
+      "reason": "Verified artifact/collector mismatch: many capital-plan project_code/project_id values contain the literal 'Previous #:' and adjacent text. Project-level analytical rendering is blocked until regeneration and validation."
+    },
+    "financials": {
+      "status": "hold",
+      "artifact": "./data/generated/financials.json",
+      "label": "Audited financial history",
+      "boundary": "Only actual comparative financial-statement line items may be normalized as CAD values.",
+      "reason": "Verified parser defect: the text fallback currently emits non-financial numeric pairs from dates, table-of-contents ranges, telephone/fax numbers and postal-code fragments. Analytical rendering is blocked pending a statement-specific parser fix."
+    },
+    "council": {
+      "status": "review",
+      "artifact": "./data/generated/council.json",
+      "label": "Council decisions",
+      "boundary": "Agenda/report/minute extraction must distinguish source documents, motions, approvals and contextual text before becoming an analytical fact table.",
+      "reason": "Artifact is present but has not yet passed a dedicated domain contract in this dashboard stabilization run."
+    },
+    "signals": {
+      "status": "missing",
+      "artifact": "./data/generated/signals.json",
+      "label": "Generated review signals",
+      "boundary": "Signals prioritize evidence review and are never findings by themselves.",
+      "reason": "No dedicated generated signal artifact is checked in; compensation signals remain locally derived from validated disclosure rows."
+    }
+  }
+}
