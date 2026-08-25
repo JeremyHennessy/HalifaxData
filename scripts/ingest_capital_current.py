@@ -3,8 +3,9 @@
 
 The final plan publishes project-level budget and lifecycle fields that are not
 present in the historical ArcGIS layer. This collector preserves source-page
-provenance, aligns money by the PDF's explicit period headers, and links to the
-historical layer only when the official project code matches exactly.
+provenance, aligns money by the PDF's explicit period headers, reconciles the
+project-sheet universe to the final plan overview, and links to the historical
+layer only when the official project code matches exactly.
 """
 from __future__ import annotations
 
@@ -23,9 +24,27 @@ REGISTRY = ROOT / "data/sources.json"
 HISTORICAL = ROOT / "data/generated/capital.json"
 DEFAULT_OUT = ROOT / "data/generated/capital_current.json"
 SOURCE_ID = "hrm-capital-2025-26"
-PARSER_VERSION = "build008-capital-current-v2"
+PARSER_VERSION = "build008-capital-current-v3"
 PLAN_NARRATIVE_ACTIVE_PROJECTS = 194
 MIN_PROJECT_ROWS = 175
+
+# Final plan overview, Figure 3, converted from source $000s to CAD.
+PLAN_OVERVIEW_TOTALS = {
+    "2025_26": 314_241_000,
+    "2026_27": 466_487_000,
+    "2027_28": 585_466_000,
+    "2028_29": 686_994_000,
+}
+# Figure 1 includes District Capital Funds as an asset-category aggregate, but
+# those funds do not appear as individual 2025/26 Capital Project sheets.
+PLAN_NON_PROJECT_AGGREGATES = {
+    "District Capital Funds": {
+        "2025_26": 1_504_000,
+        "2026_27": 1_504_000,
+        "2027_28": 1_504_000,
+        "2028_29": 1_504_000,
+    }
+}
 
 PROJECT_MARKER = "2025/26 Capital Project"
 PROJECT_CODE_RE = re.compile(r"Capital Project\s*#:\s*([A-Za-z0-9-]+)", re.I)
@@ -299,6 +318,18 @@ def main() -> None:
             f"expected at least {MIN_PROJECT_ROWS}. Missing-code pages: {missing_code_pages[:20]}"
         )
 
+    project_sheet_sums = {
+        key: round(sum(float((row.get("annual_budget") or {}).get(key) or 0) for row in records), 2)
+        for key in PLAN_OVERVIEW_TOTALS
+    }
+    excluded_sums = {
+        key: round(sum(float(values.get(key) or 0) for values in PLAN_NON_PROJECT_AGGREGATES.values()), 2)
+        for key in PLAN_OVERVIEW_TOTALS
+    }
+    reconciliation_deltas = {
+        key: round(project_sheet_sums[key] + excluded_sums[key] - PLAN_OVERVIEW_TOTALS[key], 2)
+        for key in PLAN_OVERVIEW_TOTALS
+    }
     summary_complete = sum(1 for row in records if row.get("total_estimated_project_cost") is not None)
     annual_complete = sum(1 for row in records if row.get("annual_budget") is not None)
     historical_matches = sum(1 for row in records if row["historical_exact_match"])
@@ -317,11 +348,17 @@ def main() -> None:
             "project_cost_summary_rows": summary_complete,
             "annual_budget_rows": annual_complete,
             "historical_exact_project_code_matches": historical_matches,
+            "plan_overview_total_capital": PLAN_OVERVIEW_TOTALS,
+            "non_project_overview_aggregates": PLAN_NON_PROJECT_AGGREGATES,
+            "project_sheet_annual_budget_sums": project_sheet_sums,
+            "overview_reconciliation_delta_after_non_project_aggregates": reconciliation_deltas,
             "exact_join_only": True,
             "note": (
-                "Final 2025/26 Capital Plan project sheets. Some program-style sheets do not publish a total-project-cost summary; "
-                "blank summary fields remain null. Budget fields are source-plan amounts, not actual paid amounts. Historical ArcGIS "
-                "linkage is permitted only when project_code matches exactly; no fuzzy project matching."
+                "Final 2025/26 Capital Plan project sheets. The final overview also contains District Capital Funds as an asset-category "
+                "aggregate without individual project sheets; it is recorded separately for overview reconciliation and never fabricated "
+                "as a project. Some program-style sheets do not publish a total-project-cost summary, so blank summary fields remain null. "
+                "Budget fields are source-plan amounts, not actual paid amounts. Historical ArcGIS linkage is permitted only when project_code "
+                "matches exactly; no fuzzy project matching."
             ),
         },
         "records": records,
@@ -331,7 +368,7 @@ def main() -> None:
     print(
         f"current capital: {len(records)} unique project sheets; marker_pages={project_marker_pages}; "
         f"annual_budget_rows={annual_complete}; project_cost_summary_rows={summary_complete}; "
-        f"historical_exact_matches={historical_matches}; missing_code_pages={missing_code_pages}"
+        f"historical_exact_matches={historical_matches}; reconciliation_deltas={reconciliation_deltas}"
     )
 
 
