@@ -2,8 +2,8 @@
 """Extract current 2025/26 HRM capital-project sheets from the final Capital Plan.
 
 The final plan publishes project-level budget and lifecycle fields that are not
-present in the historical ArcGIS layer. This collector keeps the PDF source
-structure/provenance, uses strict single-money-cell parsing, and links to the
+present in the historical ArcGIS layer. This collector preserves source-page
+provenance, aligns money by the PDF's explicit period headers, and links to the
 historical layer only when the official project code matches exactly.
 """
 from __future__ import annotations
@@ -23,8 +23,8 @@ REGISTRY = ROOT / "data/sources.json"
 HISTORICAL = ROOT / "data/generated/capital.json"
 DEFAULT_OUT = ROOT / "data/generated/capital_current.json"
 SOURCE_ID = "hrm-capital-2025-26"
-PARSER_VERSION = "build008-capital-current-v1"
-PLAN_STATED_ACTIVE_PROJECTS = 194
+PARSER_VERSION = "build008-capital-current-v2"
+PLAN_NARRATIVE_ACTIVE_PROJECTS = 194
 MIN_PROJECT_ROWS = 175
 
 PROJECT_MARKER = "2025/26 Capital Project"
@@ -50,15 +50,22 @@ SUMMARY_LABELS = {
     "total_work_2025_26": "Total Work to be Completed in 2025/26",
 }
 ANNUAL_LABELS = {
-    "gross_capital_budget": "Gross Capital Budget",
-    "external_funding": "External Funding",
-    "reserve": "Reserve",
-    "capital_renewal": "Capital Renewal",
-    "debt": "Debt",
-    "ongoing_operating_costs": "Ongoing Operating Costs (Savings)",
-    "one_time_operating_costs": "One-Time Operating Costs (Savings)",
+    "gross_capital_budget": ("Gross Capital Budget", True),
+    "external_funding": ("External Funding", True),
+    "reserve": ("Reserve", True),
+    "capital_renewal": ("Capital Renewal", True),
+    "debt": ("Debt", True),
+    "ongoing_operating_costs": ("Ongoing Operating Costs (Savings)", False),
+    "one_time_operating_costs": ("One-Time Operating Costs (Savings)", False),
 }
-ANNUAL_KEYS = ["unspent_previous_budget", "2025_26", "2026_27", "2027_28", "2028_29"]
+CAPITAL_PERIODS = [
+    ("unspent_previous_budget", "unspent prev"),
+    ("2025_26", "2025/26"),
+    ("2026_27", "2026/27"),
+    ("2027_28", "2027/28"),
+    ("2028_29", "2028/29"),
+]
+OPERATING_PERIODS = CAPITAL_PERIODS[1:]
 
 
 def normalized_rows(page) -> list[list[str]]:
@@ -71,9 +78,13 @@ def normalized_rows(page) -> list[list[str]]:
     return rows
 
 
+def normalized_label(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", clean(value).casefold()).strip()
+
+
 def label_matches(cell: str, label: str) -> bool:
-    left = re.sub(r"[^a-z0-9]+", " ", clean(cell).casefold()).strip()
-    right = re.sub(r"[^a-z0-9]+", " ", label.casefold()).strip()
+    left = normalized_label(cell)
+    right = normalized_label(label)
     return left == right or left.startswith(right + " ")
 
 
@@ -91,10 +102,7 @@ def value_after_label(rows: list[list[str]], labels: list[str]) -> str | None:
 def regex_field(text: str, label: str, stop_labels: tuple[str, ...] = ()) -> str | None:
     escaped = re.escape(label)
     stop = "|".join(re.escape(item) for item in stop_labels)
-    if stop:
-        pattern = rf"{escaped}\s*:?\s*(.+?)(?=\s+(?:{stop})\s*:|\n|$)"
-    else:
-        pattern = rf"{escaped}\s*:?\s*([^\n]+)"
+    pattern = rf"{escaped}\s*:?\s*(.+?)(?=\s+(?:{stop})\s*:|\n|$)" if stop else rf"{escaped}\s*:?\s*([^\n]+)"
     match = re.search(pattern, text, flags=re.I)
     return clean(match.group(1)) if match else None
 
@@ -112,50 +120,58 @@ def project_identity(text: str, rows: list[list[str]]) -> dict:
     return result
 
 
-def strict_money_values(cells: list[str]) -> list[float | None]:
-    values: list[float | None] = []
-    for cell in cells:
-        value, valid = strict_money_cell(cell)
-        if valid:
-            values.append(value)
-    return values
+def parse_money_segment(cells: list[str], *, context: str) -> float | None:
+    tokens = [clean(cell) for cell in cells if clean(cell) and clean(cell) != "$"]
+    if not tokens:
+        return None
+    if len(tokens) != 1:
+        raise RuntimeError(f"Ambiguous money segment for {context}: {tokens!r}")
+    value, valid = strict_money_cell(tokens[0])
+    if not valid:
+        raise RuntimeError(f"Invalid money cell for {context}: {tokens[0]!r}")
+    return value
 
 
-def annual_row(rows: list[list[str]], label: str) -> dict[str, float | None] | None:
-    for row in rows:
+def period_anchors(rows: list[list[str]], target_index: int, include_unspent: bool) -> list[tuple[str, int]] | None:
+    periods = CAPITAL_PERIODS if include_unspent else OPERATING_PERIODS
+    for row in reversed(rows[:target_index]):
+        anchors = []
+        for key, marker in periods:
+            match_index = next((idx for idx, cell in enumerate(row) if marker in clean(cell).casefold()), None)
+            if match_index is None:
+                anchors = []
+                break
+            anchors.append((key, match_index))
+        if anchors and all(anchors[i][1] < anchors[i + 1][1] for i in range(len(anchors) - 1)):
+            return anchors
+    return None
+
+
+def annual_row(rows: list[list[str]], label: str, include_unspent: bool) -> dict[str, float | None] | None:
+    for row_index, row in enumerate(rows):
         label_index = next((idx for idx, cell in enumerate(row) if label_matches(cell, label)), None)
         if label_index is None:
             continue
-        values = strict_money_values(row[label_index + 1 :])
-        # PDF table extraction may include blank columns; strict_money_values
-        # intentionally retains valid blank/dash cells as None.
-        if not values:
-            return {key: None for key in ANNUAL_KEYS}
-        if len(values) > 5:
-            values = values[:5]
-        while len(values) < 5:
-            values.append(None)
-        return dict(zip(ANNUAL_KEYS, values, strict=True))
+        anchors = period_anchors(rows, row_index, include_unspent)
+        periods = CAPITAL_PERIODS if include_unspent else OPERATING_PERIODS
+        if anchors is None:
+            return {key: None for key, _ in periods}
+        result: dict[str, float | None] = {}
+        for anchor_index, (key, start) in enumerate(anchors):
+            end = anchors[anchor_index + 1][1] if anchor_index + 1 < len(anchors) else len(row)
+            result[key] = parse_money_segment(row[start:end], context=f"{label}/{key}")
+        return result
     return None
 
 
 def summary_money(rows: list[list[str]], label: str) -> float | None:
-    for row_index, row in enumerate(rows):
+    for row in rows:
         for idx, cell in enumerate(row):
             if not label_matches(cell, label):
                 continue
-            # Prefer a monetary value on the same row.
-            same_row = strict_money_values(row[idx + 1 :])
-            finite = [value for value in same_row if value is not None]
-            if finite:
-                return finite[-1]
-            # Some PDF tables place the summary values in a neighboring row.
-            for lookahead in rows[row_index + 1 : row_index + 3]:
-                look_values = strict_money_values(lookahead)
-                finite = [value for value in look_values if value is not None]
-                if finite:
-                    return finite[-1]
-            return None
+            # Summary/work-plan values are printed on the same source row. Never
+            # borrow a value from a neighboring row: a blank source cell means null.
+            return parse_money_segment(row[idx + 1 :], context=label)
     return None
 
 
@@ -190,9 +206,8 @@ def historical_codes() -> dict[str, list[str]]:
     mapping: dict[str, list[str]] = {}
     for row in payload.get("records", []):
         code = clean(row.get("project_code"))
-        if not code:
-            continue
-        mapping.setdefault(code, []).append(clean(row.get("project_id")))
+        if code:
+            mapping.setdefault(code, []).append(clean(row.get("project_id")))
     return mapping
 
 
@@ -206,7 +221,7 @@ def parse_project(page_num: int, page, source_url: str, historical: dict[str, li
     if not code:
         return None
 
-    annual = {key: annual_row(rows, label) for key, label in ANNUAL_LABELS.items()}
+    annual = {key: annual_row(rows, label, include_unspent) for key, (label, include_unspent) in ANNUAL_LABELS.items()}
     summaries = {key: summary_money(rows, label) for key, label in SUMMARY_LABELS.items()}
     matched_historical_ids = historical.get(code, [])
 
@@ -284,12 +299,7 @@ def main() -> None:
             f"expected at least {MIN_PROJECT_ROWS}. Missing-code pages: {missing_code_pages[:20]}"
         )
 
-    summary_complete = sum(
-        1 for row in records
-        if row.get("previously_approved_budget") is not None
-        or row.get("four_year_budget") is not None
-        or row.get("total_estimated_project_cost") is not None
-    )
+    summary_complete = sum(1 for row in records if row.get("total_estimated_project_cost") is not None)
     annual_complete = sum(1 for row in records if row.get("annual_budget") is not None)
     historical_matches = sum(1 for row in records if row["historical_exact_match"])
 
@@ -302,14 +312,16 @@ def main() -> None:
             "records": len(records),
             "project_marker_pages": project_marker_pages,
             "missing_code_pages": missing_code_pages,
-            "plan_stated_active_projects": PLAN_STATED_ACTIVE_PROJECTS,
-            "summary_budget_rows": summary_complete,
+            "plan_narrative_active_projects": PLAN_NARRATIVE_ACTIVE_PROJECTS,
+            "project_sheets_extracted": len(records),
+            "project_cost_summary_rows": summary_complete,
             "annual_budget_rows": annual_complete,
             "historical_exact_project_code_matches": historical_matches,
             "exact_join_only": True,
             "note": (
-                "Final 2025/26 Capital Plan project sheets. Budget fields are source-plan amounts, not actual paid amounts. "
-                "Historical ArcGIS linkage is permitted only when project_code matches exactly; no fuzzy project matching."
+                "Final 2025/26 Capital Plan project sheets. Some program-style sheets do not publish a total-project-cost summary; "
+                "blank summary fields remain null. Budget fields are source-plan amounts, not actual paid amounts. Historical ArcGIS "
+                "linkage is permitted only when project_code matches exactly; no fuzzy project matching."
             ),
         },
         "records": records,
@@ -318,7 +330,7 @@ def main() -> None:
     DEFAULT_OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(
         f"current capital: {len(records)} unique project sheets; marker_pages={project_marker_pages}; "
-        f"annual_budget_rows={annual_complete}; summary_budget_rows={summary_complete}; "
+        f"annual_budget_rows={annual_complete}; project_cost_summary_rows={summary_complete}; "
         f"historical_exact_matches={historical_matches}; missing_code_pages={missing_code_pages}"
     )
 
