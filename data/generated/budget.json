@@ -14,6 +14,9 @@
     "service_area_record_count": 104,
     "service_area_detail_count": 86,
     "business_unit_count": 18,
+    "budget_source_arithmetic_discrepancy_rows": 11,
+    "budget_source_delta_mismatches": 4,
+    "budget_source_pct_mismatches": 11,
     "audited_record_count": 20,
     "audited_statement_pdf_page": 8,
     "audited_statement_printed_page": 4,
@@ -23,7 +26,7 @@
     "audited_total_expenses_actual": 1350788000,
     "audited_annual_surplus_budget": 8981000,
     "audited_annual_surplus_actual": 59838000,
-    "note": "Service-area budget rows and audited PSAS rows are separate accounting views and are not force-joined. Budget-book rows preserve 2023/24 actual, 2024/25 budget/projection and 2025/26 budget. Audited statement amounts are converted from source $000s to CAD."
+    "note": "Service-area budget rows and audited PSAS rows are separate accounting views and are not force-joined. Budget-book rows preserve source-reported change columns plus independently derived arithmetic; published inconsistencies are explicitly flagged. Audited statement amounts are converted from source $000s to CAD."
   },
   "records": [
     {
@@ -45,7 +48,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 31,
-      "derived_budget_change": 493200
+      "derived_budget_change": 493200,
+      "derived_budget_change_pct": 35.5947
     },
     {
       "record_type": "service_area_budget",
@@ -66,7 +70,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 31,
-      "derived_budget_change": 254300
+      "derived_budget_change": 254300,
+      "derived_budget_change_pct": 3.5547
     },
     {
       "record_type": "service_area_budget",
@@ -87,7 +92,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 31,
-      "derived_budget_change": 3844400
+      "derived_budget_change": 3844400,
+      "derived_budget_change_pct": 4.9757
     },
     {
       "record_type": "service_area_budget",
@@ -108,7 +114,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 31,
-      "derived_budget_change": 429300
+      "derived_budget_change": 429300,
+      "derived_budget_change_pct": 5.8288
     },
     {
       "record_type": "service_area_budget",
@@ -129,7 +136,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 31,
-      "derived_budget_change": 5021200
+      "derived_budget_change": 5021200,
+      "derived_budget_change_pct": 5.3894
     },
     {
       "record_type": "service_area_budget",
@@ -150,7 +158,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 52,
-      "derived_budget_change": 184300
+      "derived_budget_change": 184300,
+      "derived_budget_change_pct": 4.1839
     },
     {
       "record_type": "service_area_budget",
@@ -171,7 +180,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 52,
-      "derived_budget_change": -505500
+      "derived_budget_change": -505500,
+      "derived_budget_change_pct": -1.7041
     },
     {
       "record_type": "service_area_budget",
@@ -192,7 +202,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 52,
-      "derived_budget_change": 3565500
+      "derived_budget_change": 3565500,
+      "derived_budget_change_pct": 5.5762
     },
     {
       "record_type": "service_area_budget",
@@ -213,7 +224,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 52,
-      "derived_budget_change": 3244300
+      "derived_budget_change": 3244300,
+      "derived_budget_change_pct": 3.3101
     },
     {
       "record_type": "service_area_budget",
@@ -234,7 +246,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 78,
-      "derived_budget_change": 19200
+      "derived_budget_change": 19200,
+      "derived_budget_change_pct": 5.3289
     },
     {
       "record_type": "service_area_budget",
@@ -255,7 +268,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 78,
-      "derived_budget_change": 305600
+      "derived_budget_change": 305600,
+      "derived_budget_change_pct": 27.6361
     },
     {
       "record_type": "service_area_budget",
@@ -276,7 +290,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 78,
-      "derived_budget_change": 96800
+      "derived_budget_change": 96800,
+      "derived_budget_change_pct": 4.0753
     },
     {
       "record_type": "service_area_budget",
@@ -297,7 +312,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 78,
-      "derived_budget_change": 742400
+      "derived_budget_change": 742400,
+      "derived_budget_change_pct": 26.2147
     },
     {
       "record_type": "service_area_budget",
@@ -318,7 +334,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 78,
-      "derived_budget_change": -4500
+      "derived_budget_change": -4500,
+      "derived_budget_change_pct": -0.5906
     },
     {
       "record_type": "service_area_budget",
@@ -339,7 +356,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 78,
-      "derived_budget_change": 665300
+      "derived_budget_change": 665300,
+      "derived_budget_change_pct": 10.8435
     },
     {
       "record_type": "service_area_budget",
@@ -360,7 +378,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 78,
-      "derived_budget_change": 147800
+      "derived_budget_change": 147800,
+      "derived_budget_change_pct": 35.6746
     },
     {
       "record_type": "service_area_budget",
@@ -381,7 +400,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 78,
-      "derived_budget_change": 1972600
+      "derived_budget_change": 1972600,
+      "derived_budget_change_pct": 14.1049
     },
     {
       "record_type": "service_area_budget",
@@ -402,7 +422,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 100,
-      "derived_budget_change": 42600
+      "derived_budget_change": 42600,
+      "derived_budget_change_pct": 0.4905
     },
     {
       "record_type": "service_area_budget",
@@ -423,7 +444,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 100,
-      "derived_budget_change": -3024100
+      "derived_budget_change": -3024100,
+      "derived_budget_change_pct": -3.4069
     },
     {
       "record_type": "service_area_budget",
@@ -444,7 +466,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 100,
-      "derived_budget_change": 366000
+      "derived_budget_change": 366000,
+      "derived_budget_change_pct": 5.4416
     },
     {
       "record_type": "service_area_budget",
@@ -465,7 +488,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 100,
-      "derived_budget_change": 325000
+      "derived_budget_change": 325000,
+      "derived_budget_change_pct": 6.9446
     },
     {
       "record_type": "service_area_budget",
@@ -486,7 +510,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 100,
-      "derived_budget_change": -2947300
+      "derived_budget_change": -2947300,
+      "derived_budget_change_pct": 7.3399
     },
     {
       "record_type": "service_area_budget",
@@ -507,7 +532,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 100,
-      "derived_budget_change": -5237800
+      "derived_budget_change": -5237800,
+      "derived_budget_change_pct": -7.6241
     },
     {
       "record_type": "service_area_budget",
@@ -528,7 +554,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 119,
-      "derived_budget_change": -1655100
+      "derived_budget_change": -1655100,
+      "derived_budget_change_pct": 66.8727
     },
     {
       "record_type": "service_area_budget",
@@ -549,7 +576,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 119,
-      "derived_budget_change": 1037900
+      "derived_budget_change": 1037900,
+      "derived_budget_change_pct": 13.7018
     },
     {
       "record_type": "service_area_budget",
@@ -570,7 +598,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 119,
-      "derived_budget_change": 4032300
+      "derived_budget_change": 4032300,
+      "derived_budget_change_pct": 20.4091
     },
     {
       "record_type": "service_area_budget",
@@ -591,7 +620,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 119,
-      "derived_budget_change": -43700
+      "derived_budget_change": -43700,
+      "derived_budget_change_pct": -19.3363
     },
     {
       "record_type": "service_area_budget",
@@ -652,7 +682,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 119,
-      "derived_budget_change": 3371400
+      "derived_budget_change": 3371400,
+      "derived_budget_change_pct": 13.4408
     },
     {
       "record_type": "service_area_budget",
@@ -673,7 +704,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 134,
-      "derived_budget_change": 55600
+      "derived_budget_change": 55600,
+      "derived_budget_change_pct": 16.3433
     },
     {
       "record_type": "service_area_budget",
@@ -694,7 +726,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 134,
-      "derived_budget_change": 55600
+      "derived_budget_change": 55600,
+      "derived_budget_change_pct": 16.3433
     },
     {
       "record_type": "service_area_budget",
@@ -715,7 +748,12 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 147,
-      "derived_budget_change": -4100
+      "derived_budget_change": -4100,
+      "derived_budget_change_pct": -0.8666,
+      "source_budget_change_pct_delta": -0.1334,
+      "validation_flags": [
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -736,7 +774,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 147,
-      "derived_budget_change": 1457200
+      "derived_budget_change": 1457200,
+      "derived_budget_change_pct": 7.9666
     },
     {
       "record_type": "service_area_budget",
@@ -757,7 +796,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 147,
-      "derived_budget_change": 772600
+      "derived_budget_change": 772600,
+      "derived_budget_change_pct": 12.0574
     },
     {
       "record_type": "service_area_budget",
@@ -778,7 +818,12 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 147,
-      "derived_budget_change": 7100
+      "derived_budget_change": 7100,
+      "derived_budget_change_pct": 0.1524,
+      "source_budget_change_pct_delta": -0.1524,
+      "validation_flags": [
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -799,7 +844,12 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 147,
-      "derived_budget_change": 613200
+      "derived_budget_change": 613200,
+      "derived_budget_change_pct": 39.1871,
+      "source_budget_change_pct_delta": -0.1871,
+      "validation_flags": [
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -820,7 +870,12 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 147,
-      "derived_budget_change": 1927500
+      "derived_budget_change": 1927500,
+      "derived_budget_change_pct": 7.3176,
+      "source_budget_change_pct_delta": -0.3176,
+      "validation_flags": [
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -841,7 +896,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 147,
-      "derived_budget_change": 4773500
+      "derived_budget_change": 4773500,
+      "derived_budget_change_pct": 8.2678
     },
     {
       "record_type": "service_area_budget",
@@ -862,7 +918,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 176,
-      "derived_budget_change": 3200
+      "derived_budget_change": 3200,
+      "derived_budget_change_pct": 0.6806
     },
     {
       "record_type": "service_area_budget",
@@ -883,7 +940,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 176,
-      "derived_budget_change": 2569700
+      "derived_budget_change": 2569700,
+      "derived_budget_change_pct": 15.65
     },
     {
       "record_type": "service_area_budget",
@@ -904,7 +962,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 176,
-      "derived_budget_change": -42500
+      "derived_budget_change": -42500,
+      "derived_budget_change_pct": -0.8971
     },
     {
       "record_type": "service_area_budget",
@@ -925,7 +984,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 176,
-      "derived_budget_change": 4706200
+      "derived_budget_change": 4706200,
+      "derived_budget_change_pct": 42.2297
     },
     {
       "record_type": "service_area_budget",
@@ -946,7 +1006,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 176,
-      "derived_budget_change": -889100
+      "derived_budget_change": -889100,
+      "derived_budget_change_pct": -9.3306
     },
     {
       "record_type": "service_area_budget",
@@ -967,7 +1028,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 176,
-      "derived_budget_change": 6347500
+      "derived_budget_change": 6347500,
+      "derived_budget_change_pct": 15.0056
     },
     {
       "record_type": "service_area_budget",
@@ -988,7 +1050,12 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 223,
-      "derived_budget_change": 101100
+      "derived_budget_change": 101100,
+      "derived_budget_change_pct": 2.9641,
+      "source_budget_change_pct_delta": 3.3359,
+      "validation_flags": [
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -1009,7 +1076,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 223,
-      "derived_budget_change": 104400
+      "derived_budget_change": 104400,
+      "derived_budget_change_pct": 2.5581
     },
     {
       "record_type": "service_area_budget",
@@ -1030,7 +1098,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 223,
-      "derived_budget_change": 71400
+      "derived_budget_change": 71400,
+      "derived_budget_change_pct": 3.7975
     },
     {
       "record_type": "service_area_budget",
@@ -1051,7 +1120,12 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 223,
-      "derived_budget_change": -2309900
+      "derived_budget_change": -2309900,
+      "derived_budget_change_pct": 49.3758,
+      "source_budget_change_pct_delta": -48.5758,
+      "validation_flags": [
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -1072,7 +1146,12 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 223,
-      "derived_budget_change": 314600
+      "derived_budget_change": 314600,
+      "derived_budget_change_pct": 6.7235,
+      "source_budget_change_pct_delta": 6.3765,
+      "validation_flags": [
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -1093,7 +1172,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 223,
-      "derived_budget_change": -1718400
+      "derived_budget_change": -1718400,
+      "derived_budget_change_pct": -18.3333
     },
     {
       "record_type": "service_area_budget",
@@ -1114,7 +1194,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 248,
-      "derived_budget_change": -34600
+      "derived_budget_change": -34600,
+      "derived_budget_change_pct": -4.8109
     },
     {
       "record_type": "service_area_budget",
@@ -1135,7 +1216,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 248,
-      "derived_budget_change": 3300
+      "derived_budget_change": 3300,
+      "derived_budget_change_pct": 0.0869
     },
     {
       "record_type": "service_area_budget",
@@ -1156,7 +1238,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 248,
-      "derived_budget_change": 5526300
+      "derived_budget_change": 5526300,
+      "derived_budget_change_pct": 8.8721
     },
     {
       "record_type": "service_area_budget",
@@ -1177,7 +1260,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 248,
-      "derived_budget_change": 403200
+      "derived_budget_change": 403200,
+      "derived_budget_change_pct": 6.174
     },
     {
       "record_type": "service_area_budget",
@@ -1198,7 +1282,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 248,
-      "derived_budget_change": -870900
+      "derived_budget_change": -870900,
+      "derived_budget_change_pct": -2.5188
     },
     {
       "record_type": "service_area_budget",
@@ -1219,7 +1304,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 248,
-      "derived_budget_change": 40600
+      "derived_budget_change": 40600,
+      "derived_budget_change_pct": 0.8876
     },
     {
       "record_type": "service_area_budget",
@@ -1240,7 +1326,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 248,
-      "derived_budget_change": 5067900
+      "derived_budget_change": 5067900,
+      "derived_budget_change_pct": 4.5053
     },
     {
       "record_type": "service_area_budget",
@@ -1281,7 +1368,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 271,
-      "derived_budget_change": -1360400
+      "derived_budget_change": -1360400,
+      "derived_budget_change_pct": -78.8272
     },
     {
       "record_type": "service_area_budget",
@@ -1302,7 +1390,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 271,
-      "derived_budget_change": -134300
+      "derived_budget_change": -134300,
+      "derived_budget_change_pct": -7.7819
     },
     {
       "record_type": "service_area_budget",
@@ -1323,7 +1412,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 278,
-      "derived_budget_change": 113600
+      "derived_budget_change": 113600,
+      "derived_budget_change_pct": 9.2463
     },
     {
       "record_type": "service_area_budget",
@@ -1344,7 +1434,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 278,
-      "derived_budget_change": 113600
+      "derived_budget_change": 113600,
+      "derived_budget_change_pct": 9.2463
     },
     {
       "record_type": "service_area_budget",
@@ -1385,7 +1476,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 286,
-      "derived_budget_change": -49500
+      "derived_budget_change": -49500,
+      "derived_budget_change_pct": -8.7782
     },
     {
       "record_type": "service_area_budget",
@@ -1406,7 +1498,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 286,
-      "derived_budget_change": 126000
+      "derived_budget_change": 126000,
+      "derived_budget_change_pct": 3.2601
     },
     {
       "record_type": "service_area_budget",
@@ -1427,7 +1520,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 286,
-      "derived_budget_change": 165700
+      "derived_budget_change": 165700,
+      "derived_budget_change_pct": 4.4673
     },
     {
       "record_type": "service_area_budget",
@@ -1448,7 +1542,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 286,
-      "derived_budget_change": 114300
+      "derived_budget_change": 114300,
+      "derived_budget_change_pct": 11.8864
     },
     {
       "record_type": "service_area_budget",
@@ -1469,7 +1564,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 286,
-      "derived_budget_change": 107600
+      "derived_budget_change": 107600,
+      "derived_budget_change_pct": 3.3529
     },
     {
       "record_type": "service_area_budget",
@@ -1490,7 +1586,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 286,
-      "derived_budget_change": 134700
+      "derived_budget_change": 134700,
+      "derived_budget_change_pct": 6.2031
     },
     {
       "record_type": "service_area_budget",
@@ -1511,7 +1608,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 286,
-      "derived_budget_change": 65600
+      "derived_budget_change": 65600,
+      "derived_budget_change_pct": 7.235
     },
     {
       "record_type": "service_area_budget",
@@ -1532,7 +1630,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 286,
-      "derived_budget_change": 1217700
+      "derived_budget_change": 1217700,
+      "derived_budget_change_pct": 7.9138
     },
     {
       "record_type": "service_area_budget",
@@ -1553,7 +1652,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 306,
-      "derived_budget_change": 275400
+      "derived_budget_change": 275400,
+      "derived_budget_change_pct": 9.5668
     },
     {
       "record_type": "service_area_budget",
@@ -1574,7 +1674,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 306,
-      "derived_budget_change": -26900
+      "derived_budget_change": -26900,
+      "derived_budget_change_pct": -2.937
     },
     {
       "record_type": "service_area_budget",
@@ -1595,7 +1696,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 306,
-      "derived_budget_change": 8100
+      "derived_budget_change": 8100,
+      "derived_budget_change_pct": -0.7587
     },
     {
       "record_type": "service_area_budget",
@@ -1616,7 +1718,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 306,
-      "derived_budget_change": -52200
+      "derived_budget_change": -52200,
+      "derived_budget_change_pct": -3.6717
     },
     {
       "record_type": "service_area_budget",
@@ -1637,7 +1740,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 306,
-      "derived_budget_change": 758600
+      "derived_budget_change": 758600,
+      "derived_budget_change_pct": 13.2025
     },
     {
       "record_type": "service_area_budget",
@@ -1658,7 +1762,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 306,
-      "derived_budget_change": -117200
+      "derived_budget_change": -117200,
+      "derived_budget_change_pct": -2.0094
     },
     {
       "record_type": "service_area_budget",
@@ -1679,7 +1784,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 306,
-      "derived_budget_change": -233700
+      "derived_budget_change": -233700,
+      "derived_budget_change_pct": -14.3181
     },
     {
       "record_type": "service_area_budget",
@@ -1700,7 +1806,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 306,
-      "derived_budget_change": 612100
+      "derived_budget_change": 612100,
+      "derived_budget_change_pct": 3.526
     },
     {
       "record_type": "service_area_budget",
@@ -1721,7 +1828,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 324,
-      "derived_budget_change": 684300
+      "derived_budget_change": 684300,
+      "derived_budget_change_pct": 19.1161
     },
     {
       "record_type": "service_area_budget",
@@ -1742,7 +1850,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 324,
-      "derived_budget_change": 1772600
+      "derived_budget_change": 1772600,
+      "derived_budget_change_pct": 20.5503
     },
     {
       "record_type": "service_area_budget",
@@ -1763,7 +1872,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 324,
-      "derived_budget_change": 533000
+      "derived_budget_change": 533000,
+      "derived_budget_change_pct": 7.3586
     },
     {
       "record_type": "service_area_budget",
@@ -1784,7 +1894,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 324,
-      "derived_budget_change": 123900
+      "derived_budget_change": 123900,
+      "derived_budget_change_pct": 4.2663
     },
     {
       "record_type": "service_area_budget",
@@ -1805,7 +1916,14 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 324,
-      "derived_budget_change": 2106000
+      "derived_budget_change": 2106000,
+      "derived_budget_change_pct": 14.1545,
+      "source_budget_change_delta": 300000,
+      "source_budget_change_pct_delta": 2.0455,
+      "validation_flags": [
+        "reported_budget_change_mismatch",
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -1826,7 +1944,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 324,
-      "derived_budget_change": 1089500
+      "derived_budget_change": 1089500,
+      "derived_budget_change_pct": 90.9774
     },
     {
       "record_type": "service_area_budget",
@@ -1847,7 +1966,14 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 324,
-      "derived_budget_change": 6309300
+      "derived_budget_change": 6309300,
+      "derived_budget_change_pct": 16.4181,
+      "source_budget_change_delta": 300000,
+      "source_budget_change_pct_delta": 0.7819,
+      "validation_flags": [
+        "reported_budget_change_mismatch",
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -1868,7 +1994,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 341,
-      "derived_budget_change": -405000
+      "derived_budget_change": -405000,
+      "derived_budget_change_pct": -66.6886
     },
     {
       "record_type": "service_area_budget",
@@ -1889,7 +2016,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 341,
-      "derived_budget_change": 604500
+      "derived_budget_change": 604500,
+      "derived_budget_change_pct": 37.5303
     },
     {
       "record_type": "service_area_budget",
@@ -1910,7 +2038,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 341,
-      "derived_budget_change": 586300
+      "derived_budget_change": 586300,
+      "derived_budget_change_pct": 16.0161
     },
     {
       "record_type": "service_area_budget",
@@ -1931,7 +2060,14 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 341,
-      "derived_budget_change": 443000
+      "derived_budget_change": 443000,
+      "derived_budget_change_pct": 18.6951,
+      "source_budget_change_delta": -113800,
+      "source_budget_change_pct_delta": -4.7951,
+      "validation_flags": [
+        "reported_budget_change_mismatch",
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -1952,7 +2088,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 341,
-      "derived_budget_change": 306000
+      "derived_budget_change": 306000,
+      "derived_budget_change_pct": 15.5172
     },
     {
       "record_type": "service_area_budget",
@@ -1973,7 +2110,14 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 341,
-      "derived_budget_change": 1534800
+      "derived_budget_change": 1534800,
+      "derived_budget_change_pct": 15.0172,
+      "source_budget_change_delta": -113800,
+      "source_budget_change_pct_delta": -1.1172,
+      "validation_flags": [
+        "reported_budget_change_mismatch",
+        "reported_budget_change_pct_mismatch"
+      ]
     },
     {
       "record_type": "service_area_budget",
@@ -1994,7 +2138,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 357,
-      "derived_budget_change": 611200
+      "derived_budget_change": 611200,
+      "derived_budget_change_pct": 20.7236
     },
     {
       "record_type": "service_area_budget",
@@ -2015,7 +2160,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 357,
-      "derived_budget_change": 484100
+      "derived_budget_change": 484100,
+      "derived_budget_change_pct": 8.8364
     },
     {
       "record_type": "service_area_budget",
@@ -2036,7 +2182,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 357,
-      "derived_budget_change": 16400
+      "derived_budget_change": 16400,
+      "derived_budget_change_pct": 3.2405
     },
     {
       "record_type": "service_area_budget",
@@ -2057,7 +2204,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 357,
-      "derived_budget_change": 233700
+      "derived_budget_change": 233700,
+      "derived_budget_change_pct": 27.3621
     },
     {
       "record_type": "service_area_budget",
@@ -2078,7 +2226,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 357,
-      "derived_budget_change": 1345400
+      "derived_budget_change": 1345400,
+      "derived_budget_change_pct": 13.7454
     },
     {
       "record_type": "service_area_budget",
@@ -2099,7 +2248,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 369,
-      "derived_budget_change": -3446300
+      "derived_budget_change": -3446300,
+      "derived_budget_change_pct": -7.5393
     },
     {
       "record_type": "service_area_budget",
@@ -2120,7 +2270,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 369,
-      "derived_budget_change": 24000
+      "derived_budget_change": 24000,
+      "derived_budget_change_pct": 0.3183
     },
     {
       "record_type": "service_area_budget",
@@ -2141,7 +2292,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 369,
-      "derived_budget_change": 5727700
+      "derived_budget_change": 5727700,
+      "derived_budget_change_pct": 14.5424
     },
     {
       "record_type": "service_area_budget",
@@ -2162,7 +2314,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 369,
-      "derived_budget_change": 13020000
+      "derived_budget_change": 13020000,
+      "derived_budget_change_pct": 14.7693
     },
     {
       "record_type": "service_area_budget",
@@ -2183,7 +2336,8 @@
       "is_total": false,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 369,
-      "derived_budget_change": -50740500
+      "derived_budget_change": -50740500,
+      "derived_budget_change_pct": 6.0787
     },
     {
       "record_type": "service_area_budget",
@@ -2204,7 +2358,8 @@
       "is_total": true,
       "source_id": "hrm-budget-2025-26",
       "pdf_page": 369,
-      "derived_budget_change": -35415100
+      "derived_budget_change": -35415100,
+      "derived_budget_change_pct": 5.4157
     },
     {
       "record_type": "audited_psas",
