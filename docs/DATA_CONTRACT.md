@@ -127,6 +127,22 @@ data/generated/signals.json
 
 `data/generated/budget.json` is now a required generated artifact for the Build 004 product state. Until another optional file exists, the application shows registered source coverage and an explicit “awaiting generated artifact” state.
 
+## Cross-domain entity index
+
+`data/generated/entity_index.json` is a deterministic derived join artifact over the checked-in `budget.json`, `compensation.json`, `procurement.json`, `capital.json`, and `spending.json` inputs. It does not replace source-domain records.
+
+Current Build 005 normalization rules are deliberately conservative:
+
+- fuzzy matching is disabled;
+- current budget-book `service_area_budget` labels anchor operational business units;
+- `audited_psas` categories must never be attached to operational business units without a future evidence-backed crosswalk;
+- compensation history identity is **reporting organization + existing `person_key`**; `person_key` must never merge people across reporting entities;
+- vendor-name clusters are lexical exact provisional clusters and must not be represented as verified legal-entity identities;
+- capital rows use exact official project codes where present; an `OBJECTID` fallback remains isolated rather than being joined by project-name similarity;
+- a business-unit label with no exact budget anchor remains explicitly unmatched rather than being guessed.
+
+The artifact records SHA-256 hashes and record counts for all five source-domain inputs. `python scripts/build_entity_index.py --check` fails when the checked-in derived artifact is stale. `python scripts/validate_entity_index.py` independently checks source references, dimension IDs, referential integrity, prohibited joins, compensation entity scope, project identity rules, and metadata counts.
+
 ## Canonical dimensions
 
 ### Fiscal period
