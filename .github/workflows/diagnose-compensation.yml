@@ -1,4 +1,4 @@
-name: Diagnose compensation PDF
+name: Diagnose compensation extraction
 
 on:
   push:
@@ -16,4 +16,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: python scripts/diagnose_2025_compensation.py
+      - name: Rebuild compensation data in isolated runner
+        run: python scripts/ingest_compensation.py
+      - name: Validate rebuilt data
+        run: python scripts/validate_data.py
