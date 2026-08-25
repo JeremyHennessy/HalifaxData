@@ -1,0 +1,21 @@
+name: Build 003 source diagnostics
+
+on:
+  push:
+    branches: ['agent/build-003-full-data-ingestion']
+    paths: ['.github/workflows/build003-diagnostics.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python scripts/diagnose_source_shapes.py
