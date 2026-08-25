@@ -5,6 +5,7 @@ Safety properties:
 - Never overwrites the checked-in dataset unless every requested source downloads and parses.
 - Retains source id and entity on every row.
 - Treats threshold disclosure as a disclosure population, not the full HRM workforce.
+- Preserves source-reported arithmetic discrepancies instead of silently correcting them.
 """
 from __future__ import annotations
 import io, json, re, sys
@@ -55,7 +56,12 @@ def parse_pdf(blob, year, source_id):
                         business_unit=cells[1]; position=cells[2]
                     else:
                         business_unit=entity; position=cells[1] if len(cells)>=5 else ''
-                    records.append({'fiscal_year_end':year,'entity':entity,'name':name,'person_key':person_key(name),'business_unit':business_unit,'position':position,'wages':salary,'benefits':benefits,'total':total,'source_id':source_id})
+                    record={'fiscal_year_end':year,'entity':entity,'name':name,'person_key':person_key(name),'business_unit':business_unit,'position':position,'wages':salary,'benefits':benefits,'total':total,'source_id':source_id}
+                    delta=round(total-(salary+benefits),2)
+                    if abs(delta)>1.05:
+                        record['source_total_delta']=delta
+                        record['validation_flags']=['reported_total_mismatch']
+                    records.append(record)
     unique={}
     for r in records: unique[(r['fiscal_year_end'],r['entity'],r['person_key'],r['total'])]=r
     return list(unique.values())
@@ -73,10 +79,12 @@ def main():
         hrm_count=sum(x['entity']=='Halifax Regional Municipality' for x in rows)
         if hrm_count < 25:
             raise RuntimeError(f'{src["id"]}: only {hrm_count} HRM rows parsed; refusing to overwrite generated data')
-        stats.append({'source_id':src['id'],'records':len(rows),'hrm_records':hrm_count})
+        discrepancy_count=sum('reported_total_mismatch' in x.get('validation_flags',[]) for x in rows)
+        stats.append({'source_id':src['id'],'records':len(rows),'hrm_records':hrm_count,'source_arithmetic_discrepancies':discrepancy_count})
         all_rows.extend(rows)
     all_rows.sort(key=lambda r:(r['fiscal_year_end'],r['entity'],r['name']))
-    payload={'metadata':{'dataset_status':'automated_full_extraction','min_year':min(r['fiscal_year_end'] for r in all_rows),'max_year':max(r['fiscal_year_end'] for r in all_rows),'disclosure_threshold_cad':100000,'source_stats':stats,'note':'Automated extraction from all configured annual HRM compensation statements. Threshold disclosure is not the full workforce.'},'records':all_rows}
+    discrepancy_count=sum('reported_total_mismatch' in r.get('validation_flags',[]) for r in all_rows)
+    payload={'metadata':{'dataset_status':'automated_full_extraction','min_year':min(r['fiscal_year_end'] for r in all_rows),'max_year':max(r['fiscal_year_end'] for r in all_rows),'disclosure_threshold_cad':100000,'source_stats':stats,'source_arithmetic_discrepancies':discrepancy_count,'note':'Automated extraction from all configured annual HRM compensation statements. Threshold disclosure is not the full workforce. Source-reported arithmetic discrepancies are preserved and explicitly flagged.'},'records':all_rows}
     tmp=OUTPUT.with_suffix('.json.tmp'); tmp.write_text(json.dumps(payload,indent=2,ensure_ascii=False)+'\n'); tmp.replace(OUTPUT)
-    print(f'Wrote {len(all_rows)} rows to {OUTPUT}', file=sys.stderr)
+    print(f'Wrote {len(all_rows)} rows to {OUTPUT} ({discrepancy_count} source arithmetic discrepancies)', file=sys.stderr)
 if __name__=='__main__': main()
