@@ -1,28 +1,53 @@
 {
   "metadata": {
-    "generated_at": "2026-08-25T14:45:38+00:00",
-    "principle": "Independent domains; one parser failure does not block successful artifacts."
+    "generated_at": "2026-08-25T17:55:49+00:00",
+    "dataset_status": "post_validation_snapshot",
+    "note": "Counts reflect generated artifacts after the serial Build 005 refresh and both validation gates. Presence/count does not imply equal granularity or current-universe completeness across domains."
   },
-  "records": [
-    {
-      "domain": "procurement",
-      "status": "ok"
+  "domains": {
+    "compensation": {
+      "artifact": "compensation.json",
+      "records": 10228
     },
-    {
-      "domain": "capital",
-      "status": "ok"
+    "budget": {
+      "artifact": "budget.json",
+      "records": 124
     },
-    {
-      "domain": "budget",
-      "status": "ok"
+    "budget_history": {
+      "artifact": "budget_history.json",
+      "records": 1234
     },
-    {
-      "domain": "financials",
-      "status": "ok"
+    "procurement": {
+      "artifact": "procurement.json",
+      "records": 5502
     },
-    {
-      "domain": "council",
-      "status": "ok"
+    "capital": {
+      "artifact": "capital.json",
+      "records": 2623
+    },
+    "financials": {
+      "artifact": "financials.json",
+      "records": 1027
+    },
+    "council": {
+      "artifact": "council.json",
+      "records": 79
+    },
+    "council_documents": {
+      "artifact": "council_documents.json",
+      "records": 895
+    },
+    "spending": {
+      "artifact": "spending.json",
+      "records": 1255
+    },
+    "benchmarks": {
+      "artifact": "benchmarks.json",
+      "records": 108
+    },
+    "external_funding": {
+      "artifact": "external_funding.json",
+      "records": 226
     }
-  ]
+  }
 }
