@@ -190,6 +190,6 @@ def budget_records_from_table(
             "source_table": table_num,
             "source_row": row_index,
             "raw_cells": row,
-            "provenance": provenance(source_id, url, "page/table/row", table_locator, "build005-budget-history-v2"),
+            "provenance": provenance(source_id, url, "page/table/row", table_locator, "build005-budget-history-v3"),
         })
     return rows
