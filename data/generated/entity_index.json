@@ -1,8 +1,8 @@
 {
   "metadata": {
     "schema_version": "1.0.0",
-    "normalization_version": "build005-entity-index-v2",
-    "generated_at": "2026-08-25T17:49:23+00:00",
+    "normalization_version": "build005-entity-index-v3",
+    "generated_at": "2026-08-25T18:08:00+00:00",
     "generation_time_semantics": "freshest_input_generated_at_for_deterministic_build",
     "input_artifacts": {
       "budget": {
@@ -34,6 +34,12 @@
         "sha256": "ddc63387d0e0b7713f03fb29dee0dd58622efd8af8da196eabba3e97b7b9c09f",
         "records": 1255,
         "generated_at": "2026-08-25T14:53:08+00:00"
+      },
+      "financials": {
+        "path": "data/generated/financials.json",
+        "sha256": "8c3bbb393e6d303375f8922f5a66670287f99419da516ba06e119935683258ef",
+        "records": 350,
+        "generated_at": "2026-08-25T18:08:00+00:00"
       }
     },
     "join_policy": {
@@ -43,10 +49,12 @@
       "organization_match": "explicit approved alias exact only or official source scope",
       "person_identity": "reporting organization + existing person_key; no cross-entity merge",
       "vendor_identity": "provisional lexical name cluster; not guaranteed legal entity",
-      "capital_identity": "official project code exact; OBJECTID fallback stays isolated"
+      "capital_identity": "official project code exact; OBJECTID fallback stays isolated",
+      "financial_identity": "audited financial rows attach to HRM organization only; no operational business-unit crosswalk"
     },
     "forbidden_joins": [
       "audited_psas_category_to_operational_business_unit",
+      "audited_financial_line_item_to_operational_business_unit",
       "cross_entity_person_key",
       "fuzzy_name_to_business_unit",
       "fuzzy_vendor_identity",
@@ -57,15 +65,17 @@
       "compensation": 10228,
       "procurement": 5502,
       "capital": 2650,
-      "spending": 1255
+      "spending": 1255,
+      "financials": 350
     },
-    "record_link_count": 19739,
+    "record_link_count": 20089,
     "business_unit_count": 18,
     "person_name_cluster_count": 2130,
     "vendor_name_cluster_count": 2238,
     "capital_project_cluster_count": 276,
     "budget_operational_rows_linked": 104,
     "budget_audited_rows_intentionally_not_business_unit_linked": 20,
+    "financial_rows_linked_to_hrm_only": 350,
     "unmatched_business_unit_label_count": 308,
     "unmatched_business_unit_record_count": 9260
   },
@@ -91,6 +101,7 @@
       "record_counts_by_dataset": {
         "capital": 2650,
         "compensation": 9507,
+        "financials": 350,
         "procurement": 971,
         "spending": 1255
       }
@@ -201257,6 +201268,2806 @@
       },
       "organization_id": "org:halifax-regional-municipality",
       "person_name_cluster_id": "person-entity:a6ae71dc4afcfcc2"
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:009f25aaa562946c83e5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:00a7dd394f16dc55dd39",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:018040e5b67214bf4a3f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:01c55cce19723873e89f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:023a9a986da2301528e8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:026b8f8ba02a7ca00809",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:029388b78c77eca25e85",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:034bb0bfc8c700c29c9e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:057751c78e174aac9296",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:057c3da8b77041f916c0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:05bfa3ee58ccbe64b186",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:06e207b459458a10c670",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0722ab4c8e760cc282c5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:07ab1fe4484ab8fef9be",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:07f3c02530dd7b4ace94",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:087863aefe1a97269e8c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:09c9b49ecf11d1c6a3af",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:09ecf0d3bd6e588967dc",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0bad53ffc0b24bd1355e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0c2a9aa8c66da718ed50",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0c77ef7113b01a883f4e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0cf6853dce592f5791d7",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0d95905ce2df3db758bc",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0db2dffb006ab7d77724",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0dbcd644e510074fdf8c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0e4cfdf0f017aea4c520",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0f0065ed58cee914af58",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0f0195edc9f7d51384c1",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:0ffca6e455beb5d9a7af",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:10398ae06c00767f3c49",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:10797ddf091b7167ce4b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:117811cedfd21c828e91",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:122ff4808acbf2a7585c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:12b6f92fbbe51a7890be",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:1306e1d09270117440c9",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:1422fd871d0a7d8ae5a9",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:142855f187e5149eeb54",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:14ef5d81396403e0c29b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:152f9b2ca8b0400012f2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:15ea83d56d9bbc677fbe",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:181fbba9fd864b55b0bd",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:18934b0aed89e9e02bc0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:19a02a01e1924df58fc6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:19dceb3e76f478af3a99",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:1b636420c38481bdf1a1",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:1bd49f7075fa0eaf5a93",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:1be10408f4acc3b4a1f4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:1cd27c70a49a16058d06",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:1ed4b567c57999742ec6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:20a46f7c4963fcf08dbf",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:21c65217df6c570f8a62",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:21d43404d23b92958bd9",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:225e628b271bb6b0f26c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:22dc64123ab7c68ad799",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:22f57dd67e1a1b11695e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:240d5bcb46a0058504db",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2475a835923f7d7caf7b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:27e9faac9360505ca8e0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:28680989bedff8dd907d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2a21a2776a701992bdd5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2a82923821cae0370b82",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2b3639687ca4ea37ea87",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2b596bb492f5731db195",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2d1cacbfc43815b5bb76",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2d60ee170507e619cd3d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2e7791a4dd71075493b1",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:2f6f9266c7babe8181db",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3081e9b1b6e0203571c2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:30cbfe93751ace85c1f8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:311cb544287486ed1bc2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:315261af8f6a83d50ad5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:325debc38e6e13861670",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:329c5a4203c2614116fb",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3301ff531759dfa4ed8b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:332aeab341203011c7a2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:34c2df3492b7abe73fe4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:35d851ba40c209e813bf",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:378d7619212020e2edc4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:379835fb2f54408182cc",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:37f0278861d698685948",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:39db1490bda2889799b0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:39dfaa496f335699a42b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3a2e66b0ecb7be59e232",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3a4b16f5490d72e36598",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3ae28e21f38289921a31",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3c919d3db73edef51ec3",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3cacba960ef5de6858f4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3cacddf56db6983e99db",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3cc5087ee20bb0e7a2f8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3e1065049979c5a0b5de",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3e8c56793900174a9349",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3f3687e94832e66058e9",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:3fab0b7c6b8e0b1c9943",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:407c061765f75ebd7a32",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:40975e535ba56d73d14e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:40d4f948fec3e954d185",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:40ddbe68b1b05ab7e419",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:418579502f7fb0d4c979",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:41cad7fbe0e3385c1a00",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:42ab8621226624d8ada3",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:43b2eb5fed4ce44d3760",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:446d1cbe921ed7d96edd",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:45b8fe7dbf0f3563a731",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4613a7421e95a2158088",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:470ef437ba076b6d01a8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:47d819a046c27d3697f8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:491f7d471bf7614b8d5f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:49307a7430d7c0e0d76e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4974027d602df25e4912",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:49873cb2af44ec21c1c7",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4a1e32482897022b0cbb",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4b4f699726e57c616164",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4d97bff3ceef519ccbcf",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4da0e208339fea9edfba",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4ef37ed42dca955ea0df",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4f0e64562b9becf7a8e5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4f4f608fca348d5f4cdc",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:4fc0d48faa513c0138c6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:50077aa73744266c666b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5021f823574c255579d8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5140ed96a66fdcc95ad6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5216259a4686877cee97",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:538d74c615e40bf697a4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:53cd31c9975d8e04fe06",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:54d6922d969fb8c093bf",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:554cb1aa66e8b29f5141",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:55df20c5605dcd51a5c0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:568165cee23a30f46ba0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:56b05f420e9c6f595831",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:58fdf32b2507c3fba0e6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:59347e6d643418d20757",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:59f74933396b6ab2c78b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5a6b380ef6027db62e2d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5aa3db1efa894840f3ce",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5ade06b6da48862d6c00",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5ae2ceac42f299f4157f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5b38d095e37cc977705e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5d6e5f09e991e8bca943",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5e0711f91aa30f51e8b8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5e1e3c06c85906ab4742",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5eedfc9860f15d5ed338",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5f202e40d896da5aad70",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5f583f0327a28959591c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:5fc7becefb6c6468e18e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:624a67e1bb9f363b6d27",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6309d72dee52356bb4eb",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:632720c8b3b0083d038d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6350735f5de4119b8153",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:63f7aa1cd716ae2a0329",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:64c3b38a1745da8193ed",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:654d24ecc7506d647329",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:65a4564ef36653112d85",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:65bda8d1854100634699",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:671cbd8cf486b68c083d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:67245da8823c5c9bbdce",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:682631488fece78461e7",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:68f1c99dc45e94fbc2b2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:69395f1e865959215389",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:694667d90ffac4f21eb5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:69c88fcb70c9ba2dc4ca",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6a3354e9cffde1cebfad",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6aa0ce53628eddbfd8d4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6b9cc89599099b490a38",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6d39d5d13fe989108dfd",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6e65a0b9de3ac6e17b06",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6e88f9fe1e89c39cbab2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:6e8c84359fddc847b3ba",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:706181c5699addaa3cbb",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:71cff0cc45906a3dd5c5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:729f55359b92b8750ead",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7326ea632ea18a2d26c9",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7392a5e333196690b7d7",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:73969787c89f23df37e8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:76f275ea951411969cd9",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:78f15c850db23bf823db",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7a077cadcde76a1b854d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7a44984057fa31e18094",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7b2712224848bf1f98d8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7bcce88cbe1207d8c71e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7c68b29b8f8612da75c2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7c737c89a187f0c93fe4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7ca4bb2bc1b2e1b4d445",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7de4ecc8f384a335d6c5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7e26e281e80521668b80",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7eb20dc922a54563a667",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7eb2173e7e5606cf1d0d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:7f5e6c3b0fbb59358ac2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:802da5cb6ae1d45962bb",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:80dd941e29734d6a3682",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:811e02051746abe54942",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:812ad345ea4b8c30497f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:82ab15127724944e596e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:82c454742a6d8bf24667",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:83804f00a77d96a84bc1",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:8396160d8c0e0c1a1d33",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:84b9ee59d1b6111b9139",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:85ebf79df3c7b13b7496",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:8623b18ac2c9338571b5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:864a0667d356b8b10bae",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:8669cb7bebb9eb114bda",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:86ff96851258078313fe",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:888521bf9340e1a0b5b4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:8914d6cdce998d77a1b9",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:8bdd833029b4c56fb5d5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:8deb8519962f685b8925",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:8e99248a245165390b17",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:8f0ae1a96c174e74366f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:908b9c74dd975ebce1b6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:91659baca3e02021d74f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9180e833c16ebff1e64a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:92b78a3a4628db2d3327",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:92f207e1c6a12a784c23",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9308add63f4aad6fb3f6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9392f8578318925ada75",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:93963edeef7b3837f960",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:93b3d4830d008363b2dd",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:94c93f7e1f397bdd0530",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9607ce5e74c99e9683c3",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9793013760ac67a72e1f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:983343e880d4f4ca15c3",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:98550b217ceb526cbea1",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:985659346fcc7d75f1ad",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9962c379d608bb9fa76c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:99c085e89c89ba755482",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9b701487c69b91cbf271",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9be6fb0b95f09199e36a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9be7be56ed902c7b48bb",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9ceba41d663a883e9838",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9d0b0fa689d192b2cc2a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9e5a7f57c68a46af571c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:9e722f90a172dbd46b9b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a0d247c39afaa3919664",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a0e2c9e1d3f727cc303b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a1d30ee4b0dd6949f688",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a2303b207894488574c7",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a31921bd7e23748bb873",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a3ebb45628d8f831f7ff",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a406ec57a3397aab8b3d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a4afe883f1665d760884",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a67b8c276ebe29dbffd9",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a68277d0ed02d79dbb59",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a6a2f0b59477e8af054c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:a7851b722c0f49ad16a6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:aaec45a0fb01d7f5d0b2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ab33a40f499f3458af62",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ab49e1313f3e2a774d39",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ab73df9b36e58c9e6082",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ac58ace7cf01923fd619",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:acd09ee673961a84c117",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ace56dc8ce88ae47cbeb",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ad948edde6b9a1e67cdf",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ad9e28575da688a7195b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:adfca1d564c0e2c1b0b8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ae4e5533fdf146a46a4c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b03eeaac7c961b9c6b46",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b0c4d5b276fa54591048",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b2a67c74b765b356aa40",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b2ba57d11334ccb56e50",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b31d8cfb7add37326be4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b3d794563c8efeccd345",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b4b030938fd0eda1c9de",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b757c7740c5886059ded",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:b893d2f1e271da33a3ed",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ba1e519e045b465b75d7",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ba2d2cd2ec45615556f8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:bc217c848c4806cab879",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:bca7cb5eb12cdcec23c0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:bda0a2acd6bdd753185c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:bdfb21d8a0b3b94baf99",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:be83cb7e72e0247441d8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:bea6d0fc0c82c2d53e3c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:bf69855e44696cf90b27",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c0cb23e50f093eadad72",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c17daa18ac39817a5fe0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c3bfff00ac455b5979f5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c517c144d2859f94a52f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c62feaa4d58f019c6dbf",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c6e077fc6ffefa64f86c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c737137f5e68453799da",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c754853b34c5e619b2a2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:c76e7f009b45e249843e",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ca532a16f5e131e063fa",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:cafd6205334e810787bc",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:cc0ad62e5bc9b8527a6d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:cc492c9d8a4e3015fa1c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:cce1a899fa2119451f87",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ce19fb976395f3fae0ce",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:cf5802b5ec3dac7fcaeb",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d06045f8b4c56d054248",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d06fff9f361ebf8efbed",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d22cd9a63dbd8b7dd173",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d3fab0094e11a378ef3c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d482149d36c5ea05810a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d5a23c0d96b30bed39a6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d62a6e1a3e62a81bdb25",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d765cac06d985baadb7a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d7ec92959d01c11ca48a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d8322701ccc9fe0b33ef",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d867bde8d435f5c6b4db",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d8e062cb8cfec74721ea",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d8f6912f9e7b67034e92",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d943cc936ec70597bcb0",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:d966389fc0ad10b07336",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:da153b08ccd2aad255ca",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:daa0e14c13d9cdc45c49",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:dbae065f234341b350a2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:de4e70b9cfc6c580d938",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:df9acd1a9e04e84b938f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:dfcfe2bb0bb494bc4575",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e04ce7cbd0eb304f4184",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e0807444a16b5730958b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e1c86291b6838c43095b",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e27d2fb7660cf2f2a04a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e299c873dc712322e7d5",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e324432f1907f49209e7",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e3fbc69197560d75c032",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e459cfc7f64869b9a4d2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e46da8b505f08b08e5e2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e5190b629a4f50215718",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e5d8a8c016d57080ee55",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e6602dcb257c13969334",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e7a7af1757f384f828c4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e7c1d050a0f032017cb2",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e84c840756f1c0fa5e74",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:e88f9589507d71c40fc3",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:eb553418f0331c517005",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ebea9e4aff4aded7688a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ec7c01ba059bc0328499",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ed5607a0ba4b8d2fc17a",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ede1115803741a498124",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:ee4a00a539c8812ac273",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:eecba520961c3bb60cb7",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:efc51d95d4da32ceea2c",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f04bc43276b9586e51d4",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f04c2d576cda43589c97",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f05bf64e9c9d7b7cc873",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f076dbf4cf2c3e61f0e6",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f1bbc5c5e7c3963523f1",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f1d066505eb291f3cf0f",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f23d7eddcdf6d7bce700",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f38383f46108e9aa5824",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f469d6d474d446b79124",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f470ae5c9d60b762cf07",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f547614bb47cc76f5158",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f5ff952399155a8c385d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f717beec5090d61c00be",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f8f5d3feef1f8c6cedaa",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:f99c425ec8586764c3f8",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:fa41a96cda47ad21a648",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
+    },
+    {
+      "source_dataset": "financials",
+      "source_record_ref": "financials:fc5525d34cab384fb50d",
+      "organization_id": "org:halifax-regional-municipality",
+      "join_methods": {
+        "organization": "official_audited_source_scope"
+      }
     },
     {
       "source_dataset": "procurement",
