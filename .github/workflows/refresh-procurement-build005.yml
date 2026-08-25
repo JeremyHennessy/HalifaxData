@@ -5,8 +5,6 @@ on:
     branches: ['agent/build-005-normalization']
     paths:
       - 'scripts/ingest_procurement.py'
-      - 'scripts/build_entity_index.py'
-      - 'scripts/validate_entity_index.py'
       - 'data/sources.json'
       - '.github/workflows/refresh-procurement-build005.yml'
   workflow_dispatch:
@@ -70,6 +68,7 @@ jobs:
           PY
       - name: Rebuild and validate normalized joins
         run: |
+          python scripts/validate_financial_history.py
           python scripts/build_entity_index.py
           python scripts/build_entity_index.py --check
           python scripts/validate_entity_index.py
