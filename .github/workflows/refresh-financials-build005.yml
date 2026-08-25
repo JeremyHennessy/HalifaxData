@@ -57,15 +57,21 @@ jobs:
           assert not bad, f'obvious non-financial/truncated rows survived: {bad[:10]}'
           print(f"independent text guard passed for {len(rows)} audited-financial rows")
           PY
-          git diff --check
-      - name: Commit verified financial artifacts
+      - name: Rebuild and validate normalized joins
         run: |
-          if [ -z "$(git status --porcelain -- data/generated/financials.json data/generated/financials_document_tables.json)" ]; then
-            echo "Audited financial artifacts are already current."
+          python scripts/build_entity_index.py
+          python scripts/build_entity_index.py --check
+          python scripts/validate_entity_index.py
+          python scripts/validate_data.py
+          git diff --check
+      - name: Commit verified financial artifacts and joins
+        run: |
+          if [ -z "$(git status --porcelain -- data/generated/financials.json data/generated/financials_document_tables.json data/generated/entity_index.json)" ]; then
+            echo "Audited financial artifacts and normalized entity index are already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/generated/financials.json data/generated/financials_document_tables.json
-          git commit -m "Build 005: refresh verified audited financial history"
+          git add data/generated/financials.json data/generated/financials_document_tables.json data/generated/entity_index.json
+          git commit -m "Build 005: refresh verified audited financials and normalized joins"
           git push origin HEAD:agent/build-005-normalization
