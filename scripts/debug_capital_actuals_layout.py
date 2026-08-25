@@ -21,25 +21,37 @@ def main() -> None:
     session.headers["User-Agent"] = "HalifaxData/0.8-capital-actuals-debug"
     output = []
     for source in SOURCES:
-        blob = fetch_pdf(session, source["url"])
         matched_pages = []
-        with pdfplumber.open(io.BytesIO(blob)) as pdf:
-            for page_num, page in enumerate(pdf.pages, 1):
-                text = page.extract_text() or ""
-                if not any(marker in text for marker in ["Capital Projection Summary", "Budget Category", "Projected Spend", "Capital Budget"]):
-                    continue
-                tables = []
-                for table_num, table in enumerate(page.extract_tables() or [], 1):
-                    rows = [[clean(cell) for cell in (row or [])] for row in (table or [])]
-                    tables.append({"table": table_num, "rows": rows})
-                matched_pages.append({"page": page_num, "text": text, "tables": tables})
+        error = None
+        try:
+            blob = fetch_pdf(session, source["url"])
+            with pdfplumber.open(io.BytesIO(blob)) as pdf:
+                for page_num, page in enumerate(pdf.pages, 1):
+                    text = page.extract_text() or ""
+                    if not any(marker in text for marker in ["Capital Projection Summary", "Budget Category", "Projected Spend", "Capital Budget"]):
+                        continue
+                    tables = []
+                    for table_num, table in enumerate(page.extract_tables() or [], 1):
+                        rows = [[clean(cell) for cell in (row or [])] for row in (table or [])]
+                        tables.append({"table": table_num, "rows": rows})
+                    # Also preserve text-strategy extraction because the source
+                    # tables are visually ruled but not always encoded as cells.
+                    text_tables = []
+                    settings = {"vertical_strategy": "text", "horizontal_strategy": "text", "intersection_tolerance": 8, "snap_tolerance": 4}
+                    for table_num, table in enumerate(page.extract_tables(table_settings=settings) or [], 1):
+                        rows = [[clean(cell) for cell in (row or [])] for row in (table or [])]
+                        text_tables.append({"table": table_num, "rows": rows})
+                    matched_pages.append({"page": page_num, "text": text, "tables": tables, "text_tables": text_tables})
+        except Exception as exc:  # diagnostic must preserve earlier source output
+            error = f"{type(exc).__name__}: {exc}"
         output.append({
             "source_id": source["source_id"],
             "quarter": source["quarter"],
             "matched_pages": matched_pages,
+            "error": error,
         })
     OUT.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(" | ".join(f"{item['quarter']}:{len(item['matched_pages'])} pages" for item in output))
+    print(" | ".join(f"{item['quarter']}:{len(item['matched_pages'])} pages error={item['error']}" for item in output))
 
 
 if __name__ == "__main__":
