@@ -8,8 +8,12 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: halifaxdata-public-data-refresh
+  cancel-in-progress: false
+
 jobs:
-  compensation:
+  refresh:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,16 +21,42 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: python scripts/ingest_compensation.py
-      - run: python scripts/validate_data.py
-      - name: Commit verified changes
+
+      - name: Refresh every configured data domain
+        run: python scripts/refresh_all.py
+
+      - name: Validate compensation and source references
+        run: python scripts/validate_data.py
+
+      - name: Validate multi-domain generated artifacts
+        run: python scripts/validate_domains.py
+
+      - name: Commit verified successful-domain updates
         run: |
-          if git diff --quiet -- data/generated/compensation.json; then
-            echo "No compensation changes"
-            exit 0
-          fi
           git config user.name "halifaxdata-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/generated/compensation.json
-          git commit -m "data: refresh compensation disclosures"
+          git add data/sources.json data/generated/*.json
+          if git diff --cached --quiet; then
+            echo "No verified public-data changes"
+            exit 0
+          fi
+          git commit -m "data: refresh Halifax public-finance evidence"
           git push
+
+      - name: Surface isolated stage failures after preserving good updates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('data/generated/refresh_status.json')
+          status = json.loads(path.read_text())
+          failed = [row for row in status.get('records', []) if row.get('status') != 'ok']
+          if failed:
+              print('The refresh preserved validated outputs from successful independent stages.')
+              print('Stages requiring follow-up:')
+              for row in failed:
+                  print(f"- {row.get('stage')}: {row.get('status')} exit={row.get('exit_code')}")
+              raise SystemExit(1)
+          print(f"All {len(status.get('records', []))} refresh stages completed successfully.")
+          PY
