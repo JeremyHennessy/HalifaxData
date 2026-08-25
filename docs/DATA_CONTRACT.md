@@ -1,19 +1,26 @@
 # HalifaxData frontend data contract
 
-This contract keeps the collection work and GitHub Pages application decoupled. Existing Build 001 files remain authoritative and are not renamed by the dashboard work.
+This contract keeps collection and GitHub Pages presentation decoupled. Existing source IDs and generated paths are stable interfaces; UI work must not silently rewrite collector semantics.
 
-## Existing required files
+## Required files
 
 ### `data/sources.json`
 
-Current source registry. Each entry currently includes `id`, `name`, `publisher`, `category`, `coverage`, `ingestion`, `status`, and `url`.
+Source registry. Current entries include `id`, `name`, `publisher`, `category`, `coverage`, `ingestion`, `status`, and `url`.
 
 ### `data/generated/compensation.json`
 
-Current compensation output. The checked-in file may explicitly be a `partial_verified_seed`. Current row fields are:
+Compensation disclosure output. `metadata.dataset_status` currently supports:
+
+- `partial_verified_seed` — guarded development/verification subset.
+- `automated_full_extraction` — complete extraction from every currently configured annual compensation statement that passed the collector and validation gates.
+
+`automated_full_extraction` does **not** mean full workforce payroll. The public statements use a $100,000 disclosure threshold.
+
+Current row fields:
 
 - `fiscal_year_end`
-- `entity`
+- `entity` — reporting entity such as Halifax Regional Municipality, Halifax Water, or Halifax Public Libraries
 - `name`
 - `person_key`
 - `business_unit`
@@ -23,7 +30,19 @@ Current compensation output. The checked-in file may explicitly be a `partial_ve
 - `total`
 - `source_id`
 
-The UI must preserve the metadata warning that absence from a threshold-based disclosure year is not zero compensation.
+Optional row-level evidence/quality fields currently used by the extractor:
+
+- `extraction_method` — emitted when a fallback path, such as `pdf_text_fallback`, was required
+- `validation_flags[]`
+- `source_total_delta`
+
+When `validation_flags` contains `reported_total_mismatch`, `source_total_delta` records `published total - (published wages + published benefits)`. The UI must preserve the published values and show the discrepancy; it must not silently correct the source.
+
+## Compensation identity rule
+
+Longitudinal history joins are scoped by **reporting entity + `person_key`**. The same normalized name in two entities must not be assumed to represent the same person. Raw display names remain source-visible.
+
+A missing person/year is missing threshold-disclosure evidence, not zero compensation and not proof of departure from employment.
 
 ## Optional generated domain files
 
@@ -61,7 +80,7 @@ Until a file exists, the application shows registered source coverage and an exp
 
 ### Person
 
-`person_id` or stable `person_key`, `display_name`, `raw_name`, `municipal_body`, optional match metadata.
+Stable identity requires `entity` plus `person_key` unless a stronger explicit cross-entity identifier is later established.
 
 ### Project
 
@@ -75,7 +94,7 @@ Recommended fields: fiscal year, fund, business unit, service area, account/cate
 
 ### Compensation fact
 
-Person, fiscal year, wages/salary, benefits/other compensation, total, disclosure threshold, municipal body, source-defined raw fields and provenance.
+Reporting entity, person, fiscal year, wages/salary, benefits/other compensation, published total, disclosure threshold, source-defined raw fields, validation flags and provenance.
 
 ### Procurement fact
 
@@ -102,7 +121,7 @@ Production facts should retain enough information to reproduce the record:
 - `source_title`
 - `source_date`
 - `retrieved_at`
-- `locator_type` (page/table/row/API-record/etc.)
+- `locator_type`
 - `locator_value`
 - `raw_hash`
 - `parser_version`
@@ -111,23 +130,10 @@ Production facts should retain enough information to reproduce the record:
 
 ## Signal contract
 
-A generated signal should include:
+A generated signal should include `signal_id`, `signal_type`, `entity_type`, `entity_id`, `score`, optional `confidence`, `observed_facts[]`, `derived_metrics[]`, `reason_codes[]`, `source_refs[]`, `status`, and optional human `interpretation`.
 
-- `signal_id`
-- `signal_type`
-- `entity_type`
-- `entity_id`
-- `score`
-- `confidence` where meaningful
-- `observed_facts[]`
-- `derived_metrics[]`
-- `reason_codes[]`
-- `source_refs[]`
-- `status`
-- optional human `interpretation`
-
-The UI must be able to show why a signal was created and what evidence supports its inputs.
+Signals are review prompts, not findings. The UI must be able to show why a signal exists and what evidence supports it.
 
 ## Publication strategy
 
-Start with static JSON because it is inspectable and GitHub Pages-native. Precompute summary values used for first paint. Partition larger facts by fiscal year/domain rather than shipping one unbounded file. When a fact table becomes too large for practical browser JSON, publish Parquet partitions and query them with DuckDB-WASM; do not move analytical semantics into opaque client-only transforms.
+Start with static JSON because it is inspectable and GitHub Pages-native. Precompute summary values used for first paint. Partition larger facts by fiscal year/domain rather than shipping one unbounded file. When a fact table becomes too large for practical browser JSON, publish Parquet partitions and query them with DuckDB-WASM without moving analytical semantics into opaque client-only transforms.
