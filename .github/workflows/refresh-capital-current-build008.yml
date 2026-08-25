@@ -34,6 +34,12 @@ jobs:
         run: python -m compileall -q scripts
       - name: Extract final 2025/26 capital project sheets
         run: python scripts/ingest_capital_current.py
+      - name: Preserve parser output for diagnosis
+        uses: actions/upload-artifact@v4
+        with:
+          name: build008-capital-current-preview-${{ github.sha }}
+          path: data/generated/capital_current.json
+          retention-days: 3
       - name: Independently validate current capital artifact
         run: |
           python scripts/validate_capital_current.py
