@@ -23,6 +23,7 @@ jobs:
       - name: Validate JavaScript syntax
         run: |
           node --check app.js
+          node --check domain-status.js
           node --check compensation-ui.js
           node --check budget-ui.js
       - name: Validate Python syntax
@@ -43,5 +44,7 @@ jobs:
         run: |
           python scripts/build_entity_index_v4.py --check
           python scripts/validate_entity_index_v4.py
+      - name: Validate published domain lifecycle
+        run: python scripts/validate_domain_status.py
       - name: Validate repository diff hygiene
         run: git diff --check
