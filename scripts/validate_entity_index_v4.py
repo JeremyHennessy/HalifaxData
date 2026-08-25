@@ -53,7 +53,7 @@ def main() -> None:
     policy = metadata.get('join_policy') or {}
     if policy.get('fuzzy_matching') is not False:
         fail('fuzzy_matching must be explicitly false')
-    forbidden = set(policy.get('forbidden_joins') or [])
+    forbidden = set(metadata.get('forbidden_joins') or [])
     for required in {
         'cross_entity_person_key',
         'fuzzy_name_to_business_unit',
@@ -113,7 +113,6 @@ def main() -> None:
     if metadata.get('record_link_count') != len(links):
         fail('record_link_count metadata mismatch')
     link_by_ref: dict[tuple[str, str], dict] = {}
-    link_counts: Counter[str] = Counter()
     for number, link in enumerate(links):
         dataset = link.get('source_dataset')
         record_ref = link.get('source_record_ref')
@@ -124,7 +123,6 @@ def main() -> None:
         if key in link_by_ref:
             fail(f'link {number}: duplicate source link {key!r}')
         link_by_ref[key] = link
-        link_counts[dataset] += 1
         if link.get('organization_id') and link['organization_id'] not in organization_ids:
             fail(f'link {number}: unknown organization_id')
         if link.get('business_unit_id') and link['business_unit_id'] not in business_unit_ids:
@@ -141,7 +139,6 @@ def main() -> None:
         if 'fuzzy' in methods:
             fail(f'link {number}: fuzzy join method is forbidden')
 
-    # Core datasets: reconstruct the exact source references and assert critical semantics.
     for dataset in ('budget', 'compensation', 'procurement', 'capital', 'spending', 'financials'):
         rows = (loaded_inputs.get(dataset) or {}).get('records') or []
         for row_index, row in enumerate(rows):
@@ -155,9 +152,8 @@ def main() -> None:
                 if not link or not link.get('business_unit_id'):
                     fail(f'budget row {row_index}: operational row is not linked to a budget-anchor business unit')
             elif dataset == 'compensation':
-                if row.get('person_key'):
-                    if not link or not link.get('person_name_cluster_id') or not link.get('organization_id'):
-                        fail(f'compensation row {row_index}: person identity is not entity-scoped')
+                if row.get('person_key') and (not link or not link.get('person_name_cluster_id') or not link.get('organization_id')):
+                    fail(f'compensation row {row_index}: person identity is not entity-scoped')
             elif dataset == 'procurement':
                 if row.get('vendor_name') and (not link or not link.get('vendor_name_cluster_id')):
                     fail(f'procurement row {row_index}: vendor name lacks provisional exact-name cluster')
