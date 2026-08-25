@@ -38,16 +38,23 @@ jobs:
           python scripts/validate_financial_history.py
           python - <<'PY'
           import json
+          import re
           from pathlib import Path
 
           payload = json.loads(Path('data/generated/financials.json').read_text(encoding='utf-8'))
           rows = payload.get('records') or []
-          prohibited = ('telephone', 'fax', 'year ended march', 'halifax nova scotia b3j')
+          prohibited = [
+              re.compile(r'\btelephone\b', re.I),
+              re.compile(r'\bfax\b', re.I),
+              re.compile(r'\byear ended march\b', re.I),
+              re.compile(r'^halifax nova scotia\s+[A-Z]\d[A-Z]', re.I),
+              re.compile(r'\(note\s*$', re.I),
+          ]
           bad = [
               row for row in rows
-              if any(token in str(row.get('line_item') or '').lower() for token in prohibited)
+              if any(pattern.search(str(row.get('line_item') or '')) for pattern in prohibited)
           ]
-          assert not bad, f'obvious non-financial rows survived: {bad[:10]}'
+          assert not bad, f'obvious non-financial/truncated rows survived: {bad[:10]}'
           print(f"independent text guard passed for {len(rows)} audited-financial rows")
           PY
           git diff --check
