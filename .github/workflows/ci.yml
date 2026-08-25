@@ -28,6 +28,13 @@ jobs:
         run: python -m compileall -q scripts
       - name: Validate checked-in data
         run: python scripts/validate_data.py
+      - name: Validate audited financial history
+        run: |
+          if [ -f data/generated/financials.json ]; then
+            python scripts/validate_financial_history.py
+          else
+            echo "financials.json not checked in yet; audited-financial workflow must generate it before merge."
+          fi
       - name: Validate normalized entity index
         run: |
           if [ -f data/generated/entity_index.json ]; then
