@@ -1,0 +1,34 @@
+name: Budget bootstrap
+
+on:
+  push:
+    branches: ['agent/build-004-budget-actuals-final']
+    paths:
+      - 'scripts/ingest_budget.py'
+      - '.github/workflows/budget-bootstrap.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python scripts/ingest_budget.py
+      - name: Commit generated budget artifact
+        run: |
+          git config user.name "halifaxdata-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/budget.json
+          if git diff --cached --quiet; then
+            echo "No budget changes"
+            exit 0
+          fi
+          git commit -m "data: bootstrap budget and audited actuals"
+          git push
