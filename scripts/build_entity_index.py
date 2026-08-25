@@ -14,7 +14,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 GENERATED = ROOT / "data/generated"
 DEFAULT_OUT = GENERATED / "entity_index.json"
-NORMALIZATION_VERSION = "build005-entity-index-v1"
+NORMALIZATION_VERSION = "build005-entity-index-v2"
 INPUTS = {
     "budget": GENERATED / "budget.json",
     "compensation": GENERATED / "compensation.json",
@@ -213,15 +213,22 @@ def build_payload(inputs: dict[str, dict]) -> dict:
             link["join_methods"]["business_unit"] = "lexical_exact_to_budget_anchor"
         person_key = str(row.get("person_key") or "").strip()
         if person_key:
-            cluster_id = f"person-name:{person_key}"
+            if not org_id:
+                raise RuntimeError(
+                    f"Compensation row {i} has person_key {person_key!r} but no exact recognized reporting entity"
+                )
+            cluster_id = f"person-entity:{stable_digest([org_id, person_key])[:16]}"
             cluster = people.setdefault(cluster_id, {
                 "person_name_cluster_id": cluster_id,
+                "organization_id": org_id,
                 "person_key": person_key,
                 "observed_names": set(),
                 "fiscal_year_ends": set(),
                 "record_count": 0,
-                "identity_status": "provisional_name_key_only",
+                "identity_status": "entity_scoped_person_key",
             })
+            if cluster["organization_id"] != org_id or cluster["person_key"] != person_key:
+                raise RuntimeError(f"Compensation identity collision for {cluster_id}")
             name = str(row.get("name") or "").strip()
             if name:
                 cluster["observed_names"].add(name)
@@ -229,7 +236,7 @@ def build_payload(inputs: dict[str, dict]) -> dict:
                 cluster["fiscal_year_ends"].add(row.get("fiscal_year_end"))
             cluster["record_count"] += 1
             link["person_name_cluster_id"] = cluster_id
-            link["join_methods"]["person_name_cluster"] = "existing_person_key_provisional"
+            link["join_methods"]["person_name_cluster"] = "entity_scoped_person_key"
         if link["join_methods"]:
             links.append(link)
 
@@ -385,12 +392,13 @@ def build_payload(inputs: dict[str, dict]) -> dict:
                 "business_unit_anchor": "current budget-book operational business units",
                 "business_unit_match": "lexical exact only",
                 "organization_match": "explicit approved alias exact only or official source scope",
-                "person_identity": "provisional existing person_key name cluster; not guaranteed unique person",
+                "person_identity": "reporting organization + existing person_key; no cross-entity merge",
                 "vendor_identity": "provisional lexical name cluster; not guaranteed legal entity",
                 "capital_identity": "official project code exact; OBJECTID fallback stays isolated",
             },
             "forbidden_joins": [
                 "audited_psas_category_to_operational_business_unit",
+                "cross_entity_person_key",
                 "fuzzy_name_to_business_unit",
                 "fuzzy_vendor_identity",
                 "project_name_only_to_capital_project",
