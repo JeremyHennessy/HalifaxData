@@ -1,0 +1,34 @@
+name: Build 005 refresh proof
+
+on:
+  push:
+    branches: ['agent/build-005-multidomain-integration']
+    paths:
+      - '.github/workflows/build005-refresh-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Run all collectors and validation gates
+        run: python scripts/refresh_all.py
+      - name: Commit regenerated proof artifacts to branch
+        run: |
+          git config user.name "halifaxdata-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/sources.json data/generated
+          if git diff --cached --quiet; then
+            echo "Refresh reproduced checked-in artifacts with no changes"
+            exit 0
+          fi
+          git commit -m "data: regenerate Build 005 integration artifacts"
+          git push
