@@ -24,6 +24,7 @@ STAGES = [
     ('source_acquisition', 'scripts/acquire_sources.py'),
     ('compensation', 'scripts/ingest_compensation.py'),
     ('current_domains', 'scripts/ingest_domains.py'),
+    ('council_calendar', 'scripts/ingest_council.py'),
     ('budget_history', 'scripts/ingest_budget_history.py'),
     ('capital_history', 'scripts/ingest_capital_history.py'),
     ('financial_history', 'scripts/ingest_financial_history.py'),
