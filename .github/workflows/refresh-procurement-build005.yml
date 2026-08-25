@@ -1,0 +1,87 @@
+name: Refresh Build 005 procurement
+
+on:
+  push:
+    branches: ['agent/build-005-normalization']
+    paths:
+      - 'scripts/ingest_procurement.py'
+      - 'data/sources.json'
+      - '.github/workflows/refresh-procurement-build005.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-005-procurement-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/build-005-normalization
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependency
+        run: python -m pip install --disable-pip-version-check requests
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts
+      - name: Collect complete Halifax procurement subset
+        run: python scripts/ingest_procurement.py
+      - name: Verify procurement artifact completeness
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('data/generated/procurement.json')
+          payload = json.loads(path.read_text(encoding='utf-8'))
+          meta = payload.get('metadata') or {}
+          rows = payload.get('records') or []
+          assert meta.get('dataset_status') == 'official_awarded_tenders_collection', meta
+          assert meta.get('source_dataset_id') == 'm6ps-8j6u', meta
+          assert meta.get('source_query_collection_complete') is True, meta
+          assert meta.get('records') == len(rows), (meta.get('records'), len(rows))
+          assert meta.get('source_query_record_count', 0) >= len(rows), meta
+          assert len(rows) >= 100, len(rows)
+          assert all(row.get('source_id') == 'ns-awarded-tenders-socrata' for row in rows)
+          keys = [
+              (
+                  row.get('award_id'),
+                  row.get('vendor_name'),
+                  row.get('awarded_date'),
+                  row.get('current_contract_value'),
+              )
+              for row in rows
+          ]
+          assert len(keys) == len(set(keys)), 'normalized procurement rows are not unique'
+          print(
+              f"verified procurement artifact: {len(rows)} retained rows from "
+              f"{meta.get('source_query_record_count')} source-query rows across "
+              f"{meta.get('query_page_count')} page(s); "
+              f"{meta.get('duplicates_removed')} duplicates removed"
+          )
+          PY
+      - name: Rebuild and validate normalized joins
+        run: |
+          python scripts/validate_financial_history.py
+          python scripts/build_entity_index.py
+          python scripts/build_entity_index.py --check
+          python scripts/validate_entity_index.py
+          python scripts/validate_data.py
+          git diff --check
+      - name: Commit verified procurement and joins
+        run: |
+          if [ -z "$(git status --porcelain -- data/generated/procurement.json data/generated/entity_index.json)" ]; then
+            echo "Procurement and normalized entity index are already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/procurement.json data/generated/entity_index.json
+          git commit -m "Build 005: refresh verified procurement and normalized joins"
+          git push origin HEAD:agent/build-005-normalization

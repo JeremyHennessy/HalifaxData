@@ -1,0 +1,82 @@
+name: Refresh Build 005 release data
+
+on:
+  push:
+    branches: ['agent/build-005-normalization']
+    paths:
+      - 'scripts/ingest_municipal_benchmarks.py'
+      - 'scripts/validate_municipal_benchmarks.py'
+      - 'scripts/ingest_council.py'
+      - 'scripts/ingest_council_documents.py'
+      - 'scripts/validate_council.py'
+      - 'scripts/ingest_quarterly_spending.py'
+      - 'scripts/validate_spending.py'
+      - 'data/sources.json'
+      - '.github/workflows/refresh-release-build005.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-005-release-data-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/build-005-normalization
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check requests pdfplumber
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts
+
+      - name: Refresh municipal benchmarks and external funding
+        run: python scripts/ingest_municipal_benchmarks.py
+      - name: Independently validate municipal machine sources
+        run: python scripts/validate_municipal_benchmarks.py
+
+      - name: Refresh Council calendar
+        run: python scripts/ingest_council.py
+      - name: Refresh Council document graph
+        run: python scripts/ingest_council_documents.py
+      - name: Independently validate Council completeness
+        run: python scripts/validate_council.py
+
+      - name: Refresh conservative quarterly spending summaries
+        run: python scripts/ingest_quarterly_spending.py
+      - name: Independently validate quarterly spending summaries
+        run: python scripts/validate_spending.py
+
+      - name: Re-run established data validators
+        run: |
+          python scripts/validate_data.py
+          python scripts/validate_budget_history.py
+          python scripts/validate_financial_history.py
+          git diff --check
+
+      - name: Commit verified release-data artifacts atomically
+        run: |
+          files=(
+            data/generated/benchmarks.json
+            data/generated/external_funding.json
+            data/generated/council.json
+            data/generated/council_documents.json
+            data/generated/spending.json
+          )
+          if [ -z "$(git status --porcelain -- "${files[@]}")" ]; then
+            echo "Release-data artifacts are already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${files[@]}"
+          git commit -m "Build 005: refresh verified release data"
+          git push origin HEAD:agent/build-005-normalization

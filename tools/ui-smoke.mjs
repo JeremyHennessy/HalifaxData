@@ -13,18 +13,15 @@ const routes = [
   ['signals', 'Signals Lab'],
   ['sources', 'Sources & Evidence']
 ];
+const RELEASED_DOMAINS = ['budget', 'spending', 'procurement', 'capital', 'financials', 'council'];
 const viewports = [
   ['desktop', { width: 1440, height: 1100 }],
   ['mobile', { width: 390, height: 844 }]
 ];
-const OPTIONAL_404_SUFFIXES = [
-  '/data/generated/spending.json',
-  '/data/generated/procurement.json',
-  '/data/generated/capital.json',
-  '/data/generated/financials.json',
-  '/data/generated/council.json',
-  '/data/generated/signals.json'
-];
+// Signals is intentionally not one of the six Build 005 released analytical
+// domains. Its lifecycle manifest must say Validation pending while signals.json
+// remains absent; every released-domain artifact must return HTTP 200.
+const OPTIONAL_404_SUFFIXES = ['/data/generated/signals.json'];
 
 await fs.rm(OUTPUT, { recursive: true, force: true });
 await fs.mkdir(OUTPUT, { recursive: true });
@@ -38,7 +35,8 @@ const report = {
   http_errors: [],
   expected_optional_404s: [],
   views: [],
-  interactions: []
+  interactions: [],
+  released_domains: []
 };
 
 async function waitForDashboard(page) {
@@ -62,6 +60,32 @@ async function closeDrawer(page) {
   }
 }
 
+async function assertReleasedDomainsReady(page, viewportName) {
+  await openRoute(page, 'overview');
+  await page.waitForFunction(domains => domains.every(domain => {
+    const card = document.querySelector(`.coverage-card[data-domain="${domain}"]`);
+    const badge = card?.querySelector('.badge')?.textContent?.trim() || '';
+    return badge.startsWith('Ready');
+  }), RELEASED_DOMAINS, { timeout: 15000 });
+
+  const statuses = await page.evaluate(domains => Object.fromEntries(domains.map(domain => {
+    const card = document.querySelector(`.coverage-card[data-domain="${domain}"]`);
+    return [domain, card?.querySelector('.badge')?.textContent?.trim() || ''];
+  })), RELEASED_DOMAINS);
+
+  for (const domain of RELEASED_DOMAINS) {
+    const status = statuses[domain] || '';
+    if (!status.startsWith('Ready')) {
+      throw new Error(`${viewportName}/coverage: ${domain} is not Ready (${status || 'blank'})`);
+    }
+    if (/pending|missing|error|awaiting/i.test(status)) {
+      throw new Error(`${viewportName}/coverage: ${domain} has a non-release state (${status})`);
+    }
+  }
+
+  report.released_domains.push({ viewport: viewportName, statuses });
+}
+
 try {
   for (const [viewportName, viewport] of viewports) {
     const context = await browser.newContext({ viewport, deviceScaleFactor: 1 });
@@ -70,8 +94,6 @@ try {
     page.on('console', message => {
       if (message.type() !== 'error') return;
       const text = message.text();
-      // Chromium also emits a generic console error for HTTP 404s. Exact response
-      // URLs are classified below, so ignore only that generic duplicate message.
       if (text.startsWith('Failed to load resource: the server responded with a status of 404')) return;
       report.console_errors.push({ viewport: viewportName, text });
     });
@@ -81,16 +103,12 @@ try {
       const url = new URL(response.url());
       const record = { viewport: viewportName, status: response.status(), url: response.url() };
       const expectedOptional404 = response.status() === 404 && OPTIONAL_404_SUFFIXES.some(suffix => url.pathname.endsWith(suffix));
-      if (expectedOptional404) {
-        report.expected_optional_404s.push(record);
-      } else {
-        report.http_errors.push(record);
-      }
+      if (expectedOptional404) report.expected_optional_404s.push(record);
+      else report.http_errors.push(record);
     });
 
     for (const [route, expectedTitle] of routes) {
       await openRoute(page, route);
-
       const title = await page.locator('#view-title').textContent();
       if (title?.trim() !== expectedTitle) {
         throw new Error(`${viewportName}/${route}: expected title "${expectedTitle}", got "${title?.trim()}"`);
@@ -120,16 +138,12 @@ try {
         throw new Error(`${viewportName}/${route}: horizontal page overflow ${state.scroll_width}px > ${state.client_width}px`);
       }
 
-      await page.screenshot({
-        path: `${OUTPUT}/${viewportName}-${route}.png`,
-        fullPage: true
-      });
-
+      await page.screenshot({ path: `${OUTPUT}/${viewportName}-${route}.png`, fullPage: true });
       report.views.push({ viewport: viewportName, route, title: title.trim(), ...state });
     }
 
-    // Global filter: prove the disclosure count changes under a real fiscal-year filter.
-    await openRoute(page, 'overview');
+    await assertReleasedDomainsReady(page, viewportName);
+
     const allYearsCount = (await page.locator('.metrics-grid .metric-card').nth(1).locator('.metric-value').textContent())?.trim();
     await page.locator('#global-year').selectOption('2025');
     await page.waitForFunction(() => document.querySelector('#global-year')?.value === '2025');
@@ -139,11 +153,9 @@ try {
     }
     report.interactions.push({ viewport: viewportName, check: 'fiscal-year filter', before: allYearsCount, after: filteredCount });
 
-    // Reset without relying on a control that the compact mobile layout may intentionally hide.
     await page.locator('#global-year').selectOption('all');
     await page.waitForFunction(() => document.querySelector('#global-year')?.value === 'all');
 
-    // Global search -> person evidence -> historical disclosure -> official source link.
     await page.locator('#global-search').fill('Campbell');
     await page.locator('#global-search').press('Enter');
     await page.waitForSelector('#evidence-drawer[open]');
@@ -161,15 +173,22 @@ try {
     report.interactions.push({ viewport: viewportName, check: 'global search + person history + source link', history_rows: historyRows, source_url: officialHref });
     await closeDrawer(page);
 
-    // Missing-domain state must remain explicit rather than presenting synthetic records.
     await openRoute(page, 'spending');
+    await page.waitForFunction(() => /Ready\s*·\s*[\d,]+\s+rows/i.test(document.querySelector('#content')?.innerText || ''), null, { timeout: 15000 });
     const spendingText = (await page.locator('#content').innerText()).toLowerCase();
-    if (!spendingText.includes('awaiting generated artifact')) {
-      throw new Error(`${viewportName}/spending: missing generated-artifact state is not visible`);
+    for (const forbidden of ['awaiting generated artifact', 'validation pending', 'pending release', 'generated artifact error']) {
+      if (spendingText.includes(forbidden)) throw new Error(`${viewportName}/spending: released domain still shows "${forbidden}"`);
     }
-    report.interactions.push({ viewport: viewportName, check: 'missing-domain state', route: 'spending' });
+    report.interactions.push({ viewport: viewportName, check: 'released spending domain', route: 'spending' });
 
-    // Source registry cards must open provenance and expose an official link.
+    await openRoute(page, 'signals');
+    await page.waitForFunction(() => /validation pending/i.test(document.querySelector('#content')?.innerText || ''), null, { timeout: 15000 });
+    const signalsText = (await page.locator('#content').innerText()).toLowerCase();
+    if (!signalsText.includes('validation pending')) {
+      throw new Error(`${viewportName}/signals: expected explicit Validation pending lifecycle state`);
+    }
+    report.interactions.push({ viewport: viewportName, check: 'signals validation-pending state' });
+
     await openRoute(page, 'sources');
     const sourceCards = page.locator('#content [data-source-id]');
     if (await sourceCards.count() < 1) throw new Error(`${viewportName}/sources: no clickable source records rendered`);
@@ -181,7 +200,6 @@ try {
     await closeDrawer(page);
 
     if (viewportName === 'desktop') {
-      // Methodology drawer has a dedicated desktop affordance.
       await openRoute(page, 'overview');
       await page.locator('#evidence-standard').click();
       await page.waitForSelector('#evidence-drawer[open]');
@@ -191,7 +209,6 @@ try {
       report.interactions.push({ viewport: viewportName, check: 'evidence standard drawer' });
       await closeDrawer(page);
     } else {
-      // Compact navigation must open, navigate, and close again.
       await openRoute(page, 'overview');
       await page.locator('#menu-button').click();
       await page.waitForFunction(() => document.querySelector('#sidebar')?.classList.contains('open'));

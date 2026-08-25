@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "generated_at": "2026-08-25T18:50:00+00:00",
+    "schema_version": "2.0.0",
+    "principle": "Artifact availability, validation and release state are explicit and must not be conflated."
+  },
+  "records": [
+    {
+      "domain": "budget",
+      "status": "ready",
+      "note": "Current budget and actuals artifact is checked in and validated."
+    },
+    {
+      "domain": "spending",
+      "status": "ready",
+      "note": "Quarterly spending summaries were regenerated with strict monetary tokenization and independently validated."
+    },
+    {
+      "domain": "procurement",
+      "status": "ready",
+      "note": "Paged Halifax procurement awards are checked in and normalized."
+    },
+    {
+      "domain": "capital",
+      "status": "ready",
+      "note": "Historical capital projects were count-checked against the official ArcGIS source and normalized."
+    },
+    {
+      "domain": "financials",
+      "status": "ready",
+      "note": "Audited financial statement facts are checked in and independently validated."
+    },
+    {
+      "domain": "council",
+      "status": "ready",
+      "note": "Available eSCRIBE calendar coverage and agenda-document graph are complete through the current year with zero fetch errors."
+    },
+    {
+      "domain": "signals",
+      "status": "validation_pending",
+      "note": "Signals remain a derived review layer and are not part of the six Build 005 released analytical domains."
+    }
+  ]
+}
