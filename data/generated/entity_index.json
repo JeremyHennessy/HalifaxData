@@ -2,7 +2,7 @@
   "metadata": {
     "schema_version": "1.0.0",
     "normalization_version": "build005-entity-index-v1",
-    "generated_at": "2026-08-25T17:48:30+00:00",
+    "generated_at": "2026-08-25T17:49:23+00:00",
     "generation_time_semantics": "freshest_input_generated_at_for_deterministic_build",
     "input_artifacts": {
       "budget": {
@@ -25,9 +25,9 @@
       },
       "capital": {
         "path": "data/generated/capital.json",
-        "sha256": "de62a8431882093b999ab1a000d83ec36d2b38e65879e58fddd2f9f7e23e2c47",
+        "sha256": "4174bb711c67a75e26f1422f67236abc69426658f1ab5544a8bc26eff7ac706d",
         "records": 2650,
-        "generated_at": "2026-08-25T17:44:59+00:00"
+        "generated_at": "2026-08-25T17:49:23+00:00"
       },
       "spending": {
         "path": "data/generated/spending.json",
