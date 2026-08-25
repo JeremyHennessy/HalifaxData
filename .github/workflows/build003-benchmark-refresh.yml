@@ -3,6 +3,7 @@ name: Build 003 source repair
 on:
   push:
     branches: ['agent/build-003-full-data-ingestion']
+    paths: ['.github/workflows/build003-benchmark-refresh.yml']
 
 permissions:
   contents: write
