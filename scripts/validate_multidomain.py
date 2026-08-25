@@ -99,6 +99,7 @@ def validate_procurement(entry: dict):
     missing_provenance = 0
     invalid_values = 0
     negative_values = 0
+    negative_examples = []
     published_value_rows = 0
     entities = set()
     vendors = set()
@@ -123,6 +124,18 @@ def validate_procurement(entry: dict):
                 invalid_values += 1
             elif value < 0:
                 negative_values += 1
+                if len(negative_examples) < 10:
+                    negative_examples.append({
+                        "index": index,
+                        "field": key,
+                        "value": value,
+                        "award_id": row.get("award_id"),
+                        "vendor_name": row.get("vendor_name"),
+                        "entity": row.get("entity"),
+                        "description": row.get("description"),
+                        "awarded_date": row.get("awarded_date"),
+                        "source_locator": provenance.get("locator_value") if isinstance(provenance, dict) else None,
+                    })
         if any(finite_number(row.get(key)) and row.get(key) > 0 for key in ("original_award_value", "current_contract_value")):
             published_value_rows += 1
         entities.add(str(row.get("entity") or "").strip())
@@ -136,6 +149,9 @@ def validate_procurement(entry: dict):
         errors.append(f"procurement: {invalid_values} award values are not finite numbers")
     if negative_values:
         errors.append(f"procurement: {negative_values} award values are negative")
+        print("PROCUREMENT NEGATIVE VALUE EVIDENCE")
+        for example in negative_examples:
+            print(json.dumps(example, ensure_ascii=False, sort_keys=True))
     if published_value_rows < 10:
         errors.append(f"procurement: only {published_value_rows} rows expose a positive published award/contract value")
     if len(vendors - {""}) < 100:
