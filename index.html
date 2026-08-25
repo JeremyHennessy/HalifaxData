@@ -9,65 +9,26 @@
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./compensation-ui.css" />
   <link rel="stylesheet" href="./budget-ui.css" />
+  <link rel="stylesheet" href="./domains-ui.css" />
   <link rel="stylesheet" href="./light-theme.css" />
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="#overview" aria-label="HalifaxData home">
-        <span class="brand-mark">H</span>
-        <span><strong>HalifaxData</strong><small>Public finance intelligence</small></span>
-      </a>
+      <a class="brand" href="#overview" aria-label="HalifaxData home"><span class="brand-mark">H</span><span><strong>HalifaxData</strong><small>Public finance intelligence</small></span></a>
       <nav id="nav" aria-label="Primary navigation"></nav>
-      <div class="sidebar-status">
-        <div class="status-line"><span class="status-dot"></span><strong>Evidence first</strong></div>
-        <small id="snapshot-label">Loading source coverage…</small>
-      </div>
+      <div class="sidebar-status"><div class="status-line"><span class="status-dot"></span><strong>Evidence first</strong></div><small id="snapshot-label">Loading source coverage…</small></div>
     </aside>
-
     <main>
-      <header class="topbar">
-        <div class="title-group">
-          <button type="button" class="icon-button menu-button" id="menu-button" aria-label="Open navigation">☰</button>
-          <div>
-            <p class="eyebrow" id="view-eyebrow">HALIFAX REGIONAL MUNICIPALITY</p>
-            <h1 id="view-title">Command Center</h1>
-          </div>
-        </div>
-        <div class="topbar-actions">
-          <label class="global-search">
-            <span aria-hidden="true">⌕</span>
-            <input id="global-search" type="search" placeholder="Search people, sources, signals…" autocomplete="off" />
-            <kbd>↵</kbd>
-          </label>
-          <button type="button" class="button" id="evidence-standard">Evidence standard</button>
-        </div>
-      </header>
-
-      <section class="filterbar" aria-label="Global filters">
-        <label><span>Fiscal year</span><select id="global-year"></select></label>
-        <label id="global-entity-wrap"><span>Reporting entity</span><select id="global-entity"></select></label>
-        <label><span>Business unit</span><select id="global-unit"></select></label>
-        <button type="button" class="button subtle" id="reset-filters">Reset</button>
-        <div class="mode-pill" id="data-mode">Loading data status</div>
-      </section>
-
-      <section id="content" class="content" aria-live="polite">
-        <div class="loading-card"><div class="spinner" aria-hidden="true"></div><div><strong>Loading HalifaxData</strong><span>Reading checked-in evidence and source coverage.</span></div></div>
-      </section>
+      <header class="topbar"><div class="title-group"><button type="button" class="icon-button menu-button" id="menu-button" aria-label="Open navigation">☰</button><div><p class="eyebrow" id="view-eyebrow">HALIFAX REGIONAL MUNICIPALITY</p><h1 id="view-title">Command Center</h1></div></div><div class="topbar-actions"><label class="global-search"><span aria-hidden="true">⌕</span><input id="global-search" type="search" placeholder="Search people, sources, signals…" autocomplete="off" /><kbd>↵</kbd></label><button type="button" class="button" id="evidence-standard">Evidence standard</button></div></header>
+      <section class="filterbar" aria-label="Global filters"><label><span>Fiscal year</span><select id="global-year"></select></label><label id="global-entity-wrap"><span>Reporting entity</span><select id="global-entity"></select></label><label><span>Business unit</span><select id="global-unit"></select></label><button type="button" class="button subtle" id="reset-filters">Reset</button><div class="mode-pill" id="data-mode">Loading data status</div></section>
+      <section id="content" class="content" aria-live="polite"><div class="loading-card"><div class="spinner" aria-hidden="true"></div><div><strong>Loading HalifaxData</strong><span>Reading checked-in evidence and source coverage.</span></div></div></section>
     </main>
   </div>
-
-  <dialog id="evidence-drawer" class="evidence-drawer">
-    <header>
-      <div><p class="eyebrow" id="drawer-eyebrow">EVIDENCE</p><h2 id="drawer-title">Evidence</h2></div>
-      <button type="button" class="icon-button" id="drawer-close" aria-label="Close evidence drawer">×</button>
-    </header>
-    <div id="drawer-body" class="drawer-body"></div>
-  </dialog>
-
+  <dialog id="evidence-drawer" class="evidence-drawer"><header><div><p class="eyebrow" id="drawer-eyebrow">EVIDENCE</p><h2 id="drawer-title">Evidence</h2></div><button type="button" class="icon-button" id="drawer-close" aria-label="Close evidence drawer">×</button></header><div id="drawer-body" class="drawer-body"></div></dialog>
   <script src="./app.js" defer></script>
   <script src="./compensation-ui.js" defer></script>
   <script src="./budget-ui.js" defer></script>
+  <script src="./domains-ui.js" defer></script>
 </body>
 </html>
