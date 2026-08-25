@@ -13,6 +13,19 @@ HISTORICAL = ROOT / "data/generated/capital.json"
 CODE_RE = re.compile(r"^[A-Za-z0-9-]+$")
 ANNUAL_KEYS = {"unspent_previous_budget", "2025_26", "2026_27", "2027_28", "2028_29"}
 TOLERANCE = 2.0
+OVERVIEW_TOLERANCE = 1_000.0  # Final overview is published in $000s.
+EXPECTED_OVERVIEW = {
+    "2025_26": 314_241_000,
+    "2026_27": 466_487_000,
+    "2027_28": 585_466_000,
+    "2028_29": 686_994_000,
+}
+EXPECTED_DISTRICT_CAPITAL = {
+    "2025_26": 1_504_000,
+    "2026_27": 1_504_000,
+    "2027_28": 1_504_000,
+    "2028_29": 1_504_000,
+}
 
 
 def fail(message: str) -> None:
@@ -40,7 +53,7 @@ def main() -> None:
 
     if meta.get("dataset_status") != "final_2025_26_capital_plan_project_extraction":
         fail("unexpected dataset status")
-    if meta.get("parser_version") != "build008-capital-current-v2":
+    if meta.get("parser_version") != "build008-capital-current-v3":
         fail("unexpected parser version")
     if meta.get("exact_join_only") is not True:
         fail("exact_join_only must be true")
@@ -102,8 +115,6 @@ def main() -> None:
             if not close(n(four_year), annual_four_year):
                 fail(f"{code} four-year summary {four_year} != annual budget sum {annual_four_year}")
         elif annual_four_year and row.get("total_estimated_project_cost") is not None:
-            # A detailed project cost summary with planned four-year spending must
-            # publish the corresponding four-year summary amount.
             fail(f"{code} has annual four-year budget {annual_four_year} but missing four_year_budget summary")
 
         total_cost = row.get("total_estimated_project_cost")
@@ -120,6 +131,30 @@ def main() -> None:
             expected_work = n(annual.get("unspent_previous_budget")) + n(annual.get("2025_26"))
             if not close(n(total_work), expected_work):
                 fail(f"{code} 2025/26 work plan total {total_work} != unspent + 2025/26 gross budget {expected_work}")
+
+    # Independent final-plan overview reconciliation. Figure 3 is rounded to
+    # $000s and includes District Capital Funds, which Figure 1 publishes as an
+    # aggregate category rather than individual project sheets.
+    if meta.get("plan_overview_total_capital") != EXPECTED_OVERVIEW:
+        fail("embedded final-plan overview totals changed unexpectedly")
+    aggregates = meta.get("non_project_overview_aggregates") or {}
+    if aggregates.get("District Capital Funds") != EXPECTED_DISTRICT_CAPITAL:
+        fail("District Capital Funds aggregate is missing or changed")
+
+    calculated_sheet_sums = {
+        key: round(sum(n((row.get("annual_budget") or {}).get(key)) for row in rows), 2)
+        for key in EXPECTED_OVERVIEW
+    }
+    if calculated_sheet_sums != meta.get("project_sheet_annual_budget_sums"):
+        fail("project-sheet annual sum metadata mismatch")
+    calculated_deltas = {}
+    for key, overview in EXPECTED_OVERVIEW.items():
+        delta = calculated_sheet_sums[key] + EXPECTED_DISTRICT_CAPITAL[key] - overview
+        calculated_deltas[key] = round(delta, 2)
+        if abs(delta) > OVERVIEW_TOLERANCE:
+            fail(f"{key} project sheets + District Capital Funds differ from final overview by {delta}")
+    if calculated_deltas != meta.get("overview_reconciliation_delta_after_non_project_aggregates"):
+        fail("overview reconciliation delta metadata mismatch")
 
     historical_codes = {}
     historical = json.loads(HISTORICAL.read_text(encoding="utf-8"))
@@ -145,13 +180,15 @@ def main() -> None:
         fail("project-cost-summary metadata count mismatch")
     if project_cost_count < 100:
         fail(f"only {project_cost_count} project sheets publish a validated total-project-cost summary")
-    if four_year_checks < 100 or total_cost_checks < 100 or work_plan_checks < 150:
+    # Four-year summary rows are source-optional on program-style project sheets;
+    # require broad coverage but do not invent a value where the source is blank.
+    if four_year_checks < 80 or total_cost_checks < 100 or work_plan_checks < 150:
         fail(f"insufficient arithmetic coverage: four_year={four_year_checks}, total_cost={total_cost_checks}, work_plan={work_plan_checks}")
 
     print(
         f"Current capital validated: {len(rows)} projects; annual={annual_count}; project_cost={project_cost_count}; "
         f"four_year_checks={four_year_checks}; total_cost_checks={total_cost_checks}; work_plan_checks={work_plan_checks}; "
-        f"historical_exact={exact_match_count}"
+        f"historical_exact={exact_match_count}; overview_deltas={calculated_deltas}"
     )
 
 
