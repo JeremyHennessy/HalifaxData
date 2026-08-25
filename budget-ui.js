@@ -34,10 +34,13 @@ function budgetPctPlain(value) {
 const build003Render = render;
 render = function renderWithBudgetIntegration() {
   build003Render();
+  const budgetRoute = state.view === 'budget';
+  const filterbar = $('.filterbar');
   const yearLabel = $('#global-year')?.closest('label');
   const unitLabel = $('#global-unit')?.closest('label');
-  if (yearLabel) yearLabel.hidden = state.view === 'budget';
-  if (unitLabel) unitLabel.hidden = state.view === 'budget';
+  if (filterbar) filterbar.hidden = budgetRoute;
+  if (yearLabel) yearLabel.hidden = budgetRoute;
+  if (unitLabel) unitLabel.hidden = budgetRoute;
 };
 
 renderBudget = function renderBudgetIntegrated() {
