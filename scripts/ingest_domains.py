@@ -13,6 +13,15 @@ from datetime import datetime, timezone
 import requests
 
 
+STRICT_MONEY_CELL_RE = re.compile(
+    r"^\s*(?:"
+    r"\(\s*\$?\s*\d[\d,]*(?:\.\d+)?\s*\)"
+    r"|-?\s*\$?\s*\d[\d,]*(?:\.\d+)?"
+    r")\s*$"
+)
+BLANK_MONEY_CELLS = {"", "-", "—", "–"}
+
+
 def now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
@@ -38,6 +47,21 @@ def money(value):
         return round(-n if negative else n, 2)
     except ValueError:
         return None
+
+
+def strict_money_cell(value) -> tuple[float | None, bool]:
+    """Parse exactly one monetary value from one table cell.
+
+    This deliberately differs from ``money``: malformed/merged PDF cells are
+    rejected instead of stripping all non-numeric characters and accidentally
+    concatenating multiple source values into one number.
+    """
+    text = clean(value)
+    if text in BLANK_MONEY_CELLS:
+        return None, True
+    if not STRICT_MONEY_CELL_RE.fullmatch(text):
+        return None, False
+    return money(text), True
 
 
 def provenance(source_id: str, url: str, locator_type: str, locator_value: str, parser_version: str = "build005-v1") -> dict:
@@ -86,7 +110,17 @@ def flatten_header(table: list[list[str]], max_rows: int = 3) -> list[str]:
     return headers
 
 
-def budget_records_from_table(table, page_num: int, context: str, source_id: str, url: str, fiscal_label: str) -> list[dict]:
+def budget_records_from_table(
+    table,
+    page_num: int,
+    context: str,
+    source_id: str,
+    url: str,
+    fiscal_label: str,
+    *,
+    table_num: int | None = None,
+    parse_stats: dict | None = None,
+) -> list[dict]:
     if not table or len(table) < 2:
         return []
     table = [[clean(cell) for cell in (row or [])] for row in table]
@@ -98,37 +132,64 @@ def budget_records_from_table(table, page_num: int, context: str, source_id: str
     label_idx = 0
     actual_idx = next((i for i, h in enumerate(headers) if "actual" in h.lower()), None)
     projection_idx = next((i for i, h in enumerate(headers) if "project" in h.lower() or "forecast" in h.lower()), None)
-    budget_candidates = [i for i, h in enumerate(headers) if "budget" in h.lower() and "Δ" not in h and "var" not in h.lower()]
+
+    def endpoint_budget_header(header: str) -> bool:
+        low = header.lower()
+        if "budget" not in low:
+            return False
+        return not any(marker in low for marker in ["Δ", "%", "percent", "change", "variance", " var ", "delta"])
+
+    budget_candidates = [i for i, h in enumerate(headers) if endpoint_budget_header(h)]
     if actual_idx is None or not budget_candidates:
         return []
     current_budget_idx = budget_candidates[-1]
     prior_budget_idx = budget_candidates[-2] if len(budget_candidates) >= 2 else None
-    indexes = [i for i in [label_idx, actual_idx, projection_idx, current_budget_idx, prior_budget_idx] if i is not None]
+    value_indexes = [i for i in [actual_idx, projection_idx, current_budget_idx, prior_budget_idx] if i is not None]
+    indexes = [label_idx, *value_indexes]
     rows = []
     for row_index, row in enumerate(table[header_rows:], start=header_rows):
-        if not indexes or len(row) <= max(indexes):
+        if len(row) <= max(indexes):
             continue
         label = clean(row[label_idx])
         if not label or label.lower() in {"expenditures", "revenues"}:
             continue
-        actual = money(row[actual_idx])
-        current_budget = money(row[current_budget_idx])
-        projection = money(row[projection_idx]) if projection_idx is not None and projection_idx < len(row) else None
-        prior_budget = money(row[prior_budget_idx]) if prior_budget_idx is not None and prior_budget_idx < len(row) else None
-        if all(value is None for value in [actual, prior_budget, projection, current_budget]):
+
+        selected = {
+            "prior_actual": row[actual_idx],
+            "prior_budget": row[prior_budget_idx] if prior_budget_idx is not None else "",
+            "projection": row[projection_idx] if projection_idx is not None else "",
+            "current_budget": row[current_budget_idx],
+        }
+        parsed: dict[str, float | None] = {}
+        valid = True
+        for field, raw_cell in selected.items():
+            parsed[field], cell_valid = strict_money_cell(raw_cell)
+            if not cell_valid:
+                valid = False
+                break
+        if not valid:
+            if parse_stats is not None:
+                parse_stats["rejected_invalid_numeric_rows"] = parse_stats.get("rejected_invalid_numeric_rows", 0) + 1
             continue
+        if all(value is None for value in parsed.values()):
+            continue
+
+        table_locator = f"p{page_num}/t{table_num}/r{row_index}" if table_num is not None else f"p{page_num}/r{row_index}"
         rows.append({
             "fiscal_year": fiscal_label,
             "business_unit": context or None,
             "service_area": label,
-            "prior_actual": actual,
-            "prior_budget": prior_budget,
-            "projection": projection,
-            "current_budget": current_budget,
+            "prior_actual": parsed["prior_actual"],
+            "prior_budget": parsed["prior_budget"],
+            "projection": parsed["projection"],
+            "current_budget": parsed["current_budget"],
+            "source_value_cells": selected,
             "row_kind": "total" if "total" in label.lower() else "detail",
             "source_id": source_id,
             "source_page": page_num,
+            "source_table": table_num,
+            "source_row": row_index,
             "raw_cells": row,
-            "provenance": provenance(source_id, url, "page/table/row", f"p{page_num}/r{row_index}", "build005-budget-history-v1"),
+            "provenance": provenance(source_id, url, "page/table/row", table_locator, "build005-budget-history-v2"),
         })
     return rows
