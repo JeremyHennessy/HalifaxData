@@ -20,8 +20,12 @@ jobs:
         with:
           node-version: '22'
       - name: Validate JavaScript syntax
-        run: node --check app.js
+        run: |
+          node --check app.js
+          node --check app-build003.js
       - name: Validate Python syntax
         run: python -m compileall -q scripts
-      - name: Validate checked-in data
+      - name: Validate compensation and source references
         run: python scripts/validate_data.py
+      - name: Validate multi-domain generated artifacts
+        run: python scripts/validate_domains.py
