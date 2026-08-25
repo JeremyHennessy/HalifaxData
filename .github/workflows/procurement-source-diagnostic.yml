@@ -1,0 +1,20 @@
+name: Procurement Source Diagnostic
+
+on:
+  push:
+    branches: ['agent/build-005-dashboard-stabilization-20260825']
+
+permissions:
+  contents: read
+
+jobs:
+  verify-source-row:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch exact Nova Scotia tender source row
+        run: |
+          curl --fail --silent --show-error --get \
+            'https://data.novascotia.ca/resource/m6ps-8j6u.json' \
+            --data-urlencode '$where=tender_id='"'"'T15-299'"'"'' \
+            --data-urlencode '$limit=10' \
+            | python -m json.tool
