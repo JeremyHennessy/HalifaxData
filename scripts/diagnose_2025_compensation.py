@@ -32,3 +32,7 @@ with pdfplumber.open(io.BytesIO(r.content)) as pdf:
             head=' | '.join(line.strip() for line in text.splitlines()[:4])[:320]
             print(f'PAGE {n}: markers={markers} tables={len(tables)} rows={rows} candidates={candidates} head={head!r}')
             for sample in samples: print('  SAMPLE',sample)
+        if n >= 28 and n <= 31:
+            print(f'--- PAGE {n} TEXT START ---')
+            print(text)
+            print(f'--- PAGE {n} TEXT END ---')
