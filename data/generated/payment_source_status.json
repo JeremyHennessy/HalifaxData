@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "build": "007",
+    "checked_at": "2026-08-25",
+    "status": "public_transaction_source_not_found",
+    "intended_domain": "vendor_payments",
+    "ready_for_transaction_analysis": false,
+    "note": "A public HRM invoice-, cheque-, accounts-payable-, or vendor-payment-level dataset was not found. Awarded tenders and quarterly financial summaries must not be relabelled as payments or transactions."
+  },
+  "evidence": [
+    {
+      "source": "Halifax Open Data / Canadian Urban Data Catalogue finance inventory",
+      "url": "https://data.urbandatacentre.ca/catalogue/?tags=Finance+City+Government&tags=Halifax+Open+Data",
+      "finding": "Finance-tagged Halifax Open Data inventory was reviewed; no vendor-payment, cheque-register, invoice-level, or accounts-payable transaction dataset was identified."
+    },
+    {
+      "source": "HRM Standard Terms and Conditions for Goods, Services and Standing Offers",
+      "url": "https://www.halifax.ca/sites/default/files/documents/business/doing-business-halifax/stdtermsforgandsrevJune202016.pdf",
+      "finding": "Confirms HRM operates an Accounts Payable and electronic vendor-payment process and requires purchase-order references on invoices; it is process evidence, not a public payment ledger."
+    },
+    {
+      "source": "Procurement and Accounts Payable Review",
+      "url": "https://legacycontent.halifax.ca/council/agendasc/documents/090922cai02.pdf",
+      "finding": "Confirms HRM reviews payment timeliness and accounts-payable controls; the report does not publish the underlying payment-level ledger."
+    },
+    {
+      "source": "Nova Scotia Awarded Public Tenders",
+      "url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+      "finding": "Provides award/vendor/amount records and is already ingested as procurement evidence. Award value is not proof of an invoice or payment."
+    },
+    {
+      "source": "HRM quarterly financial reports",
+      "url": "https://www.halifax.ca/city-hall/budget-finances/budget",
+      "finding": "Current HalifaxData spending rows are quarterly summary-table evidence. They are not transaction-level accounts-payable records."
+    }
+  ],
+  "minimum_requested_transaction_fields": [
+    "payment_or_document_id",
+    "vendor_id_or_vendor_name",
+    "invoice_id_if_disclosable",
+    "invoice_date_if_disclosable",
+    "posting_date",
+    "payment_date",
+    "gross_amount",
+    "net_amount_if_available",
+    "tax_amount_if_available",
+    "purchase_order_number",
+    "contract_or_tender_id",
+    "business_unit_or_cost_centre",
+    "gl_account_or_expense_category",
+    "capital_project_code_if_applicable",
+    "credit_or_reversal_indicator"
+  ],
+  "recommended_access_path": {
+    "method": "formal HRM data-access / FOIPOP request or proactive Open Data request",
+    "request_scope": "Machine-readable accounts-payable/vendor-payment extract for the longest available retention period, with transaction identifiers and organizational/project coding but excluding banking details and other protected personal information.",
+    "fallback": "If invoice-level identifiers cannot be disclosed, request vendor + payment date + amount + purchase order/contract + cost centre/account/project code at the most granular releasable level."
+  },
+  "analysis_families_blocked_until_source_exists": [
+    "duplicate_invoice_detection",
+    "split_payment_detection",
+    "award_to_payment_reconciliation",
+    "contract_to_final_paid_value",
+    "payment_timing_anomalies",
+    "vendor_payment_concentration"
+  ]
+}
