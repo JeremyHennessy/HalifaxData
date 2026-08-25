@@ -113,6 +113,7 @@ b8FinancialInvestigations = function b8FinancialInvestigationsRefined() {
   return b8FinancialInvestigationsUnrefined().filter(item => {
     const title = normalize(item.title);
     return !title.includes('$') &&
+      !/\d/.test(title) &&
       !/\bbalance\b/.test(title) &&
       !title.includes('individual surpluses and reserves') &&
       !title.includes('accumulated surplus');
@@ -139,4 +140,9 @@ b8DiverseTop = function b8DiverseTopRefined(items, limit = 8, maxPerDomain = 3) 
     }
   }
   return selected;
+};
+
+const b8ProcurementPanelsUnrefined = b8ProcurementPanels;
+b8ProcurementPanels = function b8ProcurementPanelsRefined() {
+  return b8ProcurementPanelsUnrefined().replace('entity/category share', 'reporting-body share');
 };
