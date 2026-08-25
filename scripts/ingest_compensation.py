@@ -9,7 +9,7 @@ Safety properties:
 - Uses a text fallback only when a non-HRM PDF page yields no usable table rows.
 """
 from __future__ import annotations
-import io, json, re, sys
+import io, json, re, sys, unicodedata
 from pathlib import Path
 import requests, pdfplumber
 
@@ -33,7 +33,10 @@ def clean(value):
     return re.sub(r'\s+',' ',str(value or '')).strip()
 
 def person_key(name):
-    return ''.join(ch.lower() for ch in name if ch.isalnum())
+    # Disclosure typography changes across years (for example Åsa → Asa).
+    # Fold accents only for the internal longitudinal key; preserve source display text.
+    folded=unicodedata.normalize('NFKD',clean(name))
+    return ''.join(ch.lower() for ch in folded if ch.isalnum() and not unicodedata.combining(ch))
 
 def entity_for_page(text):
     t=(text or '').lower()
