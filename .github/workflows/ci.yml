@@ -23,6 +23,7 @@ jobs:
         run: |
           node --check app.js
           node --check compensation-ui.js
+          node --check budget-ui.js
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate checked-in data
