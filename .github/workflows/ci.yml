@@ -11,6 +11,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,20 +27,21 @@ jobs:
           node --check budget-ui.js
       - name: Validate Python syntax
         run: python -m compileall -q scripts
-      - name: Validate checked-in data
+      - name: Validate established budget and compensation contracts
         run: python scripts/validate_data.py
+      - name: Validate historical budgets
+        run: python scripts/validate_budget_history.py
       - name: Validate audited financial history
+        run: python scripts/validate_financial_history.py
+      - name: Validate municipal benchmarks and external funding
+        run: python scripts/validate_municipal_benchmarks.py
+      - name: Validate Council calendar and document graph
+        run: python scripts/validate_council.py
+      - name: Validate quarterly spending summaries
+        run: python scripts/validate_spending.py
+      - name: Validate final normalized entity index
         run: |
-          if [ -f data/generated/financials.json ]; then
-            python scripts/validate_financial_history.py
-          else
-            echo "financials.json not checked in yet; audited-financial workflow must generate it before merge."
-          fi
-      - name: Validate normalized entity index
-        run: |
-          if [ -f data/generated/entity_index.json ]; then
-            python scripts/build_entity_index.py --check
-            python scripts/validate_entity_index.py
-          else
-            echo "entity_index.json not checked in yet; normalization workflow must generate it before merge."
-          fi
+          python scripts/build_entity_index_v4.py --check
+          python scripts/validate_entity_index_v4.py
+      - name: Validate repository diff hygiene
+        run: git diff --check
