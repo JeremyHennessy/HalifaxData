@@ -1,6 +1,8 @@
 {
   "metadata": {
-    "generated_at": "2026-08-25T16:03:43+00:00",
+    "dataset_status": "complete_paged_source_refresh",
+    "parser_version": "build005-municipal-v2",
+    "generated_at": "2026-08-25T18:48:11+00:00",
     "records": 108,
     "hrm_records": 48,
     "comparator_records": 60,
@@ -9,76 +11,132 @@
         "source_id": "ns-municipal-operating-expenses",
         "status": "ok",
         "downloaded_rows": 30,
-        "nonempty_rows": 30,
+        "advertised_rows": 30,
         "selected_rows": 30,
         "selection_mode": "regional_type_comparator",
+        "page_size": 5000,
+        "pages": [
+          {
+            "offset": 0,
+            "returned": 30
+          }
+        ],
         "note": "Dataset is municipality-type aggregate context, not HRM-specific operating facts."
       },
       {
         "source_id": "ns-municipal-operating-revenues",
         "status": "ok",
         "downloaded_rows": 30,
-        "nonempty_rows": 30,
+        "advertised_rows": 30,
         "selected_rows": 30,
         "selection_mode": "regional_type_comparator",
+        "page_size": 5000,
+        "pages": [
+          {
+            "offset": 0,
+            "returned": 30
+          }
+        ],
         "note": "Dataset is municipality-type aggregate context, not HRM-specific operating facts."
       },
       {
         "source_id": "ns-municipal-operating-totals",
         "status": "ok",
         "downloaded_rows": 555,
-        "nonempty_rows": 555,
+        "advertised_rows": 555,
         "selected_rows": 11,
         "selection_mode": "explicit_hrm_identity",
+        "page_size": 5000,
+        "pages": [
+          {
+            "offset": 0,
+            "returned": 555
+          }
+        ],
         "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-municipal-consolidated",
         "status": "ok",
         "downloaded_rows": 396,
-        "nonempty_rows": 396,
+        "advertised_rows": 396,
         "selected_rows": 8,
         "selection_mode": "explicit_hrm_identity",
+        "page_size": 5000,
+        "pages": [
+          {
+            "offset": 0,
+            "returned": 396
+          }
+        ],
         "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-municipal-fci",
         "status": "ok",
         "downloaded_rows": 396,
-        "nonempty_rows": 396,
+        "advertised_rows": 396,
         "selected_rows": 8,
         "selection_mode": "explicit_hrm_identity",
+        "page_size": 5000,
+        "pages": [
+          {
+            "offset": 0,
+            "returned": 396
+          }
+        ],
         "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-uniform-assessment-regional",
         "status": "ok",
         "downloaded_rows": 1091,
-        "nonempty_rows": 1091,
+        "advertised_rows": 1091,
         "selected_rows": 21,
         "selection_mode": "explicit_hrm_identity",
+        "page_size": 5000,
+        "pages": [
+          {
+            "offset": 0,
+            "returned": 1091
+          }
+        ],
         "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-municipal-funding-programs",
         "status": "ok",
         "downloaded_rows": 212,
-        "nonempty_rows": 212,
+        "advertised_rows": 212,
         "selected_rows": 212,
         "selection_mode": "province_program_context",
+        "page_size": 5000,
+        "pages": [
+          {
+            "offset": 0,
+            "returned": 212
+          }
+        ],
         "note": "Program totals are contextual and must not be interpreted as funding received by HRM."
       },
       {
         "source_id": "ns-municipal-capacity-grants",
         "status": "ok",
         "downloaded_rows": 700,
-        "nonempty_rows": 700,
+        "advertised_rows": 700,
         "selected_rows": 14,
         "selection_mode": "explicit_hrm_identity",
+        "page_size": 5000,
+        "pages": [
+          {
+            "offset": 0,
+            "returned": 700
+          }
+        ],
         "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       }
     ],
-    "note": "HRM-specific rows and external comparator rows are explicitly scoped. Raw API fields are retained until source-specific semantic mappings are verified."
+    "note": "All configured Socrata sources are count-checked and paged to the advertised row count. HRM-specific rows and external comparator rows remain explicitly scoped."
   },
   "records": [
     {
