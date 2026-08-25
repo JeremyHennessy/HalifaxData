@@ -1,10 +1,10 @@
-# Source map — Build 001
+# Source map — Builds 001–002
 
-Research date: 2026-08-25. This document records the initial official/public-body source universe. It is a discovery map, not a claim that every dataset is already fully ingested.
+Research date: 2026-08-25. This document records the initial official/public-body source universe and current ingestion status. It is a discovery map, not a claim that every Halifax financial dataset is already ingested.
 
 ## Priority 1 — machine or repeatably extractable
 
-1. **HRM annual Statements of Compensation (2016–2025 located)** — employee/person name, business unit where applicable, position, salary/wages, other benefits and total. Statements also contain Halifax Water and Halifax Public Libraries sections.
+1. **HRM annual Statements of Compensation (2016–2025 located and extracted)** — employee/person name, business unit where applicable, position, salary/wages, other benefits and total. The configured statements include HRM plus Halifax Water and Halifax Public Libraries sections. Build 002 validates 10,228 threshold-disclosure rows across the ten statements. The 2025 Library/Water pages require a narrowly scoped text-layer fallback because their PDF table structure collapses under the normal extractor.
 2. **HRM capital project ArcGIS service** — project number, name, category, budget year, location/work descriptions and geometry. Service metadata currently appears historical (data last edited 2022; budget year types through 2021), so it must not be treated as the current capital universe.
 3. **Nova Scotia public tender notices** — tender discovery and awards for HRM procurements.
 4. **Nova Scotia alternative procurement award notices** — entity/vendor/procurement-circumstance discovery for non-competitive awards.
@@ -27,6 +27,15 @@ Research date: 2026-08-25. This document records the initial official/public-bod
 - Municipal Archives finance, payroll, assessment and governance records.
 - Property assessment/tax-base sources and external transfer/grant records (next research pass).
 
+## Confirmed source-data issues found during Build 002
+
+These are issues in the published statements, not inferred wrongdoing:
+
+- **2018 Halifax Public Libraries — Debra Lebel:** published salary/wages plus benefits do not equal the published total; HalifaxData preserves all published numbers and records a +$130.81 delta.
+- **2025 Halifax Public Libraries — Heather MacKenzie:** the official statement publishes $113,978.57 wages, no benefits and a $111,827.16 total; HalifaxData preserves the values and records the -$2,151.41 delta.
+
+The validator fails any unexplained arithmetic mismatch. Only explicitly tagged source-reported discrepancies pass as warnings.
+
 ## Planned analytical tests
 
 These are screening tests only; each requires provenance before any conclusion.
@@ -38,7 +47,7 @@ These are screening tests only; each requires provenance before any conclusion.
 - Competitive vs alternative procurement mix.
 - Contract amendments relative to original award.
 - Reserve withdrawals relative to stated purpose and Council authorization.
-- Compensation year-over-year outliers, role changes, and benefits-heavy years.
+- Compensation year-over-year outliers, role changes, benefits-heavy years and source arithmetic mismatches.
 - Duplicate/similar procurement descriptions near approval thresholds **only when transaction-level evidence exists**.
 
 ## Known gaps
