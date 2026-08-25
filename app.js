@@ -1,4 +1,4 @@
-const state = { compensation: null, sources: null, view: 'overview', selectedName: null };
+const state = { compensation: null, sources: null, view: 'overview', selectedPerson: null };
 const fmtMoney = new Intl.NumberFormat('en-CA', { style:'currency', currency:'CAD', maximumFractionDigits:0 });
 const fmtNum = new Intl.NumberFormat('en-CA');
 const content = document.querySelector('#content');
@@ -9,7 +9,8 @@ Promise.all([
   fetch('./data/sources.json').then(r => { if(!r.ok) throw new Error('source registry'); return r.json(); })
 ]).then(([compensation, sources]) => {
   state.compensation = compensation; state.sources = sources;
-  document.querySelector('#coverage-label').textContent = `${compensation.metadata.min_year}–${compensation.metadata.max_year} disclosure seed`;
+  const label = compensation.metadata.dataset_status === 'automated_full_extraction' ? 'configured disclosure extraction' : 'verified disclosure seed';
+  document.querySelector('#coverage-label').textContent = `${compensation.metadata.min_year}–${compensation.metadata.max_year} ${label}`;
   render();
 }).catch(err => { content.innerHTML = `<div class="panel"><h2>Data load failed</h2><p class="panel-sub">${escapeHtml(err.message)}</p></div>`; });
 
@@ -31,12 +32,13 @@ function pct(v){ return `${(v*100).toFixed(1)}%`; }
 function escapeHtml(s=''){ return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 function records(){ return state.compensation.records; }
 function latestYear(){ return Math.max(...records().map(r=>r.fiscal_year_end)); }
-function latestRecords(){ const y=latestYear(); return records().filter(r=>r.fiscal_year_end===y); }
+function personRef(r){ return `${r.entity}\u001f${r.person_key}`; }
+function isFullExtraction(){ return state.compensation.metadata.dataset_status === 'automated_full_extraction'; }
 
 function computeSignals(){
-  const byName = groupBy(records(), r => r.person_key);
+  const byPerson = groupBy(records(), personRef);
   const signals=[];
-  for(const [key, rows0] of byName){
+  for(const rows0 of byPerson.values()){
     const rows=[...rows0].sort((a,b)=>a.fiscal_year_end-b.fiscal_year_end);
     for(let i=1;i<rows.length;i++){
       const a=rows[i-1], b=rows[i];
@@ -50,26 +52,29 @@ function computeSignals(){
     }
     rows.forEach(r=>{
       if(r.total>0 && r.benefits/r.total>=.10) signals.push({type:'Benefits concentration',severity:'review',name:r.name,year:r.fiscal_year_end,detail:`Benefits were ${pct(r.benefits/r.total)} of disclosed total (${money(r.benefits)}). This may reflect severance, allowances or other permitted items and requires source review.`,source:r.source_id});
+      if((r.validation_flags||[]).includes('reported_total_mismatch')) signals.push({type:'Published arithmetic mismatch',severity:'high',name:r.name,year:r.fiscal_year_end,detail:`The published total differs from wages plus benefits by ${money(Math.abs(r.source_total_delta||0))}. HalifaxData preserves the source values rather than silently correcting them.`,source:r.source_id});
     });
   }
-  return signals.sort((a,b)=>b.year-a.year || (a.severity==='high'?-1:1));
+  const severityRank={high:0,review:1,info:2};
+  return signals.sort((a,b)=>b.year-a.year || (severityRank[a.severity]??9)-(severityRank[b.severity]??9) || a.name.localeCompare(b.name));
 }
 
 function renderOverview(){
   setTitle('Financial intelligence overview');
   const src=state.sources.sources; const comp=records(); const signals=computeSignals(); const yr=latestYear();
   const units=new Set(comp.filter(r=>r.fiscal_year_end===yr).map(r=>r.business_unit).filter(Boolean));
+  const statusText=isFullExtraction()?'All rows extracted from the currently configured annual statements passed structural validation. This is still a $100k+ disclosure population, not the full workforce.':'The current checked-in data is a verified partial seed and must not be interpreted as the complete disclosure population.';
   content.innerHTML=`
-    <div class="banner"><strong>Current data state:</strong> ${escapeHtml(state.compensation.metadata.note)} The UI never treats this seed as a complete population.</div>
+    <div class="banner"><strong>Current data state:</strong> ${escapeHtml(state.compensation.metadata.note)} ${escapeHtml(statusText)}</div>
     <div class="grid metrics">
       <div class="metric"><div class="label">Official sources mapped</div><div class="value">${fmtNum.format(src.length)}</div><div class="sub">HRM, Province, Halifax Water & regulators</div></div>
-      <div class="metric"><div class="label">Verified compensation rows</div><div class="value">${fmtNum.format(comp.length)}</div><div class="sub">Partial seed pending automated full extraction</div></div>
+      <div class="metric"><div class="label">Compensation rows</div><div class="value">${fmtNum.format(comp.length)}</div><div class="sub">${isFullExtraction()?'Validated configured-statement extraction':'Verified partial seed'}</div></div>
       <div class="metric"><div class="label">Compensation history</div><div class="value">${state.compensation.metadata.min_year}–${state.compensation.metadata.max_year}</div><div class="sub">$100k+ disclosure threshold</div></div>
-      <div class="metric"><div class="label">Latest units represented</div><div class="value">${units.size}</div><div class="sub">Seed only; not a workforce count</div></div>
+      <div class="metric"><div class="label">Latest unit labels</div><div class="value">${units.size}</div><div class="sub">Disclosure labels; not a workforce count</div></div>
     </div>
     <div class="grid two-col">
       <div class="panel"><h2>What HalifaxData will reconcile</h2><p class="panel-sub">Every signal should be traceable back to an official document or machine-readable endpoint.</p>${reconciliationHtml()}</div>
-      <div class="panel"><h2>Recent review signals</h2><p class="panel-sub">Neutral screening signals, not findings of wrongdoing.</p><div class="signal-list">${signals.slice(0,6).map(signalHtml).join('') || '<div class="empty">No signals in seed.</div>'}</div></div>
+      <div class="panel"><h2>Recent review signals</h2><p class="panel-sub">Neutral screening signals, not findings of wrongdoing.</p><div class="signal-list">${signals.slice(0,6).map(signalHtml).join('') || '<div class="empty">No signals in current data.</div>'}</div></div>
     </div>`;
 }
 function reconciliationHtml(){
@@ -89,7 +94,7 @@ function renderCompensation(){
   setTitle('Employee compensation history');
   const years=[...new Set(records().map(r=>r.fiscal_year_end))].sort((a,b)=>b-a); const units=[...new Set(records().map(r=>r.business_unit).filter(Boolean))].sort();
   content.innerHTML=`<div class="banner"><strong>Disclosure limitation:</strong> HRM's statement covers people receiving $100,000 or more in the fiscal year. Absence from a year cannot be interpreted as departure from employment or zero compensation.</div>
-  <div class="panel"><div class="section-title"><div><h2>Disclosed compensation</h2><p class="panel-sub">Click a row to inspect the available history.</p></div><span class="count" id="row-count"></span></div>
+  <div class="panel"><div class="section-title"><div><h2>Disclosed compensation</h2><p class="panel-sub">Click a row to inspect the available history within the same reporting entity.</p></div><span class="count" id="row-count"></span></div>
     <div class="toolbar"><input id="comp-search" placeholder="Search employee, position or business unit" aria-label="Search compensation"/><select id="year-filter"><option value="all">All years</option>${years.map(y=>`<option value="${y}" ${y===latestYear()?'selected':''}>${y}</option>`).join('')}</select><select id="unit-filter"><option value="all">All business units</option>${units.map(u=>`<option>${escapeHtml(u)}</option>`).join('')}</select></div>
     <div id="comp-table"></div><div id="person-detail" class="detail"></div>
   </div>`;
@@ -97,20 +102,20 @@ function renderCompensation(){
   ['#comp-search','#year-filter','#unit-filter'].forEach(sel=>document.querySelector(sel).addEventListener(sel==='#comp-search'?'input':'change',update)); update();
 }
 function renderCompTable(q,year,unit){
-  q=q.toLowerCase().trim(); let rows=records().filter(r=>(year==='all'||String(r.fiscal_year_end)===year)&&(unit==='all'||r.business_unit===unit)&&(!q||`${r.name} ${r.position} ${r.business_unit}`.toLowerCase().includes(q))).sort((a,b)=>b.fiscal_year_end-a.fiscal_year_end||b.total-a.total);
-  document.querySelector('#row-count').textContent=`${rows.length} verified seed rows`;
-  document.querySelector('#comp-table').innerHTML=rows.length?`<div class="table-wrap"><table><thead><tr><th>Year</th><th>Employee</th><th>Business unit</th><th>Position</th><th class="money">Wages</th><th class="money">Benefits</th><th class="money">Total</th></tr></thead><tbody>${rows.map(r=>`<tr data-name="${escapeHtml(r.person_key)}"><td>${r.fiscal_year_end}</td><td class="name-cell"><strong>${escapeHtml(r.name)}</strong><span>${escapeHtml(r.entity)}</span></td><td>${escapeHtml(r.business_unit||'—')}</td><td>${escapeHtml(r.position||'—')}</td><td class="money">${money(r.wages)}</td><td class="money">${money(r.benefits)}</td><td class="money"><strong>${money(r.total)}</strong></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No matching seed rows.</div>';
-  document.querySelector('#comp-table').querySelectorAll('[data-name]').forEach(tr=>tr.addEventListener('click',()=>renderPerson(tr.dataset.name)));
-  if(state.selectedName && rows.some(r=>r.person_key===state.selectedName)) renderPerson(state.selectedName); else document.querySelector('#person-detail').innerHTML='';
+  q=q.toLowerCase().trim(); let rows=records().filter(r=>(year==='all'||String(r.fiscal_year_end)===year)&&(unit==='all'||r.business_unit===unit)&&(!q||`${r.name} ${r.position} ${r.business_unit} ${r.entity}`.toLowerCase().includes(q))).sort((a,b)=>b.fiscal_year_end-a.fiscal_year_end||b.total-a.total);
+  document.querySelector('#row-count').textContent=`${fmtNum.format(rows.length)} disclosed rows`;
+  document.querySelector('#comp-table').innerHTML=rows.length?`<div class="table-wrap"><table><thead><tr><th>Year</th><th>Employee</th><th>Business unit</th><th>Position</th><th class="money">Wages</th><th class="money">Benefits</th><th class="money">Total</th></tr></thead><tbody>${rows.map(r=>`<tr data-key="${escapeHtml(r.person_key)}" data-entity="${escapeHtml(r.entity)}"><td>${r.fiscal_year_end}</td><td class="name-cell"><strong>${escapeHtml(r.name)}</strong><span>${escapeHtml(r.entity)}</span></td><td>${escapeHtml(r.business_unit||'—')}</td><td>${escapeHtml(r.position||'—')}</td><td class="money">${money(r.wages)}</td><td class="money">${money(r.benefits)}</td><td class="money"><strong>${money(r.total)}</strong></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No matching disclosure rows.</div>';
+  document.querySelector('#comp-table').querySelectorAll('[data-key]').forEach(tr=>tr.addEventListener('click',()=>renderPerson(tr.dataset.key,tr.dataset.entity)));
+  if(state.selectedPerson && rows.some(r=>r.person_key===state.selectedPerson.key && r.entity===state.selectedPerson.entity)) renderPerson(state.selectedPerson.key,state.selectedPerson.entity); else document.querySelector('#person-detail').innerHTML='';
 }
-function renderPerson(key){
-  state.selectedName=key; const rows=records().filter(r=>r.person_key===key).sort((a,b)=>a.fiscal_year_end-b.fiscal_year_end); const latest=rows.at(-1); const vals=rows.map(r=>r.total); const min=Math.min(...vals),max=Math.max(...vals); const w=600,h=130,pad=15; const pts=rows.map((r,i)=>{const x=pad+(i*(w-pad*2)/Math.max(rows.length-1,1));const y=h-pad-((r.total-min)/(Math.max(max-min,1))*(h-pad*2));return [x,y]}).map(p=>p.join(',')).join(' ');
-  document.querySelector('#person-detail').innerHTML=`<div class="panel"><div class="detail-head"><div><h3>${escapeHtml(latest.name)}</h3><p>${escapeHtml(latest.position||'')} · ${escapeHtml(latest.business_unit||'')}</p></div><span class="badge">${rows.length} disclosed years in seed</span></div><div class="trend"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Compensation history"><polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="3" style="color:#0d6d73"/>${rows.map((r,i)=>{const [x,y]=pts.split(' ')[i].split(',');return `<circle cx="${x}" cy="${y}" r="4" fill="#0d6d73"><title>${r.fiscal_year_end}: ${money(r.total)}</title></circle>`}).join('')}</svg><div class="trend-meta"><span>${rows[0].fiscal_year_end}: ${money(rows[0].total)}</span><span>${latest.fiscal_year_end}: ${money(latest.total)}</span></div></div><div class="provenance">Only years included in the current verified seed are plotted. The automated extractor is intended to replace this seed with the complete annual statements.</div></div>`;
+function renderPerson(key,entity){
+  state.selectedPerson={key,entity}; const rows=records().filter(r=>r.person_key===key && r.entity===entity).sort((a,b)=>a.fiscal_year_end-b.fiscal_year_end); const latest=rows.at(-1); const vals=rows.map(r=>r.total); const min=Math.min(...vals),max=Math.max(...vals); const w=600,h=130,pad=15; const points=rows.map((r,i)=>{const x=pad+(i*(w-pad*2)/Math.max(rows.length-1,1));const y=h-pad-((r.total-min)/(Math.max(max-min,1))*(h-pad*2));return [x,y]}); const pts=points.map(p=>p.join(',')).join(' ');
+  document.querySelector('#person-detail').innerHTML=`<div class="panel"><div class="detail-head"><div><h3>${escapeHtml(latest.name)}</h3><p>${escapeHtml(latest.position||'')} · ${escapeHtml(latest.business_unit||'')} · ${escapeHtml(latest.entity)}</p></div><span class="badge">${rows.length} disclosed year${rows.length===1?'':'s'}</span></div><div class="trend"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Compensation history"><polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="3" style="color:#0d6d73"/>${rows.map((r,i)=>{const [x,y]=points[i];return `<circle cx="${x}" cy="${y}" r="4" fill="#0d6d73"><title>${r.fiscal_year_end}: ${money(r.total)}</title></circle>`}).join('')}</svg><div class="trend-meta"><span>${rows[0].fiscal_year_end}: ${money(rows[0].total)}</span><span>${latest.fiscal_year_end}: ${money(latest.total)}</span></div></div><div class="provenance">Only published threshold-disclosure years are plotted. Missing years are not interpreted as zero compensation or departure from employment.</div></div>`;
 }
 
 function renderFlags(){
-  setTitle('Review signals'); const sig=computeSignals();
-  content.innerHTML=`<div class="banner"><strong>Interpretation rule:</strong> these are screening conditions only. Compensation can change because of overtime, acting pay, retirement/severance, vacation payouts and other permitted items explicitly included in HRM's disclosure definition.</div><div class="panel"><div class="section-title"><h2>Signals generated from available rows</h2><span class="count">${sig.length} signals</span></div><div class="signal-list">${sig.map(signalHtml).join('')||'<div class="empty">No current signals.</div>'}</div></div>`;
+  setTitle('Review signals'); const sig=computeSignals(); const shown=sig.slice(0,300);
+  content.innerHTML=`<div class="banner"><strong>Interpretation rule:</strong> these are screening conditions only. Compensation can change because of overtime, acting pay, retirement/severance, vacation payouts and other permitted items explicitly included in HRM's disclosure definition.</div><div class="panel"><div class="section-title"><div><h2>Signals generated from available rows</h2><p class="panel-sub">${sig.length>shown.length?`Showing the first ${shown.length} signals after year/severity sorting.`:'All current signals are shown.'}</p></div><span class="count">${fmtNum.format(sig.length)} signals</span></div><div class="signal-list">${shown.map(signalHtml).join('')||'<div class="empty">No current signals.</div>'}</div></div>`;
 }
 
 function renderSources(){
