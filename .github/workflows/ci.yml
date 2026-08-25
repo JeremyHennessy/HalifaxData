@@ -28,3 +28,11 @@ jobs:
         run: python -m compileall -q scripts
       - name: Validate checked-in data
         run: python scripts/validate_data.py
+      - name: Validate normalized entity index
+        run: |
+          if [ -f data/generated/entity_index.json ]; then
+            python scripts/build_entity_index.py --check
+            python scripts/validate_entity_index.py
+          else
+            echo "entity_index.json not checked in yet; normalization workflow must generate it before merge."
+          fi
