@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import re
 import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -14,13 +13,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 GENERATED = ROOT / "data/generated"
 DEFAULT_OUT = GENERATED / "entity_index.json"
-NORMALIZATION_VERSION = "build005-entity-index-v2"
+NORMALIZATION_VERSION = "build005-entity-index-v3"
 INPUTS = {
     "budget": GENERATED / "budget.json",
     "compensation": GENERATED / "compensation.json",
     "procurement": GENERATED / "procurement.json",
     "capital": GENERATED / "capital.json",
     "spending": GENERATED / "spending.json",
+    "financials": GENERATED / "financials.json",
 }
 ORGANIZATION_ALIASES = {
     "org:halifax-regional-municipality": {
@@ -84,6 +84,16 @@ def record_ref(dataset: str, row: dict, index: int) -> str:
     elif dataset == "spending":
         prov = row.get("provenance") or {}
         identity = [row.get("source_id"), prov.get("locator_value"), row.get("posting_date"), row.get("business_unit"), row.get("account"), row.get("amount")]
+    elif dataset == "financials":
+        prov = row.get("provenance") or {}
+        identity = [
+            row.get("source_id"),
+            prov.get("locator_value"),
+            row.get("statement_family"),
+            row.get("line_item"),
+            row.get("current_year"),
+            row.get("prior_year"),
+        ]
     else:
         identity = [index, row]
     return f"{dataset}:{stable_digest(identity)}"
@@ -155,6 +165,7 @@ def build_payload(inputs: dict[str, dict]) -> dict:
     procurement_rows = inputs["procurement"].get("records") or []
     capital_rows = inputs["capital"].get("records") or []
     spending_rows = inputs["spending"].get("records") or []
+    financial_rows = inputs["financials"].get("records") or []
 
     organizations, org_alias_to_id = build_organization_index()
     business_units, bu_key_to_id = build_business_units(budget_rows)
@@ -329,6 +340,16 @@ def build_payload(inputs: dict[str, dict]) -> dict:
             link["join_methods"]["business_unit"] = "lexical_exact_to_budget_anchor"
         links.append(link)
 
+    for i, row in enumerate(financial_rows):
+        org_id = "org:halifax-regional-municipality"
+        org_source_counts[org_id]["financials"] += 1
+        links.append({
+            "source_dataset": "financials",
+            "source_record_ref": record_ref("financials", row, i),
+            "organization_id": org_id,
+            "join_methods": {"organization": "official_audited_source_scope"},
+        })
+
     person_output = []
     for cluster in people.values():
         names = sorted(cluster.pop("observed_names"))
@@ -395,9 +416,11 @@ def build_payload(inputs: dict[str, dict]) -> dict:
                 "person_identity": "reporting organization + existing person_key; no cross-entity merge",
                 "vendor_identity": "provisional lexical name cluster; not guaranteed legal entity",
                 "capital_identity": "official project code exact; OBJECTID fallback stays isolated",
+                "financial_identity": "audited financial rows attach to HRM organization only; no operational business-unit crosswalk",
             },
             "forbidden_joins": [
                 "audited_psas_category_to_operational_business_unit",
+                "audited_financial_line_item_to_operational_business_unit",
                 "cross_entity_person_key",
                 "fuzzy_name_to_business_unit",
                 "fuzzy_vendor_identity",
@@ -411,6 +434,7 @@ def build_payload(inputs: dict[str, dict]) -> dict:
             "capital_project_cluster_count": len(project_output),
             "budget_operational_rows_linked": service_count,
             "budget_audited_rows_intentionally_not_business_unit_linked": audited_count,
+            "financial_rows_linked_to_hrm_only": len(financial_rows),
             "unmatched_business_unit_label_count": len(unmatched_output),
             "unmatched_business_unit_record_count": sum(item["record_count"] for item in unmatched_output),
         },
