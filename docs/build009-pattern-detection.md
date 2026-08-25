@@ -10,7 +10,8 @@ Build 009 is a derived analytical/UI layer only. It does not modify ingestion sc
 - Only final historical budget source states plus the current released budget row contribute to persistence scoring. Draft, proposed and pre-COVID rows remain context only.
 - Procurement persistence and acceleration using exact published vendor identities, annual award histories, reporting-body concentration and repeat-award frequency.
 - Candidate vendor aliases remain a separate review process and are never silently merged into pattern calculations.
-- Full quarterly spending-summary trajectories using unambiguous like-for-like row series, direction runs, reversals, acceleration and same-period year-over-year comparisons.
+- Full quarterly spending-summary trajectories use exact normalized record type + row label + amount semantics. PDF page/table context and monetary-token count are treated as layout metadata rather than longitudinal identity; any date that becomes non-unique after ignoring those layout attributes is excluded rather than guessed.
+- Build 008's stricter pairwise quarterly matcher remains unchanged as supporting evidence.
 - Cross-domain corroboration between budget patterns and operating-expense-summary trajectories only when the operating label matches exactly after normalization.
 
 ## Interpretation boundaries
