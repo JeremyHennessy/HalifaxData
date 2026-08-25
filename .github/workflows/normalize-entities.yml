@@ -40,7 +40,7 @@ jobs:
           git diff --check
       - name: Commit normalized artifact
         run: |
-          if git diff --quiet -- data/generated/entity_index.json; then
+          if [ -z "$(git status --porcelain -- data/generated/entity_index.json)" ]; then
             echo "Normalized entity index is already current."
             exit 0
           fi
