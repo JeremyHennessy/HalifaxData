@@ -10,6 +10,8 @@ both official PDFs download, expected page structures are present, all 18 config
 budget sections yield a Net Total, and independent published control totals reconcile.
 Published budget-change arithmetic is preserved even when it disagrees with the source
 row endpoints; those inconsistencies are explicitly flagged instead of silently repaired.
+Source labels are retained verbatim. A very small alias map is used only where an official
+HRM source independently establishes the complete label behind a truncated/typo table label.
 """
 from __future__ import annotations
 
@@ -66,6 +68,28 @@ AUDITED_CONTROLS = {
     ('revenue', 'Total revenue'): (1_347_173_000, 1_410_626_000),
     ('expense', 'Total expenses'): (1_338_192_000, 1_350_788_000),
     ('surplus', 'Annual surplus'): (8_981_000, 59_838_000),
+}
+
+# These are the only service-area label normalizations in Build 004. The raw table text
+# remains in source_service_area_label. Two are established elsewhere in the SAME 2025/26
+# budget book; the Libraries label is truncated throughout that table but is spelled out in
+# prior official HRM budget books.
+SERVICE_AREA_ALIASES = {
+    'Infrastructure Maintenance & Operatons': {
+        'canonical': 'Infrastructure Maintenance & Operations',
+        'basis': 'same_source_section_heading',
+        'evidence': '2025/26 Budget & Business Plan PDF page 253',
+    },
+    'Government Relations & Externa': {
+        'canonical': 'Government Relations & External Affairs',
+        'basis': 'same_source_section_heading',
+        'evidence': '2025/26 Budget & Business Plan PDF page 295',
+    },
+    'Information Technology/Collecti': {
+        'canonical': 'Information Technology/Collections',
+        'basis': 'prior_official_budget_label',
+        'evidence': 'Prior official HRM Budget & Business Plan service-area label',
+    },
 }
 
 
@@ -179,6 +203,13 @@ def annotate_budget_arithmetic(record: dict) -> None:
         record['validation_flags'] = flags
 
 
+def normalize_service_area(raw_label: str) -> tuple[str, dict | None]:
+    alias = SERVICE_AREA_ALIASES.get(raw_label)
+    if not alias:
+        return raw_label, None
+    return alias['canonical'], alias
+
+
 def parse_budget_page(page, page_number: int, business_unit: str, required_heading: str) -> list[dict]:
     text = page.extract_text() or ''
     if required_heading not in text:
@@ -216,17 +247,19 @@ def parse_budget_page(page, page_number: int, business_unit: str, required_headi
                 pending_label.append(label)
             continue
 
-        full_label = clean(' '.join([*pending_label, label]))
+        raw_label = clean(' '.join([*pending_label, label]))
         pending_label = []
-        if not full_label:
+        if not raw_label:
             raise RuntimeError(f'budget page {page_number}: numeric row without service-area label')
+        service_area, alias = normalize_service_area(raw_label)
 
         record = {
             'record_type': 'service_area_budget',
             'fiscal_year': '2025/26',
             'fiscal_year_end': 2026,
             'business_unit': business_unit,
-            'service_area': full_label,
+            'service_area': service_area,
+            'source_service_area_label': raw_label,
             'prior_actual': values['prior_actual'],
             'prior_actual_period': '2023/24',
             'prior_budget': values['prior_budget'],
@@ -237,10 +270,13 @@ def parse_budget_page(page, page_number: int, business_unit: str, required_headi
             'current_budget_period': '2025/26',
             'source_reported_budget_change': values['source_delta'],
             'source_reported_budget_change_pct': values['source_delta_pct'],
-            'is_total': full_label == 'Net Total',
+            'is_total': service_area == 'Net Total',
             'source_id': BUDGET_SOURCE_ID,
             'pdf_page': page_number,
         }
+        if alias:
+            record['label_normalization_basis'] = alias['basis']
+            record['label_normalization_evidence'] = alias['evidence']
         annotate_budget_arithmetic(record)
         records.append(record)
         if record['is_total']:
@@ -274,6 +310,7 @@ def parse_budget_book(blob: bytes) -> tuple[list[dict], dict]:
     delta_mismatches = sum('reported_budget_change_mismatch' in row.get('validation_flags', []) for row in records)
     pct_mismatches = sum('reported_budget_change_pct_mismatch' in row.get('validation_flags', []) for row in records)
     discrepancy_rows = sum(bool(row.get('validation_flags')) for row in records)
+    normalized_labels = sum(row['service_area'] != row['source_service_area_label'] for row in records)
     return records, {
         'service_area_record_count': len(records),
         'service_area_detail_count': sum(not row['is_total'] for row in records),
@@ -281,6 +318,7 @@ def parse_budget_book(blob: bytes) -> tuple[list[dict], dict]:
         'budget_source_arithmetic_discrepancy_rows': discrepancy_rows,
         'budget_source_delta_mismatches': delta_mismatches,
         'budget_source_pct_mismatches': pct_mismatches,
+        'normalized_service_area_labels': normalized_labels,
     }
 
 
@@ -407,7 +445,7 @@ def main() -> None:
             'source_sha256': {BUDGET_SOURCE_ID: budget_sha, FINANCIAL_SOURCE_ID: financial_sha},
             **budget_stats,
             **audited_stats,
-            'note': 'Service-area budget rows and audited PSAS rows are separate accounting views and are not force-joined. Budget-book rows preserve source-reported change columns plus independently derived arithmetic; published inconsistencies are explicitly flagged. Audited statement amounts are converted from source $000s to CAD.',
+            'note': 'Service-area budget rows and audited PSAS rows are separate accounting views and are not force-joined. Budget-book rows retain raw source labels and source-reported change columns plus independently derived arithmetic; published inconsistencies are explicitly flagged. Three truncated/typo service-area labels are canonicalized only where official HRM budget evidence establishes the complete label. Audited statement amounts are converted from source $000s to CAD.',
         },
         'records': [*budget_rows, *audited_rows],
     }
@@ -417,7 +455,8 @@ def main() -> None:
     tmp.replace(OUTPUT)
     print(
         f'Wrote {len(budget_rows)} budget-book rows and {len(audited_rows)} audited rows to {OUTPUT} '
-        f'({budget_stats["budget_source_arithmetic_discrepancy_rows"]} budget source arithmetic discrepancy rows)',
+        f'({budget_stats["budget_source_arithmetic_discrepancy_rows"]} budget source arithmetic discrepancy rows; '
+        f'{budget_stats["normalized_service_area_labels"]} normalized labels)',
         file=sys.stderr,
     )
 
