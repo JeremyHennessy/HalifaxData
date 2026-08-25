@@ -24,7 +24,11 @@ jobs:
           node --check app.js
           node --check compensation-ui.js
           node --check budget-ui.js
+          node --check domains-ui.js
+          node --check tools/ui-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
-      - name: Validate checked-in data
+      - name: Validate compensation and current budget data
         run: python scripts/validate_data.py
+      - name: Validate multi-domain data contracts
+        run: python scripts/validate_domains.py
