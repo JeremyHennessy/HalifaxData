@@ -6,6 +6,8 @@ on:
     paths:
       - 'scripts/ingest_capital_current.py'
       - 'scripts/validate_capital_current.py'
+      - 'scripts/ingest_capital_actuals_current.py'
+      - 'scripts/validate_capital_actuals_current.py'
       - 'data/sources.json'
       - '.github/workflows/refresh-capital-current-build008.yml'
   workflow_dispatch:
@@ -20,7 +22,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,24 +36,29 @@ jobs:
         run: python -m compileall -q scripts
       - name: Extract final 2025/26 capital project sheets
         run: python scripts/ingest_capital_current.py
+      - name: Extract 2025/26 quarterly capital actuals and projections
+        run: python scripts/ingest_capital_actuals_current.py
       - name: Preserve parser output for diagnosis
         uses: actions/upload-artifact@v4
         with:
           name: build008-capital-current-preview-${{ github.sha }}
-          path: data/generated/capital_current.json
+          path: |
+            data/generated/capital_current.json
+            data/generated/capital_actuals_current.json
           retention-days: 3
-      - name: Independently validate current capital artifact
+      - name: Independently validate current capital artifacts
         run: |
           python scripts/validate_capital_current.py
+          python scripts/validate_capital_actuals_current.py
           git diff --check
-      - name: Commit verified current capital artifact
+      - name: Commit verified current capital artifacts
         run: |
-          if [ -z "$(git status --porcelain -- data/generated/capital_current.json)" ]; then
-            echo "Current capital artifact is already current."
+          if [ -z "$(git status --porcelain -- data/generated/capital_current.json data/generated/capital_actuals_current.json)" ]; then
+            echo "Current capital artifacts are already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/generated/capital_current.json
-          git commit -m "Build 008: refresh verified current capital plan"
+          git add data/generated/capital_current.json data/generated/capital_actuals_current.json
+          git commit -m "Build 008: refresh verified current capital intelligence"
           git push origin HEAD:agent/build-008-capital
