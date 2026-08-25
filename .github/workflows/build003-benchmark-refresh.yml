@@ -27,6 +27,8 @@ jobs:
         run: python scripts/ingest_financial_history.py
       - name: Rebuild eSCRIBE Council and committee calendar
         run: python scripts/ingest_council.py
+      - name: Rebuild eSCRIBE agenda attachment graph
+        run: python scripts/ingest_council_documents.py
       - name: Validate multi-domain artifacts
         run: python scripts/validate_domains.py
       - name: Commit synchronized source/data changes
@@ -39,6 +41,7 @@ jobs:
             data/generated/financials.json
             data/generated/financials_document_tables.json
             data/generated/council.json
+            data/generated/council_documents.json
           )
           if git diff --quiet -- "${FILES[@]}"; then
             echo 'No synchronized source/data changes'
@@ -47,5 +50,5 @@ jobs:
           git config user.name 'halifaxdata-bot'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add "${FILES[@]}"
-          git commit -m 'data: synchronize public sources, financials and Council calendar'
+          git commit -m 'data: materialize Council attachment graph and synchronized evidence'
           git push
