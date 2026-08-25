@@ -1,0 +1,5 @@
+/* Build 005 domain-view layout additions. light-theme.css remains the final palette authority. */
+.domain-pagination{margin:4px 0 10px}.domain-pagination+.table-wrap{margin-top:2px}
+#content table td{max-width:360px;overflow:hidden;text-overflow:ellipsis}
+#content table td:nth-child(2),#content table td:nth-child(4){white-space:normal;line-height:1.35}
+@media(max-width:700px){.local-toolbar>select{width:100%;min-height:42px}.local-toolbar .local-search{min-width:100%}.domain-pagination{align-items:stretch}.domain-pagination>div{display:grid;grid-template-columns:1fr 1fr;width:100%}}
