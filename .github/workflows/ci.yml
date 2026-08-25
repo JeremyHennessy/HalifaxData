@@ -27,4 +27,6 @@ jobs:
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate checked-in data
-        run: python scripts/validate_data.py
+        run: |
+          python scripts/validate_data.py
+          python scripts/validate_multidomain.py
