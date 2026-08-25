@@ -15,6 +15,18 @@ EXPECTED = {
 REQUIRED_QUARTERS = {"Q1", "Q2"}
 ROUNDING_TOLERANCE = 100_000
 ARITHMETIC_TOLERANCE = 2
+VALUE_FIELDS = [
+    "budget_remaining_at_prior_year_end",
+    "commitments_at_prior_year_end",
+    "budget_2025_26",
+    "budget_increases_decreases",
+    "budget_available_at_period_end",
+    "ytd_expenditures",
+    "ytd_commitments",
+    "ytd_expenditures_and_commitments",
+    "projected_spend_remaining_2025_26",
+    "projected_work_in_progress_2026_27",
+]
 
 
 def fail(message: str) -> None:
@@ -33,7 +45,7 @@ def main() -> None:
     rows = payload.get("records") or []
     if meta.get("dataset_status") != "official_2025_26_capital_projection_summaries":
         fail("unexpected dataset status")
-    if meta.get("parser_version") != "build008-capital-actuals-v2":
+    if meta.get("parser_version") != "build008-capital-actuals-v3":
         fail("unexpected parser version")
     if meta.get("granularity") != "asset_category_summary_not_project_actuals":
         fail("granularity boundary missing")
@@ -57,7 +69,7 @@ def main() -> None:
         if not row.get("source_id") or not isinstance(row.get("source_page"), int):
             fail(f"row {index} missing source provenance")
         prov = row.get("provenance") or {}
-        if prov.get("source_id") != row.get("source_id") or prov.get("parser_version") != "build008-capital-actuals-v2":
+        if prov.get("source_id") != row.get("source_id") or prov.get("parser_version") != "build008-capital-actuals-v3":
             fail(f"row {index} provenance mismatch")
 
         available_expected = n(row.get("budget_remaining_at_prior_year_end")) + n(row.get("budget_2025_26")) + n(row.get("budget_increases_decreases"))
@@ -90,6 +102,13 @@ def main() -> None:
         if len(totals) != 1:
             fail(f"{quarter} must have exactly one GRAND TOTAL, found {len(totals)}")
         total = totals[0]
+        categories = [row for row in qrows if row is not total]
+        for field in VALUE_FIELDS:
+            category_sum = sum(n(row.get(field)) for row in categories)
+            total_value = n(total.get(field))
+            if abs(category_sum - total_value) > ARITHMETIC_TOLERANCE:
+                fail(f"{quarter} {field} category sum {category_sum} != GRAND TOTAL {total_value}")
+
         expected = EXPECTED[quarter]
         actual = n(total.get("ytd_expenditures"))
         projected = n(total.get("projected_spend_remaining_2025_26"))
@@ -105,8 +124,6 @@ def main() -> None:
         q3_status = statuses["Q3"]
         if q3_status.get("status") != "source_access_error" or q3_status.get("records") != 0:
             fail("unmaterialized Q3 must be explicit source_access_error with zero rows")
-        # The known narrative values are retained only as source-status context;
-        # they must not appear as normalized data rows without the source table.
         if q3_status.get("narrative_actual_expenditures") != EXPECTED["Q3"]["actual"]:
             fail("Q3 source-status narrative context changed unexpectedly")
 
