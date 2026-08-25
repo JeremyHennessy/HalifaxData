@@ -42,6 +42,8 @@ jobs:
         run: python scripts/validate_council.py
       - name: Validate quarterly spending summaries
         run: python scripts/validate_spending.py
+      - name: Validate Build 007 payment-source status
+        run: python scripts/validate_payment_source_status.py
       - name: Validate final normalized entity index
         run: |
           python scripts/build_entity_index_v4.py --check
