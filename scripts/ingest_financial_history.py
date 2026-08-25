@@ -2,10 +2,10 @@
 """Extract conservative audited HRM comparative financial-statement rows.
 
 The source PDFs contain many non-financial numbers (dates, page ranges, phone
-numbers and narrative note references). Only pages that explicitly identify a
-consolidated statement or consolidated schedule are eligible. Candidate rows
-must also carry financial-number formatting or a detected thousands-of-dollars
-unit before they can become facts.
+numbers and narrative note references). Only pages with an explicit statement
+or schedule heading are eligible. Table cells must be numeric cells rather than
+labels containing digits, and text fallback masks note/date references before
+selecting comparative numeric columns.
 """
 from __future__ import annotations
 
@@ -24,20 +24,27 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / 'data/sources.json'
 OUT = ROOT / 'data/generated'
 UA = 'HalifaxData/0.5 (+https://github.com/JeremyHennessy/HalifaxData)'
-PARSER_VERSION = 'build005-financials-v3'
+PARSER_VERSION = 'build005-financials-v4'
 
 VALUE_RE = re.compile(r'\(?\$?\s*\d[\d,]*(?:\.\d+)?\)?')
+NUMERIC_CELL_RE = re.compile(r'^\s*(?:\(\s*\$?\s*\d[\d,]*(?:\.\d+)?\s*\)|-?\s*\$?\s*\d[\d,]*(?:\.\d+)?)\s*$')
+NOTE_REF_RE = re.compile(r'\(?\bnotes?\s+\d+[A-Za-z]?(?:\([A-Za-z0-9]+\))?\b\)?', re.I)
+MONTH_DATE_RE = re.compile(
+    r'\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+'
+    r'\d{1,2},?\s+20\d{2}\b',
+    re.I,
+)
 STATEMENT_PATTERNS = [
-    ('financial_position', re.compile(r'\bconsolidated statement of financial position\b', re.I)),
-    ('operations', re.compile(r'\bconsolidated statement of operations(?: and accumulated surplus)?\b', re.I)),
-    ('net_financial_assets', re.compile(r'\bconsolidated statement of change(?:s)? in net financial assets(?: \(debt\))?\b', re.I)),
-    ('cash_flows', re.compile(r'\bconsolidated statement of cash flows\b', re.I)),
-    ('schedule', re.compile(r'\bconsolidated schedules? of\b', re.I)),
+    ('financial_position', re.compile(r'^(?:halifax regional municipality\s+)?consolidated statement of financial position\b', re.I)),
+    ('operations', re.compile(r'^(?:halifax regional municipality\s+)?consolidated statement of operations(?: and accumulated surplus)?\b', re.I)),
+    ('net_financial_assets', re.compile(r'^(?:halifax regional municipality\s+)?consolidated statement of change(?:s)? in net financial assets(?: \(debt\))?\b', re.I)),
+    ('cash_flows', re.compile(r'^(?:halifax regional municipality\s+)?consolidated statement of cash flows\b', re.I)),
+    ('schedule', re.compile(r'^(?:halifax regional municipality\s+)?consolidated schedules? of\b', re.I)),
 ]
 REJECT_LABEL_PATTERNS = [
     re.compile(r'^page\s+\d+', re.I),
     re.compile(r'^notes? to consolidated financial statements$', re.I),
-    re.compile(r'^year ended march\b', re.I),
+    re.compile(r'\byear ended march\b', re.I),
     re.compile(r'\btelephone\s*\(?\d{3}\)?', re.I),
     re.compile(r'\bfax\s*\(?\d{3}\)?', re.I),
     re.compile(r'^halifax nova scotia\s+[A-Z]\d[A-Z]', re.I),
@@ -61,15 +68,11 @@ def unit_multiplier(text):
 
 
 def statement_context(text):
-    """Return an explicit audited statement/schedule heading or None."""
+    """Return a heading-anchored audited statement/schedule family or None."""
     lines = [clean(line) for line in (text or '').splitlines() if clean(line)]
     for line in lines:
         for family, pattern in STATEMENT_PATTERNS:
-            match = pattern.search(line)
-            if match:
-                # Auditor narrative can mention the statements. Keep the page
-                # eligible, but downstream row formatting still has to prove a
-                # monetary comparative row before anything is emitted.
+            if pattern.search(line):
                 return family, line[:220]
     return None, None
 
@@ -79,6 +82,21 @@ def has_financial_format(raw_value, multiplier):
     if multiplier == 1000:
         return True
     return any(marker in text for marker in ('$', ',', '(', ')'))
+
+
+def numeric_cell(cell):
+    text = clean(cell)
+    if not text or not NUMERIC_CELL_RE.fullmatch(text):
+        return None
+    return money(text)
+
+
+def mask_label_numbers(line):
+    """Mask non-value numeric references while preserving character offsets."""
+    masked = line
+    for pattern in (NOTE_REF_RE, MONTH_DATE_RE):
+        masked = pattern.sub(lambda match: ' ' * len(match.group(0)), masked)
+    return masked
 
 
 def valid_label(label):
@@ -121,7 +139,11 @@ def parse_table_rows(src, fiscal_year, page_num, statement_family, statement_tit
             'context': statement_title, 'rows': len(normalized), 'header': normalized[:3],
         })
         for row_num, row in enumerate(normalized):
-            numeric_positions = [(idx, money(cell), cell) for idx, cell in enumerate(row) if money(cell) is not None]
+            numeric_positions = []
+            for idx, cell in enumerate(row):
+                value = numeric_cell(cell)
+                if value is not None:
+                    numeric_positions.append((idx, value, cell))
             if len(numeric_positions) < 2:
                 continue
             current_idx, current_raw, current_cell = numeric_positions[-2]
@@ -146,7 +168,10 @@ def parse_text_rows(src, fiscal_year, page_num, statement_family, statement_titl
         line = clean(raw_line)
         if not line or not re.search(r'[A-Za-z]', line):
             continue
-        matches = list(VALUE_RE.finditer(line))
+        if not valid_label(line):
+            continue
+        masked_line = mask_label_numbers(line)
+        matches = list(VALUE_RE.finditer(masked_line))
         if len(matches) < 2:
             continue
         current_match, prior_match = matches[-2], matches[-1]
@@ -251,7 +276,7 @@ def main():
             'records': len(records),
             'source_count': len(sources),
             'source_status': source_status,
-            'scope': 'Explicit consolidated statement/schedule pages only; narrative notes are not normalized by this collector.',
+            'scope': 'Heading-anchored consolidated statement/schedule pages only; narrative notes are not normalized by this collector.',
             'note': 'Source-presented comparative values, detected unit scale, source page and extraction method are retained. Normalized current_year/prior_year values are CAD after applying source_unit_multiplier.',
         },
         'records': records,
@@ -262,7 +287,7 @@ def main():
             'parser_version': PARSER_VERSION,
             'tables': len(tables),
             'source_count': len(sources),
-            'scope': 'Tables found only on pages with an explicit consolidated statement/schedule heading.',
+            'scope': 'Tables found only on pages with a heading-anchored consolidated statement/schedule title.',
         },
         'records': tables,
     }
