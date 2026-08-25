@@ -23,8 +23,8 @@
       "status": "ready",
       "artifact": "./data/generated/procurement.json",
       "label": "Public tender awards",
-      "boundary": "Nova Scotia awarded public tenders filtered to HRM/Halifax municipal bodies. This is not a complete accounts-payable ledger and does not include every alternative procurement or later amendment.",
-      "reason": "Structured Socrata award records have explicit solicitation/vendor/entity/value fields and per-record API provenance. Build 005 multidomain validation enforces the UI contract."
+      "boundary": "Nova Scotia awarded public tenders filtered to HRM/Halifax municipal bodies. This is not a complete accounts-payable ledger and does not include every alternative procurement or later amendment. Published award amounts are signed source values and must not automatically be interpreted as municipal spend.",
+      "reason": "Structured Socrata award records have explicit solicitation/vendor/entity/value fields and per-record API provenance. Build 005 multidomain validation enforces the UI contract. The only negative award row found in this artifact, T15-299 (street-light-fixture disposal), was re-queried from the official Nova Scotia API on 2026-08-25 and the source itself returned awarded_amount=-1500.00; HalifaxData preserves that sign without inferring its accounting treatment."
     },
     "spending": {
       "status": "hold",
