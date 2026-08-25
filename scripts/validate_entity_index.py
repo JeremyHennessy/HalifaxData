@@ -37,6 +37,8 @@ def main() -> None:
     metadata = index.get("metadata") or {}
     if metadata.get("schema_version") != "1.0.0":
         fail(f"entity index: unexpected schema_version {metadata.get('schema_version')!r}")
+    if metadata.get("normalization_version") != "build005-entity-index-v3":
+        fail(f"entity index: unexpected normalization_version {metadata.get('normalization_version')!r}")
     policy = metadata.get("join_policy") or {}
     if policy.get("fuzzy_matching") is not False:
         fail("entity index: fuzzy_matching must be explicitly false")
@@ -222,6 +224,23 @@ def main() -> None:
         if not link or link.get("organization_id") != "org:halifax-regional-municipality":
             fail(f"spending row {i}: missing official HRM source-scope organization link")
 
+    financial_rows = (inputs.get("financials") or {}).get("records") or []
+    for i, row in enumerate(financial_rows):
+        ref = record_ref("financials", row, i)
+        link = link_by_ref.get(("financials", ref))
+        if not link:
+            fail(f"financial row {i}: missing normalized record link")
+            continue
+        if link.get("organization_id") != "org:halifax-regional-municipality":
+            fail(f"financial row {i}: audited fact must link only to HRM organization scope")
+        if link.get("business_unit_id"):
+            fail(f"financial row {i}: prohibited operational business-unit link")
+        methods = link.get("join_methods") or {}
+        if methods.get("organization") != "official_audited_source_scope":
+            fail(f"financial row {i}: unexpected organization join method {methods.get('organization')!r}")
+        if set(methods) != {"organization"}:
+            fail(f"financial row {i}: audited fact has unsupported additional joins {methods!r}")
+
     count_checks = {
         "record_link_count": len(links),
         "business_unit_count": len(business_units),
@@ -230,6 +249,7 @@ def main() -> None:
         "capital_project_cluster_count": len(projects),
         "budget_operational_rows_linked": budget_service,
         "budget_audited_rows_intentionally_not_business_unit_linked": budget_audited,
+        "financial_rows_linked_to_hrm_only": len(financial_rows),
         "unmatched_business_unit_label_count": len(unmatched),
         "unmatched_business_unit_record_count": sum(int(row.get("record_count") or 0) for row in unmatched),
     }
@@ -248,6 +268,7 @@ def main() -> None:
         f"{len(people)} entity-scoped person-key clusters; "
         f"{len(vendors)} provisional vendor-name clusters; "
         f"{len(projects)} capital project clusters; "
+        f"{len(financial_rows)} HRM-only audited financial facts; "
         f"{len(unmatched)} unmatched business-unit labels"
     )
 
