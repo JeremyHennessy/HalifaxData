@@ -136,7 +136,7 @@ def validate_procurement(entry: dict):
                         "awarded_date": row.get("awarded_date"),
                         "source_locator": provenance.get("locator_value") if isinstance(provenance, dict) else None,
                     })
-        if any(finite_number(row.get(key)) and row.get(key) > 0 for key in ("original_award_value", "current_contract_value")):
+        if any(finite_number(row.get(key)) and row.get(key) != 0 for key in ("original_award_value", "current_contract_value")):
             published_value_rows += 1
         entities.add(str(row.get("entity") or "").strip())
         vendors.add(str(row.get("vendor_name") or "").strip())
@@ -148,12 +148,15 @@ def validate_procurement(entry: dict):
     if invalid_values:
         errors.append(f"procurement: {invalid_values} award values are not finite numbers")
     if negative_values:
-        errors.append(f"procurement: {negative_values} award values are negative")
-        print("PROCUREMENT NEGATIVE VALUE EVIDENCE")
+        # Signed values are valid source facts in this dataset. T15-299 was independently
+        # re-queried from the official Nova Scotia Socrata API on 2026-08-25 and returned
+        # awarded_amount=-1500.00. Preserve the sign and do not reinterpret it as spend.
+        warnings.append(f"procurement: preserving {negative_values} signed negative value fields exactly as published by the source")
+        print("PROCUREMENT SIGNED VALUE EVIDENCE")
         for example in negative_examples:
             print(json.dumps(example, ensure_ascii=False, sort_keys=True))
     if published_value_rows < 10:
-        errors.append(f"procurement: only {published_value_rows} rows expose a positive published award/contract value")
+        errors.append(f"procurement: only {published_value_rows} rows expose a non-zero published award/contract value")
     if len(vendors - {""}) < 100:
         errors.append(f"procurement: unexpectedly low vendor diversity ({len(vendors - {''})})")
 
@@ -163,7 +166,7 @@ def validate_procurement(entry: dict):
     print(
         "PROCUREMENT QUALITY "
         f"rows={len(data)} vendors={len(vendors - {''})} entities={len(entities - {''})} "
-        f"positive_value_rows={published_value_rows}"
+        f"nonzero_value_rows={published_value_rows} signed_negative_fields={negative_values}"
     )
 
 
