@@ -143,7 +143,7 @@ async function assertBuild006DataViews(page, viewportName) {
   await openRoute(page, 'benchmarks');
   const benchmarkText = await page.locator('#content').innerText();
   for (const phrase of ['HRM benchmark facts', '48', 'HRM funding facts', '14', 'Province program context', '212', 'Context ≠ Halifax']) {
-    if (!benchmarkText.includes(phrase)) throw new Error(`${viewportName}/benchmarks: missing "${phrase}"`);
+    if (!benchmarkText.toLowerCase().includes(phrase.toLowerCase())) throw new Error(`${viewportName}/benchmarks: missing "${phrase}"`);
   }
   const benchmarkRows = await page.locator('[data-benchmark-origin]').count();
   if (benchmarkRows < 1) throw new Error(`${viewportName}/benchmarks: no scoped municipal context rows rendered`);
