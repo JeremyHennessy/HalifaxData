@@ -13,18 +13,15 @@ const routes = [
   ['signals', 'Signals Lab'],
   ['sources', 'Sources & Evidence']
 ];
+const RELEASED_DOMAINS = ['budget', 'spending', 'procurement', 'capital', 'financials', 'council'];
 const viewports = [
   ['desktop', { width: 1440, height: 1100 }],
   ['mobile', { width: 390, height: 844 }]
 ];
-const OPTIONAL_404_SUFFIXES = [
-  '/data/generated/spending.json',
-  '/data/generated/procurement.json',
-  '/data/generated/capital.json',
-  '/data/generated/financials.json',
-  '/data/generated/council.json',
-  '/data/generated/signals.json'
-];
+// Signals is intentionally not one of the six Build 005 released analytical
+// domains. Its lifecycle manifest must say Validation pending while signals.json
+// remains absent; every released-domain artifact must return HTTP 200.
+const OPTIONAL_404_SUFFIXES = ['/data/generated/signals.json'];
 
 await fs.rm(OUTPUT, { recursive: true, force: true });
 await fs.mkdir(OUTPUT, { recursive: true });
@@ -38,7 +35,8 @@ const report = {
   http_errors: [],
   expected_optional_404s: [],
   views: [],
-  interactions: []
+  interactions: [],
+  released_domains: []
 };
 
 async function waitForDashboard(page) {
@@ -60,6 +58,37 @@ async function closeDrawer(page) {
     await page.locator('#drawer-close').click();
     await page.waitForFunction(() => !document.querySelector('#evidence-drawer')?.open);
   }
+}
+
+async function assertReleasedDomainsReady(page, viewportName) {
+  await openRoute(page, 'overview');
+  await page.waitForFunction(domains => domains.every(domain => {
+    const card = document.querySelector(`.coverage-card[data-domain="${domain}"]`);
+    const badge = card?.querySelector('.badge')?.textContent?.trim() || '';
+    return badge.startsWith('Ready');
+  }), RELEASED_DOMAINS, { timeout: 15000 });
+
+  const statuses = await page.evaluate(domains => Object.fromEntries(domains.map(domain => {
+    const card = document.querySelector(`.coverage-card[data-domain="${domain}"]`);
+    return [domain, card?.querySelector('.badge')?.textContent?.trim() || ''];
+  })), RELEASED_DOMAINS);
+
+  for (const domain of RELEASED_DOMAINS) {
+    const status = statuses[domain] || '';
+    if (!status.startsWith('Ready')) {
+      throw new Error(`${viewportName}/coverage: ${domain} is not Ready (${status || 'blank'})`);
+    }
+    if (/pending|missing|error|awaiting/i.test(status)) {
+      throw new Error(`${viewportName}/coverage: ${domain} has a non-release state (${status})`);
+    }
+  }
+
+  const generatedMetric = await page.locator('.metric-card').filter({ hasText: 'Additional generated domains' }).locator('.metric-value').textContent();
+  if (generatedMetric?.trim() !== '6/6') {
+    throw new Error(`${viewportName}/coverage: expected Additional generated domains = 6/6, got ${generatedMetric?.trim()}`);
+  }
+
+  report.released_domains.push({ viewport: viewportName, statuses, generated_metric: generatedMetric.trim() });
 }
 
 try {
@@ -120,16 +149,14 @@ try {
         throw new Error(`${viewportName}/${route}: horizontal page overflow ${state.scroll_width}px > ${state.client_width}px`);
       }
 
-      await page.screenshot({
-        path: `${OUTPUT}/${viewportName}-${route}.png`,
-        fullPage: true
-      });
-
+      await page.screenshot({ path: `${OUTPUT}/${viewportName}-${route}.png`, fullPage: true });
       report.views.push({ viewport: viewportName, route, title: title.trim(), ...state });
     }
 
+    // Release gate: all six analytical domains must load and render Ready.
+    await assertReleasedDomainsReady(page, viewportName);
+
     // Global filter: prove the disclosure count changes under a real fiscal-year filter.
-    await openRoute(page, 'overview');
     const allYearsCount = (await page.locator('.metrics-grid .metric-card').nth(1).locator('.metric-value').textContent())?.trim();
     await page.locator('#global-year').selectOption('2025');
     await page.waitForFunction(() => document.querySelector('#global-year')?.value === '2025');
@@ -139,7 +166,6 @@ try {
     }
     report.interactions.push({ viewport: viewportName, check: 'fiscal-year filter', before: allYearsCount, after: filteredCount });
 
-    // Reset without relying on a control that the compact mobile layout may intentionally hide.
     await page.locator('#global-year').selectOption('all');
     await page.waitForFunction(() => document.querySelector('#global-year')?.value === 'all');
 
@@ -161,13 +187,28 @@ try {
     report.interactions.push({ viewport: viewportName, check: 'global search + person history + source link', history_rows: historyRows, source_url: officialHref });
     await closeDrawer(page);
 
-    // Missing-domain state must remain explicit rather than presenting synthetic records.
+    // Spending is now a released domain; it must present usable generated data.
     await openRoute(page, 'spending');
+    await page.waitForFunction(() => {
+      const text = document.querySelector('#content')?.innerText || '';
+      return /Ready\s*·\s*[\d,]+\s+rows/i.test(text);
+    }, null, { timeout: 15000 });
     const spendingText = (await page.locator('#content').innerText()).toLowerCase();
-    if (!spendingText.includes('awaiting generated artifact')) {
-      throw new Error(`${viewportName}/spending: missing generated-artifact state is not visible`);
+    for (const forbidden of ['awaiting generated artifact', 'validation pending', 'pending release', 'generated artifact error']) {
+      if (spendingText.includes(forbidden)) {
+        throw new Error(`${viewportName}/spending: released domain still shows "${forbidden}"`);
+      }
     }
-    report.interactions.push({ viewport: viewportName, check: 'missing-domain state', route: 'spending' });
+    report.interactions.push({ viewport: viewportName, check: 'released spending domain', route: 'spending' });
+
+    // Signals is intentionally not released yet and must say so explicitly.
+    await openRoute(page, 'signals');
+    await page.waitForFunction(() => /validation pending/i.test(document.querySelector('#content')?.innerText || ''), null, { timeout: 15000 });
+    const signalsText = (await page.locator('#content').innerText()).toLowerCase();
+    if (!signalsText.includes('validation pending')) {
+      throw new Error(`${viewportName}/signals: expected explicit Validation pending lifecycle state`);
+    }
+    report.interactions.push({ viewport: viewportName, check: 'signals validation-pending state' });
 
     // Source registry cards must open provenance and expose an official link.
     await openRoute(page, 'sources');
@@ -181,7 +222,6 @@ try {
     await closeDrawer(page);
 
     if (viewportName === 'desktop') {
-      // Methodology drawer has a dedicated desktop affordance.
       await openRoute(page, 'overview');
       await page.locator('#evidence-standard').click();
       await page.waitForSelector('#evidence-drawer[open]');
@@ -191,7 +231,6 @@ try {
       report.interactions.push({ viewport: viewportName, check: 'evidence standard drawer' });
       await closeDrawer(page);
     } else {
-      // Compact navigation must open, navigate, and close again.
       await openRoute(page, 'overview');
       await page.locator('#menu-button').click();
       await page.waitForFunction(() => document.querySelector('#sidebar')?.classList.contains('open'));
