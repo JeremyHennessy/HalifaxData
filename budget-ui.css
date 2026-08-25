@@ -1,0 +1,3 @@
+/* Build 004 budget integration styles. Existing styles.css remains unchanged. */
+.budget-toolbar select{max-width:360px}.budget-table{min-width:1120px}.budget-source-warning td{background:rgba(240,187,94,.025)}.budget-source-warning:hover td{background:rgba(240,187,94,.055)}
+@media(max-width:620px){.budget-toolbar{align-items:stretch}.budget-toolbar .local-search,.budget-toolbar select{width:100%;max-width:none;min-width:0}.budget-toolbar .table-note{margin-left:0}}
