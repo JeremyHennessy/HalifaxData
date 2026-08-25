@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-08-25T15:41:59+00:00",
+    "generated_at": "2026-08-25T15:42:37+00:00",
     "records": 38,
     "hrm_records": 8,
     "comparator_records": 30,
@@ -12,7 +12,11 @@
         "nonempty_rows": 30,
         "selected_rows": 30,
         "selection_mode": "regional_type_comparator",
-        "note": "Dataset is aggregate municipal-type context, not HRM-specific expenditure facts."
+        "note": "Dataset is municipality-type aggregate context, not HRM-specific operating facts."
+      },
+      {
+        "source_id": "ns-municipal-operating-revenues",
+        "status": "missing_registry"
       },
       {
         "source_id": "ns-municipal-operating-totals",
@@ -22,6 +26,10 @@
         "selected_rows": 0,
         "selection_mode": "explicit_hrm_identity",
         "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
+      },
+      {
+        "source_id": "ns-municipal-consolidated",
+        "status": "missing_registry"
       },
       {
         "source_id": "ns-municipal-fci",
