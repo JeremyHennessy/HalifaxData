@@ -31,4 +31,5 @@ jobs:
             exit 0
           fi
           git commit -m "data: regenerate Build 005 integration artifacts"
-          git push
+          git pull --rebase origin agent/build-005-multidomain-integration
+          git push origin HEAD:agent/build-005-multidomain-integration
