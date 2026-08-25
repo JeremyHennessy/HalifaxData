@@ -127,21 +127,48 @@ data/generated/signals.json
 
 `data/generated/budget.json` is now a required generated artifact for the Build 004 product state. Until another optional file exists, the application shows registered source coverage and an explicit “awaiting generated artifact” state.
 
+### `data/generated/financials.json`
+
+Build 005 audited-financial history is a conservative extraction of comparative monetary rows from heading-anchored consolidated statements and schedules. `metadata.dataset_status` is `conservative_audited_statement_extraction`.
+
+Each row retains:
+
+- `fiscal_year_end`
+- `statement_family`
+- `statement`
+- `line_item`
+- `current_year`
+- `prior_year`
+- `source_presented_current_year`
+- `source_presented_prior_year`
+- `source_unit_multiplier`
+- `currency = CAD`
+- `source_id`
+- `source_page`
+- `raw_cells`
+- `extraction_method`
+- `provenance`
+
+Narrative pages are not normalized merely because they mention a statement. Table cells must contain a single numeric value, and text fallback masks note/date references before selecting comparative numbers. `python scripts/validate_financial_history.py` independently validates statement-family coverage, source counts, scaling arithmetic, provenance, duplicate facts and known non-financial false-positive patterns.
+
+These audited financial facts are **organization-scope facts**. They may link to `org:halifax-regional-municipality`, but statement line-item wording must not be used to infer an operational business unit.
+
 ## Cross-domain entity index
 
-`data/generated/entity_index.json` is a deterministic derived join artifact over the checked-in `budget.json`, `compensation.json`, `procurement.json`, `capital.json`, and `spending.json` inputs. It does not replace source-domain records.
+`data/generated/entity_index.json` is a deterministic derived join artifact over the checked-in `budget.json`, `compensation.json`, `procurement.json`, `capital.json`, `spending.json`, and `financials.json` inputs. It does not replace source-domain records.
 
 Current Build 005 normalization rules are deliberately conservative:
 
 - fuzzy matching is disabled;
 - current budget-book `service_area_budget` labels anchor operational business units;
 - `audited_psas` categories must never be attached to operational business units without a future evidence-backed crosswalk;
+- audited `financials.json` rows attach only to the HRM organization scope and must never acquire an operational business-unit link from statement wording;
 - compensation history identity is **reporting organization + existing `person_key`**; `person_key` must never merge people across reporting entities;
 - vendor-name clusters are lexical exact provisional clusters and must not be represented as verified legal-entity identities;
 - capital rows use exact official project codes where present; an `OBJECTID` fallback remains isolated rather than being joined by project-name similarity;
 - a business-unit label with no exact budget anchor remains explicitly unmatched rather than being guessed.
 
-The artifact records SHA-256 hashes and record counts for all five source-domain inputs. `python scripts/build_entity_index.py --check` fails when the checked-in derived artifact is stale. `python scripts/validate_entity_index.py` independently checks source references, dimension IDs, referential integrity, prohibited joins, compensation entity scope, project identity rules, and metadata counts.
+The artifact records SHA-256 hashes and record counts for all six source-domain inputs. `python scripts/build_entity_index.py --check` fails when the checked-in derived artifact is stale. `python scripts/validate_entity_index.py` independently checks source references, dimension IDs, referential integrity, prohibited joins, compensation entity scope, project identity rules, audited-financial organization-only scope and metadata counts.
 
 ## Canonical dimensions
 
@@ -178,6 +205,8 @@ Build 004's concrete budget fact is the `service_area_budget` contract above. Fu
 ### Audited actual fact
 
 Build 004's concrete audited operating fact is the `audited_psas` contract above. A future detailed reconciliation layer should reference this fact rather than mutating it into a departmental budget row.
+
+Build 005's broader audited-financial history in `financials.json` is also organization-scoped. Its statement/schedule line items are source facts, not a business-unit crosswalk.
 
 ### Compensation fact
 
