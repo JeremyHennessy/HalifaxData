@@ -16,11 +16,12 @@ permissions:
 
 concurrency:
   group: build-005-budget-history-refresh
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
