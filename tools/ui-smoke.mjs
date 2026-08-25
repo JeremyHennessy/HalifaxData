@@ -8,7 +8,7 @@ const routes = [
   ['budget', 'Budget & Actuals'],
   ['people', 'People & Compensation'],
   ['spending', 'Spend Explorer'],
-  ['vendors', 'Vendors & Contracts'],
+  ['vendors', 'Public Tender Awards'],
   ['projects', 'Capital Projects'],
   ['signals', 'Signals Lab'],
   ['sources', 'Sources & Evidence']
@@ -19,7 +19,13 @@ const viewports = [
 ];
 const OPTIONAL_404_SUFFIXES = [
   '/data/generated/spending.json',
-  '/data/generated/procurement.json',
+  '/data/generated/capital.json',
+  '/data/generated/financials.json',
+  '/data/generated/council.json',
+  '/data/generated/signals.json'
+];
+const QUALITY_BLOCKED_SUFFIXES = [
+  '/data/generated/spending.json',
   '/data/generated/capital.json',
   '/data/generated/financials.json',
   '/data/generated/council.json',
@@ -38,7 +44,8 @@ const report = {
   http_errors: [],
   expected_optional_404s: [],
   views: [],
-  interactions: []
+  interactions: [],
+  quality_gate: []
 };
 
 async function waitForDashboard(page) {
@@ -66,16 +73,20 @@ try {
   for (const [viewportName, viewport] of viewports) {
     const context = await browser.newContext({ viewport, deviceScaleFactor: 1 });
     const page = await context.newPage();
+    const requestedPaths = new Set();
 
     page.on('console', message => {
       if (message.type() !== 'error') return;
       const text = message.text();
-      // Chromium also emits a generic console error for HTTP 404s. Exact response
-      // URLs are classified below, so ignore only that generic duplicate message.
       if (text.startsWith('Failed to load resource: the server responded with a status of 404')) return;
       report.console_errors.push({ viewport: viewportName, text });
     });
     page.on('pageerror', error => report.page_errors.push({ viewport: viewportName, text: error.message }));
+    page.on('request', request => {
+      try {
+        requestedPaths.add(new URL(request.url()).pathname);
+      } catch {}
+    });
     page.on('response', response => {
       if (response.status() < 400) return;
       const url = new URL(response.url());
@@ -128,6 +139,26 @@ try {
       report.views.push({ viewport: viewportName, route, title: title.trim(), ...state });
     }
 
+    // Build 005 quality gate: only validated procurement is fetched among new domains.
+    const gate = await page.evaluate(() => window.HalifaxDataQualityGate || null);
+    if (!gate || gate.manifest_status !== 'ready') {
+      throw new Error(`${viewportName}/quality-gate: manifest is not ready (${gate?.manifest_status || 'missing'})`);
+    }
+    const blockedDomains = new Set((gate.blocked || []).map(item => item.domain));
+    const allowedDomains = new Set((gate.allowed || []).map(item => item.domain));
+    for (const domain of ['spending', 'capital', 'financials', 'council', 'signals']) {
+      if (!blockedDomains.has(domain)) throw new Error(`${viewportName}/quality-gate: ${domain} was not blocked`);
+    }
+    if (!allowedDomains.has('procurement')) throw new Error(`${viewportName}/quality-gate: procurement was not explicitly allowed`);
+    const unsafeNetworkRequests = [...requestedPaths].filter(path => QUALITY_BLOCKED_SUFFIXES.some(suffix => path.endsWith(suffix)));
+    if (unsafeNetworkRequests.length) {
+      throw new Error(`${viewportName}/quality-gate: held artifacts reached the network: ${unsafeNetworkRequests.join(', ')}`);
+    }
+    if (![...requestedPaths].some(path => path.endsWith('/data/generated/procurement.json'))) {
+      throw new Error(`${viewportName}/quality-gate: validated procurement artifact was not fetched`);
+    }
+    report.quality_gate.push({ viewport: viewportName, blocked_domains: [...blockedDomains].sort(), allowed_domains: [...allowedDomains].sort() });
+
     // Global filter: prove the disclosure count changes under a real fiscal-year filter.
     await openRoute(page, 'overview');
     const allYearsCount = (await page.locator('.metrics-grid .metric-card').nth(1).locator('.metric-value').textContent())?.trim();
@@ -139,7 +170,6 @@ try {
     }
     report.interactions.push({ viewport: viewportName, check: 'fiscal-year filter', before: allYearsCount, after: filteredCount });
 
-    // Reset without relying on a control that the compact mobile layout may intentionally hide.
     await page.locator('#global-year').selectOption('all');
     await page.waitForFunction(() => document.querySelector('#global-year')?.value === 'all');
 
@@ -161,13 +191,44 @@ try {
     report.interactions.push({ viewport: viewportName, check: 'global search + person history + source link', history_rows: historyRows, source_url: officialHref });
     await closeDrawer(page);
 
-    // Missing-domain state must remain explicit rather than presenting synthetic records.
+    // Held domains must show their evidence-backed quality block instead of invalid facts.
     await openRoute(page, 'spending');
     const spendingText = (await page.locator('#content').innerText()).toLowerCase();
-    if (!spendingText.includes('awaiting generated artifact')) {
-      throw new Error(`${viewportName}/spending: missing generated-artifact state is not visible`);
+    if (!spendingText.includes('data quality hold') || !spendingText.includes('merged-cell')) {
+      throw new Error(`${viewportName}/spending: verified quality-hold state is not visible`);
     }
-    report.interactions.push({ viewport: viewportName, check: 'missing-domain state', route: 'spending' });
+    report.interactions.push({ viewport: viewportName, check: 'spending quality hold' });
+
+    await openRoute(page, 'projects');
+    const capitalText = (await page.locator('#content').innerText()).toLowerCase();
+    if (!capitalText.includes('data quality hold') || !capitalText.includes('project-code')) {
+      throw new Error(`${viewportName}/capital: verified quality-hold state is not visible`);
+    }
+    report.interactions.push({ viewport: viewportName, check: 'capital quality hold' });
+
+    // Validated procurement: local search -> exact signed source row -> evidence drawer.
+    await openRoute(page, 'vendors');
+    const tenderRows = page.locator('#content [data-procurement-row]');
+    if (await tenderRows.count() < 1) throw new Error(`${viewportName}/procurement: no tender rows rendered`);
+    const entityOptions = await page.locator('#procurement-entity option').count();
+    if (entityOptions < 4) throw new Error(`${viewportName}/procurement: expected all-entities option plus three reporting entities`);
+    await page.locator('#procurement-search').fill('T15-299');
+    await page.waitForFunction(() => document.querySelectorAll('#content [data-procurement-row]').length === 1);
+    const filteredTenderText = await page.locator('#content [data-procurement-row]').first().innerText();
+    if (!filteredTenderText.includes('John Ross & Sons')) throw new Error(`${viewportName}/procurement: exact source row did not survive local search`);
+    await page.locator('#content [data-procurement-row]').first().click();
+    await page.waitForSelector('#evidence-drawer[open]');
+    const tenderTitle = (await page.locator('#drawer-title').textContent())?.trim();
+    const tenderEvidence = await page.locator('#drawer-body').innerText();
+    if (tenderTitle !== 'T15-299') throw new Error(`${viewportName}/procurement-evidence: expected T15-299, got ${tenderTitle}`);
+    if (!tenderEvidence.includes('John Ross & Sons') || !tenderEvidence.includes('1,500') || !tenderEvidence.toLowerCase().includes('signed source-value boundary')) {
+      throw new Error(`${viewportName}/procurement-evidence: signed official source evidence is incomplete`);
+    }
+    const tenderSourceHref = await page.locator('#evidence-drawer .source-link').getAttribute('href');
+    if (!tenderSourceHref || !/^https?:\/\//.test(tenderSourceHref)) throw new Error(`${viewportName}/procurement-evidence: official source link missing or invalid`);
+    await page.screenshot({ path: `${OUTPUT}/${viewportName}-procurement-evidence.png`, fullPage: false });
+    report.interactions.push({ viewport: viewportName, check: 'procurement search + signed source evidence', tender: 'T15-299', source_url: tenderSourceHref });
+    await closeDrawer(page);
 
     // Source registry cards must open provenance and expose an official link.
     await openRoute(page, 'sources');
@@ -181,7 +242,6 @@ try {
     await closeDrawer(page);
 
     if (viewportName === 'desktop') {
-      // Methodology drawer has a dedicated desktop affordance.
       await openRoute(page, 'overview');
       await page.locator('#evidence-standard').click();
       await page.waitForSelector('#evidence-drawer[open]');
@@ -191,7 +251,6 @@ try {
       report.interactions.push({ viewport: viewportName, check: 'evidence standard drawer' });
       await closeDrawer(page);
     } else {
-      // Compact navigation must open, navigate, and close again.
       await openRoute(page, 'overview');
       await page.locator('#menu-button').click();
       await page.waitForFunction(() => document.querySelector('#sidebar')?.classList.contains('open'));
