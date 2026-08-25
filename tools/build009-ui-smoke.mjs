@@ -56,6 +56,7 @@ try {
     if (patternCounts.budget < 1) throw new Error(`${viewportName}/overview: no multi-year budget patterns rendered`);
     if (patternCounts.procurement < 1) throw new Error(`${viewportName}/overview: no procurement persistence patterns rendered`);
     if (patternCounts.spending < 1) throw new Error(`${viewportName}/overview: no quarterly trajectory patterns rendered`);
+    if (patternCounts.cross < 1) throw new Error(`${viewportName}/overview: no exact business-unit cross-domain corroborations rendered`);
     const overviewText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of ['automated pattern engine', 'cross-domain corroboration', 'dollar values are never added together']) {
       if (!overviewText.includes(phrase)) throw new Error(`${viewportName}/overview: missing Build 009 phrase "${phrase}"`);
@@ -101,7 +102,7 @@ try {
     const signalsText = (await page.locator('#content').innerText()).toLowerCase();
     if (!signalsText.includes('automated pattern engine')) throw new Error(`${viewportName}/investigations: pattern-engine summary missing`);
     const crossDomainOption = page.locator('#investigation-domain option[value="Cross-domain"]');
-    if (patternCounts.cross > 0 && await crossDomainOption.count() !== 1) throw new Error(`${viewportName}/investigations: cross-domain filter missing despite corroborated leads`);
+    if (await crossDomainOption.count() !== 1) throw new Error(`${viewportName}/investigations: cross-domain filter missing despite required corroborated leads`);
     await assertNoOverflow(page, viewportName, 'signals');
     await page.screenshot({ path: `${OUTPUT}/${viewportName}-build009-investigations.png`, fullPage: true });
 
