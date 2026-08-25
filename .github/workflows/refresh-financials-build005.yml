@@ -1,0 +1,64 @@
+name: Refresh Build 005 audited financial history
+
+on:
+  push:
+    branches: ['agent/build-005-normalization']
+    paths:
+      - 'scripts/ingest_financial_history.py'
+      - 'scripts/validate_financial_history.py'
+      - 'data/sources.json'
+      - '.github/workflows/refresh-financials-build005.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-005-financials-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/build-005-normalization
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check requests pdfplumber
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts
+      - name: Collect conservative audited financial history
+        run: python scripts/ingest_financial_history.py
+      - name: Independently validate audited financial history
+        run: |
+          python scripts/validate_financial_history.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path('data/generated/financials.json').read_text(encoding='utf-8'))
+          rows = payload.get('records') or []
+          prohibited = ('telephone', 'fax', 'year ended march', 'halifax nova scotia b3j')
+          bad = [
+              row for row in rows
+              if any(token in str(row.get('line_item') or '').lower() for token in prohibited)
+          ]
+          assert not bad, f'obvious non-financial rows survived: {bad[:10]}'
+          print(f"independent text guard passed for {len(rows)} audited-financial rows")
+          PY
+          git diff --check
+      - name: Commit verified financial artifacts
+        run: |
+          if [ -z "$(git status --porcelain -- data/generated/financials.json data/generated/financials_document_tables.json)" ]; then
+            echo "Audited financial artifacts are already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/financials.json data/generated/financials_document_tables.json
+          git commit -m "Build 005: refresh verified audited financial history"
+          git push origin HEAD:agent/build-005-normalization
