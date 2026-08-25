@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "data/generated/financials.json"
 EXPECTED_DATASET_STATUS = "conservative_audited_statement_extraction"
-EXPECTED_PARSER_VERSION = "build005-financials-v3"
+EXPECTED_PARSER_VERSION = "build005-financials-v4"
 ALLOWED_FAMILIES = {
     "financial_position",
     "operations",
@@ -21,13 +21,15 @@ ALLOWED_FAMILIES = {
     "schedule",
 }
 ALLOWED_METHODS = {"pdf_table_row", "pdf_text_line"}
+HEADING_RE = re.compile(r"^(?:halifax regional municipality\s+)?consolidated (?:statement|schedule)s?\b", re.I)
 OBVIOUS_NONFINANCIAL = [
     re.compile(r"^page\b", re.I),
-    re.compile(r"^year ended march\b", re.I),
+    re.compile(r"\byear ended march\b", re.I),
     re.compile(r"\btelephone\b", re.I),
     re.compile(r"\bfax\b", re.I),
     re.compile(r"^halifax nova scotia\s+[A-Z]\d[A-Z]", re.I),
     re.compile(r"^notes? to consolidated financial statements$", re.I),
+    re.compile(r"\(note\s*$", re.I),
 ]
 
 errors: list[str] = []
@@ -65,6 +67,8 @@ def main() -> None:
         fail(f"parser_version {metadata.get('parser_version')!r} != {EXPECTED_PARSER_VERSION!r}")
     if metadata.get("records") != len(rows):
         fail(f"metadata records {metadata.get('records')!r} != actual {len(rows)}")
+    if "heading-anchored" not in str(metadata.get("scope") or "").lower():
+        fail("metadata scope must explicitly state heading-anchored extraction")
 
     statuses = metadata.get("source_status")
     if not isinstance(statuses, list) or not statuses:
@@ -116,14 +120,14 @@ def main() -> None:
             family_counts[source_id][family] += 1
 
         statement = str(row.get("statement") or "").strip()
-        if not statement or "consolidated" not in statement.lower():
-            fail(f"row {index}: statement heading is not explicit/consolidated: {statement!r}")
+        if not statement or not HEADING_RE.search(statement):
+            fail(f"row {index}: statement is not a heading-anchored consolidated title: {statement!r}")
 
         label = str(row.get("line_item") or "").strip()
         if not label:
             fail(f"row {index}: missing line_item")
         elif any(pattern.search(label) for pattern in OBVIOUS_NONFINANCIAL):
-            fail(f"row {index}: obvious non-financial label survived extraction: {label!r}")
+            fail(f"row {index}: obvious non-financial/truncated label survived extraction: {label!r}")
 
         multiplier = as_number(row.get("source_unit_multiplier"))
         if multiplier not in {1, 1000}:
@@ -186,8 +190,6 @@ def main() -> None:
                 f"!= actual {source_counts[source_id]}"
             )
 
-    # Both core statements should be present for every currently registered
-    # audited source. If source layout changes, fail closed and inspect it.
     for source_id in status_ids:
         for family in ("financial_position", "operations"):
             if family_counts[source_id][family] < 1:
