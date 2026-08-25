@@ -1,0 +1,51 @@
+name: Build normalized entity index
+
+on:
+  push:
+    branches: ['agent/build-005-normalization']
+    paths:
+      - 'scripts/build_entity_index.py'
+      - 'scripts/validate_entity_index.py'
+      - 'data/generated/budget.json'
+      - 'data/generated/compensation.json'
+      - 'data/generated/procurement.json'
+      - 'data/generated/capital.json'
+      - 'data/generated/spending.json'
+      - '.github/workflows/normalize-entities.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-005-normalization
+  cancel-in-progress: false
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/build-005-normalization
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build normalized entity index
+        run: python scripts/build_entity_index.py
+      - name: Validate normalized entity index
+        run: |
+          python scripts/build_entity_index.py --check
+          python scripts/validate_entity_index.py
+          git diff --check
+      - name: Commit normalized artifact
+        run: |
+          if git diff --quiet -- data/generated/entity_index.json; then
+            echo "Normalized entity index is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/entity_index.json
+          git commit -m "Build 005: refresh normalized entity index"
+          git push origin HEAD:agent/build-005-normalization
