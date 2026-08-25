@@ -8,6 +8,8 @@ Build 004 deliberately keeps the two accounting views separate:
 The collector is source-specific and guarded. It refuses to overwrite budget.json unless
 both official PDFs download, expected page structures are present, all 18 configured
 budget sections yield a Net Total, and independent published control totals reconcile.
+Published budget-change arithmetic is preserved even when it disagrees with the source
+row endpoints; those inconsistencies are explicitly flagged instead of silently repaired.
 """
 from __future__ import annotations
 
@@ -146,6 +148,37 @@ def budget_buckets(row: list[dict]) -> dict[str, list[dict]]:
     return buckets
 
 
+def annotate_budget_arithmetic(record: dict) -> None:
+    """Add independently calculated change fields and tag source arithmetic mismatches."""
+    prior_budget = record.get('prior_budget')
+    current_budget = record.get('current_budget')
+    if prior_budget is None or current_budget is None:
+        return
+
+    derived = current_budget - prior_budget
+    record['derived_budget_change'] = derived
+    derived_pct = None
+    if prior_budget != 0:
+        derived_pct = derived / prior_budget * 100
+        record['derived_budget_change_pct'] = round(derived_pct, 4)
+
+    flags: list[str] = []
+    source_delta = record.get('source_reported_budget_change')
+    if source_delta is not None and source_delta != derived:
+        flags.append('reported_budget_change_mismatch')
+        record['source_budget_change_delta'] = source_delta - derived
+
+    source_pct = record.get('source_reported_budget_change_pct')
+    # Source percentages are printed to one decimal place, so >0.11 percentage points
+    # is safely outside normal source rounding.
+    if source_pct is not None and derived_pct is not None and abs(source_pct - derived_pct) > 0.11:
+        flags.append('reported_budget_change_pct_mismatch')
+        record['source_budget_change_pct_delta'] = round(source_pct - derived_pct, 4)
+
+    if flags:
+        record['validation_flags'] = flags
+
+
 def parse_budget_page(page, page_number: int, business_unit: str, required_heading: str) -> list[dict]:
     text = page.extract_text() or ''
     if required_heading not in text:
@@ -208,8 +241,7 @@ def parse_budget_page(page, page_number: int, business_unit: str, required_headi
             'source_id': BUDGET_SOURCE_ID,
             'pdf_page': page_number,
         }
-        if record['prior_budget'] is not None and record['current_budget'] is not None:
-            record['derived_budget_change'] = record['current_budget'] - record['prior_budget']
+        annotate_budget_arithmetic(record)
         records.append(record)
         if record['is_total']:
             break
@@ -239,10 +271,16 @@ def parse_budget_book(blob: bytes) -> tuple[list[dict], dict]:
         if totals_by_unit.get(unit) != expected:
             raise RuntimeError(f'{BUDGET_SOURCE_ID}: control total mismatch for {unit}: {totals_by_unit.get(unit)} != {expected}')
 
+    delta_mismatches = sum('reported_budget_change_mismatch' in row.get('validation_flags', []) for row in records)
+    pct_mismatches = sum('reported_budget_change_pct_mismatch' in row.get('validation_flags', []) for row in records)
+    discrepancy_rows = sum(bool(row.get('validation_flags')) for row in records)
     return records, {
         'service_area_record_count': len(records),
         'service_area_detail_count': sum(not row['is_total'] for row in records),
         'business_unit_count': len(total_rows),
+        'budget_source_arithmetic_discrepancy_rows': discrepancy_rows,
+        'budget_source_delta_mismatches': delta_mismatches,
+        'budget_source_pct_mismatches': pct_mismatches,
     }
 
 
@@ -369,7 +407,7 @@ def main() -> None:
             'source_sha256': {BUDGET_SOURCE_ID: budget_sha, FINANCIAL_SOURCE_ID: financial_sha},
             **budget_stats,
             **audited_stats,
-            'note': 'Service-area budget rows and audited PSAS rows are separate accounting views and are not force-joined. Budget-book rows preserve 2023/24 actual, 2024/25 budget/projection and 2025/26 budget. Audited statement amounts are converted from source $000s to CAD.',
+            'note': 'Service-area budget rows and audited PSAS rows are separate accounting views and are not force-joined. Budget-book rows preserve source-reported change columns plus independently derived arithmetic; published inconsistencies are explicitly flagged. Audited statement amounts are converted from source $000s to CAD.',
         },
         'records': [*budget_rows, *audited_rows],
     }
@@ -378,7 +416,8 @@ def main() -> None:
     tmp.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + '\n')
     tmp.replace(OUTPUT)
     print(
-        f'Wrote {len(budget_rows)} budget-book rows and {len(audited_rows)} audited rows to {OUTPUT}',
+        f'Wrote {len(budget_rows)} budget-book rows and {len(audited_rows)} audited rows to {OUTPUT} '
+        f'({budget_stats["budget_source_arithmetic_discrepancy_rows"]} budget source arithmetic discrepancy rows)',
         file=sys.stderr,
     )
 
