@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "data/generated/budget_history.json"
 REGISTRY = ROOT / "data/sources.json"
 EXPECTED_STATUS = "conservative_historical_budget_table_extraction"
-EXPECTED_PARSER = "build005-budget-history-v2"
+EXPECTED_PARSER = "build005-budget-history-v3"
+EXCLUDED_SOURCE_IDS = {"hrm-budget-2025-26"}
 MAX_ABS_VALUE = 10_000_000_000
 MONEY_RE = re.compile(
     r"^\s*(?:"
@@ -77,6 +78,7 @@ def main() -> None:
         item["id"]: item
         for item in registry.get("sources", [])
         if str(item.get("id", "")).startswith("hrm-budget-")
+        and item.get("id") not in EXCLUDED_SOURCE_IDS
         and str(item.get("status", "")).startswith("ready")
     }
 
@@ -87,7 +89,9 @@ def main() -> None:
     if metadata.get("records") != len(rows):
         fail(f"metadata records {metadata.get('records')!r} != actual {len(rows)}")
     if metadata.get("source_count") != len(expected_sources):
-        fail(f"source_count {metadata.get('source_count')!r} != configured ready budget sources {len(expected_sources)}")
+        fail(f"source_count {metadata.get('source_count')!r} != configured historical budget sources {len(expected_sources)}")
+    if metadata.get("excluded_source_ids") != sorted(EXCLUDED_SOURCE_IDS):
+        fail(f"excluded_source_ids {metadata.get('excluded_source_ids')!r} != {sorted(EXCLUDED_SOURCE_IDS)!r}")
     for field in ("rejected_invalid_numeric_rows", "duplicates_removed"):
         value = metadata.get(field)
         if not isinstance(value, int) or value < 0:
@@ -99,7 +103,7 @@ def main() -> None:
         statuses = []
     status_ids = [item.get("source_id") for item in statuses if item.get("source_id")]
     if set(status_ids) != set(expected_sources):
-        fail("source_status IDs do not exactly match configured ready historical-budget sources")
+        fail("source_status IDs do not exactly match configured historical-budget sources")
     if len(status_ids) != len(set(status_ids)):
         fail("source_status contains duplicate source IDs")
     for item in statuses:
@@ -119,7 +123,7 @@ def main() -> None:
         source_id = row.get("source_id")
         source = expected_sources.get(source_id)
         if not source:
-            fail(f"row {index}: unknown/non-ready budget source {source_id!r}")
+            fail(f"row {index}: unknown/non-historical budget source {source_id!r}")
             continue
         counts[source_id] += 1
 
