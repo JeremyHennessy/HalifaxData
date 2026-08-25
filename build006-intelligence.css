@@ -1,0 +1,25 @@
+/* Build 006 intelligence UI additions. Light-theme only; preserves the approved shell. */
+.build006-section{display:grid;gap:16px}
+.build006-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.build006-toolbar .local-search{flex:1 1 280px;min-width:220px}
+.build006-toolbar select{min-width:170px;max-width:280px}
+.build006-toolbar .table-note{margin-left:auto}
+.build006-check{display:flex;align-items:center;gap:7px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--muted);font-size:10px;white-space:nowrap}
+.build006-check input{accent-color:var(--accent)}
+.build006-rule-list>div{align-items:flex-start}
+.build006-doc-link{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:10px 12px;border:1px solid #d7e1e8;border-radius:9px;background:#fff;color:var(--text);text-decoration:none}
+.build006-doc-link:hover{border-color:#84a6bc;background:#fbfdfe}
+.build006-doc-link span:first-child{display:grid;gap:3px;min-width:0}
+.build006-doc-link strong{font-size:11px;line-height:1.35}
+.build006-doc-link small{font-size:10px;line-height:1.4;color:var(--muted)}
+.build006-doc-link>span:last-child{color:var(--accent);font-size:13px;flex:0 0 auto}
+.build006-budget-history tbody tr,[data-spending-index],[data-financial-index],[data-council-id],[data-benchmark-origin]{cursor:pointer}
+.build006-budget-history tbody tr:hover td,[data-spending-index]:hover td,[data-financial-index]:hover td,[data-council-id]:hover td,[data-benchmark-origin]:hover td{background:#f2f9fb}
+.panel-body .metrics-grid.compact{margin-bottom:14px}
+.source-mini-list .build006-doc-link+ .build006-doc-link{margin-top:6px}
+
+@media(max-width:900px){
+  .build006-toolbar{align-items:stretch}
+  .build006-toolbar .local-search,.build006-toolbar select,.build006-check{width:100%;max-width:none;min-width:0}
+  .build006-toolbar .table-note{margin-left:0;width:100%}
+}
