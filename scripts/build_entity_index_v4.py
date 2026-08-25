@@ -78,13 +78,13 @@ def build_payload() -> dict:
     metadata['join_policy']['benchmark_context_attribution'] = 'none unless source row scope=hrm'
     metadata['join_policy']['external_funding_context_attribution'] = 'none unless source row scope=hrm'
     metadata['join_policy']['council_meeting_match'] = 'official eSCRIBE meeting_id exact only'
-    metadata['join_policy']['forbidden_joins'].extend([
+    metadata.setdefault('forbidden_joins', []).extend([
         'historical_budget_context_to_current_business_unit',
         'province_program_context_to_hrm',
         'regional_type_comparator_to_hrm',
         'council_title_fuzzy_to_financial_fact',
     ])
-    metadata['join_policy']['forbidden_joins'] = sorted(set(metadata['join_policy']['forbidden_joins']))
+    metadata['forbidden_joins'] = sorted(set(metadata['forbidden_joins']))
 
     input_artifacts = metadata['input_artifacts']
     for name, path in EXTRA_INPUTS.items():
