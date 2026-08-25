@@ -1,0 +1,104 @@
+/* Build 005 scoped presentation additions.
+ * Keeps the verified Build 004 light shell intact while adding quality-state
+ * and public-tender-specific surfaces.
+ */
+
+.quality-status-card{
+  display:grid;
+  gap:10px;
+  padding:14px;
+  border:1px solid #d6e0e7;
+  border-radius:12px;
+  background:#f9fbfc;
+}
+.quality-status-card.hold{
+  border-color:#e5b7bd;
+  background:#fff4f5;
+}
+.quality-status-card.review{
+  border-color:#e4c77f;
+  background:#fff8e8;
+}
+.quality-status-card.ready{
+  border-color:#b6d7c4;
+  background:#f3faf6;
+}
+.quality-status-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.quality-status-heading>strong{
+  font-size:12px;
+  color:#1b3345;
+  text-align:right;
+}
+.quality-status-card p{
+  margin:0;
+  color:#4c6173;
+  font-size:11px;
+  line-height:1.55;
+}
+.quality-status-card>div:last-child{
+  display:grid;
+  gap:4px;
+  padding-top:9px;
+  border-top:1px solid rgba(32,55,75,.11);
+}
+.quality-status-card>div:last-child strong{
+  font-size:10px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:#526a7c;
+}
+.quality-status-card>div:last-child span{
+  color:#334f63;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.procurement-toolbar{
+  display:grid;
+  grid-template-columns:minmax(260px,1fr) minmax(220px,320px) auto;
+  gap:10px;
+  align-items:center;
+}
+.procurement-toolbar .local-search{min-width:0}
+.procurement-toolbar select{
+  width:100%;
+  min-width:0;
+  min-height:36px;
+}
+.procurement-table td{vertical-align:top}
+.procurement-description{
+  display:block;
+  max-width:360px;
+  margin-top:3px;
+  white-space:normal;
+  line-height:1.4;
+}
+.signed-source-value{
+  display:block;
+  margin-top:3px;
+  color:#85570c;
+}
+
+@media(max-width:900px){
+  .procurement-toolbar{
+    grid-template-columns:1fr 1fr;
+  }
+  .procurement-toolbar .table-note{
+    grid-column:1 / -1;
+  }
+}
+
+@media(max-width:640px){
+  .quality-status-heading{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .quality-status-heading>strong{text-align:left}
+  .procurement-toolbar{grid-template-columns:1fr}
+  .procurement-toolbar .table-note{grid-column:auto}
+}
