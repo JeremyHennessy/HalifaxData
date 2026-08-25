@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  compensation:
+  public-data:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,16 +17,20 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: python scripts/ingest_compensation.py
-      - run: python scripts/validate_data.py
+      - name: Refresh compensation disclosures
+        run: python scripts/ingest_compensation.py
+      - name: Refresh budget and audited actuals
+        run: python scripts/ingest_budget.py
+      - name: Validate all checked-in public data
+        run: python scripts/validate_data.py
       - name: Commit verified changes
         run: |
-          if git diff --quiet -- data/generated/compensation.json; then
-            echo "No compensation changes"
+          if git diff --quiet -- data/generated/compensation.json data/generated/budget.json; then
+            echo "No public-data changes"
             exit 0
           fi
           git config user.name "halifaxdata-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/generated/compensation.json
-          git commit -m "data: refresh compensation disclosures"
+          git add data/generated/compensation.json data/generated/budget.json
+          git commit -m "data: refresh public finance datasets"
           git push
