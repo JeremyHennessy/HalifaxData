@@ -25,6 +25,7 @@ STAGES = [
     ('compensation', 'scripts/ingest_compensation.py'),
     ('current_domains', 'scripts/ingest_domains.py'),
     ('council_calendar', 'scripts/ingest_council.py'),
+    ('council_documents', 'scripts/ingest_council_documents.py'),
     ('budget_history', 'scripts/ingest_budget_history.py'),
     ('capital_history', 'scripts/ingest_capital_history.py'),
     ('financial_history', 'scripts/ingest_financial_history.py'),
