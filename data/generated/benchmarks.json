@@ -1,46 +1,781 @@
 {
   "metadata": {
-    "generated_at": "2026-08-25T14:55:20+00:00",
-    "records": 0,
+    "generated_at": "2026-08-25T15:34:11+00:00",
+    "records": 38,
+    "hrm_records": 8,
+    "comparator_records": 30,
     "source_status": [
       {
         "source_id": "ns-municipal-operating-expenses",
         "status": "ok",
         "downloaded_rows": 30,
-        "halifax_rows": 0
+        "nonempty_rows": 30,
+        "selected_rows": 30,
+        "selection_mode": "regional_type_comparator",
+        "note": "Dataset is aggregate municipal-type context, not HRM-specific expenditure facts."
       },
       {
         "source_id": "ns-municipal-operating-totals",
-        "status": "ok",
+        "status": "empty_shape",
         "downloaded_rows": 555,
-        "halifax_rows": 0
+        "nonempty_rows": 0,
+        "selected_rows": 0,
+        "selection_mode": "explicit_hrm_identity",
+        "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-municipal-fci",
         "status": "ok",
         "downloaded_rows": 396,
-        "halifax_rows": 0
+        "nonempty_rows": 396,
+        "selected_rows": 8,
+        "selection_mode": "explicit_hrm_identity",
+        "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-uniform-assessment-regional",
-        "status": "ok",
+        "status": "empty_shape",
         "downloaded_rows": 1091,
-        "halifax_rows": 0
+        "nonempty_rows": 0,
+        "selected_rows": 0,
+        "selection_mode": "explicit_hrm_identity",
+        "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-municipal-funding-programs",
         "status": "ok",
         "downloaded_rows": 212,
-        "halifax_rows": 0
+        "nonempty_rows": 212,
+        "selected_rows": 212,
+        "selection_mode": "province_program_context",
+        "note": "Program totals are contextual and must not be interpreted as funding received by HRM."
       },
       {
         "source_id": "ns-municipal-capacity-grants",
         "status": "ok",
         "downloaded_rows": 700,
-        "halifax_rows": 0
+        "nonempty_rows": 700,
+        "selected_rows": 14,
+        "selection_mode": "explicit_hrm_identity",
+        "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       }
     ],
-    "note": "Halifax-filtered rows from Nova Scotia municipal machine datasets. Raw API fields are retained until a source-specific semantic mapper is verified."
+    "note": "HRM-specific rows and external comparator rows are explicitly scoped. Raw API fields are retained until source-specific semantic mappings are verified."
   },
-  "records": []
+  "records": [
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2023/24",
+        "general_government_services": "80466685",
+        "protective_services": "95990597",
+        "transportation_services": "21487861",
+        "environmental_health_services": "73904476",
+        "public_health_and_welfare_services": "2608888",
+        "environmental_development_services": "21156319",
+        "recreation_and_cultural_services": "30445312"
+      },
+      "source_row_index": 0
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2022/23",
+        "general_government_services": "73605627",
+        "protective_services": "90555810",
+        "transportation_services": "21106170",
+        "environmental_health_services": "66287667",
+        "public_health_and_welfare_services": "2917776",
+        "environmental_development_services": "19219689",
+        "recreation_and_cultural_services": "26538037"
+      },
+      "source_row_index": 1
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2021/22",
+        "general_government_services": "66147147",
+        "protective_services": "80081617",
+        "transportation_services": "18993010",
+        "environmental_health_services": "62335191",
+        "public_health_and_welfare_services": "3004438",
+        "environmental_development_services": "17595479",
+        "recreation_and_cultural_services": "24344501"
+      },
+      "source_row_index": 2
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2020/21",
+        "general_government_services": "63249815",
+        "protective_services": "75438027",
+        "transportation_services": "22636725",
+        "environmental_health_services": "58005639",
+        "public_health_and_welfare_services": "2291663",
+        "environmental_development_services": "17307725",
+        "recreation_and_cultural_services": "20428892"
+      },
+      "source_row_index": 3
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2019/20",
+        "general_government_services": "65936143",
+        "protective_services": "78286613",
+        "transportation_services": "19981518",
+        "environmental_health_services": "62050197",
+        "public_health_and_welfare_services": "2002887",
+        "environmental_development_services": "16918658",
+        "recreation_and_cultural_services": "23143932"
+      },
+      "source_row_index": 4
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2018/19",
+        "general_government_services": "62538502",
+        "protective_services": "77080136",
+        "transportation_services": "18450396",
+        "environmental_health_services": "59420299",
+        "public_health_and_welfare_services": "1701227",
+        "environmental_development_services": "14852431",
+        "recreation_and_cultural_services": "22026368"
+      },
+      "source_row_index": 5
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2017/18",
+        "general_government_services": "59452348",
+        "protective_services": "76668821",
+        "transportation_services": "15238169",
+        "environmental_health_services": "57430247",
+        "public_health_and_welfare_services": "1670107",
+        "environmental_development_services": "15083135",
+        "recreation_and_cultural_services": "21545090"
+      },
+      "source_row_index": 6
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2016/17",
+        "general_government_services": "61391213",
+        "protective_services": "73389331",
+        "transportation_services": "15805775",
+        "environmental_health_services": "55955181",
+        "public_health_and_welfare_services": "1588180",
+        "environmental_development_services": "14279414",
+        "recreation_and_cultural_services": "21123101"
+      },
+      "source_row_index": 7
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2015/16",
+        "general_government_services": "55097922",
+        "protective_services": "69389924",
+        "transportation_services": "15942651",
+        "environmental_health_services": "53570362",
+        "public_health_and_welfare_services": "1521540",
+        "environmental_development_services": "13134001",
+        "recreation_and_cultural_services": "20969248"
+      },
+      "source_row_index": 8
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Rural Municipalities",
+        "year": "2014/15",
+        "general_government_services": "54638964",
+        "protective_services": "67989793",
+        "transportation_services": "15183863",
+        "environmental_health_services": "52760644",
+        "public_health_and_welfare_services": "1371148",
+        "environmental_development_services": "12379776",
+        "recreation_and_cultural_services": "18994262"
+      },
+      "source_row_index": 9
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2023/24",
+        "general_government_services": "33757256",
+        "protective_services": "65597253",
+        "transportation_services": "35846982",
+        "environmental_health_services": "24712389",
+        "public_health_and_welfare_services": "325966",
+        "environmental_development_services": "10420625",
+        "recreation_and_cultural_services": "25357983"
+      },
+      "source_row_index": 10
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2022/23",
+        "general_government_services": "31406472",
+        "protective_services": "63371775",
+        "transportation_services": "33098070",
+        "environmental_health_services": "23460881",
+        "public_health_and_welfare_services": "391563",
+        "environmental_development_services": "9315682",
+        "recreation_and_cultural_services": "23658315"
+      },
+      "source_row_index": 11
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2021/22",
+        "general_government_services": "27555978",
+        "protective_services": "58761575",
+        "transportation_services": "31236671",
+        "environmental_health_services": "22043186",
+        "public_health_and_welfare_services": "394711",
+        "environmental_development_services": "8174773",
+        "recreation_and_cultural_services": "21355215"
+      },
+      "source_row_index": 12
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2020/21",
+        "general_government_services": "27314630",
+        "protective_services": "56371965",
+        "transportation_services": "27799810",
+        "environmental_health_services": "21202308",
+        "public_health_and_welfare_services": "433833",
+        "environmental_development_services": "7369084",
+        "recreation_and_cultural_services": "19115299"
+      },
+      "source_row_index": 13
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2019/20",
+        "general_government_services": "27378444",
+        "protective_services": "58398803",
+        "transportation_services": "30225976",
+        "environmental_health_services": "22219545",
+        "public_health_and_welfare_services": "526233",
+        "environmental_development_services": "8651302",
+        "recreation_and_cultural_services": "22097300"
+      },
+      "source_row_index": 14
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2018/19",
+        "general_government_services": "26357093",
+        "protective_services": "57871866",
+        "transportation_services": "29546274",
+        "environmental_health_services": "22371412",
+        "public_health_and_welfare_services": "426425",
+        "environmental_development_services": "8769955",
+        "recreation_and_cultural_services": "21026647"
+      },
+      "source_row_index": 15
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2017/18",
+        "general_government_services": "26111763",
+        "protective_services": "56428108",
+        "transportation_services": "28264367",
+        "environmental_health_services": "21529686",
+        "public_health_and_welfare_services": "474217",
+        "environmental_development_services": "9730260",
+        "recreation_and_cultural_services": "20855094"
+      },
+      "source_row_index": 16
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2016/17",
+        "general_government_services": "25602538",
+        "protective_services": "54269882",
+        "transportation_services": "28461618",
+        "environmental_health_services": "21193544",
+        "public_health_and_welfare_services": "469453",
+        "environmental_development_services": "8424451",
+        "recreation_and_cultural_services": "20604762"
+      },
+      "source_row_index": 17
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2015/16",
+        "general_government_services": "24742160",
+        "protective_services": "53828894",
+        "transportation_services": "28655696",
+        "environmental_health_services": "21972867",
+        "public_health_and_welfare_services": "572413",
+        "environmental_development_services": "7838642",
+        "recreation_and_cultural_services": "20614629"
+      },
+      "source_row_index": 18
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Towns",
+        "year": "2014/15",
+        "general_government_services": "26521730",
+        "protective_services": "56103382",
+        "transportation_services": "33357838",
+        "environmental_health_services": "22057989",
+        "public_health_and_welfare_services": "698492",
+        "environmental_development_services": "8099019",
+        "recreation_and_cultural_services": "20538630"
+      },
+      "source_row_index": 19
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2023/24",
+        "general_government_services": "160948612",
+        "protective_services": "347855547",
+        "transportation_services": "297953709",
+        "environmental_health_services": "74982874",
+        "public_health_and_welfare_services": "1909656",
+        "environmental_development_services": "43888941",
+        "recreation_and_cultural_services": "128970302"
+      },
+      "source_row_index": 20
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2022/23",
+        "general_government_services": "148827160",
+        "protective_services": "326271530",
+        "transportation_services": "281360041",
+        "environmental_health_services": "78442968",
+        "public_health_and_welfare_services": "1772476",
+        "environmental_development_services": "35981374",
+        "recreation_and_cultural_services": "125365518"
+      },
+      "source_row_index": 21
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2021/22",
+        "general_government_services": "142689678",
+        "protective_services": "318593858",
+        "transportation_services": "250016420",
+        "environmental_health_services": "73745190",
+        "public_health_and_welfare_services": "1507204",
+        "environmental_development_services": "35985357",
+        "recreation_and_cultural_services": "107611773"
+      },
+      "source_row_index": 22
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2020/21",
+        "general_government_services": "134153127",
+        "protective_services": "287086841",
+        "transportation_services": "223752248",
+        "environmental_health_services": "67744091",
+        "public_health_and_welfare_services": "1501778",
+        "environmental_development_services": "33607034",
+        "recreation_and_cultural_services": "103185022"
+      },
+      "source_row_index": 23
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2019/20",
+        "general_government_services": "127934142",
+        "protective_services": "277577746",
+        "transportation_services": "222563955",
+        "environmental_health_services": "60897877",
+        "public_health_and_welfare_services": "1383347",
+        "environmental_development_services": "31743781",
+        "recreation_and_cultural_services": "119961755"
+      },
+      "source_row_index": 24
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2018/19",
+        "general_government_services": "113743453",
+        "protective_services": "267548721",
+        "transportation_services": "214482580",
+        "environmental_health_services": "69176519",
+        "public_health_and_welfare_services": "1300740",
+        "environmental_development_services": "32537284",
+        "recreation_and_cultural_services": "102027407"
+      },
+      "source_row_index": 25
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2017/18",
+        "general_government_services": "109624562",
+        "protective_services": "258958997",
+        "transportation_services": "205293091",
+        "environmental_health_services": "64202803",
+        "public_health_and_welfare_services": "1328197",
+        "environmental_development_services": "26123735",
+        "recreation_and_cultural_services": "104476628"
+      },
+      "source_row_index": 26
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2016/17",
+        "general_government_services": "101768430",
+        "protective_services": "249060081",
+        "transportation_services": "210798980",
+        "environmental_health_services": "57640697",
+        "public_health_and_welfare_services": "1355403",
+        "environmental_development_services": "23616464",
+        "recreation_and_cultural_services": "97506500"
+      },
+      "source_row_index": 27
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2015/16",
+        "general_government_services": "119312455",
+        "protective_services": "239111327",
+        "transportation_services": "202347224",
+        "environmental_health_services": "67384228",
+        "public_health_and_welfare_services": "1291642",
+        "environmental_development_services": "23065325",
+        "recreation_and_cultural_services": "90425975"
+      },
+      "source_row_index": 28
+    },
+    {
+      "dataset_type": "benchmark_operating_expenses",
+      "scope": "regional_type_comparator",
+      "source_id": "ns-municipal-operating-expenses",
+      "raw": {
+        "region_type": "Regional Municipalities",
+        "year": "2014/15",
+        "general_government_services": "113114767",
+        "protective_services": "238230297",
+        "transportation_services": "215612638",
+        "environmental_health_services": "67309921",
+        "public_health_and_welfare_services": "1267220",
+        "environmental_development_services": "21757491",
+        "recreation_and_cultural_services": "83794373"
+      },
+      "source_row_index": 29
+    },
+    {
+      "dataset_type": "financial_condition_indicators",
+      "scope": "hrm",
+      "source_id": "ns-municipal-fci",
+      "raw": {
+        "region": "HRM",
+        "region_type": "Regional Municipality",
+        "year": "2023-24",
+        "reliance_on_government_transfers": "0.027",
+        "uncollected_taxes": "0.019",
+        "three_year_change_in_tax_base": "0.255",
+        "reliance_on_single_business_or_instituion": "0.014",
+        "residential_tax_effort": "0.038",
+        "total_of_deficits": "0",
+        "liquidity": "2.5",
+        "operating_reserve": "0.256",
+        "debt_service_cost": "0.047",
+        "outstanding_operating_debt": "0.001",
+        "undepreciated_assets": "0.455",
+        "combined_operating_capital_reserves": "0.373"
+      },
+      "source_row_index": 0,
+      "identity_field": "region",
+      "identity_value": "HRM"
+    },
+    {
+      "dataset_type": "financial_condition_indicators",
+      "scope": "hrm",
+      "source_id": "ns-municipal-fci",
+      "raw": {
+        "region": "HRM",
+        "region_type": "Regional Municipality",
+        "year": "2022-23",
+        "reliance_on_government_transfers": "0.027",
+        "uncollected_taxes": "0.029",
+        "three_year_change_in_tax_base": "0.162",
+        "reliance_on_single_business_or_instituion": "0.015",
+        "residential_tax_effort": "0.036",
+        "total_of_deficits": "0",
+        "liquidity": "0.7",
+        "operating_reserve": "0.062",
+        "debt_service_cost": "0.047",
+        "outstanding_operating_debt": "0.001",
+        "undepreciated_assets": "0.467",
+        "combined_operating_capital_reserves": "0.433"
+      },
+      "source_row_index": 1,
+      "identity_field": "region",
+      "identity_value": "HRM"
+    },
+    {
+      "dataset_type": "financial_condition_indicators",
+      "scope": "hrm",
+      "source_id": "ns-municipal-fci",
+      "raw": {
+        "region": "HRM",
+        "region_type": "Regional Municipality",
+        "year": "2021-22",
+        "reliance_on_government_transfers": "0.03",
+        "uncollected_taxes": "0.037",
+        "three_year_change_in_tax_base": "0.103",
+        "reliance_on_single_business_or_instituion": "0.016",
+        "residential_tax_effort": "0.034",
+        "total_of_deficits": "0",
+        "liquidity": "0.8",
+        "operating_reserve": "0.11",
+        "debt_service_cost": "0.044",
+        "outstanding_operating_debt": "0.063",
+        "undepreciated_assets": "0.458",
+        "combined_operating_capital_reserves": "0.475"
+      },
+      "source_row_index": 2,
+      "identity_field": "region",
+      "identity_value": "HRM"
+    },
+    {
+      "dataset_type": "financial_condition_indicators",
+      "scope": "hrm",
+      "source_id": "ns-municipal-fci",
+      "raw": {
+        "region": "HRM",
+        "region_type": "Regional Municipality",
+        "year": "2020-21",
+        "reliance_on_government_transfers": "0.078",
+        "uncollected_taxes": "0.039",
+        "three_year_change_in_tax_base": "0.104",
+        "reliance_on_single_business_or_instituion": "0.018",
+        "residential_tax_effort": "0.038",
+        "total_of_deficits": "0",
+        "liquidity": "2.2",
+        "operating_reserve": "0.199",
+        "debt_service_cost": "0.063",
+        "outstanding_operating_debt": "0.002",
+        "undepreciated_assets": "0.47",
+        "combined_operating_capital_reserves": "0.464"
+      },
+      "source_row_index": 3,
+      "identity_field": "region",
+      "identity_value": "HRM"
+    },
+    {
+      "dataset_type": "financial_condition_indicators",
+      "scope": "hrm",
+      "source_id": "ns-municipal-fci",
+      "raw": {
+        "region": "HRM",
+        "region_type": "Regional Municipality",
+        "year": "2019-20",
+        "reliance_on_government_transfers": "0.014",
+        "uncollected_taxes": "0.039",
+        "three_year_change_in_tax_base": "0.089",
+        "reliance_on_single_business_or_instituion": "0.017",
+        "residential_tax_effort": "0.037",
+        "total_of_deficits": "0",
+        "total_of_budget_accuracy_within_or_5": "5",
+        "liquidity": "1.6",
+        "operating_reserve": "0.11",
+        "debt_service_cost": "0.057",
+        "outstanding_operating_debt": "0.002",
+        "undepreciated_assets": "0.484",
+        "combined_operating_capital_reserves": "0.34"
+      },
+      "source_row_index": 4,
+      "identity_field": "region",
+      "identity_value": "HRM"
+    },
+    {
+      "dataset_type": "financial_condition_indicators",
+      "scope": "hrm",
+      "source_id": "ns-municipal-fci",
+      "raw": {
+        "region": "HRM",
+        "region_type": "Regional Municipality",
+        "year": "2018-19",
+        "reliance_on_government_transfers": "0.017",
+        "uncollected_taxes": "0.034",
+        "three_year_change_in_tax_base": "0.115",
+        "reliance_on_single_business_or_instituion": "0.018",
+        "residential_tax_effort": "0.037",
+        "total_of_deficits": "0",
+        "total_of_budget_accuracy_within_or_5": "5",
+        "liquidity": "1.8",
+        "operating_reserve": "0.14",
+        "debt_service_cost": "0.063",
+        "outstanding_operating_debt": "0.003",
+        "undepreciated_assets": "0.501",
+        "combined_operating_capital_reserves": "0.263"
+      },
+      "source_row_index": 5,
+      "identity_field": "region",
+      "identity_value": "HRM"
+    },
+    {
+      "dataset_type": "financial_condition_indicators",
+      "scope": "hrm",
+      "source_id": "ns-municipal-fci",
+      "raw": {
+        "region": "HRM",
+        "region_type": "Regional Municipality",
+        "year": "2017-18",
+        "reliance_on_government_transfers": "0.016",
+        "uncollected_taxes": "0.045",
+        "three_year_change_in_tax_base": "0.13",
+        "reliance_on_single_business_or_instituion": "0.016",
+        "residential_tax_effort": "0.036",
+        "total_of_deficits": "1",
+        "total_of_budget_accuracy_within_or_5": "5",
+        "liquidity": "1.6",
+        "operating_reserve": "0.103",
+        "debt_service_cost": "0.068",
+        "outstanding_operating_debt": "0.003",
+        "undepreciated_assets": "0.519",
+        "combined_operating_capital_reserves": "0.228"
+      },
+      "source_row_index": 6,
+      "identity_field": "region",
+      "identity_value": "HRM"
+    },
+    {
+      "dataset_type": "financial_condition_indicators",
+      "scope": "hrm",
+      "source_id": "ns-municipal-fci",
+      "raw": {
+        "region": "HRM",
+        "region_type": "Regional Municipality",
+        "year": "2016-17",
+        "reliance_on_government_transfers": "0.015",
+        "uncollected_taxes": "0.044",
+        "three_year_change_in_tax_base": "0.159",
+        "reliance_on_single_business_or_instituion": "0.015",
+        "residential_tax_effort": "0.035",
+        "total_of_deficits": "1",
+        "total_of_budget_accuracy_within_or_5": "5",
+        "liquidity": "1.2",
+        "operating_reserve": "0.062",
+        "debt_service_cost": "0.073",
+        "outstanding_operating_debt": "0.004",
+        "undepreciated_assets": "0.531",
+        "combined_operating_capital_reserves": "0.233"
+      },
+      "source_row_index": 7,
+      "identity_field": "region",
+      "identity_value": "HRM"
+    }
+  ]
 }
