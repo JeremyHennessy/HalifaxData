@@ -1,0 +1,31 @@
+name: Debug Build 008 capital actuals layout
+
+on:
+  push:
+    branches: ['agent/build-008-capital']
+    paths:
+      - 'scripts/debug_capital_actuals_layout.py'
+      - '.github/workflows/debug-capital-actuals-build008.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/build-008-capital
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - run: python scripts/debug_capital_actuals_layout.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build008-capital-actuals-layout-${{ github.sha }}
+          path: data/generated/capital_actuals_layout_debug.json
+          retention-days: 2
