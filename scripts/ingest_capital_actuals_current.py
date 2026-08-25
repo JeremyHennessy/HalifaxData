@@ -3,8 +3,9 @@
 
 Attachment #8 is an asset-category summary, not a project-level ledger. The PDF
 encodes its visual ten-value rows as a fourteen-column text grid with spacer
-columns; this collector reconstructs only that explicit grid and never assigns
-category actuals to individual project codes.
+columns whose placement varies slightly by quarter. This collector reconstructs
+only explicit one-value column segments and never assigns category actuals to
+individual project codes.
 """
 from __future__ import annotations
 
@@ -20,7 +21,7 @@ from ingest_domains import clean, now, provenance, strict_money_cell
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data/generated/capital_actuals_current.json"
-PARSER_VERSION = "build008-capital-actuals-v2"
+PARSER_VERSION = "build008-capital-actuals-v3"
 
 SOURCES = [
     {
@@ -71,8 +72,21 @@ VALUE_FIELDS = [
     "projected_spend_remaining_2025_26",
     "projected_work_in_progress_2026_27",
 ]
-# pdfplumber's text-grid extraction inserts spacer columns at 4, 7 and 9.
-TEXT_GRID_VALUE_INDEXES = [1, 2, 3, 5, 6, 8, 10, 11, 12, 13]
+# Source PDF text-grid layout. Q1 puts the increase/decrease amount in col 4
+# and Q2 in col 5; YTD expenditure similarly sits inside a spacer-bounded 7:10
+# segment. Each segment must contain zero or one independently parseable amount.
+TEXT_GRID_VALUE_SEGMENTS = [
+    (1, 2),
+    (2, 3),
+    (3, 4),
+    (4, 6),
+    (6, 7),
+    (7, 10),
+    (10, 11),
+    (11, 12),
+    (12, 13),
+    (13, 14),
+]
 TEXT_TABLE_SETTINGS = {
     "vertical_strategy": "text",
     "horizontal_strategy": "text",
@@ -114,6 +128,21 @@ def source_money(cell: str) -> float | None:
     return value
 
 
+def source_money_segment(cells: list[str], *, context: str) -> float | None:
+    populated = [clean(cell) for cell in cells if clean(cell)]
+    if not populated:
+        return None
+    parsed: list[float | None] = []
+    for cell in populated:
+        if cell == "$":
+            continue
+        parsed.append(source_money(cell))
+    non_null = [value for value in parsed if value is not None]
+    if len(non_null) > 1:
+        raise RuntimeError(f"Ambiguous multi-value text-grid segment for {context}: {cells!r}")
+    return non_null[0] if non_null else None
+
+
 def extract_source(source: dict, blob: bytes) -> tuple[list[dict], list[dict]]:
     records: list[dict] = []
     table_status: list[dict] = []
@@ -129,15 +158,16 @@ def extract_source(source: dict, blob: bytes) -> tuple[list[dict], list[dict]]:
                     continue
                 parsed_in_table = 0
                 for source_row, row in enumerate(rows, 1):
-                    if len(row) <= max(TEXT_GRID_VALUE_INDEXES):
+                    if len(row) < TEXT_GRID_VALUE_SEGMENTS[-1][1]:
                         continue
                     label = clean(row[0])
                     if not label or label.casefold() == "budget category" or not any(ch.isalpha() for ch in label):
                         continue
-                    # Footer/header text can span the first grid column; only rows
-                    # with ten independently parseable monetary columns qualify.
                     try:
-                        values = [source_money(row[index]) for index in TEXT_GRID_VALUE_INDEXES]
+                        values = [
+                            source_money_segment(row[start:end], context=f"{source['quarter']}/{label}/{field}")
+                            for field, (start, end) in zip(VALUE_FIELDS, TEXT_GRID_VALUE_SEGMENTS, strict=True)
+                        ]
                     except RuntimeError:
                         continue
                     normalized_label = " ".join(label.split())
@@ -182,9 +212,18 @@ def validate_source_rows(source: dict, rows: list[dict]) -> dict:
     ]:
         expected = float(source[expected_key])
         actual = float(total[field] or 0)
-        # Narrative report values are rounded to $0.1M.
         if abs(actual - expected) > 100_000:
             raise RuntimeError(f"{source['source_id']} {field} total {actual} does not reconcile to narrative {expected}")
+    # Every numeric source column must independently add from the nine published
+    # categories to GRAND TOTAL, allowing only tiny PDF/rounding differences.
+    categories = [row for row in rows if row is not total]
+    for field in VALUE_FIELDS:
+        category_sum = sum(float(row[field] or 0) for row in categories)
+        total_value = float(total[field] or 0)
+        if abs(category_sum - total_value) > 2:
+            raise RuntimeError(
+                f"{source['source_id']} {field} category sum {category_sum} != GRAND TOTAL {total_value}"
+            )
     return total
 
 
