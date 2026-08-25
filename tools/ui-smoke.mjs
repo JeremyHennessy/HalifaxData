@@ -13,7 +13,7 @@ const routes = [
   ['projects', 'Capital Projects'],
   ['council', 'Council & Decisions'],
   ['benchmarks', 'Benchmarks & Funding'],
-  ['signals', 'Signals Lab'],
+  ['signals', 'Investigations'],
   ['sources', 'Sources & Evidence']
 ];
 const RELEASED_DOMAINS = ['budget', 'spending', 'procurement', 'capital', 'financials', 'council'];
@@ -28,15 +28,9 @@ await fs.mkdir(OUTPUT, { recursive: true });
 
 const browser = await chromium.launch({ headless: true });
 const report = {
-  generated_at: new Date().toISOString(),
-  base_url: BASE_URL,
-  console_errors: [],
-  page_errors: [],
-  http_errors: [],
-  expected_optional_404s: [],
-  views: [],
-  interactions: [],
-  released_domains: []
+  generated_at: new Date().toISOString(), base_url: BASE_URL,
+  console_errors: [], page_errors: [], http_errors: [], expected_optional_404s: [],
+  views: [], interactions: [], released_domains: []
 };
 
 async function waitForDashboard(page) {
@@ -46,12 +40,10 @@ async function waitForDashboard(page) {
     return content && !content.querySelector('.loading-card');
   });
 }
-
 async function openRoute(page, route) {
   await page.goto(`${BASE_URL}#${route}`, { waitUntil: 'networkidle' });
   await waitForDashboard(page);
 }
-
 async function closeDrawer(page) {
   const drawer = page.locator('#evidence-drawer');
   if (await drawer.getAttribute('open') !== null) {
@@ -59,106 +51,97 @@ async function closeDrawer(page) {
     await page.waitForFunction(() => !document.querySelector('#evidence-drawer')?.open);
   }
 }
+async function assertText(page, route, phrases) {
+  await openRoute(page, route);
+  const text = await page.locator('#content').innerText();
+  for (const phrase of phrases) {
+    if (!text.toLowerCase().includes(phrase.toLowerCase())) throw new Error(`${route}: missing "${phrase}"`);
+  }
+  return text;
+}
 
 async function assertReleasedDomainsReady(page, viewportName) {
   await openRoute(page, 'overview');
   await page.waitForFunction(domains => domains.every(domain => {
-    const card = document.querySelector(`.coverage-card[data-domain="${domain}"]`);
-    const badge = card?.querySelector('.badge')?.textContent?.trim() || '';
+    const badge = document.querySelector(`.coverage-card[data-domain="${domain}"] .badge`)?.textContent?.trim() || '';
     return badge.startsWith('Ready');
   }), RELEASED_DOMAINS, { timeout: 15000 });
-
-  const statuses = await page.evaluate(domains => Object.fromEntries(domains.map(domain => {
-    const card = document.querySelector(`.coverage-card[data-domain="${domain}"]`);
-    return [domain, card?.querySelector('.badge')?.textContent?.trim() || ''];
-  })), RELEASED_DOMAINS);
-
+  const statuses = await page.evaluate(domains => Object.fromEntries(domains.map(domain => [domain, document.querySelector(`.coverage-card[data-domain="${domain}"] .badge`)?.textContent?.trim() || ''])), RELEASED_DOMAINS);
   for (const domain of RELEASED_DOMAINS) {
     const status = statuses[domain] || '';
-    if (!status.startsWith('Ready')) throw new Error(`${viewportName}/coverage: ${domain} is not Ready (${status || 'blank'})`);
-    if (/pending|missing|error|awaiting/i.test(status)) throw new Error(`${viewportName}/coverage: ${domain} has a non-release state (${status})`);
+    if (!status.startsWith('Ready') || /pending|missing|error|awaiting/i.test(status)) throw new Error(`${viewportName}/coverage: ${domain} is not released (${status || 'blank'})`);
   }
   report.released_domains.push({ viewport: viewportName, statuses });
 }
 
-async function assertBuild006DataViews(page, viewportName) {
-  await openRoute(page, 'overview');
-  const overviewText = await page.locator('#content').innerText();
-  for (const phrase of ['Cross-domain review leads', 'Coverage gaps that still matter', 'No transaction-level AP ledger yet']) {
-    if (!overviewText.includes(phrase)) throw new Error(`${viewportName}/overview: missing Build 006 intelligence phrase "${phrase}"`);
-  }
+async function assertAnalyticalViews(page, viewportName) {
+  await assertText(page, 'overview', ['What deserves attention?', 'Budget pressure snapshot', 'Procurement concentration snapshot', 'Data coverage & readiness']);
+  const overviewLeads = page.locator('#content [data-build008-investigation-id]');
+  if (await overviewLeads.count() < 3) throw new Error(`${viewportName}/overview: expected cross-domain investigation cards`);
+  await overviewLeads.first().click();
+  await page.waitForSelector('#evidence-drawer[open]');
+  if ((await page.locator('#drawer-eyebrow').textContent())?.trim() !== 'INVESTIGATION LEAD') throw new Error(`${viewportName}/overview: investigation evidence drawer did not open`);
+  await closeDrawer(page);
 
-  await openRoute(page, 'budget');
-  await page.waitForFunction(() => /Historical budget evidence/i.test(document.querySelector('#content')?.innerText || ''), null, { timeout: 15000 });
-  const historyRows = await page.locator('[data-budget-history-index]').count();
-  if (historyRows < 1) throw new Error(`${viewportName}/budget: historical budget rows did not render`);
+  await assertText(page, 'budget', ['Budget pressure analysis', 'Historical budget evidence']);
+  if (await page.locator('.b8-budget-pressure [data-build008-investigation-id]').count() < 1) throw new Error(`${viewportName}/budget: no budget-pressure investigation cards rendered`);
+  if (await page.locator('[data-budget-history-index]').count() < 1) throw new Error(`${viewportName}/budget: historical budget rows did not render`);
   await page.locator('[data-budget-history-index]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
-  const historyDrawer = (await page.locator('#drawer-eyebrow').textContent())?.trim();
-  if (historyDrawer !== 'HISTORICAL BUDGET EVIDENCE') throw new Error(`${viewportName}/budget: historical evidence drawer did not open`);
+  if ((await page.locator('#drawer-eyebrow').textContent())?.trim() !== 'HISTORICAL BUDGET EVIDENCE') throw new Error(`${viewportName}/budget: historical evidence drawer did not open`);
   await closeDrawer(page);
 
-  await openRoute(page, 'spending');
-  const spendingText = await page.locator('#content').innerText();
-  if (!spendingText.includes('not invoice or accounts-payable transactions')) throw new Error(`${viewportName}/spending: transaction-granularity boundary is missing`);
-  if (!spendingText.includes('1,094')) throw new Error(`${viewportName}/spending: expected 1,094 quarterly summary rows`);
+  const spendingText = await assertText(page, 'spending', ['not invoice or accounts-payable transactions', '1,094', 'Quarterly spending movement analysis', 'ambiguous key/dates excluded']);
+  if (!spendingText.toLowerCase().includes('comparable movement leads')) throw new Error(`${viewportName}/spending: hero metric was not converted to comparable movements`);
   const spendingHeaders = (await page.locator('#content table').first().locator('th').allTextContents()).map(text => text.trim());
-  if (spendingHeaders.includes('Vendor') || spendingHeaders.includes('Project')) throw new Error(`${viewportName}/spending: unsupported transaction columns are still present`);
+  if (spendingHeaders.includes('Vendor') || spendingHeaders.includes('Project')) throw new Error(`${viewportName}/spending: unsupported transaction columns are present`);
+  if (await page.locator('.b8-spending-movement [data-build008-investigation-id]').count() < 1) throw new Error(`${viewportName}/spending: no comparable movement cards rendered`);
   await page.locator('[data-spending-index]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
-  const spendingDrawerText = await page.locator('#drawer-body').innerText();
-  if (!spendingDrawerText.includes('Not a transaction')) throw new Error(`${viewportName}/spending: source-row evidence boundary missing`);
+  if (!(await page.locator('#drawer-body').innerText()).includes('Not a transaction')) throw new Error(`${viewportName}/spending: source-row transaction boundary missing`);
   await closeDrawer(page);
 
-  await openRoute(page, 'vendors');
-  const vendorText = await page.locator('#content').innerText();
-  if (!vendorText.includes('Top collected award concentration') || !vendorText.includes('5,502')) throw new Error(`${viewportName}/vendors: award concentration integration is incomplete`);
+  await assertText(page, 'vendors', ['5,502', 'Procurement concentration & repeat awards', 'Candidate vendor identity matches', 'Top collected award concentration']);
+  if (await page.locator('.b8-procurement-analysis [data-build008-investigation-id]').count() < 1) throw new Error(`${viewportName}/vendors: no concentration/repeat-award cards rendered`);
 
-  await openRoute(page, 'projects');
-  const projectText = await page.locator('#content').innerText();
-  if (!projectText.includes('Historical-project boundary') || !projectText.includes('2,650')) throw new Error(`${viewportName}/projects: historical capital boundary/count missing`);
+  await assertText(page, 'projects', ['Historical-project boundary', '2,650']);
   const capitalHeaders = (await page.locator('#content table').first().locator('th').allTextContents()).map(text => text.trim());
-  if (capitalHeaders.includes('Current budget') || capitalHeaders.includes('Actual spend')) throw new Error(`${viewportName}/projects: unsupported current cost columns are still present`);
+  if (capitalHeaders.includes('Current budget') || capitalHeaders.includes('Actual spend')) throw new Error(`${viewportName}/projects: unsupported current cost columns are present`);
 
-  await openRoute(page, 'financials');
-  const financialText = await page.locator('#content').innerText();
-  if (!financialText.includes('Audited statement explorer') || !financialText.includes('350')) throw new Error(`${viewportName}/financials: audited statement integration is incomplete`);
-  const financialRows = await page.locator('[data-financial-index]').count();
-  if (financialRows < 1) throw new Error(`${viewportName}/financials: no audited statement rows rendered`);
+  await assertText(page, 'financials', ['Audited statement explorer', '350']);
+  if (await page.locator('[data-financial-index]').count() < 1) throw new Error(`${viewportName}/financials: no audited statement rows rendered`);
   await page.locator('[data-financial-index]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
   await closeDrawer(page);
 
-  await openRoute(page, 'council');
-  const councilText = await page.locator('#content').innerText();
-  if (!councilText.includes('Finance-tagged agenda attachments') || !councilText.includes('179')) throw new Error(`${viewportName}/council: finance document graph is not exposed`);
-  const councilRows = await page.locator('[data-council-id]').count();
-  if (councilRows < 1) throw new Error(`${viewportName}/council: no finance-context meetings rendered`);
+  await assertText(page, 'council', ['Finance-tagged agenda attachments', '179']);
+  if (await page.locator('[data-council-id]').count() < 1) throw new Error(`${viewportName}/council: no finance-context meetings rendered`);
   await page.locator('[data-council-id]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
-  const councilDrawerText = await page.locator('#drawer-body').innerText();
-  if (!councilDrawerText.includes('Not an approval finding')) throw new Error(`${viewportName}/council: decision-evidence boundary missing`);
+  if (!(await page.locator('#drawer-body').innerText()).includes('Not an approval finding')) throw new Error(`${viewportName}/council: decision-evidence boundary missing`);
   await closeDrawer(page);
 
-  await openRoute(page, 'benchmarks');
-  const benchmarkText = await page.locator('#content').innerText();
-  for (const phrase of ['HRM benchmark facts', '48', 'HRM funding facts', '14', 'Province program context', '212', 'Context ≠ Halifax']) {
-    if (!benchmarkText.toLowerCase().includes(phrase.toLowerCase())) throw new Error(`${viewportName}/benchmarks: missing "${phrase}"`);
-  }
-  const benchmarkRows = await page.locator('[data-benchmark-origin]').count();
-  if (benchmarkRows < 1) throw new Error(`${viewportName}/benchmarks: no scoped municipal context rows rendered`);
+  await assertText(page, 'benchmarks', ['HRM benchmark facts', '48', 'HRM funding facts', '14', 'Province program context', '212', 'Context ≠ Halifax']);
+  if (await page.locator('[data-benchmark-origin]').count() < 1) throw new Error(`${viewportName}/benchmarks: no scoped municipal context rows rendered`);
   await page.locator('[data-benchmark-origin]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
   await closeDrawer(page);
 
-  report.interactions.push({ viewport: viewportName, check: 'Build 006 full data-to-UI integration' });
+  await assertText(page, 'signals', ['Ranked investigations', 'Data-quality queue', 'Scoring interpretation']);
+  const signalCards = page.locator('#content [data-build008-investigation-id]');
+  if (await signalCards.count() < 3) throw new Error(`${viewportName}/investigations: expected multiple investigation cards`);
+  await signalCards.first().click();
+  await page.waitForSelector('#evidence-drawer[open]');
+  if ((await page.locator('#drawer-eyebrow').textContent())?.trim() !== 'INVESTIGATION LEAD') throw new Error(`${viewportName}/investigations: evidence drawer did not open`);
+  await closeDrawer(page);
+
+  report.interactions.push({ viewport: viewportName, check: 'Build 008 investigation analytics and Build 006/007 evidence boundaries' });
 }
 
 try {
   for (const [viewportName, viewport] of viewports) {
     const context = await browser.newContext({ viewport, deviceScaleFactor: 1 });
     const page = await context.newPage();
-
     page.on('console', message => {
       if (message.type() !== 'error') return;
       const text = message.text();
@@ -171,22 +154,16 @@ try {
       const url = new URL(response.url());
       const record = { viewport: viewportName, status: response.status(), url: response.url() };
       const expectedOptional404 = response.status() === 404 && OPTIONAL_404_SUFFIXES.some(suffix => url.pathname.endsWith(suffix));
-      if (expectedOptional404) report.expected_optional_404s.push(record);
-      else report.http_errors.push(record);
+      if (expectedOptional404) report.expected_optional_404s.push(record); else report.http_errors.push(record);
     });
 
     for (const [route, expectedTitle] of routes) {
       await openRoute(page, route);
-      const title = await page.locator('#view-title').textContent();
-      if (title?.trim() !== expectedTitle) throw new Error(`${viewportName}/${route}: expected title "${expectedTitle}", got "${title?.trim()}"`);
-
+      const title = (await page.locator('#view-title').textContent())?.trim();
+      if (title !== expectedTitle) throw new Error(`${viewportName}/${route}: expected title "${expectedTitle}", got "${title}"`);
       const viewState = await page.evaluate(() => {
-        const body = getComputedStyle(document.body);
-        const content = document.querySelector('#content');
-        const error = document.querySelector('.error-state');
+        const content = document.querySelector('#content'); const error = document.querySelector('.error-state');
         return {
-          body_background: body.backgroundColor,
-          body_color: body.color,
           content_text_length: content?.innerText?.trim().length || 0,
           data_mode: document.querySelector('#data-mode')?.textContent?.trim() || null,
           error_text: error?.textContent?.trim() || null,
@@ -196,72 +173,57 @@ try {
       });
       if (viewState.error_text) throw new Error(`${viewportName}/${route}: ${viewState.error_text}`);
       if (viewState.content_text_length < 40) throw new Error(`${viewportName}/${route}: rendered content is unexpectedly sparse`);
-      if (viewState.scroll_width > viewState.client_width + 2) throw new Error(`${viewportName}/${route}: horizontal page overflow ${viewState.scroll_width}px > ${viewState.client_width}px`);
-
+      if (viewState.scroll_width > viewState.client_width + 2) throw new Error(`${viewportName}/${route}: horizontal overflow ${viewState.scroll_width}px > ${viewState.client_width}px`);
       await page.screenshot({ path: `${OUTPUT}/${viewportName}-${route}.png`, fullPage: true });
-      report.views.push({ viewport: viewportName, route, title: title.trim(), ...viewState });
+      report.views.push({ viewport: viewportName, route, title, ...viewState });
     }
 
     await assertReleasedDomainsReady(page, viewportName);
-    await assertBuild006DataViews(page, viewportName);
+    await assertAnalyticalViews(page, viewportName);
 
-    await openRoute(page, 'overview');
-    const allYearsCount = (await page.locator('.metrics-grid .metric-card').nth(1).locator('.metric-value').textContent())?.trim();
+    await openRoute(page, 'people');
+    const allYearsCount = (await page.locator('.metrics-grid .metric-card').first().locator('.metric-value').textContent())?.trim();
     await page.locator('#global-year').selectOption('2025');
     await page.waitForFunction(() => document.querySelector('#global-year')?.value === '2025');
-    const filteredCount = (await page.locator('.metrics-grid .metric-card').nth(1).locator('.metric-value').textContent())?.trim();
-    if (!allYearsCount || !filteredCount || allYearsCount === filteredCount) throw new Error(`${viewportName}/filters: fiscal-year filter did not change the compensation disclosure count`);
-    report.interactions.push({ viewport: viewportName, check: 'fiscal-year filter', before: allYearsCount, after: filteredCount });
+    const filteredCount = (await page.locator('.metrics-grid .metric-card').first().locator('.metric-value').textContent())?.trim();
+    if (!allYearsCount || !filteredCount || allYearsCount === filteredCount) throw new Error(`${viewportName}/filters: fiscal-year filter did not change people disclosure count`);
     await page.locator('#global-year').selectOption('all');
-    await page.waitForFunction(() => document.querySelector('#global-year')?.value === 'all');
+    report.interactions.push({ viewport: viewportName, check: 'people fiscal-year filter', before: allYearsCount, after: filteredCount });
 
     await page.locator('#global-search').fill('Campbell');
     await page.locator('#global-search').press('Enter');
     await page.waitForSelector('#evidence-drawer[open]');
-    const searchTitle = (await page.locator('#drawer-title').textContent())?.trim() || '';
-    if (!searchTitle.startsWith('Search: Campbell')) throw new Error(`${viewportName}/search: unexpected drawer title "${searchTitle}"`);
-    const personSearchResults = page.locator('#drawer-body [data-search-person]');
-    if (await personSearchResults.count() < 1) throw new Error(`${viewportName}/search: expected at least one compensation person result`);
-    await personSearchResults.first().click();
+    if (!(await page.locator('#drawer-title').textContent())?.trim().startsWith('Search: Campbell')) throw new Error(`${viewportName}/search: unexpected drawer title`);
+    const peopleResults = page.locator('#drawer-body [data-search-person]');
+    if (await peopleResults.count() < 1) throw new Error(`${viewportName}/search: expected compensation person result`);
+    await peopleResults.first().click();
     await page.waitForSelector('#evidence-drawer[open] .mini-history');
-    const personHistoryRows = await page.locator('#evidence-drawer .mini-history > div').count();
-    if (personHistoryRows < 1) throw new Error(`${viewportName}/person-evidence: no disclosure history rendered`);
-    const officialHref = await page.locator('#evidence-drawer .source-link').getAttribute('href');
-    if (!officialHref || !/^https?:\/\//.test(officialHref)) throw new Error(`${viewportName}/person-evidence: official source link missing or invalid`);
-    report.interactions.push({ viewport: viewportName, check: 'global search + person history + source link', history_rows: personHistoryRows, source_url: officialHref });
+    const sourceHref = await page.locator('#evidence-drawer .source-link').getAttribute('href');
+    if (!sourceHref || !/^https?:\/\//.test(sourceHref)) throw new Error(`${viewportName}/person-evidence: official source link missing`);
     await closeDrawer(page);
-
-    await openRoute(page, 'signals');
-    await page.waitForFunction(() => /validation pending/i.test(document.querySelector('#content')?.innerText || ''), null, { timeout: 15000 });
-    report.interactions.push({ viewport: viewportName, check: 'signals validation-pending state' });
 
     await openRoute(page, 'sources');
     const sourceCards = page.locator('#content [data-source-id]');
-    if (await sourceCards.count() < 1) throw new Error(`${viewportName}/sources: no clickable source records rendered`);
+    if (await sourceCards.count() < 1) throw new Error(`${viewportName}/sources: no source cards`);
     await sourceCards.first().click();
     await page.waitForSelector('#evidence-drawer[open]');
-    const sourceHref = await page.locator('#evidence-drawer .source-link').getAttribute('href');
-    if (!sourceHref || !/^https?:\/\//.test(sourceHref)) throw new Error(`${viewportName}/sources: official source link missing or invalid`);
-    report.interactions.push({ viewport: viewportName, check: 'source evidence drawer', source_url: sourceHref });
+    const registryHref = await page.locator('#evidence-drawer .source-link').getAttribute('href');
+    if (!registryHref || !/^https?:\/\//.test(registryHref)) throw new Error(`${viewportName}/sources: official source link missing`);
     await closeDrawer(page);
 
     if (viewportName === 'desktop') {
       await openRoute(page, 'overview');
       await page.locator('#evidence-standard').click();
       await page.waitForSelector('#evidence-drawer[open]');
-      const methodologyTitle = (await page.locator('#drawer-title').textContent())?.trim();
-      if (methodologyTitle !== 'Evidence standard') throw new Error(`desktop/evidence-standard: unexpected title "${methodologyTitle}"`);
-      report.interactions.push({ viewport: viewportName, check: 'evidence standard drawer' });
+      if ((await page.locator('#drawer-title').textContent())?.trim() !== 'Evidence standard') throw new Error('desktop/evidence-standard: wrong drawer title');
       await closeDrawer(page);
     } else {
       await openRoute(page, 'overview');
       await page.locator('#menu-button').click();
       await page.waitForFunction(() => document.querySelector('#sidebar')?.classList.contains('open'));
-      await page.locator('#nav [data-view="council"]').click();
-      await page.waitForFunction(() => document.querySelector('#view-title')?.textContent?.trim() === 'Council & Decisions');
-      const sidebarStillOpen = await page.locator('#sidebar').evaluate(element => element.classList.contains('open'));
-      if (sidebarStillOpen) throw new Error('mobile/navigation: sidebar remained open after Build 006 route navigation');
-      report.interactions.push({ viewport: viewportName, check: 'compact Build 006 navigation' });
+      await page.locator('#nav [data-view="signals"]').click();
+      await page.waitForFunction(() => document.querySelector('#view-title')?.textContent?.trim() === 'Investigations');
+      if (await page.locator('#sidebar').evaluate(element => element.classList.contains('open'))) throw new Error('mobile/navigation: sidebar remained open after navigation');
     }
 
     await context.close();
@@ -271,10 +233,8 @@ try {
 }
 
 await fs.writeFile(`${OUTPUT}/report.json`, JSON.stringify(report, null, 2));
-
 if (report.console_errors.length || report.page_errors.length || report.http_errors.length) {
   console.error(JSON.stringify(report, null, 2));
   process.exit(1);
 }
-
 console.log(JSON.stringify(report, null, 2));

@@ -1,0 +1,45 @@
+/* Build 008 investigation presentation layer. Loaded after the approved light theme. */
+.b8-investigation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.b8-compact-list{display:grid;gap:8px}
+.b8-investigation-card{appearance:none;width:100%;min-width:0;padding:13px;border:1px solid #d7e1e8;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfdfe);color:var(--text);text-align:left;cursor:pointer;box-shadow:0 1px 2px rgba(24,44,61,.025)}
+.b8-investigation-card:hover{border-color:#84a6bc;background:#fafdfe}
+.b8-investigation-card:focus-visible{outline:3px solid rgba(8,123,150,.24);outline-offset:2px}
+.b8-investigation-card.compact{padding:10px 11px}
+.b8-investigation-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.b8-investigation-top>span{display:flex;gap:5px;flex-wrap:wrap}
+.b8-investigation-top>strong{min-width:34px;height:28px;padding:0 7px;display:grid;place-items:center;border:1px solid #c9d7e0;border-radius:8px;background:#f3f7f9;color:#34566d;font-size:12px;font-variant-numeric:tabular-nums}
+.b8-investigation-card h3{margin:9px 0 0;font-size:12px;line-height:1.35;letter-spacing:-.01em}
+.b8-investigation-card p{margin:5px 0 0;color:var(--muted);font-size:10.5px;line-height:1.5}
+.b8-materiality{margin-top:8px;padding-top:7px;border-top:1px solid var(--line-soft);font-size:10px;font-weight:760;color:#294b62}
+.b8-investigation-card small{display:block;margin-top:7px;color:var(--faint);font-size:9.5px;line-height:1.4}
+.b8-score-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:9px}
+.b8-score-strip span{padding:6px;border:1px solid #e0e7ec;border-radius:7px;background:#f8fafb;color:#38566b;font-size:9px;text-align:center;font-variant-numeric:tabular-nums}
+.b8-score-strip b{display:block;margin-bottom:2px;color:#718596;font-size:7.5px;letter-spacing:.04em;text-transform:uppercase}
+.b8-inline-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.b8-inline-metrics>div{padding:10px 11px;border:1px solid #dce5eb;border-radius:10px;background:#f8fbfc}
+.b8-inline-metrics strong,.b8-inline-metrics span{display:block}
+.b8-inline-metrics strong{font-size:14px;line-height:1.25;color:#1d394c}
+.b8-inline-metrics span{margin-top:3px;color:var(--faint);font-size:9px;line-height:1.35}
+.b8-quality-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.b8-vendor-candidates{display:grid;gap:8px}
+.b8-vendor-candidates button{appearance:none;width:100%;padding:10px 11px;border:1px solid #d7e1e8;border-radius:10px;background:#fff;color:var(--text);text-align:left;cursor:pointer}
+.b8-vendor-candidates button:hover{border-color:#84a6bc;background:#fbfdfe}
+.b8-vendor-candidates strong,.b8-vendor-candidates span,.b8-vendor-candidates small{display:block}
+.b8-vendor-candidates strong{font-size:10.5px;line-height:1.4}
+.b8-vendor-candidates span{margin-top:4px;color:var(--muted);font-size:9.5px;line-height:1.4}
+.b8-vendor-candidates small{margin-top:4px;color:var(--faint);font-size:8.5px;line-height:1.4}
+.b8-overview .coverage-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.b8-budget-pressure .panel-body,.b8-spending-movement .panel-body{padding-top:2px}
+.b8-procurement-analysis{display:block}
+
+@media(max-width:1180px){
+  .b8-investigation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .b8-overview .coverage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .b8-investigation-grid,.b8-quality-grid{grid-template-columns:1fr}
+  .b8-inline-metrics{grid-template-columns:1fr}
+  .b8-overview .coverage-grid{grid-template-columns:1fr}
+  .b8-score-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .b8-investigation-card{padding:12px}
+}
