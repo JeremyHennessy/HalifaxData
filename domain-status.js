@@ -1,5 +1,5 @@
 // Explicit generated-domain lifecycle states for HalifaxData.
-// Loaded after app.js so it can replace generic lifecycle rendering without
+// Loaded after app.js so generated-artifact lifecycle is visible without
 // changing the established light dashboard layout or analytical semantics.
 
 var HALIFAX_DOMAIN_LIFECYCLE = {};
@@ -54,19 +54,35 @@ generatedStatus = function generatedStatusWithLifecycle(key) {
   return resolvedGeneratedLifecycle(key);
 };
 
-// Signals has a useful calculated compensation review queue even when the
-// separate generated signals artifact is not release-approved. Preserve that
-// queue while making the generated layer's lifecycle state explicit.
-if (typeof renderSignals === 'function') {
-  const renderSignalsBase = renderSignals;
-  renderSignals = function renderSignalsWithLifecycle() {
-    const html = renderSignalsBase();
-    const lifecycle = resolvedGeneratedLifecycle('signals');
-    if (lifecycle.status === 'ready') return html;
-    const lifecycleNotice = `<div class="notice"><strong>Generated signals: ${escapeHtml(lifecycle.text)}</strong><span>${escapeHtml(lifecycle.detail)}</span></div>`;
-    return html.replace('<div class="page-stack">', `<div class="page-stack">${lifecycleNotice}`);
-  };
+function applySignalsLifecycleNotice() {
+  if (location.hash.slice(1) !== 'signals') return;
+  const pageStack = document.querySelector('#content .page-stack');
+  if (!pageStack || pageStack.querySelector('[data-generated-signals-lifecycle]')) return;
+  const lifecycle = resolvedGeneratedLifecycle('signals');
+  if (lifecycle.status === 'ready') return;
+  const notice = document.createElement('div');
+  notice.className = 'notice';
+  notice.dataset.generatedSignalsLifecycle = lifecycle.status;
+  const strong = document.createElement('strong');
+  strong.textContent = `Generated signals: ${lifecycle.text}`;
+  const span = document.createElement('span');
+  span.textContent = lifecycle.detail;
+  notice.append(strong, span);
+  pageStack.prepend(notice);
 }
+
+// The Signals renderer is owned by app.js and may be invoked through its own
+// function binding. Observe the rendered content instead of relying on a
+// cross-script renderer override; this preserves the existing calculated queue
+// and annotates only the lifecycle of the separate generated-signals artifact.
+const lifecycleContentRoot = document.querySelector('#content');
+if (lifecycleContentRoot) {
+  new MutationObserver(() => applySignalsLifecycleNotice()).observe(lifecycleContentRoot, {
+    childList: true,
+    subtree: true
+  });
+}
+window.addEventListener('hashchange', () => queueMicrotask(applySignalsLifecycleNotice));
 
 fetch('./data/generated/domain_ingestion_status.json', { cache: 'no-store' })
   .then(response => response.ok ? response.json() : null)
@@ -78,8 +94,10 @@ fetch('./data/generated/domain_ingestion_status.json', { cache: 'no-store' })
         .map(record => [String(record.domain), record])
     );
     if (typeof state !== 'undefined' && state.compensation && typeof render === 'function') render();
+    queueMicrotask(applySignalsLifecycleNotice);
   })
   .catch(() => {
     // The runtime artifact fetch remains authoritative. A missing lifecycle
     // manifest must never make an otherwise valid dataset unavailable.
+    queueMicrotask(applySignalsLifecycleNotice);
   });
