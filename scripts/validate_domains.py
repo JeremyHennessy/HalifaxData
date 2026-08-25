@@ -94,12 +94,52 @@ for i, row in enumerate(council_rows):
 if council_rows and not any(row.get("agenda_html_url") or row.get("agenda_pdf_url") for row in council_rows):
     errors.append("council.json contains no agenda document links")
 
+council_docs, council_doc_rows = rows("council_documents.json")
+if len(council_doc_rows) < 100:
+    errors.append(f"council_documents.json unexpectedly small: {len(council_doc_rows)} meeting-document edges")
+seen_edges = set()
+finance_tagged = 0
+for i, row in enumerate(council_doc_rows):
+    mid = row.get("meeting_id")
+    did = str(row.get("document_id") or "")
+    title = str(row.get("title") or "").strip()
+    url = str(row.get("url") or "")
+    edge = (mid, did)
+    if not mid or mid not in seen_meetings:
+        errors.append(f"council document row {i}: unknown/missing meeting_id {mid}")
+    if not did:
+        errors.append(f"council document row {i}: missing document_id")
+    elif edge in seen_edges:
+        errors.append(f"council document row {i}: duplicate meeting/document edge {edge}")
+    seen_edges.add(edge)
+    if not title:
+        errors.append(f"council document row {i}: missing title")
+    if not url.startswith("https://pub-halifax.escribemeetings.com/") or "DocumentId=" not in url:
+        errors.append(f"council document row {i}: invalid eSCRIBE document URL")
+    elif did and f"DocumentId={did}" not in url:
+        errors.append(f"council document row {i}: document_id does not match URL ({did})")
+    if row.get("source_id") != "hrm-escribe":
+        errors.append(f"council document row {i}: unexpected source_id {row.get('source_id')}")
+    if row.get("finance_relevant"):
+        finance_tagged += 1
+if council_doc_rows and finance_tagged < 20:
+    errors.append(f"council_documents.json has too few finance-tagged attachment edges: {finance_tagged}")
+
+# These are discovery-health warnings rather than hard gates because attachment
+# titles can legitimately change while the underlying meeting/document graph is
+# still valid.
+finance_titles = [str(row.get("title") or "").lower() for row in council_doc_rows if row.get("finance_relevant")]
+if council_doc_rows and not any("2026" in title and "budget" in title for title in finance_titles):
+    warnings.append("Council attachment graph did not surface a finance-tagged 2026 budget title; inspect agenda-title changes")
+if council_doc_rows and not any("award" in title and "contract" in title for title in finance_titles):
+    warnings.append("Council attachment graph did not surface an Award of Contracts title; inspect agenda-title changes")
+
 status, status_rows = rows("domain_ingestion_status.json")
 for row in status_rows:
     if row.get("status") == "error":
         warnings.append(f"domain parser failed but was isolated: {row.get('domain')} -> {row.get('error')}")
 
-print(f"registry={len(source_ids)} acquisition={len(acq_rows)} procurement={len(proc_rows)} capital={len(capital_rows)} budget={len(budget_rows)} financials={len(fin_rows)} council={len(council_rows)}")
+print(f"registry={len(source_ids)} acquisition={len(acq_rows)} procurement={len(proc_rows)} capital={len(capital_rows)} budget={len(budget_rows)} financials={len(fin_rows)} council={len(council_rows)} council_documents={len(council_doc_rows)} finance_tagged={finance_tagged}")
 if warnings:
     print("DOMAIN VALIDATION WARNINGS", file=sys.stderr)
     for warning in warnings:
