@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Pull Nova Scotia municipal machine datasets with source-specific scope rules.
 
-This collector deliberately separates three concepts that the first pass mixed:
-1. HRM-specific rows (for datasets that identify a municipality/region),
-2. regional-type comparator rows (useful context but not HRM facts), and
-3. province-wide municipal-program totals (context, not an HRM allocation).
+The collector separates:
+1. HRM-specific rows from datasets that explicitly identify a municipality/region,
+2. municipality-type comparator rows, and
+3. province-wide program context that is not attributed to HRM.
 
-A generic substring search is not sufficient because several Nova Scotia datasets
-identify Halifax as ``HRM`` while others contain only aggregate region types.
+Derived Socrata chart IDs are intentionally not used as row APIs. The registry
+points the affected source IDs at verified base datasets instead.
 """
 from __future__ import annotations
 
@@ -24,7 +24,9 @@ UA = 'HalifaxData/0.3 (+https://github.com/JeremyHennessy/HalifaxData)'
 
 DATASETS = {
     'ns-municipal-operating-expenses': 'benchmark_operating_expenses',
+    'ns-municipal-operating-revenues': 'benchmark_operating_revenues',
     'ns-municipal-operating-totals': 'benchmark_operating_totals',
+    'ns-municipal-consolidated': 'benchmark_consolidated_revenues_expenses',
     'ns-municipal-fci': 'financial_condition_indicators',
     'ns-uniform-assessment-regional': 'uniform_assessment',
     'ns-municipal-funding-programs': 'municipal_funding_programs',
@@ -67,11 +69,7 @@ def nonempty_rows(raw):
 
 
 def classify(source_id, raw):
-    """Return (selected_rows, selection_mode, note).
-
-    Only rows with an explicit municipality/region identity become HRM facts.
-    Aggregate datasets are retained as comparators with an explicit scope label.
-    """
+    """Return (selected_rows, selection_mode, note)."""
     raw = nonempty_rows(raw)
 
     if source_id in {
@@ -79,22 +77,19 @@ def classify(source_id, raw):
         'ns-municipal-capacity-grants',
         'ns-uniform-assessment-regional',
         'ns-municipal-operating-totals',
+        'ns-municipal-consolidated',
     }:
         selected = [row for row in raw if hrm_identity(row)]
         return selected, 'explicit_hrm_identity', (
             'Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality.'
         )
 
-    if source_id == 'ns-municipal-operating-expenses':
-        # This 10-year summary is organized by municipality type rather than an individual
-        # municipality. Keep it only as an external comparator; never label it HRM spending.
+    if source_id in {'ns-municipal-operating-expenses', 'ns-municipal-operating-revenues'}:
         return raw, 'regional_type_comparator', (
-            'Dataset is aggregate municipal-type context, not HRM-specific expenditure facts.'
+            'Dataset is municipality-type aggregate context, not HRM-specific operating facts.'
         )
 
     if source_id == 'ns-municipal-funding-programs':
-        # The source reports program-wide provincial municipal funding totals and does not
-        # identify a recipient municipality in the current schema.
         return raw, 'province_program_context', (
             'Program totals are contextual and must not be interpreted as funding received by HRM.'
         )
