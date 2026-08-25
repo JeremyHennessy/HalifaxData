@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "generated_at": "2026-08-25T14:45:38+00:00",
+    "principle": "Independent domains; one parser failure does not block successful artifacts."
+  },
+  "records": [
+    {
+      "domain": "procurement",
+      "status": "ok"
+    },
+    {
+      "domain": "capital",
+      "status": "ok"
+    },
+    {
+      "domain": "budget",
+      "status": "ok"
+    },
+    {
+      "domain": "financials",
+      "status": "ok"
+    },
+    {
+      "domain": "council",
+      "status": "ok"
+    }
+  ]
+}
