@@ -44,12 +44,79 @@ Longitudinal history joins are scoped by **reporting entity + `person_key`**. Th
 
 A missing person/year is missing threshold-disclosure evidence, not zero compensation and not proof of departure from employment.
 
+### `data/generated/budget.json`
+
+Build 004 publishes two intentionally separate record types in one source-provenance artifact. `metadata.dataset_status` is `automated_structured_extraction`.
+
+#### `service_area_budget`
+
+One row per published 2025/26 Budget & Business Plan service-area line, including each business-unit `Net Total`.
+
+Required fields:
+
+- `record_type = service_area_budget`
+- `fiscal_year = 2025/26`
+- `fiscal_year_end = 2026`
+- `business_unit`
+- `service_area` — canonical display label
+- `source_service_area_label` — raw label extracted from the current source table
+- `prior_actual` / `prior_actual_period = 2023/24`
+- `prior_budget` / `prior_budget_period = 2024/25`
+- `projection` / `projection_period = 2024/25`
+- `current_budget` / `current_budget_period = 2025/26`
+- `source_reported_budget_change`
+- `source_reported_budget_change_pct`
+- `derived_budget_change`
+- `derived_budget_change_pct` when prior budget is non-zero
+- `is_total`
+- `source_id = hrm-budget-2025-26`
+- `pdf_page`
+
+Where the source's published change arithmetic does not reconcile to the same row's published endpoint budgets, the row may also include:
+
+- `validation_flags[]`
+- `source_budget_change_delta`
+- `source_budget_change_pct_delta`
+
+Supported flags are `reported_budget_change_mismatch` and `reported_budget_change_pct_mismatch`. These describe a source-data arithmetic inconsistency, not a finding of wrongdoing. The UI must show both source-reported and independently derived values; it must not replace the source value.
+
+A canonical label may differ from `source_service_area_label` only under the allowlisted evidence-backed normalization contract. Such rows also require:
+
+- `label_normalization_basis`
+- `label_normalization_evidence`
+
+Build 004 currently has exactly three such rows. Raw source labels must never be discarded.
+
+#### `audited_psas`
+
+Rows from the March 31, 2025 Consolidated Statement of Operations and Accumulated Surplus. The source publishes amounts in thousands of dollars; HalifaxData converts them to CAD while retaining `source_units = thousands_of_cad`.
+
+Required fields:
+
+- `record_type = audited_psas`
+- `fiscal_year = 2024/25`
+- `fiscal_year_end = 2025`
+- `statement_section` — `revenue`, `expense`, or `surplus`
+- `category`
+- `budget`
+- `actual`
+- `prior_actual`
+- `prior_actual_fiscal_year_end = 2024`
+- `variance = actual - budget`
+- `source_id = hrm-financials-2025`
+- `source_units = thousands_of_cad`
+- `pdf_page = 8`
+- `printed_page = 4`
+
+### Accounting-basis boundary
+
+`service_area_budget` and `audited_psas` are **not join-compatible dimensions by default**. The budget book is organized by HRM business unit/service area; the audited statement uses PSAS presentation categories. Do not add `business_unit` or `service_area` to an audited row, and do not infer a crosswalk from similar wording. A future reconciliation requires explicit source evidence and a documented transformation.
+
 ## Optional generated domain files
 
 The dashboard automatically activates richer views when these files appear:
 
 ```text
-data/generated/budget.json
 data/generated/spending.json
 data/generated/procurement.json
 data/generated/capital.json
@@ -58,7 +125,7 @@ data/generated/council.json
 data/generated/signals.json
 ```
 
-Until a file exists, the application shows registered source coverage and an explicit “awaiting generated artifact” state.
+`data/generated/budget.json` is now a required generated artifact for the Build 004 product state. Until another optional file exists, the application shows registered source coverage and an explicit “awaiting generated artifact” state.
 
 ## Canonical dimensions
 
@@ -90,7 +157,11 @@ Stable identity requires `entity` plus `person_key` unless a stronger explicit c
 
 ### Budget fact
 
-Recommended fields: fiscal year, fund, business unit, service area, account/category, prior actual, prior budget, projection/forecast, current/final budget, variance amount, variance percentage and provenance.
+Build 004's concrete budget fact is the `service_area_budget` contract above. Future budget facts may add fund/account detail but must retain source-defined organizational history and must not overwrite the source-published change fields with derived arithmetic.
+
+### Audited actual fact
+
+Build 004's concrete audited operating fact is the `audited_psas` contract above. A future detailed reconciliation layer should reference this fact rather than mutating it into a departmental budget row.
 
 ### Compensation fact
 
@@ -127,6 +198,8 @@ Production facts should retain enough information to reproduce the record:
 - `parser_version`
 - `transform_notes`
 - `validation_status`
+
+Current Build 004 budget rows additionally retain physical PDF page locators and raw source labels. Source-file SHA-256 hashes are stored in artifact metadata.
 
 ## Signal contract
 
