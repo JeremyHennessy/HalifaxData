@@ -4,7 +4,8 @@
 Historical budget PDFs vary considerably. This collector fails closed on source
 errors, rejects merged/malformed numeric cells through the strict table helper,
 and removes only exact same-page semantic duplicates caused by PDF table
-extraction overlap.
+extraction overlap. The current 2025/26 budget book is intentionally excluded:
+it is already normalized by the dedicated, verified Build 004 budget parser.
 """
 from __future__ import annotations
 
@@ -23,7 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data/sources.json"
 OUT = ROOT / "data/generated"
 UA = "HalifaxData/0.5 (+https://github.com/JeremyHennessy/HalifaxData)"
-PARSER_VERSION = "build005-budget-history-v2"
+PARSER_VERSION = "build005-budget-history-v3"
+EXCLUDED_SOURCE_IDS = {"hrm-budget-2025-26"}
 
 
 def now():
@@ -59,7 +61,9 @@ def main():
     sources = [
         source
         for source in registry["sources"]
-        if source["id"].startswith("hrm-budget-") and str(source.get("status", "")).startswith("ready")
+        if source["id"].startswith("hrm-budget-")
+        and source["id"] not in EXCLUDED_SOURCE_IDS
+        and str(source.get("status", "")).startswith("ready")
     ]
     session = requests.Session()
     session.headers["User-Agent"] = UA
@@ -164,13 +168,15 @@ def main():
             "parser_version": PARSER_VERSION,
             "records": len(records),
             "source_count": len(sources),
+            "excluded_source_ids": sorted(EXCLUDED_SOURCE_IDS),
             "source_status": source_status,
             "rejected_invalid_numeric_rows": total_rejected_invalid_numeric_rows,
             "duplicates_removed": total_duplicates_removed,
             "note": (
                 "Historical budget extraction includes only tables with explicit actual/budget headers and "
                 "single-value numeric cells. Proposed/pre-COVID source states are retained and never silently "
-                "promoted to final approved budgets. Current Build 004 budget.json remains a separate authoritative contract."
+                "promoted to final approved budgets. The current 2025/26 book is intentionally excluded because "
+                "Build 004 budget.json is its separate authoritative normalized contract."
             ),
         },
         "records": records,
@@ -181,13 +187,14 @@ def main():
             "parser_version": PARSER_VERSION,
             "tables": len(tables),
             "source_count": len(sources),
+            "excluded_source_ids": sorted(EXCLUDED_SOURCE_IDS),
         },
         "records": tables,
     }
     (OUT / "budget_history.json").write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     (OUT / "budget_document_tables.json").write_text(json.dumps(index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(
-        f"budget history: {len(records)} conservative rows from {len(sources)} registered budget sources; "
+        f"budget history: {len(records)} conservative rows from {len(sources)} historical budget sources; "
         f"rejected_invalid_numeric_rows={total_rejected_invalid_numeric_rows}; "
         f"duplicates_removed={total_duplicates_removed}"
     )
