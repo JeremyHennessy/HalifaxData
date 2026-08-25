@@ -22,16 +22,18 @@ jobs:
         run: python scripts/acquire_sources.py
       - name: Rebuild municipal benchmarks and funding context
         run: python scripts/ingest_municipal_benchmarks.py
+      - name: Rebuild eSCRIBE Council and committee calendar
+        run: python scripts/ingest_council.py
       - name: Validate multi-domain artifacts
         run: python scripts/validate_domains.py
       - name: Commit synchronized source/data changes
         run: |
-          if git diff --quiet -- data/sources.json data/generated/source_acquisition.json data/generated/benchmarks.json data/generated/external_funding.json; then
+          if git diff --quiet -- data/sources.json data/generated/source_acquisition.json data/generated/benchmarks.json data/generated/external_funding.json data/generated/council.json; then
             echo 'No synchronized source/data changes'
             exit 0
           fi
           git config user.name 'halifaxdata-bot'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/sources.json data/generated/source_acquisition.json data/generated/benchmarks.json data/generated/external_funding.json
-          git commit -m 'data: synchronize municipal base datasets and acquisition manifest'
+          git add data/sources.json data/generated/source_acquisition.json data/generated/benchmarks.json data/generated/external_funding.json data/generated/council.json
+          git commit -m 'data: synchronize public sources and Council calendar'
           git push
