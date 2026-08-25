@@ -1,5 +1,6 @@
 name: Build 004 UI proof
 
+# Temporary branch-only artifact proof; remove before PR.
 on:
   push:
     branches: ['agent/build-004-budget-actuals-final']
