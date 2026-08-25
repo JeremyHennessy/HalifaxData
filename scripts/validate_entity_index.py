@@ -68,6 +68,7 @@ def main() -> None:
     person_ids = {row["person_name_cluster_id"] for row in people if row.get("person_name_cluster_id")}
     vendor_ids = {row["vendor_name_cluster_id"] for row in vendors if row.get("vendor_name_cluster_id")}
     project_ids = {row["capital_project_id"] for row in projects if row.get("capital_project_id")}
+    people_by_id = {row["person_name_cluster_id"]: row for row in people if row.get("person_name_cluster_id")}
 
     for row in business_units:
         if row.get("anchor_dataset") != "budget" or row.get("identity_method") != "budget_book_anchor":
@@ -83,10 +84,12 @@ def main() -> None:
             fail(f"organization {row.get('organization_id')}: no approved aliases")
 
     for row in people:
-        if row.get("identity_status") != "provisional_name_key_only":
-            fail(f"person cluster {row.get('person_name_cluster_id')}: identity must remain provisional_name_key_only")
+        if row.get("identity_status") != "entity_scoped_person_key":
+            fail(f"person cluster {row.get('person_name_cluster_id')}: identity must be entity_scoped_person_key")
         if not row.get("person_key"):
             fail(f"person cluster {row.get('person_name_cluster_id')}: missing person_key")
+        if row.get("organization_id") not in org_ids:
+            fail(f"person cluster {row.get('person_name_cluster_id')}: missing or unknown reporting organization")
 
     for row in vendors:
         if row.get("identity_status") != "provisional_name_key_only":
@@ -182,7 +185,19 @@ def main() -> None:
         ref = record_ref("compensation", row, i)
         link = link_by_ref.get(("compensation", ref))
         if not link or not link.get("person_name_cluster_id"):
-            fail(f"compensation row {i}: person_key is present but provisional person-name cluster link is missing")
+            fail(f"compensation row {i}: person_key is present but entity-scoped person cluster link is missing")
+            continue
+        if not link.get("organization_id"):
+            fail(f"compensation row {i}: entity-scoped person cluster has no reporting organization link")
+            continue
+        cluster = people_by_id.get(link["person_name_cluster_id"])
+        if cluster and cluster.get("organization_id") != link.get("organization_id"):
+            fail(
+                f"compensation row {i}: person cluster reporting organization {cluster.get('organization_id')!r} "
+                f"!= record organization {link.get('organization_id')!r}"
+            )
+        if cluster and cluster.get("person_key") != str(row.get("person_key") or "").strip():
+            fail(f"compensation row {i}: person cluster person_key does not match source row")
 
     procurement_rows = (inputs.get("procurement") or {}).get("records") or []
     for i, row in enumerate(procurement_rows):
@@ -230,7 +245,7 @@ def main() -> None:
     print(
         "validated normalized entity index: "
         f"{len(links)} links; {len(business_units)} business units; "
-        f"{len(people)} provisional person-name clusters; "
+        f"{len(people)} entity-scoped person-key clusters; "
         f"{len(vendors)} provisional vendor-name clusters; "
         f"{len(projects)} capital project clusters; "
         f"{len(unmatched)} unmatched business-unit labels"
