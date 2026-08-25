@@ -1,0 +1,48 @@
+name: UI Smoke
+
+on:
+  push:
+    branches: ['agent/design-analysis-ui-verification-20260825']
+  pull_request:
+    paths:
+      - 'index.html'
+      - '*.css'
+      - '*.js'
+      - 'data/**'
+      - 'tools/ui-smoke.mjs'
+      - '.github/workflows/ui-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser test dependency
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve static application
+        run: |
+          python -m http.server 8000 --bind 127.0.0.1 > /tmp/halifaxdata-http.log 2>&1 &
+          echo $! > /tmp/halifaxdata-http.pid
+          sleep 2
+          curl --fail --silent http://127.0.0.1:8000/ > /dev/null
+      - name: Capture and validate dashboard views
+        run: node tools/ui-smoke.mjs
+      - name: Upload UI evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-smoke-${{ github.sha }}
+          path: artifacts/ui-smoke
+          if-no-files-found: warn
+          retention-days: 14
