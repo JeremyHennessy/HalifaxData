@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 
-const BASE_URL = process.env.HALIFAXDATA_URL || 'http://127.0.0.1:8000/';
+const BASE_URL = (process.env.HALIFAXDATA_URL || 'http://127.0.0.1:8000/').replace(/\/?$/, '/');
 const OUTPUT = 'artifacts/ui-smoke';
 const routes = [
   ['overview', 'Command Center'],
@@ -17,14 +17,14 @@ const viewports = [
   ['desktop', { width: 1440, height: 1100 }],
   ['mobile', { width: 390, height: 844 }]
 ];
-const OPTIONAL_404_PATHS = new Set([
+const OPTIONAL_404_SUFFIXES = [
   '/data/generated/spending.json',
   '/data/generated/procurement.json',
   '/data/generated/capital.json',
   '/data/generated/financials.json',
   '/data/generated/council.json',
   '/data/generated/signals.json'
-]);
+];
 
 await fs.rm(OUTPUT, { recursive: true, force: true });
 await fs.mkdir(OUTPUT, { recursive: true });
@@ -70,10 +70,9 @@ try {
     page.on('console', message => {
       if (message.type() !== 'error') return;
       const text = message.text();
-      // Chromium emits a generic console error for every HTTP 404. Exact URLs are
-      // classified separately in the response handler below so unexpected 404s
-      // still fail the smoke test.
-      if (text === 'Failed to load resource: the server responded with a status of 404 (File not found)') return;
+      // Chromium also emits a generic console error for HTTP 404s. Exact response
+      // URLs are classified below, so ignore only that generic duplicate message.
+      if (text.startsWith('Failed to load resource: the server responded with a status of 404')) return;
       report.console_errors.push({ viewport: viewportName, text });
     });
     page.on('pageerror', error => report.page_errors.push({ viewport: viewportName, text: error.message }));
@@ -81,7 +80,8 @@ try {
       if (response.status() < 400) return;
       const url = new URL(response.url());
       const record = { viewport: viewportName, status: response.status(), url: response.url() };
-      if (response.status() === 404 && OPTIONAL_404_PATHS.has(url.pathname)) {
+      const expectedOptional404 = response.status() === 404 && OPTIONAL_404_SUFFIXES.some(suffix => url.pathname.endsWith(suffix));
+      if (expectedOptional404) {
         report.expected_optional_404s.push(record);
       } else {
         report.http_errors.push(record);
