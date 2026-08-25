@@ -3,40 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="HalifaxData — public-finance intelligence for Halifax Regional Municipality." />
+  <meta name="description" content="HalifaxData — evidence-first public-finance intelligence for Halifax Regional Municipality." />
+  <meta name="theme-color" content="#071421" />
   <title>HalifaxData</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">H</div>
-        <div><strong>HalifaxData</strong><span>Public finance intelligence</span></div>
-      </div>
-      <nav id="nav" aria-label="Primary">
-        <button class="nav-item active" data-view="overview">Overview</button>
-        <button class="nav-item" data-view="compensation">Compensation</button>
-        <button class="nav-item" data-view="flags">Review signals</button>
-        <button class="nav-item" data-view="sources">Source registry</button>
-      </nav>
-      <div class="sidebar-note">
-        <span class="status-dot"></span>
-        <div><strong>Evidence first</strong><small>Signals require source-level verification before conclusions.</small></div>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="HalifaxData home">
+        <span class="brand-mark">H</span>
+        <span><strong>HalifaxData</strong><small>Public finance intelligence</small></span>
+      </a>
+      <nav id="nav" aria-label="Primary navigation"></nav>
+      <div class="sidebar-status">
+        <div class="status-line"><span class="status-dot"></span><strong>Evidence first</strong></div>
+        <small id="snapshot-label">Loading source coverage…</small>
       </div>
     </aside>
 
     <main>
       <header class="topbar">
-        <div>
-          <p class="eyebrow">HALIFAX REGIONAL MUNICIPALITY</p>
-          <h1 id="view-title">Financial intelligence overview</h1>
+        <div class="title-group">
+          <button type="button" class="icon-button menu-button" id="menu-button" aria-label="Open navigation">☰</button>
+          <div>
+            <p class="eyebrow" id="view-eyebrow">HALIFAX REGIONAL MUNICIPALITY</p>
+            <h1 id="view-title">Command Center</h1>
+          </div>
         </div>
-        <div class="topbar-meta"><span id="coverage-label">Loading…</span><span class="pill">Build 001</span></div>
+        <div class="topbar-actions">
+          <label class="global-search">
+            <span aria-hidden="true">⌕</span>
+            <input id="global-search" type="search" placeholder="Search people, sources, signals…" autocomplete="off" />
+            <kbd>↵</kbd>
+          </label>
+          <button type="button" class="button" id="evidence-standard">Evidence standard</button>
+        </div>
       </header>
-      <section id="content" class="content" aria-live="polite"></section>
+
+      <section class="filterbar" aria-label="Global filters">
+        <label><span>Fiscal year</span><select id="global-year"></select></label>
+        <label><span>Business unit</span><select id="global-unit"></select></label>
+        <button type="button" class="button subtle" id="reset-filters">Reset</button>
+        <div class="mode-pill" id="data-mode">Partial verified data</div>
+      </section>
+
+      <section id="content" class="content" aria-live="polite">
+        <div class="loading-card"><div class="spinner" aria-hidden="true"></div><div><strong>Loading HalifaxData</strong><span>Reading checked-in evidence and source coverage.</span></div></div>
+      </section>
     </main>
   </div>
+
+  <dialog id="evidence-drawer" class="evidence-drawer">
+    <header>
+      <div><p class="eyebrow" id="drawer-eyebrow">EVIDENCE</p><h2 id="drawer-title">Evidence</h2></div>
+      <button type="button" class="icon-button" id="drawer-close" aria-label="Close evidence drawer">×</button>
+    </header>
+    <div id="drawer-body" class="drawer-body"></div>
+  </dialog>
+
   <script src="./app.js" defer></script>
 </body>
 </html>
