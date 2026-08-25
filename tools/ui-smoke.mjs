@@ -17,6 +17,14 @@ const viewports = [
   ['desktop', { width: 1440, height: 1100 }],
   ['mobile', { width: 390, height: 844 }]
 ];
+const OPTIONAL_404_PATHS = new Set([
+  '/data/generated/spending.json',
+  '/data/generated/procurement.json',
+  '/data/generated/capital.json',
+  '/data/generated/financials.json',
+  '/data/generated/council.json',
+  '/data/generated/signals.json'
+]);
 
 await fs.rm(OUTPUT, { recursive: true, force: true });
 await fs.mkdir(OUTPUT, { recursive: true });
@@ -27,6 +35,8 @@ const report = {
   base_url: BASE_URL,
   console_errors: [],
   page_errors: [],
+  http_errors: [],
+  expected_optional_404s: [],
   views: []
 };
 
@@ -36,9 +46,25 @@ try {
     const page = await context.newPage();
 
     page.on('console', message => {
-      if (message.type() === 'error') report.console_errors.push({ viewport: viewportName, text: message.text() });
+      if (message.type() !== 'error') return;
+      const text = message.text();
+      // Chromium emits a generic console error for every HTTP 404. Exact URLs are
+      // classified separately in the response handler below so unexpected 404s
+      // still fail the smoke test.
+      if (text === 'Failed to load resource: the server responded with a status of 404 (File not found)') return;
+      report.console_errors.push({ viewport: viewportName, text });
     });
     page.on('pageerror', error => report.page_errors.push({ viewport: viewportName, text: error.message }));
+    page.on('response', response => {
+      if (response.status() < 400) return;
+      const url = new URL(response.url());
+      const record = { viewport: viewportName, status: response.status(), url: response.url() };
+      if (response.status() === 404 && OPTIONAL_404_PATHS.has(url.pathname)) {
+        report.expected_optional_404s.push(record);
+      } else {
+        report.http_errors.push(record);
+      }
+    });
 
     for (const [route, expectedTitle] of routes) {
       await page.goto(`${BASE_URL}#${route}`, { waitUntil: 'networkidle' });
@@ -93,7 +119,7 @@ try {
 
 await fs.writeFile(`${OUTPUT}/report.json`, JSON.stringify(report, null, 2));
 
-if (report.console_errors.length || report.page_errors.length) {
+if (report.console_errors.length || report.page_errors.length || report.http_errors.length) {
   console.error(JSON.stringify(report, null, 2));
   process.exit(1);
 }
