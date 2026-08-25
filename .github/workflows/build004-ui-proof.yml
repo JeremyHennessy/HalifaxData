@@ -1,0 +1,32 @@
+name: Build 004 UI proof
+
+on:
+  push:
+    branches: ['agent/build-004-budget-actuals-final']
+    paths:
+      - '.github/workflows/build004-ui-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build004-ui-proof
+          path: |
+            index.html
+            app.js
+            compensation-ui.js
+            compensation-ui.css
+            budget-ui.js
+            budget-ui.css
+            styles.css
+            data/sources.json
+            data/generated/compensation.json
+            data/generated/budget.json
+          retention-days: 1
