@@ -1,69 +1,64 @@
 #!/usr/bin/env python3
-"""Temporary Build 003 endpoint diagnostic.
+"""Temporary Build 003 diagnostic for the eSCRIBE meeting calendar contract.
 
-Inspects Socrata derived-view lineage/catalog metadata and eSCRIBE meeting-calendar
-HTML so broken derived views can be replaced and Council crawling can be expanded.
-No production artifacts are written.
+The static calendar page exposes only one meeting link even though it contains the
+full committee selector. This script finds the dynamic GetCalendarMeetings caller,
+prints bounded context, and identifies its request URL/payload parameters without
+writing production data.
 """
 from __future__ import annotations
 
-import json
 import re
 from urllib.parse import urljoin
 
 import requests
 
+BASE='https://pub-halifax.escribemeetings.com/'
+URL=urljoin(BASE,'MeetingsCalendarView.aspx?Expanded=Halifax%20Regional%20Council')
 UA='HalifaxData/0.3 diagnostic (+https://github.com/JeremyHennessy/HalifaxData)'
 s=requests.Session(); s.headers['User-Agent']=UA
 
-for view_id in ['thwb-cfp5','k8qq-y6un','kuu2-92bp']:
-    url=f'https://data.novascotia.ca/api/views/{view_id}'
-    try:
-        r=s.get(url,timeout=60); print(f'=== VIEW {view_id} {r.status_code} {r.headers.get("content-type")} bytes={len(r.content)} ===')
-        data=r.json()
-        keep={k:data.get(k) for k in ['id','name','assetType','rowsUpdatedAt','metadata','query','columns'] if k in data}
-        # Keep output bounded while surfacing lineage/query metadata.
-        if isinstance(keep.get('columns'),list):
-            keep['columns']=[{k:c.get(k) for k in ['id','name','fieldName','dataTypeName']} for c in keep['columns'][:20]]
-        print(json.dumps(keep,indent=2,ensure_ascii=False)[:16000])
-    except Exception as exc:
-        print(f'VIEW ERROR {view_id}: {type(exc).__name__}: {exc}')
 
-queries=[
-    'Municipal Fiscal Statistics Operating Fund Total Revenues and Expenditures by Municipality',
-    'Uniform Assessment',
-]
-for q in queries:
-    try:
-        r=s.get('https://api.us.socrata.com/api/catalog/v1',params={'search_context':'data.novascotia.ca','q':q,'limit':30},timeout=60)
-        print(f'=== CATALOG {q!r} {r.status_code} bytes={len(r.content)} ===')
-        data=r.json()
-        for result in data.get('results',[])[:30]:
-            res=result.get('resource') or {}
-            print(json.dumps({
-                'id':res.get('id'),'name':res.get('name'),'type':res.get('type'),
-                'description':(res.get('description') or '')[:220],
-                'permalink':res.get('permalink'),
-            },ensure_ascii=False))
-    except Exception as exc:
-        print(f'CATALOG ERROR: {type(exc).__name__}: {exc}')
+def snippets(text, needle, radius=1800):
+    out=[]; pos=0
+    low=text.lower(); target=needle.lower()
+    while True:
+        i=low.find(target,pos)
+        if i<0: break
+        out.append(text[max(0,i-radius):min(len(text),i+len(needle)+radius)])
+        pos=i+len(needle)
+    return out
 
-calendar_urls=[
-    'https://pub-halifax.escribemeetings.com/MeetingsCalendarView.aspx?Expanded=Halifax%20Regional%20Council',
-    'https://pub-halifax.escribemeetings.com/MeetingsCalendarView.aspx?Expanded=Budget%20Committee',
-    'https://pub-halifax.escribemeetings.com/Meetings.aspx',
-]
-for url in calendar_urls:
+r=s.get(URL,timeout=60); r.raise_for_status(); html=r.text
+print(f'PAGE {r.status_code} {r.url} bytes={len(r.content)}')
+for needle in ['GetCalendarMeetings','fullCalendar','events:','eventSources','startParam','endParam']:
+    hits=snippets(html,needle)
+    print(f'INLINE {needle!r} hits={len(hits)}')
+    for n,hit in enumerate(hits[:4],1):
+        print(f'--- INLINE {needle} #{n} ---')
+        print(hit)
+        print('--- END ---')
+
+scripts=[]
+for src in re.findall(r'<script[^>]+src=["\']([^"\']+)["\']',html,re.I):
+    absolute=urljoin(r.url,src)
+    if absolute not in scripts: scripts.append(absolute)
+print(f'script_sources={len(scripts)}')
+for script_url in scripts:
     try:
-        r=s.get(url,timeout=60); print(f'=== ESCRIBE {url} {r.status_code} {r.url} bytes={len(r.content)} ===')
-        text=r.text
-        ids=[]
-        for match in re.finditer(r'Meeting\.aspx\?[^"\'<>]*?(?:Id|id)=([0-9a-fA-F-]{36})[^"\'<>]*',text):
-            mid=match.group(1)
-            if mid not in ids: ids.append(mid)
-        print(f'meeting_ids={len(ids)} sample={ids[:20]}')
-        print('contains GetCalendarMeetings=', 'GetCalendarMeetings' in text)
-        for marker in ['Halifax Regional Council','Budget Committee','Past Meetings','Meeting.aspx']:
-            print(marker, text.find(marker))
+        resp=s.get(script_url,timeout=60)
+        text=resp.text if resp.ok else ''
+        interesting=any(token.lower() in text.lower() for token in ['GetCalendarMeetings','fullCalendar','Meeting.aspx?Id='])
+        if not interesting: continue
+        print(f'=== SCRIPT {resp.status_code} {script_url} bytes={len(resp.content)} ===')
+        for needle in ['GetCalendarMeetings','fullCalendar','Meeting.aspx?Id=']:
+            for n,hit in enumerate(snippets(text,needle)[:4],1):
+                print(f'--- SCRIPT {needle} #{n} ---')
+                print(hit)
+                print('--- END ---')
     except Exception as exc:
-        print(f'ESCRIBE ERROR: {type(exc).__name__}: {exc}')
+        print(f'SCRIPT ERROR {script_url}: {type(exc).__name__}: {exc}')
+
+# Also surface ASP.NET static-method-looking endpoints directly from HTML/JS strings.
+endpoints=sorted(set(re.findall(r'[A-Za-z0-9_./-]+\.aspx/[A-Za-z0-9_]+',html)))
+print('inline_method_endpoints=',endpoints[:100])
