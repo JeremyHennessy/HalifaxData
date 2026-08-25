@@ -12,6 +12,7 @@ EXPECTED = {
     "Q2": {"actual": 147_800_000, "projected": 349_100_000, "wip": 219_900_000},
     "Q3": {"actual": 255_400_000, "projected": 109_300_000, "wip": 343_100_000},
 }
+REQUIRED_QUARTERS = {"Q1", "Q2"}
 ROUNDING_TOLERANCE = 100_000
 ARITHMETIC_TOLERANCE = 2
 
@@ -32,18 +33,18 @@ def main() -> None:
     rows = payload.get("records") or []
     if meta.get("dataset_status") != "official_2025_26_capital_projection_summaries":
         fail("unexpected dataset status")
-    if meta.get("parser_version") != "build008-capital-actuals-v1":
+    if meta.get("parser_version") != "build008-capital-actuals-v2":
         fail("unexpected parser version")
     if meta.get("granularity") != "asset_category_summary_not_project_actuals":
         fail("granularity boundary missing")
     if meta.get("project_level_actuals_available") is not False:
         fail("project-level actuals must remain false")
-    if len(rows) != meta.get("records") or meta.get("source_count") != 3:
+    if len(rows) != meta.get("records") or meta.get("source_count_configured") != 3:
         fail("metadata counts do not match")
     if any("project_code" in row or "vendor_name" in row for row in rows):
         fail("category actuals artifact contains unsupported project/vendor fields")
 
-    quarters = {}
+    quarters: dict[str, list[dict]] = {}
     for index, row in enumerate(rows):
         if row.get("granularity") != "capital_asset_category_summary":
             fail(f"row {index} wrong granularity")
@@ -56,8 +57,8 @@ def main() -> None:
         if not row.get("source_id") or not isinstance(row.get("source_page"), int):
             fail(f"row {index} missing source provenance")
         prov = row.get("provenance") or {}
-        if prov.get("source_id") != row.get("source_id"):
-            fail(f"row {index} provenance source mismatch")
+        if prov.get("source_id") != row.get("source_id") or prov.get("parser_version") != "build008-capital-actuals-v2":
+            fail(f"row {index} provenance mismatch")
 
         available_expected = n(row.get("budget_remaining_at_prior_year_end")) + n(row.get("budget_2025_26")) + n(row.get("budget_increases_decreases"))
         if abs(n(row.get("budget_available_at_period_end")) - available_expected) > ARITHMETIC_TOLERANCE:
@@ -66,16 +67,28 @@ def main() -> None:
         if abs(n(row.get("ytd_expenditures_and_commitments")) - exp_commit_expected) > ARITHMETIC_TOLERANCE:
             fail(f"row {index} expenditure/commitment arithmetic mismatch")
 
-    if set(quarters) != set(EXPECTED):
-        fail(f"quarter coverage mismatch: {sorted(quarters)}")
+    if not REQUIRED_QUARTERS.issubset(quarters):
+        fail(f"required quarter coverage missing: {sorted(set(REQUIRED_QUARTERS) - set(quarters))}")
+    if sorted(quarters) != sorted(meta.get("materialized_quarters") or []):
+        fail("materialized_quarters metadata mismatch")
+    if len(quarters) != meta.get("source_count_materialized"):
+        fail("source_count_materialized metadata mismatch")
+
+    statuses = {item.get("quarter"): item for item in (meta.get("source_status") or [])}
+    if set(statuses) != set(EXPECTED):
+        fail(f"source-status quarter coverage mismatch: {sorted(statuses)}")
+    for quarter in REQUIRED_QUARTERS:
+        if statuses[quarter].get("status") != "ok":
+            fail(f"required {quarter} source is not ok")
+
     previous_actual = -1.0
-    for quarter in ["Q1", "Q2", "Q3"]:
+    for quarter in [q for q in ["Q1", "Q2", "Q3"] if q in quarters]:
         qrows = quarters[quarter]
-        if len(qrows) < 5:
-            fail(f"{quarter} has only {len(qrows)} category rows")
-        totals = [row for row in qrows if "total" in row["budget_category"].casefold()]
+        if len(qrows) != 10:
+            fail(f"{quarter} must contain 9 categories + GRAND TOTAL, found {len(qrows)}")
+        totals = [row for row in qrows if row["budget_category"].casefold() == "grand total"]
         if len(totals) != 1:
-            fail(f"{quarter} must have exactly one total row, found {len(totals)}")
+            fail(f"{quarter} must have exactly one GRAND TOTAL, found {len(totals)}")
         total = totals[0]
         expected = EXPECTED[quarter]
         actual = n(total.get("ytd_expenditures"))
@@ -88,9 +101,19 @@ def main() -> None:
             fail(f"YTD actual expenditures are not increasing through {quarter}")
         previous_actual = actual
 
+    if "Q3" not in quarters:
+        q3_status = statuses["Q3"]
+        if q3_status.get("status") != "source_access_error" or q3_status.get("records") != 0:
+            fail("unmaterialized Q3 must be explicit source_access_error with zero rows")
+        # The known narrative values are retained only as source-status context;
+        # they must not appear as normalized data rows without the source table.
+        if q3_status.get("narrative_actual_expenditures") != EXPECTED["Q3"]["actual"]:
+            fail("Q3 source-status narrative context changed unexpectedly")
+
     print(
         "Current capital actuals validated: "
-        + ", ".join(f"{q}={len(quarters[q])} rows" for q in ["Q1", "Q2", "Q3"])
+        + ", ".join(f"{q}={len(quarters[q])} rows" for q in sorted(quarters))
+        + ("; Q3 source access blocked, no rows fabricated" if "Q3" not in quarters else "; Q3 materialized")
     )
 
 
