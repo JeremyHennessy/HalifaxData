@@ -390,27 +390,27 @@
       "name": "Municipal General Operating Expenses by Source — 10 Year Summary",
       "publisher": "Government of Nova Scotia / Open Data Nova Scotia",
       "category": "External benchmarks",
-      "coverage": "General Operating Fund expenses by category, fiscal years 2014/15–2023/24",
+      "coverage": "General Operating Fund expenses by category, fiscal years 2014/15–2023/24; municipality-type aggregate comparator",
       "ingestion": "Socrata SODA API yn47-nx5r",
       "status": "ready",
       "url": "https://data.novascotia.ca/resource/yn47-nx5r.json"
     },
     {
       "id": "ns-municipal-operating-totals",
-      "name": "Municipal Fiscal Statistics — Operating Fund Revenues and Expenditures by Regional Municipality",
+      "name": "Municipal Fiscal Statistics — Operating Fund Total Revenues and Expenditures by Municipality",
       "publisher": "Government of Nova Scotia / Open Data Nova Scotia",
       "category": "External benchmarks",
-      "coverage": "Consolidated municipal operating revenues and expenses from Financial Information Returns",
-      "ingestion": "Socrata SODA API thwb-cfp5",
+      "coverage": "Consolidated operating-fund revenues and expenditures by municipality from Financial Information Returns",
+      "ingestion": "Socrata base dataset SODA API sbzw-ajrm (replaces broken chart thwb-cfp5)",
       "status": "ready",
-      "url": "https://data.novascotia.ca/resource/thwb-cfp5.json"
+      "url": "https://data.novascotia.ca/resource/sbzw-ajrm.json"
     },
     {
       "id": "ns-municipal-fci",
       "name": "Municipal Fiscal Statistics — Financial Condition Indicators",
       "publisher": "Government of Nova Scotia / Open Data Nova Scotia",
       "category": "External benchmarks",
-      "coverage": "Financial-condition indicators derived from FIRs and audited statements, 2016/17–2023/24",
+      "coverage": "Financial-condition indicators derived from FIRs and audited statements, including HRM history through 2023/24",
       "ingestion": "Socrata SODA API 44ah-ugrd",
       "status": "ready",
       "url": "https://data.novascotia.ca/resource/44ah-ugrd.json"
@@ -420,7 +420,7 @@
       "name": "Municipal Affairs Funding Programs",
       "publisher": "Government of Nova Scotia / Open Data Nova Scotia",
       "category": "External funding",
-      "coverage": "Funding program, area, fiscal year and actual funding amount",
+      "coverage": "Province-wide program, area, fiscal-year and actual-funding totals; contextual unless a recipient municipality is explicitly identified",
       "ingestion": "Socrata SODA API 5rgt-der6",
       "status": "ready",
       "url": "https://data.novascotia.ca/resource/5rgt-der6.json"
@@ -430,20 +430,40 @@
       "name": "Municipal Financial Capacity Grant and Transitional Support Program",
       "publisher": "Government of Nova Scotia / Open Data Nova Scotia",
       "category": "External funding",
-      "coverage": "Municipal Financial Capacity Grant and transition support by municipality/year",
+      "coverage": "Municipal Financial Capacity Grant and transition support by municipality/year, including HRM",
       "ingestion": "Socrata SODA API mi6g-4wz7",
       "status": "ready",
       "url": "https://data.novascotia.ca/resource/mi6g-4wz7.json"
     },
     {
       "id": "ns-uniform-assessment-regional",
-      "name": "Uniform Assessment of Regional Municipality by Year",
+      "name": "Uniform Assessment",
       "publisher": "Government of Nova Scotia / Open Data Nova Scotia",
       "category": "External benchmarks",
-      "coverage": "Regional-municipality uniform assessment by year",
-      "ingestion": "Socrata SODA API k8qq-y6un",
+      "coverage": "Uniform assessment by municipality and year, 2006/07–2026/27; HRM selected from Region field",
+      "ingestion": "Socrata base dataset SODA API kuu2-92bp (replaces broken chart k8qq-y6un)",
       "status": "ready",
-      "url": "https://data.novascotia.ca/resource/k8qq-y6un.json"
+      "url": "https://data.novascotia.ca/resource/kuu2-92bp.json"
+    },
+    {
+      "id": "ns-municipal-operating-revenues",
+      "name": "Municipal General Operating Revenues by Source — 10 Year Summary",
+      "publisher": "Government of Nova Scotia / Open Data Nova Scotia",
+      "category": "External benchmarks",
+      "coverage": "General Operating Fund revenues by source for regional, rural and town municipality types",
+      "ingestion": "Socrata SODA API 5r87-wtae",
+      "status": "ready",
+      "url": "https://data.novascotia.ca/resource/5r87-wtae.json"
+    },
+    {
+      "id": "ns-municipal-consolidated",
+      "name": "Municipal Fiscal Statistics — Consolidated Revenues and Expenses by Municipality",
+      "publisher": "Government of Nova Scotia / Open Data Nova Scotia",
+      "category": "External benchmarks",
+      "coverage": "Consolidated municipal revenues and expenses by municipality",
+      "ingestion": "Socrata SODA API shcq-4v93",
+      "status": "ready",
+      "url": "https://data.novascotia.ca/resource/shcq-4v93.json"
     }
   ]
 }

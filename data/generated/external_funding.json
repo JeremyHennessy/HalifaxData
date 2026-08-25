@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-08-25T15:42:37+00:00",
+    "generated_at": "2026-08-25T15:57:23+00:00",
     "records": 226,
     "hrm_records": 14,
     "context_records": 212,
@@ -16,20 +16,30 @@
       },
       {
         "source_id": "ns-municipal-operating-revenues",
-        "status": "missing_registry"
+        "status": "ok",
+        "downloaded_rows": 30,
+        "nonempty_rows": 30,
+        "selected_rows": 30,
+        "selection_mode": "regional_type_comparator",
+        "note": "Dataset is municipality-type aggregate context, not HRM-specific operating facts."
       },
       {
         "source_id": "ns-municipal-operating-totals",
-        "status": "empty_shape",
+        "status": "ok",
         "downloaded_rows": 555,
-        "nonempty_rows": 0,
-        "selected_rows": 0,
+        "nonempty_rows": 555,
+        "selected_rows": 11,
         "selection_mode": "explicit_hrm_identity",
         "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-municipal-consolidated",
-        "status": "missing_registry"
+        "status": "ok",
+        "downloaded_rows": 396,
+        "nonempty_rows": 396,
+        "selected_rows": 8,
+        "selection_mode": "explicit_hrm_identity",
+        "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
       {
         "source_id": "ns-municipal-fci",
@@ -42,10 +52,10 @@
       },
       {
         "source_id": "ns-uniform-assessment-regional",
-        "status": "empty_shape",
+        "status": "ok",
         "downloaded_rows": 1091,
-        "nonempty_rows": 0,
-        "selected_rows": 0,
+        "nonempty_rows": 1091,
+        "selected_rows": 21,
         "selection_mode": "explicit_hrm_identity",
         "note": "Rows retained only when a source field explicitly identifies HRM/Halifax Regional Municipality."
       },
