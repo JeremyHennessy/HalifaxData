@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "generated_at": "2026-08-25T14:55:20+00:00",
+    "records": 0,
+    "source_status": [
+      {
+        "source_id": "ns-municipal-operating-expenses",
+        "status": "ok",
+        "downloaded_rows": 30,
+        "halifax_rows": 0
+      },
+      {
+        "source_id": "ns-municipal-operating-totals",
+        "status": "ok",
+        "downloaded_rows": 555,
+        "halifax_rows": 0
+      },
+      {
+        "source_id": "ns-municipal-fci",
+        "status": "ok",
+        "downloaded_rows": 396,
+        "halifax_rows": 0
+      },
+      {
+        "source_id": "ns-uniform-assessment-regional",
+        "status": "ok",
+        "downloaded_rows": 1091,
+        "halifax_rows": 0
+      },
+      {
+        "source_id": "ns-municipal-funding-programs",
+        "status": "ok",
+        "downloaded_rows": 212,
+        "halifax_rows": 0
+      },
+      {
+        "source_id": "ns-municipal-capacity-grants",
+        "status": "ok",
+        "downloaded_rows": 700,
+        "halifax_rows": 0
+      }
+    ],
+    "note": "Halifax-filtered rows from Nova Scotia municipal machine datasets. Raw API fields are retained until a source-specific semantic mapper is verified."
+  },
+  "records": []
+}

@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "generated_at": "2026-08-25T14:51:48+00:00",
+    "records": 0,
+    "source_count": 2,
+    "source_status": [
+      {
+        "source_id": "hrm-financials-2025",
+        "status": "ok",
+        "records": 0
+      },
+      {
+        "source_id": "hrm-financials-2023",
+        "status": "ok",
+        "records": 0
+      }
+    ],
+    "note": "Audited financial-statement table rows retain source page and raw cells because statement layouts vary by year."
+  },
+  "records": []
+}

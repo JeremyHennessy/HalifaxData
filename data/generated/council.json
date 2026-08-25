@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "generated_at": "2026-08-25T14:45:38+00:00",
+    "records": 1,
+    "discovery_urls": [
+      "https://pub-halifax.escribemeetings.com/",
+      "https://pub-halifax.escribemeetings.com/Meetings.aspx"
+    ],
+    "failures": [],
+    "note": "This is an index discovery pass. Linked agenda/report PDFs require subsequent document-graph crawling and are not inferred when the eSCRIBE landing page does not expose them."
+  },
+  "records": [
+    {
+      "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "title": "HTML",
+      "url": "https://pub-halifax.escribemeetings.com/Meeting.aspx?Id=7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa&Agenda=Agenda&lang=English",
+      "source_id": "hrm-escribe",
+      "provenance": {
+        "source_id": "hrm-escribe",
+        "source_url": "https://pub-halifax.escribemeetings.com/",
+        "retrieved_at": "2026-08-25T14:45:37+00:00",
+        "locator_type": "html-link",
+        "locator_value": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "parser_version": "build003-v1",
+        "validation_status": "parsed"
+      }
+    }
+  ]
+}
