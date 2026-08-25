@@ -2,7 +2,7 @@ name: UI Smoke
 
 on:
   push:
-    branches: ['agent/design-analysis-ui-verification-20260825']
+    branches: ['agent/**']
   pull_request:
     paths:
       - 'index.html'
