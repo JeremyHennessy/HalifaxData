@@ -1,6 +1,6 @@
 // Explicit generated-domain lifecycle states for HalifaxData.
-// Loaded after app.js so it can replace the generic generatedStatus renderer
-// without changing the established dashboard layout or domain renderers.
+// Loaded after app.js so it can replace generic lifecycle rendering without
+// changing the established light dashboard layout or analytical semantics.
 
 var HALIFAX_DOMAIN_LIFECYCLE = {};
 
@@ -53,6 +53,20 @@ function resolvedGeneratedLifecycle(key) {
 generatedStatus = function generatedStatusWithLifecycle(key) {
   return resolvedGeneratedLifecycle(key);
 };
+
+// Signals has a useful calculated compensation review queue even when the
+// separate generated signals artifact is not release-approved. Preserve that
+// queue while making the generated layer's lifecycle state explicit.
+if (typeof renderSignals === 'function') {
+  const renderSignalsBase = renderSignals;
+  renderSignals = function renderSignalsWithLifecycle() {
+    const html = renderSignalsBase();
+    const lifecycle = resolvedGeneratedLifecycle('signals');
+    if (lifecycle.status === 'ready') return html;
+    const lifecycleNotice = `<div class="notice"><strong>Generated signals: ${escapeHtml(lifecycle.text)}</strong><span>${escapeHtml(lifecycle.detail)}</span></div>`;
+    return html.replace('<div class="page-stack">', `<div class="page-stack">${lifecycleNotice}`);
+  };
+}
 
 fetch('./data/generated/domain_ingestion_status.json', { cache: 'no-store' })
   .then(response => response.ok ? response.json() : null)
