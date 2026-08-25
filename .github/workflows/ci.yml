@@ -26,6 +26,7 @@ jobs:
           node --check domain-status.js
           node --check compensation-ui.js
           node --check budget-ui.js
+          node --check tools/ui-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate established budget and compensation contracts
