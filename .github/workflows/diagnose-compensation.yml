@@ -1,14 +1,14 @@
-name: Diagnose compensation extraction
+name: Commit verified compensation bootstrap
 
 on:
   push:
     branches: ['agent/build-002-compensation-bootstrap']
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  diagnose:
+  bootstrap:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,7 +16,18 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - name: Rebuild compensation data in isolated runner
+      - name: Rebuild compensation data
         run: python scripts/ingest_compensation.py
       - name: Validate rebuilt data
         run: python scripts/validate_data.py
+      - name: Commit only the verified generated dataset
+        run: |
+          if git diff --quiet -- data/generated/compensation.json; then
+            echo "No generated compensation changes"
+            exit 0
+          fi
+          git config user.name "halifaxdata-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/compensation.json
+          git commit -m "data: bootstrap verified compensation history"
+          git push
