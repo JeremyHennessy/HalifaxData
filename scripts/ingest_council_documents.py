@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Collect item-level eSCRIBE agenda attachment links for published HRM meetings.
-
-This is a document-discovery layer, not a decision parser. It records the exact
-meeting, attachment title, eSCRIBE DocumentId and direct URL. Keyword tags are
-search aids only and do not imply that a document contains a finding or approved
-expenditure.
-"""
+"""Collect eSCRIBE agenda attachments with fail-closed meeting completeness."""
 from __future__ import annotations
 
 import hashlib
@@ -14,7 +8,7 @@ import re
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urljoin, urlparse, parse_qs
+from urllib.parse import parse_qs, urljoin, urlparse
 
 import requests
 
@@ -22,8 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 COUNCIL = ROOT / 'data/generated/council.json'
 OUT = ROOT / 'data/generated/council_documents.json'
 BASE = 'https://pub-halifax.escribemeetings.com/'
-UA = 'HalifaxData/0.3 (+https://github.com/JeremyHennessy/HalifaxData)'
+UA = 'HalifaxData/0.5 (+https://github.com/JeremyHennessy/HalifaxData)'
 SOURCE_ID = 'hrm-escribe'
+PARSER_VERSION = 'build005-council-documents-v2'
 
 FINANCE_KEYWORDS = {
     'budget': ('budget', 'business plan'),
@@ -44,6 +39,14 @@ def now():
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open('rb') as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 class AnchorParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -56,7 +59,12 @@ class AnchorParser(HTMLParser):
         amap = dict(attrs)
         href = amap.get('href')
         if href:
-            self.current = {'href': href, 'text_parts': [], 'title': amap.get('title'), 'aria_label': amap.get('aria-label')}
+            self.current = {
+                'href': href,
+                'text_parts': [],
+                'title': amap.get('title'),
+                'aria_label': amap.get('aria-label'),
+            }
 
     def handle_data(self, data):
         if self.current is not None:
@@ -83,11 +91,7 @@ def document_id(url):
 
 def classify(title):
     low = (title or '').lower()
-    tags = []
-    for tag, tokens in FINANCE_KEYWORDS.items():
-        if any(token in low for token in tokens):
-            tags.append(tag)
-    return tags
+    return [tag for tag, tokens in FINANCE_KEYWORDS.items() if any(token in low for token in tokens)]
 
 
 def sha256_text(text):
@@ -95,25 +99,37 @@ def sha256_text(text):
 
 
 def main():
+    if not COUNCIL.exists():
+        raise RuntimeError('council.json is missing; refusing to build a detached document graph')
+    council_sha = sha256_file(COUNCIL)
     council = json.loads(COUNCIL.read_text(encoding='utf-8'))
-    meetings = council.get('records', [])
+    meetings = council.get('records')
+    if not isinstance(meetings, list) or not meetings:
+        raise RuntimeError('council.json has no meeting records')
+    meeting_ids = [str(row.get('meeting_id') or '').strip() for row in meetings]
+    if any(not meeting_id for meeting_id in meeting_ids) or len(meeting_ids) != len(set(meeting_ids)):
+        raise RuntimeError('council.json meeting IDs are blank or non-unique')
+
     session = requests.Session()
     session.headers['User-Agent'] = UA
     retrieved_at = now()
-    records = []
-    meeting_status = []
+    records: list[dict] = []
+    meeting_status: list[dict] = []
+    failures: list[str] = []
+    global_edges: set[tuple[str, str]] = set()
 
     for meeting in meetings:
+        meeting_id = str(meeting['meeting_id'])
         agenda_url = meeting.get('agenda_html_url')
         if not agenda_url:
-            meeting_status.append({'meeting_id': meeting.get('meeting_id'), 'status': 'no_agenda_url', 'documents': 0})
+            meeting_status.append({'meeting_id': meeting_id, 'status': 'no_agenda_url', 'documents': 0})
             continue
         try:
             response = session.get(agenda_url, timeout=60)
             response.raise_for_status()
             parser = AnchorParser()
             parser.feed(response.text)
-            seen = set()
+            seen: set[str] = set()
             count = 0
             for link in parser.links:
                 href = link.get('href') or ''
@@ -121,17 +137,18 @@ def main():
                     continue
                 url = urljoin(BASE, href)
                 did = document_id(url)
-                if not did:
+                if not did or did in seen:
                     continue
+                seen.add(did)
+                edge = (meeting_id, did)
+                if edge in global_edges:
+                    raise RuntimeError(f'duplicate meeting/document edge {edge!r}')
+                global_edges.add(edge)
                 title = link.get('text') or link.get('title') or link.get('aria_label') or f'eSCRIBE document {did}'
-                key = (meeting.get('meeting_id'), did)
-                if key in seen:
-                    continue
-                seen.add(key)
                 tags = classify(title)
                 records.append({
                     'document_id': did,
-                    'meeting_id': meeting.get('meeting_id'),
+                    'meeting_id': meeting_id,
                     'meeting_name': meeting.get('meeting_name'),
                     'meeting_type': meeting.get('meeting_type'),
                     'meeting_start_date': meeting.get('start_date'),
@@ -143,44 +160,71 @@ def main():
                     'source_id': SOURCE_ID,
                     'retrieved_at': retrieved_at,
                     'locator_type': 'escribe_agenda_attachment',
-                    'locator_value': f"{meeting.get('meeting_id')}:{did}",
+                    'locator_value': f'{meeting_id}:{did}',
                     'agenda_html_hash': sha256_text(response.text),
                     'validation_status': 'document_link',
                 })
                 count += 1
-            meeting_status.append({'meeting_id': meeting.get('meeting_id'), 'status': 'ok', 'documents': count, 'http_status': response.status_code})
+            meeting_status.append({
+                'meeting_id': meeting_id,
+                'status': 'ok',
+                'documents': count,
+                'http_status': response.status_code,
+            })
             print(f"{meeting.get('start_date')} {meeting.get('meeting_type')}: {count} attachment links")
         except Exception as exc:
-            meeting_status.append({'meeting_id': meeting.get('meeting_id'), 'status': 'error', 'documents': 0, 'error': f'{type(exc).__name__}: {exc}'})
-            print(f"ERROR {meeting.get('meeting_id')}: {type(exc).__name__}: {exc}")
+            failures.append(f'{meeting_id}: {type(exc).__name__}: {exc}')
+            meeting_status.append({
+                'meeting_id': meeting_id,
+                'status': 'error',
+                'documents': 0,
+                'error': f'{type(exc).__name__}: {exc}',
+            })
 
-    # A document may be referenced in more than one meeting. Preserve those
-    # meeting-document edges, but provide unique-document counts separately.
-    records.sort(key=lambda row: (str(row.get('meeting_start_date') or ''), str(row.get('meeting_id') or ''), int(row['document_id']) if str(row['document_id']).isdigit() else str(row['document_id'])))
+    if failures:
+        raise RuntimeError('Council document refresh failed closed: ' + ' | '.join(failures))
+    if len(meeting_status) != len(meetings):
+        raise RuntimeError(f'meeting status count {len(meeting_status)} != meetings {len(meetings)}')
+    if {row['meeting_id'] for row in meeting_status} != set(meeting_ids):
+        raise RuntimeError('meeting status IDs do not exactly match council.json')
+
+    records.sort(key=lambda row: (
+        str(row.get('meeting_start_date') or ''),
+        str(row.get('meeting_id') or ''),
+        int(row['document_id']) if str(row['document_id']).isdigit() else str(row['document_id']),
+    ))
     unique_documents = len({row['document_id'] for row in records})
     finance_records = sum(bool(row.get('finance_relevant')) for row in records)
-    failed_meetings = sum(row.get('status') == 'error' for row in meeting_status)
     if len(records) < 100:
         raise RuntimeError(f'Only {len(records)} agenda attachment edges collected; refusing to replace document graph')
 
     payload = {
         'metadata': {
-            'dataset_status': 'escribe_agenda_attachment_collection',
+            'dataset_status': 'escribe_agenda_attachment_complete_scan',
+            'parser_version': PARSER_VERSION,
             'generated_at': retrieved_at,
+            'source_id': SOURCE_ID,
+            'council_input_sha256': council_sha,
             'meeting_records_scanned': len(meetings),
+            'meetings_with_agenda_url': sum(bool(row.get('agenda_html_url')) for row in meetings),
+            'meetings_without_agenda_url': sum(not bool(row.get('agenda_html_url')) for row in meetings),
             'document_edges': len(records),
             'unique_documents': unique_documents,
             'finance_tagged_edges': finance_records,
-            'meeting_errors': failed_meetings,
+            'meeting_errors': 0,
             'meeting_status': meeting_status,
-            'note': 'Agenda attachment links and titles are source facts. finance_tags are deterministic title-keyword search aids only, not findings, approvals or semantic classifications of document contents.',
+            'note': (
+                'Every council meeting is accounted for. Meetings with agenda HTML are fetched successfully or the '
+                'refresh fails; meetings without an agenda URL remain explicit no_agenda_url coverage states. '
+                'Finance tags are title-keyword search aids only, not findings or approvals.'
+            ),
         },
         'records': records,
     }
     tmp = OUT.with_suffix('.json.tmp')
     tmp.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     tmp.replace(OUT)
-    print(f'Wrote {len(records)} meeting-document edges / {unique_documents} unique documents; finance-tagged={finance_records}; meeting_errors={failed_meetings}')
+    print(f'Wrote {len(records)} meeting-document edges / {unique_documents} unique documents; meeting_errors=0')
 
 
 if __name__ == '__main__':
