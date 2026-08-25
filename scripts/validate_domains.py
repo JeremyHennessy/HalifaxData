@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Structural validation for Build 003 domain artifacts.
 
-Hard gates apply only where the upstream source is a stable machine/PDF source.
-Council discovery remains a reported coverage gap if eSCRIBE exposes no crawlable
-meeting links; that condition does not erase successfully acquired domains.
+Hard gates apply where upstream sources are stable enough to support them. Parser
+failures in one domain remain isolated from valid outputs in other domains, but a
+checked-in artifact may not silently collapse to an obviously incomplete shape.
 """
 from __future__ import annotations
 import json
@@ -77,8 +77,22 @@ for i, row in enumerate(fin_rows):
         errors.append(f"financial row {i}: unknown source_id {row.get('source_id')}")
 
 council, council_rows = rows("council.json")
-if not council_rows:
-    warnings.append("council.json has 0 discovered meetings; eSCRIBE requires a deeper document-graph crawler")
+if len(council_rows) < 50:
+    errors.append(f"council.json unexpectedly small: {len(council_rows)} meetings")
+seen_meetings = set()
+for i, row in enumerate(council_rows):
+    mid = row.get("meeting_id")
+    if not mid:
+        errors.append(f"council row {i}: missing meeting_id")
+    elif mid in seen_meetings:
+        errors.append(f"council row {i}: duplicate meeting_id {mid}")
+    seen_meetings.add(mid)
+    if row.get("source_id") != "hrm-escribe":
+        errors.append(f"council row {i}: unexpected source_id {row.get('source_id')}")
+    if not row.get("start_date") or not row.get("meeting_type"):
+        errors.append(f"council row {i}: missing start_date/meeting_type")
+if council_rows and not any(row.get("agenda_html_url") or row.get("agenda_pdf_url") for row in council_rows):
+    errors.append("council.json contains no agenda document links")
 
 status, status_rows = rows("domain_ingestion_status.json")
 for row in status_rows:
