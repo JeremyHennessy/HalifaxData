@@ -1,0 +1,66 @@
+name: Refresh Build 005 historical capital
+
+on:
+  push:
+    branches: ['agent/build-005-normalization']
+    paths:
+      - 'scripts/ingest_capital_arcgis.py'
+      - 'data/sources.json'
+      - '.github/workflows/refresh-capital-build005.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-005-capital-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/build-005-normalization
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependency
+        run: python -m pip install --disable-pip-version-check requests
+      - name: Collect complete historical capital layer
+        run: python scripts/ingest_capital_arcgis.py
+      - name: Verify capital artifact completeness
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('data/generated/capital.json')
+          payload = json.loads(path.read_text(encoding='utf-8'))
+          meta = payload.get('metadata') or {}
+          rows = payload.get('records') or []
+          assert meta.get('dataset_status') == 'official_historical_arcgis_collection', meta
+          assert meta.get('historical') is True, meta
+          assert meta.get('collection_complete') is True, meta
+          assert meta.get('records') == len(rows), (meta.get('records'), len(rows))
+          assert meta.get('source_record_count') == len(rows), (meta.get('source_record_count'), len(rows))
+          assert len(rows) >= 50, len(rows)
+          ids = [row.get('project_id') for row in rows]
+          assert all(ids), 'capital row missing project_id/OBJECTID'
+          assert len(ids) == len(set(ids)), 'capital OBJECTIDs are not unique'
+          assert all(row.get('source_id') == 'hrm-open-capital' for row in rows)
+          print(f"verified complete historical capital artifact: {len(rows)} rows across {meta.get('query_page_count')} page(s)")
+          PY
+          git diff --check
+      - name: Commit verified capital artifact
+        run: |
+          if git diff --quiet -- data/generated/capital.json; then
+            echo "Historical capital artifact is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/capital.json
+          git commit -m "Build 005: refresh verified historical capital data"
+          git push origin HEAD:agent/build-005-normalization
