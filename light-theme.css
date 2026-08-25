@@ -159,10 +159,18 @@ tbody tr:hover td{background:#f2f9fb}
 .evidence-drawer::backdrop{background:rgba(30,43,54,.30)}
 .evidence-drawer>header{background:rgba(255,255,255,.96);border-bottom-color:#dce4ea}
 .evidence-steps>div:after{background:#c3d4df}
+.evidence-steps strong{font-size:11px}
+.evidence-steps span{font-size:11px;line-height:1.5}
 .drawer-callout{border-color:#e5c983;background:#fff6df}
-.drawer-callout strong{color:#85570c}
-.drawer-callout p{color:#6e531d}
-.source-link{border-color:#9bc7d2;background:#e8f6f8;color:#086f88}
+.drawer-callout strong{color:#85570c;font-size:11px}
+.drawer-callout p{color:#6e531d;font-size:11px;line-height:1.5}
+.drawer-section h3{font-size:12px}
+.drawer-section p,.drawer-section li{font-size:11px;line-height:1.5}
+.drawer-note{font-size:10px!important;line-height:1.5}
+.source-link{border-color:#9bc7d2;background:#e8f6f8;color:#086f88;font-size:11px}
+.drawer-source-list strong,.search-results strong{font-size:11px}
+.drawer-source-list span,.search-results span{font-size:10px;line-height:1.45}
+.mini-history span,.mini-history strong{font-size:10px}
 
 .entity-summary>div{background:#f8fafc;border-color:#d8e2e9}
 .quality-row{border-color:#e3c783;background:#fff6df;color:var(--text)}
