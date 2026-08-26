@@ -81,6 +81,7 @@ def collect_adjustments_scoped(session, report_url: str) -> list[dict]:
     return sorted(unique.values(), key=lambda row: (row["adjustment_type"], row["project_code"]))
 
 
+base.PARSER_VERSION = "build010-current-capital-v5"
 base.ADJUSTMENT_SOURCE_ID = "hrm-escribe"
 base.collect_adjustments = collect_adjustments_scoped
 
