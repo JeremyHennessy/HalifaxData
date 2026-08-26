@@ -3,7 +3,8 @@
 
 This does not publish procurement data. It records only table/header structure and
 short source-text snippets around "Alternative Procurement" so parser changes can
-be based on source layout rather than guesses.
+be based on source layout rather than guesses. Fetch failures are recorded explicitly
+rather than causing the diagnostic to hide layouts from other available reports.
 """
 from __future__ import annotations
 
@@ -18,7 +19,7 @@ import requests
 
 from ingest_procurement_quarterly_reports import clean, fetch_pdf, find_header_map, report_documents
 
-DIAGNOSTIC_VERSION = "build011-layout-v1"
+DIAGNOSTIC_VERSION = "build011-layout-v2"
 
 
 def clip(value: str, limit: int = 240) -> str:
@@ -48,13 +49,20 @@ def main() -> None:
     reports_out = []
 
     for report in report_documents():
-        blob = fetch_pdf(session, report["url"])
         report_out = {
             "document_id": report["document_id"],
             "title": report["title"],
             "url": report["url"],
+            "status": "ok",
             "pages": [],
         }
+        try:
+            blob = fetch_pdf(session, report["url"])
+        except Exception as exc:
+            report_out["status"] = "fetch_error"
+            report_out["error"] = f"{type(exc).__name__}: {exc}"
+            reports_out.append(report_out)
+            continue
         with pdfplumber.open(io.BytesIO(blob)) as pdf:
             for page_num, page in enumerate(pdf.pages, 1):
                 text = page.extract_text() or ""
