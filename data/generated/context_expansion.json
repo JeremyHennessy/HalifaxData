@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "dataset_status": "source_backed_context_expansion",
+    "parser_version": "build013-context-expansion-v1",
+    "generated_at": "2026-08-26T16:45:00Z",
+    "scope": "Selected additional HRM funding and contract-amendment context verified from official public sources.",
+    "is_complete_grants_ledger": false,
+    "is_complete_contract_amendment_ledger": false,
+    "is_transaction_ledger": false,
+    "creates_wrongdoing_assertions": false,
+    "note": "Funding awards are context, not anomaly findings. Contract-amendment observations are review context from one complete public attachment table and exclude private/confidential reports."
+  },
+  "community_grants_2025": {
+    "fiscal_year": "2025/26",
+    "applications_received": 120,
+    "applications_ineligible": 31,
+    "applications_eligible": 89,
+    "staff_recommended_awards": 63,
+    "staff_recommended_total": 480430.0,
+    "council_approved_awards": 63,
+    "council_approved_total": 476430.0,
+    "council_adjustment": -4000.0,
+    "source_ids": ["hrm-community-grants-2025-staff", "hrm-community-grants-2025-final"],
+    "category_amount_semantics": "staff_recommended_pre_council_adjustment",
+    "categories": [
+      {"category": "Community Arts", "applications": 12, "requested": 146807.0, "recommended_awards": 8, "recommended_amount": 63549.0},
+      {"category": "Community Histories", "applications": 12, "requested": 170906.5, "recommended_awards": 8, "recommended_amount": 70683.0},
+      {"category": "Diversity & Accessibility", "applications": 24, "requested": 249331.1, "recommended_awards": 9, "recommended_amount": 79704.0},
+      {"category": "Emergency Assistance & Public Safety", "applications": 13, "requested": 111084.7, "recommended_awards": 5, "recommended_amount": 38900.0},
+      {"category": "Environment & Climate Change", "applications": 14, "requested": 96972.0, "recommended_awards": 7, "recommended_amount": 27929.0},
+      {"category": "Leisure", "applications": 17, "requested": 152069.01, "recommended_awards": 9, "recommended_amount": 62515.0},
+      {"category": "Recreation", "applications": 28, "requested": 296838.83, "recommended_awards": 17, "recommended_amount": 137150.0}
+    ],
+    "approval_context": [
+      {"organization": "Kiwanis Club of Cole Harbour Westphal", "action": "award_reduced", "recommended_amount": 5000.0, "approved_amount": 1000.0, "reason": "Council reduced the award after project soil was donated rather than incurred as a cash project expense."},
+      {"organization": "Petpeswick Yacht Club", "action": "holdback_removed", "reason": "Holdback was removed after confirmation of provincial funding."},
+      {"organization": "St. Peter Parish", "action": "referred_for_further_review", "reason": "Application was referred for further review rather than treated as a final award in this context layer."}
+    ],
+    "caveat": "Category amounts are staff recommendations before Council's final $4,000 net adjustment. They are not recomputed as final category totals."
+  },
+  "community_museums_2025": {
+    "fiscal_year": "2025/26",
+    "program_budget": 220000.0,
+    "operating_grant_count": 14,
+    "operating_grant_total": 157890.0,
+    "project_grant_count": 8,
+    "project_grant_total": 55920.0,
+    "balance": 6190.0,
+    "source_id": "hrm-community-museums-2025",
+    "operating_grants": [
+      {"recipient": "Africville Heritage Trust Society", "tier": "I", "amount": 10885.0},
+      {"recipient": "Army Museum Halifax Citadel", "tier": "I", "amount": 15279.0},
+      {"recipient": "Atlantic Canada Aviation Museum Society", "tier": "I", "amount": 10885.0},
+      {"recipient": "Cole Harbour Rural Heritage Society", "tier": "I", "amount": 18574.0},
+      {"recipient": "Fultz Corner Restoration Society", "tier": "I", "amount": 10885.0},
+      {"recipient": "Hooked Rug Museum of North America Society", "tier": "I", "amount": 10665.0},
+      {"recipient": "Lake Charlotte Area Heritage Society", "tier": "I", "amount": 24066.0},
+      {"recipient": "Musquodoboit Harbour Heritage Society", "tier": "I", "amount": 9787.0},
+      {"recipient": "Nova Scotia Sport Hall of Fame", "tier": "I", "amount": 8689.0},
+      {"recipient": "S.S. Atlantic Heritage Park Society", "tier": "I", "amount": 10661.0},
+      {"recipient": "Fort Sackville Foundation", "tier": "II", "amount": 8249.0},
+      {"recipient": "L'Acadie de Chezzetcook Association", "tier": "II", "amount": 7041.0},
+      {"recipient": "Waverley Heritage Society", "tier": "II", "amount": 7600.0},
+      {"recipient": "Sheet Harbour and Area Heritage Society", "tier": "III", "amount": 4624.0}
+    ],
+    "project_grants": [
+      {"recipient": "Atlantic Canada Aviation Museum Society", "grant_type": "Project", "amount": 4470.0, "purpose": "Interpretive signage and aviation model."},
+      {"recipient": "Fort Sackville Foundation", "grant_type": "Project", "amount": 4000.0, "purpose": "Digital scanning and database software.", "condition": "Holdback pending receipt of the final report for a 2024 grant."},
+      {"recipient": "Musquodoboit Harbour Heritage Society", "grant_type": "Project", "amount": 1000.0, "purpose": "Minor paint repairs to the former CN Railway Station."},
+      {"recipient": "Army Museum Halifax Citadel", "grant_type": "Capital", "amount": 10000.0, "purpose": "New Canadian Army interactive exhibit.", "condition": "Holdback pending confirmation the project can proceed with partial funding."},
+      {"recipient": "Cole Harbour Rural Heritage Society", "grant_type": "Capital", "amount": 8000.0, "purpose": "Water mitigation work protecting Giles House."},
+      {"recipient": "Hooked Rug Museum of North America Society", "grant_type": "Capital", "amount": 12750.0, "purpose": "Electronic point-of-sale system."},
+      {"recipient": "Nova Scotia Sport Hall of Fame", "grant_type": "Capital", "amount": 10000.0, "purpose": "New ice hockey history exhibit.", "condition": "Holdback pending confirmation the project can proceed with partial funding."},
+      {"recipient": "Lake Charlotte Area Heritage Society", "grant_type": "Special Project", "amount": 5700.0, "purpose": "Costume storage upgrades and 25 period outfits at Memory Lane Heritage Village."}
+    ],
+    "caveat": "Operating grants are annual awards in a three-year cycle and remain subject to annual budget approval. Repeat funding is an explicit program feature and is not an anomaly."
+  },
+  "rural_transit_2025_26": {
+    "fiscal_year": "2025/26",
+    "source_id": "hrm-rural-transit-2025-26",
+    "prior_fiscal_year": "2024/25",
+    "prior_total": 452696.0,
+    "projected_total": 503851.0,
+    "providers": [
+      {"provider": "Bay Rides", "prior_disbursement": 140148.0, "projected_km": 222871, "projected_grant": 161716.0},
+      {"provider": "East Hants Community Rider", "prior_disbursement": 34270.0, "projected_km": 38958, "projected_grant": 39185.0},
+      {"provider": "MusGo Rider Eastern Shore", "prior_disbursement": 189102.0, "projected_km": 300000, "projected_grant": 213102.0},
+      {"provider": "MusGo Rider Valley-Sheet Harbour", "prior_disbursement": 89176.0, "projected_km": 115000, "projected_grant": 89848.0}
+    ],
+    "caveat": "2025/26 values are projected grant disbursements based on projected in-service kilometres and the program formula, not invoices or vendor payments."
+  },
+  "contract_amendments_2023_11": {
+    "report_date": "2023-11-15",
+    "source_id": "hrm-cao-contract-amendments-2023-11",
+    "public_attachment_table_rows": 7,
+    "financial_observations": 8,
+    "private_confidential_excluded": true,
+    "amount_semantics": "Published 'Value of Amendment' in the aggregate table; treated as the cumulative amendment amount used to reach Updated Value, not necessarily the current change-order request.",
+    "observations": [
+      {"id": "2023-11-po-2070891329", "name": "Demolition consulting — former Red Cross Building", "po": "2070891329", "vendor_source": "Pinchin Ltd.", "original_value": 65629.0, "published_amendment_value": 29258.0, "updated_value": 94887.0, "published_increase_pct": 45.0, "reason": "Additional site abatement monitoring and contingency for unforeseen site conditions.", "derived_updated_value": 94887.0, "source_arithmetic_delta": 0.0, "source_arithmetic_consistent": true},
+      {"id": "2023-11-po-2070877271", "name": "Life-safety consulting — Lions Arena Spryfield", "po": "2070877271", "vendor_source": "EXP Architects Inc.", "original_value": 48702.0, "published_amendment_value": 79327.0, "updated_value": 128029.0, "published_increase_pct": 163.0, "reason": "Design consulting for electrical upgrades and renovations.", "derived_updated_value": 128029.0, "source_arithmetic_delta": 0.0, "source_arithmetic_consistent": true},
+      {"id": "2023-11-po-2070799716", "name": "Replacement MacIntosh Depot consulting", "po": "2070799716", "vendor_source": "EXP Services Inc.", "original_value": 653735.0, "published_amendment_value": 715037.0, "updated_value": 1368772.0, "published_increase_pct": 109.0, "reason": "Changes to the contracted scope of work.", "derived_updated_value": 1368772.0, "source_arithmetic_delta": 0.0, "source_arithmetic_consistent": true},
+      {"id": "2023-11-po-2070805687", "name": "Replacement MacIntosh Depot consulting", "po": "2070805687", "vendor_source": "WSP Canada Inc.", "original_value": 24980.0, "published_amendment_value": 70803.0, "updated_value": 95783.0, "published_increase_pct": 283.0, "reason": "Additional mileage because more trips to the building were required than estimated.", "derived_updated_value": 95783.0, "source_arithmetic_delta": 0.0, "source_arithmetic_consistent": true},
+      {"id": "2023-11-po-2070887247", "name": "Slayter Street AAA bikeway functional plan", "po": "2070887247", "vendor_source": null, "original_value": 56763.0, "published_amendment_value": 28663.0, "updated_value": 85246.0, "published_increase_pct": 50.5, "reason": "Revisit concepts, collect additional active-transportation counts and explore a no-diverter/half-signal concept.", "derived_updated_value": 85426.0, "source_arithmetic_delta": -180.0, "source_arithmetic_consistent": false},
+      {"id": "2023-11-po-2070812846", "name": "Alderney Gate Recapitalization Phase 2 consulting", "po": "2070812846", "vendor_source": "Abbott Brown", "original_value": 63832.0, "published_amendment_value": 90633.0, "updated_value": 154465.0, "published_increase_pct": 142.0, "reason": "Scope changes, material-delivery delays and an extended timeline requiring additional consultant oversight.", "derived_updated_value": 154465.0, "source_arithmetic_delta": 0.0, "source_arithmetic_consistent": true},
+      {"id": "2023-11-contract-21-302", "name": "Contract 21-302 Change Order No. 2", "contract": "21-302", "vendor_source": null, "original_value": 185204.0, "published_amendment_value": 34904.0, "updated_value": 220108.0, "published_increase_pct": 19.0, "reason": "A prior Executive Director approval was described as being made in error, so CAO approval was sought under the Procurement Policy.", "derived_updated_value": 220108.0, "source_arithmetic_delta": 0.0, "source_arithmetic_consistent": true},
+      {"id": "2023-11-bell-landline", "name": "Bell Canada Local Voice (Landline) contract extension", "contract": null, "vendor_source": "Bell Canada", "original_value": 1455000.0, "published_amendment_value": 694914.0, "updated_value": 2149914.0, "published_increase_pct": 48.0, "reason": "Landline service extension while IT proceeds through a competitive procurement process.", "derived_updated_value": 2149914.0, "source_arithmetic_delta": 0.0, "source_arithmetic_consistent": true}
+    ],
+    "caveat": "This is one complete public attachment table, not a complete historical amendment ledger. The source says Private & Confidential amendment reports are excluded."
+  }
+}
