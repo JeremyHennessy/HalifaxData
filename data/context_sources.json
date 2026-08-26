@@ -6,6 +6,16 @@
   },
   "sources": [
     {
+      "id": "hrm-community-grants-2026-staff",
+      "name": "HRM Community Grants Program — Fiscal 2026 Proposed Awards",
+      "publisher": "Halifax Regional Municipality — Grants Committee / Finance & Asset Management",
+      "category": "Community funding",
+      "coverage": "2026/27 staff proposal-stage Community Grants control table: applications, seven funding categories, 53 proposed awards and program-budget disposition",
+      "ingestion": "Official eSCRIBE staff-report PDF / controlled table extraction",
+      "status": "ready-proposed",
+      "url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5670"
+    },
+    {
       "id": "hrm-community-grants-2025-staff",
       "name": "HRM Community Grants Program — Fiscal 2025 Recommended Awards",
       "publisher": "Halifax Regional Municipality — Grants Committee / Finance & Asset Management",
