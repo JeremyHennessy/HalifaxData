@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "last_researched": "2026-08-26",
+    "scope": "Build 013 community funding and contract-amendment context sources",
+    "principle": "Funding records are contextual public-funding evidence, not wrongdoing signals. Contract-amendment report observations are incomplete procurement context and remain separate from AP/payment data."
+  },
+  "sources": [
+    {
+      "id": "hrm-community-grants-2026-staff",
+      "name": "HRM Community Grants Program — Fiscal 2026 Proposed Awards",
+      "publisher": "Halifax Regional Municipality — Grants Committee / Finance & Asset Management",
+      "category": "Community funding",
+      "coverage": "2026/27 staff proposal-stage Community Grants control table: applications, seven funding categories, 53 proposed awards and program-budget disposition",
+      "ingestion": "Official eSCRIBE staff-report PDF / controlled table extraction",
+      "status": "ready-proposed",
+      "url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5670"
+    },
+    {
+      "id": "hrm-community-grants-2025-staff",
+      "name": "HRM Community Grants Program — Fiscal 2025 Recommended Awards",
+      "publisher": "Halifax Regional Municipality — Grants Committee / Finance & Asset Management",
+      "category": "Community funding",
+      "coverage": "2025/26 Community Grants applications, eligibility, funding categories and 63 staff-recommended awards before Council adjustment",
+      "ingestion": "Official staff report / controlled summary extraction",
+      "status": "ready",
+      "url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=2275"
+    },
+    {
+      "id": "hrm-community-grants-2025-final",
+      "name": "2025/26 Community Grants — Council-approved total",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Community funding",
+      "coverage": "Official municipal communication confirming 63 Council-approved awards totaling $476,430 after Council adjustments",
+      "ingestion": "Official Halifax councillor communication",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/districts-councillors/district-3/district-updates/d03-july-2025.pdf"
+    },
+    {
+      "id": "hrm-community-museums-2025",
+      "name": "Community Museum Grants Program: Recommended Awards 2025",
+      "publisher": "Halifax Regional Municipality — Grants Committee",
+      "category": "Community funding",
+      "coverage": "14 annual museum operating grants plus 8 one-time project grants for 2025",
+      "ingestion": "Official committee-report PDF / source-table and recommendation extraction",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/boards-committees-commissions/250423grants911.pdf"
+    },
+    {
+      "id": "hrm-rural-transit-2025-26",
+      "name": "2025/26 Rural Transit Funding Program",
+      "publisher": "Halifax Regional Municipality — Regional Council / Grants Committee",
+      "category": "Community funding",
+      "coverage": "2024/25 disbursements and projected 2025/26 grants for four rural transit service providers",
+      "ingestion": "Official Council report PDF / controlled table extraction",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/transportation/halifax-transit/2025-26-rural-transit-funding-program.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2023-11",
+      "name": "CAO Contract Amendment Reporting — November 15, 2023",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Complete public Attachment 1 table for the November 15, 2023 CAO contract-amendment report; private/confidential reports excluded by source",
+      "ingestion": "Official committee-report PDF / aggregate amendment table",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/231115afscinfo1.pdf"
+    },
+    {
+      "id": "hrm-procurement-policy-2022-012-adm",
+      "name": "Administrative Order 2022-012-ADM — Procurement",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Procurement policy",
+      "coverage": "Procurement rules including contract-amendment approval/reporting thresholds, alternative procurement and exemptions",
+      "ingestion": "Official Administrative Order PDF / policy context",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/legislation-by-laws/2022-012-adm.pdf"
+    }
+  ]
+}

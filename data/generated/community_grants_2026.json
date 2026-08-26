@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "dataset_status": "staff_proposal_context",
+    "fiscal_year": "2026/27",
+    "source_id": "hrm-community-grants-2026-staff",
+    "source_stage": "staff_recommendation_before_council_approval",
+    "is_final_council_award": false,
+    "is_payment_data": false,
+    "creates_wrongdoing_assertions": false,
+    "note": "Counts and proposed award values are taken from the official 2026 Community Grants staff-report control table. This snapshot intentionally does not represent the proposal as a final Council award."
+  },
+  "applications_received": 145,
+  "proposed_awards": 53,
+  "proposed_award_total": 375006.0,
+  "program_budget": 500000.0,
+  "balance_after_proposed_awards": 124994.0,
+  "proposed_transfer_to_M310_8004": 65000.0,
+  "balance_after_proposed_transfer": 59994.0,
+  "categories": [
+    {"category": "Community Arts", "applications": 26, "proposed_awards": 11, "proposed_award_value": 89823.0},
+    {"category": "Community Histories", "applications": 4, "proposed_awards": 2, "proposed_award_value": 7500.0},
+    {"category": "Diversity & Accessibility", "applications": 39, "proposed_awards": 12, "proposed_award_value": 50384.0},
+    {"category": "Emergency Assistance & Public Safety", "applications": 15, "proposed_awards": 4, "proposed_award_value": 44200.0},
+    {"category": "Environment & Climate Change", "applications": 11, "proposed_awards": 6, "proposed_award_value": 36700.0},
+    {"category": "Leisure", "applications": 24, "proposed_awards": 8, "proposed_award_value": 53500.0},
+    {"category": "Recreation", "applications": 26, "proposed_awards": 10, "proposed_award_value": 92899.0}
+  ],
+  "caveat": "This is a staff proposal-stage control table, not a final Council-approved grants ledger. Repeat applicants or recipients are not treated as anomalies by this dataset."
+}
