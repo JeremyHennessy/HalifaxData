@@ -1,0 +1,47 @@
+name: Build 014 CAO Amendment Series Proof
+
+on:
+  push:
+    branches: ['agent/build-014-cao-amendment-series', main]
+    paths:
+      - 'data/contract_amendment_sources.json'
+      - 'data/generated/contract_amendments.json'
+      - 'scripts/ingest_contract_amendments.py'
+      - 'scripts/validate_contract_amendments.py'
+      - '.github/workflows/build014-amendment-proof.yml'
+  pull_request:
+    paths:
+      - 'data/contract_amendment_sources.json'
+      - 'data/generated/contract_amendments.json'
+      - 'scripts/ingest_contract_amendments.py'
+      - 'scripts/validate_contract_amendments.py'
+      - '.github/workflows/build014-amendment-proof.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts/ingest_contract_amendments.py scripts/validate_contract_amendments.py
+      - name: Reproduce public CAO amendment series from current official sources
+        run: python scripts/ingest_contract_amendments.py --output artifacts/contract_amendments.json
+      - name: Validate reproduced amendment-series controls
+        run: python scripts/validate_contract_amendments.py artifacts/contract_amendments.json
+      - name: Upload proof artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build014-cao-amendments-${{ github.sha }}
+          path: artifacts/contract_amendments.json
+          if-no-files-found: warn
+          retention-days: 14
