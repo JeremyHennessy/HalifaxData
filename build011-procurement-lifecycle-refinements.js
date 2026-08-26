@@ -19,7 +19,14 @@ b11AlternativeInvestigations = function b11AlternativeInvestigationsRefined() {
 const b11ProcurementSectionBase = b11ProcurementSection;
 b11ProcurementSection = function b11ProcurementSectionRefined() {
   const eligibleCount = b11Rows().filter(row => row.vendor_identity_eligible_for_grouping === true).length;
-  return b11ProcurementSectionBase().replace('80 supplier-identity-eligible rows', `${numberFmt.format(eligibleCount)} supplier-identity-eligible rows`);
+  let html = b11ProcurementSectionBase().replace('80 supplier-identity-eligible rows', `${numberFmt.format(eligibleCount)} supplier-identity-eligible rows`);
+  if (state.build011Procurement?.status === 'ready') {
+    html = html.replace(
+      '<section class="b11-procurement page-stack">',
+      '<section class="b11-procurement page-stack"><header class="b11-section-header"><p class="eyebrow">PROCUREMENT LIFECYCLE</p><h2>Alternative procurement report evidence</h2><p>Quarterly HRM report-controlled Alternative Awards / Alternative Procurement appendix rows, kept analytically separate from public-tender awards.</p></header>'
+    );
+  }
+  return html;
 };
 
 b11BindEvents = function b11BindEventsRefined() {
