@@ -29,6 +29,40 @@ b11ProcurementSection = function b11ProcurementSectionRefined() {
   return html;
 };
 
+b11ShowRow = function b11ShowRowRefined(id) {
+  const row = b11FindRow(id);
+  if (!row) return;
+  const report = b11Report(row) || {};
+  const liveUrl = safeUrl(row.source_url_resolved || row.source_url);
+  const graphUrl = safeUrl(row.source_url_registry);
+  const agendaUrl = safeUrl(report.agenda_url);
+  openDrawer({
+    title: row.award_title || row.project_number || 'Alternative procurement source row',
+    eyebrow: 'ALTERNATIVE PROCUREMENT EVIDENCE',
+    html: `${evidenceSteps([
+      ['Report period', row.report_period],
+      ['Project / solicitation', row.project_number || row.solicitation || '—'],
+      ['Supplier display', b11VendorName(row)],
+      ['Raw supplier summary', row.supplier_source_text || row.vendor_name || '—'],
+      ['Vendor identity status', row.vendor_identity_status],
+      ['Eligible for supplier grouping', row.vendor_identity_eligible_for_grouping ? 'Yes' : 'No'],
+      ['Source procurement type', row.procurement_type_display || '—'],
+      ['Award value', money(row.award_value)],
+      ['Department', row.department || 'Not separately reported'],
+      ['Internal / project reference', row.account_project_codes || '—'],
+      ['Source locator', `doc${row.report_document_id} / p${row.source_page} / t${row.source_table} / r${row.source_row}`],
+      ['Attachment resolution', row.source_url_resolution],
+      ['Historical graph URL changed?', row.source_url_changed_since_graph ? 'Yes — exact-title live agenda attachment resolved' : 'No']
+    ])}
+    <div class="drawer-callout"><strong>Interpretation boundary</strong><p>This is an HRM quarterly report-controlled Alternative Awards / Alternative Procurement appendix row. It is not an invoice or payment, not a complete procurement record, and not proof of lack of competition, contract amendment total or final paid value.</p></div>
+    <div class="drawer-section"><h3>Source links</h3><div class="drawer-source-list">
+      ${liveUrl ? `<a class="source-link" href="${escapeHtml(liveUrl)}" target="_blank" rel="noreferrer">Current resolved report attachment ↗</a>` : ''}
+      ${row.source_url_changed_since_graph && graphUrl ? `<a class="source-link" href="${escapeHtml(graphUrl)}" target="_blank" rel="noreferrer">Historical graph attachment URL ↗</a>` : ''}
+      ${agendaUrl ? `<a class="source-link" href="${escapeHtml(agendaUrl)}" target="_blank" rel="noreferrer">Owning Council agenda ↗</a>` : ''}
+    </div></div>`
+  });
+};
+
 b11BindEvents = function b11BindEventsRefined() {
   $$('#content [data-build011-row]').forEach(element => element.addEventListener('click', () => b11ShowRow(element.dataset.build011Row)));
   const query = $('#b11-procurement-search');
