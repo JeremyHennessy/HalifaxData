@@ -4,6 +4,19 @@ Baseline: Build 012 / `8e6d1a1d062bc9ba4979919298706c872d8140d9`.
 
 Build 013 adds source-backed explanatory data around public funding and contract amendments without changing Build 012's integrity-status ladder or weakening the AP/payment boundary.
 
+## Community Grants — 2026/27 current staff proposal
+
+The official 2026 staff-report control table currently shows:
+
+- 145 applications across seven funding categories;
+- 53 proposed awards totaling $375,006;
+- $500,000 program budget;
+- $124,994 remaining after proposed awards;
+- proposed $65,000 transfer to M310-8004;
+- $59,994 projected balance after the proposed transfer.
+
+This is a **staff proposal before final Council approval**. The app compares it only with the 2025 staff-recommendation stage and does not label it as final award data. Current proposal rows never generate investigation leads.
+
 ## Community Grants — 2025/26
 
 The layer preserves two different stages:
@@ -62,6 +75,7 @@ The score orders review. It is not a probability of corruption, fraud, waste or 
 
 Build 013 supplements the runtime source registry with:
 
+- 2026 Community Grants staff proposal report;
 - 2025 Community Grants staff report;
 - official municipal communication of the 2025/26 Council-approved Community Grants total;
 - 2025 Community Museum Grants report;
@@ -69,6 +83,8 @@ Build 013 supplements the runtime source registry with:
 - November 15, 2023 CAO Contract Amendment Reporting;
 - Administrative Order 2022-012-ADM Procurement Policy.
 
+The Build 013 source diagnostic also confirmed that 12 public CAO amendment-report PDFs from May 2023 through November 2025 are currently fetchable and contain aggregate amendment tables. Those reports are retained as the next systematic lifecycle-ingestion target rather than silently represented as already normalized data in this release.
+
 ## Release verification
 
-The release branch is intentionally cut from the completed Build 013 implementation and receives no production-data or application-logic changes after this point. CI and browser evidence are pinned to the exact pull-request head before merge.
+CI and browser evidence are pinned to the exact pull-request head before merge. No merge is permitted from an unverified later branch head.
