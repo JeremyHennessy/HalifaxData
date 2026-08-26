@@ -27,7 +27,14 @@ jobs:
           node --check compensation-ui.js
           node --check budget-ui.js
           node --check build006-intelligence-ui.js
+          node --check build008-investigations.js
+          node --check build008-investigations-refinements.js
+          node --check build009-pattern-detection.js
+          node --check build009-pattern-detection-refinements.js
+          node --check build010-current-capital.js
           node --check tools/ui-smoke.mjs
+          node --check tools/build009-ui-smoke.mjs
+          node --check tools/build010-ui-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate established budget and compensation contracts
@@ -44,6 +51,8 @@ jobs:
         run: python scripts/validate_spending.py
       - name: Validate Build 007 payment-source status
         run: python scripts/validate_payment_source_status.py
+      - name: Validate Build 010 current capital
+        run: python scripts/validate_current_capital.py
       - name: Validate final normalized entity index
         run: |
           python scripts/build_entity_index_v4.py --check
