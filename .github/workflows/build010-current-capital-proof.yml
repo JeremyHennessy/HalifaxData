@@ -1,0 +1,60 @@
+name: Build 010 Current Capital Proof
+
+on:
+  push:
+    branches: ['agent/build-010-current-capital']
+    paths:
+      - 'scripts/ingest_current_capital.py'
+      - 'scripts/validate_current_capital.py'
+      - 'data/sources.json'
+      - 'data/generated/council.json'
+      - 'data/generated/council_documents.json'
+      - '.github/workflows/build010-current-capital-proof.yml'
+  pull_request:
+    paths:
+      - 'scripts/ingest_current_capital.py'
+      - 'scripts/validate_current_capital.py'
+      - 'data/sources.json'
+      - 'data/generated/current_capital.json'
+      - 'data/generated/council.json'
+      - 'data/generated/council_documents.json'
+      - '.github/workflows/build010-current-capital-proof.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prove-current-capital:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts
+      - name: Collect official current capital evidence
+        run: python scripts/ingest_current_capital.py --output artifacts/current_capital.json
+      - name: Validate current capital contract
+        run: python scripts/validate_current_capital.py artifacts/current_capital.json
+      - name: Guard unsupported spend semantics
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          payload = json.loads(Path('artifacts/current_capital.json').read_text(encoding='utf-8'))
+          meta = payload['metadata']
+          assert meta['is_transaction_ledger'] is False
+          assert meta['has_project_spend_to_date'] is False
+          print('Current-capital proof preserves plan/budget-only evidence boundary.')
+          PY
+      - name: Upload verified current-capital evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: build010-current-capital-${{ github.sha }}
+          path: artifacts/current_capital.json
+          if-no-files-found: error
+          retention-days: 14
