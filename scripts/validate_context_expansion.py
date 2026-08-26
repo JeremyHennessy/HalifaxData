@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 DEFAULT = Path("data/generated/context_expansion.json")
+CURRENT_GRANTS = Path("data/generated/community_grants_2026.json")
 
 
 def require(condition: bool, message: str) -> None:
@@ -39,6 +40,20 @@ def main(path: Path) -> None:
     require(close(grants["staff_recommended_total"], 480430), "Unexpected staff recommended total")
     require(close(grants["council_approved_total"], 476430), "Unexpected Council-approved total")
     require(close(grants["council_approved_total"] - grants["staff_recommended_total"], grants["council_adjustment"]), "Council adjustment does not reconcile")
+
+    current = json.loads(CURRENT_GRANTS.read_text(encoding="utf-8"))
+    current_meta = current["metadata"]
+    require(current_meta["source_stage"] == "staff_recommendation_before_council_approval", "2026 Community Grants stage boundary changed")
+    require(current_meta["is_final_council_award"] is False, "2026 Community Grants must not be represented as final")
+    require(current_meta["is_payment_data"] is False, "2026 Community Grants must not be represented as payment data")
+    require(current_meta["creates_wrongdoing_assertions"] is False, "2026 Community Grants cannot assert wrongdoing")
+    current_categories = current["categories"]
+    require(len(current_categories) == 7, "Expected seven 2026 Community Grants categories")
+    require(sum(row["applications"] for row in current_categories) == current["applications_received"] == 145, "2026 Community Grants application count does not reconcile")
+    require(sum(row["proposed_awards"] for row in current_categories) == current["proposed_awards"] == 53, "2026 Community Grants proposed award count does not reconcile")
+    require(close(sum(row["proposed_award_value"] for row in current_categories), current["proposed_award_total"]), "2026 Community Grants proposed award value does not reconcile")
+    require(close(current["program_budget"] - current["proposed_award_total"], current["balance_after_proposed_awards"]), "2026 Community Grants post-award balance does not reconcile")
+    require(close(current["balance_after_proposed_awards"] - current["proposed_transfer_to_M310_8004"], current["balance_after_proposed_transfer"]), "2026 Community Grants transfer/balance does not reconcile")
 
     museums = data["community_museums_2025"]
     require(len(museums["operating_grants"]) == museums["operating_grant_count"] == 14, "Museum operating grant count mismatch")
@@ -76,6 +91,9 @@ def main(path: Path) -> None:
         "status": "ok",
         "community_grants_categories": len(categories),
         "community_grants_final_total": grants["council_approved_total"],
+        "community_grants_2026_applications": current["applications_received"],
+        "community_grants_2026_proposed_awards": current["proposed_awards"],
+        "community_grants_2026_proposed_total": current["proposed_award_total"],
         "museum_awards": museums["operating_grant_count"] + museums["project_grant_count"],
         "rural_transit_providers": len(transit["providers"]),
         "amendment_observations": len(observations),
