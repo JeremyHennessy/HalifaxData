@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Temporary Build 012 diagnostic for new contextual finance sources."""
+"""Temporary Build 012 diagnostic for new contextual finance sources. Diagnostic revision 2."""
 from __future__ import annotations
 import io, json
 from pathlib import Path
