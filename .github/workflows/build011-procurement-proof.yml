@@ -19,7 +19,7 @@ on:
       - '.github/workflows/build011-procurement-proof.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   prove:
@@ -38,6 +38,19 @@ jobs:
         run: python scripts/ingest_procurement_quarterly_resolved.py --output artifacts/procurement_quarterly.json
       - name: Validate quarterly procurement controls
         run: python scripts/validate_procurement_quarterly.py artifacts/procurement_quarterly.json
+      - name: Publish exact validated artifact to proof branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/agent/build-011-procurement-lifecycle'
+        run: |
+          cp artifacts/procurement_quarterly.json data/generated/procurement_quarterly.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/procurement_quarterly.json
+          if git diff --cached --quiet; then
+            echo "Validated artifact already matches branch"
+          else
+            git commit -m "Build 011: publish validated procurement lifecycle artifact"
+            git push origin HEAD:agent/build-011-procurement-lifecycle
+          fi
       - name: Upload proof artifact
         if: always()
         uses: actions/upload-artifact@v4
