@@ -6,6 +6,10 @@ when eSCRIBE replaces a filestream attachment. This entrypoint first tests the g
 URL. If it no longer serves a PDF, it re-reads the owning agenda and requires exactly
 one unique filestream href whose visible text exactly matches the checked-in report
 title. Both graph and resolved URLs are retained in report/row provenance.
+
+This layer also admits the Apr-Jun 2026 controlled appendix's explicit `Award Total`
+header as the same source concept previously labelled `Award Total Project Value` /
+`Project Value`. No general competitive table is reclassified by that refinement.
 """
 from __future__ import annotations
 
@@ -43,6 +47,39 @@ class AnchorCollector(HTMLParser):
             "text": base.clean(" ".join(self.current["text"])),
         })
         self.current = None
+
+
+def enhanced_modern_alt_header(table: list[list[str]]):
+    existing = _ORIGINAL_MODERN_ALT_HEADER(table)
+    if existing:
+        return existing
+    for index, row in enumerate(table[:6]):
+        headers = [base.normalize_header(cell) for cell in row]
+        if any("source published" in h or "actual award amount" in h or "completed submissions" in h for h in headers):
+            continue
+        mapping = {}
+        for col, header in enumerate(headers):
+            if header == "project number":
+                mapping["project_number"] = col
+            elif header == "project name":
+                mapping["project_name"] = col
+            elif header == "procurement type":
+                mapping["procurement_type"] = col
+            elif header in {"awarded summary", "supplier", "awarded supplier"}:
+                mapping["supplier"] = col
+            elif header in {"award total", "award total project value", "project value"}:
+                mapping["value"] = col
+            elif header in {"internal reference", "cost centre project number", "cost center project number"}:
+                mapping["reference"] = col
+            elif header == "department":
+                mapping["department"] = col
+        if {"project_number", "project_name", "procurement_type", "supplier", "value"}.issubset(mapping):
+            return index, mapping
+    return None
+
+
+_ORIGINAL_MODERN_ALT_HEADER = base.find_modern_alt_header
+base.find_modern_alt_header = enhanced_modern_alt_header
 
 
 def graph_url_is_live_pdf(session: requests.Session, url: str) -> bool:
