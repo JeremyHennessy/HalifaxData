@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "last_researched": "2026-08-26",
+    "scope": "Integrity, oversight, contract-amendment and campaign-finance sources supplementing data/sources.json",
+    "principle": "Authority findings remain separate from analytical anomalies; campaign-finance records are relationship evidence only and never imply wrongdoing by themselves."
+  },
+  "sources": [
+    {
+      "id": "hrm-ag-published-reports",
+      "name": "HRM Auditor General — Published Reports",
+      "publisher": "Office of the Auditor General — Halifax Regional Municipality",
+      "category": "Oversight",
+      "coverage": "Independent performance/compliance audit reports for HRM and municipal bodies; current index includes June 2026 Office of the Mayor Expenses and Capital Budgeting audits",
+      "ingestion": "HTML index + source documents",
+      "status": "ready",
+      "url": "https://hrmauditorgeneral.ca/published-reports"
+    },
+    {
+      "id": "hrm-ag-mayor-expenses-2026",
+      "name": "Office of the Mayor Expenses Audit — June 2026",
+      "publisher": "Office of the Auditor General — Halifax Regional Municipality",
+      "category": "Oversight",
+      "coverage": "Four 2025–2026 Office of the Mayor transactions tested for HRM policy compliance",
+      "ingestion": "PDF text / authority finding extraction",
+      "status": "ready",
+      "url": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Office_of_the_Mayor_Expenses_Audit.pdf"
+    },
+    {
+      "id": "hrm-ag-capital-budgeting-2026",
+      "name": "Capital Budgeting Audit — June 2026",
+      "publisher": "Office of the Auditor General — Halifax Regional Municipality",
+      "category": "Oversight",
+      "coverage": "Governance, prioritization, cost-estimating support and quality review for the 2025/26 Capital Plan",
+      "ingestion": "PDF text / authority finding extraction",
+      "status": "ready",
+      "url": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Capital_Budgeting_Audit.pdf"
+    },
+    {
+      "id": "hrm-ag-priorities-2026-27",
+      "name": "2025/26 Annual Report and 2026/27 Audit Priorities",
+      "publisher": "Office of the Auditor General — Halifax Regional Municipality",
+      "category": "Oversight",
+      "coverage": "Auditor General performance information plus planned 2026/27 Procurement and Capital Project Performance audits",
+      "ingestion": "PDF text",
+      "status": "ready",
+      "url": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/2025-26_Annual_Report_and_2026-27_Audit_Priorities.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2025-01",
+      "name": "CAO Contract Amendment Reporting — January 15, 2025",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "CAO-approved cumulative contract amendments exceeding Procurement Policy reporting thresholds",
+      "ingestion": "Committee report PDF / amendment records",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250115afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2025-05",
+      "name": "CAO Contract Amendment Reporting — May 21, 2025",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "CAO-approved cumulative contract amendments exceeding Procurement Policy reporting thresholds",
+      "ingestion": "Committee report PDF / amendment records",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250521afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2025-11",
+      "name": "CAO Contract Amendment Reporting — November 25, 2025",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "CAO-approved cumulative contract amendments exceeding Procurement Policy reporting thresholds, including underlying amendment reports",
+      "ingestion": "Committee report PDF / amendment records",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/251125afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-election-finance-2024-mayor",
+      "name": "2024 Mayoral Candidate Campaign Finance Disclosure",
+      "publisher": "Halifax Regional Municipality — Elections",
+      "category": "Campaign finance",
+      "coverage": "Filed 2024 mayoral campaign contribution and expenditure disclosure; relationship evidence only",
+      "ingestion": "PDF disclosure",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/elections/2024-election-financial-disclosure-mayor.pdf"
+    },
+    {
+      "id": "hrm-election-candidate-guide-2024",
+      "name": "2024 Municipal Election Candidate Information Guide",
+      "publisher": "Halifax Regional Municipality — Elections",
+      "category": "Campaign finance",
+      "coverage": "Campaign contribution, spending, disclosure and filing rules for the 2024 municipal election",
+      "ingestion": "PDF text",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/elections/022024-candidate-info-guide-halifax-regional-municipality.pdf"
+    }
+  ]
+}
