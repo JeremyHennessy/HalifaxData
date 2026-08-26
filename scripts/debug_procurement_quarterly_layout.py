@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Emit compact diagnostics for Build 011 quarterly procurement PDF layouts.
 
-This does not publish procurement data. It records only table/header structure and
-short source-text snippets around "Alternative Procurement" so parser changes can
+This does not publish procurement data. It records table/header structure and the
+source text lines from explicit alternative-award sections so parser changes can
 be based on source layout rather than guesses. Fetch failures are recorded explicitly
 rather than causing the diagnostic to hide layouts from other available reports.
 """
@@ -19,7 +19,7 @@ import requests
 
 from ingest_procurement_quarterly_reports import clean, fetch_pdf, find_header_map, report_documents
 
-DIAGNOSTIC_VERSION = "build011-layout-v2"
+DIAGNOSTIC_VERSION = "build011-layout-v3"
 
 
 def clip(value: str, limit: int = 240) -> str:
@@ -37,6 +37,19 @@ def page_snippets(text: str) -> list[str]:
         if snippet not in out:
             out.append(snippet)
     return out[:8]
+
+
+def relevant_lines(text: str) -> list[str]:
+    lines = [clean(line) for line in text.splitlines() if clean(line)]
+    if not lines:
+        return []
+    start = next((i for i, line in enumerate(lines) if re.search(r"\balternative awards\b|\balternative procurement awards over\b", line, re.I)), None)
+    if start is None and any(re.search(r"\balternative procurement\b", line, re.I) for line in lines):
+        start = max(0, next(i for i, line in enumerate(lines) if re.search(r"\balternative procurement\b", line, re.I)) - 2)
+    if start is None:
+        return []
+    selected = lines[start : start + 80]
+    return [clip(line, 520) for line in selected]
 
 
 def main() -> None:
@@ -67,12 +80,13 @@ def main() -> None:
             for page_num, page in enumerate(pdf.pages, 1):
                 text = page.extract_text() or ""
                 snippets = page_snippets(text)
+                section_lines = relevant_lines(text)
                 tables_out = []
                 for table_num, raw_table in enumerate(page.extract_tables() or [], 1):
                     table = [[clean(cell) for cell in (row or [])] for row in (raw_table or [])]
                     flat = " | ".join(" | ".join(row) for row in table)
                     header = find_header_map(table)
-                    interesting = bool(snippets) or bool(re.search(r"alternative\s+procurement", flat, re.I)) or header is not None
+                    interesting = bool(section_lines) or bool(re.search(r"alternative\s+procurement", flat, re.I)) or header is not None
                     if not interesting:
                         continue
                     header_map = None
@@ -84,10 +98,11 @@ def main() -> None:
                         "header": header_map,
                         "rows": [[clip(cell, 180) for cell in row] for row in table[:30]],
                     })
-                if snippets or tables_out:
+                if snippets or section_lines or tables_out:
                     report_out["pages"].append({
                         "page": page_num,
                         "alternative_snippets": snippets,
+                        "alternative_section_lines": section_lines,
                         "tables": tables_out,
                     })
         reports_out.append(report_out)
