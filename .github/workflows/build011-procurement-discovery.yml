@@ -1,8 +1,14 @@
 name: Build 011 Procurement Source Discovery
 
 on:
+  workflow_dispatch:
   push:
-    branches: ['agent/build-011-procurement-lifecycle']
+    branches: [main]
+    paths:
+      - 'scripts/discover_procurement_lifecycle_sources.py'
+      - 'data/generated/council_documents.json'
+      - '.github/workflows/build011-procurement-discovery.yml'
+  pull_request:
     paths:
       - 'scripts/discover_procurement_lifecycle_sources.py'
       - 'data/generated/council_documents.json'
