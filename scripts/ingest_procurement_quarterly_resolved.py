@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin
@@ -22,6 +23,9 @@ from urllib.parse import urljoin
 import requests
 
 import ingest_procurement_quarterly_reports as base
+
+POSTAL_RE = re.compile(r"\b[A-Z]\d[A-Z]\s*\d[A-Z]\d\b", re.I)
+TRAILING_DOLLAR_RE = re.compile(r"\s+\$\s*[\d,]+(?:\.\d+)?\s*$")
 
 
 class AnchorCollector(HTMLParser):
@@ -132,6 +136,29 @@ def resolve_report(session: requests.Session, report: dict) -> tuple[dict, str]:
     return resolved, "exact_title_live_agenda_resolution"
 
 
+def vendor_semantics(row: dict) -> tuple[str, str, bool]:
+    raw = base.clean(row.get("supplier_source_text") or row.get("vendor_name"))
+    if not raw:
+        return "", "unresolved_blank_source_summary", False
+    lower = raw.lower()
+    if lower.startswith("rfso -"):
+        return raw, "unresolved_descriptor_source_summary", False
+    if POSTAL_RE.search(raw):
+        return raw, "unresolved_source_summary_with_embedded_address", False
+    if lower.startswith("alt-p for "):
+        display = TRAILING_DOLLAR_RE.sub("", raw[10:]).strip()
+        return display or raw, "parsed_altp_for_source_narrative", bool(display)
+    display = base.supplier_from_summary(raw)
+    display = TRAILING_DOLLAR_RE.sub("", display).strip()
+    if lower.startswith("awarded to ") or lower.startswith("awarded "):
+        return display or raw, "parsed_awarded_to_source_narrative", bool(display)
+    if display != raw:
+        return display, "parsed_source_summary", True
+    if TRAILING_DOLLAR_RE.search(raw):
+        return display or raw, "source_vendor_text_with_trailing_value", bool(display)
+    return raw, "direct_source_vendor_text", True
+
+
 def annotate(meta: dict, rows: list[dict], original: dict, resolved: dict, resolution: str) -> None:
     graph_url = original.get("url")
     resolved_url = resolved.get("url")
@@ -144,6 +171,16 @@ def annotate(meta: dict, rows: list[dict], original: dict, resolved: dict, resol
         row["source_url_resolved"] = resolved_url
         row["source_url_resolution"] = resolution
         row["source_url_changed_since_graph"] = graph_url != resolved_url
+        if row.get("source_schema") == "legacy_alternative_awards_table":
+            row["procurement_type_display"] = "Alternative Awards report section — no separate source type column"
+            row["procurement_type_is_literal_column"] = False
+        else:
+            row["procurement_type_display"] = row.get("procurement_type_source") or "Source type unavailable"
+            row["procurement_type_is_literal_column"] = True
+        vendor_display, vendor_status, vendor_eligible = vendor_semantics(row)
+        row["vendor_display_name"] = vendor_display
+        row["vendor_identity_status"] = vendor_status
+        row["vendor_identity_eligible_for_grouping"] = vendor_eligible
         provenance = row.get("provenance") or {}
         provenance["source_url_registry"] = graph_url
         provenance["source_url_resolved"] = resolved_url
@@ -188,6 +225,7 @@ def main() -> None:
         keys.add(key)
 
     exact_threshold_rows = sum(1 for row in alternatives if abs(row["award_value"] - 50_000) <= 0.005)
+    unresolved_vendor_rows = sum(1 for row in alternatives if not row.get("vendor_identity_eligible_for_grouping"))
     payload = {
         "metadata": {
             "dataset_status": "official_quarterly_alternative_procurement_report_sections",
@@ -199,6 +237,11 @@ def main() -> None:
             "alternative_reporting_threshold_wording": "awards exceeding $50,000",
             "source_rows_at_exact_threshold": exact_threshold_rows,
             "reports_with_replaced_attachment_url": changed_urls,
+            "vendor_identity_unresolved_rows": unresolved_vendor_rows,
+            "vendor_grouping_rule": (
+                "Repeat/concentration grouping may use only rows marked vendor_identity_eligible_for_grouping=true. "
+                "Source summaries with embedded addresses, blank text, or descriptor-only text remain visible but are excluded."
+            ),
             "attachment_resolution": (
                 "Checked-in eSCRIBE attachment URLs are used first. If one no longer serves a PDF, the owning "
                 "checked-in agenda URL is re-read and exactly one filestream attachment with an exact visible-title "
@@ -230,7 +273,7 @@ def main() -> None:
     tmp.replace(args.output)
     print(
         f"Wrote {len(alternatives)} report-controlled alternative-procurement rows across {len(report_status)} reports; "
-        f"{changed_urls} report attachment URL(s) resolved from the live owning agenda"
+        f"{changed_urls} report attachment URL(s) resolved; {unresolved_vendor_rows} vendor identities excluded from grouping"
     )
 
 
