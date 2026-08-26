@@ -8,6 +8,7 @@ on:
       - 'scripts/ingest_current_capital_v2.py'
       - 'scripts/ingest_current_capital_v3.py'
       - 'scripts/ingest_current_capital_v4.py'
+      - 'scripts/ingest_current_capital_v5.py'
       - 'scripts/validate_current_capital.py'
       - 'data/sources.json'
       - 'data/generated/council.json'
@@ -19,6 +20,7 @@ on:
       - 'scripts/ingest_current_capital_v2.py'
       - 'scripts/ingest_current_capital_v3.py'
       - 'scripts/ingest_current_capital_v4.py'
+      - 'scripts/ingest_current_capital_v5.py'
       - 'scripts/validate_current_capital.py'
       - 'data/sources.json'
       - 'data/generated/current_capital.json'
@@ -43,7 +45,7 @@ jobs:
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Collect official current capital evidence
-        run: python scripts/ingest_current_capital_v4.py --output artifacts/current_capital.json
+        run: python scripts/ingest_current_capital_v5.py --output artifacts/current_capital.json
       - name: Validate current capital contract
         run: python scripts/validate_current_capital.py artifacts/current_capital.json
       - name: Guard unsupported spend semantics
