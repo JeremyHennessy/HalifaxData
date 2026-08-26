@@ -60,7 +60,10 @@ try {
       '8 quarterly reports', 'grouping-eligible value', '$24.3m',
       'identity unresolved', '4', 'separate procurement evidence layer',
       'not accounts-payable transactions', 'not final paid values',
-      '5716', '5776', 'no complete procurement denominator'
+      '5716', '5776', 'no complete procurement denominator',
+      'distinct grouping identities', '75', 'repeat identities', '5',
+      'multi-quarter identities', '3', 'department-coded rows', '61',
+      'quarterly alternative-procurement activity', 'literal source-type mix', 'department coverage'
     ]) {
       if (!vendorsText.includes(phrase.toLowerCase())) throw new Error(`${viewportName}/vendors: missing Build 011 phrase "${phrase}"`);
     }
@@ -70,6 +73,7 @@ try {
       const eligible = rows.filter(row => row.vendor_identity_eligible_for_grouping === true);
       const unresolved = rows.filter(row => row.vendor_identity_eligible_for_grouping !== true);
       const groups = window.b11VendorGroups();
+      const summary = window.b11SummaryFacts();
       return {
         rows: rows.length,
         reports: window.b11Reports().length,
@@ -78,17 +82,30 @@ try {
         groupingTotal: eligible.reduce((sum, row) => sum + Number(row.award_value || 0), 0),
         unresolvedRows: unresolved.length,
         unresolvedInGroups: groups.some(group => group.rows.some(row => row.vendor_identity_eligible_for_grouping !== true)),
+        distinctSuppliers: summary.distinctSuppliers,
+        repeatSuppliers: summary.repeatSuppliers,
+        multiQuarterSuppliers: summary.multiQuarterSuppliers,
+        departmentRows: summary.departmentRows,
+        departmentValue: summary.departmentValue,
         investigations: window.b11AlternativeInvestigations().length,
         reportCards: document.querySelectorAll('.b11-report-card').length,
+        quarterlyRows: document.querySelectorAll('.b11-quarter-row').length,
+        departmentCards: document.querySelectorAll('.b11-department-grid > div').length,
         renderedRows: document.querySelectorAll('[data-build011-row]').length
       };
     });
     if (facts.rows !== 84) throw new Error(`${viewportName}/vendors: expected 84 controlled rows, got ${facts.rows}`);
-    if (facts.reports !== 8 || facts.reportCards !== 8) throw new Error(`${viewportName}/vendors: expected eight report controls`);
+    if (facts.reports !== 8 || facts.reportCards !== 8 || facts.quarterlyRows !== 8) throw new Error(`${viewportName}/vendors: expected eight report controls and eight quarterly detail rows`);
     if (Math.abs(facts.total - EXPECTED_TOTAL) > 0.02) throw new Error(`${viewportName}/vendors: total ${facts.total} != ${EXPECTED_TOTAL}`);
     if (facts.eligibleRows !== 80) throw new Error(`${viewportName}/vendors: expected 80 grouping-eligible rows, got ${facts.eligibleRows}`);
     if (Math.abs(facts.groupingTotal - EXPECTED_GROUPING_TOTAL) > 0.02) throw new Error(`${viewportName}/vendors: grouping total ${facts.groupingTotal} != ${EXPECTED_GROUPING_TOTAL}`);
     if (facts.unresolvedRows !== 4 || facts.unresolvedInGroups) throw new Error(`${viewportName}/vendors: unresolved supplier identities leaked into grouping`);
+    if (facts.distinctSuppliers !== 75 || facts.repeatSuppliers !== 5 || facts.multiQuarterSuppliers !== 3) {
+      throw new Error(`${viewportName}/vendors: supplier detail counts changed unexpectedly: ${JSON.stringify(facts)}`);
+    }
+    if (facts.departmentRows !== 61 || Math.abs(facts.departmentValue - 17524572.75) > 0.02 || facts.departmentCards < 10) {
+      throw new Error(`${viewportName}/vendors: department-coded detail contract failed: ${JSON.stringify(facts)}`);
+    }
     if (facts.investigations < 5) throw new Error(`${viewportName}/vendors: expected multiple alternative-procurement investigations`);
     if (facts.renderedRows !== 84) throw new Error(`${viewportName}/vendors: expected all 84 controlled rows rendered, got ${facts.renderedRows}`);
 
@@ -103,7 +120,7 @@ try {
       throw new Error(`${viewportName}/vendors: Build 011 evidence drawer did not open`);
     }
     const drawerText = (await page.locator('#drawer-body').innerText()).toLowerCase();
-    for (const phrase of ['doc5716', 'exact-title live agenda attachment resolved', 'not an invoice', 'not a complete procurement record']) {
+    for (const phrase of ['doc5716', 'exact-title live agenda attachment resolved', 'not an invoice', 'not a complete procurement record', 'report control', 'source schema', 'raw extracted table cells']) {
       if (!drawerText.includes(phrase)) throw new Error(`${viewportName}/vendors drawer: missing "${phrase}"`);
     }
     const currentHref = await page.locator('#evidence-drawer a').filter({ hasText: 'Current resolved report attachment' }).getAttribute('href');
@@ -141,7 +158,7 @@ try {
     await alternativeCards.first().click();
     await page.waitForSelector('#evidence-drawer[open]');
     const investigationDrawer = (await page.locator('#drawer-body').innerText()).toLowerCase();
-    for (const phrase of ['grouping-eligible layer value', 'share of grouping-eligible layer', 'does not combine these values with public-tender awards']) {
+    for (const phrase of ['grouping-eligible layer value', 'share of grouping-eligible layer', 'does not combine these values with public-tender awards', 'supplier identity rule', 'history']) {
       if (!investigationDrawer.includes(phrase)) throw new Error(`${viewportName}/investigations drawer: missing "${phrase}"`);
     }
     await closeDrawer(page);
