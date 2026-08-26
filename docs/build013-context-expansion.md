@@ -68,3 +68,7 @@ Build 013 supplements the runtime source registry with:
 - 2025/26 Rural Transit Funding Program report;
 - November 15, 2023 CAO Contract Amendment Reporting;
 - Administrative Order 2022-012-ADM Procurement Policy.
+
+## Release verification
+
+The release branch is intentionally cut from the completed Build 013 implementation and receives no production-data or application-logic changes after this point. CI and browser evidence are pinned to the exact pull-request head before merge.
