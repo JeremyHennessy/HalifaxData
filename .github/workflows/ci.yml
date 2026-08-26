@@ -32,6 +32,7 @@ jobs:
           node --check build009-pattern-detection.js
           node --check build009-pattern-detection-refinements.js
           node --check build010-current-capital.js
+          node --check build010-current-capital-refinements.js
           node --check tools/ui-smoke.mjs
           node --check tools/build009-ui-smoke.mjs
           node --check tools/build010-ui-smoke.mjs
