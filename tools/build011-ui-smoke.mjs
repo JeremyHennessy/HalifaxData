@@ -21,7 +21,7 @@ async function openRoute(page, route) {
     const content = document.querySelector('#content');
     return content && !content.querySelector('.loading-card');
   });
-  await page.waitForFunction(() => window.state?.build011Procurement?.status === 'ready', null, { timeout: 15000 });
+  await page.waitForFunction(() => typeof window.b11Rows === 'function' && window.b11Rows().length === 84, null, { timeout: 15000 });
 }
 
 async function closeDrawer(page) {
@@ -116,6 +116,7 @@ try {
       const row = window.b11Rows().find(item => item.vendor_identity_eligible_for_grouping !== true);
       return row ? `${row.report_document_id}:${row.source_page}:${row.source_table}:${row.source_row}` : null;
     });
+    if (!unresolvedRowId) throw new Error(`${viewportName}/vendors: no unresolved supplier row found`);
     await page.locator(`[data-build011-row="${unresolvedRowId}"]`).click();
     await page.waitForSelector('#evidence-drawer[open]');
     const unresolvedDrawer = (await page.locator('#drawer-body').innerText()).toLowerCase();
