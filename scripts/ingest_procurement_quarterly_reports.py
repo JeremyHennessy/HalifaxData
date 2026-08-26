@@ -32,6 +32,7 @@ UA = "HalifaxData/0.11 (+https://github.com/JeremyHennessy/HalifaxData)"
 PARSER_VERSION = "build011-procurement-quarterly-v2"
 REPORT_TITLE_RE = re.compile(r"Award of Contracts\s*[-–—]\s*Quarterly Report", re.I)
 MONEY_RE = re.compile(r"\(?\$?\s*-?\s*\d[\d,]*(?:\.\d+)?\)?")
+DOLLAR_MONEY_RE = re.compile(r"\(?\s*\$\s*-?\s*\d[\d,]*(?:\.\d+)?\s*\)?")
 SOLICITATION_RE = re.compile(r"\b(?:HRM-)?((?:20)?\d{2})-\s*(\d{3,5})\b", re.I)
 ALT_MARKER_RE = re.compile(r"^Alternative Awards$", re.I)
 NET_TOTAL_RE = re.compile(r"^Net Total\b", re.I)
@@ -47,11 +48,7 @@ def clean(value) -> str:
     return re.sub(r"\s+", " ", str(value).replace("\u00a0", " ")).strip()
 
 
-def money(value):
-    text = clean(value).replace("**", "").replace("*", "")
-    if not text or text in {"-", "$ -", "$-", "—"}:
-        return None
-    match = MONEY_RE.search(text)
+def parse_money_match(match) -> float | None:
     if not match:
         return None
     raw = clean(match.group())
@@ -64,6 +61,22 @@ def money(value):
     except ValueError:
         return None
     return round(-value if negative else value, 2)
+
+
+def money(value):
+    text = clean(value).replace("**", "").replace("*", "")
+    if not text or text in {"-", "$ -", "$-", "—"}:
+        return None
+    return parse_money_match(MONEY_RE.search(text))
+
+
+def dollar_money(value):
+    """Parse a monetary value from narrative text only when a dollar sign is present."""
+    text = clean(value).replace("**", "").replace("*", "")
+    if not text:
+        return None
+    matches = list(DOLLAR_MONEY_RE.finditer(text))
+    return parse_money_match(matches[-1]) if matches else None
 
 
 def normalize_header(value: str) -> str:
@@ -313,7 +326,7 @@ def modern_section_rows(pdf, report: dict) -> list[dict]:
                 value_text = mapped(cells, mapping, "value")
                 award_value = money(value_text)
                 if award_value is None:
-                    award_value = money(source_summary)
+                    award_value = dollar_money(source_summary)
                 if award_value is None or award_value < 50_000:
                     continue
                 procurement_type = mapped(cells, mapping, "procurement_type")
