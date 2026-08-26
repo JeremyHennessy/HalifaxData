@@ -38,6 +38,7 @@ jobs:
           node --check build011-procurement-lifecycle-refinements.js
           node --check build012-integrity-oversight.js
           node --check build013-context-expansion.js
+          node --check build013-current-grants.js
           node --check tools/ui-smoke.mjs
           node --check tools/build009-ui-smoke.mjs
           node --check tools/build010-ui-smoke.mjs
