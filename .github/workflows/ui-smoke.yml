@@ -2,7 +2,7 @@ name: UI Smoke
 
 on:
   push:
-    branches: ['agent/design-analysis-ui-verification-20260825']
+    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle']
   pull_request:
     paths:
       - 'index.html'
@@ -13,6 +13,7 @@ on:
       - 'tools/build009-ui-smoke.mjs'
       - 'tools/build010-ui-smoke.mjs'
       - 'tools/build010-startup-race.mjs'
+      - 'tools/build011-ui-smoke.mjs'
       - '.github/workflows/ui-smoke.yml'
 
 permissions:
@@ -47,6 +48,8 @@ jobs:
         run: node tools/build009-ui-smoke.mjs
       - name: Validate Build 010 current capital surfaces
         run: node tools/build010-ui-smoke.mjs
+      - name: Validate Build 011 procurement lifecycle surfaces
+        run: node tools/build011-ui-smoke.mjs
       - name: Upload UI evidence
         if: always()
         uses: actions/upload-artifact@v4

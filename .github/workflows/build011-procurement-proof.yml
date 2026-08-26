@@ -1,0 +1,51 @@
+name: Build 011 Procurement Quarterly Proof
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/ingest_procurement_quarterly_reports.py'
+      - 'scripts/ingest_procurement_quarterly_resolved.py'
+      - 'scripts/validate_procurement_quarterly.py'
+      - 'data/generated/procurement_quarterly.json'
+      - 'data/generated/council_documents.json'
+      - '.github/workflows/build011-procurement-proof.yml'
+  pull_request:
+    paths:
+      - 'scripts/ingest_procurement_quarterly_reports.py'
+      - 'scripts/ingest_procurement_quarterly_resolved.py'
+      - 'scripts/validate_procurement_quarterly.py'
+      - 'data/generated/procurement_quarterly.json'
+      - 'data/generated/council_documents.json'
+      - '.github/workflows/build011-procurement-proof.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts/ingest_procurement_quarterly_reports.py scripts/ingest_procurement_quarterly_resolved.py scripts/validate_procurement_quarterly.py
+      - name: Validate checked procurement lifecycle artifact
+        run: python scripts/validate_procurement_quarterly.py data/generated/procurement_quarterly.json
+      - name: Reproduce quarterly procurement evidence from current sources
+        run: python scripts/ingest_procurement_quarterly_resolved.py --output artifacts/procurement_quarterly.json
+      - name: Validate reproduced quarterly procurement controls
+        run: python scripts/validate_procurement_quarterly.py artifacts/procurement_quarterly.json
+      - name: Upload proof artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build011-procurement-quarterly-${{ github.sha }}
+          path: artifacts/procurement_quarterly.json
+          if-no-files-found: warn
+          retention-days: 14

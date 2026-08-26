@@ -1,0 +1,38 @@
+name: Build 011 Procurement Source Discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/discover_procurement_lifecycle_sources.py'
+      - 'data/generated/council_documents.json'
+      - '.github/workflows/build011-procurement-discovery.yml'
+  pull_request:
+    paths:
+      - 'scripts/discover_procurement_lifecycle_sources.py'
+      - 'data/generated/council_documents.json'
+      - '.github/workflows/build011-procurement-discovery.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate discovery syntax
+        run: python -m compileall -q scripts/discover_procurement_lifecycle_sources.py
+      - name: Discover procurement lifecycle source candidates
+        run: python scripts/discover_procurement_lifecycle_sources.py | tee /tmp/build011-discovery.json
+      - name: Upload discovery evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: build011-procurement-discovery-${{ github.sha }}
+          path: /tmp/build011-discovery.json
+          if-no-files-found: error
+          retention-days: 14
