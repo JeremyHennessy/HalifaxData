@@ -51,6 +51,12 @@ def main() -> None:
     prior_by_code = {row["project_code"]: row for row in prior}
     comparison_by_code = {row["project_code"]: row for row in comparisons}
 
+    # Known authoritative identity checks catch accidental promotion of Previous # values.
+    assert "BT36" in prior_by_code, "Corporate Cashiering current code BT36 missing from 2024/25 plan"
+    assert prior_by_code["BT36"].get("previous_code") == "CI200002", prior_by_code["BT36"]
+    assert "CI200002" in prior_by_code, "Finance & HR Business Foundations CI200002 missing"
+    assert "finance" in str(prior_by_code["CI200002"].get("project_name", "")).lower(), prior_by_code["CI200002"]
+
     assert "CT000007" in current_by_code, "Cogswell missing from 2025/26 current plan"
     assert "CT000007" in prior_by_code, "Cogswell missing from 2024/25 prior plan"
     assert "CT000007" in comparison_by_code, "Cogswell missing from exact-code comparison"
@@ -68,7 +74,8 @@ def main() -> None:
     by_type = {}
     for row in adjustments:
         by_type.setdefault(row.get("adjustment_type"), []).append(row)
-        assert row.get("source_id") == "hrm-capital-adjustments-2025-26"
+        assert row.get("source_id") == "hrm-escribe", row
+        assert row.get("source_document_url"), row
         assert (row.get("decision") or {}).get("decision_status") == "approved"
         before = row.get("approved_budget_before")
         change = row.get("adjustment_amount")
