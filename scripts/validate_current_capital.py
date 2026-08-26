@@ -24,6 +24,7 @@ def main() -> None:
     decision = payload.get("decision") or {}
 
     assert meta.get("dataset_status") == "current_capital_plan_and_approved_adjustments", meta
+    assert meta.get("parser_version") == "build010-current-capital-v5", meta
     assert meta.get("is_transaction_ledger") is False, meta
     assert meta.get("has_project_spend_to_date") is False, meta
     assert len(current) >= 75, len(current)
