@@ -220,6 +220,7 @@ def parse_report(session: requests.Session, report: dict) -> tuple[dict, list[di
     controls = summary_controls(text)
     report_meta = {
         **report,
+        "report_period": period_from_title(report["title"]),
         **controls,
         "parsed_alternative_rows": len(alternatives),
         "parsed_alternative_value": round(sum(row["award_value"] for row in alternatives), 2),
