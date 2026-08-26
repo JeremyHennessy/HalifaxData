@@ -5,6 +5,7 @@ on:
     branches: ['agent/build-010-current-capital']
     paths:
       - 'scripts/ingest_current_capital.py'
+      - 'scripts/ingest_current_capital_v2.py'
       - 'scripts/validate_current_capital.py'
       - 'data/sources.json'
       - 'data/generated/council.json'
@@ -13,6 +14,7 @@ on:
   pull_request:
     paths:
       - 'scripts/ingest_current_capital.py'
+      - 'scripts/ingest_current_capital_v2.py'
       - 'scripts/validate_current_capital.py'
       - 'data/sources.json'
       - 'data/generated/current_capital.json'
@@ -37,7 +39,7 @@ jobs:
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Collect official current capital evidence
-        run: python scripts/ingest_current_capital.py --output artifacts/current_capital.json
+        run: python scripts/ingest_current_capital_v2.py --output artifacts/current_capital.json
       - name: Validate current capital contract
         run: python scripts/validate_current_capital.py artifacts/current_capital.json
       - name: Guard unsupported spend semantics
