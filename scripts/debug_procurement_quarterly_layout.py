@@ -18,6 +18,8 @@ import requests
 
 from ingest_procurement_quarterly_reports import clean, fetch_pdf, find_header_map, report_documents
 
+DIAGNOSTIC_VERSION = "build011-layout-v1"
+
 
 def clip(value: str, limit: int = 240) -> str:
     text = clean(value)
@@ -83,7 +85,7 @@ def main() -> None:
         reports_out.append(report_out)
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps({"reports": reports_out}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    args.output.write_text(json.dumps({"diagnostic_version": DIAGNOSTIC_VERSION, "reports": reports_out}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"wrote layout diagnostics for {len(reports_out)} reports")
 
 
