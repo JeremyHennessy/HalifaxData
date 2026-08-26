@@ -2,7 +2,7 @@ name: UI Smoke
 
 on:
   push:
-    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight']
+    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion']
   pull_request:
     paths:
       - 'index.html'
@@ -15,6 +15,7 @@ on:
       - 'tools/build010-startup-race.mjs'
       - 'tools/build011-ui-smoke.mjs'
       - 'tools/build012-ui-smoke.mjs'
+      - 'tools/build013-ui-smoke.mjs'
       - '.github/workflows/ui-smoke.yml'
 
 permissions:
@@ -53,6 +54,8 @@ jobs:
         run: node tools/build011-ui-smoke.mjs
       - name: Validate Build 012 integrity oversight surfaces
         run: node tools/build012-ui-smoke.mjs
+      - name: Validate Build 013 context expansion surfaces
+        run: node tools/build013-ui-smoke.mjs
       - name: Upload UI evidence
         if: always()
         uses: actions/upload-artifact@v4
