@@ -38,6 +38,25 @@ HalifaxData is an evidence-first public-finance intelligence project for Halifax
 - Three truncated/typo service-area labels are canonicalized only where other official HRM budget evidence establishes the complete name; every row retains the raw source label and normalization provenance.
 - Budget & Actuals now has a dedicated local business-unit/search filter, evidence drawers, source-arithmetic flags, and audited budget-vs-actual metrics while preserving the Build 002/003 application shell.
 
+### Builds 005–011 — longitudinal and investigation intelligence
+
+- Expanded source-backed history for budgets, audited financials, quarterly spending, capital projects, municipal benchmarks, Council records and procurement.
+- Cross-domain Investigations surfaces distinguish fiscal-review leads from data-quality issues and retain direct source provenance.
+- Automated pattern analysis covers multi-year budget pressure, exact-name procurement persistence/concentration, like-for-like quarterly spending trajectories and conservative cross-domain corroboration.
+- Current-capital analysis compares exact project codes across released plans and keeps project estimates/schedules separate from transaction-level spend.
+- Procurement lifecycle evidence adds quarterly public-award reporting, alternative-procurement context, department/supplier histories and explicit boundaries where bidder counts, amendments or final-paid values are unavailable.
+- Candidate entity aliases remain review aids rather than silently merged identities.
+
+### Build 012 — integrity and oversight evidence
+
+- Adds **six authority-backed HRM Auditor General findings** from the June 2026 Office of the Mayor Expenses and Capital Budgeting audits without converting them into anomaly scores.
+- Adds **five selected CAO contract-amendment records** with original value, cumulative increase, published new value, source explanation and independently checked arithmetic.
+- Preserves a confirmed **$95.23 arithmetic inconsistency in the published Fathom amendment table** rather than silently correcting the source.
+- Adds **nine supplemental integrity-source definitions** covering Auditor General reports, CAO contract-amendment reports and 2024 campaign-finance disclosure/rule sources.
+- Introduces an explicit evidence hierarchy: **Anomaly → Control weakness → Policy noncompliance → Referred for investigation → Substantiated wrongdoing**.
+- The checked-in Build 012 artifact contains **0 referred-for-investigation records, 0 substantiated-wrongdoing records and 0 campaign-to-vendor relationship assertions**. Higher evidence tiers are never inferred from anomaly scores or name matches.
+- Command Center, Investigations, Vendors & Contracts and Sources & Evidence receive additive light-theme panels while the established application shell and prior scoring logic remain unchanged.
+
 ## Compensation interpretation
 
 The compensation dataset is the complete extraction from the **currently configured annual $100k+ disclosure statements**, not the complete HRM workforce or a transaction-level payroll ledger. A missing person/year is therefore not evidence that the person left employment or received no compensation.
@@ -51,6 +70,14 @@ The configured statements currently contain two arithmetic inconsistencies detec
 The 2025/26 Budget & Business Plan service-area tables and the March 31, 2025 audited PSAS statement are **not the same accounting view**. A service-area budget line should not be treated as directly reconciled to an audited PSAS category unless an explicit source supports that crosswalk.
 
 Budget change columns published by HRM are retained as source facts. HalifaxData also calculates the same change from the published endpoint budgets. Where the two disagree beyond source rounding, the row is flagged for source review; the published value is not overwritten.
+
+## Integrity / oversight interpretation
+
+Authority-backed findings are stored separately from analytical anomalies. A control weakness or policy-noncompliance finding is evidence that an independent authority identified a specific problem; it is not automatically evidence of fraud, corruption or a criminal offence.
+
+Contract-amendment rows are selected published oversight examples, not a complete amendment ledger or accounts-payable transaction feed. Campaign-finance records are relationship evidence only and must not be treated as evidence of favoritism or wrongdoing without an independently supported decision/procurement link.
+
+See `docs/build012-integrity-oversight.md` for the Build 012 evidence boundaries and validation controls.
 
 ## Run locally
 
