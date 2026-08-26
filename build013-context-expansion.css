@@ -1,5 +1,9 @@
 /* Build 013 — contextual funding and amendment evidence. */
 .b13-community-funding{gap:14px}
+.b13-section-header{padding:2px 2px 0}
+.b13-section-header .eyebrow{margin:0 0 4px}
+.b13-section-header h2{margin:0;color:var(--text);font-size:18px;line-height:1.25;letter-spacing:-.02em}
+.b13-section-header>p:last-child{max-width:760px;margin:5px 0 0;color:var(--muted);font-size:10.5px;line-height:1.5}
 .b13-funding-boundary{margin:0}
 .b13-funding-stack{display:grid;gap:12px;min-width:0}
 .b13-funding-metrics{margin:0}
@@ -32,4 +36,5 @@
   .b13-inline-summary,.b13-source-grid{grid-template-columns:1fr}
   .b13-toolbar{align-items:stretch}
   .b13-toolbar .local-search,.b13-toolbar select{width:100%;min-width:0}
+  .b13-section-header h2{font-size:16px}
 }
