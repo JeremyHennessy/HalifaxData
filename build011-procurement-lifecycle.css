@@ -1,0 +1,28 @@
+/* Build 011 alternative-procurement evidence presentation. */
+.b11-procurement{gap:14px}
+.b11-boundary{margin:0}
+.b11-report-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.b11-report-card{min-width:0;padding:11px;border:1px solid #dce5eb;border-radius:10px;background:#fbfdfe}
+.b11-report-card>div{display:flex;align-items:flex-start;justify-content:space-between;gap:7px}
+.b11-report-card strong,.b11-report-card span,.b11-report-card small{display:block}
+.b11-report-card strong{font-size:10.5px;line-height:1.4}
+.b11-report-card span{margin-top:7px;color:#294b62;font-size:11px;font-weight:760;font-variant-numeric:tabular-nums}
+.b11-report-card small{margin-top:5px;color:var(--faint);font-size:8.8px;line-height:1.45}
+.b11-report-card .b11-source-change{padding-top:5px;border-top:1px solid var(--line-soft);color:#765523}
+.b11-toolbar{align-items:center}
+.b11-toolbar .local-search{min-width:min(360px,100%)}
+.b11-procurement tr[data-build011-row]{cursor:pointer}
+.b11-procurement tr[data-build011-row]:hover td{background:#f8fbfc}
+.b11-procurement tr[data-build011-row]:focus-within td{background:#f8fbfc}
+.b11-procurement .table-wrap{max-width:100%}
+.b11-procurement .split-grid .panel{min-width:0}
+
+@media(max-width:1180px){
+  .b11-report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .b11-report-grid{grid-template-columns:1fr}
+  .b11-toolbar{align-items:stretch}
+  .b11-toolbar .local-search,.b11-toolbar select{width:100%;min-width:0}
+  .b11-report-card{padding:10px}
+}
