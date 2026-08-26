@@ -1,0 +1,32 @@
+name: Build 012 Context Source Diagnostic
+
+on:
+  push:
+    branches: ['agent/build-012-context-expansion']
+    paths:
+      - 'scripts/build012_source_diagnostic.py'
+      - '.github/workflows/build012-source-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Run source diagnostics
+        run: python scripts/build012_source_diagnostic.py
+      - name: Upload diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: build012-source-diagnostic-${{ github.sha }}
+          path: artifacts/build012-source-diagnostic.json
+          if-no-files-found: error
+          retention-days: 7
