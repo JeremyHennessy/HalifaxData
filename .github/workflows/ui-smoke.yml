@@ -12,6 +12,7 @@ on:
       - 'tools/ui-smoke.mjs'
       - 'tools/build009-ui-smoke.mjs'
       - 'tools/build010-ui-smoke.mjs'
+      - 'tools/build010-startup-race.mjs'
       - '.github/workflows/ui-smoke.yml'
 
 permissions:
@@ -38,6 +39,8 @@ jobs:
           echo $! > /tmp/halifaxdata-http.pid
           sleep 2
           curl --fail --silent http://127.0.0.1:8000/ > /dev/null
+      - name: Validate Build 010 startup ordering
+        run: node tools/build010-startup-race.mjs
       - name: Capture and validate dashboard views
         run: node tools/ui-smoke.mjs
       - name: Validate Build 009 pattern surfaces
