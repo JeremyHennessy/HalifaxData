@@ -11,6 +11,7 @@ on:
       - 'data/**'
       - 'tools/ui-smoke.mjs'
       - 'tools/build009-ui-smoke.mjs'
+      - 'tools/build010-ui-smoke.mjs'
       - '.github/workflows/ui-smoke.yml'
 
 permissions:
@@ -41,6 +42,8 @@ jobs:
         run: node tools/ui-smoke.mjs
       - name: Validate Build 009 pattern surfaces
         run: node tools/build009-ui-smoke.mjs
+      - name: Validate Build 010 current capital surfaces
+        run: node tools/build010-ui-smoke.mjs
       - name: Upload UI evidence
         if: always()
         uses: actions/upload-artifact@v4

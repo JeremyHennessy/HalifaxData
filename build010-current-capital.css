@@ -1,0 +1,119 @@
+/* Build 010 — current capital control additions. Reuses the approved light system. */
+.b10-current-capital {
+  margin-bottom: 4px;
+}
+
+.b10-current-capital > .notice:first-child {
+  border-left-width: 4px;
+}
+
+.b10-adjustment-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.b10-adjustment-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.b10-adjustment-summary > div {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-subtle, #f8fafc);
+  padding: 14px 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.b10-adjustment-summary strong {
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.b10-adjustment-summary span,
+.b10-static-row span,
+.b10-row-button span {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.b10-adjustment-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.b10-adjustment-columns section {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.b10-adjustment-columns h3 {
+  margin: 0 0 2px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+  color: var(--text-muted);
+}
+
+.b10-static-row,
+.b10-row-button {
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface, #fff);
+}
+
+.b10-row-button {
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.b10-row-button:hover,
+.b10-row-button:focus-visible {
+  border-color: var(--accent, #3768d8);
+  outline: none;
+}
+
+.b10-current-capital tbody tr[data-build010-project] {
+  cursor: pointer;
+}
+
+.b10-current-capital tbody tr[data-build010-project]:hover td {
+  background: var(--surface-subtle, #f8fafc);
+}
+
+.b10-current-capital .notice.subtle {
+  margin-top: 2px;
+  background: var(--surface-subtle, #f8fafc);
+}
+
+@media (max-width: 900px) {
+  .b10-adjustment-summary,
+  .b10-adjustment-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .b10-adjustment-summary > div,
+  .b10-static-row,
+  .b10-row-button {
+    padding: 11px 12px;
+  }
+
+  .b10-current-capital .b8-investigation-grid {
+    grid-template-columns: 1fr;
+  }
+}
