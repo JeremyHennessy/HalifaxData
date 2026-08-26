@@ -19,7 +19,14 @@ async function openRoute(page, route) {
     const content = document.querySelector('#content');
     return content && !content.querySelector('.loading-card');
   });
-  await page.waitForFunction(() => typeof window.b13Data === 'function' && window.b13Data()?.community_grants_2025?.council_approved_total === 476430, null, { timeout: 15000 });
+  await page.waitForFunction(() =>
+    typeof window.b13Data === 'function' &&
+    window.b13Data()?.community_grants_2025?.council_approved_total === 476430 &&
+    typeof window.b13CurrentGrants === 'function' &&
+    window.b13CurrentGrants()?.proposed_award_total === 375006,
+    null,
+    { timeout: 15000 }
+  );
 }
 
 async function closeDrawer(page) {
@@ -55,6 +62,7 @@ try {
     const fundingText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of [
       'community funding context', 'funding context, not suspicion scoring',
+      '2026/27 community grants', 'proposal stage', 'not final council awards',
       '2025/26 community grants', 'council-approved total',
       '2025 community museum funding', 'rural transit funding',
       'repeat funding is an explicit program feature', 'not invoices or vendor payments'
@@ -63,6 +71,7 @@ try {
     }
 
     const facts = await page.evaluate(() => {
+      const current = window.b13CurrentGrants();
       const grants = window.b13CommunityGrants();
       const museums = window.b13Museums();
       const transit = window.b13Transit();
@@ -70,6 +79,12 @@ try {
       const museumRows = window.b13MuseumRows();
       const operating = new Set(museums.operating_grants.map(row => row.recipient.toLowerCase()));
       return {
+        currentGrantCategories: current.categories.length,
+        currentGrantApplications: current.categories.reduce((sum, row) => sum + Number(row.applications || 0), 0),
+        currentGrantAwards: current.categories.reduce((sum, row) => sum + Number(row.proposed_awards || 0), 0),
+        currentGrantValue: current.categories.reduce((sum, row) => sum + Number(row.proposed_award_value || 0), 0),
+        currentGrantBudget: current.program_budget,
+        currentGrantBalance: current.balance_after_proposed_transfer,
         grantCategories: grants.categories.length,
         grantApplications: grants.categories.reduce((sum, row) => sum + Number(row.applications || 0), 0),
         grantRequested: grants.categories.reduce((sum, row) => sum + Number(row.requested || 0), 0),
@@ -89,6 +104,8 @@ try {
       };
     });
 
+    if (facts.currentGrantCategories !== 7 || facts.currentGrantApplications !== 145 || facts.currentGrantAwards !== 53) throw new Error(`${viewportName}/benchmarks: 2026 Community Grants count controls failed`);
+    if (Math.abs(facts.currentGrantValue - 375006) > 0.02 || Math.abs(facts.currentGrantBudget - 500000) > 0.02 || Math.abs(facts.currentGrantBalance - 59994) > 0.02) throw new Error(`${viewportName}/benchmarks: 2026 Community Grants value controls failed`);
     if (facts.grantCategories !== 7 || facts.grantApplications !== 120 || facts.grantRecommendedAwards !== 63) throw new Error(`${viewportName}/benchmarks: Community Grants count controls failed`);
     if (Math.abs(facts.grantRequested - 1224009.14) > 0.02 || Math.abs(facts.grantRecommendedTotal - 480430) > 0.02 || Math.abs(facts.grantFinalTotal - 476430) > 0.02) throw new Error(`${viewportName}/benchmarks: Community Grants value controls failed`);
     if (facts.museumRows !== 22 || Math.abs(facts.museumOperating - 157890) > 0.02 || Math.abs(facts.museumProjects - 55920) > 0.02 || facts.museumOverlap !== 8) throw new Error(`${viewportName}/benchmarks: museum funding controls failed`);
@@ -137,10 +154,10 @@ try {
 
     await openRoute(page, 'sources');
     const sourceText = (await page.locator('#content').innerText()).toLowerCase();
-    for (const phrase of ['build 013 context sources', 'community funding', 'procurement policy', 'complete grants or contract-amendment ledger']) {
+    for (const phrase of ['build 013 context sources', 'community funding', 'procurement policy', 'complete grants or contract-amendment ledger', 'fiscal 2026 proposed awards']) {
       if (!sourceText.includes(phrase)) throw new Error(`${viewportName}/sources: missing "${phrase}"`);
     }
-    if (await page.locator('.b13-source-grid > div').count() !== 6) throw new Error(`${viewportName}/sources: expected six Build 013 source records`);
+    if (await page.locator('.b13-source-grid > div').count() !== 7) throw new Error(`${viewportName}/sources: expected seven Build 013 source records`);
     await assertNoOverflow(page, viewportName, 'sources');
 
     report.views.push({ viewport: viewportName, ...facts, amendmentCards: await cards.count() });
