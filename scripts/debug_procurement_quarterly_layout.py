@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Emit compact diagnostics for Build 011 quarterly procurement PDF layouts.
+"""Temporary Build 011 source/layout diagnostic.
 
-This does not publish procurement data. It records table/header structure and the
-source text lines from explicit alternative-award sections so parser changes can
-be based on source layout rather than guesses. Fetch failures are recorded explicitly
-rather than causing the diagnostic to hide layouts from other available reports.
+Never publishes data. It records source table structure and, when an attachment URL
+fails, re-reads the owning eSCRIBE agenda page and captures current attachment links
+whose text references Award of Contracts.
 """
 from __future__ import annotations
 
@@ -12,44 +11,78 @@ import argparse
 import io
 import json
 import re
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urljoin
 
 import pdfplumber
 import requests
 
-from ingest_procurement_quarterly_reports import clean, fetch_pdf, find_header_map, report_documents
+from ingest_procurement_quarterly_reports import clean, fetch_pdf, find_modern_alt_header, report_documents
 
-DIAGNOSTIC_VERSION = "build011-layout-v3"
+DIAGNOSTIC_VERSION = "build011-layout-v4"
 
 
-def clip(value: str, limit: int = 240) -> str:
+class AnchorCollector(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.current = None
+        self.anchors = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() != "a":
+            return
+        href = dict(attrs).get("href")
+        self.current = {"href": href or "", "text": []}
+
+    def handle_data(self, data):
+        if self.current is not None:
+            self.current["text"].append(data)
+
+    def handle_endtag(self, tag):
+        if tag.lower() == "a" and self.current is not None:
+            self.anchors.append({"href": self.current["href"], "text": clean(" ".join(self.current["text"]))})
+            self.current = None
+
+
+def clip(value: str, limit: int = 520) -> str:
     text = clean(value)
     return text if len(text) <= limit else text[: limit - 1] + "…"
 
 
-def page_snippets(text: str) -> list[str]:
-    flat = clean(text)
-    out = []
-    for match in re.finditer(r"alternative\s+procurement", flat, re.I):
-        start = max(0, match.start() - 180)
-        end = min(len(flat), match.end() + 260)
-        snippet = clip(flat[start:end], 520)
-        if snippet not in out:
-            out.append(snippet)
-    return out[:8]
+def agenda_candidates(session: requests.Session, report: dict) -> dict:
+    url = report.get("agenda_url")
+    result = {"agenda_url": url, "status": "not_checked", "candidates": []}
+    if not url:
+        return result
+    try:
+        response = session.get(url, timeout=90)
+        result["http_status"] = response.status_code
+        response.raise_for_status()
+        parser = AnchorCollector()
+        parser.feed(response.text)
+        candidates = []
+        for anchor in parser.anchors:
+            href = anchor["href"]
+            text = anchor["text"]
+            if not href:
+                continue
+            if re.search(r"award of contracts", text, re.I) or ("filestream.ashx" in href.lower() and re.search(r"quarterly report", text, re.I)):
+                candidates.append({"text": clip(text), "href": urljoin(url, href)})
+        result["status"] = "ok"
+        result["candidates"] = candidates
+    except Exception as exc:
+        result["status"] = "error"
+        result["error"] = f"{type(exc).__name__}: {exc}"
+    return result
 
 
 def relevant_lines(text: str) -> list[str]:
     lines = [clean(line) for line in text.splitlines() if clean(line)]
-    if not lines:
-        return []
     start = next((i for i, line in enumerate(lines) if re.search(r"\balternative awards\b|\balternative procurement awards over\b", line, re.I)), None)
-    if start is None and any(re.search(r"\balternative procurement\b", line, re.I) for line in lines):
-        start = max(0, next(i for i, line in enumerate(lines) if re.search(r"\balternative procurement\b", line, re.I)) - 2)
     if start is None:
         return []
-    selected = lines[start : start + 80]
-    return [clip(line, 520) for line in selected]
+    return [clip(line) for line in lines[start : start + 80]]
 
 
 def main() -> None:
@@ -58,58 +91,51 @@ def main() -> None:
     args = parser.parse_args()
 
     session = requests.Session()
-    session.headers["User-Agent"] = "HalifaxData/0.11 layout diagnostic"
+    session.headers["User-Agent"] = "HalifaxData/0.11 source diagnostic"
     reports_out = []
 
     for report in report_documents():
-        report_out = {
+        out = {
             "document_id": report["document_id"],
+            "meeting_id": report.get("meeting_id"),
             "title": report["title"],
             "url": report["url"],
+            "agenda_url": report.get("agenda_url"),
             "status": "ok",
             "pages": [],
         }
         try:
             blob = fetch_pdf(session, report["url"])
         except Exception as exc:
-            report_out["status"] = "fetch_error"
-            report_out["error"] = f"{type(exc).__name__}: {exc}"
-            reports_out.append(report_out)
+            out["status"] = "fetch_error"
+            out["error"] = f"{type(exc).__name__}: {exc}"
+            out["agenda_resolution"] = agenda_candidates(session, report)
+            reports_out.append(out)
             continue
         with pdfplumber.open(io.BytesIO(blob)) as pdf:
             for page_num, page in enumerate(pdf.pages, 1):
                 text = page.extract_text() or ""
-                snippets = page_snippets(text)
-                section_lines = relevant_lines(text)
-                tables_out = []
-                for table_num, raw_table in enumerate(page.extract_tables() or [], 1):
-                    table = [[clean(cell) for cell in (row or [])] for row in (raw_table or [])]
-                    flat = " | ".join(" | ".join(row) for row in table)
-                    header = find_header_map(table)
-                    interesting = bool(section_lines) or bool(re.search(r"alternative\s+procurement", flat, re.I)) or header is not None
-                    if not interesting:
+                lines = relevant_lines(text)
+                tables = []
+                for table_num, raw in enumerate(page.extract_tables() or [], 1):
+                    table = [[clean(cell) for cell in (row or [])] for row in (raw or [])]
+                    modern = find_modern_alt_header(table)
+                    has_alt = any(re.search(r"alternative (?:procurement|awards?)", clean(" ".join(row)), re.I) for row in table)
+                    if not lines and not modern and not has_alt:
                         continue
-                    header_map = None
-                    if header:
-                        header_map = {"row_index": header[0], "mapping": header[1]}
-                    tables_out.append({
+                    tables.append({
                         "table_num": table_num,
                         "row_count": len(table),
-                        "header": header_map,
+                        "modern_alt_header": modern,
                         "rows": [[clip(cell, 180) for cell in row] for row in table[:30]],
                     })
-                if snippets or section_lines or tables_out:
-                    report_out["pages"].append({
-                        "page": page_num,
-                        "alternative_snippets": snippets,
-                        "alternative_section_lines": section_lines,
-                        "tables": tables_out,
-                    })
-        reports_out.append(report_out)
+                if lines or tables:
+                    out["pages"].append({"page": page_num, "alternative_section_lines": lines, "tables": tables})
+        reports_out.append(out)
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps({"diagnostic_version": DIAGNOSTIC_VERSION, "reports": reports_out}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"wrote layout diagnostics for {len(reports_out)} reports")
+    print(f"wrote source diagnostics for {len(reports_out)} reports")
 
 
 if __name__ == "__main__":
