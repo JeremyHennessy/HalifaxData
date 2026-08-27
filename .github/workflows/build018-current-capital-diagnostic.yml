@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check -r requirements.txt
-      - name: Resolve and inspect revised 2026/27 capital schedule source
+      - name: Resolve and inspect complete 2026/27 capital multi-year schedule
         run: |
           python - <<'PY'
           import html
@@ -34,71 +34,45 @@ jobs:
           exact_title = '7 - Revised 202627 Multi-Year Capital Plan.pdf'
           session = requests.Session()
           session.headers.update({'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)'})
-
           agenda = session.get(agenda_url, timeout=180)
           agenda.raise_for_status()
 
           class LinkParser(HTMLParser):
               def __init__(self):
-                  super().__init__()
-                  self.current = None
-                  self.links = []
+                  super().__init__(); self.current = None; self.links = []
               def handle_starttag(self, tag, attrs):
                   if tag.lower() == 'a':
                       href = dict(attrs).get('href')
-                      if href:
-                          self.current = {'href': href, 'text': []}
+                      if href: self.current = {'href': href, 'text': []}
               def handle_data(self, data):
-                  if self.current is not None:
-                      self.current['text'].append(data)
+                  if self.current is not None: self.current['text'].append(data)
               def handle_endtag(self, tag):
                   if tag.lower() == 'a' and self.current is not None:
                       self.current['text'] = re.sub(r'\s+', ' ', html.unescape(' '.join(self.current['text']))).strip()
-                      self.links.append(self.current)
-                      self.current = None
+                      self.links.append(self.current); self.current = None
 
-          parser = LinkParser()
-          parser.feed(agenda.text)
-          candidates = set()
-          for link in parser.links:
-              title = re.sub(r'\s+', ' ', link['text']).strip()
-              if title == exact_title:
-                  candidates.add(urljoin(agenda_url, link['href']))
-          print(f'exact_title_unique_candidates={sorted(candidates)}')
-          if len(candidates) != 1:
-              related = [(link['text'], link['href']) for link in parser.links if 'capital' in link['text'].lower()]
-              print(f'capital_related_links={related}')
-              raise SystemExit(f'expected exactly one unique exact-title revised-capital URL, found {len(candidates)}')
-
-          resolved_url = next(iter(candidates))
+          parser = LinkParser(); parser.feed(agenda.text)
+          urls = {
+              urljoin(agenda_url, link['href'])
+              for link in parser.links
+              if re.sub(r'\s+', ' ', link['text']).strip() == exact_title
+          }
+          if len(urls) != 1:
+              raise SystemExit(f'expected one unique current-capital URL, found {sorted(urls)}')
+          resolved_url = next(iter(urls))
           response = session.get(resolved_url, headers={'Referer': agenda_url}, timeout=180)
           response.raise_for_status()
           if not response.content.startswith(b'%PDF'):
-              raise SystemExit(f'resolved capital source is not PDF: {response.headers.get("content-type")!r}')
-          print(f'resolved_url={resolved_url}')
+              raise SystemExit('resolved source is not PDF')
 
           with pdfplumber.open(io.BytesIO(response.content)) as pdf:
-              print(f'pdf_pages={len(pdf.pages)}')
-              relevant_pages = 0
-              relevant_tables = 0
-              for page_number, page in enumerate(pdf.pages, 1):
-                  text = re.sub(r'\s+', ' ', page.extract_text() or '').strip()
-                  if not any(token in text.lower() for token in ('attachment 1', 'attachment 2', 'capital multi-year', 'capital plan')):
-                      continue
-                  relevant_pages += 1
-                  print(f'PAGE {page_number}: {text[:700]}')
-                  for table_number, table in enumerate(page.extract_tables() or [], 1):
-                      normalized = [
-                          [re.sub(r'\s+', ' ', str(cell or '')).strip() for cell in (row or [])]
-                          for row in (table or [])
-                      ]
-                      joined = ' | '.join(' | '.join(row) for row in normalized[:5]).lower()
-                      if not any(token in joined for token in ('project', '2026/27', '2027/28', 'grand total')):
-                          continue
-                      relevant_tables += 1
-                      print(f'  TABLE {table_number} rows={len(normalized)}')
-                      for row in normalized[:12]:
-                          print('   ', row)
-              print(f'relevant_pages={relevant_pages}')
-              print(f'relevant_tables={relevant_tables}')
+              page = pdf.pages[8]
+              tables = page.extract_tables() or []
+              if len(tables) != 1:
+                  raise SystemExit(f'Attachment 2 expected one table, found {len(tables)}')
+              table = [[re.sub(r'\s+', ' ', str(cell or '')).strip() for cell in (row or [])] for row in tables[0]]
+              print(f'resolved_url={resolved_url}')
+              print(f'attachment2_rows={len(table)}')
+              for index, row in enumerate(table, 1):
+                  print(f'{index:03d}: {row}')
           PY
