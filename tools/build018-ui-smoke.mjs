@@ -74,7 +74,7 @@ try {
     if (await warningRow.count() !== 1) throw new Error(`${viewportName}: expected one visible Build 018 budget source-warning row`);
     await warningRow.click();
     await page.waitForSelector('#evidence-drawer[open]');
-    const budgetDrawer = `${await page.locator('#drawer-title').innerText()}\n${await page.locator('#drawer-body').innerText()}`.toLowerCase();
+    const budgetDrawer = `${await page.locator('#drawer-eyebrow').innerText()}\n${await page.locator('#drawer-title').innerText()}\n${await page.locator('#drawer-body').innerText()}`.toLowerCase();
     requirePhrases(budgetDrawer, [
       'ratified-current budget evidence',
       'published source arithmetic flag',
@@ -133,7 +133,7 @@ try {
     if (await capitalRow.count() < 1) throw new Error(`${viewportName}: no Build 018 capital rows rendered`);
     await capitalRow.click();
     await page.waitForSelector('#evidence-drawer[open]');
-    const capitalDrawer = `${await page.locator('#drawer-title').innerText()}\n${await page.locator('#drawer-body').innerText()}`.toLowerCase();
+    const capitalDrawer = `${await page.locator('#drawer-eyebrow').innerText()}\n${await page.locator('#drawer-title').innerText()}\n${await page.locator('#drawer-body').innerText()}`.toLowerCase();
     requirePhrases(capitalDrawer, [
       'approved-current capital schedule evidence',
       'project account id',
