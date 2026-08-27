@@ -55,7 +55,7 @@ jobs:
       - name: Publish reproduced dataset to Build 014 branch
         if: github.event_name == 'push' && github.ref_name == 'agent/build-014-cao-amendment-series'
         run: |
-          if git diff --quiet -- data/generated/contract_amendments.json; then
+          if [ -z "$(git status --porcelain -- data/generated/contract_amendments.json)" ]; then
             echo 'Checked amendment artifact is already reproducible.'
             exit 0
           fi
