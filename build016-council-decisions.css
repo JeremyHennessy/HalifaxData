@@ -1,0 +1,19 @@
+/* Build 016 — Council decision evidence. Additive only; preserve approved light UI. */
+.b16-decision-panel .panel-body{display:grid;gap:12px}
+.b16-decision-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.b16-decision-toolbar .local-search{flex:1 1 300px}
+.b16-decision-toolbar select{min-width:150px}
+.b16-result{font-weight:750;text-transform:capitalize}
+.b16-motion-cell{max-width:720px}
+.b16-motion-cell strong,.b16-motion-cell span,.b16-motion-cell small{display:block}
+.b16-motion-cell span{margin-top:3px;color:var(--muted);line-height:1.45}
+.b16-motion-cell small{margin-top:4px;color:var(--faint)}
+.b16-money-list{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.b16-money-token{display:inline-flex;padding:2px 6px;border-radius:999px;background:#eef4f7;color:#365568;font-size:8.5px;font-weight:750;white-space:nowrap}
+.b16-source-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.b16-source-summary>div{border:1px solid var(--line);border-radius:9px;padding:9px;background:#fbfdfe}
+.b16-source-summary strong,.b16-source-summary span{display:block}
+.b16-source-summary strong{font-size:17px}
+.b16-source-summary span{margin-top:3px;font-size:9px;line-height:1.4;color:var(--muted)}
+@media(max-width:900px){.b16-source-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.b16-source-summary{grid-template-columns:1fr}.b16-decision-toolbar select{width:100%}}
