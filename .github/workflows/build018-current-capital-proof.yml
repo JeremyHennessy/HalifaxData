@@ -6,6 +6,7 @@ on:
     paths:
       - 'data/current_capital_sources.json'
       - 'data/generated/current_capital_2026_27_multiyear.json'
+      - 'data/current_source_refresh_status.json'
       - 'scripts/ingest_current_capital_build018.py'
       - 'scripts/validate_current_capital_build018.py'
       - 'build018-current-source-refresh.js'
@@ -22,6 +23,7 @@ on:
     paths:
       - 'data/current_capital_sources.json'
       - 'data/generated/current_capital_2026_27_multiyear.json'
+      - 'data/current_source_refresh_status.json'
       - 'scripts/ingest_current_capital_build018.py'
       - 'scripts/validate_current_capital_build018.py'
       - 'build018-current-source-refresh.js'
