@@ -26,8 +26,9 @@ def main() -> None:
     supplemental = json.loads(SUPPLEMENTAL.read_text(encoding="utf-8"))
 
     expected_years = supplemental.get("metadata", {}).get("expected_source_years") or []
-    assert expected_years == list(range(2018, 2026)), expected_years
+    assert expected_years == list(range(2019, 2026)), expected_years
     assert supplemental.get("metadata", {}).get("base_registry_source_ids") == ["hrm-financials-2023", "hrm-financials-2025"]
+    assert supplemental.get("metadata", {}).get("documented_parse_gap_source_ids") == ["hrm-financials-2018"]
 
     source_map = {
         source["id"]: source
@@ -44,17 +45,23 @@ def main() -> None:
         assert host in OFFICIAL_HOSTS, (source_id, host)
         assert source_year(source_id) in expected_years
 
+    gap = source_map["hrm-financials-2018"]
+    assert gap.get("status") == "research-parse-gap", gap
+    assert "zero eligible statement pages" in str(gap.get("ingestion") or "").lower(), gap
+    assert (urlparse(gap.get("url") or "").hostname or "").lower() in OFFICIAL_HOSTS
+
     meta = financials.get("metadata") or {}
     rows = financials.get("records") or []
     statuses = meta.get("source_status") or []
     assert meta.get("dataset_status") == "conservative_audited_statement_extraction"
     assert meta.get("parser_version") == EXPECTED_PARSER, "Build 017 must preserve the established parser semantics"
-    assert meta.get("source_count") == 8, meta.get("source_count")
-    assert len(statuses) == 8, len(statuses)
-    assert len(rows) >= 900, f"Expanded audited history unexpectedly sparse: {len(rows)} rows"
+    assert meta.get("source_count") == 7, meta.get("source_count")
+    assert len(statuses) == 7, len(statuses)
+    assert len(rows) >= 1100, f"Expanded audited history unexpectedly sparse: {len(rows)} rows"
 
     status_map = {item.get("source_id"): item for item in statuses}
     assert sorted(status_map) == expected_ids, sorted(status_map)
+    assert "hrm-financials-2018" not in status_map, "2018 parse-gap source must not be silently released"
     for source_id in expected_ids:
         item = status_map[source_id]
         assert item.get("status") == "ok", item
@@ -66,8 +73,10 @@ def main() -> None:
     row_source_ids = {row.get("source_id") for row in rows}
     assert row_source_ids == set(expected_ids), sorted(row_source_ids)
 
-    # The source-year series is contiguous, but each row still keeps its own annual
-    # current/prior comparator semantics rather than being collapsed into one fact.
+    # The 2019 source contains source-presented 2018 comparatives. Those remain
+    # prior_year values inside the 2019 source; they are not relabelled as 2018 rows.
+    assert any(row.get("source_id") == "hrm-financials-2019" and row.get("prior_year") is not None for row in rows)
+
     for row in rows:
         source_id = row.get("source_id")
         assert int(row.get("fiscal_year_end")) == source_year(source_id), row
@@ -76,11 +85,12 @@ def main() -> None:
 
     table_meta = table_index.get("metadata") or {}
     assert table_meta.get("parser_version") == EXPECTED_PARSER
-    assert table_meta.get("source_count") == 8, table_meta.get("source_count")
+    assert table_meta.get("source_count") == 7, table_meta.get("source_count")
 
     print(
         f"Build 017 audited history validated: {len(rows)} rows, "
-        f"8 annual sources, {expected_years[0]}-{expected_years[-1]} source-year coverage"
+        f"7 released annual sources, {expected_years[0]}-{expected_years[-1]} source-year coverage; "
+        "2018 official source retained as an explicit parser gap"
     )
 
 
