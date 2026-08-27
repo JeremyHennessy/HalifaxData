@@ -1,0 +1,104 @@
+name: Build 017 Audited Financial History Proof
+
+on:
+  push:
+    branches: ['agent/build-017-audited-financial-history', main]
+    paths:
+      - 'data/audited_financial_sources.json'
+      - 'data/generated/financials.json'
+      - 'data/generated/financials_document_tables.json'
+      - 'data/generated/entity_index.json'
+      - 'scripts/ingest_financial_history.py'
+      - 'scripts/ingest_financial_history_build017.py'
+      - 'scripts/validate_financial_history.py'
+      - 'scripts/validate_financial_history_build017.py'
+      - '.github/workflows/build017-audited-financial-proof.yml'
+  pull_request:
+    paths:
+      - 'data/audited_financial_sources.json'
+      - 'data/generated/financials.json'
+      - 'data/generated/financials_document_tables.json'
+      - 'data/generated/entity_index.json'
+      - 'scripts/ingest_financial_history.py'
+      - 'scripts/ingest_financial_history_build017.py'
+      - 'scripts/validate_financial_history.py'
+      - 'scripts/validate_financial_history_build017.py'
+      - '.github/workflows/build017-audited-financial-proof.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts/ingest_financial_history.py scripts/ingest_financial_history_build017.py scripts/validate_financial_history.py scripts/validate_financial_history_build017.py
+      - name: Reproduce eight-source audited financial history
+        run: python scripts/ingest_financial_history_build017.py
+      - name: Normalize checked-artifact generation timestamps
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          stamp = json.loads(Path('data/audited_financial_sources.json').read_text(encoding='utf-8'))['metadata']['last_researched'] + 'T00:00:00Z'
+          for filename in ['financials.json', 'financials_document_tables.json']:
+              path = Path('data/generated') / filename
+              data = json.loads(path.read_text(encoding='utf-8'))
+              data['metadata']['generated_at'] = stamp
+              path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          PY
+      - name: Validate established audited statement semantics
+        run: python scripts/validate_financial_history.py
+      - name: Validate Build 017 source-year expansion
+        run: python scripts/validate_financial_history_build017.py
+      - name: Rebuild normalized entity index
+        run: |
+          python scripts/build_entity_index_v4.py
+          python scripts/build_entity_index_v4.py --check
+          python scripts/validate_entity_index_v4.py
+      - name: Copy proof artifacts
+        run: |
+          mkdir -p artifacts
+          cp data/generated/financials.json artifacts/financials.json
+          cp data/generated/financials_document_tables.json artifacts/financials_document_tables.json
+          cp data/generated/entity_index.json artifacts/entity_index.json
+          cp data/generated/financials.json /tmp/build017-financials.json
+          cp data/generated/financials_document_tables.json /tmp/build017-financials_document_tables.json
+          cp data/generated/entity_index.json /tmp/build017-entity_index.json
+      - name: Publish reproduced audited history to latest Build 017 branch head
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-017-audited-financial-history'
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B build017-publish "origin/$GITHUB_REF_NAME"
+          cp /tmp/build017-financials.json data/generated/financials.json
+          cp /tmp/build017-financials_document_tables.json data/generated/financials_document_tables.json
+          cp /tmp/build017-entity_index.json data/generated/entity_index.json
+          python scripts/validate_financial_history.py
+          python scripts/validate_financial_history_build017.py
+          python scripts/build_entity_index_v4.py --check
+          python scripts/validate_entity_index_v4.py
+          if [ -z "$(git status --porcelain -- data/generated/financials.json data/generated/financials_document_tables.json data/generated/entity_index.json)" ]; then
+            echo 'Checked Build 017 artifacts are already reproducible on latest branch head.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/financials.json data/generated/financials_document_tables.json data/generated/entity_index.json
+          git commit -m 'Build 017: publish audited financial history'
+          git push origin HEAD:"$GITHUB_REF_NAME"
+      - name: Upload proof artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build017-audited-financial-history-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
