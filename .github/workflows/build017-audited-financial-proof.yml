@@ -41,7 +41,7 @@ jobs:
         run: python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate Python syntax
         run: python -m compileall -q scripts/ingest_financial_history.py scripts/ingest_financial_history_build017.py scripts/validate_financial_history.py scripts/validate_financial_history_build017.py
-      - name: Reproduce eight-source audited financial history
+      - name: Reproduce seven-source audited financial history
         run: python scripts/ingest_financial_history_build017.py
       - name: Normalize checked-artifact generation timestamps
         run: |
