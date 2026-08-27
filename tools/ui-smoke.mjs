@@ -91,7 +91,7 @@ async function assertAnalyticalViews(page, viewportName) {
   if ((await page.locator('#drawer-eyebrow').textContent())?.trim() !== 'HISTORICAL BUDGET EVIDENCE') throw new Error(`${viewportName}/budget: historical evidence drawer did not open`);
   await closeDrawer(page);
 
-  const spendingText = await assertText(page, 'spending', ['not invoice or accounts-payable transactions', '1,094', 'Quarterly spending movement analysis', 'ambiguous key/dates excluded']);
+  const spendingText = await assertText(page, 'spending', ['not invoice or accounts-payable transactions', '1,753', 'Quarterly spending movement analysis', 'ambiguous key/dates excluded']);
   if (!spendingText.toLowerCase().includes('comparable movement leads')) throw new Error(`${viewportName}/spending: hero metric was not converted to comparable movements`);
   const spendingHeaders = (await page.locator('#content table').first().locator('th').allTextContents()).map(text => text.trim());
   if (spendingHeaders.includes('Vendor') || spendingHeaders.includes('Project')) throw new Error(`${viewportName}/spending: unsupported transaction columns are present`);
