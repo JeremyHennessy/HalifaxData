@@ -19,10 +19,10 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check -r requirements.txt
-      - name: Print source visual rows for representative final-package pages
+      - name: Measure final-package service-area column separation
         run: |
           python - <<'PY'
-          import io, json, requests
+          import io, json, re, requests
           from pathlib import Path
           import pdfplumber
           import sys
@@ -30,9 +30,8 @@ jobs:
           import ingest_budget as base
 
           cfg = json.loads(Path('data/current_budget_sources.json').read_text(encoding='utf-8'))
-          url = cfg['budget_source']['url']
           response = requests.get(
-              url,
+              cfg['budget_source']['url'],
               headers={
                   'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)',
                   'Referer': cfg['approval_source']['url'],
@@ -42,15 +41,82 @@ jobs:
           response.raise_for_status()
           if not response.content.startswith(b'%PDF'):
               raise SystemExit('final package response is not PDF')
+
+          max_delta = None
+          min_percent = None
+          max_delta_row = None
+          min_percent_row = None
+          net_value_starts = []
+          pages = 0
+          candidate_rows = 0
+
+          def text_of(row):
+              return ' '.join(str(word.get('text') or '') for word in row)
+
           with pdfplumber.open(io.BytesIO(response.content)) as pdf:
-              for page_number in (85, 125, 206):
-                  page = pdf.pages[page_number - 1]
+              for page_number, page in enumerate(pdf.pages, 1):
+                  text = page.extract_text() or ''
+                  if 'SERVICE AREA BUDGET OVERVIEW' not in text.upper():
+                      continue
                   rows = base.visual_rows(page)
-                  print(f'PAGE {page_number} VISUAL ROWS')
-                  for i, row in enumerate(rows):
-                      text = ' '.join(str(word.get('text') or '') for word in row)
-                      low = text.lower()
-                      if ('service area' in low and 'actual' in low and 'budget' in low) or 'net total' in low or page_number == 206 and 'facility design' in low or page_number == 85 and 'housing & homelessness' in low:
-                          coords = [(str(word.get('text') or ''), round(float(word.get('x0') or 0), 1)) for word in row]
-                          print(f'{i:03d}: {text} :: {coords}')
+                  header_index = None
+                  for index, row in enumerate(rows):
+                      low = text_of(row).lower()
+                      if 'service area' in low and 'actual' in low and 'budget' in low and ('projection' in low or 'projections' in low):
+                          header_index = index
+                          break
+                  if header_index is None:
+                      raise SystemExit(f'page {page_number}: no service-area header')
+                  pages += 1
+
+                  for row in rows[header_index + 1:]:
+                      row_text = text_of(row).strip()
+                      low = row_text.lower()
+                      if low.startswith('net total'):
+                          value_tokens = [
+                              word for word in row
+                              if float(word.get('x0') or 0) > 150 and (
+                                  str(word.get('text') or '').strip() == '$' or
+                                  re.search(r'\d', str(word.get('text') or ''))
+                              )
+                          ]
+                          if value_tokens:
+                              net_value_starts.append((float(value_tokens[0]['x0']), page_number, row_text))
+
+                      right = []
+                      for word in row:
+                          token = str(word.get('text') or '').strip()
+                          x = float(word.get('x0') or 0)
+                          if x < 466:
+                              continue
+                          if token == '$' or token in {'(', ')', '-', '–', '—'} or re.search(r'\d', token):
+                              right.append((token, x))
+                      # In the source tables the percent field is the rightmost numeric/dash token.
+                      # Require it to start in the observed rightmost column so narrative/table noise
+                      # cannot manufacture a false separation measurement.
+                      if len(right) >= 2 and right[-1][1] >= 515:
+                          candidate_rows += 1
+                          pct_token, pct_x = right[-1]
+                          delta_tokens = right[:-1]
+                          delta_x = max(x for _, x in delta_tokens)
+                          if max_delta is None or delta_x > max_delta:
+                              max_delta = delta_x
+                              max_delta_row = (page_number, row_text, right)
+                          if min_percent is None or pct_x < min_percent:
+                              min_percent = pct_x
+                              min_percent_row = (page_number, row_text, right)
+                      if low.startswith('net total'):
+                          break
+
+          print(f'overview_pages={pages}')
+          print(f'candidate_rows={candidate_rows}')
+          print(f'max_source_delta_token_x0={max_delta}')
+          print(f'min_percent_token_x0={min_percent}')
+          print(f'max_delta_row={max_delta_row}')
+          print(f'min_percent_row={min_percent_row}')
+          print(f'min_net_total_first_value_x0={min(net_value_starts) if net_value_starts else None}')
+          if max_delta is None or min_percent is None or max_delta >= min_percent:
+              raise SystemExit('No source-wide safe change/percent x-gap established')
+          print(f'safe_gap=({max_delta}, {min_percent})')
+          print(f'midpoint={(max_delta + min_percent) / 2:.2f}')
           PY
