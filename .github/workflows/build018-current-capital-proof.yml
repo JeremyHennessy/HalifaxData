@@ -1,0 +1,95 @@
+name: Build 018 Current Capital Proof
+
+on:
+  push:
+    branches: ['agent/build-018-current-source-refresh', main]
+    paths:
+      - 'data/current_capital_sources.json'
+      - 'data/generated/current_capital_2026_27_multiyear.json'
+      - 'scripts/ingest_current_capital_build018.py'
+      - 'scripts/validate_current_capital_build018.py'
+      - '.github/workflows/build018-current-capital-proof.yml'
+  pull_request:
+    paths:
+      - 'data/current_capital_sources.json'
+      - 'data/generated/current_capital_2026_27_multiyear.json'
+      - 'scripts/ingest_current_capital_build018.py'
+      - 'scripts/validate_current_capital_build018.py'
+      - '.github/workflows/build018-current-capital-proof.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Build 018 current-capital Python syntax
+        run: python -m compileall -q scripts/ingest_current_capital_build018.py scripts/validate_current_capital_build018.py
+      - name: Reproduce approved-current 2026/27 capital schedule
+        run: python scripts/ingest_current_capital_build018.py
+      - name: Validate current-capital evidence contract
+        run: python scripts/validate_current_capital_build018.py
+      - name: Verify March 31 capital-plan approval source remains live
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+          import requests
+
+          config = json.loads(Path('data/current_capital_sources.json').read_text(encoding='utf-8'))
+          source = config['approval_source']
+          response = requests.get(
+              source['url'],
+              headers={'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)'},
+              timeout=120,
+          )
+          response.raise_for_status()
+          text = re.sub(r'\s+', ' ', response.text)
+          required = [
+              'Ratification from Budget Committee',
+              'Proposed 2026/27 Budget',
+              'Resolution for Approval of Operating Budgets, Capital Plan and Tax Rates for Fiscal 2026/27',
+          ]
+          missing = [item for item in required if item not in text]
+          if missing:
+              raise SystemExit(f'capital approval source missing required text: {missing}')
+          print('March 31, 2026 Regional Council Capital Plan ratification source verified')
+          PY
+      - name: Preserve proof artifact
+        run: |
+          mkdir -p artifacts
+          cp data/generated/current_capital_2026_27_multiyear.json artifacts/current_capital_2026_27_multiyear.json
+          cp data/generated/current_capital_2026_27_multiyear.json /tmp/build018-current-capital.json
+      - name: Publish reproduced current capital to latest Build 018 branch head
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-018-current-source-refresh'
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B build018-capital-publish "origin/$GITHUB_REF_NAME"
+          cp /tmp/build018-current-capital.json data/generated/current_capital_2026_27_multiyear.json
+          python scripts/validate_current_capital_build018.py
+          if [ -z "$(git status --porcelain -- data/generated/current_capital_2026_27_multiyear.json)" ]; then
+            echo 'Checked Build 018 current-capital artifact already reproduces exactly.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/current_capital_2026_27_multiyear.json
+          git commit -m 'Build 018: publish current capital schedule'
+          git push origin HEAD:"$GITHUB_REF_NAME"
+      - name: Upload proof artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build018-current-capital-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
