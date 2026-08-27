@@ -1,0 +1,51 @@
+/* Build 014 — longitudinal public CAO contract-amendment series. */
+.b14-amendment-series{min-width:0}
+.b14-boundary{margin:0 0 12px}
+.b14-metrics{margin-bottom:12px}
+.b14-timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.b14-timeline-card{appearance:none;text-align:left;border:1px solid #dbe5eb;border-radius:10px;background:#fbfdfe;padding:10px;min-width:0;cursor:pointer;color:var(--text)}
+.b14-timeline-card:hover,.b14-timeline-card.active{border-color:#8fb4c8;background:#f2f8fb}
+.b14-timeline-card strong,.b14-timeline-card span,.b14-timeline-card small{display:block}
+.b14-timeline-card strong{font-size:10.5px;line-height:1.35}
+.b14-timeline-card span{margin-top:4px;color:#315a70;font-size:9.5px;font-weight:750}
+.b14-timeline-card small{margin-top:3px;color:var(--faint);font-size:8.8px;line-height:1.35}
+.b14-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.b14-toolbar .local-search{flex:1 1 320px;min-width:220px}
+.b14-toolbar select{max-width:280px}
+.b14-trajectory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.b14-trajectory-card{appearance:none;text-align:left;border:1px solid #d9e4ea;background:#fbfdfe;border-radius:11px;padding:12px;cursor:pointer;min-width:0;color:var(--text)}
+.b14-trajectory-card:hover{border-color:#8fb4c8;background:#f5fafc}
+.b14-trajectory-card h3{font-size:12px;line-height:1.35;margin:6px 0}
+.b14-trajectory-card p{font-size:9.5px;line-height:1.5;color:var(--muted);margin:0}
+.b14-trajectory-card .b14-movement{display:block;margin-top:8px;color:#315a70;font-size:11px;font-weight:800}
+.b14-quality-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.b14-quality-card{appearance:none;text-align:left;border:1px solid #ead9bc;background:#fffbf3;border-radius:10px;padding:10px;cursor:pointer;min-width:0;color:var(--text)}
+.b14-quality-card strong,.b14-quality-card span,.b14-quality-card small{display:block}
+.b14-quality-card strong{font-size:10.5px;line-height:1.4}
+.b14-quality-card span{margin-top:5px;color:#7a5315;font-size:10px;font-weight:800}
+.b14-quality-card small{margin-top:4px;color:var(--muted);font-size:8.8px;line-height:1.4}
+.b14-table tr[data-build014-amendment]{cursor:pointer}
+.b14-table tr[data-build014-amendment]:hover td{background:#f8fbfc}
+.b14-table .cell-sub{max-width:420px}
+.b14-semantic{display:inline-block;margin-top:4px;padding:2px 5px;border-radius:5px;background:#eef4f7;color:#496777;font-size:8px;line-height:1.25;font-weight:700}
+.b14-semantic.derived{background:#fff6e5;color:#7d5718}
+.b14-source-flag{color:#8a5a12!important;font-weight:800}
+.b14-source-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.b14-source-card{border:1px solid #dce5eb;background:#fbfdfe;border-radius:10px;padding:10px;min-width:0}
+.b14-source-card strong,.b14-source-card span,.b14-source-card small{display:block}
+.b14-source-card strong{font-size:10.3px;line-height:1.35}
+.b14-source-card span{margin-top:4px;color:var(--muted);font-size:8.8px;line-height:1.4}
+.b14-source-card small{margin:5px 0;color:var(--faint);font-size:8.4px;line-height:1.35}
+.b14-source-card .source-link{display:inline-block;margin-top:5px;font-size:8.8px}
+.b14-source-cells{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;font-size:8.7px;line-height:1.55;background:#f7fafb;border:1px solid #e0e7eb;border-radius:8px;padding:9px}
+.b14-baseline-note{margin-top:10px;color:var(--faint);font-size:8.8px;line-height:1.45}
+
+@media(max-width:1100px){
+  .b14-timeline{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .b14-source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .b14-timeline,.b14-trajectory-grid,.b14-quality-grid,.b14-source-grid{grid-template-columns:1fr}
+  .b14-toolbar{align-items:stretch}
+  .b14-toolbar .local-search,.b14-toolbar select,.b14-toolbar .button{width:100%;max-width:none;min-width:0}
+}

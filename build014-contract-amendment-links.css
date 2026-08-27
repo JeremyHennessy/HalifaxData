@@ -1,0 +1,10 @@
+/* Build 014 — defensible related-record links for amendment evidence. */
+.b14-related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.b14-related-card{border:1px solid #dce5eb;background:#fbfdfe;border-radius:9px;padding:9px;min-width:0}
+.b14-related-card strong,.b14-related-card span,.b14-related-card small{display:block}
+.b14-related-card strong{font-size:10.2px;line-height:1.4}
+.b14-related-card span{margin-top:4px;font-size:9px;line-height:1.45;color:var(--muted)}
+.b14-related-card small{margin-top:5px;font-size:8.3px;line-height:1.4;color:var(--faint)}
+.b14-related-empty{border-style:dashed;background:#fcfdfd}
+.b14-related-basis{display:inline-block!important;margin-top:6px!important;padding:2px 5px;border-radius:5px;background:#eef4f7;color:#496777!important;font-size:8px!important;font-weight:750}
+@media(max-width:760px){.b14-related-grid{grid-template-columns:1fr}}

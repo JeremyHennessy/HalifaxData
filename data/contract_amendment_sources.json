@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "last_researched": "2026-08-26",
+    "scope": "Official public HRM CAO contract-amendment reports identified from May 2023 through November 2025.",
+    "report_count": 12,
+    "coverage_start": "2023-05-17",
+    "coverage_end": "2025-11-25",
+    "principle": "These are public CAO contract-amendment reporting records, not invoices, AP transactions, final paid values or findings of wrongdoing. Public reports may exclude Private & Confidential amendment records."
+  },
+  "sources": [
+    {
+      "id": "hrm-cao-contract-amendments-2023-05",
+      "report_date": "2023-05-17",
+      "name": "CAO Contract Amendment Reporting — May 17, 2023",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for May 17, 2023.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/boards-committees-commissions/revised230517afscinfo01.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2023-09",
+      "report_date": "2023-09-20",
+      "name": "CAO Contract Amendment Reporting — September 20, 2023",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for September 20, 2023.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/230920afscinfo1.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2023-11",
+      "report_date": "2023-11-15",
+      "name": "CAO Contract Amendment Reporting — November 15, 2023",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for November 15, 2023.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/231115afscinfo1.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2024-01",
+      "report_date": "2024-01-17",
+      "name": "CAO Contract Amendment Reporting — January 17, 2024",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for January 17, 2024.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/boards-committees-commissions/240117afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2024-06",
+      "report_date": "2024-06-19",
+      "name": "CAO Contract Amendment Reporting — June 19, 2024",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for June 19, 2024.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/240619afscinfo3_0.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2024-10",
+      "report_date": "2024-10-09",
+      "name": "CAO Contract Amendment Reporting — October 9, 2024",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for October 9, 2024.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/241009afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2024-12",
+      "report_date": "2024-12-11",
+      "name": "CAO Contract Amendment Reporting — December 11, 2024",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for December 11, 2024.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/241211afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2025-01",
+      "report_date": "2025-01-15",
+      "name": "CAO Contract Amendment Reporting — January 15, 2025",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for January 15, 2025.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250115afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2025-04",
+      "report_date": "2025-04-16",
+      "name": "CAO Contract Amendment Reporting — April 16, 2025",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for April 16, 2025.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250416afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2025-05",
+      "report_date": "2025-05-21",
+      "name": "CAO Contract Amendment Reporting — May 21, 2025",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for May 21, 2025.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250521afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2025-06",
+      "report_date": "2025-06-18",
+      "name": "CAO Contract Amendment Reporting — June 18, 2025",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for June 18, 2025.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250618afscinfo2.pdf"
+    },
+    {
+      "id": "hrm-cao-contract-amendments-2025-11",
+      "report_date": "2025-11-25",
+      "name": "CAO Contract Amendment Reporting — November 25, 2025",
+      "publisher": "Halifax Regional Municipality — Audit & Finance Standing Committee",
+      "category": "Procurement",
+      "coverage": "Public CAO contract-amendment aggregate reporting table for November 25, 2025; source uses cumulative-amendment columns rather than a separate updated-value column.",
+      "ingestion": "Official HRM PDF / controlled public aggregate-table extraction",
+      "status": "ready-historical",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/251125afscinfo2.pdf"
+    }
+  ]
+}

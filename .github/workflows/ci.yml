@@ -40,6 +40,8 @@ jobs:
           node --check build013-context-expansion.js
           node --check build013-current-grants.js
           node --check build013-context-expansion-refinements.js
+          node --check build014-contract-amendment-series.js
+          node --check build014-contract-amendment-links.js
           node --check tools/ui-smoke.mjs
           node --check tools/build009-ui-smoke.mjs
           node --check tools/build010-ui-smoke.mjs
@@ -47,6 +49,8 @@ jobs:
           node --check tools/build011-ui-smoke.mjs
           node --check tools/build012-ui-smoke.mjs
           node --check tools/build013-ui-smoke.mjs
+          node --check tools/build014-ui-smoke.mjs
+          node --check tools/build014-linkage-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate established budget and compensation contracts
@@ -71,6 +75,8 @@ jobs:
         run: python scripts/validate_integrity_oversight.py
       - name: Validate Build 013 context expansion
         run: python scripts/validate_context_expansion.py
+      - name: Validate Build 014 CAO amendment series
+        run: python scripts/validate_contract_amendments.py
       - name: Validate final normalized entity index
         run: |
           python scripts/build_entity_index_v4.py --check

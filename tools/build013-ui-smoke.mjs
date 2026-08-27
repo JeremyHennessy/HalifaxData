@@ -27,6 +27,9 @@ async function openRoute(page, route) {
     null,
     { timeout: 15000 }
   );
+  if (typeof await page.evaluate(() => typeof window.b14Data === 'function') === 'boolean') {
+    await page.waitForFunction(() => typeof window.b14Data !== 'function' || window.b14Data()?.summary?.report_count === 12, null, { timeout: 20000 });
+  }
 }
 
 async function closeDrawer(page) {
@@ -78,7 +81,9 @@ try {
       const amendments = window.b13Amendments();
       const museumRows = window.b13MuseumRows();
       const operating = new Set(museums.operating_grants.map(row => row.recipient.toLowerCase()));
+      const build14Ready = typeof window.b14Data === 'function' && window.b14Data()?.summary?.report_count === 12;
       return {
+        build14Ready,
         currentGrantCategories: current.categories.length,
         currentGrantApplications: current.categories.reduce((sum, row) => sum + Number(row.applications || 0), 0),
         currentGrantAwards: current.categories.reduce((sum, row) => sum + Number(row.proposed_awards || 0), 0),
@@ -100,7 +105,7 @@ try {
         transitProjected: transit.providers.reduce((sum, row) => sum + Number(row.projected_grant || 0), 0),
         amendmentObservations: amendments.length,
         amendmentMathFlags: amendments.filter(row => row.source_arithmetic_consistent === false).length,
-        amendmentLeads: window.b13AmendmentInvestigations().length
+        amendmentLeads: build14Ready ? window.b14AmendmentInvestigations().length : window.b13AmendmentInvestigations().length
       };
     });
 
@@ -119,14 +124,21 @@ try {
     for (const phrase of ['historical cao amendment context', 'nov. 15, 2023', 'source arithmetic flags', 'private/confidential', 'not a complete historical amendment ledger']) {
       if (!vendorText.includes(phrase.toLowerCase())) throw new Error(`${viewportName}/vendors: missing "${phrase}"`);
     }
-    const amendmentRows = page.locator('[data-build013-amendment]');
-    if (await amendmentRows.count() !== 8) throw new Error(`${viewportName}/vendors: expected eight amendment observations`);
-    const mismatchId = await page.evaluate(() => window.b13Amendments().find(row => row.source_arithmetic_consistent === false)?.id || null);
-    if (!mismatchId) throw new Error(`${viewportName}/vendors: missing source arithmetic mismatch`);
-    await page.locator(`[data-build013-amendment="${mismatchId}"]`).click();
+    if (facts.build14Ready) {
+      if (await page.locator('.b14-table tr[data-build014-amendment]').count() !== 58) throw new Error(`${viewportName}/vendors: expected 58 Build 014 amendment observations`);
+      const mismatchId = await page.evaluate(() => window.b14Observations().find(row => row.report_date === '2023-11-15' && row.po === '2070887247')?.id || null);
+      if (!mismatchId) throw new Error(`${viewportName}/vendors: Build 014 lost Build 013 Slayter source arithmetic mismatch`);
+      await page.locator(`tr[data-build014-amendment="${mismatchId}"]`).click();
+    } else {
+      const amendmentRows = page.locator('[data-build013-amendment]');
+      if (await amendmentRows.count() !== 8) throw new Error(`${viewportName}/vendors: expected eight amendment observations`);
+      const mismatchId = await page.evaluate(() => window.b13Amendments().find(row => row.source_arithmetic_consistent === false)?.id || null);
+      if (!mismatchId) throw new Error(`${viewportName}/vendors: missing source arithmetic mismatch`);
+      await page.locator(`[data-build013-amendment="${mismatchId}"]`).click();
+    }
     await page.waitForSelector('#evidence-drawer[open]');
     const drawerText = (await page.locator('#drawer-body').innerText()).toLowerCase();
-    for (const phrase of ['source arithmetic delta', 'source values preserved without correction', 'private & confidential amendment reports are excluded', 'not an invoice', 'not a complete contract history']) {
+    for (const phrase of ['source arithmetic delta', 'source values preserved without correction', 'private & confidential', 'not an invoice', 'not a complete contract history']) {
       if (!drawerText.includes(phrase)) throw new Error(`${viewportName}/vendors drawer: missing "${phrase}"`);
     }
     await closeDrawer(page);
@@ -136,16 +148,16 @@ try {
     await openRoute(page, 'signals');
     await page.waitForFunction(() => [...document.querySelectorAll('#investigation-domain option')].some(option => option.value === 'Contract amendments'), null, { timeout: 15000 });
     await page.locator('#investigation-domain').selectOption('Contract amendments');
-    const cards = page.locator('#content [data-build008-investigation-id^="b13-amend-"]');
-    if (await cards.count() < 5) throw new Error(`${viewportName}/investigations: insufficient Build 013 amendment leads`);
+    const cards = page.locator(facts.build14Ready ? '#content [data-build008-investigation-id^="b14-amend-"]' : '#content [data-build008-investigation-id^="b13-amend-"]');
+    if (await cards.count() < 5) throw new Error(`${viewportName}/investigations: insufficient amendment leads`);
     const signalText = (await page.locator('#content').innerText()).toLowerCase();
-    for (const phrase of ['contract amendments', 'private/confidential amendment reports excluded', 'published amendment value']) {
+    for (const phrase of facts.build14Ready ? ['contract amendments', '12 identified public cao amendment reports', 'cumulative amendment value'] : ['contract amendments', 'private/confidential amendment reports excluded', 'published amendment value']) {
       if (!signalText.includes(phrase)) throw new Error(`${viewportName}/investigations: missing "${phrase}"`);
     }
     await cards.first().click();
     await page.waitForSelector('#evidence-drawer[open]');
     const investigationDrawer = (await page.locator('#drawer-body').innerText()).toLowerCase();
-    for (const phrase of ['published amendment value', 'source-stated reason', 'not necessarily the current change-order request', 'not evidence of corruption']) {
+    for (const phrase of facts.build14Ready ? ['cumulative amendment', 'source-stated reason', 'not necessarily one current change order', 'not a probability of corruption'] : ['published amendment value', 'source-stated reason', 'not necessarily the current change-order request', 'not evidence of corruption']) {
       if (!investigationDrawer.includes(phrase)) throw new Error(`${viewportName}/investigations drawer: missing "${phrase}"`);
     }
     await closeDrawer(page);

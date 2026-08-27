@@ -1,0 +1,75 @@
+# Build 014 release gate: live-source reproduction is required on the exact release head.
+name: Build 014 CAO Amendment Series Proof
+
+on:
+  push:
+    branches: ['agent/build-014-cao-amendment-series', main]
+    paths:
+      - 'data/contract_amendment_sources.json'
+      - 'data/generated/contract_amendments.json'
+      - 'scripts/ingest_contract_amendments.py'
+      - 'scripts/validate_contract_amendments.py'
+      - '.github/workflows/build014-amendment-proof.yml'
+  pull_request:
+    paths:
+      - 'data/contract_amendment_sources.json'
+      - 'data/generated/contract_amendments.json'
+      - 'scripts/ingest_contract_amendments.py'
+      - 'scripts/validate_contract_amendments.py'
+      - '.github/workflows/build014-amendment-proof.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts/ingest_contract_amendments.py scripts/validate_contract_amendments.py
+      - name: Reproduce public CAO amendment series from current official sources
+        run: python scripts/ingest_contract_amendments.py --output data/generated/contract_amendments.json
+      - name: Normalize checked-artifact generation timestamp
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          sources = json.loads(Path('data/contract_amendment_sources.json').read_text(encoding='utf-8'))
+          path = Path('data/generated/contract_amendments.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          data['metadata']['generated_at'] = sources['metadata']['last_researched'] + 'T00:00:00Z'
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          PY
+      - name: Validate reproduced amendment-series controls
+        run: python scripts/validate_contract_amendments.py data/generated/contract_amendments.json
+      - name: Copy proof artifact
+        run: |
+          mkdir -p artifacts
+          cp data/generated/contract_amendments.json artifacts/contract_amendments.json
+      - name: Publish reproduced dataset to Build 014 branch
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-014-cao-amendment-series'
+        run: |
+          if [ -z "$(git status --porcelain -- data/generated/contract_amendments.json)" ]; then
+            echo 'Checked amendment artifact is already reproducible.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/contract_amendments.json
+          git commit -m 'Build 014: publish reproduced amendment series'
+          git push
+      - name: Upload proof artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build014-cao-amendments-${{ github.sha }}
+          path: artifacts/contract_amendments.json
+          if-no-files-found: warn
+          retention-days: 14
