@@ -25,6 +25,7 @@ fetch('./data/audited_financial_sources.json', { cache: 'no-store' })
 function b17Registry() { return state.build017FinancialSources?.data || null; }
 function b17SupplementSources() { return Array.isArray(b17Registry()?.sources) ? b17Registry().sources : []; }
 function b17ExpectedYears() { return Array.isArray(b17Registry()?.metadata?.expected_source_years) ? b17Registry().metadata.expected_source_years : []; }
+function b17ParseGapIds() { return Array.isArray(b17Registry()?.metadata?.documented_parse_gap_source_ids) ? b17Registry().metadata.documented_parse_gap_source_ids : []; }
 
 function b17MergeFinancialSources() {
   if (build017FinancialSourcesMerged || state.build017FinancialSources?.status !== 'ready' || !Array.isArray(state.sources?.sources)) return false;
@@ -59,14 +60,15 @@ function b17FinancialCoverageHtml() {
     const source = sourceById(sourceId);
     return `<div><strong>${escapeHtml(String(year))} · ${numberFmt.format(status.records || rows.filter(row => Number(row.fiscal_year_end) === year).length)} facts</strong><span>${escapeHtml(source?.name || sourceId)} · ${numberFmt.format(status.eligible_statement_pages || 0)} eligible statement/schedule page${Number(status.eligible_statement_pages || 0) === 1 ? '' : 's'}</span></div>`;
   }).join('');
-  return `<section class="panel b17-financial-coverage"><header class="panel-header"><div><h2>Audited financial history coverage</h2><p>Build 017 expands the same conservative heading-anchored parser from two annual sources to a contiguous 2018–2025 source-year series. Source-presented prior-year comparators remain attached to their annual statement rather than being silently collapsed into a synthetic time series.</p></div></header><div class="panel-body">
+  return `<section class="panel b17-financial-coverage"><header class="panel-header"><div><h2>Audited financial history coverage</h2><p>Build 017 expands the same conservative heading-anchored parser from two annual sources to a contiguous 2019–2025 released source-year series. Source-presented prior-year comparators remain attached to their annual statement rather than being silently collapsed into a synthetic time series.</p></div></header><div class="panel-body">
     <div class="metrics-grid compact">
-      ${metricCard('Annual audited sources', numberFmt.format(meta.source_count || years.length), expected.length ? `${expected[0]}–${expected[expected.length - 1]} source-year series` : years.join(' · '), 'accent')}
+      ${metricCard('Released audited sources', numberFmt.format(meta.source_count || years.length), expected.length ? `${expected[0]}–${expected[expected.length - 1]} source-year series` : years.join(' · '), 'accent')}
       ${metricCard('Normalized statement facts', numberFmt.format(rows.length), 'Same conservative statement/schedule parser', 'good')}
       ${metricCard('Statement families', numberFmt.format(new Set(rows.map(row => row.statement_family)).size), 'Financial position, operations, net financial assets, cash flows and schedules where published', 'neutral')}
       ${metricCard('Parser semantics', escapeHtml(meta.parser_version || '—'), 'Build 017 changes source coverage, not extraction rules', 'neutral')}
     </div>
     <div class="rule-list">${yearCards}</div>
+    <div class="notice"><strong>2018 source parse gap</strong><span>The official 2018 Council attachment was fetched successfully, but the established conservative parser found zero eligible statement pages in that source. HalifaxData therefore does not release synthetic 2018 source rows. The 2019 statement retains its source-presented 2018 comparators as prior-year values.</span></div>
     <div class="notice"><strong>Longitudinal boundary</strong><span>Each annual statement can restate or reclassify its prior-year comparator. HalifaxData preserves the source-year context and does not treat repeated comparator values as independent additive facts or force audited PSAS lines onto operating-department budget categories.</span></div>
   </div></section>`;
 }
@@ -74,13 +76,16 @@ function b17FinancialCoverageHtml() {
 function b17SourceCoverageHtml() {
   if (state.build017FinancialSources?.status !== 'ready') return '';
   const expected = b17ExpectedYears();
-  return `<section class="panel b17-financial-sources"><header class="panel-header"><div><h2>Build 017 audited financial sources</h2><p>Six additional official HRM annual audited-statement sources extend the existing 2023/2025 registry into a contiguous eight-source series.</p></div></header><div class="panel-body">
+  const ready = b17SupplementSources().filter(source => String(source.status || '').startsWith('ready'));
+  const gaps = b17SupplementSources().filter(source => b17ParseGapIds().includes(source.id));
+  return `<section class="panel b17-financial-sources"><header class="panel-header"><div><h2>Build 017 audited financial sources</h2><p>Five additional released official HRM annual audited-statement sources extend the existing 2023/2025 registry into a contiguous seven-source 2019–2025 series. The located 2018 source remains separately registered as a parser gap.</p></div></header><div class="panel-body">
     <div class="metrics-grid compact">
-      ${metricCard('Configured source years', numberFmt.format(expected.length), expected.length ? `${expected[0]}–${expected[expected.length - 1]}` : '—', 'accent')}
-      ${metricCard('New source definitions', numberFmt.format(b17SupplementSources().length), 'Existing 2023 and 2025 source definitions retained', 'neutral')}
+      ${metricCard('Released source years', numberFmt.format(expected.length), expected.length ? `${expected[0]}–${expected[expected.length - 1]}` : '—', 'accent')}
+      ${metricCard('New released sources', numberFmt.format(ready.length), 'Existing 2023 and 2025 source definitions retained', 'neutral')}
+      ${metricCard('Documented parser gaps', numberFmt.format(gaps.length), gaps.map(source => source.id).join(' · ') || 'None', gaps.length ? 'warn' : 'good')}
     </div>
-    <div class="source-mini-list">${b17SupplementSources().map(source => `<a class="build006-doc-link" href="${escapeHtml(safeUrl(source.url) || '#')}" target="_blank" rel="noreferrer"><span><strong>${escapeHtml(source.name)}</strong><small>${escapeHtml(source.coverage)} · ${escapeHtml(source.ingestion)}</small></span><span>↗</span></a>`).join('')}</div>
-    <div class="notice"><strong>Source-series boundary</strong><span>This registry expands audited source coverage only. It does not create an operating-budget crosswalk, payment ledger, transaction history or project-level actual-spend dataset.</span></div>
+    <div class="source-mini-list">${b17SupplementSources().map(source => `<a class="build006-doc-link" href="${escapeHtml(safeUrl(source.url) || '#')}" target="_blank" rel="noreferrer"><span><strong>${escapeHtml(source.name)}</strong><small>${escapeHtml(source.coverage)} · ${escapeHtml(source.status)} · ${escapeHtml(source.ingestion)}</small></span><span>↗</span></a>`).join('')}</div>
+    <div class="notice"><strong>Source-series boundary</strong><span>This registry expands audited source coverage only. It does not create an operating-budget crosswalk, payment ledger, transaction history or project-level actual-spend dataset, and it does not hide the incompatible 2018 source format.</span></div>
   </div></section>`;
 }
 
