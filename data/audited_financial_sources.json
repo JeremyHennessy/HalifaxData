@@ -2,20 +2,21 @@
   "metadata": {
     "build": "017",
     "last_researched": "2026-08-27",
-    "scope": "Official Halifax Regional Municipality annual audited consolidated financial statements used to extend the conservative statement/schedule extraction to a contiguous 2018–2025 source-year series.",
-    "expected_source_years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+    "scope": "Official Halifax Regional Municipality annual audited consolidated financial statements used to extend the established conservative statement/schedule extraction to a contiguous 2019–2025 source-year series. The official 2018 Council attachment is retained as a documented parser gap rather than being forced into released data.",
+    "expected_source_years": [2019, 2020, 2021, 2022, 2023, 2024, 2025],
     "base_registry_source_ids": ["hrm-financials-2023", "hrm-financials-2025"],
-    "note": "Comparative prior-year values printed in each annual statement remain source-presented comparators. They are not de-duplicated into a synthetic restatement-free time series without explicit semantic reconciliation."
+    "documented_parse_gap_source_ids": ["hrm-financials-2018"],
+    "note": "Comparative prior-year values printed in each annual statement remain source-presented comparators. The 2019 statement provides source-presented 2018 comparatives, but HalifaxData does not relabel those comparators as a successfully parsed 2018 source."
   },
   "sources": [
     {
       "id": "hrm-financials-2018",
-      "name": "Audited Consolidated Financial Statements — 2018",
+      "name": "Audited Consolidated Financial Statements — 2018 Council attachment",
       "publisher": "Halifax Regional Municipality",
       "category": "Budgets & actuals",
-      "coverage": "Year ended Mar 31, 2018 with comparative 2017",
-      "ingestion": "Official Regional Council PDF attachment; heading-anchored statement/schedule extraction",
-      "status": "ready",
+      "coverage": "Year ended Mar 31, 2018 with comparative 2017; official source located but not normalized by the established heading-anchored parser",
+      "ingestion": "Official Regional Council PDF attachment; Build 017 live proof returned zero eligible statement pages under established parser semantics",
+      "status": "research-parse-gap",
       "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/180731rc1433.pdf"
     },
     {
