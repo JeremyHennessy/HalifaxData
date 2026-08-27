@@ -47,7 +47,9 @@ jobs:
       - name: Verify hosted dashboard
         env:
           HALIFAXDATA_URL: ${{ needs.deploy.outputs.page_url }}
-        run: node tools/ui-smoke.mjs
+        run: |
+          node tools/ui-smoke.mjs
+          node tools/build014-ui-smoke.mjs
       - name: Upload hosted UI evidence
         if: always()
         uses: actions/upload-artifact@v4
