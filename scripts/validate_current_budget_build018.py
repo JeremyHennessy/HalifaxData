@@ -9,6 +9,21 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "data" / "current_budget_sources.json"
 DATA = ROOT / "data" / "generated" / "current_budget_2026_27.json"
 PARSER_VERSION = "build018-current-budget-v2"
+EXPECTED_OVERVIEW_PAGES = 20
+EXPECTED_RECORDS = 105
+EXPECTED_SOURCE_DISCREPANCIES = 1
+EXPECTED_PCT_DISCREPANCY = {
+    "business_unit_source_heading": "Parks & Recreation",
+    "service_area": "Strategic Planning and Design",
+    "source_page": 140,
+    "prior_budget": 3922100,
+    "current_budget": 4255900,
+    "source_reported_budget_change": 333800,
+    "source_reported_budget_change_pct": 8.9,
+    "derived_budget_change": 333800,
+    "derived_budget_change_pct": 8.5107,
+    "validation_flags": ["reported_budget_change_pct_mismatch"],
+}
 
 FORBIDDEN_RECORD_FIELDS = {
     "vendor_name",
@@ -45,9 +60,10 @@ def main() -> None:
     assert controls.get("municipal_expenditures") == expected_controls["municipal_expenditures"]
     assert controls.get("gross_capital_spending") == expected_controls["gross_capital_spending"]
 
-    assert metadata.get("overview_page_count") == len(pages) >= 12
-    assert metadata.get("service_area_record_count") == len(records) >= 45
+    assert metadata.get("overview_page_count") == len(pages) == EXPECTED_OVERVIEW_PAGES
+    assert metadata.get("service_area_record_count") == len(records) == EXPECTED_RECORDS
     assert metadata.get("net_total_count") == sum(bool(row.get("is_total")) for row in records) == len(pages)
+    assert metadata.get("source_arithmetic_discrepancy_rows") == EXPECTED_SOURCE_DISCREPANCIES
     assert len({page.get("source_page") for page in pages}) == len(pages)
 
     ids = set()
@@ -96,10 +112,16 @@ def main() -> None:
         assert len(totals) == 1
         assert totals[0].get("current_budget") == page.get("net_total")
 
+    discrepancies = [row for row in records if row.get("validation_flags")]
+    assert len(discrepancies) == EXPECTED_SOURCE_DISCREPANCIES
+    discrepancy = discrepancies[0]
+    for key, expected in EXPECTED_PCT_DISCREPANCY.items():
+        assert discrepancy.get(key) == expected, f"unexpected source discrepancy field {key}: {discrepancy.get(key)!r}"
+
     print(
         "Build 018 current budget valid: "
         f"{len(records)} rows / {len(pages)} overview pages / "
-        f"{metadata.get('source_arithmetic_discrepancy_rows')} source-arithmetic review rows"
+        f"{len(discrepancies)} preserved source-arithmetic review row"
     )
 
 
