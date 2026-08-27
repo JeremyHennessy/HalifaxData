@@ -12,13 +12,17 @@ async function b15FetchJson(url) {
   return response.json();
 }
 
+function b15SafeRerender() {
+  if (typeof render === 'function' && state.compensation && state.sources) render();
+}
+
 b15FetchJson('./data/quarterly_financial_sources.json').then(data => {
   state.build015QuarterlySources = { status: 'ready', data, error: null };
   b15MergeSources();
-  if (typeof render === 'function') render();
+  b15SafeRerender();
 }).catch(error => {
   state.build015QuarterlySources = { status: 'error', data: null, error: error.message || 'Quarterly source registry failed to load' };
-  if (typeof render === 'function') render();
+  b15SafeRerender();
 });
 
 function b15Sources() {
