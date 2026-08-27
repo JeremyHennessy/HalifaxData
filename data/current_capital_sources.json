@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "build": "018",
+    "last_researched": "2026-08-27",
+    "scope": "Official HRM 2026/27 Capital Multi-Year Projects schedule from the revised March 3, 2026 capital-plan report.",
+    "principle": "Attachment 2 is a budget cashflow/authority schedule for identified multi-year projects and programs. It is not a complete capital-project ledger, project spend-to-date, invoice evidence, commitment ledger, final project cost or proof of an overrun."
+  },
+  "schedule_source": {
+    "id": "hrm-capital-2026-27-multiyear-revised",
+    "name": "Revised 2026/27 Multi-Year Capital Plan — Attachment 2",
+    "publisher": "Halifax Regional Municipality",
+    "category": "Capital",
+    "meeting_date": "2026-03-03",
+    "meeting_id": "2dc5ed20-0349-47ab-89a0-a6d84e435b9a",
+    "staff_report_date": "2026-02-22",
+    "agenda_url": "https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2dc5ed20-0349-47ab-89a0-a6d84e435b9a&lang=English",
+    "attachment_visible_title": "7 - Revised 202627 Multi-Year Capital Plan.pdf",
+    "previous_indexed_attachment_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4406",
+    "known_live_attachment_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+    "attachment_pdf_page": 9,
+    "attachment_number": 2,
+    "source_stage": "revised_post_budget_direction",
+    "status": "ready-live-resolved",
+    "published_controls": {
+      "source_table_rows": 60,
+      "project_rows": 52,
+      "discrete_project_rows": 29,
+      "ongoing_program_rows": 23,
+      "current_2026_27_multiyear_budget": 196656000,
+      "computed_previous_years_gross_budget": 672458423,
+      "source_grand_total_previous_years_gross_budget": 207710978,
+      "source_grand_total": 2152999430
+    },
+    "known_source_discrepancy": {
+      "field": "grand_total_row_previous_years_gross_budget",
+      "source_value": 207710978,
+      "computed_from_discrete_and_ongoing_subtotals": 672458423,
+      "difference_source_minus_computed": -464747445,
+      "note": "The source Grand Total row repeats the discrete-project previous-years subtotal instead of discrete plus ongoing. The row's other fiscal-year columns and overall Grand Total reconcile to the two source subtotals."
+    }
+  },
+  "approval_source": {
+    "id": "hrm-council-2026-03-31-budget-ratification",
+    "name": "Regional Council — Ratification from Budget Committee, Proposed 2026/27 Budget",
+    "publisher": "Halifax Regional Municipality",
+    "category": "Council decisions",
+    "meeting_date": "2026-03-31",
+    "meeting_id": "2b525638-79db-4d72-8db3-9b4bde75cc13",
+    "status": "approved",
+    "url": "https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2b525638-79db-4d72-8db3-9b4bde75cc13&lang=English",
+    "approval_text": "Regional Council adopted the Resolution for Approval of Operating Budgets, Capital Plan and Tax Rates for Fiscal 2026/27 as set out in Schedule 1 of the March 25, 2026 staff report.",
+    "interpretation_boundary": "Council approval establishes capital budget authority. It does not establish that a scheduled amount was spent, committed, invoiced or paid."
+  }
+}
