@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "build": "016",
+    "last_researched": "2026-08-27",
+    "scope": "Official Halifax Regional Council approved minutes used to extract motion text and outcomes. Modern coverage follows posted eSCRIBE minutes in the checked Council calendar; legacy records are an explicit seed and are not a complete pre-2024 archive.",
+    "modern_source_id": "hrm-escribe",
+    "legacy_seed_complete": false,
+    "note": "A passed motion is Council decision evidence, but money mentioned in a motion is not proof of payment, final cost, invoice activity or policy compliance. Legacy seed coverage must never be represented as a complete historical Council series."
+  },
+  "legacy_sources": [
+    {
+      "source_id": "hrm-council-legacy-2016-06-14",
+      "meeting_date": "2016-06-14",
+      "meeting_name": "Halifax Regional Council",
+      "minutes_url": "https://legacycontent.halifax.ca/council/agendasc/documents/c160614.pdf",
+      "publisher": "Halifax Regional Municipality",
+      "source_kind": "approved_minutes_pdf",
+      "coverage_status": "legacy_seed"
+    },
+    {
+      "source_id": "hrm-council-legacy-2019-04-30",
+      "meeting_date": "2019-04-30",
+      "meeting_name": "Halifax Regional Council",
+      "minutes_url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/190430rc-mins.pdf",
+      "publisher": "Halifax Regional Municipality",
+      "source_kind": "approved_minutes_pdf",
+      "coverage_status": "legacy_seed"
+    },
+    {
+      "source_id": "hrm-council-legacy-2022-10-25",
+      "meeting_date": "2022-10-25",
+      "meeting_name": "Halifax Regional Council",
+      "minutes_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/regional-council/221025rc-mins.pdf",
+      "publisher": "Halifax Regional Municipality",
+      "source_kind": "approved_minutes_pdf",
+      "coverage_status": "legacy_seed"
+    },
+    {
+      "source_id": "hrm-council-legacy-2022-12-13",
+      "meeting_date": "2022-12-13",
+      "meeting_name": "Halifax Regional Council",
+      "minutes_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/regional-council/221213rc-mins_0.pdf",
+      "publisher": "Halifax Regional Municipality",
+      "source_kind": "approved_minutes_pdf",
+      "coverage_status": "legacy_seed"
+    },
+    {
+      "source_id": "hrm-council-legacy-2023-05-09",
+      "meeting_date": "2023-05-09",
+      "meeting_name": "Halifax Regional Council",
+      "minutes_url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/230509rcmins.pdf",
+      "publisher": "Halifax Regional Municipality",
+      "source_kind": "approved_minutes_pdf",
+      "coverage_status": "legacy_seed"
+    },
+    {
+      "source_id": "hrm-council-legacy-2023-10-17",
+      "meeting_date": "2023-10-17",
+      "meeting_name": "Halifax Regional Council",
+      "minutes_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/regional-council/231017rcmins.pdf",
+      "publisher": "Halifax Regional Municipality",
+      "source_kind": "approved_minutes_pdf",
+      "coverage_status": "legacy_seed"
+    },
+    {
+      "source_id": "hrm-council-legacy-2023-12-12",
+      "meeting_date": "2023-12-12",
+      "meeting_name": "Halifax Regional Council",
+      "minutes_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/regional-council/231212rc-mins.pdf",
+      "publisher": "Halifax Regional Municipality",
+      "source_kind": "approved_minutes_pdf",
+      "coverage_status": "legacy_seed"
+    }
+  ]
+}
