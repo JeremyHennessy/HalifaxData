@@ -50,6 +50,7 @@ jobs:
           node --check tools/build012-ui-smoke.mjs
           node --check tools/build013-ui-smoke.mjs
           node --check tools/build014-ui-smoke.mjs
+          node --check tools/build014-linkage-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate established budget and compensation contracts
