@@ -9,7 +9,16 @@ on:
       - 'scripts/ingest_current_budget_build018.py'
       - 'scripts/ingest_current_budget_build018_v2.py'
       - 'scripts/validate_current_budget_build018.py'
+      - 'build018-current-source-refresh.js'
+      - 'tools/build018-ui-smoke.mjs'
+      - 'index.html'
+      - 'docs/build018-current-source-refresh.md'
+      - 'docs/source-map.md'
       - '.github/workflows/build018-current-budget-proof.yml'
+      - '.github/workflows/build018-current-capital-proof.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/ui-smoke.yml'
+      - '.github/workflows/pages.yml'
   pull_request:
     paths:
       - 'data/current_budget_sources.json'
@@ -17,7 +26,16 @@ on:
       - 'scripts/ingest_current_budget_build018.py'
       - 'scripts/ingest_current_budget_build018_v2.py'
       - 'scripts/validate_current_budget_build018.py'
+      - 'build018-current-source-refresh.js'
+      - 'tools/build018-ui-smoke.mjs'
+      - 'index.html'
+      - 'docs/build018-current-source-refresh.md'
+      - 'docs/source-map.md'
       - '.github/workflows/build018-current-budget-proof.yml'
+      - '.github/workflows/build018-current-capital-proof.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/ui-smoke.yml'
+      - '.github/workflows/pages.yml'
 
 permissions:
   contents: write
