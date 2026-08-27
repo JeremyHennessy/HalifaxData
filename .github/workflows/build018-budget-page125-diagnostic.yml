@@ -1,0 +1,55 @@
+name: Build 018 Budget Page 125 Diagnostic
+
+on:
+  push:
+    branches: ['agent/build-018-current-source-refresh']
+    paths:
+      - '.github/workflows/build018-budget-page125-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Print source visual rows for final-package page 125
+        run: |
+          python - <<'PY'
+          import io, json, requests
+          from pathlib import Path
+          import pdfplumber
+          import sys
+          sys.path.insert(0, 'scripts')
+          import ingest_budget as base
+
+          cfg = json.loads(Path('data/current_budget_sources.json').read_text(encoding='utf-8'))
+          url = cfg['budget_source']['url']
+          response = requests.get(
+              url,
+              headers={
+                  'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)',
+                  'Referer': cfg['approval_source']['url'],
+              },
+              timeout=180,
+          )
+          response.raise_for_status()
+          if not response.content.startswith(b'%PDF'):
+              raise SystemExit('final package response is not PDF')
+          with pdfplumber.open(io.BytesIO(response.content)) as pdf:
+              page = pdf.pages[124]
+              rows = base.visual_rows(page)
+              print('PAGE 125 TEXT')
+              print(page.extract_text() or '')
+              print('PAGE 125 VISUAL ROWS')
+              for i, row in enumerate(rows):
+                  text = ' '.join(str(word.get('text') or '') for word in row)
+                  coords = [(str(word.get('text') or ''), round(float(word.get('x0') or 0), 1)) for word in row]
+                  print(f'{i:03d}: {text} :: {coords}')
+          PY
