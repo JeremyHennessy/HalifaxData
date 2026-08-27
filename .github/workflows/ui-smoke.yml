@@ -2,7 +2,7 @@ name: UI Smoke
 
 on:
   push:
-    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh']
+    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph']
   pull_request:
     paths:
       - 'index.html'
@@ -19,6 +19,7 @@ on:
       - 'tools/build014-ui-smoke.mjs'
       - 'tools/build014-linkage-smoke.mjs'
       - 'tools/build015-ui-smoke.mjs'
+      - 'tools/build016-ui-smoke.mjs'
       - '.github/workflows/ui-smoke.yml'
 
 permissions:
@@ -65,6 +66,8 @@ jobs:
         run: node tools/build014-linkage-smoke.mjs
       - name: Validate Build 015 current fiscal refresh
         run: node tools/build015-ui-smoke.mjs
+      - name: Validate Build 016 Council decision evidence
+        run: node tools/build016-ui-smoke.mjs
       - name: Upload UI evidence
         if: always()
         uses: actions/upload-artifact@v4
