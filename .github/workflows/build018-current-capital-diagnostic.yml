@@ -31,7 +31,7 @@ jobs:
           import pdfplumber
 
           agenda_url = 'https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2dc5ed20-0349-47ab-89a0-a6d84e435b9a&lang=English'
-          exact_title = '1.7 - Revised 202627 Multi-Year Capital Plan.pdf'
+          exact_title = '7 - Revised 202627 Multi-Year Capital Plan.pdf'
           session = requests.Session()
           session.headers.update({'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)'})
 
@@ -59,19 +59,18 @@ jobs:
 
           parser = LinkParser()
           parser.feed(agenda.text)
-          candidates = []
+          candidates = set()
           for link in parser.links:
               title = re.sub(r'\s+', ' ', link['text']).strip()
               if title == exact_title:
-                  candidates.append(urljoin(agenda_url, link['href']))
-          print(f'exact_title_candidates={candidates}')
+                  candidates.add(urljoin(agenda_url, link['href']))
+          print(f'exact_title_unique_candidates={sorted(candidates)}')
           if len(candidates) != 1:
-              # Print capital-related anchors as diagnostic evidence, then fail closed.
-              related = [(link['text'], link['href']) for link in parser.links if 'capital' in link['text'].lower() or '4406' in link['href']]
+              related = [(link['text'], link['href']) for link in parser.links if 'capital' in link['text'].lower()]
               print(f'capital_related_links={related}')
-              raise SystemExit(f'expected exactly one exact-title revised-capital attachment, found {len(candidates)}')
+              raise SystemExit(f'expected exactly one unique exact-title revised-capital URL, found {len(candidates)}')
 
-          resolved_url = candidates[0]
+          resolved_url = next(iter(candidates))
           response = session.get(resolved_url, headers={'Referer': agenda_url}, timeout=180)
           response.raise_for_status()
           if not response.content.startswith(b'%PDF'):
@@ -98,7 +97,7 @@ jobs:
                           continue
                       relevant_tables += 1
                       print(f'  TABLE {table_number} rows={len(normalized)}')
-                      for row in normalized[:10]:
+                      for row in normalized[:12]:
                           print('   ', row)
               print(f'relevant_pages={relevant_pages}')
               print(f'relevant_tables={relevant_tables}')
