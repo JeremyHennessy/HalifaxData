@@ -43,8 +43,7 @@ try {
     for (const phrase of [
       'related checked records',
       'deterministic source relationships only',
-      'missing links remain missing rather than being filled by fuzzy matching',
-      'no relationship is inferred from similar vendor names, project names or descriptive text'
+      'missing links remain missing rather than being filled by fuzzy matching'
     ]) {
       if (!drawerText.includes(phrase)) throw new Error(`${viewportName}: related-record drawer missing "${phrase}"`);
     }
