@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independently validate conservative quarterly spending-summary extraction."""
+"""Independently validate conservative quarterly financial-summary extraction."""
 from __future__ import annotations
 
 import json
@@ -11,17 +11,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / 'data/generated/spending.json'
-REGISTRY = ROOT / 'data/sources.json'
+REGISTRY = ROOT / 'data/quarterly_financial_sources.json'
 EXPECTED_STATUS = 'conservative_quarterly_summary_extraction'
-EXPECTED_PARSER = 'build005-spending-v2'
+EXPECTED_PARSER = 'build015-quarterly-financial-v1'
 MAX_ABS_VALUE = 10_000_000_000
-PERIOD_END = {
-    'hrm-q2-2024-25': '2024-09-30',
-    'hrm-q3-2024-25': '2024-12-31',
-    'hrm-q1-2023-24': '2023-06-30',
-    'hrm-q2-2023-24': '2023-09-30',
-    'hrm-q3-2023-24': '2023-12-31',
-}
 MONEY_TOKEN_RE = re.compile(
     r'(?<![\w.])(?:'
     r'\(\s*\$?\s*\d[\d,]*(?:\.\d+)?\s*\)'
@@ -62,6 +55,27 @@ def independent_values(cell: str) -> list[float]:
     return values
 
 
+def load_registry() -> tuple[list[dict], dict[str, dict]]:
+    payload = json.loads(REGISTRY.read_text(encoding='utf-8'))
+    sources = payload.get('sources')
+    if not isinstance(sources, list):
+        raise SystemExit('quarterly_financial_sources.json sources must be a list')
+    by_id: dict[str, dict] = {}
+    for index, source in enumerate(sources):
+        source_id = clean(source.get('id'))
+        if not source_id or source_id in by_id:
+            fail(f'registry source {index}: blank/duplicate id {source_id!r}')
+            continue
+        by_id[source_id] = source
+        if source.get('status') != 'ready':
+            fail(f'{source_id}: registry status must be ready')
+        if source.get('quarter') not in {1, 2, 3, 4}:
+            fail(f'{source_id}: invalid quarter')
+        if not clean(source.get('period_end')) or not clean(source.get('fiscal_year')) or not clean(source.get('url')):
+            fail(f'{source_id}: period_end, fiscal_year and url are required')
+    return sources, by_id
+
+
 def main() -> None:
     if not PATH.exists():
         raise SystemExit(f'Missing spending artifact: {PATH.relative_to(ROOT)}')
@@ -71,11 +85,14 @@ def main() -> None:
     if not isinstance(rows, list):
         raise SystemExit('spending.json records must be a list')
 
-    registry = json.loads(REGISTRY.read_text(encoding='utf-8'))
-    registry_ids = {row.get('id') for row in registry.get('sources', [])}
-    for source_id in PERIOD_END:
-        if source_id not in registry_ids:
-            fail(f'configured quarterly source {source_id!r} is missing from registry')
+    sources, source_by_id = load_registry()
+    expected_ids = set(source_by_id)
+    if len(sources) < 8:
+        fail(f'Build 015 requires at least 8 identified quarterly reports, found {len(sources)}')
+    expected_2025 = {(1, '2025-06-30'), (2, '2025-09-30'), (3, '2025-12-31')}
+    actual_2025 = {(source.get('quarter'), source.get('period_end')) for source in sources if source.get('fiscal_year') == '2025/26'}
+    if not expected_2025.issubset(actual_2025):
+        fail(f'2025/26 Q1-Q3 coverage missing: expected {sorted(expected_2025)}, got {sorted(actual_2025)}')
 
     if metadata.get('dataset_status') != EXPECTED_STATUS:
         fail(f"dataset_status {metadata.get('dataset_status')!r} != {EXPECTED_STATUS!r}")
@@ -83,23 +100,35 @@ def main() -> None:
         fail(f"parser_version {metadata.get('parser_version')!r} != {EXPECTED_PARSER!r}")
     if metadata.get('records') != len(rows):
         fail(f"metadata records {metadata.get('records')!r} != actual {len(rows)}")
+    if metadata.get('report_count') != len(sources):
+        fail(f"metadata report_count {metadata.get('report_count')!r} != registry {len(sources)}")
+    if metadata.get('latest_period_end') != max(source['period_end'] for source in sources):
+        fail('latest_period_end does not match source registry')
+    if metadata.get('latest_period_end') != '2025-12-31':
+        fail('Build 015 expected latest period end 2025-12-31')
     if metadata.get('is_transaction_ledger') is not False:
         fail('spending artifact must explicitly state is_transaction_ledger=false')
     if metadata.get('granularity') != 'quarterly financial summary tables':
         fail(f"unexpected granularity {metadata.get('granularity')!r}")
+    note = clean(metadata.get('note')).lower()
+    for phrase in ('not a transaction-level accounts-payable ledger', 'invoice', 'vendor-payment'):
+        if phrase not in note:
+            fail(f'metadata note must preserve boundary phrase {phrase!r}')
 
     statuses = metadata.get('source_status') or []
     if not isinstance(statuses, list):
         fail('source_status must be a list')
         statuses = []
     status_ids = [item.get('source_id') for item in statuses]
-    if set(status_ids) != set(PERIOD_END) or len(status_ids) != len(PERIOD_END):
+    if set(status_ids) != expected_ids or len(status_ids) != len(expected_ids):
         fail('source_status must contain each configured quarterly source exactly once')
     status_by_id = {item.get('source_id'): item for item in statuses}
-    for source_id in PERIOD_END:
+    for source_id, source in source_by_id.items():
         item = status_by_id.get(source_id) or {}
         if item.get('status') != 'ok':
             fail(f'{source_id}: source status is not ok')
+        if item.get('period_end') != source.get('period_end') or item.get('fiscal_year') != source.get('fiscal_year') or item.get('quarter') != source.get('quarter'):
+            fail(f'{source_id}: source_status period metadata mismatch')
         if not isinstance(item.get('records'), int) or item.get('records', 0) < 1:
             fail(f'{source_id}: source status has no positive record count')
         rejected = item.get('rejected_rows_without_monetary_values')
@@ -113,17 +142,20 @@ def main() -> None:
         'district_activity_expenditure', 'area_rate_expenditure',
         'capital_summary', 'reserve_summary', 'operating_expense_summary',
     }
+    prohibited_fields = {'vendor', 'supplier', 'invoice_id', 'payment_id', 'cheque_number', 'purchase_order_payment'}
     for index, row in enumerate(rows):
         source_id = row.get('source_id')
-        if source_id not in PERIOD_END:
+        source = source_by_id.get(source_id)
+        if not source:
             fail(f'row {index}: unknown source_id {source_id!r}')
             continue
         counts[source_id] += 1
-        if row.get('posting_date') != PERIOD_END[source_id]:
+        if row.get('posting_date') != source.get('period_end'):
             fail(f'row {index}: posting_date does not match configured period end')
-        expected_fy = '2024/25' if '2024-25' in source_id else '2023/24'
-        if row.get('fiscal_year') != expected_fy:
-            fail(f'row {index}: fiscal_year {row.get("fiscal_year")!r} != {expected_fy!r}')
+        if row.get('fiscal_year') != source.get('fiscal_year'):
+            fail(f'row {index}: fiscal_year mismatch')
+        if row.get('quarter') != source.get('quarter'):
+            fail(f'row {index}: quarter mismatch')
         if row.get('record_type') not in allowed_types:
             fail(f'row {index}: unsupported record_type {row.get("record_type")!r}')
         if row.get('granularity') != 'official_summary_table_row':
@@ -132,6 +164,9 @@ def main() -> None:
             fail(f'row {index}: unexpected amount_semantics')
         if not clean(row.get('account')) or not clean(row.get('category')):
             fail(f'row {index}: blank account/category context')
+        present_prohibited = prohibited_fields.intersection(row)
+        if present_prohibited:
+            fail(f'row {index}: transaction/vendor fields are prohibited: {sorted(present_prohibited)}')
 
         raw_cells = row.get('raw_cells')
         label_index = row.get('label_cell_index')
@@ -162,14 +197,14 @@ def main() -> None:
         page, table, source_row = row.get('source_page'), row.get('source_table'), row.get('source_row')
         if not isinstance(page, int) or page < 1 or not isinstance(table, int) or table < 1 or not isinstance(source_row, int) or source_row < 1:
             fail(f'row {index}: invalid source page/table/row coordinates')
-        provenance = row.get('provenance') or {}
-        if provenance.get('source_id') != source_id:
+        prov = row.get('provenance') or {}
+        if prov.get('source_id') != source_id:
             fail(f'row {index}: provenance source_id mismatch')
-        if provenance.get('parser_version') != EXPECTED_PARSER:
+        if prov.get('parser_version') != EXPECTED_PARSER:
             fail(f'row {index}: stale provenance parser_version')
-        if provenance.get('validation_status') != 'parsed':
+        if prov.get('validation_status') != 'parsed':
             fail(f'row {index}: provenance validation_status must be parsed')
-        locator = provenance.get('locator_value')
+        locator = prov.get('locator_value')
         expected_locator = f'p{page}/t{table}/r{source_row}'
         if locator != expected_locator:
             fail(f'row {index}: locator {locator!r} != {expected_locator!r}')
@@ -177,10 +212,10 @@ def main() -> None:
         if locator_key in seen_locators:
             fail(f'row {index}: duplicate source locator {locator_key!r}')
         seen_locators.add(locator_key)
-        if not provenance.get('source_url'):
-            fail(f'row {index}: missing provenance source_url')
+        if prov.get('source_url') != source.get('url'):
+            fail(f'row {index}: provenance source_url mismatch')
 
-    for source_id in PERIOD_END:
+    for source_id in expected_ids:
         status_count = (status_by_id.get(source_id) or {}).get('records')
         if status_count != counts[source_id]:
             fail(f'{source_id}: metadata count {status_count!r} != actual {counts[source_id]}')
@@ -191,9 +226,9 @@ def main() -> None:
             print(message, file=sys.stderr)
         raise SystemExit(1)
 
-    print(f'validated {len(rows)} conservative quarterly spending-summary rows across {len(PERIOD_END)} sources')
-    for source_id in sorted(PERIOD_END):
-        print(f'{source_id}: rows={counts[source_id]}')
+    print(f'validated {len(rows)} conservative quarterly financial-summary rows across {len(sources)} reports')
+    for source in sorted(sources, key=lambda item: item['period_end']):
+        print(f"{source['id']}: {source['fiscal_year']} Q{source['quarter']} rows={counts[source['id']]}")
 
 
 if __name__ == '__main__':

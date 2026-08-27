@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "last_researched": "2026-08-26",
+    "scope": "Official HRM quarterly financial reports used for conservative summary-table extraction",
+    "series_status": "identified_public_quarterly_reports_not_complete_transaction_ledger",
+    "note": "These are quarterly financial-report sources. They are not accounts-payable, invoice, vendor-payment or transaction-ledger sources. Missing quarters remain explicit rather than inferred."
+  },
+  "sources": [
+    {
+      "id": "hrm-q1-2023-24",
+      "name": "First Quarter 2023/24 Financial Report",
+      "publisher": "Halifax Regional Municipality",
+      "fiscal_year": "2023/24",
+      "quarter": 1,
+      "period_end": "2023-06-30",
+      "coverage": "Period ended June 30, 2023",
+      "ingestion": "Council report PDF tables",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/231003rci04.pdf"
+    },
+    {
+      "id": "hrm-q2-2023-24",
+      "name": "Second Quarter 2023/24 Financial Report",
+      "publisher": "Halifax Regional Municipality",
+      "fiscal_year": "2023/24",
+      "quarter": 2,
+      "period_end": "2023-09-30",
+      "coverage": "Period ended September 30, 2023",
+      "ingestion": "Council report PDF tables",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/231128rci06.pdf"
+    },
+    {
+      "id": "hrm-q3-2023-24",
+      "name": "Third Quarter 2023/24 Financial Report",
+      "publisher": "Halifax Regional Municipality",
+      "fiscal_year": "2023/24",
+      "quarter": 3,
+      "period_end": "2023-12-31",
+      "coverage": "Period ended December 31, 2023",
+      "ingestion": "Council report PDF tables",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/240305rci05.pdf"
+    },
+    {
+      "id": "hrm-q2-2024-25",
+      "name": "Second Quarter 2024/25 Financial Report",
+      "publisher": "Halifax Regional Municipality",
+      "fiscal_year": "2024/25",
+      "quarter": 2,
+      "period_end": "2024-09-30",
+      "coverage": "Period ended September 30, 2024",
+      "ingestion": "Audit and Finance report PDF tables",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/241211afsc1321.pdf"
+    },
+    {
+      "id": "hrm-q3-2024-25",
+      "name": "Third Quarter 2024/25 Financial Report",
+      "publisher": "Halifax Regional Municipality",
+      "fiscal_year": "2024/25",
+      "quarter": 3,
+      "period_end": "2024-12-31",
+      "coverage": "Period ended December 31, 2024",
+      "ingestion": "Audit and Finance report PDF tables",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250218afsc1312.pdf"
+    },
+    {
+      "id": "hrm-q1-2025-26",
+      "name": "First Quarter 2025/26 Financial Report",
+      "publisher": "Halifax Regional Municipality",
+      "fiscal_year": "2025/26",
+      "quarter": 1,
+      "period_end": "2025-06-30",
+      "coverage": "Period ended June 30, 2025; staff report dated September 11, 2025",
+      "ingestion": "Audit and Finance report PDF tables",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250917afsc1313.pdf"
+    },
+    {
+      "id": "hrm-q2-2025-26",
+      "name": "Second Quarter 2025/26 Financial Report",
+      "publisher": "Halifax Regional Municipality",
+      "fiscal_year": "2025/26",
+      "quarter": 2,
+      "period_end": "2025-09-30",
+      "coverage": "Period ended September 30, 2025; staff report dated November 5, 2025",
+      "ingestion": "Audit and Finance report PDF tables",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/media/92446"
+    },
+    {
+      "id": "hrm-q3-2025-26",
+      "name": "Third Quarter 2025/26 Financial Report",
+      "publisher": "Halifax Regional Municipality",
+      "fiscal_year": "2025/26",
+      "quarter": 3,
+      "period_end": "2025-12-31",
+      "coverage": "Period ended December 31, 2025; staff report dated February 12, 2026; forwarded by Audit and Finance February 25, 2026",
+      "ingestion": "Audit and Finance staff-report PDF tables",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/260225afsc1313.pdf"
+    }
+  ]
+}

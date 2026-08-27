@@ -1,0 +1,87 @@
+name: Build 015 Quarterly Financial Series Proof
+
+on:
+  push:
+    branches: ['agent/build-015-current-fiscal-refresh', main]
+    paths:
+      - 'data/quarterly_financial_sources.json'
+      - 'data/generated/spending.json'
+      - 'scripts/ingest_quarterly_spending.py'
+      - 'scripts/validate_spending.py'
+      - '.github/workflows/build015-quarterly-proof.yml'
+  pull_request:
+    paths:
+      - 'data/quarterly_financial_sources.json'
+      - 'data/generated/spending.json'
+      - 'scripts/ingest_quarterly_spending.py'
+      - 'scripts/validate_spending.py'
+      - '.github/workflows/build015-quarterly-proof.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts/ingest_quarterly_spending.py scripts/validate_spending.py scripts/build_entity_index_v4.py scripts/validate_entity_index_v4.py
+      - name: Reproduce quarterly financial series from current official sources
+        run: python scripts/ingest_quarterly_spending.py
+      - name: Normalize checked-artifact generation timestamp
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          registry = json.loads(Path('data/quarterly_financial_sources.json').read_text(encoding='utf-8'))
+          path = Path('data/generated/spending.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          data['metadata']['generated_at'] = registry['metadata']['last_researched'] + 'T00:00:00Z'
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          PY
+      - name: Validate reproduced quarterly controls
+        run: python scripts/validate_spending.py
+      - name: Rebuild and validate normalized entity index
+        run: |
+          python scripts/build_entity_index_v4.py
+          python scripts/validate_entity_index_v4.py
+      - name: Copy proof artifacts
+        run: |
+          mkdir -p artifacts
+          cp data/generated/spending.json artifacts/spending.json
+          cp data/generated/entity_index.json artifacts/entity_index.json
+          cp data/generated/spending.json /tmp/build015-spending.json
+      - name: Publish reproduced artifacts to latest Build 015 branch head
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-015-current-fiscal-refresh'
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B build015-publish "origin/$GITHUB_REF_NAME"
+          cp /tmp/build015-spending.json data/generated/spending.json
+          python scripts/build_entity_index_v4.py
+          python scripts/validate_entity_index_v4.py
+          if [ -z "$(git status --porcelain -- data/generated/spending.json data/generated/entity_index.json)" ]; then
+            echo 'Checked quarterly and entity-index artifacts are already reproducible on latest branch head.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/spending.json data/generated/entity_index.json
+          git commit -m 'Build 015: publish refreshed quarterly series and entity index'
+          git push origin HEAD:"$GITHUB_REF_NAME"
+      - name: Upload proof artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build015-quarterly-${{ github.sha }}
+          path: |
+            artifacts/spending.json
+            artifacts/entity_index.json
+          if-no-files-found: warn
+          retention-days: 14

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-08-25T18:50:00+00:00",
+    "generated_at": "2026-08-26T00:00:00+00:00",
     "schema_version": "2.0.0",
     "principle": "Artifact availability, validation and release state are explicit and must not be conflated."
   },
@@ -13,7 +13,7 @@
     {
       "domain": "spending",
       "status": "ready",
-      "note": "Quarterly spending summaries were regenerated with strict monetary tokenization and independently validated."
+      "note": "Eight official quarterly financial reports through Q3 2025/26 are checked in as 1,753 conservative summary-table rows with strict monetary tokenization. This remains non-transaction financial-summary evidence."
     },
     {
       "domain": "procurement",

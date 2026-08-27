@@ -42,6 +42,7 @@ jobs:
           node --check build013-context-expansion-refinements.js
           node --check build014-contract-amendment-series.js
           node --check build014-contract-amendment-links.js
+          node --check build015-current-fiscal-refresh.js
           node --check tools/ui-smoke.mjs
           node --check tools/build009-ui-smoke.mjs
           node --check tools/build010-ui-smoke.mjs
@@ -51,6 +52,7 @@ jobs:
           node --check tools/build013-ui-smoke.mjs
           node --check tools/build014-ui-smoke.mjs
           node --check tools/build014-linkage-smoke.mjs
+          node --check tools/build015-ui-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate established budget and compensation contracts
