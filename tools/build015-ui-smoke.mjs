@@ -54,8 +54,9 @@ try {
     if (await currentCards.count() !== 3) throw new Error(`${viewportName}: expected 3 current-fiscal timeline cards`);
     await currentCards.first().click();
     await page.waitForSelector('#evidence-drawer[open]');
-    const drawerText = (await page.locator('#drawer-body').innerText()).toLowerCase();
+    const drawerText = `${await page.locator('#drawer-title').innerText()}\n${await page.locator('#drawer-body').innerText()}`.toLowerCase();
     if (!drawerText.includes('2025/26')) throw new Error(`${viewportName}: current report source drawer missing 2025/26 context`);
+    if (!drawerText.includes('source id') || !drawerText.includes('coverage')) throw new Error(`${viewportName}: current report source drawer missing evidence fields`);
     await page.locator('#drawer-close').click();
 
     const dims = await page.evaluate(() => ({
