@@ -77,7 +77,6 @@ def source_heading(text: str, page_number: int) -> str:
             previous = lines[index - 1]
             if previous and "P.O. Box" not in previous and not re.fullmatch(r"\d+", previous):
                 return previous
-    # Fail closed on identity rather than inventing a business-unit label.
     raise RuntimeError(f"budget page {page_number}: could not identify source business-unit heading")
 
 
@@ -176,7 +175,6 @@ def parse_service_area_page(page, page_number: int, heading: str, stable_retriev
 
 
 def extract_report_controls(pdf, expected: dict) -> dict:
-    # The final staff report places the executive-summary controls near the front.
     front_text = "\n".join((pdf.pages[index].extract_text() or "") for index in range(min(20, len(pdf.pages))))
     normalized = clean(front_text)
     spending_match = re.search(r"municipal expenditures of \$?\s*([\d,.]+)\s*million", normalized, re.I)
@@ -264,9 +262,9 @@ def main() -> None:
             "net_total_count": sum(record["is_total"] for record in records),
             "source_arithmetic_discrepancy_rows": sum(bool(record.get("validation_flags")) for record in records),
             "published_controls": controls,
-            "is_accounts_payable_ledger": false,
-            "is_payment_evidence": false,
-            "is_final_cost_evidence": false,
+            "is_accounts_payable_ledger": False,
+            "is_payment_evidence": False,
+            "is_final_cost_evidence": False,
             "note": "Current 2026/27 budget authority extracted from the final March 25 post-BAL staff package and linked separately to March 31 Council ratification. These are budget facts, not transactions or payments. Source headings are retained rather than force-mapped to the prior-year organization taxonomy.",
         },
         "overview_pages": overview_pages,
