@@ -37,7 +37,7 @@
       },
       "financials": {
         "path": "data/generated/financials.json",
-        "sha256": "99b98a89e31751b67ca7cae78bcfdf96cec5f3aae0b676df23acf95c268c616e",
+        "sha256": "42c7fee9f40ea80ea6ca45f03224b7353e2f888748366fcefa58d7a16caef8de",
         "records": 1243,
         "generated_at": "2026-08-27T00:00:00Z"
       },
