@@ -24,14 +24,11 @@ try {
     });
 
     await page.goto(`${BASE_URL}#spending`, { waitUntil: 'networkidle' });
-    await page.waitForFunction(() =>
-      typeof window.b15Stats === 'function' &&
-      window.b15Sources?.().length === 8 &&
-      document.querySelector('.b15-current-fiscal') &&
-      window.state?.optional?.spending?.data?.metadata?.parser_version === 'build015-quarterly-financial-v1',
-      null,
-      { timeout: 30000 }
-    );
+    await page.waitForFunction(() => {
+      if (typeof window.b15Stats !== 'function' || window.b15Sources?.().length !== 8 || !document.querySelector('.b15-current-fiscal')) return false;
+      const stats = window.b15Stats();
+      return stats.latestPeriodEnd === '2025-12-31' && stats.totalRows > 1094 && stats.currentRows > 0;
+    }, null, { timeout: 30000 });
 
     const stats = await page.evaluate(() => window.b15Stats());
     if (stats.reportCount !== 8) throw new Error(`${viewportName}: expected 8 quarterly reports, got ${stats.reportCount}`);
