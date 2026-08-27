@@ -1,5 +1,4 @@
 name: Build 017 Audited Financial History Proof
-# Exact-head release proof trigger after Build 017 artifact publication and documentation closeout.
 
 on:
   push:
@@ -42,19 +41,57 @@ jobs:
         run: python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate Python syntax
         run: python -m compileall -q scripts/ingest_financial_history.py scripts/ingest_financial_history_build017.py scripts/validate_financial_history.py scripts/validate_financial_history_build017.py
+      - name: Preserve checked retrieval provenance
+        run: cp data/generated/financials.json /tmp/build017-checked-financials.json
       - name: Reproduce seven-source audited financial history
         run: python scripts/ingest_financial_history_build017.py
-      - name: Normalize checked-artifact generation timestamps
+      - name: Normalize volatile proof metadata without rewriting source retrieval history
         run: |
           python - <<'PY'
           import json
+          import re
           from pathlib import Path
-          stamp = json.loads(Path('data/audited_financial_sources.json').read_text(encoding='utf-8'))['metadata']['last_researched'] + 'T00:00:00Z'
-          for filename in ['financials.json', 'financials_document_tables.json']:
-              path = Path('data/generated') / filename
-              data = json.loads(path.read_text(encoding='utf-8'))
-              data['metadata']['generated_at'] = stamp
-              path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          registry = json.loads(Path('data/audited_financial_sources.json').read_text(encoding='utf-8'))
+          stamp = registry['metadata']['last_researched'] + 'T00:00:00Z'
+          checked = json.loads(Path('/tmp/build017-checked-financials.json').read_text(encoding='utf-8'))
+          current_path = Path('data/generated/financials.json')
+          current = json.loads(current_path.read_text(encoding='utf-8'))
+
+          def key(row):
+              return (
+                  row.get('source_id'),
+                  row.get('source_page'),
+                  row.get('statement_family'),
+                  re.sub(r'\s+', ' ', str(row.get('line_item') or '')).strip().lower(),
+                  row.get('current_year'),
+                  row.get('prior_year'),
+              )
+
+          checked_retrieved = {}
+          for row in checked.get('records') or []:
+              provenance = row.get('provenance') or {}
+              retrieved_at = provenance.get('retrieved_at')
+              if retrieved_at:
+                  checked_retrieved[key(row)] = retrieved_at
+
+          preserved = 0
+          for row in current.get('records') or []:
+              retrieved_at = checked_retrieved.get(key(row))
+              provenance = row.get('provenance')
+              if retrieved_at and isinstance(provenance, dict):
+                  provenance['retrieved_at'] = retrieved_at
+                  preserved += 1
+
+          current['metadata']['generated_at'] = stamp
+          current_path.write_text(json.dumps(current, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          tables_path = Path('data/generated/financials_document_tables.json')
+          tables = json.loads(tables_path.read_text(encoding='utf-8'))
+          tables['metadata']['generated_at'] = stamp
+          tables_path.write_text(json.dumps(tables, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          print(f'preserved checked retrieved_at provenance for {preserved} unchanged financial rows')
           PY
       - name: Validate established audited statement semantics
         run: python scripts/validate_financial_history.py
@@ -73,7 +110,7 @@ jobs:
           cp data/generated/entity_index.json artifacts/entity_index.json
           cp data/generated/financials.json /tmp/build017-financials.json
           cp data/generated/financials_document_tables.json /tmp/build017-financials_document_tables.json
-          cp data/generated/entity_index.json /tmp/build017-entity_index.json
+          cp data/generated/entity_index.json /tmp/build017-entity-index.json
       - name: Publish reproduced audited history to latest Build 017 branch head
         if: github.event_name == 'push' && github.ref_name == 'agent/build-017-audited-financial-history'
         run: |
@@ -81,7 +118,7 @@ jobs:
           git checkout -B build017-publish "origin/$GITHUB_REF_NAME"
           cp /tmp/build017-financials.json data/generated/financials.json
           cp /tmp/build017-financials_document_tables.json data/generated/financials_document_tables.json
-          cp /tmp/build017-entity_index.json data/generated/entity_index.json
+          cp /tmp/build017-entity-index.json data/generated/entity_index.json
           python scripts/validate_financial_history.py
           python scripts/validate_financial_history_build017.py
           python scripts/build_entity_index_v4.py --check
