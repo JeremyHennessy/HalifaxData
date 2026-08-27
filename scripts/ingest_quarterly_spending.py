@@ -2,10 +2,11 @@
 """Extract conservative HRM quarterly financial-summary rows.
 
 Build 015 moves source/period configuration into a dedicated registry and extends
-coverage through Q3 2025/26. Source PDFs frequently merge several monetary
-columns into one extracted cell. The parser tokenizes those values individually
-instead of collapsing them into one number. Records remain summary-table facts,
-not invoices, payments or accounts-payable transactions.
+coverage through Q3 2025/26 while preserving the Build 005 table-classification
+semantics for previously released sources. Source PDFs frequently merge several
+monetary columns into one extracted cell. The parser tokenizes those values
+individually instead of collapsing them into one number. Records remain summary-
+table facts, not invoices, payments or accounts-payable transactions.
 """
 from __future__ import annotations
 
@@ -30,7 +31,6 @@ MAX_ABS_VALUE = 10_000_000_000
 KEYWORDS = (
     'expense', 'expenditure', 'district capital', 'district activity',
     'hospitality', 'area rate', 'operating results', 'capital projection', 'reserve',
-    'projected surplus', 'projected deficit', 'financial report',
 )
 MONEY_TOKEN_RE = re.compile(
     r'(?<![\w.])(?:'
@@ -46,11 +46,11 @@ def now() -> str:
 
 def context_for(text: str) -> str:
     lines = [clean(line) for line in text.splitlines() if clean(line)]
-    for line in lines[:22]:
+    for line in lines[:18]:
         low = line.lower()
         if any(keyword in low for keyword in KEYWORDS):
-            return line[:240]
-    return lines[0][:240] if lines else ''
+            return line[:200]
+    return lines[0][:200] if lines else ''
 
 
 def classify(context: str, header: str) -> str | None:
@@ -67,7 +67,7 @@ def classify(context: str, header: str) -> str | None:
         return 'capital_summary'
     if 'reserve' in value:
         return 'reserve_summary'
-    if any(term in value for term in ('expense', 'expenditure', 'projected surplus', 'projected deficit')):
+    if 'expense' in value or 'expenditure' in value:
         return 'operating_expense_summary'
     return None
 
@@ -94,8 +94,6 @@ def extract_cell_values(cell: str) -> list[float]:
     values: list[float] = []
     for match in MONEY_TOKEN_RE.finditer(text):
         token = match.group(0)
-        # Plain integers embedded in descriptive text are not money. Exact
-        # numeric cells are allowed; merged cells need currency-style evidence.
         if not any(marker in token for marker in (',', '$', '(', ')', '-')):
             if text.strip() != token.strip():
                 continue
