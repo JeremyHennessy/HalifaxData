@@ -8,14 +8,32 @@ on:
       - 'data/generated/current_capital_2026_27_multiyear.json'
       - 'scripts/ingest_current_capital_build018.py'
       - 'scripts/validate_current_capital_build018.py'
+      - 'build018-current-source-refresh.js'
+      - 'tools/build018-ui-smoke.mjs'
+      - 'index.html'
+      - 'docs/build018-current-source-refresh.md'
+      - 'docs/source-map.md'
+      - '.github/workflows/build018-current-budget-proof.yml'
       - '.github/workflows/build018-current-capital-proof.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/ui-smoke.yml'
+      - '.github/workflows/pages.yml'
   pull_request:
     paths:
       - 'data/current_capital_sources.json'
       - 'data/generated/current_capital_2026_27_multiyear.json'
       - 'scripts/ingest_current_capital_build018.py'
       - 'scripts/validate_current_capital_build018.py'
+      - 'build018-current-source-refresh.js'
+      - 'tools/build018-ui-smoke.mjs'
+      - 'index.html'
+      - 'docs/build018-current-source-refresh.md'
+      - 'docs/source-map.md'
+      - '.github/workflows/build018-current-budget-proof.yml'
       - '.github/workflows/build018-current-capital-proof.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/ui-smoke.yml'
+      - '.github/workflows/pages.yml'
 
 permissions:
   contents: write
