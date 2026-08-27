@@ -19,25 +19,64 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check -r requirements.txt
-      - name: Inspect revised 2026/27 capital schedule source
+      - name: Resolve and inspect revised 2026/27 capital schedule source
         run: |
           python - <<'PY'
-          import io, re, requests
+          import html
+          import io
+          import re
+          from html.parser import HTMLParser
+          from urllib.parse import urljoin
+          import requests
           import pdfplumber
 
-          url = 'https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4406'
-          referer = 'https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2dc5ed20-0349-47ab-89a0-a6d84e435b9a&lang=English'
-          response = requests.get(
-              url,
-              headers={
-                  'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)',
-                  'Referer': referer,
-              },
-              timeout=180,
-          )
+          agenda_url = 'https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2dc5ed20-0349-47ab-89a0-a6d84e435b9a&lang=English'
+          exact_title = '1.7 - Revised 202627 Multi-Year Capital Plan.pdf'
+          session = requests.Session()
+          session.headers.update({'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)'})
+
+          agenda = session.get(agenda_url, timeout=180)
+          agenda.raise_for_status()
+
+          class LinkParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.current = None
+                  self.links = []
+              def handle_starttag(self, tag, attrs):
+                  if tag.lower() == 'a':
+                      href = dict(attrs).get('href')
+                      if href:
+                          self.current = {'href': href, 'text': []}
+              def handle_data(self, data):
+                  if self.current is not None:
+                      self.current['text'].append(data)
+              def handle_endtag(self, tag):
+                  if tag.lower() == 'a' and self.current is not None:
+                      self.current['text'] = re.sub(r'\s+', ' ', html.unescape(' '.join(self.current['text']))).strip()
+                      self.links.append(self.current)
+                      self.current = None
+
+          parser = LinkParser()
+          parser.feed(agenda.text)
+          candidates = []
+          for link in parser.links:
+              title = re.sub(r'\s+', ' ', link['text']).strip()
+              if title == exact_title:
+                  candidates.append(urljoin(agenda_url, link['href']))
+          print(f'exact_title_candidates={candidates}')
+          if len(candidates) != 1:
+              # Print capital-related anchors as diagnostic evidence, then fail closed.
+              related = [(link['text'], link['href']) for link in parser.links if 'capital' in link['text'].lower() or '4406' in link['href']]
+              print(f'capital_related_links={related}')
+              raise SystemExit(f'expected exactly one exact-title revised-capital attachment, found {len(candidates)}')
+
+          resolved_url = candidates[0]
+          response = session.get(resolved_url, headers={'Referer': agenda_url}, timeout=180)
           response.raise_for_status()
           if not response.content.startswith(b'%PDF'):
-              raise SystemExit(f'capital source is not PDF: {response.headers.get("content-type")!r}')
+              raise SystemExit(f'resolved capital source is not PDF: {response.headers.get("content-type")!r}')
+          print(f'resolved_url={resolved_url}')
 
           with pdfplumber.open(io.BytesIO(response.content)) as pdf:
               print(f'pdf_pages={len(pdf.pages)}')
@@ -48,18 +87,18 @@ jobs:
                   if not any(token in text.lower() for token in ('attachment 1', 'attachment 2', 'capital multi-year', 'capital plan')):
                       continue
                   relevant_pages += 1
-                  print(f'PAGE {page_number}: {text[:600]}')
+                  print(f'PAGE {page_number}: {text[:700]}')
                   for table_number, table in enumerate(page.extract_tables() or [], 1):
                       normalized = [
                           [re.sub(r'\s+', ' ', str(cell or '')).strip() for cell in (row or [])]
                           for row in (table or [])
                       ]
-                      joined = ' | '.join(' | '.join(row) for row in normalized[:4]).lower()
+                      joined = ' | '.join(' | '.join(row) for row in normalized[:5]).lower()
                       if not any(token in joined for token in ('project', '2026/27', '2027/28', 'grand total')):
                           continue
                       relevant_tables += 1
                       print(f'  TABLE {table_number} rows={len(normalized)}')
-                      for row in normalized[:8]:
+                      for row in normalized[:10]:
                           print('   ', row)
               print(f'relevant_pages={relevant_pages}')
               print(f'relevant_tables={relevant_tables}')
