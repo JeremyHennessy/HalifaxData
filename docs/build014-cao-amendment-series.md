@@ -13,8 +13,9 @@ Build 014 expands the single Nov. 15, 2023 amendment context introduced in Build
 - Contract 21-302 shows a $23,216 movement in the published cumulative amendment between those two public reports. This is not assumed to be one change order.
 - Three preserved source arithmetic discrepancies: West Bedford Fire Station/HQ design (-$30,000), Slayter Street (-$180), and Fire Boat Infrastructure (-$1).
 - Vendors & Contracts now exposes a 12-report timeline, full observation table, exact-identifier trajectories, source arithmetic controls and source/derived amount semantics.
-- Investigations replaces the old Build 013 one-report amendment leads with Build 014 full-series review leads. Scores order review only and are not probabilities of corruption, fraud, waste, illegality or policy breach.
+- Investigations replaces the old Build 013 one-report amendment leads with 33 Build 014 full-series review leads. Scores order review only and are not probabilities of corruption, fraud, waste, illegality or policy breach.
 - Sources & Evidence exposes all 12 identified report sources.
+- Amendment evidence drawers now include a deterministic related-record layer for checked procurement, capital and committee-calendar data.
 
 ## Source-schema controls
 
@@ -35,6 +36,17 @@ A cross-report trajectory is created only when the same exact source identifier 
 
 Build 014 does **not** create cross-report links from vendor-name similarity, project-name similarity, fuzzy text matching, or candidate vendor aliases.
 
+## Related checked records
+
+Build 014 also tests whether an amendment observation can be connected to other checked HalifaxData domains without lowering the identity standard. These are related evidence records, not inferred causal relationships.
+
+- Procurement: source procurement/contract references are compared with checked public-tender solicitation IDs after an explicit normalization that removes an `HRM` prefix and normalizes whitespace/hyphens. Under that rule, **16 of the 58 amendment observations link to 15 distinct checked public-tender award records**.
+- Capital: a relationship is created only when a checked capital project code appears as an exact token in the amendment source evidence. The current checked datasets produce **0 exact capital-code relationships**.
+- Council: a calendar/document context relationship is created only when the report date exactly matches a checked `Audit & Finance Standing Committee` calendar record after canonical committee-name normalization. The current checked datasets produce **0 same-date committee relationships**. Even if present, that relationship would not establish approval of an amendment.
+- Fuzzy links created: **0**.
+
+The zero capital/council results are intentional evidence-boundary behavior. Build 014 leaves a relationship unresolved instead of filling it from similar project names, vendor names or descriptive text.
+
 ## Interpretation boundary
 
 This dataset is public CAO contract-amendment reporting evidence. It is **not**:
@@ -52,4 +64,6 @@ Public amendment reports may exclude Private & Confidential amendment records. C
 
 `python scripts/validate_contract_amendments.py` checks the 12-report source registry, report/date coverage, source/derived semantic boundaries, 58-observation floor, exact trajectory controls, preserved source arithmetic discrepancies, and the no-AP/no-payment/no-wrongdoing assertions.
 
-`.github/workflows/build014-amendment-proof.yml` re-fetches the official PDFs, reproduces the normalized artifact, validates it, and uploads the proof artifact. `tools/build014-ui-smoke.mjs` validates the new desktop/mobile surfaces and semantic boundaries. The normal CI, UI Smoke, and Pages hosted-verification workflows include Build 014 release coverage.
+`.github/workflows/build014-amendment-proof.yml` re-fetches the official PDFs, reproduces the normalized artifact, validates it, and uploads the proof artifact. `tools/build014-ui-smoke.mjs` validates the new desktop/mobile series surfaces and semantic boundaries. `tools/build014-linkage-smoke.mjs` verifies the deterministic related-record layer, records its actual match counts and requires zero fuzzy links. The normal CI, UI Smoke, and Pages hosted-verification workflows include Build 014 release coverage.
+
+Current visual QA on the Build 014 browser artifact confirms the existing light presentation is preserved, the 12-report timeline and source/derived labels remain readable, the full-series investigation cards render without overflow, and related-record drawers explicitly show unresolved capital/council relationships instead of inventing joins.
