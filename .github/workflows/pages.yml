@@ -53,6 +53,7 @@ jobs:
           node tools/build014-linkage-smoke.mjs
           node tools/build015-ui-smoke.mjs
           node tools/build016-ui-smoke.mjs
+          node tools/build017-ui-smoke.mjs
       - name: Upload hosted UI evidence
         if: always()
         uses: actions/upload-artifact@v4
