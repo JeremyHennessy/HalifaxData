@@ -1,4 +1,5 @@
 name: Build 017 Audited Financial History Proof
+# Exact-head release proof trigger after Build 017 artifact publication and documentation closeout.
 
 on:
   push:
