@@ -4,8 +4,8 @@
     "researched_at": "2026-08-27",
     "purpose": "Track current-public-source freshness without converting an unverified publication gap into a zero or an assertion that no source exists.",
     "status_semantics": {
-      "verified_current": "A public source covering the latest completed relevant period was verified and is already represented in HalifaxData.",
-      "verified_new_source": "A newer authoritative public source was verified and requires ingestion or integration.",
+      "verified_current": "A public source covering the latest completed relevant period was verified and is already represented in the production evidence set.",
+      "verified_new_source": "A newer authoritative public source was verified and has a validated Build 018 integration pending production release gates.",
       "not_yet_verified": "Targeted research did not verify a newer source. This is not proof that the source does not exist or will not be published.",
       "current_source_research": "The domain source discovery itself was refreshed on the research date; publication/approval timing still governs record availability."
     }
@@ -17,16 +17,20 @@
       "production_through": "2025/26",
       "verified_current_period": "2026/27",
       "source_id": "hrm-budget-2026-27-final-package",
-      "source_stage": "final staff package after Budget Adjustment List; ratified by Regional Council March 31, 2026",
-      "next_action": "Reproduce and validate the final 2026/27 service-area budget layer before UI integration."
+      "source_stage": "Final March 25, 2026 post-Budget-Adjustment-List staff package; separately ratified by Regional Council March 31, 2026.",
+      "build018_integration": "105 service-area rows across 20 source overview pages; validator and repeat live-source reproduction proof established.",
+      "next_action": "Release Build 018 only after exact-head CI, both source proofs, desktop/mobile browser smoke, PR-context checks and hosted Pages verification pass."
     },
     {
       "domain": "capital_plan",
       "status": "verified_new_source",
-      "production_through": "2025/26 final plan plus approved 2025/26 adjustments",
+      "production_through": "2025/26 final project-sheet plan plus approved 2025/26 adjustments",
       "verified_current_period": "2026/27",
-      "source_stage": "March 25 final budget package contains the current capital schedule; March 31 Council ratified the Capital Plan. The January draft project book must not be represented as final.",
-      "next_action": "Normalize the final 2026/27 capital schedule separately from draft project-sheet context."
+      "source_id": "hrm-capital-2026-27-multiyear-revised",
+      "source_stage": "Revised March 3, 2026 Capital Multi-Year Projects Attachment 2; separately covered by March 31 Regional Council Capital Plan ratification.",
+      "build018_integration": "52 exact-account project/program schedule rows; 29 discrete projects and 23 ongoing programs; $196.656M 2026/27 cashflow/budget; exact source-control defects preserved.",
+      "source_link_status": "Previously indexed DocumentId=4406 returns 404; exact-title agenda resolution currently resolves the official report to DocumentId=4622.",
+      "next_action": "Release the Build 018 schedule as an additive current-capital layer; retain Build 010 project-sheet/adjustment evidence separately."
     },
     {
       "domain": "quarterly_financial_reports",
