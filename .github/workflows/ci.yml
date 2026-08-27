@@ -44,6 +44,7 @@ jobs:
           node --check build014-contract-amendment-links.js
           node --check build015-current-fiscal-refresh.js
           node --check build016-council-decisions.js
+          node --check build017-audited-financial-history.js
           node --check tools/ui-smoke.mjs
           node --check tools/build009-ui-smoke.mjs
           node --check tools/build010-ui-smoke.mjs
@@ -55,6 +56,7 @@ jobs:
           node --check tools/build014-linkage-smoke.mjs
           node --check tools/build015-ui-smoke.mjs
           node --check tools/build016-ui-smoke.mjs
+          node --check tools/build017-ui-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate established budget and compensation contracts
@@ -63,6 +65,8 @@ jobs:
         run: python scripts/validate_budget_history.py
       - name: Validate audited financial history
         run: python scripts/validate_financial_history.py
+      - name: Validate Build 017 audited source-year expansion
+        run: python scripts/validate_financial_history_build017.py
       - name: Validate municipal benchmarks and external funding
         run: python scripts/validate_municipal_benchmarks.py
       - name: Validate Council calendar and document graph
