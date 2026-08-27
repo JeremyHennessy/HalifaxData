@@ -17,6 +17,7 @@ on:
       - 'tools/build012-ui-smoke.mjs'
       - 'tools/build013-ui-smoke.mjs'
       - 'tools/build014-ui-smoke.mjs'
+      - 'tools/build014-linkage-smoke.mjs'
       - '.github/workflows/ui-smoke.yml'
 
 permissions:
@@ -59,6 +60,8 @@ jobs:
         run: node tools/build013-ui-smoke.mjs
       - name: Validate Build 014 amendment series surfaces
         run: node tools/build014-ui-smoke.mjs
+      - name: Validate Build 014 exact related-record links
+        run: node tools/build014-linkage-smoke.mjs
       - name: Upload UI evidence
         if: always()
         uses: actions/upload-artifact@v4
