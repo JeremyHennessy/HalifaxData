@@ -130,7 +130,7 @@ try {
     if (await newCards.count() < 25) throw new Error(`${viewportName}/investigations: insufficient Build 014 amendment review leads`);
     if (await page.locator('#content [data-build008-investigation-id^="b13-amend-"]').count() !== 0) throw new Error(`${viewportName}/investigations: obsolete Build 013 amendment leads were double-counted`);
     const signalText = (await page.locator('#content').innerText()).toLowerCase();
-    for (const phrase of ['contract amendments', '12 identified public cao amendment reports', 'not a probability of misconduct']) {
+    for (const phrase of ['contract amendments', '12 identified public cao amendment reports', 'cumulative amendment value']) {
       if (!signalText.includes(phrase)) throw new Error(`${viewportName}/investigations: missing "${phrase}"`);
     }
     await newCards.first().click();
