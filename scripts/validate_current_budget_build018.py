@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "data" / "current_budget_sources.json"
 DATA = ROOT / "data" / "generated" / "current_budget_2026_27.json"
+PARSER_VERSION = "build018-current-budget-v2"
 
 FORBIDDEN_RECORD_FIELDS = {
     "vendor_name",
@@ -28,7 +29,7 @@ def main() -> None:
     pages = payload.get("overview_pages") or []
 
     assert metadata.get("dataset_status") == "ratified_current_budget_service_area_tables"
-    assert metadata.get("parser_version") == "build018-current-budget-v1"
+    assert metadata.get("parser_version") == PARSER_VERSION
     assert metadata.get("fiscal_year") == "2026/27"
     assert metadata.get("source_id") == config["budget_source"]["id"]
     assert metadata.get("source_url") == config["budget_source"]["url"]
@@ -68,7 +69,7 @@ def main() -> None:
         assert isinstance(row.get("source_page"), int) and row["source_page"] > 0
         provenance = row.get("provenance") or {}
         assert provenance.get("source_id") == config["budget_source"]["id"]
-        assert provenance.get("parser_version") == "build018-current-budget-v1"
+        assert provenance.get("parser_version") == PARSER_VERSION
         assert provenance.get("validation_status") == "parsed"
         identity = (
             row.get("source_page"),
