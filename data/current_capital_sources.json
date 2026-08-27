@@ -27,17 +27,45 @@
       "discrete_project_rows": 29,
       "ongoing_program_rows": 23,
       "current_2026_27_multiyear_budget": 196656000,
-      "computed_previous_years_gross_budget": 672458423,
+      "computed_previous_years_gross_budget": 672458424,
       "source_grand_total_previous_years_gross_budget": 207710978,
-      "source_grand_total": 2152999430
+      "computed_schedule_grand_total": 2152999431,
+      "source_schedule_grand_total": 2152999430
     },
-    "known_source_discrepancy": {
-      "field": "grand_total_row_previous_years_gross_budget",
-      "source_value": 207710978,
-      "computed_from_discrete_and_ongoing_subtotals": 672458423,
-      "difference_source_minus_computed": -464747445,
-      "note": "The source Grand Total row repeats the discrete-project previous-years subtotal instead of discrete plus ongoing. The row's other fiscal-year columns and overall Grand Total reconcile to the two source subtotals."
-    }
+    "known_source_control_discrepancies": [
+      {
+        "control_row": "Subtotal Discrete Projects",
+        "field": "total_previous_years_gross_budget",
+        "source_value": 207710978,
+        "computed_from_project_rows": 207710979,
+        "difference_source_minus_computed": -1,
+        "note": "All 29 discrete project rows individually reconcile to their own source Grand Total, but their previous-years values sum one dollar above the printed discrete-project subtotal."
+      },
+      {
+        "control_row": "Subtotal Discrete Projects",
+        "field": "grand_total",
+        "source_value": 1014838978,
+        "computed_from_project_rows": 1014838979,
+        "difference_source_minus_computed": -1,
+        "note": "The one-dollar discrete previous-years subtotal defect carries into the printed discrete-project Grand Total."
+      },
+      {
+        "control_row": "Grand Total 2026/27 Muti-Year Projects",
+        "field": "total_previous_years_gross_budget",
+        "source_value": 207710978,
+        "computed_from_project_rows": 672458424,
+        "difference_source_minus_computed": -464747446,
+        "note": "The source final Grand Total row repeats the printed discrete-project previous-years subtotal and therefore omits the ongoing-program previous-years subtotal of 464,747,445; it also inherits the discrete subtotal's one-dollar defect."
+      },
+      {
+        "control_row": "Grand Total 2026/27 Muti-Year Projects",
+        "field": "grand_total",
+        "source_value": 2152999430,
+        "computed_from_project_rows": 2152999431,
+        "difference_source_minus_computed": -1,
+        "note": "The one-dollar discrete-project subtotal defect carries into the source final schedule Grand Total. All other fiscal-year columns reconcile to project-row sums."
+      }
+    ]
   },
   "approval_source": {
     "id": "hrm-council-2026-03-31-budget-ratification",
