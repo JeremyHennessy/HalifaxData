@@ -25,6 +25,19 @@ def nz(value) -> int:
     return 0 if value is None else int(value)
 
 
+def expected_discrepancies(source: dict) -> list[dict]:
+    return [
+        {
+            "control_row": row["control_row"],
+            "field": row["field"],
+            "source_value": row["source_value"],
+            "computed_value": row["computed_from_project_rows"],
+            "difference_source_minus_computed": row["difference_source_minus_computed"],
+        }
+        for row in source["known_source_control_discrepancies"]
+    ]
+
+
 def main() -> None:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     source = config["schedule_source"]
@@ -49,9 +62,11 @@ def main() -> None:
     assert metadata.get("discrete_project_rows") == controls["discrete_project_rows"] == 29
     assert metadata.get("ongoing_program_rows") == controls["ongoing_program_rows"] == 23
     assert metadata.get("current_2026_27_multiyear_budget") == controls["current_2026_27_multiyear_budget"] == 196656000
-    assert metadata.get("computed_previous_years_gross_budget") == controls["computed_previous_years_gross_budget"] == 672458423
+    assert metadata.get("computed_previous_years_gross_budget") == controls["computed_previous_years_gross_budget"] == 672458424
     assert metadata.get("source_grand_total_previous_years_gross_budget") == controls["source_grand_total_previous_years_gross_budget"] == 207710978
-    assert metadata.get("schedule_grand_total") == controls["source_grand_total"] == 2152999430
+    assert metadata.get("computed_schedule_grand_total") == controls["computed_schedule_grand_total"] == 2152999431
+    assert metadata.get("source_schedule_grand_total") == controls["source_schedule_grand_total"] == 2152999430
+    assert metadata.get("source_control_discrepancies") == expected_discrepancies(source)
     assert metadata.get("approval_status") == "ratified_capital_plan"
     assert metadata.get("approval_source_id") == approval["id"]
     assert metadata.get("approval_date") == "2026-03-31"
@@ -61,19 +76,12 @@ def main() -> None:
     assert metadata.get("is_commitment_ledger") is False
     assert metadata.get("is_final_project_cost") is False
 
-    expected_discrepancy = source["known_source_discrepancy"]
-    assert metadata.get("source_grand_total_discrepancies") == [{
-        "field": "total_previous_years_gross_budget",
-        "source_value": expected_discrepancy["source_value"],
-        "computed_value": expected_discrepancy["computed_from_discrete_and_ongoing_subtotals"],
-        "difference_source_minus_computed": expected_discrepancy["difference_source_minus_computed"],
-    }]
-
     ids = set()
     discrete = 0
     ongoing = 0
     current_total = 0
-    grand_total = 0
+    computed_grand_total = 0
+    previous_years_total = 0
     for row in records:
         assert row.get("record_type") == "current_capital_multiyear_schedule"
         assert row.get("fiscal_year") == "2026/27"
@@ -102,7 +110,8 @@ def main() -> None:
         ))
         assert computed == row.get("computed_grand_total") == row.get("grand_total")
         current_total += nz(row.get("capital_budget_2026_27"))
-        grand_total += nz(row.get("grand_total"))
+        computed_grand_total += nz(row.get("grand_total"))
+        previous_years_total += nz(row.get("total_previous_years_gross_budget"))
         provenance = row.get("provenance") or {}
         assert provenance.get("source_id") == source["id"]
         assert provenance.get("source_url_resolution") == "exact_title_live_agenda_resolution"
@@ -111,20 +120,44 @@ def main() -> None:
 
     assert discrete == 29 and ongoing == 23
     assert current_total == 196656000
-    assert grand_total == 2152999430
+    assert previous_years_total == 672458424
+    assert computed_grand_total == 2152999431
 
+    computed_discrete = source_controls.get("computed_discrete_projects") or {}
+    source_discrete = source_controls.get("source_discrete_projects") or {}
+    computed_ongoing = source_controls.get("computed_ongoing_programs") or {}
+    source_ongoing = source_controls.get("source_ongoing_programs") or {}
     computed_all = source_controls.get("computed_all_projects") or {}
-    assert computed_all.get("capital_budget_2026_27") == current_total
-    assert computed_all.get("grand_total") == grand_total
-    assert computed_all.get("total_previous_years_gross_budget") == 672458423
     source_grand = source_controls.get("source_grand_total_row") or {}
+
+    assert computed_discrete.get("total_previous_years_gross_budget") == 207710979
+    assert source_discrete.get("total_previous_years_gross_budget") == 207710978
+    assert computed_discrete.get("grand_total") == 1014838979
+    assert source_discrete.get("grand_total") == 1014838978
+
+    for field in (
+        "total_previous_years_gross_budget",
+        "capital_budget_2025_26",
+        "capital_budget_2026_27",
+        "capital_budget_2027_28",
+        "capital_budget_2028_29",
+        "capital_budget_2029_30",
+        "grand_total",
+    ):
+        assert nz(computed_ongoing.get(field)) == nz(source_ongoing.get(field))
+    assert nz(computed_ongoing.get("capital_budget_2030_31_to_2035_36")) == nz(source_ongoing.get("capital_budget_2030_31_to_2035_36")) == 0
+
+    assert computed_all.get("capital_budget_2026_27") == current_total
+    assert computed_all.get("total_previous_years_gross_budget") == previous_years_total
+    assert computed_all.get("grand_total") == computed_grand_total
     assert source_grand.get("total_previous_years_gross_budget") == 207710978
     assert source_grand.get("grand_total") == 2152999430
 
     print(
         "Build 018 current capital valid: "
-        f"{len(records)} rows / 2026/27 ${current_total:,} / schedule ${grand_total:,} / "
-        "1 preserved source Grand Total defect"
+        f"{len(records)} rows / 2026/27 ${current_total:,} / "
+        f"computed schedule ${computed_grand_total:,} / source schedule ${source_grand['grand_total']:,} / "
+        f"{len(metadata['source_control_discrepancies'])} preserved field-level source-control discrepancies"
     )
 
 
