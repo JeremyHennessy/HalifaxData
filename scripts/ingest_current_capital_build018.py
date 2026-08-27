@@ -198,6 +198,36 @@ def sum_records(records: list[dict]) -> dict:
     return result
 
 
+def control_differences(computed: dict, source: dict) -> list[dict]:
+    differences = []
+    for field in [*VALUE_FIELDS, "grand_total"]:
+        computed_value = value_or_zero(computed.get(field))
+        source_value = source.get(field)
+        source_numeric = value_or_zero(source_value)
+        if source_numeric == computed_value:
+            continue
+        differences.append({
+            "field": field,
+            "source_value": source_value,
+            "computed_value": computed_value,
+            "difference_source_minus_computed": source_numeric - computed_value,
+        })
+    return differences
+
+
+def expected_control_differences(source: dict) -> list[dict]:
+    return [
+        {
+            "control_row": row["control_row"],
+            "field": row["field"],
+            "source_value": row["source_value"],
+            "computed_value": row["computed_from_project_rows"],
+            "difference_source_minus_computed": row["difference_source_minus_computed"],
+        }
+        for row in source["known_source_control_discrepancies"]
+    ]
+
+
 def main() -> None:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     source = config["schedule_source"]
@@ -266,30 +296,21 @@ def main() -> None:
     computed_ongoing = sum_records(ongoing)
     computed_all = sum_records(records)
 
-    if computed_discrete != discrete_subtotal:
-        raise RuntimeError(f"discrete-project subtotal mismatch: {computed_discrete} != {discrete_subtotal}")
-    if computed_ongoing != ongoing_subtotal:
-        raise RuntimeError(f"ongoing-program subtotal mismatch: {computed_ongoing} != {ongoing_subtotal}")
+    observed_control_discrepancies = []
+    for control_row, computed, source_control in (
+        ("Subtotal Discrete Projects", computed_discrete, discrete_subtotal),
+        ("Subtotal Ongoing Programs", computed_ongoing, ongoing_subtotal),
+        ("Grand Total 2026/27 Muti-Year Projects", computed_all, source_grand_total),
+    ):
+        for difference in control_differences(computed, source_control):
+            observed_control_discrepancies.append({"control_row": control_row, **difference})
 
-    grand_total_discrepancies = []
-    for field, computed_value in computed_all.items():
-        source_value = source_grand_total.get(field)
-        if source_value != computed_value:
-            grand_total_discrepancies.append({
-                "field": field,
-                "source_value": source_value,
-                "computed_value": computed_value,
-                "difference_source_minus_computed": value_or_zero(source_value) - computed_value,
-            })
-
-    expected_gap = source["known_source_discrepancy"]
-    if grand_total_discrepancies != [{
-        "field": "total_previous_years_gross_budget",
-        "source_value": expected_gap["source_value"],
-        "computed_value": expected_gap["computed_from_discrete_and_ongoing_subtotals"],
-        "difference_source_minus_computed": expected_gap["difference_source_minus_computed"],
-    }]:
-        raise RuntimeError(f"unexpected capital Grand Total discrepancies: {grand_total_discrepancies}")
+    expected_discrepancies = expected_control_differences(source)
+    if observed_control_discrepancies != expected_discrepancies:
+        raise RuntimeError(
+            f"unexpected capital source-control discrepancies: "
+            f"observed={observed_control_discrepancies} expected={expected_discrepancies}"
+        )
 
     controls = source["published_controls"]
     if len(records) != controls["project_rows"] or len(discrete) != controls["discrete_project_rows"] or len(ongoing) != controls["ongoing_program_rows"]:
@@ -298,8 +319,14 @@ def main() -> None:
         )
     if computed_all["capital_budget_2026_27"] != controls["current_2026_27_multiyear_budget"]:
         raise RuntimeError("2026/27 multi-year capital budget control mismatch")
-    if computed_all["grand_total"] != controls["source_grand_total"]:
-        raise RuntimeError("multi-year project grand-total control mismatch")
+    if computed_all["total_previous_years_gross_budget"] != controls["computed_previous_years_gross_budget"]:
+        raise RuntimeError("computed previous-years capital control mismatch")
+    if source_grand_total["total_previous_years_gross_budget"] != controls["source_grand_total_previous_years_gross_budget"]:
+        raise RuntimeError("source previous-years Grand Total control mismatch")
+    if computed_all["grand_total"] != controls["computed_schedule_grand_total"]:
+        raise RuntimeError("computed multi-year schedule Grand Total control mismatch")
+    if source_grand_total["grand_total"] != controls["source_schedule_grand_total"]:
+        raise RuntimeError("source multi-year schedule Grand Total control mismatch")
 
     payload = {
         "metadata": {
@@ -322,8 +349,9 @@ def main() -> None:
             "current_2026_27_multiyear_budget": computed_all["capital_budget_2026_27"],
             "computed_previous_years_gross_budget": computed_all["total_previous_years_gross_budget"],
             "source_grand_total_previous_years_gross_budget": source_grand_total["total_previous_years_gross_budget"],
-            "schedule_grand_total": computed_all["grand_total"],
-            "source_grand_total_discrepancies": grand_total_discrepancies,
+            "computed_schedule_grand_total": computed_all["grand_total"],
+            "source_schedule_grand_total": source_grand_total["grand_total"],
+            "source_control_discrepancies": observed_control_discrepancies,
             "approval_status": "ratified_capital_plan",
             "approval_source_id": approval["id"],
             "approval_date": approval["meeting_date"],
@@ -333,11 +361,13 @@ def main() -> None:
             "is_accounts_payable_ledger": False,
             "is_commitment_ledger": False,
             "is_final_project_cost": False,
-            "note": "Attachment 2 is the approved 2026/27 Capital Multi-Year Projects cashflow schedule. Exact project account IDs are retained for deterministic lifecycle linking. The source Grand Total row contains one preserved previous-years arithmetic defect; project rows and both source subtotals are not rewritten.",
+            "note": "Attachment 2 is the approved 2026/27 Capital Multi-Year Projects cashflow schedule. Exact project account IDs are retained for deterministic lifecycle linking. Four exact field-level source-control discrepancies arising from two source defects are preserved rather than rewritten: a one-dollar discrete subtotal defect and an omitted ongoing-program previous-years subtotal in the final Grand Total row.",
         },
         "source_controls": {
-            "discrete_projects": discrete_subtotal,
-            "ongoing_programs": ongoing_subtotal,
+            "source_discrete_projects": discrete_subtotal,
+            "computed_discrete_projects": computed_discrete,
+            "source_ongoing_programs": ongoing_subtotal,
+            "computed_ongoing_programs": computed_ongoing,
             "source_grand_total_row": source_grand_total,
             "computed_all_projects": computed_all,
         },
@@ -350,8 +380,9 @@ def main() -> None:
     temporary.replace(OUTPUT)
     print(
         f"Wrote {len(records)} current multi-year capital rows: "
-        f"2026/27={computed_all['capital_budget_2026_27']} grand={computed_all['grand_total']} "
-        f"source_discrepancies={len(grand_total_discrepancies)}"
+        f"2026/27={computed_all['capital_budget_2026_27']} "
+        f"computed_grand={computed_all['grand_total']} source_grand={source_grand_total['grand_total']} "
+        f"source_control_discrepancies={len(observed_control_discrepancies)}"
     )
 
 
