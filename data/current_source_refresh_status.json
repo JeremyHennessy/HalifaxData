@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "build": "018",
+    "researched_at": "2026-08-27",
+    "purpose": "Track current-public-source freshness without converting an unverified publication gap into a zero or an assertion that no source exists.",
+    "status_semantics": {
+      "verified_current": "A public source covering the latest completed relevant period was verified and is already represented in HalifaxData.",
+      "verified_new_source": "A newer authoritative public source was verified and requires ingestion or integration.",
+      "not_yet_verified": "Targeted research did not verify a newer source. This is not proof that the source does not exist or will not be published.",
+      "current_source_research": "The domain source discovery itself was refreshed on the research date; publication/approval timing still governs record availability."
+    }
+  },
+  "domains": [
+    {
+      "domain": "operating_budget",
+      "status": "verified_new_source",
+      "production_through": "2025/26",
+      "verified_current_period": "2026/27",
+      "source_id": "hrm-budget-2026-27-final-package",
+      "source_stage": "final staff package after Budget Adjustment List; ratified by Regional Council March 31, 2026",
+      "next_action": "Reproduce and validate the final 2026/27 service-area budget layer before UI integration."
+    },
+    {
+      "domain": "capital_plan",
+      "status": "verified_new_source",
+      "production_through": "2025/26 final plan plus approved 2025/26 adjustments",
+      "verified_current_period": "2026/27",
+      "source_stage": "March 25 final budget package contains the current capital schedule; March 31 Council ratified the Capital Plan. The January draft project book must not be represented as final.",
+      "next_action": "Normalize the final 2026/27 capital schedule separately from draft project-sheet context."
+    },
+    {
+      "domain": "quarterly_financial_reports",
+      "status": "not_yet_verified",
+      "production_through": "2025/26 Q3 (period ended December 31, 2025)",
+      "verified_current_period": null,
+      "known_gap": "2024/25 Q1 remains explicitly missing from the checked series.",
+      "research_result": "Targeted official eSCRIBE research on August 27, 2026 did not verify a 2025/26 Q4/year-end report. Prior-year year-end/Q4 reporting was tabled in September 2025, so no absence conclusion is drawn before a current source is actually located or the reporting cycle passes."
+    },
+    {
+      "domain": "procurement_quarterly_awards",
+      "status": "verified_current",
+      "production_through": "April-June 2026 report presented August 25, 2026",
+      "verified_current_period": "2026-06-30",
+      "next_action": "No new completed quarterly award period exists as of the research date; retain current production evidence."
+    },
+    {
+      "domain": "cao_contract_amendments",
+      "status": "not_yet_verified",
+      "production_through": "November 25, 2025 public report series",
+      "verified_current_period": null,
+      "research_result": "Targeted 2026 eSCRIBE searches did not verify a newer public CAO Contract Amendment Reporting source. Do not infer that no amendments occurred; public reports may also exclude Private & Confidential records."
+    },
+    {
+      "domain": "compensation_disclosure",
+      "status": "not_yet_verified",
+      "production_through": "year ended March 31, 2025",
+      "verified_current_period": null,
+      "research_result": "Targeted Halifax/CDN searches did not verify a Statement of Compensation for the year ended March 31, 2026. The April 28, 2026 threshold-review report still referenced the March 31, 2025 statement."
+    },
+    {
+      "domain": "council_decisions",
+      "status": "current_source_research",
+      "production_through": "Build 016 checked modern approved-minutes window plus explicit seven-meeting pre-2024 seed",
+      "verified_current_period": "source discovery researched 2026-08-27",
+      "next_action": "Add later meetings only when approved minutes exist; agenda recommendations remain separate from adopted decisions."
+    },
+    {
+      "domain": "audited_financial_statements",
+      "status": "verified_current",
+      "production_through": "2019-2025 released source years",
+      "verified_current_period": "year ended March 31, 2025",
+      "known_gap": "Official 2018 source remains a parser gap under established Build 017 semantics.",
+      "next_action": "Do not infer March 31, 2026 audited statements until an authoritative release is located and approved."
+    }
+  ]
+}
