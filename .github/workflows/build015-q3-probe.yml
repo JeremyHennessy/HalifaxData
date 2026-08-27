@@ -1,0 +1,57 @@
+name: Build 015 Q3 Source Probe
+
+on:
+  push:
+    branches: ['agent/build-015-current-fiscal-refresh']
+    paths: ['.github/workflows/build015-q3-probe.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install requests
+        run: python -m pip install --disable-pip-version-check requests==2.32.5
+      - name: Probe official Q3 locations
+        run: |
+          python - <<'PY'
+          import requests
+          candidates = [
+              'https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/260225afsc1313.pdf',
+              'https://pub-halifax.escribemeetings.com/FileStream.ashx?DocumentId=4479',
+              'https://pub-halifax.escribemeetings.com/FileStream.ashx?DocumentId=4474',
+              'https://pub-halifax.escribemeetings.com/FileStream.ashx?DocumentId=4692',
+          ]
+          def show(label, response):
+              print(label, 'status=', response.status_code, 'type=', response.headers.get('content-type'), 'bytes=', len(response.content), 'url=', response.url, 'prefix=', repr(response.content[:12]))
+          for url in candidates:
+              try:
+                  r = requests.get(url, timeout=45, headers={'User-Agent':'HalifaxData/0.5 (+https://github.com/JeremyHennessy/HalifaxData)'}, allow_redirects=True)
+                  show('direct '+url, r)
+              except Exception as exc:
+                  print('direct', url, type(exc).__name__, exc)
+          session = requests.Session()
+          session.headers.update({'User-Agent':'Mozilla/5.0 (compatible; HalifaxData/0.5; +https://github.com/JeremyHennessy/HalifaxData)'})
+          landing = 'https://pub-halifax.escribemeetings.com/MeetingsCalendarView.aspx'
+          meeting = 'https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=1338404b-b5af-4d13-996d-bb11be3fdcdb&lang=English'
+          for url in [landing, meeting]:
+              try:
+                  r = session.get(url, timeout=45, allow_redirects=True)
+                  show('session init '+url, r)
+              except Exception as exc:
+                  print('session init', url, type(exc).__name__, exc)
+          for doc_id in ('4479','4474','4692'):
+              url=f'https://pub-halifax.escribemeetings.com/FileStream.ashx?DocumentId={doc_id}'
+              try:
+                  r=session.get(url, timeout=45, headers={'Referer':meeting}, allow_redirects=True)
+                  show('session '+url, r)
+              except Exception as exc:
+                  print('session', url, type(exc).__name__, exc)
+          PY
