@@ -1,0 +1,2939 @@
+{
+  "metadata": {
+    "dataset_status": "official_public_cao_contract_amendment_series",
+    "parser_version": "build014-cao-amendment-series-v1",
+    "generated_at": "2026-08-26T00:00:00Z",
+    "coverage_start": "2023-05-17",
+    "coverage_end": "2025-11-25",
+    "identified_public_report_count": 12,
+    "ready_report_count": 12,
+    "is_complete_contract_amendment_ledger": false,
+    "is_transaction_ledger": false,
+    "is_accounts_payable_ledger": false,
+    "is_final_paid_value_data": false,
+    "creates_wrongdoing_assertions": false,
+    "vendor_aliases_auto_merged": false,
+    "fuzzy_contract_links_created": false,
+    "private_confidential_may_be_excluded": true,
+    "scope": "Public CAO contract-amendment aggregate reporting tables identified from May 2023 through November 2025. This does not claim the complete universe of HRM amendments.",
+    "amount_semantics": "Source amount semantics are stored per observation. Published cumulative amendments are not assumed to equal a single current change order."
+  },
+  "summary": {
+    "report_count": 12,
+    "ready_report_count": 12,
+    "observation_count": 58,
+    "unique_contract_keys": 54,
+    "recurring_exact_contract_keys": 1,
+    "unkeyed_observations": 3,
+    "source_arithmetic_flags": 3,
+    "source_percentage_flags_gt_1pp": 1
+  },
+  "reports": [
+    {
+      "report_date": "2023-05-17",
+      "source_id": "hrm-cao-contract-amendments-2023-05",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/boards-committees-commissions/revised230517afscinfo01.pdf",
+      "status": "ready",
+      "page_count": 11,
+      "matched_table_count": 1,
+      "observation_count": 2,
+      "schemas": [
+        "original_updated_total_to_date"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 408557,
+      "warnings": []
+    },
+    {
+      "report_date": "2023-09-20",
+      "source_id": "hrm-cao-contract-amendments-2023-09",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/230920afscinfo1.pdf",
+      "status": "ready",
+      "page_count": 23,
+      "matched_table_count": 2,
+      "observation_count": 5,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 1042853,
+      "warnings": []
+    },
+    {
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/231115afscinfo1.pdf",
+      "status": "ready",
+      "page_count": 28,
+      "matched_table_count": 2,
+      "observation_count": 8,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 466915,
+      "warnings": []
+    },
+    {
+      "report_date": "2024-01-17",
+      "source_id": "hrm-cao-contract-amendments-2024-01",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/boards-committees-commissions/240117afscinfo2.pdf",
+      "status": "ready",
+      "page_count": 4,
+      "matched_table_count": 1,
+      "observation_count": 3,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 397800,
+      "warnings": []
+    },
+    {
+      "report_date": "2024-06-19",
+      "source_id": "hrm-cao-contract-amendments-2024-06",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/240619afscinfo3_0.pdf",
+      "status": "ready",
+      "page_count": 10,
+      "matched_table_count": 1,
+      "observation_count": 2,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 341256,
+      "warnings": []
+    },
+    {
+      "report_date": "2024-10-09",
+      "source_id": "hrm-cao-contract-amendments-2024-10",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/241009afscinfo2.pdf",
+      "status": "ready",
+      "page_count": 16,
+      "matched_table_count": 2,
+      "observation_count": 3,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 310217,
+      "warnings": []
+    },
+    {
+      "report_date": "2024-12-11",
+      "source_id": "hrm-cao-contract-amendments-2024-12",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/241211afscinfo2.pdf",
+      "status": "ready",
+      "page_count": 19,
+      "matched_table_count": 2,
+      "observation_count": 5,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 336730,
+      "warnings": []
+    },
+    {
+      "report_date": "2025-01-15",
+      "source_id": "hrm-cao-contract-amendments-2025-01",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250115afscinfo2.pdf",
+      "status": "ready",
+      "page_count": 15,
+      "matched_table_count": 1,
+      "observation_count": 3,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 764074,
+      "warnings": []
+    },
+    {
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250416afscinfo2.pdf",
+      "status": "ready",
+      "page_count": 32,
+      "matched_table_count": 2,
+      "observation_count": 8,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 526363,
+      "warnings": []
+    },
+    {
+      "report_date": "2025-05-21",
+      "source_id": "hrm-cao-contract-amendments-2025-05",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250521afscinfo2.pdf",
+      "status": "ready",
+      "page_count": 16,
+      "matched_table_count": 1,
+      "observation_count": 4,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 419775,
+      "warnings": []
+    },
+    {
+      "report_date": "2025-06-18",
+      "source_id": "hrm-cao-contract-amendments-2025-06",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250618afscinfo2.pdf",
+      "status": "ready",
+      "page_count": 19,
+      "matched_table_count": 2,
+      "observation_count": 4,
+      "schemas": [
+        "original_amendment_updated"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 298315,
+      "warnings": []
+    },
+    {
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/251125afscinfo2.pdf",
+      "status": "ready",
+      "page_count": 38,
+      "matched_table_count": 1,
+      "observation_count": 11,
+      "schemas": [
+        "original_cumulative_amendment"
+      ],
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "bytes": 720060,
+      "warnings": []
+    }
+  ],
+  "observations": [
+    {
+      "id": "2023-05-17-contract-19-1013",
+      "report_date": "2023-05-17",
+      "source_id": "hrm-cao-contract-amendments-2023-05",
+      "source_schema": "original_updated_total_to_date",
+      "source_amount_semantics": "Source publishes PO Awarded Amount and Increase Total to Date. The second amount is treated as the published updated total because the published percent increase reconciles to (total-to-date - original) / original. The amendment amount is derived, not source-published.",
+      "source_row_id": "2023-05-17-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Award - CA 19-1013 Functional Plan for IMP AAA Bicycling Network: Peninsula South",
+        "$90,640",
+        "$249,217",
+        "175%"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award - CA 19-1013 Functional Plan for IMP AAA Bicycling Network: Peninsula South",
+      "reason_source": "",
+      "po": null,
+      "procurement_refs": [
+        "19-1013"
+      ],
+      "contract_key": "contract:19-1013",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 90640.0,
+      "amendment_value_source": null,
+      "updated_value_source": 249217.0,
+      "derived_amendment_value": 158577.0,
+      "derived_updated_value": 249217.0,
+      "effective_cumulative_amendment_value": 158577.0,
+      "increase_pct_source": 175.0,
+      "derived_increase_pct": 174.9526,
+      "source_pct_delta": 0.0474,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-05-17-po-2070895749",
+      "report_date": "2023-05-17",
+      "source_id": "hrm-cao-contract-amendments-2023-05",
+      "source_schema": "original_updated_total_to_date",
+      "source_amount_semantics": "Source publishes PO Awarded Amount and Increase Total to Date. The second amount is treated as the published updated total because the published percent increase reconciles to (total-to-date - original) / original. The amendment amount is derived, not source-published.",
+      "source_row_id": "2023-05-17-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Award CA – Increase to Contract Bayne Street (PO 2070895749)",
+        "$47,804",
+        "$112,042",
+        "134%"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award CA – Increase to Contract Bayne Street (PO 2070895749)",
+      "reason_source": "",
+      "po": "2070895749",
+      "procurement_refs": [],
+      "contract_key": "po:2070895749",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 47804.0,
+      "amendment_value_source": null,
+      "updated_value_source": 112042.0,
+      "derived_amendment_value": 64238.0,
+      "derived_updated_value": 112042.0,
+      "effective_cumulative_amendment_value": 64238.0,
+      "increase_pct_source": 134.0,
+      "derived_increase_pct": 134.3779,
+      "source_pct_delta": -0.3779,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-09-20-po-2070837342",
+      "report_date": "2023-09-20",
+      "source_id": "hrm-cao-contract-amendments-2023-09",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-09-20-p3-t1-r5",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 5
+        }
+      ],
+      "source_cells": [
+        "4. CAO Award Contract Amendment PO #2070837342 Design Consultant Services for West Bedford Fire Station & Headquarters Campus",
+        "$751,886",
+        "$516,459",
+        "$1,238,345",
+        "69%",
+        "The Consultant fees for this project were estimated in the approved 2019/2020 Project Budget at $939,000, which included both Design and Construction Phases."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "4. CAO Award Contract Amendment PO #2070837342 Design Consultant Services for West Bedford Fire Station & Headquarters Campus",
+      "reason_source": "The Consultant fees for this project were estimated in the approved 2019/2020 Project Budget at $939,000, which included both Design and Construction Phases.",
+      "po": "2070837342",
+      "procurement_refs": [],
+      "contract_key": "po:2070837342",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 751886.0,
+      "amendment_value_source": 516459.0,
+      "updated_value_source": 1238345.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 1268345.0,
+      "effective_cumulative_amendment_value": 516459.0,
+      "increase_pct_source": 69.0,
+      "derived_increase_pct": 68.6885,
+      "source_pct_delta": 0.3115,
+      "source_arithmetic_delta": -30000.0,
+      "source_arithmetic_consistent": false,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-09-20-po-2070894676",
+      "report_date": "2023-09-20",
+      "source_id": "hrm-cao-contract-amendments-2023-09",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-09-20-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "3. CAO Contract Amendment PO #2070894676 Solar Installation Project Management Services",
+        "$85,515",
+        "$18,605",
+        "$104,120",
+        "22%",
+        "The contract amendment is a result structural analysis of Cole Harbour Place and Sackville Sports Stadium after BMO Centre and Scotiabank Centre were removed due to being removed from the scope of work."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "3. CAO Contract Amendment PO #2070894676 Solar Installation Project Management Services",
+      "reason_source": "The contract amendment is a result structural analysis of Cole Harbour Place and Sackville Sports Stadium after BMO Centre and Scotiabank Centre were removed due to being removed from the scope of work.",
+      "po": "2070894676",
+      "procurement_refs": [],
+      "contract_key": "po:2070894676",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 85515.0,
+      "amendment_value_source": 18605.0,
+      "updated_value_source": 104120.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 104120.0,
+      "effective_cumulative_amendment_value": 18605.0,
+      "increase_pct_source": 22.0,
+      "derived_increase_pct": 21.7564,
+      "source_pct_delta": 0.2436,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-09-20-po-2070895366",
+      "report_date": "2023-09-20",
+      "source_id": "hrm-cao-contract-amendments-2023-09",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-09-20-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "2. CAO Contract Amendment PO #2070895366 Design Services",
+        "$52,164",
+        "$19,577",
+        "$71,741",
+        "38%",
+        "The contract amendment is a result of existing building conditions discovered while completing the original scope of work."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "2. CAO Contract Amendment PO #2070895366 Design Services",
+      "reason_source": "The contract amendment is a result of existing building conditions discovered while completing the original scope of work.",
+      "po": "2070895366",
+      "procurement_refs": [],
+      "contract_key": "po:2070895366",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 52164.0,
+      "amendment_value_source": 19577.0,
+      "updated_value_source": 71741.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 71741.0,
+      "effective_cumulative_amendment_value": 19577.0,
+      "increase_pct_source": 38.0,
+      "derived_increase_pct": 37.5297,
+      "source_pct_delta": 0.4703,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-09-20-po-2070897430",
+      "report_date": "2023-09-20",
+      "source_id": "hrm-cao-contract-amendments-2023-09",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-09-20-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "1. CAO Award Contract Amendment PO #2070897430 Removal and Installation of New Floor for Findlay Community Centre Pottery Room",
+        "$64,762",
+        "$64,692",
+        "$129,454",
+        "100%",
+        "The contract amendment is a result of existing conditions discovered while completing the original scope or work. The change order covers equipment rental and soil tamping."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "1. CAO Award Contract Amendment PO #2070897430 Removal and Installation of New Floor for Findlay Community Centre Pottery Room",
+      "reason_source": "The contract amendment is a result of existing conditions discovered while completing the original scope or work. The change order covers equipment rental and soil tamping.",
+      "po": "2070897430",
+      "procurement_refs": [],
+      "contract_key": "po:2070897430",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 64762.0,
+      "amendment_value_source": 64692.0,
+      "updated_value_source": 129454.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 129454.0,
+      "effective_cumulative_amendment_value": 64692.0,
+      "increase_pct_source": 100.0,
+      "derived_increase_pct": 99.8919,
+      "source_pct_delta": 0.1081,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-09-20-po-2070902453",
+      "report_date": "2023-09-20",
+      "source_id": "hrm-cao-contract-amendments-2023-09",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-09-20-p4-t1-r1",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 1
+        }
+      ],
+      "source_cells": [
+        "5. CAO Contract Amendment PO #2070902453 Emergency fencing services in response to the Tantallon Wildfires. Purchase will be recouped through individual insurance companies and the Disaster Financial Assistance Program",
+        "$169,500",
+        "$10,830,500",
+        "$11,000,000",
+        "6390%",
+        "An amendment for an emergency PO issued to First Fence for fencing around destroyed or severely damaged properties for safety reasons. The initial PO was to secure services and actual requirements were unknown at the time of PO creation."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "5. CAO Contract Amendment PO #2070902453 Emergency fencing services in response to the Tantallon Wildfires. Purchase will be recouped through individual insurance companies and the Disaster Financial Assistance Program",
+      "reason_source": "An amendment for an emergency PO issued to First Fence for fencing around destroyed or severely damaged properties for safety reasons. The initial PO was to secure services and actual requirements were unknown at the time of PO creation.",
+      "po": "2070902453",
+      "procurement_refs": [],
+      "contract_key": "po:2070902453",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 169500.0,
+      "amendment_value_source": 10830500.0,
+      "updated_value_source": 11000000.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 11000000.0,
+      "effective_cumulative_amendment_value": 10830500.0,
+      "increase_pct_source": 6390.0,
+      "derived_increase_pct": 6389.6755,
+      "source_pct_delta": 0.3245,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-11-15-po-2070799716-1",
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-11-15-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "CAO Award Contract Amendment PO #2070799716 and PO #2070805687 Consulting Services for the Replacement MacIntosh Depot",
+        "207079916 $653,735 2070805687 $24,980",
+        "$715,037 $70,803",
+        "$1,368,772 $95,783",
+        "109% 283%",
+        "Staff has recommended an increase to PO #2070799716, EXP Services Inc. for changes to the contracted scope of work. Staff has also recommended an increase to PO #2070805687 WSP Canada Inc. for changes to the contracted scope of work, the requested amount is for mileage as additional trips were required to the building compared to the estimated amount."
+      ],
+      "source_group_size": 2,
+      "source_group_index": 1,
+      "name_source": "CAO Award Contract Amendment PO #2070799716 and PO #2070805687 Consulting Services for the Replacement MacIntosh Depot",
+      "reason_source": "Staff has recommended an increase to PO #2070799716, EXP Services Inc. for changes to the contracted scope of work. Staff has also recommended an increase to PO #2070805687 WSP Canada Inc. for changes to the contracted scope of work, the requested amount is for mileage as additional trips were required to the building compared to the estimated amount.",
+      "po": "2070799716",
+      "procurement_refs": [],
+      "contract_key": "po:2070799716",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 653735.0,
+      "amendment_value_source": 715037.0,
+      "updated_value_source": 1368772.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 1368772.0,
+      "effective_cumulative_amendment_value": 715037.0,
+      "increase_pct_source": 109.0,
+      "derived_increase_pct": 109.3772,
+      "source_pct_delta": -0.3772,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-11-15-po-2070805687-2",
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-11-15-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "CAO Award Contract Amendment PO #2070799716 and PO #2070805687 Consulting Services for the Replacement MacIntosh Depot",
+        "207079916 $653,735 2070805687 $24,980",
+        "$715,037 $70,803",
+        "$1,368,772 $95,783",
+        "109% 283%",
+        "Staff has recommended an increase to PO #2070799716, EXP Services Inc. for changes to the contracted scope of work. Staff has also recommended an increase to PO #2070805687 WSP Canada Inc. for changes to the contracted scope of work, the requested amount is for mileage as additional trips were required to the building compared to the estimated amount."
+      ],
+      "source_group_size": 2,
+      "source_group_index": 2,
+      "name_source": "CAO Award Contract Amendment PO #2070799716 and PO #2070805687 Consulting Services for the Replacement MacIntosh Depot",
+      "reason_source": "Staff has recommended an increase to PO #2070799716, EXP Services Inc. for changes to the contracted scope of work. Staff has also recommended an increase to PO #2070805687 WSP Canada Inc. for changes to the contracted scope of work, the requested amount is for mileage as additional trips were required to the building compared to the estimated amount.",
+      "po": "2070805687",
+      "procurement_refs": [],
+      "contract_key": "po:2070805687",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 24980.0,
+      "amendment_value_source": 70803.0,
+      "updated_value_source": 95783.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 95783.0,
+      "effective_cumulative_amendment_value": 70803.0,
+      "increase_pct_source": 283.0,
+      "derived_increase_pct": 283.4388,
+      "source_pct_delta": -0.4388,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-11-15-po-2070877271",
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-11-15-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Award Contract Amendment PO # 2070877271 Consulting Services for Life Safety Work at Lions Arena Spryfield",
+        "$48,702",
+        "$79,327",
+        "$128,029",
+        "163%",
+        "Design Consulting Services for Spryfield Lions Rink – Electrical Upgrades and Renovations with EXP Architects Inc."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award Contract Amendment PO # 2070877271 Consulting Services for Life Safety Work at Lions Arena Spryfield",
+      "reason_source": "Design Consulting Services for Spryfield Lions Rink – Electrical Upgrades and Renovations with EXP Architects Inc.",
+      "po": "2070877271",
+      "procurement_refs": [],
+      "contract_key": "po:2070877271",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 48702.0,
+      "amendment_value_source": 79327.0,
+      "updated_value_source": 128029.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 128029.0,
+      "effective_cumulative_amendment_value": 79327.0,
+      "increase_pct_source": 163.0,
+      "derived_increase_pct": 162.8824,
+      "source_pct_delta": 0.1176,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-11-15-po-2070887247",
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-11-15-p3-t1-r5",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 5
+        }
+      ],
+      "source_cells": [
+        "CAO Award Contract Amendment PO #2070887247 Functional Plan for IMP AAA Bicycle Network of Slayter Street Local Street Bikeway and Connections",
+        "$56,763",
+        "$28,663",
+        "$85,246",
+        "50.5%",
+        "To successfully achieve the project’s objectives, the proposed additional scope includes, revisiting previously developed concepts, additional Active Transportation counts as well as exploring a new concept without traffic diverters and instead installing half signals."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award Contract Amendment PO #2070887247 Functional Plan for IMP AAA Bicycle Network of Slayter Street Local Street Bikeway and Connections",
+      "reason_source": "To successfully achieve the project’s objectives, the proposed additional scope includes, revisiting previously developed concepts, additional Active Transportation counts as well as exploring a new concept without traffic diverters and instead installing half signals.",
+      "po": "2070887247",
+      "procurement_refs": [],
+      "contract_key": "po:2070887247",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 56763.0,
+      "amendment_value_source": 28663.0,
+      "updated_value_source": 85246.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 85426.0,
+      "effective_cumulative_amendment_value": 28663.0,
+      "increase_pct_source": 50.5,
+      "derived_increase_pct": 50.4959,
+      "source_pct_delta": 0.0041,
+      "source_arithmetic_delta": -180.0,
+      "source_arithmetic_consistent": false,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-11-15-po-2070891329",
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-11-15-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Award Contract Amendment PO #2070891329 Consultant Services for the Demolition of the Former Red Cross Building, 1940 Gottingen Street",
+        "$65,629",
+        "$29,258",
+        "$94,887",
+        "45%",
+        "Staff has recommended an increase to PO #2070891329 – Pinchin Ltd. for changes to the contracted scope of work in the amount of $9,334 (net HST included) for additional part time site abatement monitoring plus an additional $5,666 (8.63% increase) contingency allowance for potential future unforeseen site conditions requiring additional contract administrative costs. The release of these contingency funds will be by approval of the PM and only if necessary."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award Contract Amendment PO #2070891329 Consultant Services for the Demolition of the Former Red Cross Building, 1940 Gottingen Street",
+      "reason_source": "Staff has recommended an increase to PO #2070891329 – Pinchin Ltd. for changes to the contracted scope of work in the amount of $9,334 (net HST included) for additional part time site abatement monitoring plus an additional $5,666 (8.63% increase) contingency allowance for potential future unforeseen site conditions requiring additional contract administrative costs. The release of these contingency funds will be by approval of the PM and only if necessary.",
+      "po": "2070891329",
+      "procurement_refs": [],
+      "contract_key": "po:2070891329",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 65629.0,
+      "amendment_value_source": 29258.0,
+      "updated_value_source": 94887.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 94887.0,
+      "effective_cumulative_amendment_value": 29258.0,
+      "increase_pct_source": 45.0,
+      "derived_increase_pct": 44.5809,
+      "source_pct_delta": 0.4191,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-11-15-cao-award-contract-amendment-bell-canada-local-voice-landline-contract-extension-and-execute-1",
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-11-15-p4-t1-r3",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Award Contract Amendment Bell Canada Local Voice (Landline) Contract Extension and Execute",
+        "$1,455,000 (over three years)",
+        "$694,914",
+        "$2,149,914",
+        "48%",
+        "Amendment 4, which outlines the extension for landline services has some impacts to the Municipality. IT accepts these impacts, as IT works through the competitive procurement process for these services."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award Contract Amendment Bell Canada Local Voice (Landline) Contract Extension and Execute",
+      "reason_source": "Amendment 4, which outlines the extension for landline services has some impacts to the Municipality. IT accepts these impacts, as IT works through the competitive procurement process for these services.",
+      "po": null,
+      "procurement_refs": [],
+      "contract_key": null,
+      "contract_key_basis": null,
+      "original_value": 1455000.0,
+      "amendment_value_source": 694914.0,
+      "updated_value_source": 2149914.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 2149914.0,
+      "effective_cumulative_amendment_value": 694914.0,
+      "increase_pct_source": 48.0,
+      "derived_increase_pct": 47.7604,
+      "source_pct_delta": 0.2396,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-11-15-contract-21-302",
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-11-15-p4-t1-r2",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Award Contract Amendment 21-302 Change Order No. 2",
+        "$185,204",
+        "$34,904",
+        "$220,108",
+        "19%",
+        "This change order was previously approved by former Executive Director of HRM Planning & Development, Kelly Denty. This was done in error, as the Executive Director cannot approve change orders that exceed 15% or $15,000, whichever is greater. Therefore, approval is now being sought from the CAO in accordance with the Procurement Policy."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award Contract Amendment 21-302 Change Order No. 2",
+      "reason_source": "This change order was previously approved by former Executive Director of HRM Planning & Development, Kelly Denty. This was done in error, as the Executive Director cannot approve change orders that exceed 15% or $15,000, whichever is greater. Therefore, approval is now being sought from the CAO in accordance with the Procurement Policy.",
+      "po": null,
+      "procurement_refs": [
+        "21-302"
+      ],
+      "contract_key": "contract:21-302",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 185204.0,
+      "amendment_value_source": 34904.0,
+      "updated_value_source": 220108.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 220108.0,
+      "effective_cumulative_amendment_value": 34904.0,
+      "increase_pct_source": 19.0,
+      "derived_increase_pct": 18.8462,
+      "source_pct_delta": 0.1538,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2023-11-15-po-2070812846",
+      "report_date": "2023-11-15",
+      "source_id": "hrm-cao-contract-amendments-2023-11",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2023-11-15-p4-t1-r1",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 1
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment PO #2070812846 Consulting Services for Alderney Gate Recapitalization Phase 2",
+        "$63,832",
+        "$90,633",
+        "$154,465",
+        "142%",
+        "Multiple changes in the scope of work and delays in material delivery resulted in an extended timeline and increased fees to Abbott Brown. Regional Council approved an increase in fees in August 2022 in the amount of $16,029 for these changes. The project schedule has now been further extended due to delivery and installation of the generator which will require the consultant to return to the project to oversee the work."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment PO #2070812846 Consulting Services for Alderney Gate Recapitalization Phase 2",
+      "reason_source": "Multiple changes in the scope of work and delays in material delivery resulted in an extended timeline and increased fees to Abbott Brown. Regional Council approved an increase in fees in August 2022 in the amount of $16,029 for these changes. The project schedule has now been further extended due to delivery and installation of the generator which will require the consultant to return to the project to oversee the work.",
+      "po": "2070812846",
+      "procurement_refs": [],
+      "contract_key": "po:2070812846",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 63832.0,
+      "amendment_value_source": 90633.0,
+      "updated_value_source": 154465.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 154465.0,
+      "effective_cumulative_amendment_value": 90633.0,
+      "increase_pct_source": 142.0,
+      "derived_increase_pct": 141.9868,
+      "source_pct_delta": 0.0132,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-01-17-contract-21-5010",
+      "report_date": "2024-01-17",
+      "source_id": "hrm-cao-contract-amendments-2024-01",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-01-17-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "CAO Award Contract Amendment 21- 5010 Functional Plan for Midtown AAA Bikeways: IMP AAA Network",
+        "$31,359",
+        "$67,368",
+        "$98,727",
+        "215%",
+        "In July 2021, Project Planning and Design Services approved an award to DesignPoint Engineering & Surveying Ltd. to complete the functional planning study for $30,070 (+ Net HST) under Purchase Order No. 2070865247. The scope of the original contract described a functional planning study that would include 30% designs and utilize a ‘Complete Streets’ approach to determine the feasibility and preferred design options. After realizing the many complexities for planning in the project area, it was determined that additional work is required to meet our objectives. Specifically, to successfully"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award Contract Amendment 21- 5010 Functional Plan for Midtown AAA Bikeways: IMP AAA Network",
+      "reason_source": "In July 2021, Project Planning and Design Services approved an award to DesignPoint Engineering & Surveying Ltd. to complete the functional planning study for $30,070 (+ Net HST) under Purchase Order No. 2070865247. The scope of the original contract described a functional planning study that would include 30% designs and utilize a ‘Complete Streets’ approach to determine the feasibility and preferred design options. After realizing the many complexities for planning in the project area, it was determined that additional work is required to meet our objectives. Specifically, to successfully",
+      "po": null,
+      "procurement_refs": [
+        "21-5010"
+      ],
+      "contract_key": "contract:21-5010",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 31359.0,
+      "amendment_value_source": 67368.0,
+      "updated_value_source": 98727.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 98727.0,
+      "effective_cumulative_amendment_value": 67368.0,
+      "increase_pct_source": 215.0,
+      "derived_increase_pct": 214.8283,
+      "source_pct_delta": 0.1717,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-01-17-po-2070835770",
+      "report_date": "2024-01-17",
+      "source_id": "hrm-cao-contract-amendments-2024-01",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-01-17-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment PO #2070835770 – 3rd Party Commissioning Services for HRFE Headquarters and Station 1",
+        "$19,189",
+        "36,907",
+        "$56,096",
+        "192%",
+        "Enhanced commissioning is meant to augment fundamental commissioning on a project. Since the scope of fundamental commissioning is not currently assigned to any party, it is recommended that MCW Maricor include this in their scope of work, so the project has one consistent Commissioning Agent. MCW Maricor’s proposed fee for this additional work is $21,754.06 (net HST included). Staff is recommending an additional $5,246 contingency allowance be included."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment PO #2070835770 – 3rd Party Commissioning Services for HRFE Headquarters and Station 1",
+      "reason_source": "Enhanced commissioning is meant to augment fundamental commissioning on a project. Since the scope of fundamental commissioning is not currently assigned to any party, it is recommended that MCW Maricor include this in their scope of work, so the project has one consistent Commissioning Agent. MCW Maricor’s proposed fee for this additional work is $21,754.06 (net HST included). Staff is recommending an additional $5,246 contingency allowance be included.",
+      "po": "2070835770",
+      "procurement_refs": [],
+      "contract_key": "po:2070835770",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 19189.0,
+      "amendment_value_source": 36907.0,
+      "updated_value_source": 56096.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 56096.0,
+      "effective_cumulative_amendment_value": 36907.0,
+      "increase_pct_source": 192.0,
+      "derived_increase_pct": 192.3341,
+      "source_pct_delta": -0.3341,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-01-17-po-2070902013",
+      "report_date": "2024-01-17",
+      "source_id": "hrm-cao-contract-amendments-2024-01",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-01-17-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment PO #2070902013 Signage Installation at the Dartmouth North Community Centre",
+        "$44,271",
+        "$18,333",
+        "$62,604",
+        "41%",
+        "Staff has recommended an increase to PO 2070902013 with Day Nite Signs Ltd. for changes to the contracted scope of work in the amount of $18,334 (net HST included) for additional equipment and labour is required to break and remove the existing bedrock to the required depth to install the new pylon sign base."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment PO #2070902013 Signage Installation at the Dartmouth North Community Centre",
+      "reason_source": "Staff has recommended an increase to PO 2070902013 with Day Nite Signs Ltd. for changes to the contracted scope of work in the amount of $18,334 (net HST included) for additional equipment and labour is required to break and remove the existing bedrock to the required depth to install the new pylon sign base.",
+      "po": "2070902013",
+      "procurement_refs": [],
+      "contract_key": "po:2070902013",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 44271.0,
+      "amendment_value_source": 18333.0,
+      "updated_value_source": 62604.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 62604.0,
+      "effective_cumulative_amendment_value": 18333.0,
+      "increase_pct_source": 41.0,
+      "derived_increase_pct": 41.4109,
+      "source_pct_delta": -0.4109,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-06-19-contract-2023-5016",
+      "report_date": "2024-06-19",
+      "source_id": "hrm-cao-contract-amendments-2024-06",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-06-19-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment 2023-5016 Drainage Analysis, Road Design, and Storm Design: Munroe Subdivision – Increase to Contract",
+        "$92,950",
+        "$19,986",
+        "$112,936",
+        "21.5%",
+        "Most of the existing underground storm system on Oliver Street and Hamilton Street is 150 mm diameter, sized as a clearwater system connected to footing drains only, and is not connected to any catch basins. Residents have complained about significant overland flooding on their properties. HRM procured WSP’s services to design the upgrades to the storm water system to help address these issues, and during the design of the system separation additional changes were required to the sanitary and water systems."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment 2023-5016 Drainage Analysis, Road Design, and Storm Design: Munroe Subdivision – Increase to Contract",
+      "reason_source": "Most of the existing underground storm system on Oliver Street and Hamilton Street is 150 mm diameter, sized as a clearwater system connected to footing drains only, and is not connected to any catch basins. Residents have complained about significant overland flooding on their properties. HRM procured WSP’s services to design the upgrades to the storm water system to help address these issues, and during the design of the system separation additional changes were required to the sanitary and water systems.",
+      "po": null,
+      "procurement_refs": [
+        "2023-5016"
+      ],
+      "contract_key": "contract:2023-5016",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 92950.0,
+      "amendment_value_source": 19986.0,
+      "updated_value_source": 112936.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 112936.0,
+      "effective_cumulative_amendment_value": 19986.0,
+      "increase_pct_source": 21.5,
+      "derived_increase_pct": 21.5019,
+      "source_pct_delta": -0.0019,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-06-19-po-2070915000",
+      "report_date": "2024-06-19",
+      "source_id": "hrm-cao-contract-amendments-2024-06",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-06-19-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment PO #2070915000 Bedford Hammonds Plains CC Lighting Upgrades",
+        "$13,902",
+        "$20,082",
+        "$33,984",
+        "144%",
+        "The scope of work was to replace a section of lights in the gym while other work was being done in this area. This would have split the cost of a lift on site and replace some of the lighting earlier in the area where other work was being done; the rest of the lighting would be completed at a later date. Due to a delay in getting the original PO issued, the lighting work could not be completed in conjunction with the other work, so the project was re-quoted to include the lift and replacement of all the lights."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment PO #2070915000 Bedford Hammonds Plains CC Lighting Upgrades",
+      "reason_source": "The scope of work was to replace a section of lights in the gym while other work was being done in this area. This would have split the cost of a lift on site and replace some of the lighting earlier in the area where other work was being done; the rest of the lighting would be completed at a later date. Due to a delay in getting the original PO issued, the lighting work could not be completed in conjunction with the other work, so the project was re-quoted to include the lift and replacement of all the lights.",
+      "po": "2070915000",
+      "procurement_refs": [],
+      "contract_key": "po:2070915000",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 13902.0,
+      "amendment_value_source": 20082.0,
+      "updated_value_source": 33984.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 33984.0,
+      "effective_cumulative_amendment_value": 20082.0,
+      "increase_pct_source": 144.0,
+      "derived_increase_pct": 144.454,
+      "source_pct_delta": -0.454,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-10-09-po-2070796457",
+      "report_date": "2024-10-09",
+      "source_id": "hrm-cao-contract-amendments-2024-10",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-10-09-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report – RFP 18-302 PO 2070796457 Bayers Road Transit Priority- Increase to Contract #11",
+        "$114,324",
+        "$444,390",
+        "$558,714",
+        "389%",
+        "Phase 2 (Connaught Avenue to Windsor Street) construction was planned to be tendered in fall/winter 2022 with construction in 2023. However, due to the current status of the land acquisition schedule, it is expected that the Phase 2 construction will be tendered and constructed in 2025. Additional costs and scope items have been added to the project, including integration of the Halifax Water watermain replacement and design changes to the Windsor, Young and Bayers Road intersection to accommodate proposed at facilities on Windsor and Young Streets. Previous Regional Council approvals include C.O.#4 (Item 15.1.1 – December 10, 2019); C.O.#7 (Item 9.1.4 – June 23, 2020; & C.O. #’s 8&9 (Item 11.1.7 – August 17, 2021). C.O. #10 (Item 15.1.1 – November 8, 2022)."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report – RFP 18-302 PO 2070796457 Bayers Road Transit Priority- Increase to Contract #11",
+      "reason_source": "Phase 2 (Connaught Avenue to Windsor Street) construction was planned to be tendered in fall/winter 2022 with construction in 2023. However, due to the current status of the land acquisition schedule, it is expected that the Phase 2 construction will be tendered and constructed in 2025. Additional costs and scope items have been added to the project, including integration of the Halifax Water watermain replacement and design changes to the Windsor, Young and Bayers Road intersection to accommodate proposed at facilities on Windsor and Young Streets. Previous Regional Council approvals include C.O.#4 (Item 15.1.1 – December 10, 2019); C.O.#7 (Item 9.1.4 – June 23, 2020; & C.O. #’s 8&9 (Item 11.1.7 – August 17, 2021). C.O. #10 (Item 15.1.1 – November 8, 2022).",
+      "po": "2070796457",
+      "procurement_refs": [
+        "18-302"
+      ],
+      "contract_key": "po:2070796457",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 114324.0,
+      "amendment_value_source": 444390.0,
+      "updated_value_source": 558714.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 558714.0,
+      "effective_cumulative_amendment_value": 444390.0,
+      "increase_pct_source": 389.0,
+      "derived_increase_pct": 388.711,
+      "source_pct_delta": 0.289,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-10-09-po-2070924188",
+      "report_date": "2024-10-09",
+      "source_id": "hrm-cao-contract-amendments-2024-10",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-10-09-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report – RFP 18-186 PO 2070924188 Phase 2 - Design Consulting Services Wrights Cove Transit Terminal",
+        "$214,673",
+        "$126, 373",
+        "$341,046",
+        "59%",
+        "Staff has recommended an increase to Arcadis Professional Services for changes to the contracted scope of work in the amount of $126,373 (net HST included). This recommendation includes a $10,000 (4.66% increase) contingency allowance for design changes. The release of these contingency funds will be by approval of the PM, only if necessary. The original award value for Phase 2 was included in the submission for RFP 18-186, since then there has been an escalation in costs and the Phase 1 work identified additional scope of work."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report – RFP 18-186 PO 2070924188 Phase 2 - Design Consulting Services Wrights Cove Transit Terminal",
+      "reason_source": "Staff has recommended an increase to Arcadis Professional Services for changes to the contracted scope of work in the amount of $126,373 (net HST included). This recommendation includes a $10,000 (4.66% increase) contingency allowance for design changes. The release of these contingency funds will be by approval of the PM, only if necessary. The original award value for Phase 2 was included in the submission for RFP 18-186, since then there has been an escalation in costs and the Phase 1 work identified additional scope of work.",
+      "po": "2070924188",
+      "procurement_refs": [
+        "18-186"
+      ],
+      "contract_key": "po:2070924188",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 214673.0,
+      "amendment_value_source": 126373.0,
+      "updated_value_source": 341046.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 341046.0,
+      "effective_cumulative_amendment_value": 126373.0,
+      "increase_pct_source": 59.0,
+      "derived_increase_pct": 58.8677,
+      "source_pct_delta": 0.1323,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-10-09-po-2070903684",
+      "report_date": "2024-10-09",
+      "source_id": "hrm-cao-contract-amendments-2024-10",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-10-09-p4-t1-r2",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report RFP 2023-2042 PO 2070903684 HTTP Project Team Augmentation",
+        "$723,797",
+        "$166,418",
+        "$890,215",
+        "23%",
+        "The goal is to secure the current project team for an additional 8 months (on a part-time basis) to complete the Fixed Route Planning Phase 1 project work and implementation. These project resources are required due to the volume of work, the level of knowledge and expertise they have gained and the impact of changing resources on the project timeline in advance of implementation. An estimated project completion date of December 2024 is expected. The extension to December would ensure time for all required post go-live activities. This will be the final extension for these resources."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report RFP 2023-2042 PO 2070903684 HTTP Project Team Augmentation",
+      "reason_source": "The goal is to secure the current project team for an additional 8 months (on a part-time basis) to complete the Fixed Route Planning Phase 1 project work and implementation. These project resources are required due to the volume of work, the level of knowledge and expertise they have gained and the impact of changing resources on the project timeline in advance of implementation. An estimated project completion date of December 2024 is expected. The extension to December would ensure time for all required post go-live activities. This will be the final extension for these resources.",
+      "po": "2070903684",
+      "procurement_refs": [
+        "2023-2042"
+      ],
+      "contract_key": "po:2070903684",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 723797.0,
+      "amendment_value_source": 166418.0,
+      "updated_value_source": 890215.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 890215.0,
+      "effective_cumulative_amendment_value": 166418.0,
+      "increase_pct_source": 23.0,
+      "derived_increase_pct": 22.9924,
+      "source_pct_delta": 0.0076,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-12-11-contract-19s561",
+      "report_date": "2024-12-11",
+      "source_id": "hrm-cao-contract-amendments-2024-12",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-12-11-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report RFQ 19S561 Janitorial Services to the Halifax Central Library",
+        "$1,614,348",
+        "$427,091",
+        "$2,041,439",
+        "26%",
+        "In November 2019, the contract was awarded to ZM Supreme Cleaning Services Ltd for a three-year term with the option to renew for only two additional one-year terms (instead of three), ending in December 2024. This report serves as a request to continue janitorial services to the Halifax Central Library. Continuing this contract to December 31, 2025, the end date noted in the original solicitation, would allow for the provision of consistent service at a set price."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report RFQ 19S561 Janitorial Services to the Halifax Central Library",
+      "reason_source": "In November 2019, the contract was awarded to ZM Supreme Cleaning Services Ltd for a three-year term with the option to renew for only two additional one-year terms (instead of three), ending in December 2024. This report serves as a request to continue janitorial services to the Halifax Central Library. Continuing this contract to December 31, 2025, the end date noted in the original solicitation, would allow for the provision of consistent service at a set price.",
+      "po": null,
+      "procurement_refs": [
+        "19S561"
+      ],
+      "contract_key": "contract:19S561",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 1614348.0,
+      "amendment_value_source": 427091.0,
+      "updated_value_source": 2041439.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 2041439.0,
+      "effective_cumulative_amendment_value": 427091.0,
+      "increase_pct_source": 26.0,
+      "derived_increase_pct": 26.4559,
+      "source_pct_delta": -0.4559,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-12-11-po-2070889134",
+      "report_date": "2024-12-11",
+      "source_id": "hrm-cao-contract-amendments-2024-12",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-12-11-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report – PO 2070889134 Design and Project Management of Public EV Charger Installs",
+        "$32,401",
+        "$15,183",
+        "$47,584",
+        "47%",
+        "In Fall 2022, WSP was hired via the Standing Offer to perform design and project management services for public charging at seven municipal sites. This additional increase is required to perform minor design revisions for the fast-charging sites. These revisions include repositioning the charging stations and/or power cabinet and electrical enclosure. This will ensure that the chargers are more accessible to a wide range of electric vehicle models and reduce the need for a retaining wall at some sites."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report – PO 2070889134 Design and Project Management of Public EV Charger Installs",
+      "reason_source": "In Fall 2022, WSP was hired via the Standing Offer to perform design and project management services for public charging at seven municipal sites. This additional increase is required to perform minor design revisions for the fast-charging sites. These revisions include repositioning the charging stations and/or power cabinet and electrical enclosure. This will ensure that the chargers are more accessible to a wide range of electric vehicle models and reduce the need for a retaining wall at some sites.",
+      "po": "2070889134",
+      "procurement_refs": [],
+      "contract_key": "po:2070889134",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 32401.0,
+      "amendment_value_source": 15183.0,
+      "updated_value_source": 47584.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 47584.0,
+      "effective_cumulative_amendment_value": 15183.0,
+      "increase_pct_source": 47.0,
+      "derived_increase_pct": 46.8597,
+      "source_pct_delta": 0.1403,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-12-11-po-2070899393",
+      "report_date": "2024-12-11",
+      "source_id": "hrm-cao-contract-amendments-2024-12",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-12-11-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report - RFT 23-162, PO 2070899393, Upper Hammonds Plains Community Centre Upgrades",
+        "$280,024",
+        "$66,004",
+        "$346,028",
+        "$24%",
+        "In 2020 HRM Council approved the HalifACT Climate Plan, including a target of net-zero municipal operations by 2030. Staff has recommended an increase to Bird Mechanical’s PO 2070899393 for changes to the contracted scope of work in the amount of $11,893 (net HST included). This increase is for additional code work to meet NSPI’s inspection and T-bar ceiling adjustments due to unforeseen site conditions. The release of these contingency funds will be by approval of the Project Manager, only if necessary."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report - RFT 23-162, PO 2070899393, Upper Hammonds Plains Community Centre Upgrades",
+      "reason_source": "In 2020 HRM Council approved the HalifACT Climate Plan, including a target of net-zero municipal operations by 2030. Staff has recommended an increase to Bird Mechanical’s PO 2070899393 for changes to the contracted scope of work in the amount of $11,893 (net HST included). This increase is for additional code work to meet NSPI’s inspection and T-bar ceiling adjustments due to unforeseen site conditions. The release of these contingency funds will be by approval of the Project Manager, only if necessary.",
+      "po": "2070899393",
+      "procurement_refs": [
+        "23-162"
+      ],
+      "contract_key": "po:2070899393",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 280024.0,
+      "amendment_value_source": 66004.0,
+      "updated_value_source": 346028.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 346028.0,
+      "effective_cumulative_amendment_value": 66004.0,
+      "increase_pct_source": 24.0,
+      "derived_increase_pct": 23.5708,
+      "source_pct_delta": 0.4292,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-12-11-po-2070901586",
+      "report_date": "2024-12-11",
+      "source_id": "hrm-cao-contract-amendments-2024-12",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-12-11-p4-t1-r2",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report – RFP 23-159, Increase to PO 2070901586 – Design Services",
+        "$230,300",
+        "$73,025",
+        "$303,325",
+        "32%",
+        "VWMason was awarded PO 2070901586 for a value of $230,300 HST fully reimbursable in April 2023. The original scope of work included design and contract administration services for a new performance audio system, distributed audio, digital advertising ring, and concourse digital signage at the Scotiabank Centre. During the design process meetings with VWMason, HRM and Events East, it was identified that the new AV upgrades should include enhanced commissioning to ensure the highest level of performance for the system. Enhanced commissioning will ensure that the new system components are all configured and calibrated to deliver the optimal performance of the new system, preventing possible interference or feedback. Enhanced commissioning also provides the opportunity for additional training for the Events East staff who will be operating the system after handover."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report – RFP 23-159, Increase to PO 2070901586 – Design Services",
+      "reason_source": "VWMason was awarded PO 2070901586 for a value of $230,300 HST fully reimbursable in April 2023. The original scope of work included design and contract administration services for a new performance audio system, distributed audio, digital advertising ring, and concourse digital signage at the Scotiabank Centre. During the design process meetings with VWMason, HRM and Events East, it was identified that the new AV upgrades should include enhanced commissioning to ensure the highest level of performance for the system. Enhanced commissioning will ensure that the new system components are all configured and calibrated to deliver the optimal performance of the new system, preventing possible interference or feedback. Enhanced commissioning also provides the opportunity for additional training for the Events East staff who will be operating the system after handover.",
+      "po": "2070901586",
+      "procurement_refs": [
+        "23-159"
+      ],
+      "contract_key": "po:2070901586",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 230300.0,
+      "amendment_value_source": 73025.0,
+      "updated_value_source": 303325.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 303325.0,
+      "effective_cumulative_amendment_value": 73025.0,
+      "increase_pct_source": 32.0,
+      "derived_increase_pct": 31.7086,
+      "source_pct_delta": 0.2914,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2024-12-11-po-2070906544",
+      "report_date": "2024-12-11",
+      "source_id": "hrm-cao-contract-amendments-2024-12",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2024-12-11-p4-t1-r1",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 1
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report – RFT 23-176, PO 2070906544, Chocolate Lake Community Centre Upgrades – Increase #3",
+        "$992,803",
+        "$215,573",
+        "$1,208,376",
+        "$22%",
+        "In 2020 HRM Council approved the HalifACT Climate Plan, including a target of net-zero municipal operations by 2030. Staff has recommended an increase to Blunden Construction (1995) Limited’s PO 2070906544 for changes to the contracted scope of work in the amount of $20,000 (net HST included). This change is due to a change in the code requirements for natural gas piping. This increase also includes owner contingency as the project moves into the final stage and commissioning."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report – RFT 23-176, PO 2070906544, Chocolate Lake Community Centre Upgrades – Increase #3",
+      "reason_source": "In 2020 HRM Council approved the HalifACT Climate Plan, including a target of net-zero municipal operations by 2030. Staff has recommended an increase to Blunden Construction (1995) Limited’s PO 2070906544 for changes to the contracted scope of work in the amount of $20,000 (net HST included). This change is due to a change in the code requirements for natural gas piping. This increase also includes owner contingency as the project moves into the final stage and commissioning.",
+      "po": "2070906544",
+      "procurement_refs": [
+        "23-176"
+      ],
+      "contract_key": "po:2070906544",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 992803.0,
+      "amendment_value_source": 215573.0,
+      "updated_value_source": 1208376.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 1208376.0,
+      "effective_cumulative_amendment_value": 215573.0,
+      "increase_pct_source": 22.0,
+      "derived_increase_pct": 21.7136,
+      "source_pct_delta": 0.2864,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-01-15-contract-23-2229",
+      "report_date": "2025-01-15",
+      "source_id": "hrm-cao-contract-amendments-2025-01",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-01-15-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment RFP 23-2229 Windmill Road Functional Plan",
+        "$488,799",
+        "$156,486",
+        "$645,285",
+        "32%",
+        "This increase would allow for a Mobility Demand Forecasting and Analysis and a Conceptual Design of Princess Margaret Boulevard."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment RFP 23-2229 Windmill Road Functional Plan",
+      "reason_source": "This increase would allow for a Mobility Demand Forecasting and Analysis and a Conceptual Design of Princess Margaret Boulevard.",
+      "po": null,
+      "procurement_refs": [
+        "23-2229"
+      ],
+      "contract_key": "contract:23-2229",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 488799.0,
+      "amendment_value_source": 156486.0,
+      "updated_value_source": 645285.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 645285.0,
+      "effective_cumulative_amendment_value": 156486.0,
+      "increase_pct_source": 32.0,
+      "derived_increase_pct": 32.0144,
+      "source_pct_delta": -0.0144,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-01-15-po-2070895256",
+      "report_date": "2025-01-15",
+      "source_id": "hrm-cao-contract-amendments-2025-01",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-01-15-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment – Increase to PO 2070895256 – Fleet Charging Design",
+        "$88,153",
+        "$20,436",
+        "$108,589",
+        "23%",
+        "This additional contract increase is required to perform minor design revisions at one fleet depot, 40 Alderney Drive. These revisions are necessary to avoid potential future conflicts with an Active Transportation (AT) project currently in the concept stage. As it stands, the AT concept design includes a new retaining wall along the northeast side of the fleet parking lot. If this proceeds, fleet chargers will need to be relocated."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment – Increase to PO 2070895256 – Fleet Charging Design",
+      "reason_source": "This additional contract increase is required to perform minor design revisions at one fleet depot, 40 Alderney Drive. These revisions are necessary to avoid potential future conflicts with an Active Transportation (AT) project currently in the concept stage. As it stands, the AT concept design includes a new retaining wall along the northeast side of the fleet parking lot. If this proceeds, fleet chargers will need to be relocated.",
+      "po": "2070895256",
+      "procurement_refs": [],
+      "contract_key": "po:2070895256",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 88153.0,
+      "amendment_value_source": 20436.0,
+      "updated_value_source": 108589.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 108589.0,
+      "effective_cumulative_amendment_value": 20436.0,
+      "increase_pct_source": 23.0,
+      "derived_increase_pct": 23.1824,
+      "source_pct_delta": -0.1824,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-01-15-po-2070918746",
+      "report_date": "2025-01-15",
+      "source_id": "hrm-cao-contract-amendments-2025-01",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-01-15-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment - PO 2070918746 Consulting Services for Beechville- Lakeside- Timberlea Community Centre",
+        "$14,535",
+        "$17,087",
+        "$31,622",
+        "118%",
+        "During excavation of the site, large amounts of unsuitable materials were discovered which required additional testing. In addition, other delays in construction resulted in multiple concrete pours over the original estimated amount requiring additional technicians and equipment."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment - PO 2070918746 Consulting Services for Beechville- Lakeside- Timberlea Community Centre",
+      "reason_source": "During excavation of the site, large amounts of unsuitable materials were discovered which required additional testing. In addition, other delays in construction resulted in multiple concrete pours over the original estimated amount requiring additional technicians and equipment.",
+      "po": "2070918746",
+      "procurement_refs": [],
+      "contract_key": "po:2070918746",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 14535.0,
+      "amendment_value_source": 17087.0,
+      "updated_value_source": 31622.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 31622.0,
+      "effective_cumulative_amendment_value": 17087.0,
+      "increase_pct_source": 118.0,
+      "derived_increase_pct": 117.5576,
+      "source_pct_delta": 0.4424,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-04-16-contract-21-093",
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-04-16-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Tender 21- 093 RFP – Project Management AAA Bikeway Project",
+        "$416,623",
+        "$150,987",
+        "$567,610",
+        "36%",
+        "In early 2020, HRM signed a contribution agreement with the Province of Nova Scotia for a $25 million dollar project under the Investing in Canada Infrastructure Program (ICIP) to support the costs of building the Regional Centre All Ages and Abilities Bikeway Network. One of the stipulations in the funding agreement was that HRM hire an external project manager. Colliers Project Leaders Inc. was contracted to do this work following an RFP process in July of 2021 for the original value of $416,623 (net HST included). Their work scope was originally tied to the 2024 completion date. This extension would continue Colliers’ role in the project until the anticipated timeline for the funds from Provincial and Federal funders to run out (2026)."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Tender 21- 093 RFP – Project Management AAA Bikeway Project",
+      "reason_source": "In early 2020, HRM signed a contribution agreement with the Province of Nova Scotia for a $25 million dollar project under the Investing in Canada Infrastructure Program (ICIP) to support the costs of building the Regional Centre All Ages and Abilities Bikeway Network. One of the stipulations in the funding agreement was that HRM hire an external project manager. Colliers Project Leaders Inc. was contracted to do this work following an RFP process in July of 2021 for the original value of $416,623 (net HST included). Their work scope was originally tied to the 2024 completion date. This extension would continue Colliers’ role in the project until the anticipated timeline for the funds from Provincial and Federal funders to run out (2026).",
+      "po": null,
+      "procurement_refs": [
+        "21-093"
+      ],
+      "contract_key": "contract:21-093",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 416623.0,
+      "amendment_value_source": 150987.0,
+      "updated_value_source": 567610.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 567610.0,
+      "effective_cumulative_amendment_value": 150987.0,
+      "increase_pct_source": 36.0,
+      "derived_increase_pct": 36.2407,
+      "source_pct_delta": -0.2407,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-04-16-contract-22-1229",
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-04-16-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment – Alternative Procurement 22-1229 – Recreation Software Transition Project Contract Extension",
+        "$438,001",
+        "$189,801",
+        "$627,802",
+        "43%",
+        "Xplor Technologies will be transitioning HRM to the Xplor Recreation software which meets HRMs original requirements. Delays in Cross-Site Functionality programming compressing UAT, additional time is required from Barrington Consulting Senior Business Analyst engaged on the project to support the software transition with report creation for both Legend and Xplor applications. In January 2023 Alternative Procurement #22-1229 was awarded to Barrington Consulting to secure a Senior Business Analyst for the project. In September 2024, we exercised with Change Order #1 on PO #2070899517 the ability to extend the Barrington Sr BA resource for $107,414.58 as the go-live for the switch to the new software was pushed to April 2025."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment – Alternative Procurement 22-1229 – Recreation Software Transition Project Contract Extension",
+      "reason_source": "Xplor Technologies will be transitioning HRM to the Xplor Recreation software which meets HRMs original requirements. Delays in Cross-Site Functionality programming compressing UAT, additional time is required from Barrington Consulting Senior Business Analyst engaged on the project to support the software transition with report creation for both Legend and Xplor applications. In January 2023 Alternative Procurement #22-1229 was awarded to Barrington Consulting to secure a Senior Business Analyst for the project. In September 2024, we exercised with Change Order #1 on PO #2070899517 the ability to extend the Barrington Sr BA resource for $107,414.58 as the go-live for the switch to the new software was pushed to April 2025.",
+      "po": null,
+      "procurement_refs": [
+        "22-1229"
+      ],
+      "contract_key": "contract:22-1229",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 438001.0,
+      "amendment_value_source": 189801.0,
+      "updated_value_source": 627802.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 627802.0,
+      "effective_cumulative_amendment_value": 189801.0,
+      "increase_pct_source": 43.0,
+      "derived_increase_pct": 43.3335,
+      "source_pct_delta": -0.3335,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-04-16-contract-23-028",
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-04-16-p3-t1-r5",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 5
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment RFP# 23-028 – Recreation Software Transition Project Contract Extension",
+        "$370,924",
+        "$133,746",
+        "$504,670",
+        "36%",
+        "Xplor Technologies will be transitioning HRM to the Xplor Recreation software which meets HRMs original requirements. Due to the vendor turning off the Legend Servers on June 30, 2025, and delays in Cross-Site Functionality programming compressing UAT, this Change Order is to extend the IMP Senior Business Analyst resource to continue the transition to the Xplor Recreation software required for Parks and Recreation. This resource will work under the direction of the Project Management Office (PMO) and the Parks and Recreation Business Lead."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment RFP# 23-028 – Recreation Software Transition Project Contract Extension",
+      "reason_source": "Xplor Technologies will be transitioning HRM to the Xplor Recreation software which meets HRMs original requirements. Due to the vendor turning off the Legend Servers on June 30, 2025, and delays in Cross-Site Functionality programming compressing UAT, this Change Order is to extend the IMP Senior Business Analyst resource to continue the transition to the Xplor Recreation software required for Parks and Recreation. This resource will work under the direction of the Project Management Office (PMO) and the Parks and Recreation Business Lead.",
+      "po": null,
+      "procurement_refs": [
+        "23-028"
+      ],
+      "contract_key": "contract:23-028",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 370924.0,
+      "amendment_value_source": 133746.0,
+      "updated_value_source": 504670.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 504670.0,
+      "effective_cumulative_amendment_value": 133746.0,
+      "increase_pct_source": 36.0,
+      "derived_increase_pct": 36.0575,
+      "source_pct_delta": -0.0575,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-04-16-po-2070920062",
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-04-16-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Tender 2024- 0034, PO 2070920062 - Fire Boat Infrastructure",
+        "$239,467",
+        "$62,281",
+        "$301,747",
+        "26%",
+        "Eagle Beach Contractors Ltd was awarded Tender # 2024-0034 in April 2024 through a competitive bid process. The original scope of work was supply and installation of gang way, floating dock and electrical upgrades at the Alderney waterfront to support yearly operations of the new HRFE fire boat. During construction, HRFE requested for a change in the scope of work. The scope change was to include a water line, usable 12 months a year, to flush the two fire pump systems after each use and wash and clean the fire boat upon returning to jetty. The work involves running an insulated water line under the existing wharves."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Tender 2024- 0034, PO 2070920062 - Fire Boat Infrastructure",
+      "reason_source": "Eagle Beach Contractors Ltd was awarded Tender # 2024-0034 in April 2024 through a competitive bid process. The original scope of work was supply and installation of gang way, floating dock and electrical upgrades at the Alderney waterfront to support yearly operations of the new HRFE fire boat. During construction, HRFE requested for a change in the scope of work. The scope change was to include a water line, usable 12 months a year, to flush the two fire pump systems after each use and wash and clean the fire boat upon returning to jetty. The work involves running an insulated water line under the existing wharves.",
+      "po": "2070920062",
+      "procurement_refs": [
+        "2024-0034"
+      ],
+      "contract_key": "po:2070920062",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 239467.0,
+      "amendment_value_source": 62281.0,
+      "updated_value_source": 301747.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 301748.0,
+      "effective_cumulative_amendment_value": 62281.0,
+      "increase_pct_source": 26.0,
+      "derived_increase_pct": 26.0082,
+      "source_pct_delta": -0.0082,
+      "source_arithmetic_delta": -1.0,
+      "source_arithmetic_consistent": false,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-04-16-cao-contract-amendment-change-order-02-jrpv-devices-for-halifax-ferry-terminals-1",
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-04-16-p4-t1-r4",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment - Change Order 02, JRPV devices for Halifax Ferry Terminals",
+        "$1,360,000",
+        "$324,869",
+        "$1,684,869",
+        "24%",
+        "Halifax Regional Municipality issued Request for Proposals #21-095 for a Mobile Ticketing Solution for Halifax Transit in May 2021, Masabi submitted its response to the RFP, and the agreement was signed on April 7, 2023, and went live in November 2023 and has seen a steady increase in users. The Electronic Validation, Phase 2, involved the installation and commissioning of Justride Validators inside buses. During the delivery of phase 2, it was discovered that there had been an increase in the number of transit vehicles not accounted for in the original RFP and awarding. During the delivery of phase 2, it became clear to the project team that the handheld validators should not be pursued: the costs we excessive relative to the functionality offered and future phases of the fare management strategy may not be possible with the handheld validators (smart cards and open payment). As the handheld validators were no longer considered a viable option for the ferry terminals, a different solution was required. Masabi offers a similar product to the JRVs meant for permanent, stationary locations, the JustRide Platform Validator (JRPV). The JRPV is essentially a JRV in a rigid enclosure to be installed in fixed locations at gates, stations, or terminals."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment - Change Order 02, JRPV devices for Halifax Ferry Terminals",
+      "reason_source": "Halifax Regional Municipality issued Request for Proposals #21-095 for a Mobile Ticketing Solution for Halifax Transit in May 2021, Masabi submitted its response to the RFP, and the agreement was signed on April 7, 2023, and went live in November 2023 and has seen a steady increase in users. The Electronic Validation, Phase 2, involved the installation and commissioning of Justride Validators inside buses. During the delivery of phase 2, it was discovered that there had been an increase in the number of transit vehicles not accounted for in the original RFP and awarding. During the delivery of phase 2, it became clear to the project team that the handheld validators should not be pursued: the costs we excessive relative to the functionality offered and future phases of the fare management strategy may not be possible with the handheld validators (smart cards and open payment). As the handheld validators were no longer considered a viable option for the ferry terminals, a different solution was required. Masabi offers a similar product to the JRVs meant for permanent, stationary locations, the JustRide Platform Validator (JRPV). The JRPV is essentially a JRV in a rigid enclosure to be installed in fixed locations at gates, stations, or terminals.",
+      "po": null,
+      "procurement_refs": [],
+      "contract_key": null,
+      "contract_key_basis": null,
+      "original_value": 1360000.0,
+      "amendment_value_source": 324869.0,
+      "updated_value_source": 1684869.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 1684869.0,
+      "effective_cumulative_amendment_value": 324869.0,
+      "increase_pct_source": 24.0,
+      "derived_increase_pct": 23.8874,
+      "source_pct_delta": 0.1126,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-04-16-contract-18-186",
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-04-16-p4-t1-r3",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment – Increase to Phase 2 - RFP 18-186 – Design Consulting Services Wrights Cove Transit Terminal",
+        "$214,673",
+        "$196,373",
+        "$411,046",
+        "91%",
+        "Halifax Transit’s fixed route transit network has grown over the last several years and currently carries over 19 million passengers annually. Growth of the network has increased the number of buses and passengers using each terminal, creating capacity issues that have required new terminals over the past few years. The original project from 2018 was deferred until 2024. This increase in cost is rationalized by additional scope due to the changing needs of the municipality. Staff has recommended an increase to Arcadis Professional Services for changes to the contracted scope of work in the amount of $42,000 (net HST included). Staff has recommended an additional $28,000 (net HST included) contingency allowance be included. The additional cost is due to design changes in Phase 2 to address net-zero construction not considered in the original design and changes requested by Halifax Transit to bus routing and platform design to enhance pedestrian safety."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment – Increase to Phase 2 - RFP 18-186 – Design Consulting Services Wrights Cove Transit Terminal",
+      "reason_source": "Halifax Transit’s fixed route transit network has grown over the last several years and currently carries over 19 million passengers annually. Growth of the network has increased the number of buses and passengers using each terminal, creating capacity issues that have required new terminals over the past few years. The original project from 2018 was deferred until 2024. This increase in cost is rationalized by additional scope due to the changing needs of the municipality. Staff has recommended an increase to Arcadis Professional Services for changes to the contracted scope of work in the amount of $42,000 (net HST included). Staff has recommended an additional $28,000 (net HST included) contingency allowance be included. The additional cost is due to design changes in Phase 2 to address net-zero construction not considered in the original design and changes requested by Halifax Transit to bus routing and platform design to enhance pedestrian safety.",
+      "po": null,
+      "procurement_refs": [
+        "18-186"
+      ],
+      "contract_key": "contract:18-186",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 214673.0,
+      "amendment_value_source": 196373.0,
+      "updated_value_source": 411046.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 411046.0,
+      "effective_cumulative_amendment_value": 196373.0,
+      "increase_pct_source": 91.0,
+      "derived_increase_pct": 91.4754,
+      "source_pct_delta": -0.4754,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-04-16-po-2070904381",
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-04-16-p4-t1-r2",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment PO 2070904381 Project Management Services at Scotiabank Centre",
+        "$29,500",
+        "$20,488",
+        "49,988",
+        "69%",
+        "Collier Project Leaders was awarded PO 2070904381 in July 2023. The scope of work is to provide project management services during the design and construction of a new tenant dressing room at the Scotiabank Centre. This increase is required to provide additional project management services during the construction phase of this project. Additional hours are required due to delays with the timing of the construction and additional site visits to address questions or concerns due to unknown existing site conditions. The primary cause for the additional labour hours is related to a design change for the relocation of existing heating and cooling lines to prevent potential water damage to the new dressing room."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment PO 2070904381 Project Management Services at Scotiabank Centre",
+      "reason_source": "Collier Project Leaders was awarded PO 2070904381 in July 2023. The scope of work is to provide project management services during the design and construction of a new tenant dressing room at the Scotiabank Centre. This increase is required to provide additional project management services during the construction phase of this project. Additional hours are required due to delays with the timing of the construction and additional site visits to address questions or concerns due to unknown existing site conditions. The primary cause for the additional labour hours is related to a design change for the relocation of existing heating and cooling lines to prevent potential water damage to the new dressing room.",
+      "po": "2070904381",
+      "procurement_refs": [],
+      "contract_key": "po:2070904381",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 29500.0,
+      "amendment_value_source": 20488.0,
+      "updated_value_source": 49988.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 49988.0,
+      "effective_cumulative_amendment_value": 20488.0,
+      "increase_pct_source": 69.0,
+      "derived_increase_pct": 69.4508,
+      "source_pct_delta": -0.4508,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-04-16-po-2070909410",
+      "report_date": "2025-04-16",
+      "source_id": "hrm-cao-contract-amendments-2025-04",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-04-16-p4-t1-r1",
+      "source_locations": [
+        {
+          "page": 4,
+          "table": 1,
+          "row": 1
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment – PO 2070909410 – Engineering Services for Dartmouth Ferry Terminal",
+        "$43,435",
+        "$20,649",
+        "$64,084",
+        "48%",
+        "Dillon Consulting Limited was awarded PO 2070909410 in October 2023. The scope of work is to provide Engineering services for the design of a new emergency generator to serve the Dartmouth Ferry Terminal facility. This is required for additional studies to determine a suitable location for the generator and the associated electrical equipment to be installed within the Dartmouth Ferry Terminal."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment – PO 2070909410 – Engineering Services for Dartmouth Ferry Terminal",
+      "reason_source": "Dillon Consulting Limited was awarded PO 2070909410 in October 2023. The scope of work is to provide Engineering services for the design of a new emergency generator to serve the Dartmouth Ferry Terminal facility. This is required for additional studies to determine a suitable location for the generator and the associated electrical equipment to be installed within the Dartmouth Ferry Terminal.",
+      "po": "2070909410",
+      "procurement_refs": [],
+      "contract_key": "po:2070909410",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 43435.0,
+      "amendment_value_source": 20649.0,
+      "updated_value_source": 64084.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 64084.0,
+      "effective_cumulative_amendment_value": 20649.0,
+      "increase_pct_source": 48.0,
+      "derived_increase_pct": 47.54,
+      "source_pct_delta": 0.46,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-05-21-cao-contract-amendment-report-po2070914345-consulting-services-at-halifax-lancers-facility-1",
+      "report_date": "2025-05-21",
+      "source_id": "hrm-cao-contract-amendments-2025-05",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-05-21-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report - PO2070914345 Consulting Services at Halifax Lancers Facility",
+        "$20,544",
+        "$103,765",
+        "$124,309",
+        "500%",
+        "RJ Bartlett was awarded PO 2070914345 in January 2024. The scope of work was to complete an analysis of the requirement to install a sprinkler system within the Lancers Arena facility or alternative approaches to address life safety concerns within the facility. The Consultant initially proposed to re- classify the building under the building code as a Farm Building and thus not require a sprinkler system. This was not accepted by the Building Official (authority having jurisdiction). Thus, a sprinkler system is the most expedient way to satisfy the life safety requirements for the facility and minimize the duration the facility is closed to complete modifications necessary to comply with the building code. There is an Order to Comply from Halifax Regional Fire and Emergency issued for this facility; thus, there is a need to proceed with the design of the new sprinkler system without delay."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report - PO2070914345 Consulting Services at Halifax Lancers Facility",
+      "reason_source": "RJ Bartlett was awarded PO 2070914345 in January 2024. The scope of work was to complete an analysis of the requirement to install a sprinkler system within the Lancers Arena facility or alternative approaches to address life safety concerns within the facility. The Consultant initially proposed to re- classify the building under the building code as a Farm Building and thus not require a sprinkler system. This was not accepted by the Building Official (authority having jurisdiction). Thus, a sprinkler system is the most expedient way to satisfy the life safety requirements for the facility and minimize the duration the facility is closed to complete modifications necessary to comply with the building code. There is an Order to Comply from Halifax Regional Fire and Emergency issued for this facility; thus, there is a need to proceed with the design of the new sprinkler system without delay.",
+      "po": null,
+      "procurement_refs": [],
+      "contract_key": null,
+      "contract_key_basis": null,
+      "original_value": 20544.0,
+      "amendment_value_source": 103765.0,
+      "updated_value_source": 124309.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 124309.0,
+      "effective_cumulative_amendment_value": 103765.0,
+      "increase_pct_source": 500.0,
+      "derived_increase_pct": 505.0866,
+      "source_pct_delta": -5.0866,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-05-21-contract-21-302",
+      "report_date": "2025-05-21",
+      "source_id": "hrm-cao-contract-amendments-2025-05",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-05-21-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Award – Contract Amendment 21-302 Dutch Village Road Design Change Order #4",
+        "$185,204",
+        "$58,120",
+        "$243,324",
+        "31%",
+        "The original award covered the complete scope of detailed design in the amount of $177,592. Three prior change orders were approved for additional changes requested to the landscaping design after its initial submission in the amount of $19,814, to landscaping and civil changes in the amount of $15,090, and for a revision to the alignment and associated landscaping $11,040. The cumulative change order value is thus $58,120 including this change order. Change order #4 addresses the HRM requested changes outside of the original design scope."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award – Contract Amendment 21-302 Dutch Village Road Design Change Order #4",
+      "reason_source": "The original award covered the complete scope of detailed design in the amount of $177,592. Three prior change orders were approved for additional changes requested to the landscaping design after its initial submission in the amount of $19,814, to landscaping and civil changes in the amount of $15,090, and for a revision to the alignment and associated landscaping $11,040. The cumulative change order value is thus $58,120 including this change order. Change order #4 addresses the HRM requested changes outside of the original design scope.",
+      "po": null,
+      "procurement_refs": [
+        "21-302"
+      ],
+      "contract_key": "contract:21-302",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 185204.0,
+      "amendment_value_source": 58120.0,
+      "updated_value_source": 243324.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 243324.0,
+      "effective_cumulative_amendment_value": 58120.0,
+      "increase_pct_source": 31.0,
+      "derived_increase_pct": 31.3816,
+      "source_pct_delta": -0.3816,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-05-21-po-2070894009",
+      "report_date": "2025-05-21",
+      "source_id": "hrm-cao-contract-amendments-2025-05",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-05-21-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment - PO 2070894009 Consulting Services for East Dartmouth Community Centre Interior Renovation – Increase #2",
+        "$99,248",
+        "$56,605",
+        "$155,853",
+        "57.1%",
+        "In December 2022, Arcadis Architects (Canada) Inc. (IBI Group) was engaged to design renovations to the existing East Dartmouth Community Centre. There was a desire to create a more open and welcoming main entrance leading to the reception desk to improve visitor control and awareness. In addition, there was a need to re-plan the balance of the existing lobby and to re-define the existing adjacent breakout spaces to optimize their use. Finally, there was desire to capture the exterior volume of the existing green roof space to redevelop into new interior space including new roof structure, floors, and windows. Changes in scope of work during the design period included the addition of a new folding wall and a small meeting space and landscape work."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment - PO 2070894009 Consulting Services for East Dartmouth Community Centre Interior Renovation – Increase #2",
+      "reason_source": "In December 2022, Arcadis Architects (Canada) Inc. (IBI Group) was engaged to design renovations to the existing East Dartmouth Community Centre. There was a desire to create a more open and welcoming main entrance leading to the reception desk to improve visitor control and awareness. In addition, there was a need to re-plan the balance of the existing lobby and to re-define the existing adjacent breakout spaces to optimize their use. Finally, there was desire to capture the exterior volume of the existing green roof space to redevelop into new interior space including new roof structure, floors, and windows. Changes in scope of work during the design period included the addition of a new folding wall and a small meeting space and landscape work.",
+      "po": "2070894009",
+      "procurement_refs": [],
+      "contract_key": "po:2070894009",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 99248.0,
+      "amendment_value_source": 56605.0,
+      "updated_value_source": 155853.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 155853.0,
+      "effective_cumulative_amendment_value": 56605.0,
+      "increase_pct_source": 57.1,
+      "derived_increase_pct": 57.0339,
+      "source_pct_delta": 0.0661,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-05-21-po-2070933389",
+      "report_date": "2025-05-21",
+      "source_id": "hrm-cao-contract-amendments-2025-05",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-05-21-p3-t1-r5",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 5
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment Report – RFP 2024-0556, PO 2070933389 Design Services at Fire Station 50",
+        "$122,536",
+        "$136,447",
+        "$258,983",
+        "111%",
+        "Acre Architects Inc. was awarded RFP 2024-0556 in November 2024. The scope of work is to provide design services to convert Fire Station #50 into a career station. Staff has recommended an increase to PO 2070933389 for additional design services in the amount of $126,447 this increase is required to address the additional operational and health and safety items identified by Halifax Regional Fire & Emergency."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment Report – RFP 2024-0556, PO 2070933389 Design Services at Fire Station 50",
+      "reason_source": "Acre Architects Inc. was awarded RFP 2024-0556 in November 2024. The scope of work is to provide design services to convert Fire Station #50 into a career station. Staff has recommended an increase to PO 2070933389 for additional design services in the amount of $126,447 this increase is required to address the additional operational and health and safety items identified by Halifax Regional Fire & Emergency.",
+      "po": "2070933389",
+      "procurement_refs": [
+        "2024-0556"
+      ],
+      "contract_key": "po:2070933389",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 122536.0,
+      "amendment_value_source": 136447.0,
+      "updated_value_source": 258983.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 258983.0,
+      "effective_cumulative_amendment_value": 136447.0,
+      "increase_pct_source": 111.0,
+      "derived_increase_pct": 111.3526,
+      "source_pct_delta": -0.3526,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-06-18-contract-23-169",
+      "report_date": "2025-06-18",
+      "source_id": "hrm-cao-contract-amendments-2025-06",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-06-18-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        },
+        {
+          "page": 4,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "CAO Award – RFP 23-169 Scotiabank Centre - HVAC & Refrigeration Upgrades",
+        "$8,699,700",
+        "$1,860,653",
+        "$10,560,353",
+        "21%",
+        "The existing ice plant and air conditioning system at the Scotiabank Centre are both at or near the end of life. HRM and Armco reached an agreement in September of 2020 to proceed with the installation of independent air conditioning systems. The increased cost above the original estimate is anticipated to be the result of general market wide cost escalations for labour and material. There are limited mechanical contractors in the market capable of completing a large scale and schedule driven project of this nature."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Award – RFP 23-169 Scotiabank Centre - HVAC & Refrigeration Upgrades",
+      "reason_source": "The existing ice plant and air conditioning system at the Scotiabank Centre are both at or near the end of life. HRM and Armco reached an agreement in September of 2020 to proceed with the installation of independent air conditioning systems. The increased cost above the original estimate is anticipated to be the result of general market wide cost escalations for labour and material. There are limited mechanical contractors in the market capable of completing a large scale and schedule driven project of this nature.",
+      "po": null,
+      "procurement_refs": [
+        "23-169"
+      ],
+      "contract_key": "contract:23-169",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 8699700.0,
+      "amendment_value_source": 1860653.0,
+      "updated_value_source": 10560353.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 10560353.0,
+      "effective_cumulative_amendment_value": 1860653.0,
+      "increase_pct_source": 21.0,
+      "derived_increase_pct": 21.3876,
+      "source_pct_delta": -0.3876,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-06-18-po-2070925358",
+      "report_date": "2025-06-18",
+      "source_id": "hrm-cao-contract-amendments-2025-06",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-06-18-p3-t1-r5",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 5
+        },
+        {
+          "page": 4,
+          "table": 1,
+          "row": 5
+        }
+      ],
+      "source_cells": [
+        "Contract Amendment to PO#2070925358, RFP# 2024-0269 Corporate Scheduling Project – Test Lead",
+        "$167,440",
+        "$132,110",
+        "$299,550",
+        "79%",
+        "In December 2022, the Corporate Scheduling and Time Reporting Project was launched to plan, design, build and implement a suite of business tools using UKG’s Telestaff and WFMPro applications. The project is focused on implementing these applications as an integrated “Software as a Service” (SaaS) solution. The Test Lead responsibilities include supporting the development and management of all project test deliverables and processes. The Test Lead manages the development of test plans, test scenarios, test cases and test data sets and supports project team members and business stakeholders throughout all testing activities."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "Contract Amendment to PO#2070925358, RFP# 2024-0269 Corporate Scheduling Project – Test Lead",
+      "reason_source": "In December 2022, the Corporate Scheduling and Time Reporting Project was launched to plan, design, build and implement a suite of business tools using UKG’s Telestaff and WFMPro applications. The project is focused on implementing these applications as an integrated “Software as a Service” (SaaS) solution. The Test Lead responsibilities include supporting the development and management of all project test deliverables and processes. The Test Lead manages the development of test plans, test scenarios, test cases and test data sets and supports project team members and business stakeholders throughout all testing activities.",
+      "po": "2070925358",
+      "procurement_refs": [
+        "2024-0269"
+      ],
+      "contract_key": "po:2070925358",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 167440.0,
+      "amendment_value_source": 132110.0,
+      "updated_value_source": 299550.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 299550.0,
+      "effective_cumulative_amendment_value": 132110.0,
+      "increase_pct_source": 79.0,
+      "derived_increase_pct": 78.8999,
+      "source_pct_delta": 0.1001,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-06-18-po-2070927668",
+      "report_date": "2025-06-18",
+      "source_id": "hrm-cao-contract-amendments-2025-06",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-06-18-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        },
+        {
+          "page": 4,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "Contract Amendment to PO#2070927668, RFP# 2024-0269 Corporate Scheduling Project – Instructional Designer",
+        "$131,025",
+        "$139,500",
+        "270,525",
+        "106%",
+        "In December 2022, the Corporate Scheduling and Time Reporting Project was launched to plan, design, build and implement a suite of business tools using UKG’s Telestaff and WFMPro applications. The implementation of these business tools is a complex undertaking for the municipality; one that will introduce changes in business processes, practices, and the adoption of new digital technologies. The project has recently completed an initial solution configuration process and is now planning to advance with user testing, training and business readiness activities to support the adoption of the solution corporately. To advance this work, the municipality requires knowledgeable and experienced resources to support the current Corporate Scheduling and Time reporting project team to develop and deliver key business readiness, testing and training deliverables."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "Contract Amendment to PO#2070927668, RFP# 2024-0269 Corporate Scheduling Project – Instructional Designer",
+      "reason_source": "In December 2022, the Corporate Scheduling and Time Reporting Project was launched to plan, design, build and implement a suite of business tools using UKG’s Telestaff and WFMPro applications. The implementation of these business tools is a complex undertaking for the municipality; one that will introduce changes in business processes, practices, and the adoption of new digital technologies. The project has recently completed an initial solution configuration process and is now planning to advance with user testing, training and business readiness activities to support the adoption of the solution corporately. To advance this work, the municipality requires knowledgeable and experienced resources to support the current Corporate Scheduling and Time reporting project team to develop and deliver key business readiness, testing and training deliverables.",
+      "po": "2070927668",
+      "procurement_refs": [
+        "2024-0269"
+      ],
+      "contract_key": "po:2070927668",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 131025.0,
+      "amendment_value_source": 139500.0,
+      "updated_value_source": 270525.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 270525.0,
+      "effective_cumulative_amendment_value": 139500.0,
+      "increase_pct_source": 106.0,
+      "derived_increase_pct": 106.4682,
+      "source_pct_delta": -0.4682,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-06-18-po-2070937341",
+      "report_date": "2025-06-18",
+      "source_id": "hrm-cao-contract-amendments-2025-06",
+      "source_schema": "original_amendment_updated",
+      "source_amount_semantics": "Source publishes Original PO Awarded Amount, Value of Amendment and Updated Value of PO. Value of Amendment is treated as the published cumulative amendment amount used to reach the updated value; it is not assumed to be the current incremental change-order request.",
+      "source_row_id": "2025-06-18-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        },
+        {
+          "page": 4,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "CAO Contract Amendment – Increase to PO 2070937341 – Scotiabank Centre Heat Pump Supply and Installation",
+        "$57,796",
+        "$22,125",
+        "$79,921",
+        "38%",
+        "MasterTech was awarded PO 2070937341 for $57,796 HST fully reimbursable in February 2025. The original scope of work included the supply and installation of three (3) ductless mini-split heat pumps to provide cooling in new data rooms in relation to the ongoing A/V upgrades underway at Scotiabank Centre. MasterTech were selected from HRM’s standing offer list of HVAC vendors to complete this work. Due to unknown existing site conditions two (2) of the ductless mini-split heat pumps cannot be installed due to spacing limitations in the facility and maximum allowable distance between the interior head and the exterior condenser. These two locations require an alternate technology (variable refrigerant flow) that can accommodate the longer distances."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "CAO Contract Amendment – Increase to PO 2070937341 – Scotiabank Centre Heat Pump Supply and Installation",
+      "reason_source": "MasterTech was awarded PO 2070937341 for $57,796 HST fully reimbursable in February 2025. The original scope of work included the supply and installation of three (3) ductless mini-split heat pumps to provide cooling in new data rooms in relation to the ongoing A/V upgrades underway at Scotiabank Centre. MasterTech were selected from HRM’s standing offer list of HVAC vendors to complete this work. Due to unknown existing site conditions two (2) of the ductless mini-split heat pumps cannot be installed due to spacing limitations in the facility and maximum allowable distance between the interior head and the exterior condenser. These two locations require an alternate technology (variable refrigerant flow) that can accommodate the longer distances.",
+      "po": "2070937341",
+      "procurement_refs": [],
+      "contract_key": "po:2070937341",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 57796.0,
+      "amendment_value_source": 22125.0,
+      "updated_value_source": 79921.0,
+      "derived_amendment_value": null,
+      "derived_updated_value": 79921.0,
+      "effective_cumulative_amendment_value": 22125.0,
+      "increase_pct_source": 38.0,
+      "derived_increase_pct": 38.2812,
+      "source_pct_delta": -0.2812,
+      "source_arithmetic_delta": 0.0,
+      "source_arithmetic_consistent": true,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-contract-024-016",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r8",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 8
+        }
+      ],
+      "source_cells": [
+        "024-016, Peer Review and Layout for IMP Action Plan Update",
+        "$ 23,151.49",
+        "$ 26,587.39",
+        "115.00",
+        "This is a time and materials contract. Additional time was required for staff education, analisys of current state, and greater complexity of business requirements than originally estimated"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "024-016, Peer Review and Layout for IMP Action Plan Update",
+      "reason_source": "This is a time and materials contract. Additional time was required for staff education, analisys of current state, and greater complexity of business requirements than originally estimated",
+      "po": null,
+      "procurement_refs": [
+        "024-016"
+      ],
+      "contract_key": "contract:024-016",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 23151.49,
+      "amendment_value_source": 26587.39,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 49738.88,
+      "effective_cumulative_amendment_value": 26587.39,
+      "increase_pct_source": 115.0,
+      "derived_increase_pct": 114.8409,
+      "source_pct_delta": 0.1591,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-contract-2024-0242",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r7",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 7
+        }
+      ],
+      "source_cells": [
+        "2024-0242, HR Success Factors Project Phase 2 - Technical Implementaiton Partner",
+        "$ 288,040.00",
+        "$ 135,888.00",
+        "47.18",
+        "This is a time and materials contract. Additional time was required for staff education, analisys of current state, and greater complexity of business requirements than originally estimated"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "2024-0242, HR Success Factors Project Phase 2 - Technical Implementaiton Partner",
+      "reason_source": "This is a time and materials contract. Additional time was required for staff education, analisys of current state, and greater complexity of business requirements than originally estimated",
+      "po": null,
+      "procurement_refs": [
+        "2024-0242"
+      ],
+      "contract_key": "contract:2024-0242",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 288040.0,
+      "amendment_value_source": 135888.0,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 423928.0,
+      "effective_cumulative_amendment_value": 135888.0,
+      "increase_pct_source": 47.18,
+      "derived_increase_pct": 47.1768,
+      "source_pct_delta": 0.0032,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-contract-2024-0652",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r4",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 4
+        }
+      ],
+      "source_cells": [
+        "2024-0652 Rental of One (1) Asphalt Recycler",
+        "$57,000.00",
+        "$ 32,490.00",
+        "57.0",
+        "Increase in time to continue operations aligning with changes in asphalt plant opening days"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "2024-0652 Rental of One (1) Asphalt Recycler",
+      "reason_source": "Increase in time to continue operations aligning with changes in asphalt plant opening days",
+      "po": null,
+      "procurement_refs": [
+        "2024-0652"
+      ],
+      "contract_key": "contract:2024-0652",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 57000.0,
+      "amendment_value_source": 32490.0,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 89490.0,
+      "effective_cumulative_amendment_value": 32490.0,
+      "increase_pct_source": 57.0,
+      "derived_increase_pct": 57.0,
+      "source_pct_delta": 0.0,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-contract-2024-0677",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r6",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 6
+        }
+      ],
+      "source_cells": [
+        "2024-0677, Public Works Needs Facility Assessment",
+        "$ 129,210.35",
+        "$ 22,308.48",
+        "17.30",
+        "Additional Wrok including \"test fit\" of the ideal building and yeard space at 3825 Mackintosh Street and"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "2024-0677, Public Works Needs Facility Assessment",
+      "reason_source": "Additional Wrok including \"test fit\" of the ideal building and yeard space at 3825 Mackintosh Street and",
+      "po": null,
+      "procurement_refs": [
+        "2024-0677"
+      ],
+      "contract_key": "contract:2024-0677",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 129210.35,
+      "amendment_value_source": 22308.48,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 151518.83,
+      "effective_cumulative_amendment_value": 22308.48,
+      "increase_pct_source": 17.3,
+      "derived_increase_pct": 17.2652,
+      "source_pct_delta": 0.0348,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-contract-21-237-1",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "21-237 (Nova Scotia Power),22-224 (Brycon Construction,23 259 (Brycon Construction) Burnside Business Park Phases 13-1 and 13-2",
+        "- $627,252.9 $3,147,000 $16,966,889",
+        "$405,112.12 $564,640.00 $4,307,187.86",
+        "64.6 17.9 25.3",
+        "Assorted cumulative change orders associated with power, lift station and development of 44 net acres of industrial lot inventory. The increase of $405,112.12 to Nova Scotia Power's contract is exempt from the application of the Procurement Policy."
+      ],
+      "source_group_size": 3,
+      "source_group_index": 1,
+      "name_source": "21-237 (Nova Scotia Power),22-224 (Brycon Construction,23 259 (Brycon Construction) Burnside Business Park Phases 13-1 and 13-2",
+      "reason_source": "Assorted cumulative change orders associated with power, lift station and development of 44 net acres of industrial lot inventory. The increase of $405,112.12 to Nova Scotia Power's contract is exempt from the application of the Procurement Policy.",
+      "po": null,
+      "procurement_refs": [
+        "21-237"
+      ],
+      "contract_key": "contract:21-237",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 627252.9,
+      "amendment_value_source": 405112.12,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 1032365.02,
+      "effective_cumulative_amendment_value": 405112.12,
+      "increase_pct_source": 64.6,
+      "derived_increase_pct": 64.5851,
+      "source_pct_delta": 0.0149,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-contract-22-224-2",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "21-237 (Nova Scotia Power),22-224 (Brycon Construction,23 259 (Brycon Construction) Burnside Business Park Phases 13-1 and 13-2",
+        "- $627,252.9 $3,147,000 $16,966,889",
+        "$405,112.12 $564,640.00 $4,307,187.86",
+        "64.6 17.9 25.3",
+        "Assorted cumulative change orders associated with power, lift station and development of 44 net acres of industrial lot inventory. The increase of $405,112.12 to Nova Scotia Power's contract is exempt from the application of the Procurement Policy."
+      ],
+      "source_group_size": 3,
+      "source_group_index": 2,
+      "name_source": "21-237 (Nova Scotia Power),22-224 (Brycon Construction,23 259 (Brycon Construction) Burnside Business Park Phases 13-1 and 13-2",
+      "reason_source": "Assorted cumulative change orders associated with power, lift station and development of 44 net acres of industrial lot inventory. The increase of $405,112.12 to Nova Scotia Power's contract is exempt from the application of the Procurement Policy.",
+      "po": null,
+      "procurement_refs": [
+        "22-224"
+      ],
+      "contract_key": "contract:22-224",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 3147000.0,
+      "amendment_value_source": 564640.0,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 3711640.0,
+      "effective_cumulative_amendment_value": 564640.0,
+      "increase_pct_source": 17.9,
+      "derived_increase_pct": 17.9422,
+      "source_pct_delta": -0.0422,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-contract-23-259-3",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r3",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 3
+        }
+      ],
+      "source_cells": [
+        "21-237 (Nova Scotia Power),22-224 (Brycon Construction,23 259 (Brycon Construction) Burnside Business Park Phases 13-1 and 13-2",
+        "- $627,252.9 $3,147,000 $16,966,889",
+        "$405,112.12 $564,640.00 $4,307,187.86",
+        "64.6 17.9 25.3",
+        "Assorted cumulative change orders associated with power, lift station and development of 44 net acres of industrial lot inventory. The increase of $405,112.12 to Nova Scotia Power's contract is exempt from the application of the Procurement Policy."
+      ],
+      "source_group_size": 3,
+      "source_group_index": 3,
+      "name_source": "21-237 (Nova Scotia Power),22-224 (Brycon Construction,23 259 (Brycon Construction) Burnside Business Park Phases 13-1 and 13-2",
+      "reason_source": "Assorted cumulative change orders associated with power, lift station and development of 44 net acres of industrial lot inventory. The increase of $405,112.12 to Nova Scotia Power's contract is exempt from the application of the Procurement Policy.",
+      "po": null,
+      "procurement_refs": [
+        "23-259"
+      ],
+      "contract_key": "contract:23-259",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "original_value": 16966889.0,
+      "amendment_value_source": 4307187.86,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 21274076.86,
+      "effective_cumulative_amendment_value": 4307187.86,
+      "increase_pct_source": 25.3,
+      "derived_increase_pct": 25.3858,
+      "source_pct_delta": -0.0858,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-po-2070887951",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r10",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 10
+        }
+      ],
+      "source_cells": [
+        "22-169, Increase to PO 2070887951 - Acadia Centre HVAC Upgrades",
+        "$ 981,049.00",
+        "$ 205,132.00",
+        "20.90",
+        "Changes to scope of work including $5,000 contingency for unforeseen conditions"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "22-169, Increase to PO 2070887951 - Acadia Centre HVAC Upgrades",
+      "reason_source": "Changes to scope of work including $5,000 contingency for unforeseen conditions",
+      "po": "2070887951",
+      "procurement_refs": [
+        "22-169"
+      ],
+      "contract_key": "po:2070887951",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 981049.0,
+      "amendment_value_source": 205132.0,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 1186181.0,
+      "effective_cumulative_amendment_value": 205132.0,
+      "increase_pct_source": 20.9,
+      "derived_increase_pct": 20.9095,
+      "source_pct_delta": -0.0095,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-po-2070915731",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r5",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 5
+        }
+      ],
+      "source_cells": [
+        "PO 2070915731, Alterney Combustible Refuse Storage Design Services",
+        "$ 18,487.00",
+        "$ 22,122.00",
+        "120.00",
+        "To include development of a bid package for the work"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "PO 2070915731, Alterney Combustible Refuse Storage Design Services",
+      "reason_source": "To include development of a bid package for the work",
+      "po": "2070915731",
+      "procurement_refs": [],
+      "contract_key": "po:2070915731",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 18487.0,
+      "amendment_value_source": 22122.0,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 40609.0,
+      "effective_cumulative_amendment_value": 22122.0,
+      "increase_pct_source": 120.0,
+      "derived_increase_pct": 119.6625,
+      "source_pct_delta": 0.3375,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-po-2070937269",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r2",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 2
+        }
+      ],
+      "source_cells": [
+        "Increase to Purchase Order 2070937269",
+        "$ 140,766.00",
+        "$ 42,102.00",
+        "30.0",
+        "The extent of the work was unknown at the time of the initial scoping exercise."
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "Increase to Purchase Order 2070937269",
+      "reason_source": "The extent of the work was unknown at the time of the initial scoping exercise.",
+      "po": "2070937269",
+      "procurement_refs": [],
+      "contract_key": "po:2070937269",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 140766.0,
+      "amendment_value_source": 42102.0,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 182868.0,
+      "effective_cumulative_amendment_value": 42102.0,
+      "increase_pct_source": 30.0,
+      "derived_increase_pct": 29.9092,
+      "source_pct_delta": 0.0908,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    },
+    {
+      "id": "2025-11-25-po-2070945290",
+      "report_date": "2025-11-25",
+      "source_id": "hrm-cao-contract-amendments-2025-11",
+      "source_schema": "original_cumulative_amendment",
+      "source_amount_semantics": "Source publishes Original PO Value and Cumulative Amendment(s) Value, without an explicit updated-value column. Updated value is derived as original plus cumulative amendments and is not represented as source-published.",
+      "source_row_id": "2025-11-25-p3-t1-r9",
+      "source_locations": [
+        {
+          "page": 3,
+          "table": 1,
+          "row": 9
+        }
+      ],
+      "source_cells": [
+        "PO 2070945290, IT Field Support Services",
+        "$ 24,717.00",
+        "$ 22,848.00",
+        "92.40",
+        "This is a temp staffing engagement. Additional time needed due to delays in full-time staffing"
+      ],
+      "source_group_size": 1,
+      "source_group_index": 1,
+      "name_source": "PO 2070945290, IT Field Support Services",
+      "reason_source": "This is a temp staffing engagement. Additional time needed due to delays in full-time staffing",
+      "po": "2070945290",
+      "procurement_refs": [],
+      "contract_key": "po:2070945290",
+      "contract_key_basis": "exact source PO number",
+      "original_value": 24717.0,
+      "amendment_value_source": 22848.0,
+      "updated_value_source": null,
+      "derived_amendment_value": null,
+      "derived_updated_value": 47565.0,
+      "effective_cumulative_amendment_value": 22848.0,
+      "increase_pct_source": 92.4,
+      "derived_increase_pct": 92.4384,
+      "source_pct_delta": -0.0384,
+      "source_arithmetic_delta": null,
+      "source_arithmetic_consistent": null,
+      "is_invoice_or_payment": false,
+      "is_final_paid_value": false,
+      "creates_wrongdoing_assertion": false
+    }
+  ],
+  "trajectories": [
+    {
+      "contract_key": "contract:21-302",
+      "contract_key_basis": "source procurement/contract reference; whitespace/hyphen normalized only",
+      "report_count": 2,
+      "observation_count": 2,
+      "first_report_date": "2023-11-15",
+      "last_report_date": "2025-05-21",
+      "original_value_stable": true,
+      "first_original_value": 185204.0,
+      "latest_total_value": 243324.0,
+      "latest_effective_cumulative_amendment_value": 58120.0,
+      "latest_increase_pct_source": 31.0,
+      "growth_from_first_original_pct": 31.3816,
+      "observation_ids": [
+        "2023-11-15-contract-21-302",
+        "2025-05-21-contract-21-302"
+      ],
+      "steps": [
+        {
+          "from_report_date": "2023-11-15",
+          "to_report_date": "2025-05-21",
+          "from_observation_id": "2023-11-15-contract-21-302",
+          "to_observation_id": "2025-05-21-contract-21-302",
+          "published_cumulative_amendment_delta": 23216.0,
+          "interpretation": "Change in published cumulative amendment between public reports; not necessarily one change order."
+        }
+      ],
+      "caveat": "Trajectory links use only the same exact PO or source procurement/contract reference after whitespace/hyphen normalization. They do not rely on fuzzy vendor or project-name matching."
+    }
+  ],
+  "caveats": [
+    "A contract amendment can reflect legitimate scope, schedule, site-condition, utility, market, safety or operational changes and is not evidence of corruption, waste or illegality.",
+    "This dataset is amendment-report evidence, not invoices, AP transactions or a final-paid-value ledger.",
+    "Private & Confidential amendment reports may be excluded from the public reporting sources.",
+    "Longitudinal trajectories use exact source identifiers only; vendor/project-name fuzzy matching is not used."
+  ]
+}
