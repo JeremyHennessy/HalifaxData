@@ -80,6 +80,16 @@ def source_heading(text: str, page_number: int) -> str:
     raise RuntimeError(f"budget page {page_number}: could not identify source business-unit heading")
 
 
+def parse_bucket(words: list[dict], *, percent: bool, bucket_name: str, page_number: int, heading: str, visual_row: list[dict]):
+    try:
+        return base.parse_numeric_words(words, percent=percent)
+    except RuntimeError as exc:
+        coordinates = [(str(word.get("text") or ""), round(float(word.get("x0") or 0), 1)) for word in visual_row]
+        raise RuntimeError(
+            f"budget page {page_number} ({heading}) failed {bucket_name}; visual row={coordinates}"
+        ) from exc
+
+
 def parse_service_area_page(page, page_number: int, heading: str, stable_retrieved_at: str) -> list[dict]:
     text = page.extract_text() or ""
     if "SERVICE AREA BUDGET OVERVIEW" not in text.upper():
@@ -104,12 +114,12 @@ def parse_service_area_page(page, page_number: int, heading: str, stable_retriev
         buckets = base.budget_buckets(visual_row)
         label = clean(" ".join(str(word.get("text") or "") for word in buckets["label"]))
         values = {
-            "prior_actual": base.parse_numeric_words(buckets["prior_actual"]),
-            "prior_budget": base.parse_numeric_words(buckets["prior_budget"]),
-            "projection": base.parse_numeric_words(buckets["projection"]),
-            "current_budget": base.parse_numeric_words(buckets["current_budget"]),
-            "source_delta": base.parse_numeric_words(buckets["source_delta"]),
-            "source_delta_pct": base.parse_numeric_words(buckets["source_delta_pct"], percent=True),
+            "prior_actual": parse_bucket(buckets["prior_actual"], percent=False, bucket_name="prior_actual", page_number=page_number, heading=heading, visual_row=visual_row),
+            "prior_budget": parse_bucket(buckets["prior_budget"], percent=False, bucket_name="prior_budget", page_number=page_number, heading=heading, visual_row=visual_row),
+            "projection": parse_bucket(buckets["projection"], percent=False, bucket_name="projection", page_number=page_number, heading=heading, visual_row=visual_row),
+            "current_budget": parse_bucket(buckets["current_budget"], percent=False, bucket_name="current_budget", page_number=page_number, heading=heading, visual_row=visual_row),
+            "source_delta": parse_bucket(buckets["source_delta"], percent=False, bucket_name="source_delta", page_number=page_number, heading=heading, visual_row=visual_row),
+            "source_delta_pct": parse_bucket(buckets["source_delta_pct"], percent=True, bucket_name="source_delta_pct", page_number=page_number, heading=heading, visual_row=visual_row),
         }
         has_financial_value = any(
             values[key] is not None
