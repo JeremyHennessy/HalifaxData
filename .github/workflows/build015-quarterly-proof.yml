@@ -52,18 +52,22 @@ jobs:
         run: |
           mkdir -p artifacts
           cp data/generated/spending.json artifacts/spending.json
-      - name: Publish reproduced dataset to Build 015 branch
+          cp data/generated/spending.json /tmp/build015-spending.json
+      - name: Publish reproduced dataset to latest Build 015 branch head
         if: github.event_name == 'push' && github.ref_name == 'agent/build-015-current-fiscal-refresh'
         run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B build015-publish "origin/$GITHUB_REF_NAME"
+          cp /tmp/build015-spending.json data/generated/spending.json
           if [ -z "$(git status --porcelain -- data/generated/spending.json)" ]; then
-            echo 'Checked quarterly artifact is already reproducible.'
+            echo 'Checked quarterly artifact is already reproducible on latest branch head.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/generated/spending.json
           git commit -m 'Build 015: publish refreshed quarterly series'
-          git push
+          git push origin HEAD:"$GITHUB_REF_NAME"
       - name: Upload proof artifact
         if: always()
         uses: actions/upload-artifact@v4
