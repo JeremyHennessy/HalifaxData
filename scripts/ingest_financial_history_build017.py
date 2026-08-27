@@ -3,7 +3,8 @@
 
 Build 017 changes only the configured official-source set. It deliberately reuses
 scripts/ingest_financial_history.py unchanged so the previously validated parsing
-semantics remain the control while source-year coverage expands from two to eight.
+semantics remain the control while released source-year coverage expands from two
+to seven (2019–2025). The official 2018 source remains an explicit parse gap.
 """
 from __future__ import annotations
 
