@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "build": "017",
+    "last_researched": "2026-08-27",
+    "scope": "Official Halifax Regional Municipality annual audited consolidated financial statements used to extend the conservative statement/schedule extraction to a contiguous 2018–2025 source-year series.",
+    "expected_source_years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+    "base_registry_source_ids": ["hrm-financials-2023", "hrm-financials-2025"],
+    "note": "Comparative prior-year values printed in each annual statement remain source-presented comparators. They are not de-duplicated into a synthetic restatement-free time series without explicit semantic reconciliation."
+  },
+  "sources": [
+    {
+      "id": "hrm-financials-2018",
+      "name": "Audited Consolidated Financial Statements — 2018",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Budgets & actuals",
+      "coverage": "Year ended Mar 31, 2018 with comparative 2017",
+      "ingestion": "Official Regional Council PDF attachment; heading-anchored statement/schedule extraction",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/180731rc1433.pdf"
+    },
+    {
+      "id": "hrm-financials-2019",
+      "name": "Audited Consolidated Financial Statements — 2019",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Budgets & actuals",
+      "coverage": "Year ended Mar 31, 2019 with comparative 2018",
+      "ingestion": "Official signed PDF; heading-anchored statement/schedule extraction",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/budget-finances/FS-March-31-2019-V7-Signed.pdf"
+    },
+    {
+      "id": "hrm-financials-2020",
+      "name": "Audited Consolidated Financial Statements — 2020",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Budgets & actuals",
+      "coverage": "Year ended Mar 31, 2020 with comparative 2019",
+      "ingestion": "Official Audit Committee PDF attachment; heading-anchored statement/schedule extraction",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/200819ac4.pdf"
+    },
+    {
+      "id": "hrm-financials-2021",
+      "name": "Audited Consolidated Financial Statements — 2021",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Budgets & actuals",
+      "coverage": "Year ended Mar 31, 2021 with comparative 2020",
+      "ingestion": "Official Regional Council PDF attachment; heading-anchored statement/schedule extraction",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/210817rc1161a.pdf"
+    },
+    {
+      "id": "hrm-financials-2022",
+      "name": "Audited Consolidated Financial Statements — 2022",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Budgets & actuals",
+      "coverage": "Year ended Mar 31, 2022 with comparative 2021",
+      "ingestion": "Official audited financial statements PDF; heading-anchored statement/schedule extraction",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/budget-finances/march-31-2022-audited-financial-statements.pdf"
+    },
+    {
+      "id": "hrm-financials-2024",
+      "name": "Audited Consolidated Financial Statements — 2024",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Budgets & actuals",
+      "coverage": "Year ended Mar 31, 2024 with comparative 2023",
+      "ingestion": "Official CAO-approved audited financial statements PDF; heading-anchored statement/schedule extraction",
+      "status": "ready",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/budget-finances/march-31-2024-audited-financial-statements-cao-approved.pdf"
+    }
+  ]
+}
