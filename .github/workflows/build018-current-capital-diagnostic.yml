@@ -1,0 +1,66 @@
+name: Build 018 Current Capital Diagnostic
+
+on:
+  push:
+    branches: ['agent/build-018-current-source-refresh']
+    paths:
+      - '.github/workflows/build018-current-capital-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Inspect revised 2026/27 capital schedule source
+        run: |
+          python - <<'PY'
+          import io, re, requests
+          import pdfplumber
+
+          url = 'https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4406'
+          referer = 'https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2dc5ed20-0349-47ab-89a0-a6d84e435b9a&lang=English'
+          response = requests.get(
+              url,
+              headers={
+                  'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)',
+                  'Referer': referer,
+              },
+              timeout=180,
+          )
+          response.raise_for_status()
+          if not response.content.startswith(b'%PDF'):
+              raise SystemExit(f'capital source is not PDF: {response.headers.get("content-type")!r}')
+
+          with pdfplumber.open(io.BytesIO(response.content)) as pdf:
+              print(f'pdf_pages={len(pdf.pages)}')
+              relevant_pages = 0
+              relevant_tables = 0
+              for page_number, page in enumerate(pdf.pages, 1):
+                  text = re.sub(r'\s+', ' ', page.extract_text() or '').strip()
+                  if not any(token in text.lower() for token in ('attachment 1', 'attachment 2', 'capital multi-year', 'capital plan')):
+                      continue
+                  relevant_pages += 1
+                  print(f'PAGE {page_number}: {text[:600]}')
+                  for table_number, table in enumerate(page.extract_tables() or [], 1):
+                      normalized = [
+                          [re.sub(r'\s+', ' ', str(cell or '')).strip() for cell in (row or [])]
+                          for row in (table or [])
+                      ]
+                      joined = ' | '.join(' | '.join(row) for row in normalized[:4]).lower()
+                      if not any(token in joined for token in ('project', '2026/27', '2027/28', 'grand total')):
+                          continue
+                      relevant_tables += 1
+                      print(f'  TABLE {table_number} rows={len(normalized)}')
+                      for row in normalized[:8]:
+                          print('   ', row)
+              print(f'relevant_pages={relevant_pages}')
+              print(f'relevant_tables={relevant_tables}')
+          PY
