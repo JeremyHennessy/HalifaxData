@@ -7,6 +7,7 @@ on:
       - 'data/current_budget_sources.json'
       - 'data/generated/current_budget_2026_27.json'
       - 'scripts/ingest_current_budget_build018.py'
+      - 'scripts/ingest_current_budget_build018_v2.py'
       - 'scripts/validate_current_budget_build018.py'
       - '.github/workflows/build018-current-budget-proof.yml'
   pull_request:
@@ -14,6 +15,7 @@ on:
       - 'data/current_budget_sources.json'
       - 'data/generated/current_budget_2026_27.json'
       - 'scripts/ingest_current_budget_build018.py'
+      - 'scripts/ingest_current_budget_build018_v2.py'
       - 'scripts/validate_current_budget_build018.py'
       - '.github/workflows/build018-current-budget-proof.yml'
 
@@ -32,9 +34,9 @@ jobs:
       - name: Install collector dependencies
         run: python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate Build 018 Python syntax
-        run: python -m compileall -q scripts/ingest_current_budget_build018.py scripts/validate_current_budget_build018.py
+        run: python -m compileall -q scripts/ingest_current_budget_build018.py scripts/ingest_current_budget_build018_v2.py scripts/validate_current_budget_build018.py
       - name: Reproduce ratified 2026/27 current budget
-        run: python scripts/ingest_current_budget_build018.py
+        run: python scripts/ingest_current_budget_build018_v2.py
       - name: Validate current-budget evidence contract
         run: python scripts/validate_current_budget_build018.py
       - name: Verify March 31 approval source remains live
