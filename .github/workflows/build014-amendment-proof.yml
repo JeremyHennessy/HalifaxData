@@ -1,3 +1,4 @@
+# Build 014 release gate: live-source reproduction is required on the exact release head.
 name: Build 014 CAO Amendment Series Proof
 
 on:
