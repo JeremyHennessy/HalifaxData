@@ -6,6 +6,7 @@ on:
     paths:
       - 'data/current_budget_sources.json'
       - 'data/generated/current_budget_2026_27.json'
+      - 'data/current_source_refresh_status.json'
       - 'scripts/ingest_current_budget_build018.py'
       - 'scripts/ingest_current_budget_build018_v2.py'
       - 'scripts/validate_current_budget_build018.py'
@@ -23,6 +24,7 @@ on:
     paths:
       - 'data/current_budget_sources.json'
       - 'data/generated/current_budget_2026_27.json'
+      - 'data/current_source_refresh_status.json'
       - 'scripts/ingest_current_budget_build018.py'
       - 'scripts/ingest_current_budget_build018_v2.py'
       - 'scripts/validate_current_budget_build018.py'
