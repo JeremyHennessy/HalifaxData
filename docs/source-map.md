@@ -1,6 +1,6 @@
 # Source map — current HalifaxData coverage
 
-Research date: 2026-08-26. This document records the official/public-body source universe and current ingestion status. It is a discovery and coverage map, not a claim that every Halifax financial dataset is already ingested.
+Research date: 2026-08-27. This document records the official/public-body source universe and current ingestion status. It is a discovery and coverage map, not a claim that every Halifax financial dataset is already ingested.
 
 ## Priority 1 — machine or repeatably extractable
 
@@ -10,7 +10,7 @@ Research date: 2026-08-26. This document records the official/public-body source
 4. **HRM capital project ArcGIS service** — project number, name, category, budget year, location/work descriptions and geometry. Service metadata currently appears historical (data last edited 2022; budget year types through 2021), so it must not be treated as the current capital universe.
 5. **Nova Scotia public tender notices** — tender discovery and awards for HRM procurements.
 6. **Nova Scotia alternative procurement award notices** — entity/vendor/procurement-circumstance discovery for non-competitive awards.
-7. **HRM eSCRIBE** — Council/committee agenda reports, recommendations, minutes and decisions; essential for post-budget amendments and contract increases.
+7. **HRM Council approved minutes and eSCRIBE** — modern eSCRIBE calendar/agenda/minutes coverage plus Build 016 semantic decision extraction from approved Regional Council minutes. The Build 016 source proof validates 986 motion outcomes: 812 from the checked modern posted-minutes window and 174 from a seven-meeting pre-2024 legacy seed. The legacy set is explicitly incomplete and must not be represented as a complete historical archive. Agenda presence remains distinct from approval; motion/result evidence comes from approved minutes.
 8. **HRM quarterly financial reports (extracted through Q3 2025/26)** — Build 015 validates 1,753 conservative source-table rows across eight official reports: 2023/24 Q1–Q3, 2024/25 Q2–Q3 and 2025/26 Q1–Q3. The original five-report Build 005 baseline reproduces exactly at 1,094 rows; Build 015 adds 190 Q1, 232 Q2 and 237 Q3 2025/26 rows. These are quarterly financial-summary facts, not invoices, accounts-payable transactions or vendor-payment records. The absent 2024/25 Q1 report remains an explicit source-coverage gap and is not imputed.
 
 ## Priority 2 — structured PDFs
@@ -18,8 +18,9 @@ Research date: 2026-08-26. This document records the official/public-body source
 - Annual approved Budget & Business Plan beyond the currently extracted 2025/26 service-area layer.
 - Annual Capital Plan and detailed project work plans.
 - Additional quarterly financial/capital reporting outside the currently checked eight-report series, including the unresolved 2024/25 Q1 gap and future quarters as published.
-- Audited consolidated financial statements beyond the currently extracted Statement of Operations layer.
+- Audited consolidated financial statements beyond the currently extracted two-source longitudinal statement layer.
 - Procurement award / alternative procurement reports beyond the currently normalized public-tender and alternative-procurement series.
+- Complete pre-2024 Regional Council approved-minutes archive enumeration beyond the current seven-meeting Build 016 legacy seed.
 - Halifax Water annual business plans, financial statements and regulatory submissions.
 - Nova Scotia municipal financial condition indicators.
 
@@ -57,6 +58,13 @@ The validator fails any unexplained arithmetic mismatch. Only explicitly tagged 
 - The initially indexed eSCRIBE item attachment for the 2025/26 Q3 report returned 404 during source proof. The official HRM static staff-report PDF at `260225afsc1313.pdf` was independently probed and returned a valid PDF, so the stable HRM-hosted staff-report source is used instead.
 - Source wording such as **spent or committed** is retained as source context and is not converted into evidence of a cash payment.
 
+### Council decision evidence — Build 016
+
+- The checked modern eSCRIBE calendar does not expose pre-2024 meetings, but official older approved minutes remain retrievable from Halifax.ca / legacycontent. Build 016 therefore treats the modern window as an eSCRIBE coverage boundary rather than the beginning of Council history.
+- The current pre-2024 decision layer is an explicit seven-meeting **legacy seed**, not a complete archive.
+- Build 016 validates 986 motion/result records, including 960 passed/passed-unanimously motions, 291 fiscal-relevant screening records and 78 records containing source-text dollar mentions.
+- A dollar amount in an approved motion remains Council decision text. It is not converted into evidence of an invoice, cash payment, final project cost or final paid contract value.
+
 ## Label normalization provenance — Build 004
 
 The current budget table exposes three shortened/typo service-area labels. HalifaxData retains every raw label and uses a canonical label only where official HRM budget evidence independently establishes the complete form:
@@ -84,10 +92,11 @@ These are screening tests only; each requires provenance before any conclusion.
 
 ## Known gaps
 
-- **No complete public transaction-level accounts-payable/vendor-payment ledger has been verified.** Quarterly financial reports, tender awards and amendment reports do not close this gap.
+- **No complete public transaction-level accounts-payable/vendor-payment ledger has been verified.** Quarterly financial reports, tender awards, Council decisions and amendment reports do not close this gap.
 - Public procurement information remains fragmented between HRM reports/eSCRIBE and the provincial tender system.
 - The located HRM capital ArcGIS service is historical and cannot stand in for current capital plans.
 - The checked quarterly financial series has an explicit 2024/25 Q1 source gap.
+- Pre-2024 Council decision coverage is still incomplete; Build 016 currently proves the legacy approved-minutes path with seven source meetings rather than claiming a complete historical archive.
 - HalifaxData does not claim a service-area-to-PSAS reconciliation crosswalk; those source classifications remain separate until explicit reconciliation evidence is collected.
 - A final, reliably retrievable 2026/27 Budget & Business Plan PDF has not yet been verified for ingestion; current budget-book coverage is 2025/26.
 - A 2025/26 (year ended March 31, 2026) HRM Statement of Compensation was not located in the initial web search; absence from search results is not proof that it has not been published.

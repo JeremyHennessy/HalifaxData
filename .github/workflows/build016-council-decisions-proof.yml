@@ -1,0 +1,81 @@
+name: Build 016 Council Decision Proof
+
+on:
+  push:
+    branches: ['agent/build-016-council-approval-graph', main]
+    paths:
+      - 'data/council_decision_sources.json'
+      - 'data/generated/council.json'
+      - 'data/generated/council_decisions.json'
+      - 'scripts/ingest_council_decisions.py'
+      - 'scripts/validate_council_decisions.py'
+      - '.github/workflows/build016-council-decisions-proof.yml'
+  pull_request:
+    paths:
+      - 'data/council_decision_sources.json'
+      - 'data/generated/council.json'
+      - 'data/generated/council_decisions.json'
+      - 'scripts/ingest_council_decisions.py'
+      - 'scripts/validate_council_decisions.py'
+      - '.github/workflows/build016-council-decisions-proof.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Python syntax
+        run: python -m compileall -q scripts/ingest_council_decisions.py scripts/validate_council_decisions.py
+      - name: Reproduce Council decision evidence from approved minutes
+        run: python scripts/ingest_council_decisions.py
+      - name: Normalize checked-artifact generation timestamp
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          registry = json.loads(Path('data/council_decision_sources.json').read_text(encoding='utf-8'))
+          path = Path('data/generated/council_decisions.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          data['metadata']['generated_at'] = registry['metadata']['last_researched'] + 'T00:00:00Z'
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          PY
+      - name: Validate reproduced Council decision controls
+        run: python scripts/validate_council_decisions.py
+      - name: Copy proof artifact
+        run: |
+          mkdir -p artifacts
+          cp data/generated/council_decisions.json artifacts/council_decisions.json
+          cp data/generated/council_decisions.json /tmp/build016-council-decisions.json
+      - name: Publish reproduced Council decisions to latest Build 016 branch head
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-016-council-approval-graph'
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B build016-publish "origin/$GITHUB_REF_NAME"
+          cp /tmp/build016-council-decisions.json data/generated/council_decisions.json
+          python scripts/validate_council_decisions.py
+          if [ -z "$(git status --porcelain -- data/generated/council_decisions.json)" ]; then
+            echo 'Checked Council decision artifact is already reproducible on latest branch head.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/council_decisions.json
+          git commit -m 'Build 016: publish Council decision evidence'
+          git push origin HEAD:"$GITHUB_REF_NAME"
+      - name: Upload proof artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build016-council-decisions-${{ github.sha }}
+          path: artifacts/council_decisions.json
+          if-no-files-found: warn
+          retention-days: 14
