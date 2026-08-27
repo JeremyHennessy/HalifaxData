@@ -6,7 +6,7 @@ Research date: 2026-08-27. This document records the official/public-body source
 
 1. **HRM annual Statements of Compensation (2016–2025 located and extracted)** — employee/person name, business unit where applicable, position, salary/wages, other benefits and total. The configured statements include HRM plus Halifax Water and Halifax Public Libraries sections. Build 003 validates 10,228 threshold-disclosure rows across the ten statements. The 2025 Library/Water pages require a narrowly scoped text-layer fallback because their PDF table structure collapses under the normal extractor.
 2. **2025/26 HRM Budget & Business Plan service-area overviews (extracted)** — Build 004 extracts 104 rows from 18 business-unit service-area overview tables: 86 detail rows plus 18 Net Totals. Each row retains 2023/24 actual, 2024/25 budget, 2024/25 projection, 2025/26 budget, source-published change columns, independently derived change arithmetic, raw source label and PDF page locator.
-3. **March 31, 2025 audited consolidated Statement of Operations (extracted)** — Build 004 extracts 20 PSAS revenue/expense/surplus rows from PDF page 8 / printed page 4. The source publishes in $000s; HalifaxData converts to CAD while retaining source-unit provenance. These rows are not force-joined to budget-book business units.
+3. **HRM audited consolidated financial statements (2019–2025 released source-year series)** — Build 017 extends the established conservative statement/schedule parser to seven released annual source years and 1,243 normalized facts. The parser remains `build005-financials-v4`; source-presented prior-year comparators remain attached to their source-year statement rather than being collapsed into synthetic time-series rows. The official 2018 Council attachment is separately registered as an explicit parser gap because the established parser finds zero eligible statement pages. Audited PSAS classifications are not force-joined to budget-book business units without an explicit reconciliation source.
 4. **HRM capital project ArcGIS service** — project number, name, category, budget year, location/work descriptions and geometry. Service metadata currently appears historical (data last edited 2022; budget year types through 2021), so it must not be treated as the current capital universe.
 5. **Nova Scotia public tender notices** — tender discovery and awards for HRM procurements.
 6. **Nova Scotia alternative procurement award notices** — entity/vendor/procurement-circumstance discovery for non-competitive awards.
@@ -18,7 +18,7 @@ Research date: 2026-08-27. This document records the official/public-body source
 - Annual approved Budget & Business Plan beyond the currently extracted 2025/26 service-area layer.
 - Annual Capital Plan and detailed project work plans.
 - Additional quarterly financial/capital reporting outside the currently checked eight-report series, including the unresolved 2024/25 Q1 gap and future quarters as published.
-- Audited consolidated financial statements beyond the currently extracted two-source longitudinal statement layer.
+- Audited consolidated financial statements outside the released 2019–2025 source-year series, including resolution of the documented 2018 parser gap only if a defensible extraction path can preserve the established semantics.
 - Procurement award / alternative procurement reports beyond the currently normalized public-tender and alternative-procurement series.
 - Complete pre-2024 Regional Council approved-minutes archive enumeration beyond the current seven-meeting Build 016 legacy seed.
 - Halifax Water annual business plans, financial statements and regulatory submissions.
@@ -65,6 +65,12 @@ The validator fails any unexplained arithmetic mismatch. Only explicitly tagged 
 - Build 016 validates 986 motion/result records, including 960 passed/passed-unanimously motions, 291 fiscal-relevant screening records and 78 records containing source-text dollar mentions.
 - A dollar amount in an approved motion remains Council decision text. It is not converted into evidence of an invoice, cash payment, final project cost or final paid contract value.
 
+### Audited financial statements — Build 017
+
+- The official `hrm-financials-2018` Council attachment is located and fetchable, but the established heading-anchored parser finds **zero eligible statement pages** in that source format.
+- HalifaxData therefore releases audited source-year rows for **2019–2025**, not 2018–2025. The 2018 source remains registered as `research-parse-gap` rather than being hidden or synthetically filled.
+- HRM-published 2018 comparator values inside the 2019 statement remain prior-year comparator values belonging to the 2019 source. They are not relabelled as a successful 2018 extraction.
+
 ## Label normalization provenance — Build 004
 
 The current budget table exposes three shortened/typo service-area labels. HalifaxData retains every raw label and uses a canonical label only where official HRM budget evidence independently establishes the complete form:
@@ -97,6 +103,7 @@ These are screening tests only; each requires provenance before any conclusion.
 - The located HRM capital ArcGIS service is historical and cannot stand in for current capital plans.
 - The checked quarterly financial series has an explicit 2024/25 Q1 source gap.
 - Pre-2024 Council decision coverage is still incomplete; Build 016 currently proves the legacy approved-minutes path with seven source meetings rather than claiming a complete historical archive.
+- The official 2018 audited-financial source remains an explicit parser gap; no 2018 source-year rows are released under the established parser semantics.
 - HalifaxData does not claim a service-area-to-PSAS reconciliation crosswalk; those source classifications remain separate until explicit reconciliation evidence is collected.
 - A final, reliably retrievable 2026/27 Budget & Business Plan PDF has not yet been verified for ingestion; current budget-book coverage is 2025/26.
 - A 2025/26 (year ended March 31, 2026) HRM Statement of Compensation was not located in the initial web search; absence from search results is not proof that it has not been published.
