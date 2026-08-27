@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "build": "018",
+    "last_researched": "2026-08-27",
+    "scope": "Official HRM current-fiscal budget evidence for the ratified 2026/27 municipal budget.",
+    "principle": "The March 25 staff package is the financial table source; the March 31 Regional Council record is separate approval evidence. A budget authorization is not evidence of a payment, invoice, commitment or final cost."
+  },
+  "budget_source": {
+    "id": "hrm-budget-2026-27-final-package",
+    "name": "Proposed 2026/27 Budget — final post-BAL staff package",
+    "publisher": "Halifax Regional Municipality",
+    "category": "Budgets & actuals",
+    "fiscal_year": "2026/27",
+    "source_stage": "final_staff_package_after_budget_adjustment_list",
+    "coverage": "March 25, 2026 final Budget Committee package containing the budget after business-unit presentations and Budget Adjustment List deliberations.",
+    "ingestion": "Official eSCRIBE PDF service-area budget tables",
+    "status": "ready-ratified-source-package",
+    "url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4584",
+    "document_id": "4584",
+    "staff_report_date": "2026-03-25",
+    "published_controls": {
+      "municipal_expenditures": 1211700000,
+      "gross_capital_spending": 331500000,
+      "residential_municipal_tax_rate_prior": 0.770,
+      "residential_municipal_tax_rate_current": 0.798,
+      "halifax_regional_police_net_budget": 102182400
+    }
+  },
+  "approval_source": {
+    "id": "hrm-council-2026-03-31-budget-ratification",
+    "name": "Regional Council — Ratification from Budget Committee, Proposed 2026/27 Budget",
+    "publisher": "Halifax Regional Municipality",
+    "category": "Council decisions",
+    "meeting_date": "2026-03-31",
+    "meeting_id": "2b525638-79db-4d72-8db3-9b4bde75cc13",
+    "status": "approved",
+    "url": "https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2b525638-79db-4d72-8db3-9b4bde75cc13&lang=English",
+    "approval_text": "Regional Council adopted the Resolution for Approval of Operating Budgets, Capital Plan and Tax Rates for Fiscal 2026/27 as set out in Schedule 1 of the March 25, 2026 staff report.",
+    "interpretation_boundary": "Council approval establishes budget authority. It does not establish that an authorized amount was spent or paid."
+  }
+}
