@@ -6,22 +6,26 @@ Build 015 refreshes HalifaxData's quarterly financial-report evidence through th
 
 The checked source set is moved into `data/quarterly_financial_sources.json` so fiscal-year, quarter and period-end semantics are explicit source metadata rather than inferred from source IDs.
 
-The identified public set contains eight official HRM quarterly financial reports:
+The identified public set contains eight official HRM quarterly financial reports and **1,753 validated conservative summary rows**:
 
-- 2023/24 Q1 — period ended June 30, 2023
-- 2023/24 Q2 — period ended September 30, 2023
-- 2023/24 Q3 — period ended December 31, 2023
-- 2024/25 Q2 — period ended September 30, 2024
-- 2024/25 Q3 — period ended December 31, 2024
-- 2025/26 Q1 — period ended June 30, 2025
-- 2025/26 Q2 — period ended September 30, 2025
-- 2025/26 Q3 — period ended December 31, 2025
+- 2023/24 Q1 — period ended June 30, 2023 — 346 rows
+- 2023/24 Q2 — period ended September 30, 2023 — 135 rows
+- 2023/24 Q3 — period ended December 31, 2023 — 166 rows
+- 2024/25 Q2 — period ended September 30, 2024 — 195 rows
+- 2024/25 Q3 — period ended December 31, 2024 — 252 rows
+- 2025/26 Q1 — period ended June 30, 2025 — 190 rows
+- 2025/26 Q2 — period ended September 30, 2025 — 232 rows
+- 2025/26 Q3 — period ended December 31, 2025 — 237 rows
 
-The missing 2024/25 Q1 report is an explicit coverage gap in this checked series. It is not imputed, synthesized or treated as zero.
+The original five-report Build 005 baseline therefore reproduces **exactly 1,094 rows**, while the three 2025/26 reports add **659 rows**. The missing 2024/25 Q1 report is an explicit coverage gap in this checked series. It is not imputed, synthesized or treated as zero.
+
+### Q3 source resolution
+
+The Q3 2025/26 report was indexed through an eSCRIBE item attachment whose `DocumentId=4479` endpoint returned HTTP 404 during the network proof, even after session/referer probing. A temporary source probe independently confirmed that HRM's stable staff-report PDF at `260225afsc1313.pdf` returns a valid official PDF (about 2.19 MB), while the compiled eSCRIBE agenda/minutes remain separately accessible. Build 015 therefore uses the stable HRM-hosted staff-report PDF rather than the stale item-attachment URL. The temporary probe workflow was removed after resolution.
 
 ## Parser continuity
 
-`scripts/ingest_quarterly_spending.py` retains the Build 005 conservative table-classification semantics for the previously released five reports. Build 015 changes source configuration and adds new reports; it does not intentionally broaden the historical extraction definition.
+`scripts/ingest_quarterly_spending.py` retains the Build 005 conservative table-classification semantics for the previously released five reports. Build 015 changes source configuration and adds new reports; it does not intentionally broaden the historical extraction definition. The exact historical row-count reproduction above is a regression control on this boundary.
 
 The Build 015 parser:
 
@@ -82,7 +86,8 @@ Sources & Evidence adds the Build 015 quarterly source timeline while retaining 
 ## Validation and release gates
 
 - `python scripts/validate_spending.py` independently validates source registry membership, quarter/fiscal/date alignment, tokenizer output, provenance, source counts, current 2025/26 Q1-Q3 presence and the no-payment/no-vendor-field boundary.
-- `.github/workflows/build015-quarterly-proof.yml` re-fetches every official source, reproduces `data/generated/spending.json`, validates it and publishes the exact reproducible artifact on the Build 015 branch.
+- `.github/workflows/build015-quarterly-proof.yml` re-fetches every official source, reproduces `data/generated/spending.json`, validates it and publishes the exact reproducible artifact onto the latest Build 015 branch head.
+- The first complete eight-report network proof validated all **1,753** rows before its original publish step encountered a non-fast-forward race; the workflow was then hardened to publish onto the latest remote branch head rather than discarding concurrent UI/documentation commits.
 - `tools/build015-ui-smoke.mjs` verifies desktop/mobile current-fiscal coverage, source drawers, the explicit 2024/25 Q1 gap and no horizontal overflow.
 - CI checks Build 015 JavaScript/Python syntax and the expanded spending validator.
 - Pages hosted verification runs the Build 015 browser gate against the deployed application before release is considered complete.
