@@ -46,8 +46,20 @@ jobs:
         run: |
           python -m http.server 8000 --bind 127.0.0.1 > /tmp/halifaxdata-http.log 2>&1 &
           echo $! > /tmp/halifaxdata-http.pid
-          sleep 2
-          curl --fail --silent http://127.0.0.1:8000/ > /dev/null
+          for attempt in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:8000/ > /dev/null; then
+              exit 0
+            fi
+            if ! kill -0 "$(cat /tmp/halifaxdata-http.pid)" 2>/dev/null; then
+              echo "Static server exited before becoming ready." >&2
+              cat /tmp/halifaxdata-http.log >&2
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "Static server did not become ready within 20 seconds." >&2
+          cat /tmp/halifaxdata-http.log >&2
+          exit 1
       - name: Validate Build 010 startup ordering
         run: node tools/build010-startup-race.mjs
       - name: Capture and validate dashboard views
