@@ -12,11 +12,13 @@ Research date: 2026-08-27. This document records the official/public-body source
 6. **Nova Scotia alternative procurement award notices** — entity/vendor/procurement-circumstance discovery for non-competitive awards.
 7. **HRM Council approved minutes and eSCRIBE** — modern eSCRIBE calendar/agenda/minutes coverage plus Build 016 semantic decision extraction from approved Regional Council minutes. The Build 016 source proof validates 986 motion outcomes: 812 from the checked modern posted-minutes window and 174 from a seven-meeting pre-2024 legacy seed. The legacy set is explicitly incomplete and must not be represented as a complete historical archive. Agenda presence remains distinct from approval; motion/result evidence comes from approved minutes.
 8. **HRM quarterly financial reports (extracted through Q3 2025/26)** — Build 015 validates 1,753 conservative source-table rows across eight official reports: 2023/24 Q1–Q3, 2024/25 Q2–Q3 and 2025/26 Q1–Q3. The original five-report Build 005 baseline reproduces exactly at 1,094 rows; Build 015 adds 190 Q1, 232 Q2 and 237 Q3 2025/26 rows. These are quarterly financial-summary facts, not invoices, accounts-payable transactions or vendor-payment records. The absent 2024/25 Q1 report remains an explicit source-coverage gap and is not imputed.
+9. **Ratified-current 2026/27 HRM service-area budget authority (Build 018)** — the final March 25, 2026 post-Budget-Adjustment-List staff package plus separate March 31 Regional Council ratification evidence. Build 018 validates 105 source rows across 20 service-area overview pages and 20 Net Totals. The final package controls $1.2117B of municipal expenditures and $331.5M of gross capital spending. Budget authority remains distinct from payments, commitments and final actuals.
+10. **Approved-current 2026/27 Capital Multi-Year Projects schedule (Build 018)** — Attachment 2 of the revised March 3 capital report resolves from the owning eSCRIBE agenda by exact visible title after its previously indexed filestream URL began returning 404. The checked schedule contains 52 identified rows: 29 discrete projects and 23 ongoing programs, with exact project account IDs and fiscal-year cashflow/budget columns. The 2026/27 scheduled amount across those rows is $196.656M. This is a multi-year capital budget/cashflow schedule, not a complete capital-project ledger or project spend-to-date source.
 
 ## Priority 2 — structured PDFs
 
-- Annual approved Budget & Business Plan beyond the currently extracted 2025/26 service-area layer.
-- Annual Capital Plan and detailed project work plans.
+- Standalone/final published Budget & Business Plan books beyond the currently extracted source layers, including a separately published 2026/27 budget book if HRM exposes one with useful additional structure beyond the verified final March 25 package.
+- Annual Capital Plan detailed project work plans beyond the current Build 018 multi-year schedule; the Build 018 Attachment 2 layer does not replace project-sheet evidence or establish spend-to-date.
 - Additional quarterly financial/capital reporting outside the currently checked eight-report series, including the unresolved 2024/25 Q1 gap and future quarters as published.
 - Audited consolidated financial statements outside the released 2019–2025 source-year series, including resolution of the documented 2018 parser gap only if a defensible extraction path can preserve the established semantics.
 - Procurement award / alternative procurement reports beyond the currently normalized public-tender and alternative-procurement series.
@@ -71,15 +73,34 @@ The validator fails any unexplained arithmetic mismatch. Only explicitly tagged 
 - HalifaxData therefore releases audited source-year rows for **2019–2025**, not 2018–2025. The 2018 source remains registered as `research-parse-gap` rather than being hidden or synthetically filled.
 - HRM-published 2018 comparator values inside the 2019 statement remain prior-year comparator values belonging to the 2019 source. They are not relabelled as a successful 2018 extraction.
 
+### 2026/27 final budget package — Build 018
+
+Build 018 independently recalculates the budget change from the printed 2025/26 and 2026/27 endpoints. Exactly one checked row has a source-published percentage discrepancy:
+
+- **Parks & Recreation — Strategic Planning and Design:** the source prints $3,922,100 for the 2025/26 budget, $4,255,900 for the 2026/27 budget, a $333,800 increase and an 8.9% increase. The endpoint arithmetic yields approximately 8.5107%. HalifaxData retains the printed 8.9% and the independently derived value and tags the row as a source-data review item.
+
+No other Build 018 current-budget arithmetic discrepancy is accepted by the validator.
+
+### 2026/27 Capital Multi-Year Projects — Build 018
+
+All 52 project/program rows independently reconcile to their own printed Grand Total. The source control rows contain two underlying defects represented by four exact field-level mismatches:
+
+- the 29 discrete project rows sum to **$207,710,979** of previous-years gross budget and **$1,014,838,979** Grand Total, while the printed discrete subtotal is one dollar lower at **$207,710,978** and **$1,014,838,978**;
+- the final Grand Total row repeats the printed discrete previous-years subtotal (**$207,710,978**) rather than discrete plus ongoing previous-years rows (**$672,458,424**), a difference of **-$464,747,446** after the discrete subtotal's one-dollar defect;
+- the same one-dollar defect carries into the final source schedule Grand Total: project/program rows compute to **$2,152,999,431** while the source prints **$2,152,999,430**;
+- all other fiscal-year control columns reconcile, and the 23 ongoing-program rows reconcile numerically to their source subtotal.
+
+The previously indexed `DocumentId=4406` attachment returns 404. The collector re-reads the owning March 3 agenda and requires one unique exact-title link, currently resolving the official report to `DocumentId=4622`. The source rows and source controls are preserved rather than rewritten.
+
 ## Label normalization provenance — Build 004
 
-The current budget table exposes three shortened/typo service-area labels. HalifaxData retains every raw label and uses a canonical label only where official HRM budget evidence independently establishes the complete form:
+The 2025/26 budget table exposes three shortened/typo service-area labels. HalifaxData retains every raw label and uses a canonical label only where official HRM budget evidence independently establishes the complete form:
 
 - `Infrastructure Maintenance & Operatons` → `Infrastructure Maintenance & Operations` — complete heading appears elsewhere in the same 2025/26 budget book.
 - `Government Relations & Externa` → `Government Relations & External Affairs` — complete heading appears elsewhere in the same 2025/26 budget book.
 - `Information Technology/Collecti` → `Information Technology/Collections` — complete service-area label appears in prior official HRM Budget & Business Plans.
 
-No general fuzzy label cleanup is permitted by the Build 004 contract.
+No general fuzzy label cleanup is permitted by the Build 004 contract. Build 018 likewise retains current source headings rather than force-mapping them onto the prior-year organization taxonomy.
 
 ## Planned analytical tests
 
@@ -98,12 +119,13 @@ These are screening tests only; each requires provenance before any conclusion.
 
 ## Known gaps
 
-- **No complete public transaction-level accounts-payable/vendor-payment ledger has been verified.** Quarterly financial reports, tender awards, Council decisions and amendment reports do not close this gap.
+- **No complete public transaction-level accounts-payable/vendor-payment ledger has been verified.** Quarterly financial reports, tender awards, Council decisions, amendment reports and Build 018 budget/capital schedules do not close this gap.
 - Public procurement information remains fragmented between HRM reports/eSCRIBE and the provincial tender system.
-- The located HRM capital ArcGIS service is historical and cannot stand in for current capital plans.
-- The checked quarterly financial series has an explicit 2024/25 Q1 source gap.
+- The located HRM capital ArcGIS service is historical and cannot stand in for current capital plans. Build 018 adds an approved-current multi-year schedule but not a complete current project-sheet universe, spend-to-date ledger or final-cost source.
+- The checked quarterly financial series has an explicit 2024/25 Q1 source gap. A 2025/26 Q4/year-end quarterly report was not verified during the August 27 Build 018 refresh and is not treated as zero activity.
 - Pre-2024 Council decision coverage is still incomplete; Build 016 currently proves the legacy approved-minutes path with seven source meetings rather than claiming a complete historical archive.
 - The official 2018 audited-financial source remains an explicit parser gap; no 2018 source-year rows are released under the established parser semantics.
 - HalifaxData does not claim a service-area-to-PSAS reconciliation crosswalk; those source classifications remain separate until explicit reconciliation evidence is collected.
-- A final, reliably retrievable 2026/27 Budget & Business Plan PDF has not yet been verified for ingestion; current budget-book coverage is 2025/26.
-- A 2025/26 (year ended March 31, 2026) HRM Statement of Compensation was not located in the initial web search; absence from search results is not proof that it has not been published.
+- Build 018 verifies the final March 25 staff budget package and March 31 ratification for current 2026/27 service-area authority. A separately published final standalone 2026/27 Budget & Business Plan book may still provide additional structure and should be treated as a separate source-discovery task if located.
+- A 2025/26 (year ended March 31, 2026) HRM Statement of Compensation was not verified during the August 27 Build 018 refresh; absence from the checked search is not proof that it has not been published.
+- A 2026 CAO contract-amendment report was not verified during the August 27 Build 018 refresh; the current checked public amendment series ends November 25, 2025 and absence is not treated as zero amendment activity.

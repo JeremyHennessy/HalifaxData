@@ -1,0 +1,117 @@
+name: Build 018 Current Budget Proof
+
+on:
+  push:
+    branches: ['agent/build-018-current-source-refresh', main]
+    paths:
+      - 'data/current_budget_sources.json'
+      - 'data/generated/current_budget_2026_27.json'
+      - 'data/current_source_refresh_status.json'
+      - 'scripts/ingest_current_budget_build018.py'
+      - 'scripts/ingest_current_budget_build018_v2.py'
+      - 'scripts/validate_current_budget_build018.py'
+      - 'build018-current-source-refresh.js'
+      - 'tools/build018-ui-smoke.mjs'
+      - 'index.html'
+      - 'docs/build018-current-source-refresh.md'
+      - 'docs/source-map.md'
+      - '.github/workflows/build018-current-budget-proof.yml'
+      - '.github/workflows/build018-current-capital-proof.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/ui-smoke.yml'
+      - '.github/workflows/pages.yml'
+  pull_request:
+    paths:
+      - 'data/current_budget_sources.json'
+      - 'data/generated/current_budget_2026_27.json'
+      - 'data/current_source_refresh_status.json'
+      - 'scripts/ingest_current_budget_build018.py'
+      - 'scripts/ingest_current_budget_build018_v2.py'
+      - 'scripts/validate_current_budget_build018.py'
+      - 'build018-current-source-refresh.js'
+      - 'tools/build018-ui-smoke.mjs'
+      - 'index.html'
+      - 'docs/build018-current-source-refresh.md'
+      - 'docs/source-map.md'
+      - '.github/workflows/build018-current-budget-proof.yml'
+      - '.github/workflows/build018-current-capital-proof.yml'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/ui-smoke.yml'
+      - '.github/workflows/pages.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate Build 018 Python syntax
+        run: python -m compileall -q scripts/ingest_current_budget_build018.py scripts/ingest_current_budget_build018_v2.py scripts/validate_current_budget_build018.py
+      - name: Reproduce ratified 2026/27 current budget
+        run: python scripts/ingest_current_budget_build018_v2.py
+      - name: Validate current-budget evidence contract
+        run: python scripts/validate_current_budget_build018.py
+      - name: Verify March 31 approval source remains live
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+          import requests
+
+          config = json.loads(Path('data/current_budget_sources.json').read_text(encoding='utf-8'))
+          source = config['approval_source']
+          response = requests.get(
+              source['url'],
+              headers={'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)'},
+              timeout=120,
+          )
+          response.raise_for_status()
+          text = re.sub(r'\s+', ' ', response.text)
+          required = [
+              'Ratification from Budget Committee',
+              'Proposed 2026/27 Budget',
+              'Resolution for Approval of Operating Budgets, Capital Plan and Tax Rates for Fiscal 2026/27',
+          ]
+          missing = [item for item in required if item not in text]
+          if missing:
+              raise SystemExit(f'approval source missing required text: {missing}')
+          print('March 31, 2026 Regional Council budget-ratification source verified')
+          PY
+      - name: Preserve proof artifact
+        run: |
+          mkdir -p artifacts
+          cp data/generated/current_budget_2026_27.json artifacts/current_budget_2026_27.json
+          cp data/generated/current_budget_2026_27.json /tmp/build018-current-budget.json
+      - name: Publish reproduced current budget to latest Build 018 branch head
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-018-current-source-refresh'
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B build018-publish "origin/$GITHUB_REF_NAME"
+          cp /tmp/build018-current-budget.json data/generated/current_budget_2026_27.json
+          python scripts/validate_current_budget_build018.py
+          if [ -z "$(git status --porcelain -- data/generated/current_budget_2026_27.json)" ]; then
+            echo 'Checked Build 018 current-budget artifact already reproduces exactly.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/current_budget_2026_27.json
+          git commit -m 'Build 018: publish ratified current budget'
+          git push origin HEAD:"$GITHUB_REF_NAME"
+      - name: Upload proof artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build018-current-budget-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
