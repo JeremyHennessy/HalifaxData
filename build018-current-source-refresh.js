@@ -120,6 +120,14 @@ function b18PlainPct(value) {
   if (!Number.isFinite(n)) return '—';
   return `${n >= 0 ? '+' : ''}${decimalFmt.format(n)}%`;
 }
+function b18SourceEvidence(label, source) {
+  if (!source) return '';
+  return `<div class="drawer-section"><h3>${escapeHtml(label)}</h3>${evidenceSteps([
+    ['Source', source.name],
+    ['Publisher', source.publisher],
+    ['Source ID', source.id]
+  ])}${sourceLink(source)}</div>`;
+}
 
 function b18BudgetTable() {
   const rows = b18BudgetFilteredRows();
@@ -208,7 +216,7 @@ function b18ShowBudgetRow(key) {
       ['Derived change %', b18PlainPct(row.derived_budget_change_pct)],
       ['Source PDF page', row.source_page],
       ['Approval date', b18BudgetMeta().approval_date]
-    ])}${flags.length ? `<div class="drawer-callout"><strong>Published source arithmetic flag</strong><p>${escapeHtml(flags.join(' · '))}. HalifaxData retains the printed value and the independently derived arithmetic; this is a source-data review item, not a finding of wrongdoing.</p></div>` : ''}<div class="drawer-callout"><strong>Interpretation boundary</strong><p>Budget authority is not evidence of a payment, invoice, commitment or final cost.</p></div>${source ? sourceLink(source) : ''}${approval ? sourceLink(approval) : ''}`
+    ])}${flags.length ? `<div class="drawer-callout"><strong>Published source arithmetic flag</strong><p>${escapeHtml(flags.join(' · '))}. HalifaxData retains the printed value and the independently derived arithmetic; this is a source-data review item, not a finding of wrongdoing.</p></div>` : ''}<div class="drawer-callout"><strong>Interpretation boundary</strong><p>Budget authority is not evidence of a payment, invoice, commitment or final cost.</p></div>${b18SourceEvidence('Amount source', source)}${b18SourceEvidence('Approval source', approval)}`
   });
 }
 
@@ -233,7 +241,7 @@ function b18ShowCapitalRow(projectAccountId) {
       ['Row Grand Total', money(row.grand_total)],
       ['Source PDF / table / row', `${row.source_page} / ${row.source_table} / ${row.source_row}`],
       ['Approval date', b18CapitalMeta().approval_date]
-    ])}<div class="drawer-callout"><strong>Interpretation boundary</strong><p>This row is scheduled capital budget authority/cashflow. It is not spend-to-date, a payment, commitment, invoice, final cost or evidence of an overrun.</p></div>${source ? sourceLink(source) : ''}${approval ? sourceLink(approval) : ''}`
+    ])}<div class="drawer-callout"><strong>Interpretation boundary</strong><p>This row is scheduled capital budget authority/cashflow. It is not spend-to-date, a payment, commitment, invoice, final cost or evidence of an overrun.</p></div>${b18SourceEvidence('Schedule source', source)}${b18SourceEvidence('Approval source', approval)}`
   });
 }
 
