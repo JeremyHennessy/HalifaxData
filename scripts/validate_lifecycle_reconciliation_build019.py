@@ -37,6 +37,7 @@ def main() -> None:
     identifier_links = payload.get("identifier_links") or []
     direct_links = payload.get("direct_links") or []
     chains = payload.get("reconciled_chains") or []
+    quarantined = payload.get("quarantined_links") or []
 
     if meta.get("build") != "019" or meta.get("parser_version") != "build019-deterministic-lifecycle-v1":
         fail("unexpected build/parser identity")
@@ -48,12 +49,17 @@ def main() -> None:
         fail("dollar-value matching must remain disabled")
     if meta.get("is_accounts_payable_ledger") is not False or meta.get("has_vendor_payment_facts") is not False:
         fail("reconciliation artifact must not claim AP/payment evidence")
+    if meta.get("council_item_metadata_used_for_matching") is not False:
+        fail("Council item metadata must not be a linkage basis")
+    if "approved motion_text" not in str(meta.get("council_identifier_policy") or ""):
+        fail("Council motion-context policy is missing")
     if summary.get("capital_schedule_ids") != 52:
         fail(f"Build 018 capital schedule identifier control changed: {summary.get('capital_schedule_ids')}")
 
     link_ids = set()
-    evidence_keys = set()
     by_link_id = {}
+    canonical_evidence_keys = set()
+    council_link_count = 0
     for link in identifier_links:
         link_id = link.get("link_id")
         if not link_id or link_id in link_ids:
@@ -73,6 +79,15 @@ def main() -> None:
         method = str(link.get("match_method") or "").lower()
         if "fuzzy" in method or "amount" in method or "dollar" in method or "name_similarity" in method:
             fail(f"forbidden method wording on {link_id}: {method}")
+
+        raw_variants = link.get("raw_identifiers") or []
+        if not isinstance(raw_variants, list) or not raw_variants:
+            fail(f"raw identifier variants missing on {link_id}")
+        if sorted(set(str(value) for value in raw_variants)) != raw_variants:
+            fail(f"raw identifier variants are not unique/sorted on {link_id}")
+        if link.get("raw_identifier") not in raw_variants:
+            fail(f"primary raw identifier is not retained in raw variants on {link_id}")
+
         evidence = link.get("evidence") or {}
         if evidence.get("domain") not in {"capital", "procurement", "amendment", "council"}:
             fail(f"unapproved evidence domain on {link_id}: {evidence.get('domain')}")
@@ -82,7 +97,25 @@ def main() -> None:
             fail(f"missing source_id on {link_id}")
         if not evidence.get("source_locator"):
             fail(f"missing source locator on {link_id}")
-        evidence_keys.add((evidence.get("domain"), evidence.get("record_type"), evidence.get("record_key")))
+
+        canonical_key = (
+            link.get("identifier_type"), link.get("identifier_value"), evidence.get("domain"),
+            evidence.get("record_type"), evidence.get("record_key"), link.get("match_method"), link.get("source_field")
+        )
+        if canonical_key in canonical_evidence_keys:
+            fail(f"duplicate canonical evidence edge remains after raw-variant collapse: {canonical_key}")
+        canonical_evidence_keys.add(canonical_key)
+
+        if evidence.get("domain") == "council":
+            council_link_count += 1
+            if evidence.get("context_status") != "exact_identifier_present_in_approved_motion_text":
+                fail(f"Council edge lacks approved-motion context verification: {link_id}")
+            if evidence.get("item_metadata_used_for_matching") is not False:
+                fail(f"Council item metadata used for matching on {link_id}")
+            if evidence.get("motion_text_used_for_identifier_verification") is not True:
+                fail(f"Council motion text was not the verification basis on {link_id}")
+            if not str(evidence.get("label") or "").startswith("Council motion ·"):
+                fail(f"Council evidence label may misrepresent parsed item metadata: {link_id}")
 
     direct_ids = set()
     for link in direct_links:
@@ -137,10 +170,18 @@ def main() -> None:
         fail("direct-link summary count mismatch")
     if summary.get("reconciled_chain_count") != len(chains):
         fail("chain summary count mismatch")
+    if summary.get("quarantined_council_identifier_links") != len(quarantined):
+        fail("quarantined Council-link summary mismatch")
     if len(chains) < 1:
         fail("no deterministic cross-domain chains were produced")
     if len(direct_links) < 1:
         fail("no direct documentary links were produced")
+    if council_link_count < 1:
+        fail("no Council exact-motion identifier links survived contextual validation")
+
+    for row in quarantined:
+        if row.get("reason") not in {"council_decision_record_not_found", "identifier_not_present_in_approved_motion_text"}:
+            fail(f"unexpected quarantine reason: {row.get('reason')}")
 
     forbidden_blob = json.dumps(payload.get("metadata") or {}).lower() + " " + json.dumps(payload.get("unresolved_boundaries") or []).lower()
     if "payment facts" in forbidden_blob and meta.get("has_vendor_payment_facts") is not False:
@@ -155,6 +196,8 @@ def main() -> None:
         "procurement_chains": summary.get("procurement_identifier_chains"),
         "purchase_order_chains": summary.get("purchase_order_chains"),
         "linked_build018_capital_ids": summary.get("linked_build018_capital_ids"),
+        "quarantined_council_identifier_links": len(quarantined),
+        "council_motion_verified_links": council_link_count,
         "chain_domain_count_distribution": summary.get("chain_domain_count_distribution"),
     }, indent=2))
 
