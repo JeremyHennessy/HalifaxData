@@ -1,0 +1,40 @@
+name: Build 019 Payment Source Research
+
+on:
+  push:
+    branches: ['agent/build-019-deterministic-lifecycle-reconciliation']
+    paths:
+      - 'data/payment_source_research_build019.json'
+      - 'data/generated/payment_source_status.json'
+      - 'data/generated/payments.json'
+      - 'data/generated/lifecycle_reconciliation.json'
+      - 'scripts/validate_payment_source_status.py'
+      - 'scripts/validate_payment_source_research_build019.py'
+      - '.github/workflows/build019-payment-source-research.yml'
+  pull_request:
+    paths:
+      - 'data/payment_source_research_build019.json'
+      - 'data/generated/payment_source_status.json'
+      - 'data/generated/payments.json'
+      - 'data/generated/lifecycle_reconciliation.json'
+      - 'scripts/validate_payment_source_status.py'
+      - 'scripts/validate_payment_source_research_build019.py'
+      - '.github/workflows/build019-payment-source-research.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate payment-source guards
+        run: python -m compileall -q scripts/validate_payment_source_status.py scripts/validate_payment_source_research_build019.py
+      - name: Validate established no-payment guard
+        run: python scripts/validate_payment_source_status.py
+      - name: Validate Build 019 payment-source research boundary
+        run: python scripts/validate_payment_source_research_build019.py
