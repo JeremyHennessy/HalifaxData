@@ -15,6 +15,7 @@ on:
       - 'data/generated/lifecycle_reconciliation.json'
       - 'scripts/build_lifecycle_reconciliation_build019.py'
       - 'scripts/build_lifecycle_reconciliation_build019_v2.py'
+      - 'scripts/build_lifecycle_reconciliation_build019_v3.py'
       - 'scripts/validate_lifecycle_reconciliation_build019.py'
       - '.github/workflows/build019-lifecycle-reconciliation.yml'
   pull_request:
@@ -30,6 +31,7 @@ on:
       - 'data/generated/lifecycle_reconciliation.json'
       - 'scripts/build_lifecycle_reconciliation_build019.py'
       - 'scripts/build_lifecycle_reconciliation_build019_v2.py'
+      - 'scripts/build_lifecycle_reconciliation_build019_v3.py'
       - 'scripts/validate_lifecycle_reconciliation_build019.py'
       - '.github/workflows/build019-lifecycle-reconciliation.yml'
 
@@ -46,9 +48,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate Build 019 Python syntax
-        run: python -m compileall -q scripts/build_lifecycle_reconciliation_build019.py scripts/build_lifecycle_reconciliation_build019_v2.py scripts/validate_lifecycle_reconciliation_build019.py
+        run: python -m compileall -q scripts/build_lifecycle_reconciliation_build019.py scripts/build_lifecycle_reconciliation_build019_v2.py scripts/build_lifecycle_reconciliation_build019_v3.py scripts/validate_lifecycle_reconciliation_build019.py
       - name: Build deterministic lifecycle reconciliation
-        run: python scripts/build_lifecycle_reconciliation_build019_v2.py --output /tmp/lifecycle_reconciliation.json
+        run: python scripts/build_lifecycle_reconciliation_build019_v3.py --output /tmp/lifecycle_reconciliation.json
       - name: Validate deterministic lifecycle reconciliation
         run: python scripts/validate_lifecycle_reconciliation_build019.py /tmp/lifecycle_reconciliation.json
       - name: Preserve proof artifact
