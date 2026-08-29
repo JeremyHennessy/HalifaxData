@@ -10,6 +10,7 @@ on:
       - 'data/generated/lifecycle_reconciliation.json'
       - 'scripts/validate_payment_source_status.py'
       - 'scripts/validate_payment_source_research_build019.py'
+      - 'docs/build019-release-candidate.md'
       - '.github/workflows/build019-payment-source-research.yml'
   pull_request:
     paths:
@@ -19,6 +20,7 @@ on:
       - 'data/generated/lifecycle_reconciliation.json'
       - 'scripts/validate_payment_source_status.py'
       - 'scripts/validate_payment_source_research_build019.py'
+      - 'docs/build019-release-candidate.md'
       - '.github/workflows/build019-payment-source-research.yml'
 
 permissions:
