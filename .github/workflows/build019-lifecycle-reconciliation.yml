@@ -16,7 +16,9 @@ on:
       - 'scripts/build_lifecycle_reconciliation_build019.py'
       - 'scripts/build_lifecycle_reconciliation_build019_v2.py'
       - 'scripts/build_lifecycle_reconciliation_build019_v3.py'
+      - 'scripts/enrich_lifecycle_components_build019.py'
       - 'scripts/validate_lifecycle_reconciliation_build019.py'
+      - 'scripts/validate_lifecycle_components_build019.py'
       - '.github/workflows/build019-lifecycle-reconciliation.yml'
   pull_request:
     paths:
@@ -32,7 +34,9 @@ on:
       - 'scripts/build_lifecycle_reconciliation_build019.py'
       - 'scripts/build_lifecycle_reconciliation_build019_v2.py'
       - 'scripts/build_lifecycle_reconciliation_build019_v3.py'
+      - 'scripts/enrich_lifecycle_components_build019.py'
       - 'scripts/validate_lifecycle_reconciliation_build019.py'
+      - 'scripts/validate_lifecycle_components_build019.py'
       - '.github/workflows/build019-lifecycle-reconciliation.yml'
 
 permissions:
@@ -48,11 +52,17 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate Build 019 Python syntax
-        run: python -m compileall -q scripts/build_lifecycle_reconciliation_build019.py scripts/build_lifecycle_reconciliation_build019_v2.py scripts/build_lifecycle_reconciliation_build019_v3.py scripts/validate_lifecycle_reconciliation_build019.py
-      - name: Build deterministic lifecycle reconciliation
-        run: python scripts/build_lifecycle_reconciliation_build019_v3.py --output /tmp/lifecycle_reconciliation.json
-      - name: Validate deterministic lifecycle reconciliation
-        run: python scripts/validate_lifecycle_reconciliation_build019.py /tmp/lifecycle_reconciliation.json
+        run: python -m compileall -q scripts/build_lifecycle_reconciliation_build019.py scripts/build_lifecycle_reconciliation_build019_v2.py scripts/build_lifecycle_reconciliation_build019_v3.py scripts/enrich_lifecycle_components_build019.py scripts/validate_lifecycle_reconciliation_build019.py scripts/validate_lifecycle_components_build019.py
+      - name: Build deterministic exact-identifier evidence graph
+        run: python scripts/build_lifecycle_reconciliation_build019_v3.py --output /tmp/lifecycle_base.json
+      - name: Validate exact-identifier evidence graph
+        run: python scripts/validate_lifecycle_reconciliation_build019.py /tmp/lifecycle_base.json
+      - name: Build deterministic cross-identifier lifecycle components
+        run: python scripts/enrich_lifecycle_components_build019.py /tmp/lifecycle_base.json /tmp/lifecycle_reconciliation.json
+      - name: Validate final lifecycle reconciliation
+        run: |
+          python scripts/validate_lifecycle_reconciliation_build019.py /tmp/lifecycle_reconciliation.json
+          python scripts/validate_lifecycle_components_build019.py /tmp/lifecycle_reconciliation.json
       - name: Preserve proof artifact
         run: |
           mkdir -p artifacts
@@ -64,6 +74,7 @@ jobs:
           git checkout -B build019-publish "origin/$GITHUB_REF_NAME"
           cp /tmp/lifecycle_reconciliation.json data/generated/lifecycle_reconciliation.json
           python scripts/validate_lifecycle_reconciliation_build019.py data/generated/lifecycle_reconciliation.json
+          python scripts/validate_lifecycle_components_build019.py data/generated/lifecycle_reconciliation.json
           if [ -z "$(git status --porcelain -- data/generated/lifecycle_reconciliation.json)" ]; then
             echo 'Checked Build 019 reconciliation artifact already matches deterministic rebuild.'
             exit 0
