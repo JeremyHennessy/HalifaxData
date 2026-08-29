@@ -62,12 +62,13 @@
     },
     "council_identifier_policy": "Council identifier edges require the exact identifier in approved motion_text. Parsed item_ref/item_title are retained as context only and never create a link.",
     "council_item_metadata_used_for_matching": false,
-    "duplicate_raw_identifier_policy": "Multiple literal source spellings that normalize to one explicit identifier on the same evidence record are retained in raw_identifiers on one canonical edge."
+    "duplicate_raw_identifier_policy": "Multiple literal source spellings that normalize to one explicit identifier on the same evidence record are retained in raw_identifiers on one canonical edge.",
+    "council_procurement_token_policy": "Exact canonical procurement references are verified in approved motion_text using the same year-number token; four- and two-digit year presentations are accepted and adjacent procurement prefixes do not invalidate the token."
   },
   "summary": {
     "capital_schedule_ids": 52,
     "known_capital_ids_all_layers": 566,
-    "identifier_links": 3241,
+    "identifier_links": 3242,
     "direct_documentary_links": 98,
     "reconciled_chain_count": 53,
     "capital_identifier_chains": 33,
@@ -79,7 +80,7 @@
     },
     "linked_build018_capital_ids": 16,
     "linked_procurement_refs": 20,
-    "quarantined_council_identifier_links": 1
+    "quarantined_council_identifier_links": 0
   },
   "reconciled_chains": [
     {
@@ -1243,9 +1244,10 @@
       ],
       "evidence_link_ids": [
         "b19-0de06a746fe27b87195d",
+        "b19-675b50c950641513e6ef",
         "b19-cf814b04d5fc7e2bf33c"
       ],
-      "evidence_record_count": 2,
+      "evidence_record_count": 3,
       "authoritative": true,
       "join_rule": "same explicit identifier only"
     },
@@ -69354,6 +69356,38 @@
       "used_amount_for_matching": false
     },
     {
+      "link_id": "b19-675b50c950641513e6ef",
+      "identifier_type": "procurement_reference",
+      "identifier_value": "2024-0662",
+      "raw_identifier": "2024-0662",
+      "raw_identifiers": [
+        "2024-0662"
+      ],
+      "evidence": {
+        "domain": "council",
+        "record_type": "approved_council_decision",
+        "record_key": "council-2025-05-27-c0c0d5af56596e2d0f9b9812",
+        "label": "Council motion · 2025-05-27 · aggregate/consent motion",
+        "source_id": "hrm-escribe",
+        "source_locator": "minutes p2 near result line 35",
+        "source_url": "https://pub-halifax.escribemeetings.com/FileStream.ashx?DocumentId=2137",
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "meeting_date": "2025-05-27",
+        "item_ref": null,
+        "decision_status": "passed_unanimously",
+        "source_item_ref": null,
+        "source_item_title": null,
+        "context_status": "exact_identifier_present_in_approved_motion_text",
+        "item_metadata_used_for_matching": false,
+        "motion_text_used_for_identifier_verification": true
+      },
+      "match_method": "exact_parser_extracted_identifier_format_normalization",
+      "source_field": "procurement_refs",
+      "authoritative": true,
+      "used_name_for_matching": false,
+      "used_amount_for_matching": false
+    },
+    {
       "link_id": "b19-cf814b04d5fc7e2bf33c",
       "identifier_type": "procurement_reference",
       "identifier_value": "2024-0662",
@@ -85429,16 +85463,5 @@
     "CAO amendment reports are a public aggregate reporting series and may exclude Private & Confidential records.",
     "A shared vendor name or equal dollar value is never sufficient to create an authoritative Build 019 edge."
   ],
-  "quarantined_links": [
-    {
-      "identifier_type": "procurement_reference",
-      "identifier_value": "2024-0662",
-      "record_key": "council-2025-05-27-c0c0d5af56596e2d0f9b9812",
-      "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
-      "meeting_date": "2025-05-27",
-      "source_item_ref": null,
-      "source_item_title": null,
-      "reason": "identifier_not_present_in_approved_motion_text"
-    }
-  ]
+  "quarantined_links": []
 }
