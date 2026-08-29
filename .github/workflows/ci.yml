@@ -104,6 +104,8 @@ jobs:
           python scripts/validate_lifecycle_components_build019.py
       - name: Validate Build 019 lifecycle investigation queue
         run: python scripts/validate_lifecycle_investigations_build019.py
+      - name: Validate Build 019 pinned release controls
+        run: python scripts/validate_build019_release_controls.py
       - name: Validate final normalized entity index
         run: |
           python scripts/build_entity_index_v4.py --check
