@@ -1,0 +1,2360 @@
+{
+  "metadata": {
+    "build": "019",
+    "parser_version": "build019-lifecycle-investigations-v1",
+    "dataset_status": "deterministic_lifecycle_review_queue",
+    "baseline_sha": "93fd8b769a48271b5f1f12782a3fa4a25a1d38d9",
+    "source_lifecycle_parser_version": "build019-deterministic-lifecycle-v1",
+    "scoring_semantics": "review_priority_score ranks evidence depth and lifecycle complexity; it is not misconduct probability or risk probability",
+    "uses_fuzzy_name_matching": false,
+    "uses_dollar_value_matching_for_links": false,
+    "has_payment_evidence": false,
+    "operating_budget_bridge_status": "not_available_without_shared_deterministic_identifier",
+    "audited_psas_bridge_status": "not_available_without_validated_crosswalk"
+  },
+  "summary": {
+    "investigations": 29,
+    "priority_review": 2,
+    "review": 2,
+    "context": 25,
+    "capital_procurement": 21,
+    "procurement_amendment": 8,
+    "council_linked": 3,
+    "with_payment_evidence": 0,
+    "reason_counts": {
+      "approved_council_motion_in_lifecycle_evidence": 3,
+      "capital_account_linked_to_procurement_award_evidence": 21,
+      "multiple_procurement_references_linked_to_same_capital_component": 7,
+      "multiple_purchase_orders_linked_to_same_procurement_reference": 1,
+      "procurement_reference_linked_to_public_cao_amendment_evidence": 8
+    }
+  },
+  "investigations": [
+    {
+      "investigation_id": "b19-investigation-8ff6ee7d196641b5fb4f",
+      "component_id": "b19-component-8ff6ee7d196641b5fb4f",
+      "title": "Capital lifecycle · CR200001",
+      "review_priority_score": 86,
+      "priority": "priority_review",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence",
+        "multiple_procurement_references_linked_to_same_capital_component",
+        "approved_council_motion_in_lifecycle_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CR200001"
+      ],
+      "procurement_references": [
+        "2026-0317",
+        "2026-0338"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Ecology Action Centre",
+        "WSP"
+      ],
+      "observed_facts": [
+        "Capital account(s): CR200001",
+        "Procurement reference(s): 2026-0317, 2026-0338",
+        "Published vendor name(s), context only: Ecology Action Centre, WSP",
+        "Evidence domains: capital, council, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p155/CR200001",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CR200001",
+          "label": "Active Transportation"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p159/CR200001",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CR200001",
+          "label": "Active Transportation"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r43/CR200001",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CR200001",
+          "label": "Active Transportation"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "p7/t2/r9/CR200001/capital_budget_transfer",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=2000",
+          "domain": "capital",
+          "record_type": "approved_capital_budget_adjustment",
+          "record_key": "adjustment:CR200001:capital_budget_transfer:7:6",
+          "label": "Active Transportation"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r4",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r4",
+          "label": "Cycling eduction, Bicycle Repair Training & Community Engagement"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r5",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r5",
+          "label": "ALTP - Engineering and Administrative Services for Windmill Road"
+        }
+      ],
+      "evidence_record_count": 8,
+      "identifier_count": 3,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-265b14174594ef106848",
+      "component_id": "b19-component-265b14174594ef106848",
+      "title": "Capital lifecycle · CP180002",
+      "review_priority_score": 86,
+      "priority": "priority_review",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence",
+        "multiple_procurement_references_linked_to_same_capital_component",
+        "approved_council_motion_in_lifecycle_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CP180002"
+      ],
+      "procurement_references": [
+        "2025-0355",
+        "2025-0573"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "CBCL Limited",
+        "Langes Rock Farm Construction"
+      ],
+      "observed_facts": [
+        "Capital account(s): CP180002",
+        "Procurement reference(s): 2025-0355, 2025-0573",
+        "Published vendor name(s), context only: CBCL Limited, Langes Rock Farm Construction",
+        "Evidence domains: capital, council, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p150/CP180002",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CP180002",
+          "label": "Shoreline Improvements/Water Access"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p154/CP180002",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CP180002",
+          "label": "Shoreline Improvements/Water Access"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "minutes p8 near result line 10",
+          "source_url": "https://pub-halifax.escribemeetings.com/FileStream.ashx?DocumentId=5056",
+          "domain": "council",
+          "record_type": "approved_council_decision",
+          "record_key": "council-2026-04-28-eb6a2dbb85ecd090ae48f296",
+          "label": "Council motion · 2026-04-28 · item 15.2.1"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3093/p6/t1/r16",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3093:p6:t1:r16",
+          "label": "ALTP - Banook Dam - Study, Mapping, Investigation"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-2025-0573",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:de999e400a129c5e5d4a",
+          "label": "SIR SANDFORD FLEMMING PARK – SHORELINE IMPROVEMENTS PHASE 5"
+        }
+      ],
+      "evidence_record_count": 6,
+      "identifier_count": 3,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-fe6fe87557a90964069e",
+      "component_id": "b19-component-fe6fe87557a90964069e",
+      "title": "Capital lifecycle · CR200003",
+      "review_priority_score": 82,
+      "priority": "review",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence",
+        "approved_council_motion_in_lifecycle_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CR200003"
+      ],
+      "procurement_references": [
+        "2026-0306"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Harbourside Engineering Consultants"
+      ],
+      "observed_facts": [
+        "Capital account(s): CR200003",
+        "Procurement reference(s): 2026-0306",
+        "Published vendor name(s), context only: Harbourside Engineering Consultants",
+        "Evidence domains: capital, council, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p153/CR200003",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CR200003",
+          "label": "Bridges"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p157/CR200003",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CR200003",
+          "label": "Bridges"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r45/CR200003",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CR200003",
+          "label": "Bridges"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "p7/t2/r10/CR200003/capital_budget_transfer",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=2000",
+          "domain": "capital",
+          "record_type": "approved_capital_budget_adjustment",
+          "record_key": "adjustment:CR200003:capital_budget_transfer:7:7",
+          "label": "Bridges"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r8",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r8",
+          "label": "Walker's Bridge - Construction Services - AltP"
+        }
+      ],
+      "evidence_record_count": 7,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-72f5c24da0e5688b0abd",
+      "component_id": "b19-component-72f5c24da0e5688b0abd",
+      "title": "Capital lifecycle · CZ230100",
+      "review_priority_score": 74,
+      "priority": "review",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence",
+        "multiple_procurement_references_linked_to_same_capital_component"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CZ230100"
+      ],
+      "procurement_references": [
+        "2025-0548",
+        "2026-0110",
+        "2026-0184"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "DILLON CONSULTING LTD",
+        "Dillon Consulting Limited",
+        "Efficiency One Dartmouth"
+      ],
+      "observed_facts": [
+        "Capital account(s): CZ230100",
+        "Procurement reference(s): 2025-0548, 2026-0110, 2026-0184",
+        "Published vendor name(s), context only: DILLON CONSULTING LTD, Dillon Consulting Limited, Efficiency One Dartmouth",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p270/CZ230100",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CZ230100",
+          "label": "HalifACT - Municipal Building Retrofits"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p276/CZ230100",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CZ230100",
+          "label": "HalifACT - Municipal Building Retrofits"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r54/CZ230100",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CZ230100",
+          "label": "HalifACT - Municipal Building Retrofits"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3858/p5/t1/r5",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3858:p5:t1:r5",
+          "label": "Solar Carports at Cole Harbour Place"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5001/p5/t1/r4",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5001:p5:t1:r4",
+          "label": "Solar Carports - Design Services"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r21",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r21",
+          "label": "Consulting Services - EfficiencyOne"
+        }
+      ],
+      "evidence_record_count": 9,
+      "identifier_count": 4,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-1c70b6354c2af91b59d7",
+      "component_id": "b19-component-1c70b6354c2af91b59d7",
+      "title": "Capital lifecycle · CT000007",
+      "review_priority_score": 70,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence",
+        "multiple_procurement_references_linked_to_same_capital_component"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CT000007"
+      ],
+      "procurement_references": [
+        "2025-0204",
+        "2026-0329"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Big Bell Solar",
+        "IOTA Studios"
+      ],
+      "observed_facts": [
+        "Capital account(s): CT000007",
+        "Procurement reference(s): 2025-0204, 2026-0329",
+        "Published vendor name(s), context only: Big Bell Solar, IOTA Studios",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p161/CT000007",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CT000007",
+          "label": "Cogswell Interchange Redevelopment"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p166/CT000007",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CT000007",
+          "label": "Cogswell Interchange Redevelopment"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r4/CT000007",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CT000007",
+          "label": "Cogswell Interchange Redevelopment"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3093/p6/t1/r14",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3093:p6:t1:r14",
+          "label": "InterChange Public Art Pilot Program"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r3",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r3",
+          "label": "Alt-P High Capacity 5/Solar Compacting 5.5 Double Station"
+        }
+      ],
+      "evidence_record_count": 7,
+      "identifier_count": 3,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-bc5b3ff9dcc26b972746",
+      "component_id": "b19-component-bc5b3ff9dcc26b972746",
+      "title": "Capital lifecycle · CV240002",
+      "review_priority_score": 70,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence",
+        "multiple_procurement_references_linked_to_same_capital_component"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CV240002"
+      ],
+      "procurement_references": [
+        "2025-0340",
+        "2026-0021"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Cubex Ltd",
+        "Saunders Equipment"
+      ],
+      "observed_facts": [
+        "Capital account(s): CV240002",
+        "Procurement reference(s): 2025-0340, 2026-0021",
+        "Published vendor name(s), context only: Cubex Ltd, Saunders Equipment",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p249/CV240002",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CV240002",
+          "label": "Municipal Fleet Replacement"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p259/CV240002",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CV240002",
+          "label": "Municipal Fleet Replacement"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r49/CV240002",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CV240002",
+          "label": "Municipal Fleet Replacement"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3093/p6/t1/r17",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3093:p6:t1:r17",
+          "label": "AltP – 2025 Trackless MT7 Municipal Tractor"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5001/p5/t1/r11",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5001:p5:t1:r11",
+          "label": "Supply and Delivery of One (1) Street Sweeper"
+        }
+      ],
+      "evidence_record_count": 7,
+      "identifier_count": 3,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-5cdda807cf24439ced02",
+      "component_id": "b19-component-5cdda807cf24439ced02",
+      "title": "Capital lifecycle · CV210013",
+      "review_priority_score": 70,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence",
+        "multiple_procurement_references_linked_to_same_capital_component"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CV210013"
+      ],
+      "procurement_references": [
+        "2025-0315",
+        "2025-0411"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "CBCL",
+        "E.Y.E. Marine Consultants"
+      ],
+      "observed_facts": [
+        "Capital account(s): CV210013",
+        "Procurement reference(s): 2025-0315, 2025-0411",
+        "Published vendor name(s), context only: CBCL, E.Y.E. Marine Consultants",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p260/CV210013",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CV210013",
+          "label": "Mill Cove Ferry Service"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p267/CV210013",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CV210013",
+          "label": "Mill Cove Ferry Service"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r20/CV210013",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CV210013",
+          "label": "Mill Cove Ferry Service (Construction) **"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3515/p5/t1/r2",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3515",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3515:p5:t1:r2",
+          "label": "Naval Architecture - Guidance"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3515/p5/t1/r6",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3515",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3515:p5:t1:r6",
+          "label": "Mill Cove Ferry - Concept Design Advancement"
+        }
+      ],
+      "evidence_record_count": 6,
+      "identifier_count": 3,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-f45b15d84757afa050c1",
+      "component_id": "b19-component-f45b15d84757afa050c1",
+      "title": "Capital lifecycle · CM200007",
+      "review_priority_score": 70,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence",
+        "multiple_procurement_references_linked_to_same_capital_component"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CM200007"
+      ],
+      "procurement_references": [
+        "2025-0540",
+        "2025-0633"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Voith"
+      ],
+      "observed_facts": [
+        "Capital account(s): CM200007",
+        "Procurement reference(s): 2025-0540, 2025-0633",
+        "Published vendor name(s), context only: Voith",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p258/CM200007",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CM200007",
+          "label": "Ferry Overhaul and Capital Upgrades"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p265/CM200007",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CM200007",
+          "label": "Ferry Overhaul and Capital Upgrades"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3858/p5/t1/r3",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3858:p5:t1:r3",
+          "label": "Voith Schneider Propeller Bevel Gear Unit for Craig Blake Ferry"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3858/p5/t1/r8",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3858:p5:t1:r8",
+          "label": "Voith Electronic Control System"
+        }
+      ],
+      "evidence_record_count": 5,
+      "identifier_count": 3,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-99f2ef964117c18da69a",
+      "component_id": "b19-component-99f2ef964117c18da69a",
+      "title": "Procurement amendment lifecycle · 2024-0269",
+      "review_priority_score": 69,
+      "priority": "context",
+      "review_reasons": [
+        "procurement_reference_linked_to_public_cao_amendment_evidence",
+        "multiple_purchase_orders_linked_to_same_procurement_reference"
+      ],
+      "domains": [
+        "amendment",
+        "procurement"
+      ],
+      "capital_project_accounts": [],
+      "procurement_references": [
+        "2024-0269"
+      ],
+      "purchase_orders": [
+        "2070925358",
+        "2070927668"
+      ],
+      "vendor_names_context_only": [
+        "2i Solutions",
+        "Altis Human Resourse"
+      ],
+      "observed_facts": [
+        "Procurement reference(s): 2024-0269",
+        "Purchase order(s): 2070925358, 2070927668",
+        "Published vendor name(s), context only: 2i Solutions, Altis Human Resourse",
+        "Evidence domains: amendment, procurement"
+      ],
+      "amendment_facts": [
+        {
+          "observation_id": "2025-06-18-po-2070925358",
+          "report_date": "2025-06-18",
+          "purchase_order": "2070925358",
+          "procurement_refs": [
+            "2024-0269"
+          ],
+          "name_source": "Contract Amendment to PO#2070925358, RFP# 2024-0269 Corporate Scheduling Project – Test Lead",
+          "reason_source": "In December 2022, the Corporate Scheduling and Time Reporting Project was launched to plan, design, build and implement a suite of business tools using UKG’s Telestaff and WFMPro applications. The project is focused on implementing these applications as an integrated “Software as a Service” (SaaS) solution. The Test Lead responsibilities include supporting the development and management of all project test deliverables and processes. The Test Lead manages the development of test plans, test scenarios, test cases and test data sets and supports project team members and business stakeholders throughout all testing activities.",
+          "original_value": 167440.0,
+          "effective_cumulative_amendment_value": 132110.0,
+          "updated_value_source": 299550.0,
+          "derived_updated_value": 299550.0,
+          "increase_pct_source": 79.0,
+          "derived_increase_pct": 78.8999,
+          "source_arithmetic_consistent": true,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        },
+        {
+          "observation_id": "2025-06-18-po-2070927668",
+          "report_date": "2025-06-18",
+          "purchase_order": "2070927668",
+          "procurement_refs": [
+            "2024-0269"
+          ],
+          "name_source": "Contract Amendment to PO#2070927668, RFP# 2024-0269 Corporate Scheduling Project – Instructional Designer",
+          "reason_source": "In December 2022, the Corporate Scheduling and Time Reporting Project was launched to plan, design, build and implement a suite of business tools using UKG’s Telestaff and WFMPro applications. The implementation of these business tools is a complex undertaking for the municipality; one that will introduce changes in business processes, practices, and the adoption of new digital technologies. The project has recently completed an initial solution configuration process and is now planning to advance with user testing, training and business readiness activities to support the adoption of the solution corporately. To advance this work, the municipality requires knowledgeable and experienced resources to support the current Corporate Scheduling and Time reporting project team to develop and deliver key business readiness, testing and training deliverables.",
+          "original_value": 131025.0,
+          "effective_cumulative_amendment_value": 139500.0,
+          "updated_value_source": 270525.0,
+          "derived_updated_value": 270525.0,
+          "increase_pct_source": 106.0,
+          "derived_increase_pct": 106.4682,
+          "source_arithmetic_consistent": true,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        }
+      ],
+      "source_evidence": [
+        {
+          "source_id": "hrm-cao-contract-amendments-2025-06",
+          "source_locator": "2025-06-18-p3-t1-r4",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2025-06-18-po-2070927668",
+          "label": "Contract Amendment to PO#2070927668, RFP# 2024-0269 Corporate Scheduling Project – Instructional Designer"
+        },
+        {
+          "source_id": "hrm-cao-contract-amendments-2025-06",
+          "source_locator": "2025-06-18-p3-t1-r5",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2025-06-18-po-2070925358",
+          "label": "Contract Amendment to PO#2070925358, RFP# 2024-0269 Corporate Scheduling Project – Test Lead"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-2024-0269",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:322eafb7d0c9de1fa09e",
+          "label": "RFP - Corporate Scheduling Project – Support Resources"
+        }
+      ],
+      "evidence_record_count": 4,
+      "identifier_count": 3,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-1410dc04a920a0677892",
+      "component_id": "b19-component-1410dc04a920a0677892",
+      "title": "Capital lifecycle · CB200008",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CB200008"
+      ],
+      "procurement_references": [
+        "2025-0284"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "RCS CONSTRUCTION INC"
+      ],
+      "observed_facts": [
+        "Capital account(s): CB200008",
+        "Procurement reference(s): 2025-0284",
+        "Published vendor name(s), context only: RCS CONSTRUCTION INC",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p82/CB200008",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CB200008",
+          "label": "Scotiabank Centre"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p82/CB200008",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CB200008",
+          "label": "PR - Scotiabank Centre"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r38/CB200008",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CB200008",
+          "label": "Scotiabank Centre"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3093/p6/t1/r13",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3093:p6:t1:r13",
+          "label": "Relocation of Heating/Cooling System at SBC"
+        }
+      ],
+      "evidence_record_count": 5,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-21bba60f20e3931264ee",
+      "component_id": "b19-component-21bba60f20e3931264ee",
+      "title": "Capital lifecycle · CT200002",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CT200002"
+      ],
+      "procurement_references": [
+        "2026-0289"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "WSP Canada Inc"
+      ],
+      "observed_facts": [
+        "Capital account(s): CT200002",
+        "Procurement reference(s): 2026-0289",
+        "Published vendor name(s), context only: WSP Canada Inc",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p168/CT200002",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CT200002",
+          "label": "Major Strategic Multi Modal Corridor: Bayers Road"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p191/CT200002",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CT200002",
+          "label": "Strategic Mobility Corridor: Bayers Road"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r27/CT200002",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CT200002",
+          "label": "Strategic Mobility Corridor: Bayers Road"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r20",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r20",
+          "label": "Bayers Road - Phase 2 - Construction Admin - ALTP"
+        }
+      ],
+      "evidence_record_count": 5,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-5e7bf52cb53049e4b91a",
+      "component_id": "b19-component-5e7bf52cb53049e4b91a",
+      "title": "Capital lifecycle · CB190007",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CB190007"
+      ],
+      "procurement_references": [
+        "2025-0289"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "ORKIN CANADA"
+      ],
+      "observed_facts": [
+        "Capital account(s): CB190007",
+        "Procurement reference(s): 2025-0289",
+        "Published vendor name(s), context only: ORKIN CANADA",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p27/CB190007",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CB190007",
+          "label": "Alderney Gate Recapitalization"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p55/CB190007",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CB190007",
+          "label": "PFE - Alderney Gate Recapitalization"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r36/CB190007",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CB190007",
+          "label": "Alderney Gate Recapitalization"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3093/p6/t1/r10",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3093:p6:t1:r10",
+          "label": "Bird Control System"
+        }
+      ],
+      "evidence_record_count": 5,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-876cc4c2b4f8878eee5e",
+      "component_id": "b19-component-876cc4c2b4f8878eee5e",
+      "title": "Capital lifecycle · CR200006",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CR200006"
+      ],
+      "procurement_references": [
+        "2025-0271"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Stantec Consulting Limited"
+      ],
+      "observed_facts": [
+        "Capital account(s): CR200006",
+        "Procurement reference(s): 2025-0271",
+        "Published vendor name(s), context only: Stantec Consulting Limited",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p192/CR200006",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CR200006",
+          "label": "Street Recapitalization"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p204/CR200006",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CR200006",
+          "label": "Street Recapitalization"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r47/CR200006",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CR200006",
+          "label": "Street Recapitalization"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3093/p6/t1/r8",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3093:p6:t1:r8",
+          "label": "AltP - Highway Pavement Management Application"
+        }
+      ],
+      "evidence_record_count": 5,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-9841f84acf05a3ba595a",
+      "component_id": "b19-component-9841f84acf05a3ba595a",
+      "title": "Capital lifecycle · CV240006",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CV240006"
+      ],
+      "procurement_references": [
+        "2025-0628"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Privateers Harley-Davidson"
+      ],
+      "observed_facts": [
+        "Capital account(s): CV240006",
+        "Procurement reference(s): 2025-0628",
+        "Published vendor name(s), context only: Privateers Harley-Davidson",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p253/CV240006",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CV240006",
+          "label": "Police Fleet Replacement"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p262/CV240006",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CV240006",
+          "label": "Police Fleet Replacement"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r52/CV240006",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CV240006",
+          "label": "Police Fleet Replacement"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5001/p5/t1/r10",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5001:p5:t1:r10",
+          "label": "Supply and Delivery of Six (6) Police Motorcycles"
+        }
+      ],
+      "evidence_record_count": 5,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-c6a9090ddfb1a190e180",
+      "component_id": "b19-component-c6a9090ddfb1a190e180",
+      "title": "Capital lifecycle · CZ230600",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CZ230600"
+      ],
+      "procurement_references": [
+        "2026-0225"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Halifax Water Commission"
+      ],
+      "observed_facts": [
+        "Capital account(s): CZ230600",
+        "Procurement reference(s): 2026-0225",
+        "Published vendor name(s), context only: Halifax Water Commission",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p268/CZ230600",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CZ230600",
+          "label": "HalifACT - Critical Infrastructure Projects"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p274/CZ230600",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CZ230600",
+          "label": "HalifACT - Critical Infrastructure Projects"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r57/CZ230600",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CZ230600",
+          "label": "HalifACT - Critical Infrastructure"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r7",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r7",
+          "label": "Landscaped Swale Program - HW - Exemption"
+        }
+      ],
+      "evidence_record_count": 5,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-e95f4ee2b2feb02a6ca2",
+      "component_id": "b19-component-e95f4ee2b2feb02a6ca2",
+      "title": "Capital lifecycle · CQ220002",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CQ220002"
+      ],
+      "procurement_references": [
+        "2026-0342"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Englobe Corp"
+      ],
+      "observed_facts": [
+        "Capital account(s): CQ220002",
+        "Procurement reference(s): 2026-0342",
+        "Published vendor name(s), context only: Englobe Corp",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p265/CQ220002",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CQ220002",
+          "label": "Burnside & City of Lakes Industrial Park"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p272/CQ220002",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CQ220002",
+          "label": "Burnside & City of Lakes Industrial Park"
+        },
+        {
+          "source_id": "hrm-capital-2026-27-multiyear-revised",
+          "source_locator": "attachment2/p9/t1/r42/CQ220002",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4622",
+          "domain": "capital",
+          "record_type": "current_capital_multiyear_schedule",
+          "record_key": "CQ220002",
+          "label": "Burnside & City of Lakes Industrial Park"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r22",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r22",
+          "label": "AltP - Burnside Phase 13-3 - Construction Inspection"
+        }
+      ],
+      "evidence_record_count": 5,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-088c9274e56364bf796d",
+      "component_id": "b19-component-088c9274e56364bf796d",
+      "title": "Capital lifecycle · CE200004",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CE200004"
+      ],
+      "procurement_references": [
+        "2026-0243"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Vision Tec Systems"
+      ],
+      "observed_facts": [
+        "Capital account(s): CE200004",
+        "Procurement reference(s): 2026-0243",
+        "Published vendor name(s), context only: Vision Tec Systems",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p219/CE200004",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CE200004",
+          "label": "Fire Services Equipment Replacement"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p228/CE200004",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CE200004",
+          "label": "Fire Services Equipment Replacement"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r14",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r14",
+          "label": "AltP Handheld Gas Analyzer & FTIR Spectrometer"
+        }
+      ],
+      "evidence_record_count": 4,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-81b03c34fbd0d463880c",
+      "component_id": "b19-component-81b03c34fbd0d463880c",
+      "title": "Capital lifecycle · CM200003",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CM200003"
+      ],
+      "procurement_references": [
+        "2026-0155"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "3041518 Nova Scotia Limited"
+      ],
+      "observed_facts": [
+        "Capital account(s): CM200003",
+        "Procurement reference(s): 2026-0155",
+        "Published vendor name(s), context only: 3041518 Nova Scotia Limited",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p256/CM200003",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CM200003",
+          "label": "Transit Support Vehicle Replacement"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p264/CM200003",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CM200003",
+          "label": "Transit Support Vehicle Replacement"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5001/p5/t1/r8",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5001:p5:t1:r8",
+          "label": "Supply and Delivery of One (1) Truck with Cargo Body"
+        }
+      ],
+      "evidence_record_count": 4,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-d60b595cdda258ab8878",
+      "component_id": "b19-component-d60b595cdda258ab8878",
+      "title": "Capital lifecycle · CV240001",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CV240001"
+      ],
+      "procurement_references": [
+        "2025-0409"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Toromont Cat"
+      ],
+      "observed_facts": [
+        "Capital account(s): CV240001",
+        "Procurement reference(s): 2025-0409",
+        "Published vendor name(s), context only: Toromont Cat",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p247/CV240001",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CV240001",
+          "label": "Municipal Fleet Expansion"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p257/CV240001",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CV240001",
+          "label": "Municipal Fleet Expansion"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3515/p5/t1/r5",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3515",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3515:p5:t1:r5",
+          "label": "AltP – Compact Wheel Loader (Caterpillar Model 910 CCE)"
+        }
+      ],
+      "evidence_record_count": 4,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-fb2f40accfb00af935bd",
+      "component_id": "b19-component-fb2f40accfb00af935bd",
+      "title": "Capital lifecycle · CB000022",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CB000022"
+      ],
+      "procurement_references": [
+        "2026-0319"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Crossman Controls Incorporated"
+      ],
+      "observed_facts": [
+        "Capital account(s): CB000022",
+        "Procurement reference(s): 2026-0319",
+        "Published vendor name(s), context only: Crossman Controls Incorporated",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p73/CB000022",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CB000022",
+          "label": "Police Headquarters"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p45/CB000022",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CB000022",
+          "label": "HRP - Police Headquarters"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r12",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r12",
+          "label": "Security Gates - HRP Headquarters"
+        }
+      ],
+      "evidence_record_count": 4,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-fd202c3611dae791411f",
+      "component_id": "b19-component-fd202c3611dae791411f",
+      "title": "Capital lifecycle · CV240007",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CV240007"
+      ],
+      "procurement_references": [
+        "2025-0385"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "CME"
+      ],
+      "observed_facts": [
+        "Capital account(s): CV240007",
+        "Procurement reference(s): 2025-0385",
+        "Published vendor name(s), context only: CME",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p259/CV240007",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CV240007",
+          "label": "Mid Life Ferry Rebuild"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p266/CV240007",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CV240007",
+          "label": "Mid Life Ferry Rebuild"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc3858/p5/t1/r9",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc3858:p5:t1:r9",
+          "label": "Craig Blake Ferry – Refit, Dry Docking, and Mechanical Remediation"
+        }
+      ],
+      "evidence_record_count": 4,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-fe027870b4ab10e1957b",
+      "component_id": "b19-component-fe027870b4ab10e1957b",
+      "title": "Capital lifecycle · CB200005",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "capital_account_linked_to_procurement_award_evidence"
+      ],
+      "domains": [
+        "capital",
+        "council_document",
+        "procurement"
+      ],
+      "capital_project_accounts": [
+        "CB200005"
+      ],
+      "procurement_references": [
+        "2026-0267"
+      ],
+      "purchase_orders": [],
+      "vendor_names_context_only": [
+        "Jim Kimber Construction"
+      ],
+      "observed_facts": [
+        "Capital account(s): CB200005",
+        "Procurement reference(s): 2026-0267",
+        "Published vendor name(s), context only: Jim Kimber Construction",
+        "Evidence domains: capital, council_document, procurement"
+      ],
+      "amendment_facts": [],
+      "source_evidence": [
+        {
+          "source_id": "hrm-capital-2024-25",
+          "source_locator": "p79/CB200005",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/capitalplan_2024-25_final.pdf",
+          "domain": "capital",
+          "record_type": "prior_capital_project_sheet",
+          "record_key": "2024/25:CB200005",
+          "label": "Roof Recapitalization"
+        },
+        {
+          "source_id": "hrm-capital-2025-26",
+          "source_locator": "p63/CB200005",
+          "source_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/2025-26-capital-plan.pdf",
+          "domain": "capital",
+          "record_type": "current_capital_project_sheet",
+          "record_key": "2025/26:CB200005",
+          "label": "PFE - Roof Recapitalization"
+        },
+        {
+          "source_id": "hrm-escribe",
+          "source_locator": "doc5716/p12/t1/r9",
+          "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776",
+          "domain": "procurement",
+          "record_type": "quarterly_alternative_procurement_award",
+          "record_key": "quarterly-award:doc5716:p12:t1:r9",
+          "label": "Roof replacement at Dartmouth North Public Library"
+        }
+      ],
+      "evidence_record_count": 4,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-ae26d77f648a1b216290",
+      "component_id": "b19-component-ae26d77f648a1b216290",
+      "title": "Procurement amendment lifecycle · 2018-186",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "procurement_reference_linked_to_public_cao_amendment_evidence"
+      ],
+      "domains": [
+        "amendment",
+        "procurement"
+      ],
+      "capital_project_accounts": [],
+      "procurement_references": [
+        "2018-186"
+      ],
+      "purchase_orders": [
+        "2070924188"
+      ],
+      "vendor_names_context_only": [
+        "IBI Group"
+      ],
+      "observed_facts": [
+        "Procurement reference(s): 2018-186",
+        "Purchase order(s): 2070924188",
+        "Published vendor name(s), context only: IBI Group",
+        "Evidence domains: amendment, procurement"
+      ],
+      "amendment_facts": [
+        {
+          "observation_id": "2024-10-09-po-2070924188",
+          "report_date": "2024-10-09",
+          "purchase_order": "2070924188",
+          "procurement_refs": [
+            "18-186"
+          ],
+          "name_source": "CAO Contract Amendment Report – RFP 18-186 PO 2070924188 Phase 2 - Design Consulting Services Wrights Cove Transit Terminal",
+          "reason_source": "Staff has recommended an increase to Arcadis Professional Services for changes to the contracted scope of work in the amount of $126,373 (net HST included). This recommendation includes a $10,000 (4.66% increase) contingency allowance for design changes. The release of these contingency funds will be by approval of the PM, only if necessary. The original award value for Phase 2 was included in the submission for RFP 18-186, since then there has been an escalation in costs and the Phase 1 work identified additional scope of work.",
+          "original_value": 214673.0,
+          "effective_cumulative_amendment_value": 126373.0,
+          "updated_value_source": 341046.0,
+          "derived_updated_value": 341046.0,
+          "increase_pct_source": 59.0,
+          "derived_increase_pct": 58.8677,
+          "source_arithmetic_consistent": true,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        },
+        {
+          "observation_id": "2025-04-16-contract-18-186",
+          "report_date": "2025-04-16",
+          "purchase_order": null,
+          "procurement_refs": [
+            "18-186"
+          ],
+          "name_source": "CAO Contract Amendment – Increase to Phase 2 - RFP 18-186 – Design Consulting Services Wrights Cove Transit Terminal",
+          "reason_source": "Halifax Transit’s fixed route transit network has grown over the last several years and currently carries over 19 million passengers annually. Growth of the network has increased the number of buses and passengers using each terminal, creating capacity issues that have required new terminals over the past few years. The original project from 2018 was deferred until 2024. This increase in cost is rationalized by additional scope due to the changing needs of the municipality. Staff has recommended an increase to Arcadis Professional Services for changes to the contracted scope of work in the amount of $42,000 (net HST included). Staff has recommended an additional $28,000 (net HST included) contingency allowance be included. The additional cost is due to design changes in Phase 2 to address net-zero construction not considered in the original design and changes requested by Halifax Transit to bus routing and platform design to enhance pedestrian safety.",
+          "original_value": 214673.0,
+          "effective_cumulative_amendment_value": 196373.0,
+          "updated_value_source": 411046.0,
+          "derived_updated_value": 411046.0,
+          "increase_pct_source": 91.0,
+          "derived_increase_pct": 91.4754,
+          "source_arithmetic_consistent": true,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        }
+      ],
+      "source_evidence": [
+        {
+          "source_id": "hrm-cao-contract-amendments-2024-10",
+          "source_locator": "2024-10-09-p3-t1-r3",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2024-10-09-po-2070924188",
+          "label": "CAO Contract Amendment Report – RFP 18-186 PO 2070924188 Phase 2 - Design Consulting Services Wrights Cove Transit Terminal"
+        },
+        {
+          "source_id": "hrm-cao-contract-amendments-2025-04",
+          "source_locator": "2025-04-16-p4-t1-r3",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2025-04-16-contract-18-186",
+          "label": "CAO Contract Amendment – Increase to Phase 2 - RFP 18-186 – Design Consulting Services Wrights Cove Transit Terminal"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-18-186",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:7abb4acb586d0d4865af",
+          "label": "Design Consultant Services Wrights Cove Transit Terminal"
+        }
+      ],
+      "evidence_record_count": 3,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-24db1902e04195d5e023",
+      "component_id": "b19-component-24db1902e04195d5e023",
+      "title": "Procurement amendment lifecycle · 2023-159",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "procurement_reference_linked_to_public_cao_amendment_evidence"
+      ],
+      "domains": [
+        "amendment",
+        "procurement"
+      ],
+      "capital_project_accounts": [],
+      "procurement_references": [
+        "2023-159"
+      ],
+      "purchase_orders": [
+        "2070901586"
+      ],
+      "vendor_names_context_only": [
+        "VWMason Technology Consultants"
+      ],
+      "observed_facts": [
+        "Procurement reference(s): 2023-159",
+        "Purchase order(s): 2070901586",
+        "Published vendor name(s), context only: VWMason Technology Consultants",
+        "Evidence domains: amendment, procurement"
+      ],
+      "amendment_facts": [
+        {
+          "observation_id": "2024-12-11-po-2070901586",
+          "report_date": "2024-12-11",
+          "purchase_order": "2070901586",
+          "procurement_refs": [
+            "23-159"
+          ],
+          "name_source": "CAO Contract Amendment Report – RFP 23-159, Increase to PO 2070901586 – Design Services",
+          "reason_source": "VWMason was awarded PO 2070901586 for a value of $230,300 HST fully reimbursable in April 2023. The original scope of work included design and contract administration services for a new performance audio system, distributed audio, digital advertising ring, and concourse digital signage at the Scotiabank Centre. During the design process meetings with VWMason, HRM and Events East, it was identified that the new AV upgrades should include enhanced commissioning to ensure the highest level of performance for the system. Enhanced commissioning will ensure that the new system components are all configured and calibrated to deliver the optimal performance of the new system, preventing possible interference or feedback. Enhanced commissioning also provides the opportunity for additional training for the Events East staff who will be operating the system after handover.",
+          "original_value": 230300.0,
+          "effective_cumulative_amendment_value": 73025.0,
+          "updated_value_source": 303325.0,
+          "derived_updated_value": 303325.0,
+          "increase_pct_source": 32.0,
+          "derived_increase_pct": 31.7086,
+          "source_arithmetic_consistent": true,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        }
+      ],
+      "source_evidence": [
+        {
+          "source_id": "hrm-cao-contract-amendments-2024-12",
+          "source_locator": "2024-12-11-p4-t1-r2",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2024-12-11-po-2070901586",
+          "label": "CAO Contract Amendment Report – RFP 23-159, Increase to PO 2070901586 – Design Services"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-23-159",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:43cb768e54e2e8289b26",
+          "label": "Request for Proposal- Scotiabank Centre Digital Advertising and Public Address System"
+        }
+      ],
+      "evidence_record_count": 2,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-5306331c6d958af3c45b",
+      "component_id": "b19-component-5306331c6d958af3c45b",
+      "title": "Procurement amendment lifecycle · 2022-169",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "procurement_reference_linked_to_public_cao_amendment_evidence"
+      ],
+      "domains": [
+        "amendment",
+        "procurement"
+      ],
+      "capital_project_accounts": [],
+      "procurement_references": [
+        "2022-169"
+      ],
+      "purchase_orders": [
+        "2070887951"
+      ],
+      "vendor_names_context_only": [
+        "Bird Mechanical"
+      ],
+      "observed_facts": [
+        "Procurement reference(s): 2022-169",
+        "Purchase order(s): 2070887951",
+        "Published vendor name(s), context only: Bird Mechanical",
+        "Evidence domains: amendment, procurement"
+      ],
+      "amendment_facts": [
+        {
+          "observation_id": "2025-11-25-po-2070887951",
+          "report_date": "2025-11-25",
+          "purchase_order": "2070887951",
+          "procurement_refs": [
+            "22-169"
+          ],
+          "name_source": "22-169, Increase to PO 2070887951 - Acadia Centre HVAC Upgrades",
+          "reason_source": "Changes to scope of work including $5,000 contingency for unforeseen conditions",
+          "original_value": 981049.0,
+          "effective_cumulative_amendment_value": 205132.0,
+          "updated_value_source": null,
+          "derived_updated_value": 1186181.0,
+          "increase_pct_source": 20.9,
+          "derived_increase_pct": 20.9095,
+          "source_arithmetic_consistent": null,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        }
+      ],
+      "source_evidence": [
+        {
+          "source_id": "hrm-cao-contract-amendments-2025-11",
+          "source_locator": "2025-11-25-p3-t1-r10",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2025-11-25-po-2070887951",
+          "label": "22-169, Increase to PO 2070887951 - Acadia Centre HVAC Upgrades"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-22-169",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:3915e6513d1766b76ce0",
+          "label": "Request for Tender- Acadia Centre HVAC Upgrades"
+        }
+      ],
+      "evidence_record_count": 2,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-581d64b7129d89a6e31c",
+      "component_id": "b19-component-581d64b7129d89a6e31c",
+      "title": "Procurement amendment lifecycle · 2018-302",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "procurement_reference_linked_to_public_cao_amendment_evidence"
+      ],
+      "domains": [
+        "amendment",
+        "procurement"
+      ],
+      "capital_project_accounts": [],
+      "procurement_references": [
+        "2018-302"
+      ],
+      "purchase_orders": [
+        "2070796457"
+      ],
+      "vendor_names_context_only": [
+        "WSP Canada"
+      ],
+      "observed_facts": [
+        "Procurement reference(s): 2018-302",
+        "Purchase order(s): 2070796457",
+        "Published vendor name(s), context only: WSP Canada",
+        "Evidence domains: amendment, procurement"
+      ],
+      "amendment_facts": [
+        {
+          "observation_id": "2024-10-09-po-2070796457",
+          "report_date": "2024-10-09",
+          "purchase_order": "2070796457",
+          "procurement_refs": [
+            "18-302"
+          ],
+          "name_source": "CAO Contract Amendment Report – RFP 18-302 PO 2070796457 Bayers Road Transit Priority- Increase to Contract #11",
+          "reason_source": "Phase 2 (Connaught Avenue to Windsor Street) construction was planned to be tendered in fall/winter 2022 with construction in 2023. However, due to the current status of the land acquisition schedule, it is expected that the Phase 2 construction will be tendered and constructed in 2025. Additional costs and scope items have been added to the project, including integration of the Halifax Water watermain replacement and design changes to the Windsor, Young and Bayers Road intersection to accommodate proposed at facilities on Windsor and Young Streets. Previous Regional Council approvals include C.O.#4 (Item 15.1.1 – December 10, 2019); C.O.#7 (Item 9.1.4 – June 23, 2020; & C.O. #’s 8&9 (Item 11.1.7 – August 17, 2021). C.O. #10 (Item 15.1.1 – November 8, 2022).",
+          "original_value": 114324.0,
+          "effective_cumulative_amendment_value": 444390.0,
+          "updated_value_source": 558714.0,
+          "derived_updated_value": 558714.0,
+          "increase_pct_source": 389.0,
+          "derived_increase_pct": 388.711,
+          "source_arithmetic_consistent": true,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        }
+      ],
+      "source_evidence": [
+        {
+          "source_id": "hrm-cao-contract-amendments-2024-10",
+          "source_locator": "2024-10-09-p3-t1-r2",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2024-10-09-po-2070796457",
+          "label": "CAO Contract Amendment Report – RFP 18-302 PO 2070796457 Bayers Road Transit Priority- Increase to Contract #11"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-18-302",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:51f30d8fef607e5d8e53",
+          "label": "Bayers Road Transit Priority Corridor- Detailed Design"
+        }
+      ],
+      "evidence_record_count": 2,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-cb2a71593e89e9d52367",
+      "component_id": "b19-component-cb2a71593e89e9d52367",
+      "title": "Procurement amendment lifecycle · 2023-176",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "procurement_reference_linked_to_public_cao_amendment_evidence"
+      ],
+      "domains": [
+        "amendment",
+        "procurement"
+      ],
+      "capital_project_accounts": [],
+      "procurement_references": [
+        "2023-176"
+      ],
+      "purchase_orders": [
+        "2070906544"
+      ],
+      "vendor_names_context_only": [
+        "Blunden Construction"
+      ],
+      "observed_facts": [
+        "Procurement reference(s): 2023-176",
+        "Purchase order(s): 2070906544",
+        "Published vendor name(s), context only: Blunden Construction",
+        "Evidence domains: amendment, procurement"
+      ],
+      "amendment_facts": [
+        {
+          "observation_id": "2024-12-11-po-2070906544",
+          "report_date": "2024-12-11",
+          "purchase_order": "2070906544",
+          "procurement_refs": [
+            "23-176"
+          ],
+          "name_source": "CAO Contract Amendment Report – RFT 23-176, PO 2070906544, Chocolate Lake Community Centre Upgrades – Increase #3",
+          "reason_source": "In 2020 HRM Council approved the HalifACT Climate Plan, including a target of net-zero municipal operations by 2030. Staff has recommended an increase to Blunden Construction (1995) Limited’s PO 2070906544 for changes to the contracted scope of work in the amount of $20,000 (net HST included). This change is due to a change in the code requirements for natural gas piping. This increase also includes owner contingency as the project moves into the final stage and commissioning.",
+          "original_value": 992803.0,
+          "effective_cumulative_amendment_value": 215573.0,
+          "updated_value_source": 1208376.0,
+          "derived_updated_value": 1208376.0,
+          "increase_pct_source": 22.0,
+          "derived_increase_pct": 21.7136,
+          "source_arithmetic_consistent": true,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        }
+      ],
+      "source_evidence": [
+        {
+          "source_id": "hrm-cao-contract-amendments-2024-12",
+          "source_locator": "2024-12-11-p4-t1-r1",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2024-12-11-po-2070906544",
+          "label": "CAO Contract Amendment Report – RFT 23-176, PO 2070906544, Chocolate Lake Community Centre Upgrades – Increase #3"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-2023-176",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:70ed566ce8068818d034",
+          "label": "Tender- Chocolate Lake Community Centre Upgrades"
+        }
+      ],
+      "evidence_record_count": 2,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-d83a10769b16c34055f3",
+      "component_id": "b19-component-d83a10769b16c34055f3",
+      "title": "Procurement amendment lifecycle · 2024-0034",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "procurement_reference_linked_to_public_cao_amendment_evidence"
+      ],
+      "domains": [
+        "amendment",
+        "procurement"
+      ],
+      "capital_project_accounts": [],
+      "procurement_references": [
+        "2024-0034"
+      ],
+      "purchase_orders": [
+        "2070920062"
+      ],
+      "vendor_names_context_only": [
+        "Eagle Beach Contractors"
+      ],
+      "observed_facts": [
+        "Procurement reference(s): 2024-0034",
+        "Purchase order(s): 2070920062",
+        "Published vendor name(s), context only: Eagle Beach Contractors",
+        "Evidence domains: amendment, procurement"
+      ],
+      "amendment_facts": [
+        {
+          "observation_id": "2025-04-16-po-2070920062",
+          "report_date": "2025-04-16",
+          "purchase_order": "2070920062",
+          "procurement_refs": [
+            "2024-0034"
+          ],
+          "name_source": "CAO Contract Amendment Tender 2024- 0034, PO 2070920062 - Fire Boat Infrastructure",
+          "reason_source": "Eagle Beach Contractors Ltd was awarded Tender # 2024-0034 in April 2024 through a competitive bid process. The original scope of work was supply and installation of gang way, floating dock and electrical upgrades at the Alderney waterfront to support yearly operations of the new HRFE fire boat. During construction, HRFE requested for a change in the scope of work. The scope change was to include a water line, usable 12 months a year, to flush the two fire pump systems after each use and wash and clean the fire boat upon returning to jetty. The work involves running an insulated water line under the existing wharves.",
+          "original_value": 239467.0,
+          "effective_cumulative_amendment_value": 62281.0,
+          "updated_value_source": 301747.0,
+          "derived_updated_value": 301748.0,
+          "increase_pct_source": 26.0,
+          "derived_increase_pct": 26.0082,
+          "source_arithmetic_consistent": false,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        }
+      ],
+      "source_evidence": [
+        {
+          "source_id": "hrm-cao-contract-amendments-2025-04",
+          "source_locator": "2025-04-16-p3-t1-r4",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2025-04-16-po-2070920062",
+          "label": "CAO Contract Amendment Tender 2024- 0034, PO 2070920062 - Fire Boat Infrastructure"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-2024-0034",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:30bd1ebb288f913320d5",
+          "label": "New Floating Dock and Electrical"
+        }
+      ],
+      "evidence_record_count": 2,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    },
+    {
+      "investigation_id": "b19-investigation-db93e8257660dda0a719",
+      "component_id": "b19-component-db93e8257660dda0a719",
+      "title": "Procurement amendment lifecycle · 2023-162",
+      "review_priority_score": 66,
+      "priority": "context",
+      "review_reasons": [
+        "procurement_reference_linked_to_public_cao_amendment_evidence"
+      ],
+      "domains": [
+        "amendment",
+        "procurement"
+      ],
+      "capital_project_accounts": [],
+      "procurement_references": [
+        "2023-162"
+      ],
+      "purchase_orders": [
+        "2070899393"
+      ],
+      "vendor_names_context_only": [
+        "Bird Mechanical"
+      ],
+      "observed_facts": [
+        "Procurement reference(s): 2023-162",
+        "Purchase order(s): 2070899393",
+        "Published vendor name(s), context only: Bird Mechanical",
+        "Evidence domains: amendment, procurement"
+      ],
+      "amendment_facts": [
+        {
+          "observation_id": "2024-12-11-po-2070899393",
+          "report_date": "2024-12-11",
+          "purchase_order": "2070899393",
+          "procurement_refs": [
+            "23-162"
+          ],
+          "name_source": "CAO Contract Amendment Report - RFT 23-162, PO 2070899393, Upper Hammonds Plains Community Centre Upgrades",
+          "reason_source": "In 2020 HRM Council approved the HalifACT Climate Plan, including a target of net-zero municipal operations by 2030. Staff has recommended an increase to Bird Mechanical’s PO 2070899393 for changes to the contracted scope of work in the amount of $11,893 (net HST included). This increase is for additional code work to meet NSPI’s inspection and T-bar ceiling adjustments due to unforeseen site conditions. The release of these contingency funds will be by approval of the Project Manager, only if necessary.",
+          "original_value": 280024.0,
+          "effective_cumulative_amendment_value": 66004.0,
+          "updated_value_source": 346028.0,
+          "derived_updated_value": 346028.0,
+          "increase_pct_source": 24.0,
+          "derived_increase_pct": 23.5708,
+          "source_arithmetic_consistent": true,
+          "is_final_paid_value": false,
+          "is_invoice_or_payment": false
+        }
+      ],
+      "source_evidence": [
+        {
+          "source_id": "hrm-cao-contract-amendments-2024-12",
+          "source_locator": "2024-12-11-p3-t1-r4",
+          "source_url": null,
+          "domain": "amendment",
+          "record_type": "cao_contract_amendment_observation",
+          "record_key": "2024-12-11-po-2070899393",
+          "label": "CAO Contract Amendment Report - RFT 23-162, PO 2070899393, Upper Hammonds Plains Community Centre Upgrades"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "HRM-23-162",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:c8ebb769661cc758004b",
+          "label": "Tender- Upper Hammonds Plains Community Centre Upgrades"
+        }
+      ],
+      "evidence_record_count": 2,
+      "identifier_count": 2,
+      "has_payment_evidence": false,
+      "has_budget_service_area_bridge": false,
+      "has_audited_psas_bridge": false,
+      "interpretation": "Review priority reflects deterministic evidence depth and lifecycle complexity only. It is not a probability or finding of waste, corruption, illegality, policy breach, overpayment, or final paid value."
+    }
+  ]
+}
