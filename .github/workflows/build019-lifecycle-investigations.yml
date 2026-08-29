@@ -1,0 +1,67 @@
+name: Build 019 Lifecycle Investigations
+
+on:
+  push:
+    branches: ['agent/build-019-deterministic-lifecycle-reconciliation']
+    paths:
+      - 'data/generated/lifecycle_reconciliation.json'
+      - 'data/generated/contract_amendments.json'
+      - 'data/generated/lifecycle_investigations.json'
+      - 'scripts/build_lifecycle_investigations_build019.py'
+      - 'scripts/validate_lifecycle_investigations_build019.py'
+      - '.github/workflows/build019-lifecycle-investigations.yml'
+  pull_request:
+    paths:
+      - 'data/generated/lifecycle_reconciliation.json'
+      - 'data/generated/contract_amendments.json'
+      - 'data/generated/lifecycle_investigations.json'
+      - 'scripts/build_lifecycle_investigations_build019.py'
+      - 'scripts/validate_lifecycle_investigations_build019.py'
+      - '.github/workflows/build019-lifecycle-investigations.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-investigations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate Build 019 investigation Python syntax
+        run: python -m compileall -q scripts/build_lifecycle_investigations_build019.py scripts/validate_lifecycle_investigations_build019.py
+      - name: Build deterministic lifecycle investigation queue
+        run: python scripts/build_lifecycle_investigations_build019.py --output /tmp/lifecycle_investigations.json
+      - name: Validate lifecycle investigation queue
+        run: python scripts/validate_lifecycle_investigations_build019.py /tmp/lifecycle_investigations.json
+      - name: Preserve proof artifact
+        run: |
+          mkdir -p artifacts
+          cp /tmp/lifecycle_investigations.json artifacts/lifecycle_investigations.json
+      - name: Publish validated queue to latest Build 019 branch head
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-019-deterministic-lifecycle-reconciliation'
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B build019-investigations-publish "origin/$GITHUB_REF_NAME"
+          cp /tmp/lifecycle_investigations.json data/generated/lifecycle_investigations.json
+          python scripts/validate_lifecycle_investigations_build019.py data/generated/lifecycle_investigations.json
+          if [ -z "$(git status --porcelain -- data/generated/lifecycle_investigations.json)" ]; then
+            echo 'Checked Build 019 investigation queue already matches deterministic rebuild.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/lifecycle_investigations.json
+          git commit -m 'Build 019: publish lifecycle investigation queue'
+          git push origin HEAD:"$GITHUB_REF_NAME"
+      - name: Upload Build 019 investigation proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build019-investigations-${{ github.sha }}
+          path: artifacts/lifecycle_investigations.json
+          if-no-files-found: warn
+          retention-days: 14
