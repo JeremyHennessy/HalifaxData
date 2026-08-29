@@ -4,7 +4,7 @@
  */
 
 state.build019LifecycleInvestigations = { status: 'loading', data: null, error: null };
-state.build019LifecyclePriority = 'all';
+state.build019LifecyclePriority = 'attention';
 state.build019LifecycleTrack = 'all';
 
 fetch('./data/generated/lifecycle_investigations.json', { cache: 'no-store' })
@@ -39,9 +39,14 @@ function b19PriorityLabel(value) {
 }
 function b19PriorityTone(value) { return value === 'priority_review' ? 'warn' : value === 'review' ? 'info' : 'muted'; }
 function b19Track(row) { return row.capital_project_accounts?.length ? 'capital_procurement' : 'procurement_amendment'; }
+function b19PriorityMatches(row) {
+  if (state.build019LifecyclePriority === 'all') return true;
+  if (state.build019LifecyclePriority === 'attention') return row.priority === 'priority_review' || row.priority === 'review';
+  return row.priority === state.build019LifecyclePriority;
+}
 function b19FilteredInvestigations() {
   return b19InvestigationRows().filter(row =>
-    (state.build019LifecyclePriority === 'all' || row.priority === state.build019LifecyclePriority) &&
+    b19PriorityMatches(row) &&
     (state.build019LifecycleTrack === 'all' || b19Track(row) === state.build019LifecycleTrack)
   );
 }
@@ -80,7 +85,7 @@ function b19InvestigationPanel() {
       ${metricCard('Procurement ↔ amendment', numberFmt.format(summary.procurement_amendment || 0), 'Exact tender/contract refs and PO evidence', 'neutral')}
       ${metricCard('Payment evidence', '0', 'Transaction analyses remain disabled', 'warn')}
     </div>
-    <div class="local-toolbar"><select id="b19-lifecycle-priority"><option value="all">All review states</option><option value="priority_review" ${state.build019LifecyclePriority === 'priority_review' ? 'selected' : ''}>Priority review</option><option value="review" ${state.build019LifecyclePriority === 'review' ? 'selected' : ''}>Review</option><option value="context" ${state.build019LifecyclePriority === 'context' ? 'selected' : ''}>Context</option></select><select id="b19-lifecycle-track"><option value="all">All lifecycle tracks</option><option value="capital_procurement" ${state.build019LifecycleTrack === 'capital_procurement' ? 'selected' : ''}>Capital ↔ procurement</option><option value="procurement_amendment" ${state.build019LifecycleTrack === 'procurement_amendment' ? 'selected' : ''}>Procurement ↔ amendment</option></select><span class="table-note">${numberFmt.format(rows.length)} targets</span></div>
+    <div class="local-toolbar"><select id="b19-lifecycle-priority"><option value="attention" ${state.build019LifecyclePriority === 'attention' ? 'selected' : ''}>Priority + review</option><option value="all" ${state.build019LifecyclePriority === 'all' ? 'selected' : ''}>All 29 targets</option><option value="priority_review" ${state.build019LifecyclePriority === 'priority_review' ? 'selected' : ''}>Priority review</option><option value="review" ${state.build019LifecyclePriority === 'review' ? 'selected' : ''}>Review</option><option value="context" ${state.build019LifecyclePriority === 'context' ? 'selected' : ''}>Context</option></select><select id="b19-lifecycle-track"><option value="all">All lifecycle tracks</option><option value="capital_procurement" ${state.build019LifecycleTrack === 'capital_procurement' ? 'selected' : ''}>Capital ↔ procurement</option><option value="procurement_amendment" ${state.build019LifecycleTrack === 'procurement_amendment' ? 'selected' : ''}>Procurement ↔ amendment</option></select><span class="table-note">${numberFmt.format(rows.length)} of ${numberFmt.format(summary.investigations || 0)} targets</span></div>
     ${rows.length ? `<div class="b8-investigation-grid">${rows.map(b19InvestigationCard).join('')}</div>` : emptyState('No lifecycle targets under these filters', 'Widen the Build 019 review-state or lifecycle-track filter.')}
   </div></section>`;
 }
