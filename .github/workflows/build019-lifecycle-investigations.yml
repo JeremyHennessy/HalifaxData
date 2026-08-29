@@ -9,6 +9,7 @@ on:
       - 'data/generated/lifecycle_investigations.json'
       - 'scripts/build_lifecycle_investigations_build019.py'
       - 'scripts/validate_lifecycle_investigations_build019.py'
+      - 'docs/build019-release-candidate.md'
       - '.github/workflows/build019-lifecycle-investigations.yml'
   pull_request:
     paths:
@@ -17,6 +18,7 @@ on:
       - 'data/generated/lifecycle_investigations.json'
       - 'scripts/build_lifecycle_investigations_build019.py'
       - 'scripts/validate_lifecycle_investigations_build019.py'
+      - 'docs/build019-release-candidate.md'
       - '.github/workflows/build019-lifecycle-investigations.yml'
 
 permissions:
