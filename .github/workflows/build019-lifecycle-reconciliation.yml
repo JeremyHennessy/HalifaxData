@@ -21,6 +21,7 @@ on:
       - 'scripts/validate_lifecycle_reconciliation_build019.py'
       - 'scripts/validate_lifecycle_components_build019.py'
       - 'scripts/validate_capital_identifier_policy_build019.py'
+      - 'docs/build019-release-candidate.md'
       - '.github/workflows/build019-lifecycle-reconciliation.yml'
   pull_request:
     paths:
@@ -41,6 +42,7 @@ on:
       - 'scripts/validate_lifecycle_reconciliation_build019.py'
       - 'scripts/validate_lifecycle_components_build019.py'
       - 'scripts/validate_capital_identifier_policy_build019.py'
+      - 'docs/build019-release-candidate.md'
       - '.github/workflows/build019-lifecycle-reconciliation.yml'
 
 permissions:
