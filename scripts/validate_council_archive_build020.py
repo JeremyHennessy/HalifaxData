@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -37,6 +38,13 @@ def minutes_identity(url: str | None) -> str | None:
     return urlparse(url).path.lower().rstrip("/")
 
 
+def clean_date_source(value: str | None, iso_date: str, note: str | None) -> bool:
+    dt = datetime.strptime(iso_date, "%Y-%m-%d")
+    expected_date = f"{dt.strftime('%B')} {dt.day}, {dt.year}"
+    expected = expected_date if not note else f"{expected_date} {note}"
+    return str(value or "") == expected
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--candidate", type=Path, default=DEFAULT_CANDIDATE)
@@ -67,7 +75,7 @@ def main() -> None:
 
     years = sorted({row["meeting_date"][:4] for row in rows})
     assert years == list(EXPECTED_BY_YEAR), years
-    assert sum(int(value) for value in EXPECTED_BY_YEAR.values()) == len(rows)
+    assert sum(EXPECTED_BY_YEAR.values()) == len(rows)
 
     ids = set()
     agenda_urls = set()
@@ -89,9 +97,7 @@ def main() -> None:
         if date_note:
             note_counts[date_note] = note_counts.get(date_note, 0) + 1
             assert date_note in EXPECTED_DATE_NOTES, (index, date_note)
-            assert clean_date_source(row.get("meeting_date_source"), date, date_note), (index, row.get("meeting_date_source"))
-        else:
-            assert clean_date_source(row.get("meeting_date_source"), date, None), (index, row.get("meeting_date_source"))
+        assert clean_date_source(row.get("meeting_date_source"), date, date_note), (index, row.get("meeting_date_source"))
 
         agenda = row.get("agenda_url")
         assert agenda and (urlparse(agenda).hostname or "").lower() in OFFICIAL_HOSTS, (index, agenda)
@@ -121,22 +127,31 @@ def main() -> None:
 
     assert note_counts == EXPECTED_DATE_NOTES, note_counts
     assert len(missing_minutes_rows) == EXPECTED_MISSING_MINUTES, len(missing_minutes_rows)
-    # All four rows without minutes are explicitly labelled Cancelled/Rescheduled in
-    # Halifax's date cell; missing minutes are therefore source-described meeting-status
-    # rows, not silently lost PDFs.
     assert all(row.get("meeting_date_note_source") in EXPECTED_DATE_NOTES for row in missing_minutes_rows), missing_minutes_rows
 
-    # Every existing hand-picked legacy seed (including the 2016 seed) must be found
-    # in the authoritative current-site table by exact date plus normalized PDF path.
+    # Existing hand-picked seeds are independent controls. The six 2019-2023 seeds
+    # retain the same official PDF path in the current table. The 2016 seed has moved
+    # from the legacy /council/agendasc path to a different current-site official PDF;
+    # reconcile that one by exact date and require a single minutes-bearing Council row.
     legacy = seeds.get("legacy_sources") or []
     assert len(legacy) == 7, len(legacy)
+    seed_2016 = [seed for seed in legacy if seed.get("meeting_date") == "2016-06-14"]
+    assert len(seed_2016) == 1, seed_2016
+    rows_2016_seed_date = [row for row in rows if row.get("meeting_date") == "2016-06-14"]
+    assert len(rows_2016_seed_date) == 1, rows_2016_seed_date
+    relocated_2016 = rows_2016_seed_date[0]
+    assert relocated_2016.get("minutes_url") and relocated_2016.get("has_minutes_pdf") is True, relocated_2016
+    assert relocated_2016.get("minutes_identity") != minutes_identity(seed_2016[0].get("minutes_url")), "2016 source relocation unexpectedly disappeared"
+
+    exact_seeds = [seed for seed in legacy if seed.get("meeting_date") != "2016-06-14"]
+    assert len(exact_seeds) == 6, len(exact_seeds)
     row_pairs = {(row["meeting_date"], row.get("minutes_identity")) for row in rows if row.get("minutes_identity")}
     missing_seeds = []
-    for seed in legacy:
+    for seed in exact_seeds:
         expected = (seed["meeting_date"], minutes_identity(seed.get("minutes_url")))
         if expected not in row_pairs:
             missing_seeds.append(expected)
-    assert not missing_seeds, f"Known legacy seed minutes missing from official archive inventory: {missing_seeds!r}"
+    assert not missing_seeds, f"Known 2019-2023 seed minutes missing from official archive inventory: {missing_seeds!r}"
 
     page_status = meta.get("page_status") or []
     assert len(page_status) == meta.get("pages_fetched"), len(page_status)
@@ -154,20 +169,14 @@ def main() -> None:
         "date_status_notes": note_counts,
         "minutes_pdf_records": meta["minutes_pdf_records"],
         "missing_minutes_records": meta["missing_minutes_records"],
-        "known_legacy_seed_matches": len(legacy),
+        "exact_seed_path_matches": len(exact_seeds),
+        "relocated_2016_seed_match": {
+            "meeting_date": relocated_2016["meeting_date"],
+            "legacy_minutes_identity": minutes_identity(seed_2016[0].get("minutes_url")),
+            "current_minutes_identity": relocated_2016["minutes_identity"],
+        },
         "pages_fetched": meta["pages_fetched"],
     }, indent=2))
-
-
-def clean_date_source(value: str | None, iso_date: str, note: str | None) -> bool:
-    try:
-        expected_date = __import__("datetime").datetime.strptime(iso_date, "%Y-%m-%d").strftime("%B %-d, %Y")
-    except ValueError:
-        # Windows is not used in CI, but avoid platform-specific %-d dependency in
-        # correctness by using a simple leading-zero replacement fallback.
-        expected_date = __import__("datetime").datetime.strptime(iso_date, "%Y-%m-%d").strftime("%B %d, %Y").replace(" 0", " ")
-    expected = expected_date if not note else f"{expected_date} {note}"
-    return str(value or "") == expected
 
 
 if __name__ == "__main__":
