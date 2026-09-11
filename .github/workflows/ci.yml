@@ -81,6 +81,8 @@ jobs:
         run: python scripts/validate_municipal_benchmarks.py
       - name: Validate Council calendar and document graph
         run: python scripts/validate_council.py
+      - name: Validate Build 020 historical Council archive release
+        run: python scripts/validate_council_archive_release_build020.py
       - name: Validate Build 016 Council decision evidence
         run: python scripts/validate_council_decisions.py
       - name: Validate quarterly spending summaries
