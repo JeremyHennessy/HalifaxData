@@ -1,0 +1,37 @@
+name: Build 020 Council Archive Proof
+
+on:
+  push:
+    branches: ['agent/build020-tax-payment-graph']
+    paths:
+      - 'data/council_decision_sources.json'
+      - 'scripts/ingest_council_archive_build020.py'
+      - 'scripts/validate_council_archive_build020.py'
+      - '.github/workflows/build020-council-archive-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate archive collector syntax
+        run: python -m compileall -q scripts/ingest_council_archive_build020.py scripts/validate_council_archive_build020.py
+      - name: Collect official Regional Council historical archive
+        run: python scripts/ingest_council_archive_build020.py --output artifacts/build020-council-archive.json
+      - name: Validate exact archive coverage and seed reconciliation
+        run: python scripts/validate_council_archive_build020.py --candidate artifacts/build020-council-archive.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build020-council-archive-${{ github.sha }}
+          path: artifacts/build020-council-archive.json
+          retention-days: 14
