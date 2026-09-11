@@ -96,6 +96,8 @@ def main() -> None:
         else:
             assert close(row["current_year"], row["source_presented_current_year"] * 1000, 0.011), index
 
+        # The 2017 comparative remains OCR-derived from the 2018 source. It is not
+        # corrected from a later statement in this Build 020 adapter.
         assert close(row["prior_year"], row["source_presented_prior_year"] * 1000, 0.011), index
         key = (row["source_page"], row["statement_family"], norm_label(row["line_item"]), row["current_year"], row["prior_year"])
         assert key not in seen, f"duplicate OCR fact: {key!r}"
@@ -103,26 +105,25 @@ def main() -> None:
 
     assert len(corrected_rows) == EXPECTED_CORRECTIONS, len(corrected_rows)
 
-    # Hard anchors are authoritative normalized values after the explicit comparator
-    # corrections. They cover both corrected and naturally accurate OCR rows.
-    anchors = [
-        ("financial_position", "Cash and short-term deposits", 187_292_000, 235_331_000),
-        ("financial_position", "Accounts payable and accrued liabilities", 106_700_000, 77_162_000),
-        ("financial_position", "Loans, deposits and advances", 490_000, 544_000),
-        ("financial_position", "Investment in the Halifax Regional Water Commission", 167_660_000, 147_629_000),
-        ("financial_position", "Net financial assets", 163_419_000, 134_397_000),
-        ("financial_position", "Accumulated surplus", 2_040_260_000, 1_958_195_000),
-        ("operations", "Taxation", 736_207_000, 710_941_000),
-        ("operations", "Total expenses", 953_587_000, 924_234_000),
-        ("cash_flows", "Annual surplus", 83_815_000, 63_231_000),
-        ("cash_flows", "Increase (decrease) in accounts payable and accrued liabilities", -67_000, 9_298_000),
-        ("cash_flows", "Before remeasurement gain (loss)", -21_781_000, -14_363_000),
-        ("cash_flows", "Cash and short-term deposits, end of year", 187_292_000, 235_331_000),
+    # Current-year anchors only. No 2017 figure is asserted here unless independently
+    # validated in a separate source; this avoids turning OCR output into a hard fact.
+    current_anchors = [
+        ("financial_position", "Cash and short-term deposits", 187_292_000),
+        ("financial_position", "Accounts payable and accrued liabilities", 106_700_000),
+        ("financial_position", "Loans, deposits and advances", 490_000),
+        ("financial_position", "Investment in the Halifax Regional Water Commission", 167_660_000),
+        ("financial_position", "Net financial assets", 163_419_000),
+        ("financial_position", "Accumulated surplus", 2_040_260_000),
+        ("operations", "Taxation", 736_207_000),
+        ("operations", "Total expenses", 953_587_000),
+        ("cash_flows", "Annual surplus", 83_815_000),
+        ("cash_flows", "Increase (decrease) in accounts payable and accrued liabilities", -67_000),
+        ("cash_flows", "Before remeasurement gain (loss)", -21_781_000),
+        ("cash_flows", "Cash and short-term deposits, end of year", 187_292_000),
     ]
-    for family, label, current, prior in anchors:
+    for family, label, current in current_anchors:
         row = find_unique(rows, family, label)
         assert close(row["current_year"], current), (family, label, row["current_year"], current)
-        assert close(row["prior_year"], prior), (family, label, row["prior_year"], prior)
 
     # Independent consistency check: the text-native 2019 audited statement prints
     # these same 2018 line items in its comparative column. After explicit correction,
