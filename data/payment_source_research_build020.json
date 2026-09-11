@@ -1,0 +1,232 @@
+{
+  "metadata": {
+    "build": "020",
+    "researched_at": "2026-09-11",
+    "domain": "accounts_payable_vendor_payments",
+    "status": "transaction_source_not_yet_acquired_access_path_strengthened",
+    "ready_for_transaction_analysis": false,
+    "verified_public_transaction_ledger": false,
+    "verified_internal_transaction_records_exist": true,
+    "payment_facts_available_to_halifaxdata": 0,
+    "is_evidence_of_source_absence": false,
+    "principle": "Targeted public-source research still has not verified a public HRM invoice-, cheque-, accounts-payable-, purchasing-card-, or vendor-payment-level ledger. Build 020 did verify stronger evidence that transaction-level AP records exist internally and that at least some invoice/payment amount information can be releasable under Part XX of the Municipal Government Act. HalifaxData must continue to report zero payment facts until an actual transaction source is acquired and validated. Procurement awards, contract amendments, budgets, quarterly financial summaries and audited aggregates are not payments."
+  },
+  "confirmed_internal_record_evidence": [
+    {
+      "id": "hrm-oag-ap-audit-2021",
+      "publisher": "Halifax Regional Municipality Office of the Auditor General",
+      "title": "Management of Accounts Payable Audit - April 2021",
+      "url": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Management_of_Accounts_Payable_Audit_Report.pdf",
+      "evidence_class": "internal_transaction_records_confirmed_not_public_ledger",
+      "findings": [
+        "Accounts Payable is responsible for processing and paying invoices for HRM business units.",
+        "The audit states that invoice processing uses vendor number, invoice number, invoice date and amount in HRM's financial system.",
+        "The audit analyzed 122,328 invoices processed during its April 2019 to September 2020 audit period for possible duplicate invoices.",
+        "The audit analyzed 11,317 transactions posted to the one-time vendor account from April 1, 2016 to February 22, 2021.",
+        "The audit found that invoice and payment data were sufficiently structured for data analysis, duplicate-payment testing, invoice timing analysis and early-payment-discount analysis.",
+        "These audit findings prove internal record existence and analytical feasibility; they do not publish the underlying invoice/payment rows to HalifaxData."
+      ],
+      "candidate_fields_supported_by_source": [
+        "vendor_number",
+        "invoice_number",
+        "invoice_date",
+        "invoice_amount",
+        "payment_status_or_paid_state",
+        "invoice_entry_date_or_posting_date"
+      ]
+    },
+    {
+      "id": "hrm-standard-terms-electronic-payment",
+      "publisher": "Halifax Regional Municipality",
+      "title": "Standard Terms and Conditions for Goods, Services and Standing Offers",
+      "url": "https://www.halifax.ca/sites/default/files/documents/business/doing-business-halifax/stdtermsforgandsrevJune202016.pdf",
+      "evidence_class": "internal_payment_process_confirmed_not_public_ledger",
+      "findings": [
+        "Supplier invoices are required to identify the purchase order and relevant invoice information.",
+        "HRM administers payables through an electronic payment process.",
+        "Standard terms provide a normal payment timing framework tied to invoice receipt or satisfactory delivery, subject to purchase-order terms and verification."
+      ]
+    },
+    {
+      "id": "hrm-procurement-audit-2018",
+      "publisher": "Halifax Regional Municipality Office of the Auditor General",
+      "title": "Procurement Audit - May 2018",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/180516afsc121.pdf",
+      "evidence_class": "purchase_order_population_confirmed_not_payment_ledger",
+      "findings": [
+        "For fiscal 2017/18 the audit reported approximately 49,747 purchase orders with a value of about $265 million.",
+        "Purchase-order populations are procurement/authorization evidence and must not be relabelled as invoice or payment facts."
+      ]
+    }
+  ],
+  "disclosure_precedent": [
+    {
+      "id": "oipc-review-24-06",
+      "publisher": "Office of the Information and Privacy Commissioner for Nova Scotia",
+      "title": "Review Report 24-06 - Halifax Regional Municipality",
+      "url": "https://oipc.novascotia.ca/sites/default/files/reports/24-06%202024%2003%2021%20Review%20Report_0.pdf",
+      "evidence_class": "invoice_amount_disclosure_precedent_not_bulk_release",
+      "findings": [
+        "The access request concerned direct and indirect costs incurred by HRM for collective-agreement negotiations.",
+        "The responsive record set included 213 pages of legal-services invoices and records of arbitrator fees.",
+        "The Commissioner recommended disclosure of the bottom-line totals of the legal invoices and all records of fees paid to the arbitrator, while allowing other protected invoice content to remain withheld.",
+        "This is evidence that invoice/payment amount information can be severed and disclosed in at least some HRM access cases; it is not a ruling that every AP field or every vendor record must be released."
+      ]
+    },
+    {
+      "id": "oipc-review-19-07",
+      "publisher": "Office of the Information and Privacy Commissioner for Nova Scotia",
+      "title": "Review Report 19-07 - Halifax Regional Municipality",
+      "url": "https://oipc.novascotia.ca/sites/default/files/reports/19-07%20Review%20Report%20%2822%20Aug%202019%29_0.pdf",
+      "evidence_class": "municipal_payment_transparency_precedent_employee_specific",
+      "findings": [
+        "The Commissioner concluded that performance-based payments to identified municipal employees were subject to a statutory transparency provision and recommended disclosure.",
+        "This supports the general proposition that municipal payment amounts can engage strong accountability interests, but the decision concerns employee performance payments rather than supplier AP records."
+      ]
+    }
+  ],
+  "official_access_path": {
+    "strategy": "request_machine_readable_register_before_requesting_invoice_documents",
+    "reason": "A structured extract is the smallest, most useful and least burdensome path to transaction analysis. Requesting thousands of invoice PDFs first would increase processing burden, fees, severing complexity and privacy risk without providing a better analytical starting point.",
+    "preferred_sequence": [
+      "Submit a routine/informal request to HRM Finance/Accounts Payable for an existing machine-readable report or export of releasable AP/vendor-payment records.",
+      "Ask HRM to identify any standard SAP/S4 or successor-system report that can satisfy the request with minimal custom programming.",
+      "If the records are not routinely available, file a Part XX Municipal Government Act access request using the same narrowly defined fields and request an electronic spreadsheet or delimited export.",
+      "If the full retention period is considered too burdensome, accept a staged release beginning with the most recent complete fiscal year or rolling 24 months, while preserving stable identifiers and the data dictionary.",
+      "Only after transaction rows are validated should HalifaxData request selected invoice images or supporting documents for a small number of evidence-driven review cases."
+    ],
+    "official_guidance": [
+      {
+        "title": "Access, Privacy & Requesting Information",
+        "url": "https://www.halifax.ca/sites/default/files/documents/city-hall/accountability-transparency/RequestingInformation.pdf",
+        "finding": "HRM directs requesters to start with an informal request to the relevant business unit; if the information is not routinely available, an access request can be filed."
+      },
+      {
+        "title": "Form 1 - Access to Information Application",
+        "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/accountability-transparency/Form1AccessToInformationApplicationFillableOct18.pdf",
+        "finding": "HRM's form allows an electronic copy request and notes that electronic records are typically supplied in PDF or Excel depending on the records and file size."
+      }
+    ]
+  },
+  "requested_record_scope": {
+    "primary": "An existing machine-readable extract or standard report of HRM accounts-payable/vendor-payment records for the longest practical retention period, one row per releasable invoice/payment event or payment accounting document. Include stable document identifiers and organizational, account, procurement and project coding where those fields exist. Exclude banking data, tax identifiers and protected personal information.",
+    "staged_fallback": "If the longest retention period is not practical, provide the most recent complete fiscal year plus the current fiscal year to date, or a rolling 24-month period, using identical fields and stable identifiers so subsequent releases can be appended without double counting.",
+    "aggregate_fallback": "If invoice/document identifiers cannot be released, provide the most granular releasable vendor/payment export containing vendor/payee, payment date, paid amount and organizational/account/project/procurement references. Do not substitute procurement awards or quarterly summary reports for this request."
+  },
+  "minimum_machine_readable_fields": [
+    "payment_or_accounting_document_id",
+    "vendor_id_if_releasable",
+    "vendor_name_or_payee_name",
+    "invoice_or_source_document_id_if_releasable",
+    "invoice_date_if_releasable",
+    "entry_or_posting_date_if_available",
+    "payment_date_or_clearing_date",
+    "gross_or_document_amount",
+    "paid_or_cleared_amount_if_separate",
+    "tax_amount_if_available",
+    "currency",
+    "purchase_order_number_if_applicable",
+    "contract_or_tender_id_if_available",
+    "business_unit",
+    "cost_centre_or_responsibility_centre",
+    "gl_account_or_expense_category",
+    "capital_project_or_internal_order_code_if_applicable",
+    "payment_method_category_if_releasable",
+    "credit_reversal_void_or_cancellation_indicator",
+    "document_or_payment_status"
+  ],
+  "requested_supporting_metadata": [
+    "field_data_dictionary",
+    "code_lists_for_business_unit_cost_centre_gl_account_project_and_status",
+    "coverage_start_and_end_dates",
+    "record_retention_limitations",
+    "known_exclusions_or_suppression_rules",
+    "one_time_vendor_semantics",
+    "credit_reversal_void_and_cancellation_semantics",
+    "relationship_between_invoice_document_payment_document_and_clearing_date",
+    "whether the extract includes manual purchases_purchase_order_invoices_purchasing_cards_grants_and_employee_reimbursements"
+  ],
+  "privacy_and_security_exclusions": [
+    "bank_account_numbers",
+    "routing_or_transit_numbers",
+    "payment_card_numbers_or_full_card_data",
+    "tax_identification_numbers",
+    "personal_home_addresses",
+    "personal_phone_numbers_or_personal_emails",
+    "other protected personal information not required for public-money reconciliation"
+  ],
+  "public_source_search_results": [
+    {
+      "surface": "HRM Open Data catalogue and Halifax public web search",
+      "result": "No current public invoice-level, vendor-payment, cheque-register or accounts-payable transaction dataset was verified in the targeted Build 020 search.",
+      "interpretation": "targeted_research_result_not_absence_proof"
+    },
+    {
+      "surface": "HRM Council/eSCRIBE attachments",
+      "result": "Council attachments contain procurement reports, audits, contracts, budget documents and some individual invoice/cost evidence, but no recurring bulk AP transaction register was verified.",
+      "interpretation": "supporting_evidence_and_disclosure_leads_not_payment_ledger"
+    },
+    {
+      "surface": "Nova Scotia Awarded Public Tenders",
+      "result": "The provincial tender source provides award/vendor/value evidence, not invoices or payments.",
+      "interpretation": "procurement_award_not_payment"
+    },
+    {
+      "surface": "Nova Scotia Public Accounts Volume 3",
+      "result": "The Province publishes annual cash-basis sums paid from the General Revenue Fund and supplier totals generally at $5,000 and over. This is a useful disclosure/data-model benchmark but it is provincial, not an HRM AP source.",
+      "interpretation": "external_disclosure_model_not_hrm_payment_fact"
+    },
+    {
+      "surface": "HRM quarterly financial reports and audited financial statements",
+      "result": "These sources provide summarized or accrued financial results and cannot be converted into invoice/payment rows.",
+      "interpretation": "financial_summary_not_transaction_ledger"
+    }
+  ],
+  "external_disclosure_model": {
+    "id": "nova-scotia-public-accounts-volume-3-2025",
+    "publisher": "Province of Nova Scotia",
+    "title": "Public Accounts Volume 3 - Supplementary Information 2024-25",
+    "url": "https://notices.novascotia.ca/files/public-accounts/2025/pa-supplementary-2025.pdf",
+    "finding": "The Province reports General Revenue Fund payments on a cash basis and generally reports accumulated other payments to individuals and suppliers at $5,000 and over. Accounts-payable and other adjustments reconcile cash payments to accrued appropriations.",
+    "use": "benchmark_for_public_payment_disclosure_and_schema_design_only"
+  },
+  "analysis_families_blocked_until_payment_source_is_acquired_and_validated": [
+    "award_to_paid_reconciliation",
+    "contract_value_to_paid_value",
+    "project_spend_to_date_from_vendor_payments",
+    "payment_concentration",
+    "duplicate_invoice_or_payment_detection",
+    "split_payment_detection",
+    "payment_timing_anomalies",
+    "early_payment_discount_analysis",
+    "one_time_vendor_payment_analysis",
+    "final_paid_value_assertions"
+  ],
+  "analysis_families_unlocked_after_validated_transaction_source": [
+    "deterministic_invoice_and_payment_deduplication",
+    "invoice_to_purchase_order_matching",
+    "purchase_order_or_contract_to_payment_reconciliation",
+    "vendor_payment_concentration_by_period_and_business_unit",
+    "duplicate_invoice_candidate_detection_using_vendor_invoice_number_date_and_amount",
+    "credit_reversal_and_void_reconciliation",
+    "payment_timing_analysis_using_invoice_entry_and_clearing_dates",
+    "project_spend_to_date_when_project_codes_are_present",
+    "manual_purchase_and_one_time_vendor_review_when_source_flags_are_present"
+  ],
+  "allowed_current_analyses": [
+    "budget_authority_analysis",
+    "capital_schedule_analysis",
+    "procurement_award_analysis",
+    "contract_amendment_analysis",
+    "council_approval_analysis",
+    "quarterly_financial_summary_analysis",
+    "audited_financial_statement_analysis",
+    "deterministic_identifier_lifecycle_reconciliation_without_payment_claims",
+    "accounts_payable_process_and_control_research_without_transaction_claims"
+  ],
+  "next_action": {
+    "priority": 1,
+    "action": "Submit the narrow machine-readable routine-access request to HRM Finance/Accounts Payable; if not routinely releasable, convert it to a Part XX request without broadening the field scope.",
+    "production_rule": "Do not change HalifaxData payment_fact_count from zero until a returned transaction dataset is received, source-authenticated, normalized and independently validated."
+  }
+}
