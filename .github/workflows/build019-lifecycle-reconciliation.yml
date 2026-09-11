@@ -72,6 +72,17 @@ jobs:
           python scripts/validate_lifecycle_reconciliation_build019.py /tmp/lifecycle_reconciliation.json
           python scripts/validate_capital_identifier_policy_build019.py /tmp/lifecycle_reconciliation.json
           python scripts/validate_lifecycle_components_build019.py /tmp/lifecycle_reconciliation.json
+      - name: Prove repeat generation is byte-identical
+        run: |
+          python scripts/build_lifecycle_reconciliation_build019_v4.py --output /tmp/lifecycle_base_repeat.json
+          python scripts/enrich_lifecycle_components_build019.py /tmp/lifecycle_base_repeat.json /tmp/lifecycle_reconciliation_repeat.json
+          python scripts/validate_lifecycle_reconciliation_build019.py /tmp/lifecycle_reconciliation_repeat.json
+          python scripts/validate_capital_identifier_policy_build019.py /tmp/lifecycle_reconciliation_repeat.json
+          python scripts/validate_lifecycle_components_build019.py /tmp/lifecycle_reconciliation_repeat.json
+          cmp /tmp/lifecycle_reconciliation.json /tmp/lifecycle_reconciliation_repeat.json
+      - name: Prove checked artifact needs no mutation for release PR
+        if: github.event_name == 'pull_request'
+        run: cmp /tmp/lifecycle_reconciliation.json data/generated/lifecycle_reconciliation.json
       - name: Preserve proof artifact
         run: |
           mkdir -p artifacts
