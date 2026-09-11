@@ -67,6 +67,8 @@ jobs:
         run: python scripts/validate_data.py
       - name: Validate Build 020 tax transparency
         run: python scripts/validate_tax_transparency_2026.py
+      - name: Install isolated 2018 audited-source probe dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Probe alternate official 2018 audited source
         run: python scripts/probe_financial_2018_build020.py
       - name: Validate historical budgets
