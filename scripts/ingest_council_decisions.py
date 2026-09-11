@@ -14,6 +14,7 @@ import hashlib
 import io
 import json
 import re
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -26,6 +27,10 @@ REGISTRY_PATH = ROOT / "data/council_decision_sources.json"
 DEFAULT_OUT = ROOT / "data/generated/council_decisions.json"
 UA = "HalifaxData/0.16 (+https://github.com/JeremyHennessy/HalifaxData)"
 PARSER_VERSION = "build016-council-decisions-v1"
+ESCRIBE_HOST = "pub-halifax.escribemeetings.com"
+ESCRIBE_REQUEST_DELAY_SECONDS = 0.75
+TRANSIENT_HTTP_STATUSES = {429, 500, 502, 503, 504}
+MAX_FETCH_ATTEMPTS = 5
 
 RESULT_RE = re.compile(r"\bMOTION\s+PUT\s+AND\s+(.+?)(?:\s*)$", re.I)
 MOVED_RE = re.compile(r"^MOVED\s+by\s+(.+?),\s+seconded\s+by\s+(.+?)(?:\s*$)", re.I)
@@ -231,13 +236,53 @@ def parse_decisions(lines: list[dict], source: dict) -> tuple[list[dict], dict]:
     return records, {"unpaired_result_lines": unpaired_results}
 
 
+def retry_delay_seconds(response: requests.Response | None, attempt: int) -> float:
+    if response is not None:
+        retry_after = str(response.headers.get("Retry-After") or "").strip()
+        try:
+            if retry_after:
+                return min(max(float(retry_after), 1.0), 120.0)
+        except ValueError:
+            pass
+    return min(5.0 * (2 ** (attempt - 1)), 60.0)
+
+
 def fetch_pdf(session: requests.Session, url: str) -> tuple[bytes, str]:
-    response = session.get(url, timeout=120, allow_redirects=True)
-    response.raise_for_status()
-    content = response.content
-    if not content.startswith(b"%PDF"):
-        raise RuntimeError(f"Expected PDF from {url}; received {response.headers.get('content-type')} ({len(content)} bytes)")
-    return content, response.url
+    last_error: Exception | None = None
+    for attempt in range(1, MAX_FETCH_ATTEMPTS + 1):
+        if ESCRIBE_HOST in url.lower():
+            time.sleep(ESCRIBE_REQUEST_DELAY_SECONDS)
+        response: requests.Response | None = None
+        try:
+            response = session.get(url, timeout=120, allow_redirects=True)
+            if response.status_code in TRANSIENT_HTTP_STATUSES:
+                if attempt == MAX_FETCH_ATTEMPTS:
+                    response.raise_for_status()
+                delay = retry_delay_seconds(response, attempt)
+                print(
+                    f"Transient HTTP {response.status_code} for {url}; "
+                    f"retry {attempt}/{MAX_FETCH_ATTEMPTS} after {delay:.1f}s"
+                )
+                time.sleep(delay)
+                continue
+            response.raise_for_status()
+            content = response.content
+            if not content.startswith(b"%PDF"):
+                raise RuntimeError(
+                    f"Expected PDF from {url}; received {response.headers.get('content-type')} ({len(content)} bytes)"
+                )
+            return content, response.url
+        except requests.RequestException as error:
+            last_error = error
+            if attempt == MAX_FETCH_ATTEMPTS:
+                raise
+            delay = retry_delay_seconds(response, attempt)
+            print(
+                f"Transient request failure for {url}: {error}; "
+                f"retry {attempt}/{MAX_FETCH_ATTEMPTS} after {delay:.1f}s"
+            )
+            time.sleep(delay)
+    raise RuntimeError(f"Could not fetch Council minutes PDF after {MAX_FETCH_ATTEMPTS} attempts: {url}") from last_error
 
 
 def modern_sources(council: dict) -> list[dict]:
