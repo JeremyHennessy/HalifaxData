@@ -1,5 +1,6 @@
 name: Build 020 Release Audited History Once
 
+# Retry 2: nested 2018 schedule-release metadata fixed in promoter.
 on:
   push:
     branches: ['agent/build020-tax-payment-graph']
