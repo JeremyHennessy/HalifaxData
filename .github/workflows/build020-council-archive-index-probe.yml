@@ -1,0 +1,48 @@
+name: Build 020 Council Archive Index Probe
+
+on:
+  push:
+    branches: ['agent/build020-tax-payment-graph']
+    paths: ['.github/workflows/build020-council-archive-index-probe.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe Halifax Regional Council index
+        run: |
+          python - <<'PY'
+          import re
+          import requests
+          from urllib.parse import urljoin
+
+          url='https://www.halifax.ca/city-hall/regional-council'
+          headers={
+              'User-Agent':'Mozilla/5.0 (compatible; HalifaxData/0.20; +https://github.com/JeremyHennessy/HalifaxData)',
+              'Accept':'text/html,application/xhtml+xml'
+          }
+          r=requests.get(url,headers=headers,timeout=60,allow_redirects=True)
+          print('status', r.status_code, 'bytes', len(r.content), 'url', r.url, 'content-type', r.headers.get('content-type'))
+          print('prefix', r.text[:300].replace('\n',' '))
+          r.raise_for_status()
+          hrefs=re.findall(r'href=["\']([^"\']+)["\']', r.text, re.I)
+          dated=[]
+          for href in hrefs:
+              absolute=urljoin(r.url,href)
+              if '/city-hall/regional-council/' not in absolute:
+                  continue
+              if re.search(r'/[a-z]+-\d{1,2}-20\d{2}-(?:special-)?halifax-regional-council(?:$|[?#])', absolute, re.I):
+                  dated.append(absolute.split('#',1)[0].split('?',1)[0])
+          dated=sorted(set(dated))
+          print('dated meeting links', len(dated))
+          for item in dated[:250]:
+              print(item)
+          PY
