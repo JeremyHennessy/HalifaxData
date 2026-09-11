@@ -1,0 +1,25 @@
+name: Build 019 Reference Diagnostic
+
+on:
+  push:
+    branches: ['agent/build-019-deterministic-lifecycle-reconciliation']
+    paths:
+      - 'scripts/diagnose_build019_refs.py'
+      - '.github/workflows/build019-reference-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate diagnostic helper
+        run: python -m py_compile scripts/diagnose_build019_refs.py
+      - name: Inspect exact-reference source context
+        run: python scripts/diagnose_build019_refs.py 2025-0441 2024-0662 2025-0185 2025-0573

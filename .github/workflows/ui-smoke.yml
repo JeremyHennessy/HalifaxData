@@ -2,7 +2,7 @@ name: UI Smoke
 
 on:
   push:
-    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph', 'agent/build-017-audited-financial-history', 'agent/build-018-current-source-refresh']
+    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph', 'agent/build-017-audited-financial-history', 'agent/build-018-current-source-refresh', 'agent/build-019-deterministic-lifecycle-reconciliation']
   pull_request:
     paths:
       - 'index.html'
@@ -22,6 +22,7 @@ on:
       - 'tools/build016-ui-smoke.mjs'
       - 'tools/build017-ui-smoke.mjs'
       - 'tools/build018-ui-smoke.mjs'
+      - 'tools/build019-ui-smoke.mjs'
       - '.github/workflows/ui-smoke.yml'
 
 permissions:
@@ -86,6 +87,8 @@ jobs:
         run: node tools/build017-ui-smoke.mjs
       - name: Validate Build 018 current-source refresh
         run: node tools/build018-ui-smoke.mjs
+      - name: Validate Build 019 lifecycle investigations
+        run: node tools/build019-ui-smoke.mjs
       - name: Upload UI evidence
         if: always()
         uses: actions/upload-artifact@v4

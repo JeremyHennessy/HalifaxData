@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "build": "019",
+    "researched_at": "2026-08-29",
+    "domain": "accounts_payable_vendor_payments",
+    "status": "not_yet_verified_public_transaction_source",
+    "ready_for_transaction_analysis": false,
+    "is_evidence_of_source_absence": false,
+    "principle": "Targeted public-source research did not verify a current public HRM invoice-, cheque-, accounts-payable-, or vendor-payment-level ledger. This is not proof that such records do not exist internally or cannot be released through routine access or an access-to-information request. Procurement awards, budget authority, contract amendments, quarterly summaries and audited actuals must not be relabelled as payments."
+  },
+  "verified_process_evidence": [
+    {
+      "id": "hrm-standard-terms-electronic-payment",
+      "publisher": "Halifax Regional Municipality",
+      "title": "Standard Terms and Conditions for Goods and Services",
+      "url": "https://www.halifax.ca/sites/default/files/documents/business/doing-business-halifax/Standard_Terms_for_Goods_and_Services_2020-01-03.pdf",
+      "finding": "HRM requires purchase-order information on supplier invoices and administers payments through an electronic payment process; undisputed properly rendered invoices are generally payable 30 days from invoice date, subject to HRM verification.",
+      "evidence_class": "internal_process_exists_not_public_ledger"
+    },
+    {
+      "id": "hrm-finance-accounts-payable-function",
+      "publisher": "Halifax Regional Municipality",
+      "title": "2015/16 Budget and Business Plan - Finance & ICT",
+      "url": "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/15-16ApprovedOperatingBook.pdf",
+      "finding": "The Finance function explicitly described Accounts Payable Processing as recording approved invoices and paying vendors for HRM, Library and various agencies, boards and commissions.",
+      "evidence_class": "internal_process_exists_not_public_ledger"
+    }
+  ],
+  "public_source_boundary_evidence": [
+    {
+      "id": "ns-awarded-public-tenders",
+      "publisher": "Province of Nova Scotia",
+      "title": "Awarded Public Tenders",
+      "url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+      "finding": "This source provides tender award/vendor/award-amount evidence. Award value is not evidence that an invoice was submitted or that HRM paid that amount.",
+      "evidence_class": "procurement_award_not_payment"
+    },
+    {
+      "id": "hrm-open-data-program",
+      "publisher": "Halifax Regional Municipality",
+      "title": "Halifax Open Data program",
+      "url": "https://www.halifax.ca/home/news/new-datasets-available-open-data-10",
+      "finding": "HRM maintains an active Open Data program. Targeted Build 019 searches of public HRM/Open Data surfaces did not verify a vendor-payment, cheque-register, invoice-level or accounts-payable transaction dataset.",
+      "evidence_class": "targeted_research_result_not_absence_proof"
+    }
+  ],
+  "access_path": {
+    "preferred_sequence": [
+      "Submit an informal/routine-access request to the appropriate HRM business unit for a machine-readable accounts-payable/vendor-payment export.",
+      "If HRM advises that the records are not routinely available, file an access-to-information request under Part XX of the Municipal Government Act.",
+      "Request an electronic machine-readable release and a data dictionary/code list; HRM access materials state electronic records are typically supplied as PDF or Excel depending on the records and file size."
+    ],
+    "official_guidance": [
+      {
+        "title": "Access, Privacy & Requesting Information",
+        "url": "https://www.halifax.ca/sites/default/files/documents/city-hall/accountability-transparency/RequestingInformation.pdf",
+        "finding": "HRM directs requesters to start with an informal request to the relevant business unit and use an access request if the information is not routinely available."
+      },
+      {
+        "title": "Form 1 - Access to Information Application",
+        "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/accountability-transparency/Form1AccessToInformationApplicationFillableOct18.pdf",
+        "finding": "The form supports requesting electronic copies; it states electronic records are typically provided in PDF or Excel format."
+      }
+    ],
+    "requested_record_scope": "A machine-readable extract of HRM accounts-payable/vendor-payment records for the longest practical retention period, one row per releasable payment/disbursement or invoice-payment event, including stable document identifiers and organizational/procurement/project coding. Exclude banking information, tax identifiers, personal addresses and other protected personal or confidential information.",
+    "fallback_scope": "If invoice identifiers or line-level details cannot be released, request the most granular releasable vendor/payment data containing a stable payment/document identifier, payee, payment date, amount, purchase-order/contract/tender reference, cost centre/business unit, account/category and capital project code where applicable."
+  },
+  "minimum_machine_readable_fields": [
+    "payment_or_document_id",
+    "vendor_id_if_releasable",
+    "vendor_name",
+    "invoice_or_source_document_id_if_releasable",
+    "invoice_date_if_releasable",
+    "posting_date_if_available",
+    "payment_date",
+    "gross_amount",
+    "net_amount_if_available",
+    "tax_amount_if_available",
+    "currency",
+    "purchase_order_number",
+    "contract_or_tender_id",
+    "business_unit_or_cost_centre",
+    "gl_account_or_expense_category",
+    "capital_project_code_if_applicable",
+    "credit_reversal_or_void_indicator",
+    "payment_status_if_available"
+  ],
+  "requested_supporting_metadata": [
+    "field_data_dictionary",
+    "code_lists_for_business_unit_cost_centre_account_and_status",
+    "coverage_start_and_end_dates",
+    "record_retention_limitations",
+    "known_exclusions_or_suppression_rules",
+    "explanation_of_credit_reversal_void_semantics"
+  ],
+  "privacy_and_security_exclusions": [
+    "bank_account_numbers",
+    "routing_or_transit_numbers",
+    "payment_card data",
+    "tax_identification_numbers",
+    "personal home addresses",
+    "personal phone_numbers_or_emails",
+    "other protected personal information not necessary for public-money reconciliation"
+  ],
+  "analysis_families_blocked_until_payment_source_is_acquired_and_validated": [
+    "award_to_paid_reconciliation",
+    "contract_value_to_paid_value",
+    "project_spend_to_date_from_vendor_payments",
+    "payment_concentration",
+    "duplicate_invoice_or_payment_detection",
+    "split_payment_detection",
+    "payment_timing_anomalies",
+    "final_paid_value_assertions"
+  ],
+  "allowed_current_analyses": [
+    "budget_authority_analysis",
+    "capital_schedule_analysis",
+    "procurement_award_analysis",
+    "contract_amendment_analysis",
+    "council_approval_analysis",
+    "quarterly_financial_summary_analysis",
+    "audited_financial_statement_analysis",
+    "deterministic_identifier_lifecycle_reconciliation_without_payment_claims"
+  ]
+}
