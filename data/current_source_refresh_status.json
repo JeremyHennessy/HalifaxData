@@ -1,36 +1,58 @@
 {
   "metadata": {
     "build": "018",
-    "researched_at": "2026-08-27",
+    "researched_at": "2026-09-11",
+    "production_baseline": {
+      "commit": "93fd8b769a48271b5f1f12782a3fa4a25a1d38d9",
+      "release": "Build 018 — current-source refresh",
+      "hosted_verification": "Pages deploy and hosted desktop/mobile verification passed on 2026-08-28"
+    },
     "purpose": "Track current-public-source freshness without converting an unverified publication gap into a zero or an assertion that no source exists.",
     "status_semantics": {
-      "verified_current": "A public source covering the latest completed relevant period was verified and is already represented in the production evidence set.",
-      "verified_new_source": "A newer authoritative public source was verified and has a validated Build 018 integration pending production release gates.",
-      "not_yet_verified": "Targeted research did not verify a newer source. This is not proof that the source does not exist or will not be published.",
+      "verified_current": "An authoritative public source covering the latest currently applicable period was verified and is represented in production.",
+      "verified_new_source": "A newer authoritative public source was verified but is not yet represented in production.",
+      "not_yet_verified": "Targeted research did not verify the targeted newer source. This is not proof that the source does not exist, is late, or will not be published.",
       "current_source_research": "The domain source discovery itself was refreshed on the research date; publication/approval timing still governs record availability."
+    },
+    "automation_scope": {
+      "last_successful_scheduled_run": "2026-09-07",
+      "automated_domains": [
+        "compensation_disclosure",
+        "operating_budget_and_audited_actuals"
+      ],
+      "manual_or_release_cycle_domains": [
+        "capital_plan",
+        "quarterly_financial_reports",
+        "procurement_quarterly_awards",
+        "cao_contract_amendments",
+        "council_decisions",
+        "audited_financial_statements"
+      ],
+      "note": "The weekly refresh workflow currently re-runs compensation and budget ingestion only. A successful run with no committed diff does not establish freshness for the other domains."
     }
   },
   "domains": [
     {
       "domain": "operating_budget",
-      "status": "verified_new_source",
-      "production_through": "2025/26",
+      "status": "verified_current",
+      "production_through": "2026/27",
       "verified_current_period": "2026/27",
       "source_id": "hrm-budget-2026-27-final-package",
       "source_stage": "Final March 25, 2026 post-Budget-Adjustment-List staff package; separately ratified by Regional Council March 31, 2026.",
-      "build018_integration": "105 service-area rows across 20 source overview pages; validator and repeat live-source reproduction proof established.",
-      "next_action": "Release Build 018 only after exact-head CI, both source proofs, desktop/mobile browser smoke, PR-context checks and hosted Pages verification pass."
+      "production_integration": "Build 018: 105 service-area rows across 20 source overview pages; validator and repeat live-source reproduction proof established.",
+      "latest_check": "Build 018 is deployed. The scheduled public-data refresh last succeeded September 7, 2026 and produced no checked-in budget change.",
+      "next_action": "Keep the 2026/27 layer current and re-run source verification when HRM publishes a revised authoritative budget package."
     },
     {
       "domain": "capital_plan",
-      "status": "verified_new_source",
-      "production_through": "2025/26 final project-sheet plan plus approved 2025/26 adjustments",
+      "status": "verified_current",
+      "production_through": "2026/27 current schedule plus retained 2025/26 project-sheet and approved-adjustment evidence",
       "verified_current_period": "2026/27",
       "source_id": "hrm-capital-2026-27-multiyear-revised",
       "source_stage": "Revised March 3, 2026 Capital Multi-Year Projects Attachment 2; separately covered by March 31 Regional Council Capital Plan ratification.",
-      "build018_integration": "52 exact-account project/program schedule rows; 29 discrete projects and 23 ongoing programs; $196.656M 2026/27 cashflow/budget; exact source-control defects preserved.",
-      "source_link_status": "Previously indexed DocumentId=4406 returns 404; exact-title agenda resolution currently resolves the official report to DocumentId=4622.",
-      "next_action": "Release the Build 018 schedule as an additive current-capital layer; retain Build 010 project-sheet/adjustment evidence separately."
+      "production_integration": "Build 018: 52 exact-account project/program schedule rows; 29 discrete projects and 23 ongoing programs; $196.656M 2026/27 cashflow/budget; exact source-control defects preserved.",
+      "source_link_status": "Previously indexed DocumentId=4406 returns 404; exact-title agenda resolution resolves the official report to DocumentId=4622.",
+      "next_action": "Retain Build 018 as the current layer and re-check when a revised authoritative capital schedule or approved adjustment is published."
     },
     {
       "domain": "quarterly_financial_reports",
@@ -38,43 +60,49 @@
       "production_through": "2025/26 Q3 (period ended December 31, 2025)",
       "verified_current_period": null,
       "known_gap": "2024/25 Q1 remains explicitly missing from the checked series.",
-      "research_result": "Targeted official eSCRIBE research on August 27, 2026 did not verify a 2025/26 Q4/year-end report. Prior-year year-end/Q4 reporting was tabled in September 2025, so no absence conclusion is drawn before a current source is actually located or the reporting cycle passes."
+      "research_result": "Targeted official HRM and eSCRIBE research refreshed September 11, 2026 did not verify a 2025/26 Q4/year-end report. The prior 2024/25 year-end/Q4 report was tabled in September 2025, so no absence conclusion is drawn before a current authoritative source is located or the comparable reporting window passes.",
+      "next_action": "Re-check the Audit and Finance and Regional Council publication stream later in September 2026 and ingest only an authoritative report when verified."
     },
     {
       "domain": "procurement_quarterly_awards",
       "status": "verified_current",
       "production_through": "April-June 2026 report presented August 25, 2026",
       "verified_current_period": "2026-06-30",
-      "next_action": "No new completed quarterly award period exists as of the research date; retain current production evidence."
+      "research_result": "The July-September 2026 quarter is not complete as of September 11, 2026; no newer completed quarterly award period is expected yet.",
+      "next_action": "Retain current production evidence and re-check after the July-September 2026 reporting cycle closes."
     },
     {
       "domain": "cao_contract_amendments",
       "status": "not_yet_verified",
       "production_through": "November 25, 2025 public report series",
       "verified_current_period": null,
-      "research_result": "Targeted 2026 eSCRIBE searches did not verify a newer public CAO Contract Amendment Reporting source. Do not infer that no amendments occurred; public reports may also exclude Private & Confidential records."
+      "research_result": "Targeted official-domain and eSCRIBE research refreshed September 11, 2026 did not verify a newer public CAO Contract Amendment Reporting source. Do not infer that no amendments occurred; public reports may also exclude Private & Confidential records.",
+      "next_action": "Continue explicit source checks and ingest a newer public report only when its authoritative meeting/report evidence is verified."
     },
     {
       "domain": "compensation_disclosure",
       "status": "not_yet_verified",
       "production_through": "year ended March 31, 2025",
       "verified_current_period": null,
-      "research_result": "Targeted Halifax/CDN searches did not verify a Statement of Compensation for the year ended March 31, 2026. The April 28, 2026 threshold-review report still referenced the March 31, 2025 statement."
+      "research_result": "Targeted official-source research refreshed September 11, 2026 did not verify a Statement of Compensation for the year ended March 31, 2026. The scheduled compensation refresh last succeeded September 7, 2026 and produced no checked-in data change.",
+      "next_action": "Keep the weekly source check active and ingest the March 31, 2026 disclosure only when an authoritative source is verified."
     },
     {
       "domain": "council_decisions",
       "status": "current_source_research",
       "production_through": "Build 016 checked modern approved-minutes window plus explicit seven-meeting pre-2024 seed",
-      "verified_current_period": "source discovery researched 2026-08-27",
-      "next_action": "Add later meetings only when approved minutes exist; agenda recommendations remain separate from adopted decisions."
+      "verified_current_period": "source research refreshed 2026-09-11",
+      "research_result": "The August 25, 2026 Halifax Regional Council meeting is publicly linked with draft minutes. Draft minutes are not promoted to adopted-decision evidence under the existing evidence contract; the decision layer remains limited to approved/post minutes.",
+      "next_action": "Refresh the eSCRIBE meeting/document inventory and add later decisions only after approved/post minutes are available. Keep agenda recommendations and draft minutes separate from adopted decisions."
     },
     {
       "domain": "audited_financial_statements",
-      "status": "verified_current",
+      "status": "not_yet_verified",
       "production_through": "2019-2025 released source years",
-      "verified_current_period": "year ended March 31, 2025",
+      "verified_current_period": null,
       "known_gap": "Official 2018 source remains a parser gap under established Build 017 semantics.",
-      "next_action": "Do not infer March 31, 2026 audited statements until an authoritative release is located and approved."
+      "research_result": "Targeted official-source research refreshed September 11, 2026 did not verify audited financial statements for the year ended March 31, 2026. The latest authoritative released source verified in production remains the year ended March 31, 2025.",
+      "next_action": "Do not infer March 31, 2026 audited values. Re-check the current reporting cycle and ingest only an authoritative released statement."
     }
   ]
 }
