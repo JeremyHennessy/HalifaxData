@@ -39,6 +39,14 @@ jobs:
         run: python scripts/build_lifecycle_investigations_build019.py --output /tmp/lifecycle_investigations.json
       - name: Validate lifecycle investigation queue
         run: python scripts/validate_lifecycle_investigations_build019.py /tmp/lifecycle_investigations.json
+      - name: Prove repeat investigation generation is byte-identical
+        run: |
+          python scripts/build_lifecycle_investigations_build019.py --output /tmp/lifecycle_investigations_repeat.json
+          python scripts/validate_lifecycle_investigations_build019.py /tmp/lifecycle_investigations_repeat.json
+          cmp /tmp/lifecycle_investigations.json /tmp/lifecycle_investigations_repeat.json
+      - name: Prove checked investigation artifact needs no mutation for release PR
+        if: github.event_name == 'pull_request'
+        run: cmp /tmp/lifecycle_investigations.json data/generated/lifecycle_investigations.json
       - name: Preserve proof artifact
         run: |
           mkdir -p artifacts
