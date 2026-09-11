@@ -1,0 +1,42 @@
+name: Build 020 Refresh Entity Index Once
+
+on:
+  push:
+    branches: ['agent/build020-tax-payment-graph']
+    paths: ['.github/workflows/build020-refresh-entity-index-once.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild normalized entity index from released inputs
+        run: python scripts/build_entity_index_v4.py
+      - name: Validate refreshed entity index
+        run: |
+          python scripts/build_entity_index_v4.py --check
+          python scripts/validate_entity_index_v4.py
+      - name: Assert only entity index changed
+        run: |
+          git diff --check
+          changed="$(git status --porcelain | awk '{print $2}' | sort)"
+          echo "Changed files:"
+          printf '%s\n' "$changed"
+          test "$changed" = "data/generated/entity_index.json"
+      - name: Commit refreshed entity index
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/entity_index.json
+          test "$(git diff --cached --name-only | wc -l)" -eq 1
+          git commit -m 'Build 020: refresh entity index after audited history expansion'
+          git push origin HEAD:agent/build020-tax-payment-graph
