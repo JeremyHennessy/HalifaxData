@@ -1,0 +1,341 @@
+name: Freshness Domain Monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 11 * * 1'
+  push:
+    branches: [main, 'agent/freshness-automation-expansion']
+    paths:
+      - '.github/workflows/freshness-domain-monitor.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/freshness-domain-monitor.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  quarterly-financials:
+    name: Quarterly financials
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate collector syntax
+        run: python -m compileall -q scripts/ingest_quarterly_spending.py scripts/validate_spending.py
+      - name: Reproduce registered quarterly financial reports
+        run: python scripts/ingest_quarterly_spending.py
+      - name: Validate quarterly financial evidence
+        run: python scripts/validate_spending.py
+      - name: Preserve proof artifact
+        if: always()
+        run: |
+          mkdir -p artifacts
+          test ! -f data/generated/spending.json || cp data/generated/spending.json artifacts/spending.json
+      - name: Upload quarterly proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-quarterly-financials-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
+
+  procurement-awards:
+    name: Procurement awards
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate collector syntax
+        run: python -m compileall -q scripts/ingest_procurement.py
+      - name: Collect current Nova Scotia Halifax award rows
+        run: |
+          mkdir -p artifacts
+          python scripts/ingest_procurement.py --output artifacts/procurement.json
+      - name: Validate live award snapshot and record differences
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          live_path = Path('artifacts/procurement.json')
+          checked_path = Path('data/generated/procurement.json')
+          live = json.loads(live_path.read_text(encoding='utf-8'))
+          checked = json.loads(checked_path.read_text(encoding='utf-8'))
+          meta = live.get('metadata') or {}
+          rows = live.get('records') or []
+          if meta.get('dataset_status') != 'official_awarded_tenders_collection':
+              raise SystemExit(f'unexpected procurement dataset status: {meta.get("dataset_status")!r}')
+          if meta.get('source_query_collection_complete') is not True:
+              raise SystemExit('live procurement source query did not complete')
+          if meta.get('records') != len(rows) or len(rows) < 100:
+              raise SystemExit(f'live procurement record-count contract failed: metadata={meta.get("records")} rows={len(rows)}')
+          keys = [(r.get('award_id'), r.get('vendor_name'), r.get('awarded_date'), r.get('original_award_value')) for r in rows]
+          if len(keys) != len(set(keys)):
+              raise SystemExit('live procurement snapshot contains duplicate normalized award keys')
+          if any(r.get('source_id') != 'ns-awarded-tenders-socrata' for r in rows):
+              raise SystemExit('live procurement snapshot contains an unexpected source_id')
+
+          def key(row):
+              return (row.get('award_id'), row.get('vendor_name'), row.get('awarded_date'), row.get('original_award_value'))
+
+          live_keys = {key(r) for r in rows}
+          checked_rows = checked.get('records') or []
+          checked_keys = {key(r) for r in checked_rows}
+          summary = {
+              'checked_records': len(checked_rows),
+              'live_records': len(rows),
+              'new_normalized_award_keys': len(live_keys - checked_keys),
+              'missing_from_live_normalized_award_keys': len(checked_keys - live_keys),
+              'source_query_record_count': meta.get('source_query_record_count'),
+              'source_query_collection_complete': meta.get('source_query_collection_complete'),
+              'interpretation': 'Differences are freshness candidates only. This monitor does not publish or infer payments, final contract values, or wrongdoing.'
+          }
+          Path('artifacts/procurement_diff.json').write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps(summary, indent=2))
+          PY
+      - name: Upload procurement freshness evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-procurement-awards-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
+
+  procurement-quarterly:
+    name: Quarterly procurement reports
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate collector syntax
+        run: python -m compileall -q scripts/ingest_council.py scripts/ingest_council_documents.py scripts/validate_council.py scripts/ingest_procurement_quarterly_reports.py scripts/ingest_procurement_quarterly_resolved.py scripts/validate_procurement_quarterly.py
+      - name: Refresh current eSCRIBE meeting inventory
+        run: python scripts/ingest_council.py
+      - name: Refresh current eSCRIBE document inventory
+        run: python scripts/ingest_council_documents.py
+      - name: Validate current Council document graph
+        run: python scripts/validate_council.py
+      - name: Reproduce quarterly procurement from current document inventory
+        run: python scripts/ingest_procurement_quarterly_resolved.py --output data/generated/procurement_quarterly.json
+      - name: Validate quarterly procurement controls
+        run: python scripts/validate_procurement_quarterly.py data/generated/procurement_quarterly.json
+      - name: Preserve quarterly procurement evidence
+        if: always()
+        run: |
+          mkdir -p artifacts
+          test ! -f data/generated/procurement_quarterly.json || cp data/generated/procurement_quarterly.json artifacts/procurement_quarterly.json
+          test ! -f data/generated/council_documents.json || cp data/generated/council_documents.json artifacts/council_documents.json
+      - name: Upload quarterly procurement freshness evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-procurement-quarterly-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
+
+  cao-amendments:
+    name: CAO amendments
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate collector syntax
+        run: python -m compileall -q scripts/ingest_contract_amendments.py scripts/validate_contract_amendments.py
+      - name: Reproduce registered public CAO amendment series
+        run: |
+          mkdir -p artifacts
+          python scripts/ingest_contract_amendments.py --output artifacts/contract_amendments.json
+      - name: Validate CAO amendment evidence
+        run: python scripts/validate_contract_amendments.py artifacts/contract_amendments.json
+      - name: Upload CAO amendment proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-cao-amendments-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
+
+  council-approved-minutes:
+    name: Approved Council minutes
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Preserve checked Council controls
+        run: |
+          cp data/generated/council.json /tmp/checked-council.json
+          cp data/generated/council_decisions.json /tmp/checked-council-decisions.json
+      - name: Validate collector syntax
+        run: python -m compileall -q scripts/ingest_council.py scripts/ingest_council_documents.py scripts/ingest_council_decisions.py scripts/validate_council.py scripts/validate_council_decisions.py
+      - name: Refresh current eSCRIBE meeting inventory
+        run: python scripts/ingest_council.py
+      - name: Refresh current eSCRIBE document inventory
+        run: python scripts/ingest_council_documents.py
+      - name: Validate current Council document graph
+        run: python scripts/validate_council.py
+      - name: Reproduce decisions from currently posted approved minutes
+        run: python scripts/ingest_council_decisions.py --output data/generated/council_decisions.json
+      - name: Validate approved-minute decision evidence
+        run: python scripts/validate_council_decisions.py data/generated/council_decisions.json
+      - name: Record Council freshness differences
+        run: |
+          mkdir -p artifacts
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          checked_council = json.loads(Path('/tmp/checked-council.json').read_text(encoding='utf-8'))
+          live_council = json.loads(Path('data/generated/council.json').read_text(encoding='utf-8'))
+          checked_decisions = json.loads(Path('/tmp/checked-council-decisions.json').read_text(encoding='utf-8'))
+          live_decisions = json.loads(Path('data/generated/council_decisions.json').read_text(encoding='utf-8'))
+          checked_meetings = {str(r.get('meeting_id')) for r in checked_council.get('records') or [] if r.get('meeting_id')}
+          live_meetings = {str(r.get('meeting_id')) for r in live_council.get('records') or [] if r.get('meeting_id')}
+          checked_ids = {r.get('decision_id') for r in checked_decisions.get('records') or [] if r.get('decision_id')}
+          live_ids = {r.get('decision_id') for r in live_decisions.get('records') or [] if r.get('decision_id')}
+          summary = {
+              'checked_meetings': len(checked_meetings),
+              'live_meetings': len(live_meetings),
+              'new_meeting_ids': len(live_meetings - checked_meetings),
+              'checked_decisions': len(checked_ids),
+              'live_decisions': len(live_ids),
+              'new_approved_minute_decisions': len(live_ids - checked_ids),
+              'missing_from_live_decisions': len(checked_ids - live_ids),
+              'interpretation': 'Only posted approved/PostMinutes sources are decision evidence. Agenda or draft-minute availability is not promoted to an adopted decision.'
+          }
+          Path('artifacts/council_freshness_diff.json').write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps(summary, indent=2))
+          PY
+          cp data/generated/council.json artifacts/council.json
+          cp data/generated/council_documents.json artifacts/council_documents.json
+          cp data/generated/council_decisions.json artifacts/council_decisions.json
+      - name: Upload Council freshness evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-council-approved-minutes-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
+
+  audited-statements:
+    name: Audited statements
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate collector syntax
+        run: python -m compileall -q scripts/ingest_financial_history.py scripts/ingest_financial_history_build017.py scripts/validate_financial_history.py scripts/validate_financial_history_build017.py
+      - name: Reproduce registered audited-statement history
+        run: python scripts/ingest_financial_history_build017.py
+      - name: Validate audited-statement semantics
+        run: |
+          python scripts/validate_financial_history.py
+          python scripts/validate_financial_history_build017.py
+      - name: Preserve audited-statement evidence
+        if: always()
+        run: |
+          mkdir -p artifacts
+          test ! -f data/generated/financials.json || cp data/generated/financials.json artifacts/financials.json
+          test ! -f data/generated/financials_document_tables.json || cp data/generated/financials_document_tables.json artifacts/financials_document_tables.json
+      - name: Upload audited-statement proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-audited-statements-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
+
+  current-capital:
+    name: Current capital
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate collector syntax
+        run: python -m compileall -q scripts/ingest_current_capital_build018.py scripts/validate_current_capital_build018.py
+      - name: Reproduce approved-current capital schedule
+        run: python scripts/ingest_current_capital_build018.py
+      - name: Validate current-capital evidence contract
+        run: python scripts/validate_current_capital_build018.py
+      - name: Verify capital-plan ratification source remains live
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+          import requests
+
+          config = json.loads(Path('data/current_capital_sources.json').read_text(encoding='utf-8'))
+          source = config['approval_source']
+          response = requests.get(
+              source['url'],
+              headers={'User-Agent': 'HalifaxData freshness monitor (+https://github.com/JeremyHennessy/HalifaxData)'},
+              timeout=120,
+          )
+          response.raise_for_status()
+          text = re.sub(r'\s+', ' ', response.text)
+          required = [
+              'Ratification from Budget Committee',
+              'Proposed 2026/27 Budget',
+              'Resolution for Approval of Operating Budgets, Capital Plan and Tax Rates for Fiscal 2026/27',
+          ]
+          missing = [item for item in required if item not in text]
+          if missing:
+              raise SystemExit(f'capital approval source missing required text: {missing}')
+          print('current capital source and March 31, 2026 ratification source verified')
+          PY
+      - name: Preserve current-capital evidence
+        if: always()
+        run: |
+          mkdir -p artifacts
+          test ! -f data/generated/current_capital_2026_27_multiyear.json || cp data/generated/current_capital_2026_27_multiyear.json artifacts/current_capital_2026_27_multiyear.json
+      - name: Upload current-capital proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-current-capital-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: warn
+          retention-days: 14
