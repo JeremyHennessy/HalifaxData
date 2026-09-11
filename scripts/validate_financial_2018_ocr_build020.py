@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CANDIDATE = ROOT / "artifacts/build020-financials-2018-ocr.json"
 FINANCIALS = ROOT / "data/generated/financials.json"
 EXPECTED_BASE_PARSER = "build005-financials-v4"
-EXPECTED_ADAPTER = "build020-financials-2018-ocr-v3"
+EXPECTED_ADAPTER = "build020-financials-2018-ocr-v4"
+EXPECTED_CORRECTIONS = 8
 REQUIRED_FAMILIES = {"financial_position", "operations", "net_financial_assets", "cash_flows"}
 NOTE_RE = re.compile(r"\s*\(?notes?\s+\d+[a-z]?(?:\([a-z0-9]+\))?\)?", re.I)
 NONWORD_RE = re.compile(r"[^a-z0-9]+")
@@ -50,7 +51,9 @@ def main() -> None:
     assert metadata.get("source_id") == "hrm-financials-2018", metadata
     assert metadata.get("base_parser_version") == EXPECTED_BASE_PARSER, metadata
     assert metadata.get("ocr_adapter_version") == EXPECTED_ADAPTER, metadata
-    assert metadata.get("ocr_dpi") == 400, metadata
+    assert metadata.get("ocr_dpi") == 200, metadata
+    assert metadata.get("validated_ocr_corrections") == EXPECTED_CORRECTIONS, metadata
+    assert (metadata.get("correction_validation_source") or {}).get("id") == "hrm-financials-2019", metadata
     assert metadata.get("release_status") == "candidate_not_production_until_validated_and_integrated", metadata
     assert metadata.get("schedule_coverage") == "not_released_from_ocr_candidate", metadata
     assert isinstance(metadata.get("source_sha256"), str) and len(metadata["source_sha256"]) == 64
@@ -61,6 +64,7 @@ def main() -> None:
     assert set(families) == REQUIRED_FAMILIES, families
     assert all(families[name] >= 5 for name in REQUIRED_FAMILIES), families
 
+    corrected_rows = []
     seen = set()
     for index, row in enumerate(rows):
         assert row.get("source_id") == "hrm-financials-2018", (index, row.get("source_id"))
@@ -70,24 +74,49 @@ def main() -> None:
         assert row.get("source_unit_multiplier") == 1000, (index, row.get("source_unit_multiplier"))
         assert isinstance(row.get("current_year"), (int, float))
         assert isinstance(row.get("prior_year"), (int, float))
-        assert close(row["current_year"], row["source_presented_current_year"] * 1000, 0.011)
-        assert close(row["prior_year"], row["source_presented_prior_year"] * 1000, 0.011)
         prov = row.get("provenance") or {}
         assert prov.get("parser_version") == EXPECTED_BASE_PARSER, (index, prov)
         assert prov.get("ocr_adapter_version") == EXPECTED_ADAPTER, (index, prov)
         assert prov.get("source_sha256") == metadata.get("source_sha256"), index
         assert prov.get("locator_type") == "ocr_text_line", (index, prov)
         assert str(prov.get("locator_value") or "").startswith(f"p{row['source_page']}/ocr-line"), (index, prov)
+
+        correction = row.get("ocr_correction")
+        if correction:
+            corrected_rows.append(row)
+            assert correction.get("status") == "validated_against_next_year_audited_comparative", correction
+            assert correction.get("validation_source_id") == "hrm-financials-2019", correction
+            assert correction.get("validation_source_url"), correction
+            assert close(row["current_year"], correction["validated_current_year"]), (index, correction)
+            assert close(row["ocr_current_year"], correction["raw_ocr_current_year"]), (index, correction)
+            assert close(row["ocr_current_year"], row["ocr_source_presented_current_year"] * 1000, 0.011), (index, correction)
+            assert row["ocr_current_year"] != row["current_year"], (index, correction)
+            assert prov.get("validation_source_id") == "hrm-financials-2019", (index, prov)
+            assert prov.get("ocr_correction_applied") is True, (index, prov)
+        else:
+            assert close(row["current_year"], row["source_presented_current_year"] * 1000, 0.011), index
+
+        assert close(row["prior_year"], row["source_presented_prior_year"] * 1000, 0.011), index
         key = (row["source_page"], row["statement_family"], norm_label(row["line_item"]), row["current_year"], row["prior_year"])
         assert key not in seen, f"duplicate OCR fact: {key!r}"
         seen.add(key)
 
-    # Fixed anchors limited to values that independently agreed between the 200-DPI
-    # 2018 OCR output and the text-native 2019 statement's printed 2018 comparatives.
+    assert len(corrected_rows) == EXPECTED_CORRECTIONS, len(corrected_rows)
+
+    # Hard anchors are authoritative normalized values after the explicit comparator
+    # corrections. They cover both corrected and naturally accurate OCR rows.
     anchors = [
         ("financial_position", "Cash and short-term deposits", 187_292_000, 235_331_000),
+        ("financial_position", "Accounts payable and accrued liabilities", 106_700_000, 77_162_000),
+        ("financial_position", "Loans, deposits and advances", 490_000, 544_000),
+        ("financial_position", "Investment in the Halifax Regional Water Commission", 167_660_000, 147_629_000),
+        ("financial_position", "Net financial assets", 163_419_000, 134_397_000),
+        ("financial_position", "Accumulated surplus", 2_040_260_000, 1_958_195_000),
         ("operations", "Taxation", 736_207_000, 710_941_000),
         ("operations", "Total expenses", 953_587_000, 924_234_000),
+        ("cash_flows", "Annual surplus", 83_815_000, 63_231_000),
+        ("cash_flows", "Increase (decrease) in accounts payable and accrued liabilities", -67_000, 9_298_000),
+        ("cash_flows", "Before remeasurement gain (loss)", -21_781_000, -14_363_000),
         ("cash_flows", "Cash and short-term deposits, end of year", 187_292_000, 235_331_000),
     ]
     for family, label, current, prior in anchors:
@@ -95,6 +124,9 @@ def main() -> None:
         assert close(row["current_year"], current), (family, label, row["current_year"], current)
         assert close(row["prior_year"], prior), (family, label, row["prior_year"], prior)
 
+    # Independent consistency check: the text-native 2019 audited statement prints
+    # these same 2018 line items in its comparative column. After explicit correction,
+    # every deterministic overlap must agree exactly within $1 CAD normalization tolerance.
     established = json.loads(FINANCIALS.read_text(encoding="utf-8"))
     rows_2019 = [row for row in established.get("records") or [] if row.get("source_id") == "hrm-financials-2019"]
     prior_index: dict[tuple[str, str], set[float]] = {}
@@ -117,16 +149,17 @@ def main() -> None:
         else:
             mismatches.append((key, row["current_year"], expected))
     assert overlaps >= 20, f"Too few deterministic 2018↔2019 comparative overlaps: {overlaps}"
-    assert matches / overlaps >= 0.90, f"2018↔2019 comparative agreement {matches}/{overlaps}; mismatches={mismatches[:10]!r}"
+    assert not mismatches, f"2018↔2019 comparative mismatches remain: {mismatches!r}"
+    assert matches == overlaps
 
     print(json.dumps({
         "status": "ok",
         "candidate_rows": len(rows),
         "families": dict(sorted(families.items())),
+        "validated_ocr_corrections": len(corrected_rows),
         "2019_comparative_overlaps": overlaps,
         "2019_comparative_matches": matches,
-        "2019_comparative_agreement": round(matches / overlaps, 4),
-        "mismatches": mismatches,
+        "2019_comparative_agreement": 1.0,
         "source_sha256": metadata["source_sha256"],
         "release_status": metadata["release_status"],
     }, indent=2))
