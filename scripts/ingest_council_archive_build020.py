@@ -28,6 +28,7 @@ CATEGORY = "931"
 UA = "HalifaxData/0.20 (+https://github.com/JeremyHennessy/HalifaxData)"
 EXPECTED_HEADER = ["Date", "Type", "Agenda", "Minutes (PDF)", "Video"]
 DATE_FORMAT = "%B %d, %Y"
+DATE_PREFIX_RE = re.compile(r"^([A-Z][a-z]+\s+\d{1,2},\s+20\d{2})(?:\s+(.*))?$")
 RETRYABLE = {429, 500, 502, 503, 504}
 
 
@@ -145,6 +146,19 @@ def normalize_minutes_identity(url: str | None) -> str | None:
     return parsed.path.lower().rstrip("/")
 
 
+def parse_source_date(date_text: str, page_index: int, row_index: int) -> tuple[str, str | None]:
+    match = DATE_PREFIX_RE.fullmatch(date_text)
+    if not match:
+        raise RuntimeError(f"Page {page_index} row {row_index}: invalid meeting date/status cell {date_text!r}")
+    date_part = match.group(1)
+    note = clean(match.group(2)) if match.group(2) else None
+    try:
+        meeting_date = datetime.strptime(date_part, DATE_FORMAT).date().isoformat()
+    except ValueError as exc:
+        raise RuntimeError(f"Page {page_index} row {row_index}: invalid meeting date {date_part!r}") from exc
+    return meeting_date, note
+
+
 def parse_row(row: list[dict], page_index: int, row_index: int, search_url: str) -> dict:
     if len(row) != len(EXPECTED_HEADER):
         raise RuntimeError(f"Page {page_index} row {row_index}: expected 5 cells, found {len(row)}")
@@ -152,21 +166,19 @@ def parse_row(row: list[dict], page_index: int, row_index: int, search_url: str)
     date_text, meeting_type = values[0], values[1]
     if meeting_type != "Regional Council":
         raise RuntimeError(f"Page {page_index} row {row_index}: unexpected meeting type {meeting_type!r}")
-    try:
-        meeting_date = datetime.strptime(date_text, DATE_FORMAT).date().isoformat()
-    except ValueError as exc:
-        raise RuntimeError(f"Page {page_index} row {row_index}: invalid meeting date {date_text!r}") from exc
+    meeting_date, date_note = parse_source_date(date_text, page_index, row_index)
 
     agenda_url = first_link(row[2])
     minutes_url = first_link(row[3])
     video_url = first_link(row[4])
     if not agenda_url:
         raise RuntimeError(f"Page {page_index} row {row_index}: meeting has no agenda/details URL")
-    identity = hashlib.sha256(f"{meeting_date}|{agenda_url}|{minutes_url or ''}".encode("utf-8")).hexdigest()[:20]
+    identity = hashlib.sha256(f"{meeting_date}|{date_note or ''}|{agenda_url}|{minutes_url or ''}".encode("utf-8")).hexdigest()[:20]
     return {
         "archive_meeting_id": f"hrm-regional-council-archive-{identity}",
         "meeting_date": meeting_date,
         "meeting_date_source": date_text,
+        "meeting_date_note_source": date_note,
         "meeting_type": meeting_type,
         "agenda_url": agenda_url,
         "minutes_url": minutes_url,
@@ -230,9 +242,13 @@ def main() -> None:
     records.sort(key=lambda row: (row["meeting_date"], row["archive_meeting_id"]), reverse=True)
     dates = [row["meeting_date"] for row in records]
     by_year: dict[str, int] = {}
+    date_notes: dict[str, int] = {}
     for row in records:
         year = row["meeting_date"][:4]
         by_year[year] = by_year.get(year, 0) + 1
+        note = row.get("meeting_date_note_source")
+        if note:
+            date_notes[note] = date_notes.get(note, 0) + 1
     minutes_count = sum(1 for row in records if row["minutes_url"])
 
     payload = {
@@ -249,10 +265,11 @@ def main() -> None:
             "min_meeting_date": min(dates),
             "max_meeting_date": max(dates),
             "records_by_year": dict(sorted(by_year.items())),
+            "date_status_notes": dict(sorted(date_notes.items())),
             "minutes_pdf_records": minutes_count,
             "missing_minutes_records": len(records) - minutes_count,
             "page_status": page_status,
-            "scope": "Official Halifax Regional Council historical meeting-table inventory exposed by the pre-eSCRIBE agendas/meetings/reports search. This is meeting/minutes discovery evidence only; it is not Council decision extraction and not payment evidence.",
+            "scope": "Official Halifax Regional Council historical meeting-table inventory exposed by the pre-eSCRIBE agendas/meetings/reports search. Date-cell status text such as Rescheduled is preserved separately. This is meeting/minutes discovery evidence only; it is not Council decision extraction and not payment evidence.",
             "pre_2017_boundary": "Halifax directs users seeking meetings prior to 2017 to the separate legacy archive / Municipal Clerk path; this candidate does not assert pre-2017 completeness.",
             "release_status": "candidate_not_production",
         },
