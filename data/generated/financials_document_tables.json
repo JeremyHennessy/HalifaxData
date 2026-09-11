@@ -1,10 +1,14 @@
 {
   "metadata": {
-    "generated_at": "2026-08-27T00:00:00Z",
+    "generated_at": "2026-09-11T15:01:34+00:00",
     "parser_version": "build005-financials-v4",
     "tables": 0,
-    "source_count": 7,
-    "scope": "Tables found only on pages with a heading-anchored consolidated statement/schedule title."
+    "source_count": 8,
+    "scope": "Tables found only on pages with a heading-anchored consolidated statement/schedule title.",
+    "table_source_count": 7,
+    "ocr_source_count": 1,
+    "2018_table_index_status": "not_applicable_primary_statements_extracted_from_ocr_text_lines",
+    "release_status": "released_checked_in"
   },
   "records": []
 }
