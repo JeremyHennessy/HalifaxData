@@ -251,6 +251,8 @@ def main() -> None:
             date_notes[note] = date_notes.get(note, 0) + 1
     minutes_count = sum(1 for row in records if row["minutes_url"])
 
+    min_date = min(dates)
+    max_date = max(dates)
     payload = {
         "metadata": {
             "build": "020",
@@ -262,15 +264,15 @@ def main() -> None:
             "records": len(records),
             "page_size": page_size,
             "pages_fetched": total_pages,
-            "min_meeting_date": min(dates),
-            "max_meeting_date": max(dates),
+            "min_meeting_date": min_date,
+            "max_meeting_date": max_date,
             "records_by_year": dict(sorted(by_year.items())),
             "date_status_notes": dict(sorted(date_notes.items())),
             "minutes_pdf_records": minutes_count,
             "missing_minutes_records": len(records) - minutes_count,
             "page_status": page_status,
-            "scope": "Official Halifax Regional Council historical meeting-table inventory exposed by the pre-eSCRIBE agendas/meetings/reports search. Date-cell status text such as Rescheduled is preserved separately. This is meeting/minutes discovery evidence only; it is not Council decision extraction and not payment evidence.",
-            "pre_2017_boundary": "Halifax directs users seeking meetings prior to 2017 to the separate legacy archive / Municipal Clerk path; this candidate does not assert pre-2017 completeness.",
+            "scope": "Official Halifax Regional Council historical meeting-table inventory exposed by the pre-eSCRIBE agendas/meetings/reports search. Date-cell status text such as Cancelled or Rescheduled is preserved separately. This is meeting/minutes discovery evidence only; it is not Council decision extraction and not payment evidence.",
+            "earlier_archive_boundary": f"The current filtered table itself spans {min_date} through {max_date}, including 2016 records despite general page copy referring users seeking older records to the legacy archive / Municipal Clerk. HalifaxData does not assert completeness before {min_date}; earlier records remain a separate research path.",
             "release_status": "candidate_not_production",
         },
         "records": records,
