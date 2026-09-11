@@ -47,6 +47,7 @@ jobs:
           node --check build017-audited-financial-history.js
           node --check build018-current-source-refresh.js
           node --check build019-lifecycle-investigations.js
+          node --check build021-provincial-context.js
           node --check tools/ui-smoke.mjs
           node --check tools/build009-ui-smoke.mjs
           node --check tools/build010-ui-smoke.mjs
@@ -61,12 +62,15 @@ jobs:
           node --check tools/build017-ui-smoke.mjs
           node --check tools/build018-ui-smoke.mjs
           node --check tools/build019-ui-smoke.mjs
+          node --check tools/build021-ui-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Validate established budget and compensation contracts
         run: python scripts/validate_data.py
       - name: Validate Build 020 tax transparency
         run: python scripts/validate_tax_transparency_2026.py
+      - name: Validate Build 021 provincial context
+        run: python scripts/validate_province_context_build021.py
       - name: Validate historical budgets
         run: python scripts/validate_budget_history.py
       - name: Validate audited financial history
