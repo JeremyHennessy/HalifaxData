@@ -126,8 +126,14 @@ jobs:
           python-version: '3.12'
       - name: Install collector dependencies
         run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Preserve checked quarterly procurement evidence
+        run: cp data/generated/procurement_quarterly.json /tmp/checked-procurement-quarterly.json
       - name: Validate collector syntax
-        run: python -m compileall -q scripts/ingest_council.py scripts/ingest_council_documents.py scripts/validate_council.py scripts/ingest_procurement_quarterly_reports.py scripts/ingest_procurement_quarterly_resolved.py scripts/validate_procurement_quarterly.py
+        run: python -m compileall -q scripts/ingest_council.py scripts/ingest_council_documents.py scripts/validate_council.py scripts/ingest_procurement_quarterly_reports.py scripts/ingest_procurement_quarterly_resolved.py scripts/validate_procurement_quarterly.py scripts/monitor_procurement_quarterly_freshness.py
+      - name: Reproduce checked quarterly procurement from preserved historical graph
+        run: python scripts/ingest_procurement_quarterly_resolved.py --output /tmp/procurement_quarterly_checked_reproduction.json
+      - name: Validate checked quarterly procurement evidence contract
+        run: python scripts/validate_procurement_quarterly.py /tmp/procurement_quarterly_checked_reproduction.json
       - name: Refresh current eSCRIBE meeting inventory
         run: python scripts/ingest_council.py
       - name: Refresh current eSCRIBE document inventory
@@ -135,15 +141,21 @@ jobs:
       - name: Validate current Council document graph
         run: python scripts/validate_council.py
       - name: Reproduce quarterly procurement from current document inventory
-        run: python scripts/ingest_procurement_quarterly_resolved.py --output data/generated/procurement_quarterly.json
-      - name: Validate quarterly procurement controls
-        run: python scripts/validate_procurement_quarterly.py data/generated/procurement_quarterly.json
+        run: |
+          mkdir -p artifacts
+          python scripts/ingest_procurement_quarterly_resolved.py --output artifacts/procurement_quarterly_live.json
+      - name: Compare live report semantics without rewriting historical source identity
+        run: |
+          python scripts/monitor_procurement_quarterly_freshness.py \
+            --checked /tmp/checked-procurement-quarterly.json \
+            --live artifacts/procurement_quarterly_live.json \
+            --output artifacts/procurement_quarterly_freshness.json
       - name: Preserve quarterly procurement evidence
         if: always()
         run: |
           mkdir -p artifacts
-          test ! -f data/generated/procurement_quarterly.json || cp data/generated/procurement_quarterly.json artifacts/procurement_quarterly.json
-          test ! -f data/generated/council_documents.json || cp data/generated/council_documents.json artifacts/council_documents.json
+          test ! -f /tmp/procurement_quarterly_checked_reproduction.json || cp /tmp/procurement_quarterly_checked_reproduction.json artifacts/procurement_quarterly_checked_reproduction.json
+          test ! -f data/generated/council_documents.json || cp data/generated/council_documents.json artifacts/council_documents_live.json
       - name: Upload quarterly procurement freshness evidence
         if: always()
         uses: actions/upload-artifact@v4
