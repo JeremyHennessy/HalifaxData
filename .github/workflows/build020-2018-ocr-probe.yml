@@ -1,0 +1,49 @@
+name: Build 020 2018 OCR Probe
+
+on:
+  push:
+    branches: ['agent/build020-tax-payment-graph']
+    paths: ['.github/workflows/build020-2018-ocr-probe.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PDF dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Ensure OCR utilities
+        run: |
+          if ! command -v tesseract >/dev/null 2>&1 || ! command -v pdftoppm >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y tesseract-ocr poppler-utils
+          fi
+          tesseract --version | head -1
+          pdftoppm -v 2>&1 | head -1
+      - name: Download official 2018 statement bundle
+        run: |
+          python - <<'PY'
+          import requests
+          url='https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/180718afsc1211.pdf'
+          r=requests.get(url,headers={'User-Agent':'HalifaxData/0.20 (+https://github.com/JeremyHennessy/HalifaxData)'},timeout=120)
+          r.raise_for_status()
+          assert r.content.startswith(b'%PDF')
+          open('/tmp/hrm-2018.pdf','wb').write(r.content)
+          print('downloaded', len(r.content), 'bytes')
+          PY
+      - name: OCR likely statement pages only
+        run: |
+          mkdir -p /tmp/hrm2018
+          pdftoppm -f 4 -l 12 -r 170 -png /tmp/hrm-2018.pdf /tmp/hrm2018/page >/dev/null 2>&1
+          for img in /tmp/hrm2018/page-*.png; do
+            echo "===== $(basename "$img") ====="
+            tesseract "$img" stdout --psm 6 2>/dev/null | sed -n '1,80p'
+          done
