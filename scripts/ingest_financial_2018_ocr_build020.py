@@ -48,16 +48,12 @@ COMPARATOR_SOURCE = {
     "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/budget-finances/FS-March-31-2019-V7-Signed.pdf",
     "role": "text-native next-year audited statement containing source-presented 2018 comparative values",
 }
-# PDF pages 8-11 correspond to statement pages 3-6: financial position,
-# operations, change in net financial assets, and cash flows.
 OCR_PAGES = [8, 9, 10, 11]
 OCR_DPI = 200
 OCR_PSM = 6
 ADAPTER_VERSION = "build020-financials-2018-ocr-v4"
 NONWORD_RE = re.compile(r"[^a-z0-9]+")
 
-# Values are normalized CAD. These are not guessed corrections: each target is the
-# same line item's 2018 comparative printed in HRM's text-native 2019 audited statement.
 CORRECTIONS = {
     ("financial_position", "accounts payable and accrued liabilities"): 106_700_000.0,
     ("financial_position", "accumulated surplus"): 2_040_260_000.0,
@@ -88,16 +84,7 @@ def require_binary(name: str) -> str:
 def ocr_page(pdf_path: Path, page_num: int, workdir: Path) -> str:
     prefix = workdir / f"page-{page_num:03d}"
     subprocess.run(
-        [
-            require_binary("pdftoppm"),
-            "-f", str(page_num),
-            "-l", str(page_num),
-            "-r", str(OCR_DPI),
-            "-singlefile",
-            "-png",
-            str(pdf_path),
-            str(prefix),
-        ],
+        [require_binary("pdftoppm"), "-f", str(page_num), "-l", str(page_num), "-r", str(OCR_DPI), "-singlefile", "-png", str(pdf_path), str(prefix)],
         check=True,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.PIPE,
@@ -116,16 +103,7 @@ def ocr_page(pdf_path: Path, page_num: int, workdir: Path) -> str:
     return text
 
 
-def parse_ocr_text_rows(
-    src: dict,
-    fiscal_year: int,
-    page_num: int,
-    statement_family: str,
-    statement_title: str,
-    text: str,
-    multiplier: int,
-) -> list[dict]:
-    """Apply Build 005 text parsing with a 2018 OCR three-column label fix."""
+def parse_ocr_text_rows(src: dict, fiscal_year: int, page_num: int, statement_family: str, statement_title: str, text: str, multiplier: int) -> list[dict]:
     records: list[dict] = []
     for line_num, raw_line in enumerate((text or "").splitlines(), 1):
         line = clean(raw_line)
@@ -135,17 +113,9 @@ def parse_ocr_text_rows(
         matches = list(base.VALUE_RE.finditer(masked_line))
         if len(matches) < 2:
             continue
-
         current_match, prior_match = matches[-2], matches[-1]
-        if not (
-            base.has_financial_format(current_match.group(), multiplier)
-            or base.has_financial_format(prior_match.group(), multiplier)
-        ):
+        if not (base.has_financial_format(current_match.group(), multiplier) or base.has_financial_format(prior_match.group(), multiplier)):
             continue
-
-        # For Budget / current / prior statement rows, the first numeric match is
-        # the budget column and must not leak into the line-item label. For ordinary
-        # two-column rows, the current-year match is already the first numeric value.
         label_end = matches[0].start() if len(matches) >= 3 else current_match.start()
         label = clean(line[:label_end]).rstrip("$ ")
         if not base.valid_label(label):
@@ -154,20 +124,9 @@ def parse_ocr_text_rows(
         prior_raw = money(prior_match.group())
         if current_raw is None or prior_raw is None:
             continue
-
         records.append(base.normalized_record(
-            src,
-            fiscal_year,
-            page_num,
-            statement_family,
-            statement_title,
-            label,
-            current_raw,
-            prior_raw,
-            multiplier,
-            [line],
-            "ocr_text_line",
-            f"p{page_num}/ocr-line{line_num}",
+            src, fiscal_year, page_num, statement_family, statement_title, label,
+            current_raw, prior_raw, multiplier, [line], "ocr_text_line", f"p{page_num}/ocr-line{line_num}",
         ))
     return records
 
@@ -207,44 +166,43 @@ def apply_validated_corrections(rows: list[dict]) -> int:
         applied += 1
     missing = set(CORRECTIONS) - seen_keys
     if missing:
-        raise RuntimeError(f"Configured OCR corrections did not match candidate rows: {sorted(missing)!r}")
+        diagnostics = [
+            {
+                "family": row.get("statement_family"),
+                "label": row.get("line_item"),
+                "normalized_label": norm_label(row.get("line_item")),
+                "current_year": row.get("current_year"),
+                "prior_year": row.get("prior_year"),
+                "raw_cells": row.get("raw_cells"),
+            }
+            for row in rows
+            if row.get("statement_family") == "financial_position"
+        ]
+        raise RuntimeError(
+            f"Configured OCR corrections did not match candidate rows: {sorted(missing)!r}; "
+            f"financial_position_rows={diagnostics!r}"
+        )
     return applied
 
 
 def dedupe(rows: list[dict]) -> list[dict]:
     unique: dict[tuple, dict] = {}
     for row in rows:
-        key = (
-            row["source_id"],
-            row["source_page"],
-            row["statement_family"],
-            " ".join(str(row["line_item"]).lower().split()),
-            row["current_year"],
-            row["prior_year"],
-        )
+        key = (row["source_id"], row["source_page"], row["statement_family"], " ".join(str(row["line_item"]).lower().split()), row["current_year"], row["prior_year"])
         unique.setdefault(key, row)
-    return sorted(
-        unique.values(),
-        key=lambda row: (
-            row.get("source_page") or 0,
-            row.get("statement_family") or "",
-            row.get("line_item") or "",
-        ),
-    )
+    return sorted(unique.values(), key=lambda row: (row.get("source_page") or 0, row.get("statement_family") or "", row.get("line_item") or ""))
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUT)
     args = parser.parse_args()
-
     require_binary("pdftoppm")
     require_binary("tesseract")
     session = requests.Session()
     session.headers["User-Agent"] = base.UA
     blob = fetch_pdf(session, SOURCE)
     source_sha = hashlib.sha256(blob).hexdigest()
-
     rows: list[dict] = []
     page_status: list[dict] = []
     with tempfile.TemporaryDirectory(prefix="halifaxdata-2018-ocr-") as tmp:
@@ -254,22 +212,13 @@ def main() -> None:
         with pdfplumber.open(io.BytesIO(blob)) as pdf:
             if len(pdf.pages) < max(OCR_PAGES):
                 raise RuntimeError(f"2018 source unexpectedly has only {len(pdf.pages)} pages")
-
         for page_num in OCR_PAGES:
             text = ocr_page(pdf_path, page_num, tmpdir)
             family, title = base.statement_context(text)
             if not family:
                 raise RuntimeError(f"No audited statement heading recovered by OCR on PDF page {page_num}")
             multiplier = base.unit_multiplier(text)
-            parsed = parse_ocr_text_rows(
-                SOURCE,
-                2018,
-                page_num,
-                family,
-                title,
-                text,
-                multiplier,
-            )
+            parsed = parse_ocr_text_rows(SOURCE, 2018, page_num, family, title, text, multiplier)
             for row in parsed:
                 row["ocr_adapter_version"] = ADAPTER_VERSION
                 row["source_sha256"] = source_sha
@@ -280,22 +229,12 @@ def main() -> None:
                 prov["source_sha256"] = source_sha
                 row["provenance"] = prov
             rows.extend(parsed)
-            page_status.append({
-                "source_page": page_num,
-                "status": "parsed",
-                "statement_family": family,
-                "statement_title": title,
-                "source_unit_multiplier": multiplier,
-                "ocr_chars": len(text),
-                "records": len(parsed),
-            })
-
+            page_status.append({"source_page": page_num, "status": "parsed", "statement_family": family, "statement_title": title, "source_unit_multiplier": multiplier, "ocr_chars": len(text), "records": len(parsed)})
     correction_count = apply_validated_corrections(rows)
     rows = dedupe(rows)
     families: dict[str, int] = {}
     for row in rows:
         families[row["statement_family"]] = families.get(row["statement_family"], 0) + 1
-
     payload = {
         "metadata": {
             "build": "020",
