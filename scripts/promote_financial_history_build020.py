@@ -41,6 +41,10 @@ def main() -> None:
         raise RuntimeError("Candidate source-year controls are not the proven 2018-2025 shape")
     if meta.get("2018_schedule_coverage") != "not_released_from_ocr_candidate":
         raise RuntimeError("Candidate no longer preserves the 2018 schedule gap")
+    candidate_status = {item.get("source_id"): item for item in meta.get("source_status") or []}
+    candidate_2018 = candidate_status.get("hrm-financials-2018") or {}
+    if candidate_2018.get("schedule_coverage") != "not_released_from_ocr_candidate":
+        raise RuntimeError("Candidate 2018 source_status no longer preserves the schedule gap")
     if table_meta.get("release_status") != "candidate_not_production":
         raise RuntimeError("Table-index candidate release boundary changed")
     if table_meta.get("source_count") != 8 or table_meta.get("table_source_count") != 7 or table_meta.get("ocr_source_count") != 1:
@@ -51,6 +55,11 @@ def main() -> None:
     released_meta["dataset_status"] = "build020_combined_audited_statement_history"
     released_meta["release_status"] = "released_checked_in"
     released_meta["2018_schedule_coverage"] = "not_released"
+    released_status = {item.get("source_id"): item for item in released_meta.get("source_status") or []}
+    released_2018 = released_status.get("hrm-financials-2018")
+    if not released_2018:
+        raise RuntimeError("Released metadata is missing hrm-financials-2018 source_status")
+    released_2018["schedule_coverage"] = "not_released"
     released_meta["scope"] = (
         "2018 four primary audited statements via source-specific OCR adapter plus unchanged standard "
         "heading-anchored 2019-2025 audited statement/schedule extraction."
