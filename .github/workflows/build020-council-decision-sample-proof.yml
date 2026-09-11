@@ -1,0 +1,39 @@
+name: Build 020 Council Decision Sample Proof
+
+on:
+  push:
+    branches: ['agent/build020-tax-payment-graph']
+    paths:
+      - 'data/generated/council_archive.json'
+      - 'data/generated/council_decisions.json'
+      - 'scripts/ingest_council_decisions.py'
+      - 'scripts/ingest_council_archive_decision_sample_build020.py'
+      - 'scripts/validate_council_archive_decision_sample_build020.py'
+      - '.github/workflows/build020-council-decision-sample-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parser dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate sample collector syntax
+        run: python -m compileall -q scripts/ingest_council_archive_decision_sample_build020.py scripts/validate_council_archive_decision_sample_build020.py
+      - name: Parse deterministic historical Council sample
+        run: python scripts/ingest_council_archive_decision_sample_build020.py --output artifacts/build020-council-archive-decision-sample.json
+      - name: Validate multi-year sample and Build 016 equivalence control
+        run: python scripts/validate_council_archive_decision_sample_build020.py --candidate artifacts/build020-council-archive-decision-sample.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build020-council-decision-sample-${{ github.sha }}
+          path: artifacts/build020-council-archive-decision-sample.json
+          retention-days: 14

@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "reviewed_at": "2026-09-11",
+    "scope": "Four complete, visually reviewed ceremony minutes containing no motion/outcome pairs. This is an exact-document exception, not a rule that empty parser output means no decisions.",
+    "source_change_policy": "A changed hash, date, URL, motion marker or parser diagnostic must remain an unresolved parse gap.",
+    "payment_boundary": "These observations do not establish any payment fact or zero expenditure."
+  },
+  "sources": [
+    {
+      "meeting_date": "2016-02-03",
+      "minutes_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/regional-council/160203rc-mins.pdf",
+      "source_sha256": "85861a56f0486a9cec2ad398a600c7c35036d1dc4129fe21bb70a1917e61421c",
+      "pdf_pages": 2,
+      "review_note": "Cover and attendance on page 1; page 2 records call to order, Tony Mancini's oath of office and adjournment. No motion or vote outcome is recorded."
+    },
+    {
+      "meeting_date": "2016-11-01",
+      "minutes_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/regional-council/161101rc-mins.pdf",
+      "source_sha256": "eef2ff19d15507b48c43f23391c140c3350ddade7ad9e952fc345e570247237e",
+      "pdf_pages": 2,
+      "review_note": "Ceremony cover on page 1; page 2 records introductions, swearing in of councillors, closing remarks and adjournment. No motion or vote outcome is recorded."
+    },
+    {
+      "meeting_date": "2020-10-29",
+      "minutes_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/regional-council/201029rc-mins.pdf",
+      "source_sha256": "d7e510a2d9e0bd19e90f47bac3327e67161e7b8a1ba4ebeab728921ecc2f1ff6",
+      "pdf_pages": 3,
+      "review_note": "Ceremony cover on page 1; pages 2-3 record introductions, oaths of office, the deferred District 11 oath, closing remarks and adjournment. No motion or vote outcome is recorded."
+    },
+    {
+      "meeting_date": "2024-11-05",
+      "minutes_url": "https://www.halifax.ca/sites/default/files/documents/city-hall/regional-council/241105rc-mins.pdf",
+      "source_sha256": "ed5a7360ddbdfa433545f79f10907ffcf1690e7d345cf8f6117a9c67cf3ab58f",
+      "pdf_pages": 2,
+      "review_note": "Ceremony cover on page 1; page 2 records welcomes, introductions, oaths of office, remarks and adjournment. No motion or vote outcome is recorded."
+    }
+  ]
+}

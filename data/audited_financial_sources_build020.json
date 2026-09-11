@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "build": "020",
+    "last_researched": "2026-09-11",
+    "scope": "Build 020 audited-history overlay closing the 2018 primary-statement parser gap with a source-specific OCR adapter while preserving the established 2019-2025 standard parser unchanged.",
+    "released_source_years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+    "standard_parser_source_years": [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+    "ocr_primary_statement_source_years": [2018],
+    "remaining_partial_source_years": [2018],
+    "remaining_gap": "2018 image-backed schedules are not released by the Build 020 OCR adapter; only the four primary audited statements are normalized.",
+    "payment_boundary": "Audited statement rows are aggregate PSAS financial evidence, not invoices, accounts-payable transactions, vendor payments or project-level paid values.",
+    "note": "The 2018 adapter preserves raw OCR values. Eight current-year OCR digit errors are corrected only where the text-native 2019 audited statement independently prints the same 2018 comparative line item; 41/41 deterministic 2018-to-2019 comparative overlaps matched after those explicit corrections."
+  },
+  "sources": [
+    {
+      "id": "hrm-financials-2018",
+      "name": "Audited Consolidated Financial Statements — 2018 Audit & Finance attachment",
+      "publisher": "Halifax Regional Municipality",
+      "category": "Budgets & actuals",
+      "coverage": "Year ended March 31, 2018 with comparative 2017; four primary statements released through source-specific OCR; image-backed schedules remain explicit gap",
+      "ingestion": "Official Audit & Finance PDF attachment; PDF pages 8-11 OCR at 200 DPI with Tesseract, conservative Build 005 numeric/normalization semantics, explicit 2019-comparative validation for eight OCR digit corrections",
+      "status": "ready-ocr-primary-statements-partial-schedules",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/180718afsc1211.pdf",
+      "source_sha256": "8ddb997b3deaf2985b0fe6901f76ef36a8dd8c6633b434c68b903149651821fe",
+      "ocr_adapter_version": "build020-financials-2018-ocr-v4",
+      "released_records": 79,
+      "released_statement_families": [
+        "financial_position",
+        "operations",
+        "net_financial_assets",
+        "cash_flows"
+      ],
+      "validated_ocr_corrections": 8,
+      "deterministic_2019_comparative_overlaps": 41,
+      "deterministic_2019_comparative_matches": 41,
+      "schedule_coverage": "not_released"
+    },
+    {
+      "id": "hrm-financials-2019",
+      "role": "independent validation source for 2018 current-year OCR values",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/budget-finances/FS-March-31-2019-V7-Signed.pdf",
+      "finding": "The text-native 2019 audited statement presents 2018 comparative values used only to validate deterministic same-line 2018 OCR corrections; those comparators are not relabelled as a second 2018 source."
+    }
+  ]
+}

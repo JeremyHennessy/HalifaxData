@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Independently validate the conservative audited-financial history artifact."""
+"""Independently validate the conservative audited-financial history artifact.
+
+Build 020 preserves all Build 005/017 rules for standard PDF-parsed sources and adds
+one narrowly bounded exception: HRM 2018 primary statements may use the proven
+source-specific OCR adapter. OCR is forbidden for all later source years, and corrected
+2018 current-year values must preserve raw OCR values plus independent 2019 comparative
+validation provenance.
+"""
 from __future__ import annotations
 
 import json
@@ -11,8 +18,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "data/generated/financials.json"
-EXPECTED_DATASET_STATUS = "conservative_audited_statement_extraction"
+STANDARD_DATASET_STATUS = "conservative_audited_statement_extraction"
+BUILD020_DATASET_STATUS = "build020_combined_audited_statement_history"
 EXPECTED_PARSER_VERSION = "build005-financials-v4"
+EXPECTED_OCR_ADAPTER = "build020-financials-2018-ocr-v4"
 ALLOWED_FAMILIES = {
     "financial_position",
     "operations",
@@ -20,10 +29,10 @@ ALLOWED_FAMILIES = {
     "cash_flows",
     "schedule",
 }
-ALLOWED_METHODS = {"pdf_table_row", "pdf_text_line"}
+STANDARD_METHODS = {"pdf_table_row", "pdf_text_line"}
 HEADING_RE = re.compile(r"^(?:halifax regional municipality\s+)?consolidated (?:statement|schedule)s?\b", re.I)
 OBVIOUS_NONFINANCIAL = [
-    re.compile(r"^page\b", re.I),
+    re.compile(r"^page\s+\d+", re.I),
     re.compile(r"\byear ended march\b", re.I),
     re.compile(r"\btelephone\b", re.I),
     re.compile(r"\bfax\b", re.I),
@@ -47,6 +56,38 @@ def close_enough(left: float, right: float) -> bool:
     return math.isclose(left, right, rel_tol=0.0, abs_tol=0.011)
 
 
+def validate_2018_correction(index: int, row: dict, current: float | None, current_raw: float | None, multiplier: float | None, provenance: dict) -> None:
+    correction = row.get("ocr_correction")
+    if not correction:
+        if multiplier is not None and current_raw is not None and current is not None:
+            expected = round(current_raw * multiplier, 2)
+            if not close_enough(current, expected):
+                fail(f"row {index}: uncorrected 2018 current_year {current} != OCR source value * multiplier {expected}")
+        return
+
+    if correction.get("status") != "validated_against_next_year_audited_comparative":
+        fail(f"row {index}: invalid 2018 OCR correction status")
+    if correction.get("validation_source_id") != "hrm-financials-2019":
+        fail(f"row {index}: 2018 OCR correction lacks 2019 validation source")
+    raw_ocr = as_number(row.get("ocr_current_year"))
+    raw_presented = as_number(row.get("ocr_source_presented_current_year"))
+    validated = as_number(correction.get("validated_current_year"))
+    correction_raw = as_number(correction.get("raw_ocr_current_year"))
+    if None in {raw_ocr, raw_presented, validated, correction_raw, multiplier, current}:
+        fail(f"row {index}: incomplete numeric 2018 OCR correction evidence")
+        return
+    if not close_enough(raw_ocr, raw_presented * multiplier):
+        fail(f"row {index}: preserved raw 2018 OCR value does not reconcile to source-presented OCR value")
+    if not close_enough(raw_ocr, correction_raw):
+        fail(f"row {index}: correction raw OCR value does not match preserved raw value")
+    if not close_enough(current, validated):
+        fail(f"row {index}: corrected current_year does not match validated comparator value")
+    if close_enough(current, raw_ocr):
+        fail(f"row {index}: correction block present but normalized value equals raw OCR value")
+    if provenance.get("validation_source_id") != "hrm-financials-2019" or provenance.get("ocr_correction_applied") is not True:
+        fail(f"row {index}: corrected 2018 row lacks correction provenance")
+
+
 def main() -> None:
     if not PATH.exists():
         raise SystemExit(f"Financial history artifact is missing: {PATH.relative_to(ROOT)}")
@@ -61,14 +102,26 @@ def main() -> None:
     if not isinstance(rows, list):
         raise SystemExit("financials.json records must be a list")
 
-    if metadata.get("dataset_status") != EXPECTED_DATASET_STATUS:
-        fail(f"dataset_status {metadata.get('dataset_status')!r} != {EXPECTED_DATASET_STATUS!r}")
+    dataset_status = metadata.get("dataset_status")
+    is_build020 = dataset_status == BUILD020_DATASET_STATUS
+    if dataset_status not in {STANDARD_DATASET_STATUS, BUILD020_DATASET_STATUS}:
+        fail(f"unsupported dataset_status {dataset_status!r}")
     if metadata.get("parser_version") != EXPECTED_PARSER_VERSION:
         fail(f"parser_version {metadata.get('parser_version')!r} != {EXPECTED_PARSER_VERSION!r}")
     if metadata.get("records") != len(rows):
         fail(f"metadata records {metadata.get('records')!r} != actual {len(rows)}")
-    if "heading-anchored" not in str(metadata.get("scope") or "").lower():
-        fail("metadata scope must explicitly state heading-anchored extraction")
+    scope = str(metadata.get("scope") or "").lower()
+    if "heading-anchored" not in scope:
+        fail("metadata scope must explicitly retain heading-anchored standard extraction")
+    if is_build020:
+        if metadata.get("ocr_adapter_version") != EXPECTED_OCR_ADAPTER:
+            fail(f"Build 020 ocr_adapter_version {metadata.get('ocr_adapter_version')!r} is stale")
+        if metadata.get("source_years") != list(range(2018, 2026)):
+            fail(f"Build 020 source_years {metadata.get('source_years')!r} != 2018-2025")
+        if metadata.get("2018_schedule_coverage") != "not_released":
+            fail("Build 020 must keep 2018 schedule coverage explicitly unreleased")
+        if metadata.get("release_status") != "released_checked_in":
+            fail(f"Build 020 release_status {metadata.get('release_status')!r} != 'released_checked_in'")
 
     statuses = metadata.get("source_status")
     if not isinstance(statuses, list) or not statuses:
@@ -84,18 +137,27 @@ def main() -> None:
             fail(f"source_status entry missing source_id: {item!r}")
             continue
         status_ids.append(source_id)
-        if item.get("status") != "ok":
-            fail(f"source {source_id}: status is {item.get('status')!r}, expected 'ok'")
+        expected_status = "ok_ocr_primary_statements" if source_id == "hrm-financials-2018" and is_build020 else "ok"
+        if item.get("status") != expected_status:
+            fail(f"source {source_id}: status is {item.get('status')!r}, expected {expected_status!r}")
         if not isinstance(item.get("records"), int) or item.get("records", 0) < 10:
             fail(f"source {source_id}: fewer than 10 validated rows")
         if not isinstance(item.get("eligible_statement_pages"), int) or item.get("eligible_statement_pages", 0) < 1:
             fail(f"source {source_id}: no eligible audited statement pages recorded")
+        if source_id == "hrm-financials-2018" and is_build020:
+            if item.get("records") != 79 or item.get("eligible_statement_pages") != 4:
+                fail(f"source {source_id}: unexpected proven OCR row/page counts")
+            if item.get("validated_ocr_corrections") != 8:
+                fail(f"source {source_id}: expected exactly 8 validated OCR corrections")
+            if item.get("schedule_coverage") != "not_released":
+                fail(f"source {source_id}: schedules must remain unreleased")
     if len(status_ids) != len(set(status_ids)):
         fail("source_status contains duplicate source IDs")
 
     source_counts: Counter[str] = Counter()
     family_counts: dict[str, Counter[str]] = defaultdict(Counter)
     seen_facts: set[tuple] = set()
+    corrected_2018 = 0
 
     for index, row in enumerate(rows):
         source_id = str(row.get("source_id") or "")
@@ -147,20 +209,35 @@ def main() -> None:
             if value is None or not math.isfinite(value):
                 fail(f"row {index}: {field} is not a finite numeric value")
 
-        if multiplier is not None and current_raw is not None and current is not None:
-            expected = round(current_raw * multiplier, 2)
-            if not close_enough(current, expected):
-                fail(f"row {index}: current_year {current} != source value * multiplier {expected}")
+        provenance = row.get("provenance") or {}
+        method = row.get("extraction_method")
+        if source_id == "hrm-financials-2018" and is_build020:
+            if fiscal_year != 2018:
+                fail(f"row {index}: 2018 OCR source has fiscal_year_end {fiscal_year!r}")
+            if method != "ocr_text_line":
+                fail(f"row {index}: 2018 Build 020 row must use ocr_text_line, got {method!r}")
+            if row.get("ocr_adapter_version") != EXPECTED_OCR_ADAPTER or provenance.get("ocr_adapter_version") != EXPECTED_OCR_ADAPTER:
+                fail(f"row {index}: stale/missing 2018 OCR adapter version")
+            if family == "schedule":
+                fail(f"row {index}: 2018 schedules are not released")
+            validate_2018_correction(index, row, current, current_raw, multiplier, provenance)
+            if row.get("ocr_correction"):
+                corrected_2018 += 1
+        else:
+            if method not in STANDARD_METHODS:
+                fail(f"row {index}: unsupported standard extraction_method {method!r}")
+            if row.get("ocr_adapter_version") or provenance.get("ocr_adapter_version"):
+                fail(f"row {index}: OCR metadata leaked into standard source {source_id}")
+            if multiplier is not None and current_raw is not None and current is not None:
+                expected = round(current_raw * multiplier, 2)
+                if not close_enough(current, expected):
+                    fail(f"row {index}: current_year {current} != source value * multiplier {expected}")
+
         if multiplier is not None and prior_raw is not None and prior is not None:
             expected = round(prior_raw * multiplier, 2)
             if not close_enough(prior, expected):
                 fail(f"row {index}: prior_year {prior} != source value * multiplier {expected}")
 
-        method = row.get("extraction_method")
-        if method not in ALLOWED_METHODS:
-            fail(f"row {index}: unsupported extraction_method {method!r}")
-
-        provenance = row.get("provenance") or {}
         if provenance.get("source_id") != source_id:
             fail(f"row {index}: provenance source_id mismatch")
         if provenance.get("parser_version") != EXPECTED_PARSER_VERSION:
@@ -194,6 +271,18 @@ def main() -> None:
         for family in ("financial_position", "operations"):
             if family_counts[source_id][family] < 1:
                 fail(f"source {source_id}: no rows from required statement family {family!r}")
+
+    if is_build020:
+        expected_ids = {f"hrm-financials-{year}" for year in range(2018, 2026)}
+        if set(status_ids) != expected_ids:
+            fail(f"Build 020 source IDs {sorted(status_ids)!r} != expected 2018-2025 set")
+        if corrected_2018 != 8:
+            fail(f"Build 020 corrected 2018 row count {corrected_2018} != 8")
+        if source_counts["hrm-financials-2018"] != 79:
+            fail(f"Build 020 2018 row count {source_counts['hrm-financials-2018']} != 79")
+        expected_2018_families = {"financial_position": 16, "operations": 24, "net_financial_assets": 12, "cash_flows": 27}
+        if dict(family_counts["hrm-financials-2018"]) != expected_2018_families:
+            fail(f"Build 020 2018 family counts {dict(family_counts['hrm-financials-2018'])!r} != {expected_2018_families!r}")
 
     if errors:
         print("FINANCIAL HISTORY VALIDATION FAILED", file=sys.stderr)
