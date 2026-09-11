@@ -71,8 +71,10 @@ jobs:
         run: python scripts/validate_budget_history.py
       - name: Validate audited financial history
         run: python scripts/validate_financial_history.py
-      - name: Validate Build 017 audited source-year expansion
+      - name: Validate Build 017 standard audited layer
         run: python scripts/validate_financial_history_build017.py
+      - name: Validate Build 020 audited-source overlay
+        run: python scripts/validate_audited_financial_sources_build020.py
       - name: Validate Build 018 ratified current budget
         run: python scripts/validate_current_budget_build018.py
       - name: Validate municipal benchmarks and external funding
