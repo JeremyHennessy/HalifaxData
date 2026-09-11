@@ -1,6 +1,6 @@
 name: Build 020 Release Audited History Once
 
-# Retry 2: nested 2018 schedule-release metadata fixed in promoter.
+# Retry 3: released data validates; clean ephemeral proof outputs before two-file guard.
 on:
   push:
     branches: ['agent/build020-tax-payment-graph']
@@ -61,6 +61,10 @@ jobs:
           python scripts/validate_financial_history.py
           python scripts/validate_financial_history_build017.py
           python scripts/validate_audited_financial_sources_build020.py
+      - name: Remove ephemeral proof outputs
+        run: |
+          rm -rf artifacts
+          find scripts -type d -name __pycache__ -prune -exec rm -rf {} +
       - name: Assert release changed only generated audited artifacts
         run: |
           git diff --check
