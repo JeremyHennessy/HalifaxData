@@ -13,9 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CANDIDATE = ROOT / "artifacts/build020-financials-2018-ocr.json"
 FINANCIALS = ROOT / "data/generated/financials.json"
 EXPECTED_BASE_PARSER = "build005-financials-v4"
-EXPECTED_ADAPTER = "build020-financials-2018-ocr-v1"
+EXPECTED_ADAPTER = "build020-financials-2018-ocr-v2"
 REQUIRED_FAMILIES = {"financial_position", "operations", "net_financial_assets", "cash_flows"}
-ALLOWED_FAMILIES = REQUIRED_FAMILIES | {"schedule"}
 NOTE_RE = re.compile(r"\s*\(?notes?\s+\d+[a-z]?(?:\([a-z0-9]+\))?\)?", re.I)
 NONWORD_RE = re.compile(r"[^a-z0-9]+")
 
@@ -33,7 +32,8 @@ def find_unique(rows: list[dict], family: str, label: str) -> dict:
     target = norm_label(label)
     matches = [row for row in rows if row.get("statement_family") == family and norm_label(row.get("line_item")) == target]
     if len(matches) != 1:
-        raise AssertionError(f"Expected one {family!r} row for {label!r}; found {len(matches)}")
+        labels = [row.get("line_item") for row in rows if row.get("statement_family") == family]
+        raise AssertionError(f"Expected one {family!r} row for {label!r}; found {len(matches)}; labels={labels!r}")
     return matches[0]
 
 
@@ -51,13 +51,13 @@ def main() -> None:
     assert metadata.get("base_parser_version") == EXPECTED_BASE_PARSER, metadata
     assert metadata.get("ocr_adapter_version") == EXPECTED_ADAPTER, metadata
     assert metadata.get("release_status") == "candidate_not_production_until_validated_and_integrated", metadata
+    assert metadata.get("schedule_coverage") == "not_released_from_ocr_candidate", metadata
     assert isinstance(metadata.get("source_sha256"), str) and len(metadata["source_sha256"]) == 64
     assert metadata.get("records") == len(rows), (metadata.get("records"), len(rows))
     assert len(rows) >= 50, f"2018 OCR candidate unexpectedly sparse: {len(rows)} rows"
 
     families = Counter(row.get("statement_family") for row in rows)
-    assert REQUIRED_FAMILIES.issubset(families), families
-    assert not (set(families) - ALLOWED_FAMILIES), families
+    assert set(families) == REQUIRED_FAMILIES, families
     assert all(families[name] >= 5 for name in REQUIRED_FAMILIES), families
 
     seen = set()
@@ -76,13 +76,11 @@ def main() -> None:
         assert prov.get("ocr_adapter_version") == EXPECTED_ADAPTER, (index, prov)
         assert prov.get("source_sha256") == metadata.get("source_sha256"), index
         assert prov.get("locator_type") == "ocr_text_line", (index, prov)
-        assert str(prov.get("locator_value") or "").startswith(f"p{row['source_page']}/ocr/"), (index, prov)
+        assert str(prov.get("locator_value") or "").startswith(f"p{row['source_page']}/ocr-line"), (index, prov)
         key = (row["source_page"], row["statement_family"], norm_label(row["line_item"]), row["current_year"], row["prior_year"])
         assert key not in seen, f"duplicate OCR fact: {key!r}"
         seen.add(key)
 
-    # Hard source anchors from the OCR proof. These values are in CAD after the
-    # source's 'in thousands of dollars' multiplier.
     anchors = [
         ("financial_position", "Cash and short-term deposits", 187_292_000, 235_331_000),
         ("financial_position", "Net financial assets", 163_421_000, 134_397_000),
@@ -98,8 +96,6 @@ def main() -> None:
         assert close(row["current_year"], current), (family, label, row["current_year"], current)
         assert close(row["prior_year"], prior), (family, label, row["prior_year"], prior)
 
-    # Independent consistency check: the 2019 audited source prints 2018 values as
-    # its comparative prior-year column. Compare uniquely matching labels/families.
     established = json.loads(FINANCIALS.read_text(encoding="utf-8"))
     rows_2019 = [row for row in established.get("records") or [] if row.get("source_id") == "hrm-financials-2019"]
     prior_index: dict[tuple[str, str], set[float]] = {}
