@@ -2,7 +2,7 @@ name: UI Smoke
 
 on:
   push:
-    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph', 'agent/build-017-audited-financial-history', 'agent/build-018-current-source-refresh', 'agent/build-019-deterministic-lifecycle-reconciliation', 'agent/build020-tax-payment-graph']
+    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph', 'agent/build-017-audited-financial-history', 'agent/build-018-current-source-refresh', 'agent/build-019-deterministic-lifecycle-reconciliation']
   pull_request:
     paths:
       - 'index.html'
