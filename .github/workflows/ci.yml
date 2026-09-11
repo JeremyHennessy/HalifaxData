@@ -67,10 +67,6 @@ jobs:
         run: python scripts/validate_data.py
       - name: Validate Build 020 tax transparency
         run: python scripts/validate_tax_transparency_2026.py
-      - name: Install temporary 2018 extraction diagnostic dependencies
-        run: python -m pip install --disable-pip-version-check -r requirements.txt
-      - name: Diagnose 2018 audited PDF extraction
-        run: python scripts/diagnose_financial_2018_build020.py
       - name: Validate historical budgets
         run: python scripts/validate_budget_history.py
       - name: Validate audited financial history
