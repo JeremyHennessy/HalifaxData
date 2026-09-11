@@ -156,10 +156,12 @@ def main() -> None:
                 row["ocr_adapter_version"] = ADAPTER_VERSION
                 row["source_sha256"] = source_sha
                 prov = dict(row.get("provenance") or {})
+                original_locator = str(prov.get("locator_value") or f"p{page_num}")
+                prov["locator_type"] = "ocr_text_line"
+                prov["locator_value"] = f"p{page_num}/ocr/{original_locator}"
                 prov["parser_version"] = base.PARSER_VERSION
                 prov["ocr_adapter_version"] = ADAPTER_VERSION
                 prov["source_sha256"] = source_sha
-                prov["locator"] = f"p{page_num}/ocr/{prov.get('locator') or ''}".rstrip("/")
                 row["provenance"] = prov
             rows.extend(parsed)
             page_status.append({
