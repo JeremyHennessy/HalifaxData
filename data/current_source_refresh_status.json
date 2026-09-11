@@ -1,13 +1,14 @@
 {
   "metadata": {
-    "build": "018",
+    "build": "019",
     "researched_at": "2026-09-11",
     "production_baseline": {
-      "commit": "93fd8b769a48271b5f1f12782a3fa4a25a1d38d9",
-      "release": "Build 018 — current-source refresh",
-      "hosted_verification": "Pages deploy and hosted desktop/mobile verification passed on 2026-08-28"
+      "commit": "ae0b214e2dc6b54b0ad538d6fb05ccc2946111f4",
+      "baseline_branch": "baseline/build-019",
+      "release": "Build 019 — deterministic lifecycle reconciliation",
+      "hosted_verification": "Post-merge CI, current-budget proof, current-capital proof, Pages deployment, and hosted browser verification passed on 2026-09-11."
     },
-    "purpose": "Track current-public-source freshness without converting an unverified publication gap into a zero or an assertion that no source exists.",
+    "purpose": "Track current-public-source freshness without converting an unverified publication gap into a zero, overwriting historical provenance with a replacement URL, or asserting that no newer source exists merely because a registered source still reproduces.",
     "status_semantics": {
       "verified_current": "An authoritative public source covering the latest currently applicable period was verified and is represented in production.",
       "verified_new_source": "A newer authoritative public source was verified but is not yet represented in production.",
@@ -15,20 +16,32 @@
       "current_source_research": "The domain source discovery itself was refreshed on the research date; publication/approval timing still governs record availability."
     },
     "automation_scope": {
-      "last_successful_scheduled_run": "2026-09-07",
-      "automated_domains": [
-        "compensation_disclosure",
-        "operating_budget_and_audited_actuals"
-      ],
-      "manual_or_release_cycle_domains": [
-        "capital_plan",
-        "quarterly_financial_reports",
-        "procurement_quarterly_awards",
-        "cao_contract_amendments",
-        "council_decisions",
-        "audited_financial_statements"
-      ],
-      "note": "The weekly refresh workflow currently re-runs compensation and budget ingestion only. A successful run with no committed diff does not establish freshness for the other domains."
+      "write_refresh": {
+        "last_successful_scheduled_run": "2026-09-07",
+        "domains": [
+          "compensation_disclosure",
+          "operating_budget_and_audited_actuals"
+        ],
+        "note": "The established write-capable weekly refresh remains limited to compensation and budget ingestion."
+      },
+      "read_only_domain_monitor": {
+        "schedule": "weekly Monday 11:47 UTC plus workflow_dispatch",
+        "permissions": "contents: read",
+        "failure_isolation": "Seven independent jobs; no domain depends on another domain succeeding.",
+        "domains": [
+          "quarterly_financial_reports",
+          "procurement_awards",
+          "procurement_quarterly_awards",
+          "cao_contract_amendments",
+          "council_decisions",
+          "audited_financial_statements",
+          "capital_plan"
+        ],
+        "validated_pre_release_head": "77850a6c6de407d1d3dff8605fb282989177ad14",
+        "validated_pre_release_run": 34599764377,
+        "validated_pre_release_result": "All seven jobs passed on 2026-09-11.",
+        "note": "The monitor reproduces registered evidence and/or discovers current public records into ephemeral workflow artifacts. It has no repository write permission and does not auto-publish new reporting periods, Council decisions, replacement document identities, or other freshness candidates."
+      }
     }
   },
   "domains": [
@@ -39,9 +52,9 @@
       "verified_current_period": "2026/27",
       "source_id": "hrm-budget-2026-27-final-package",
       "source_stage": "Final March 25, 2026 post-Budget-Adjustment-List staff package; separately ratified by Regional Council March 31, 2026.",
-      "production_integration": "Build 018: 105 service-area rows across 20 source overview pages; validator and repeat live-source reproduction proof established.",
-      "latest_check": "Build 018 is deployed. The scheduled public-data refresh last succeeded September 7, 2026 and produced no checked-in budget change.",
-      "next_action": "Keep the 2026/27 layer current and re-run source verification when HRM publishes a revised authoritative budget package."
+      "production_integration": "Build 018 current-budget layer retained in verified Build 019 production: 105 service-area rows across 20 source overview pages.",
+      "latest_check": "Independent post-Build-019 current-budget reproduction and evidence proof passed September 11, 2026 on production merge SHA ae0b214e2dc6b54b0ad538d6fb05ccc2946111f4.",
+      "next_action": "Keep the 2026/27 layer current and review any revised authoritative budget package before publication."
     },
     {
       "domain": "capital_plan",
@@ -50,9 +63,10 @@
       "verified_current_period": "2026/27",
       "source_id": "hrm-capital-2026-27-multiyear-revised",
       "source_stage": "Revised March 3, 2026 Capital Multi-Year Projects Attachment 2; separately covered by March 31 Regional Council Capital Plan ratification.",
-      "production_integration": "Build 018: 52 exact-account project/program schedule rows; 29 discrete projects and 23 ongoing programs; $196.656M 2026/27 cashflow/budget; exact source-control defects preserved.",
-      "source_link_status": "Previously indexed DocumentId=4406 returns 404; exact-title agenda resolution resolves the official report to DocumentId=4622.",
-      "next_action": "Retain Build 018 as the current layer and re-check when a revised authoritative capital schedule or approved adjustment is published."
+      "production_integration": "Build 018 current-capital layer retained in verified Build 019 production: 52 exact-account project/program schedule rows; 29 discrete projects and 23 ongoing programs; $196.656M 2026/27 cashflow/budget.",
+      "source_link_status": "Historical source identity remains preserved. Exact-title live-source resolution may move when HRM replaces eSCRIBE attachments.",
+      "latest_check": "The read-only domain monitor reproduced and validated the current capital schedule and independently verified the March 31, 2026 ratification source on September 11, 2026.",
+      "next_action": "Retain the verified current layer and review any revised authoritative capital schedule or approved adjustment before publication."
     },
     {
       "domain": "quarterly_financial_reports",
@@ -60,40 +74,55 @@
       "production_through": "2025/26 Q3 (period ended December 31, 2025)",
       "verified_current_period": null,
       "known_gap": "2024/25 Q1 remains explicitly missing from the checked series.",
-      "research_result": "Targeted official HRM and eSCRIBE research refreshed September 11, 2026 did not verify a 2025/26 Q4/year-end report. The prior 2024/25 year-end/Q4 report was tabled in September 2025, so no absence conclusion is drawn before a current authoritative source is located or the comparable reporting window passes.",
-      "next_action": "Re-check the Audit and Finance and Regional Council publication stream later in September 2026 and ingest only an authoritative report when verified."
+      "latest_check": "On September 11, 2026 the read-only domain monitor reproduced and validated 1,753 conservative rows across the same eight registered reports, including 2025/26 Q1-Q3. This proves registered-source liveness/parser stability; it does not prove that no 2025/26 Q4/year-end source exists.",
+      "research_result": "Targeted official HRM and eSCRIBE research on September 11, 2026 did not verify a 2025/26 Q4/year-end report. The prior 2024/25 year-end/Q4 report was tabled in September 2025, so no absence conclusion is drawn before a current authoritative source is located or the comparable reporting window passes.",
+      "next_action": "Continue source discovery for 2025/26 Q4/year-end and ingest only an authoritative verified report."
+    },
+    {
+      "domain": "procurement_awards",
+      "status": "current_source_research",
+      "production_through": "current checked Nova Scotia awarded-tenders snapshot",
+      "verified_current_period": "source research refreshed 2026-09-11",
+      "latest_check": "The September 11 read-only live query returned 6,296 source rows and normalized 5,502 Halifax awards, exactly matching 5,502 checked normalized award keys with 0 new keys and 0 checked keys missing.",
+      "evidence_boundary": "Award records are procurement evidence, not accounts-payable transactions, invoices, final paid values, or findings of wrongdoing.",
+      "next_action": "Continue weekly read-only comparison and review any newly discovered normalized award keys before publishing them."
     },
     {
       "domain": "procurement_quarterly_awards",
       "status": "verified_current",
       "production_through": "April-June 2026 report presented August 25, 2026",
       "verified_current_period": "2026-06-30",
+      "latest_check": "The September 11 monitor reproduced the eight checked reports and 84 rows, then independently rebuilt from the current eSCRIBE graph: eight reports, 84 rows, no new or missing report periods, and no semantic count/value/schema changes.",
+      "source_identity_observation": "The checked April-June 2026 report preserves registry DocumentId 5716 and previously resolved replacement DocumentId 5776. Current exact-title discovery exposes the same report as DocumentId 5801. This is recorded as source relocation/replacement; historical provenance is not rewritten.",
       "research_result": "The July-September 2026 quarter is not complete as of September 11, 2026; no newer completed quarterly award period is expected yet.",
-      "next_action": "Retain current production evidence and re-check after the July-September 2026 reporting cycle closes."
+      "next_action": "Retain current production evidence, preserve historical registry identity, and re-check after the July-September 2026 reporting cycle closes."
     },
     {
       "domain": "cao_contract_amendments",
       "status": "not_yet_verified",
       "production_through": "November 25, 2025 public report series",
       "verified_current_period": null,
-      "research_result": "Targeted official-domain and eSCRIBE research refreshed September 11, 2026 did not verify a newer public CAO Contract Amendment Reporting source. Do not infer that no amendments occurred; public reports may also exclude Private & Confidential records.",
-      "next_action": "Continue explicit source checks and ingest a newer public report only when its authoritative meeting/report evidence is verified."
+      "latest_check": "The registered public CAO amendment series reproduced and validated successfully in the September 11 read-only domain monitor. This proves the checked sources still reproduce; it does not prove that no newer public report exists.",
+      "research_result": "Targeted official-domain and eSCRIBE research on September 11, 2026 did not verify a newer public CAO Contract Amendment Reporting source. Do not infer that no amendments occurred; public reports may also exclude Private & Confidential records.",
+      "next_action": "Continue explicit source discovery and ingest a newer public report only when its authoritative meeting/report evidence is verified."
     },
     {
       "domain": "compensation_disclosure",
       "status": "not_yet_verified",
       "production_through": "year ended March 31, 2025",
       "verified_current_period": null,
-      "research_result": "Targeted official-source research refreshed September 11, 2026 did not verify a Statement of Compensation for the year ended March 31, 2026. The scheduled compensation refresh last succeeded September 7, 2026 and produced no checked-in data change.",
-      "next_action": "Keep the weekly source check active and ingest the March 31, 2026 disclosure only when an authoritative source is verified."
+      "research_result": "Targeted official-source research on September 11, 2026 did not verify a Statement of Compensation for the year ended March 31, 2026. The established write-capable compensation refresh last succeeded September 7, 2026 and produced no checked-in data change.",
+      "next_action": "Keep the established weekly source check active and ingest the March 31, 2026 disclosure only when an authoritative source is verified."
     },
     {
       "domain": "council_decisions",
-      "status": "current_source_research",
-      "production_through": "Build 016 checked modern approved-minutes window plus explicit seven-meeting pre-2024 seed",
-      "verified_current_period": "source research refreshed 2026-09-11",
-      "research_result": "The August 25, 2026 Halifax Regional Council meeting is publicly linked with draft minutes. Draft minutes are not promoted to adopted-decision evidence under the existing evidence contract; the decision layer remains limited to approved/post minutes.",
-      "next_action": "Refresh the eSCRIBE meeting/document inventory and add later decisions only after approved/post minutes are available. Keep agenda recommendations and draft minutes separate from adopted decisions."
+      "status": "verified_new_source",
+      "production_through": "986 checked decisions through the June 23, 2026 approved-minutes window plus explicit seven-meeting pre-2024 seed",
+      "verified_current_period": "2026-07-14 approved Regional Council minutes",
+      "latest_check": "The September 11 read-only monitor refreshed the same 79-meeting eSCRIBE inventory and 897-document graph with zero agenda-fetch errors, then reproduced 1,014 validated approved-minute decisions: 28 more than the 986 checked production decisions and 0 checked decisions missing.",
+      "new_source_detail": "All 28 newly verified decision records are from the July 14, 2026 Halifax Regional Council approved/PostMinutes source. The August 25, 2026 meeting is not promoted to adopted-decision evidence because approved/PostMinutes evidence was not established by this run.",
+      "evidence_boundary": "Only approved/PostMinutes motion/result pairs are treated as adopted decision evidence. Agenda recommendations, draft minutes, and dollar mentions are not payments or proof that an amount was spent.",
+      "next_action": "Review and publish the 28 July 14 approved-minute decisions in a separate controlled data refresh, then regenerate any affected Build 019 lifecycle/investigation artifacts and rerun their exact-head release gates."
     },
     {
       "domain": "audited_financial_statements",
@@ -101,8 +130,9 @@
       "production_through": "2019-2025 released source years",
       "verified_current_period": null,
       "known_gap": "Official 2018 source remains a parser gap under established Build 017 semantics.",
-      "research_result": "Targeted official-source research refreshed September 11, 2026 did not verify audited financial statements for the year ended March 31, 2026. The latest authoritative released source verified in production remains the year ended March 31, 2025.",
-      "next_action": "Do not infer March 31, 2026 audited values. Re-check the current reporting cycle and ingest only an authoritative released statement."
+      "latest_check": "The registered 2019-2025 audited-statement history reproduced and passed both established financial-history validators in the September 11 read-only domain monitor. This proves registered-source liveness/parser stability; it does not prove that no March 31, 2026 audited statement exists.",
+      "research_result": "Targeted official-source research on September 11, 2026 did not verify audited financial statements for the year ended March 31, 2026. The latest authoritative released source verified in production remains the year ended March 31, 2025.",
+      "next_action": "Do not infer March 31, 2026 audited values. Continue source discovery and ingest only an authoritative released statement."
     }
   ]
 }
