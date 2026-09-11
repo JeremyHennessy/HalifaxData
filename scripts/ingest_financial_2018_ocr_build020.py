@@ -3,9 +3,13 @@
 
 The 2018 official attachment is a mixed text/image PDF. The established Build 005
 parser correctly refuses to treat narrative bundle pages as statements, but the actual
-statement/schedule pages have no usable PDF text layer. This adapter OCRs only the
-known audited statement/schedule pages, then reuses the established conservative text
-row parser unchanged. It does not alter parsing semantics for any other source year.
+statement pages have no usable PDF text layer. This adapter OCRs only the four primary
+audited statement pages and applies the established conservative numeric/normalization
+rules with one source-specific correction: on three-column Budget/2018/2017 lines, the
+label ends before the first numeric column rather than before the 2018 column.
+
+It does not alter parsing semantics for any other source year. Image-backed schedules
+remain explicitly out of scope until separately validated.
 """
 from __future__ import annotations
 
@@ -23,7 +27,7 @@ import pdfplumber
 import requests
 
 import ingest_financial_history as base
-from ingest_domains import fetch_pdf
+from ingest_domains import clean, fetch_pdf, money
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT = ROOT / "artifacts/build020-financials-2018-ocr.json"
@@ -35,12 +39,12 @@ SOURCE = {
     "status": "ocr-adapter-candidate",
     "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/180718afsc1211.pdf",
 }
-# PDF page numbers. Pages 8-11 are statement pages 3-6. Pages 35-38 are the
-# consolidated long-term-debt and segment-disclosure schedules (statement pages 30-33).
-OCR_PAGES = [8, 9, 10, 11, 35, 36, 37, 38]
+# PDF pages 8-11 correspond to statement pages 3-6: financial position,
+# operations, change in net financial assets, and cash flows.
+OCR_PAGES = [8, 9, 10, 11]
 OCR_DPI = 200
 OCR_PSM = 6
-ADAPTER_VERSION = "build020-financials-2018-ocr-v1"
+ADAPTER_VERSION = "build020-financials-2018-ocr-v2"
 
 
 def now() -> str:
@@ -85,6 +89,62 @@ def ocr_page(pdf_path: Path, page_num: int, workdir: Path) -> str:
     return text
 
 
+def parse_ocr_text_rows(
+    src: dict,
+    fiscal_year: int,
+    page_num: int,
+    statement_family: str,
+    statement_title: str,
+    text: str,
+    multiplier: int,
+) -> list[dict]:
+    """Apply Build 005 text parsing with a 2018 OCR three-column label fix."""
+    records: list[dict] = []
+    for line_num, raw_line in enumerate((text or "").splitlines(), 1):
+        line = clean(raw_line)
+        if not line or not base.valid_label(line):
+            continue
+        masked_line = base.mask_label_numbers(line)
+        matches = list(base.VALUE_RE.finditer(masked_line))
+        if len(matches) < 2:
+            continue
+
+        current_match, prior_match = matches[-2], matches[-1]
+        if not (
+            base.has_financial_format(current_match.group(), multiplier)
+            or base.has_financial_format(prior_match.group(), multiplier)
+        ):
+            continue
+
+        # For Budget / current / prior statement rows, the first numeric match is
+        # the budget column and must not leak into the line-item label. For ordinary
+        # two-column rows, the current-year match is already the first numeric value.
+        label_end = matches[0].start() if len(matches) >= 3 else current_match.start()
+        label = clean(line[:label_end]).rstrip("$ ")
+        if not base.valid_label(label):
+            continue
+        current_raw = money(current_match.group())
+        prior_raw = money(prior_match.group())
+        if current_raw is None or prior_raw is None:
+            continue
+
+        records.append(base.normalized_record(
+            src,
+            fiscal_year,
+            page_num,
+            statement_family,
+            statement_title,
+            label,
+            current_raw,
+            prior_raw,
+            multiplier,
+            [line],
+            "ocr_text_line",
+            f"p{page_num}/ocr-line{line_num}",
+        ))
+    return records
+
+
 def dedupe(rows: list[dict]) -> list[dict]:
     unique: dict[tuple, dict] = {}
     for row in rows:
@@ -125,7 +185,6 @@ def main() -> None:
         tmpdir = Path(tmp)
         pdf_path = tmpdir / "source.pdf"
         pdf_path.write_bytes(blob)
-        # Structural check: these pages must exist in the authoritative attachment.
         with pdfplumber.open(io.BytesIO(blob)) as pdf:
             if len(pdf.pages) < max(OCR_PAGES):
                 raise RuntimeError(f"2018 source unexpectedly has only {len(pdf.pages)} pages")
@@ -134,15 +193,9 @@ def main() -> None:
             text = ocr_page(pdf_path, page_num, tmpdir)
             family, title = base.statement_context(text)
             if not family:
-                page_status.append({
-                    "source_page": page_num,
-                    "status": "no_statement_heading",
-                    "ocr_chars": len(text),
-                    "ocr_first_lines": [line.strip() for line in text.splitlines()[:5]],
-                })
-                continue
+                raise RuntimeError(f"No audited statement heading recovered by OCR on PDF page {page_num}")
             multiplier = base.unit_multiplier(text)
-            parsed = base.parse_text_rows(
+            parsed = parse_ocr_text_rows(
                 SOURCE,
                 2018,
                 page_num,
@@ -152,13 +205,10 @@ def main() -> None:
                 multiplier,
             )
             for row in parsed:
-                row["extraction_method"] = "ocr_text_line"
                 row["ocr_adapter_version"] = ADAPTER_VERSION
                 row["source_sha256"] = source_sha
                 prov = dict(row.get("provenance") or {})
-                original_locator = str(prov.get("locator_value") or f"p{page_num}")
                 prov["locator_type"] = "ocr_text_line"
-                prov["locator_value"] = f"p{page_num}/ocr/{original_locator}"
                 prov["parser_version"] = base.PARSER_VERSION
                 prov["ocr_adapter_version"] = ADAPTER_VERSION
                 prov["source_sha256"] = source_sha
@@ -197,7 +247,8 @@ def main() -> None:
             "records": len(rows),
             "families": families,
             "page_status": page_status,
-            "scope": "2018-only OCR of authoritative image-backed statement/schedule pages, followed by the established conservative Build 005 text-row parser. Narrative notes are not normalized.",
+            "scope": "2018-only OCR of the four authoritative primary statement pages, followed by Build 005 conservative numeric/normalization rules with a source-specific three-column label-boundary correction. Image-backed schedules and narrative notes remain out of scope.",
+            "schedule_coverage": "not_released_from_ocr_candidate",
             "release_status": "candidate_not_production_until_validated_and_integrated",
         },
         "records": rows,
