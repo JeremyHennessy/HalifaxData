@@ -52,6 +52,7 @@ OCR_PAGES = [8, 9, 10, 11]
 OCR_DPI = 200
 OCR_PSM = 6
 ADAPTER_VERSION = "build020-financials-2018-ocr-v4"
+NOTE_RE = re.compile(r"\s*\(?notes?\s+\d+[a-z]?(?:\([a-z0-9]+\))?\)?", re.I)
 NONWORD_RE = re.compile(r"[^a-z0-9]+")
 
 CORRECTIONS = {
@@ -71,7 +72,8 @@ def now() -> str:
 
 
 def norm_label(value: str) -> str:
-    return " ".join(NONWORD_RE.sub(" ", str(value or "").lower()).split())
+    text = NOTE_RE.sub(" ", str(value or "").lower())
+    return " ".join(NONWORD_RE.sub(" ", text).split())
 
 
 def require_binary(name: str) -> str:
