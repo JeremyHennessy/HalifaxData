@@ -1,8 +1,11 @@
 {
   "metadata": {
-    "last_researched": "2026-08-26",
+    "last_researched": "2026-09-11",
     "scope": "Official HRM quarterly financial reports used for conservative summary-table extraction",
     "series_status": "identified_public_quarterly_reports_not_complete_transaction_ledger",
+    "production_through": "2025/26 Q3 (period ended December 31, 2025)",
+    "known_gap": "2024/25 Q1 remains explicitly missing from the checked series.",
+    "latest_research_result": "Targeted official HRM and eSCRIBE research on September 11, 2026 did not verify a 2025/26 Q4/year-end report. The prior 2024/25 year-end/Q4 report was tabled in September 2025, so no absence conclusion is drawn before a current authoritative source is located or the comparable reporting window passes.",
     "note": "These are quarterly financial-report sources. They are not accounts-payable, invoice, vendor-payment or transaction-ledger sources. Missing quarters remain explicit rather than inferred."
   },
   "sources": [
