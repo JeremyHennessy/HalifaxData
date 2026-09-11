@@ -127,9 +127,9 @@
     {
       "domain": "audited_financial_statements",
       "status": "not_yet_verified",
-      "production_through": "2019-2025 released source years",
+      "production_through": "2018-2025 released source years; 2018 primary statements only",
       "verified_current_period": null,
-      "known_gap": "Official 2018 source remains a parser gap under established Build 017 semantics.",
+      "known_gap": "The standard parser still cannot read the image-backed 2018 source. Build 020 releases 79 rows from its four primary statements through the separately validated OCR adapter; 2018 schedules remain unverified and unreleased.",
       "latest_check": "The registered 2019-2025 audited-statement history reproduced and passed both established financial-history validators in the September 11 read-only domain monitor. This proves registered-source liveness/parser stability; it does not prove that no March 31, 2026 audited statement exists.",
       "research_result": "Targeted official-source research on September 11, 2026 did not verify audited financial statements for the year ended March 31, 2026. The latest authoritative released source verified in production remains the year ended March 31, 2025.",
       "next_action": "Do not infer March 31, 2026 audited values. Continue source discovery and ingest only an authoritative released statement."
