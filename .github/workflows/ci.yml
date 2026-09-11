@@ -87,6 +87,8 @@ jobs:
         run: python scripts/validate_payment_source_status.py
       - name: Validate Build 019 payment-source research boundary
         run: python scripts/validate_payment_source_research_build019.py
+      - name: Validate Build 020 AP research boundary
+        run: python scripts/validate_payment_source_research_build020.py
       - name: Validate Build 010 current capital
         run: python scripts/validate_current_capital.py
       - name: Validate Build 018 current capital schedule
