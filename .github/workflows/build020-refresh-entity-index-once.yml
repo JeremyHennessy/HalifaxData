@@ -1,5 +1,6 @@
 name: Build 020 Refresh Entity Index Once
 
+# Retry 2: index rebuild/validation already passed; clean Python cache before strict one-file guard.
 on:
   push:
     branches: ['agent/build020-tax-payment-graph']
@@ -25,6 +26,8 @@ jobs:
         run: |
           python scripts/build_entity_index_v4.py --check
           python scripts/validate_entity_index_v4.py
+      - name: Remove ephemeral Python cache
+        run: find scripts -type d -name __pycache__ -prune -exec rm -rf {} +
       - name: Assert only entity index changed
         run: |
           git diff --check
