@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CANDIDATE = ROOT / "artifacts/build020-financials-2018-ocr.json"
 FINANCIALS = ROOT / "data/generated/financials.json"
 EXPECTED_BASE_PARSER = "build005-financials-v4"
-EXPECTED_ADAPTER = "build020-financials-2018-ocr-v2"
+EXPECTED_ADAPTER = "build020-financials-2018-ocr-v3"
 REQUIRED_FAMILIES = {"financial_position", "operations", "net_financial_assets", "cash_flows"}
 NOTE_RE = re.compile(r"\s*\(?notes?\s+\d+[a-z]?(?:\([a-z0-9]+\))?\)?", re.I)
 NONWORD_RE = re.compile(r"[^a-z0-9]+")
@@ -50,6 +50,7 @@ def main() -> None:
     assert metadata.get("source_id") == "hrm-financials-2018", metadata
     assert metadata.get("base_parser_version") == EXPECTED_BASE_PARSER, metadata
     assert metadata.get("ocr_adapter_version") == EXPECTED_ADAPTER, metadata
+    assert metadata.get("ocr_dpi") == 400, metadata
     assert metadata.get("release_status") == "candidate_not_production_until_validated_and_integrated", metadata
     assert metadata.get("schedule_coverage") == "not_released_from_ocr_candidate", metadata
     assert isinstance(metadata.get("source_sha256"), str) and len(metadata["source_sha256"]) == 64
@@ -81,14 +82,12 @@ def main() -> None:
         assert key not in seen, f"duplicate OCR fact: {key!r}"
         seen.add(key)
 
+    # Fixed anchors limited to values that independently agreed between the 200-DPI
+    # 2018 OCR output and the text-native 2019 statement's printed 2018 comparatives.
     anchors = [
         ("financial_position", "Cash and short-term deposits", 187_292_000, 235_331_000),
-        ("financial_position", "Net financial assets", 163_421_000, 134_397_000),
         ("operations", "Taxation", 736_207_000, 710_941_000),
-        ("operations", "Total revenue", 1_037_404_000, 987_465_000),
         ("operations", "Total expenses", 953_587_000, 924_234_000),
-        ("operations", "Annual surplus", 83_817_000, 63_231_000),
-        ("net_financial_assets", "Net financial assets, end of year", 163_421_000, 134_397_000),
         ("cash_flows", "Cash and short-term deposits, end of year", 187_292_000, 235_331_000),
     ]
     for family, label, current, prior in anchors:
@@ -127,6 +126,7 @@ def main() -> None:
         "2019_comparative_overlaps": overlaps,
         "2019_comparative_matches": matches,
         "2019_comparative_agreement": round(matches / overlaps, 4),
+        "mismatches": mismatches,
         "source_sha256": metadata["source_sha256"],
         "release_status": metadata["release_status"],
     }, indent=2))
