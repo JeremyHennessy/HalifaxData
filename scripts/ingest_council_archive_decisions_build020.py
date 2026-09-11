@@ -14,6 +14,7 @@ import argparse
 import hashlib
 import json
 import time
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -28,6 +29,24 @@ DEFAULT_OUT = ROOT / "artifacts/build020-council-archive-decisions.json"
 SOURCE_ID = "hrm-historical-council-table"
 COVERAGE_LAYER = "historical_halifax_meeting_table"
 REQUEST_DELAY_SECONDS = 0.25
+NO_MOTION_PATH = ROOT / "data/council_no_motion_sources_build020.json"
+
+
+def reviewed_no_motion(source: dict, lines: list[dict], page_count: int,
+                       records: list[dict], diagnostics: dict) -> dict | None:
+    """Accept only an exact reviewed document; unknown empty parses stay gaps."""
+    if records or diagnostics.get("unpaired_result_lines") != 0:
+        return None
+    text = " ".join(line["text"] for line in lines)
+    if re.search(r"\b(MOTION|MOVED|SECONDED)\b", text, re.I):
+        return None
+    registry = json.loads(NO_MOTION_PATH.read_text(encoding="utf-8"))
+    for review in registry["sources"]:
+        if (all(source.get(key) == review[key] for key in
+                ("meeting_date", "minutes_url", "source_sha256"))
+                and page_count == review["pdf_pages"] and len(lines) >= 20):
+            return review
+    return None
 
 
 def now() -> str:
@@ -102,6 +121,22 @@ def main() -> None:
             lines, page_count = base.read_pdf_lines(content)
             records, diagnostics = base.parse_decisions(lines, source)
             if not records:
+                review = reviewed_no_motion(source, lines, page_count, records, diagnostics)
+                if review:
+                    source_status.append({
+                        **base_status,
+                        "status": "verified_no_motion_outcomes",
+                        "minutes_url": resolved_url,
+                        "source_sha256": sha,
+                        "pdf_pages": page_count,
+                        "pdf_text_lines": len(lines),
+                        "decision_records": 0,
+                        **diagnostics,
+                        "review_registry": NO_MOTION_PATH.relative_to(ROOT).as_posix(),
+                        "review_note": review["review_note"],
+                    })
+                    print(f"[{index}/{len(selected)}] {source['meeting_date']}: VERIFIED_NO_MOTION_OUTCOMES")
+                    continue
                 source_status.append({
                     **base_status,
                     "status": "parse_gap",
@@ -182,7 +217,7 @@ def main() -> None:
             "is_payment_ledger": False,
             "payment_facts": 0,
             "scope": "Candidate-only application of the unchanged Build 016 approved-minutes motion/result parser to every minutes-bearing, non-status Regional Council row in the released Build 020 historical archive inventory.",
-            "note": "Every eligible historical source is accounted for as parsed, parse_gap or error. Dollar mentions are Council source text, not invoices, vendor payments, final paid values or findings of wrongdoing.",
+            "note": "Every eligible historical source is accounted for as parsed, exact-document verified_no_motion_outcomes, parse_gap or error. Only four SHA-pinned, visually reviewed ceremony minutes qualify for the no-motion status; missing or failed sources remain unverified. Dollar mentions are Council source text, not invoices, vendor payments, final paid values or findings of wrongdoing.",
             "release_status": "candidate_not_production",
         },
         "records": all_records,

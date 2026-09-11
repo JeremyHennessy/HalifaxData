@@ -15,6 +15,7 @@ SEEDS_PATH = ROOT / "data/council_decision_sources.json"
 EXPECTED_PARSER = "build016-council-decisions-v1"
 EXPECTED_SOURCE_ID = "hrm-historical-council-table"
 EXPECTED_COVERAGE = "historical_halifax_meeting_table"
+NO_MOTION_PATH = ROOT / "data/council_no_motion_sources_build020.json"
 
 
 def eligible(row: dict) -> bool:
@@ -57,6 +58,10 @@ def main() -> None:
     archive = json.loads(ARCHIVE_PATH.read_text(encoding="utf-8"))
     current = json.loads(CURRENT_DECISIONS.read_text(encoding="utf-8"))
     seeds = json.loads(SEEDS_PATH.read_text(encoding="utf-8"))
+    reviews = json.loads(NO_MOTION_PATH.read_text(encoding="utf-8"))["sources"]
+    reviews_by_date = {row["meeting_date"]: row for row in reviews}
+    assert len(reviews) == len(reviews_by_date) == 4
+    assert set(reviews_by_date) == {"2016-02-03", "2016-11-01", "2020-10-29", "2024-11-05"}
     meta = candidate.get("metadata") or {}
     rows = candidate.get("records") or []
 
@@ -89,28 +94,39 @@ def main() -> None:
     assert dict(sorted(status_counts.items())) == meta.get("source_status_counts"), (status_counts, meta.get("source_status_counts"))
     assert not status_counts.get("error"), f"Historical candidate has {status_counts['error']} source errors"
     assert not status_counts.get("parse_gap"), f"Historical candidate has {status_counts['parse_gap']} parser gaps"
-    assert status_counts.get("parsed") == len(eligible_rows), status_counts
+    assert set(status_counts) <= {"parsed", "verified_no_motion_outcomes"}, status_counts
+    assert status_counts.get("verified_no_motion_outcomes") == len(reviews), status_counts
+    assert status_counts.get("parsed") == len(eligible_rows) - len(reviews), status_counts
 
     decisions_by_status = sum(int(item.get("decision_records") or 0) for item in statuses)
     assert decisions_by_status == len(rows), (decisions_by_status, len(rows))
     for item in statuses:
         meeting_id = item.get("meeting_id")
-        assert item.get("status") == "parsed", item
+        assert item.get("status") in {"parsed", "verified_no_motion_outcomes"}, item
         assert item.get("source_id") == EXPECTED_SOURCE_ID, item
         assert item.get("coverage_layer") == EXPECTED_COVERAGE, item
         assert item.get("meeting_date") == expected_dates_by_id[meeting_id], item
         assert item.get("minutes_url") and item.get("source_sha256") and len(item["source_sha256"]) == 64, item
         assert int(item.get("pdf_pages") or 0) >= 2, item
         assert int(item.get("pdf_text_lines") or 0) >= 20, item
-        assert int(item.get("decision_records") or 0) >= 1, item
         assert int(item.get("unpaired_result_lines") or 0) >= 0, item
+        if item["status"] == "verified_no_motion_outcomes":
+            review = reviews_by_date[item["meeting_date"]]
+            assert all(item.get(key) == review[key] for key in
+                       ("minutes_url", "source_sha256", "pdf_pages", "review_note")), item
+            assert item.get("review_registry") == "data/council_no_motion_sources_build020.json", item
+            assert item.get("decision_records") == 0 and item.get("unpaired_result_lines") == 0, item
+        else:
+            assert int(item.get("decision_records") or 0) >= 1, item
+    assert {item["meeting_date"] for item in statuses if item["status"] == "verified_no_motion_outcomes"} == set(reviews_by_date)
 
     decision_ids = [row.get("decision_id") for row in rows]
     assert len(decision_ids) == len(set(decision_ids)), "Historical candidate decision IDs are not unique"
     row_counts_by_date = Counter(row.get("meeting_date") for row in rows)
     expected_dates = {row["meeting_date"] for row in eligible_rows}
-    assert set(row_counts_by_date) == expected_dates, {
-        "dates_without_decisions": sorted(expected_dates - set(row_counts_by_date))[:20],
+    expected_decision_dates = expected_dates - set(reviews_by_date)
+    assert set(row_counts_by_date) == expected_decision_dates, {
+        "dates_without_decisions": sorted(expected_decision_dates - set(row_counts_by_date))[:20],
         "unexpected_dates": sorted(set(row_counts_by_date) - expected_dates)[:20],
     }
     assert all(value >= 1 for value in row_counts_by_date.values())
@@ -132,8 +148,8 @@ def main() -> None:
 
     years = sorted({row["meeting_date"][:4] for row in eligible_rows})
     assert years == [str(year) for year in range(2016, 2025)], years
-    parsed_meetings_by_year = Counter(item["meeting_date"][:4] for item in statuses)
-    expected_meetings_by_year = Counter(row["meeting_date"][:4] for row in eligible_rows)
+    parsed_meetings_by_year = Counter(item["meeting_date"][:4] for item in statuses if item["status"] == "parsed")
+    expected_meetings_by_year = Counter(row["meeting_date"][:4] for row in eligible_rows if row["meeting_date"] not in reviews_by_date)
     assert parsed_meetings_by_year == expected_meetings_by_year, (parsed_meetings_by_year, expected_meetings_by_year)
     assert meta.get("parsed_meetings_by_year") == dict(sorted(parsed_meetings_by_year.items())), meta.get("parsed_meetings_by_year")
     decisions_by_year = Counter(row["meeting_date"][:4] for row in rows)
@@ -169,7 +185,7 @@ def main() -> None:
     overlap_dates = sorted(candidate_dates & current_dates)
     assert overlap_dates == seed_dates, (overlap_dates, seed_dates)
     new_dates = candidate_dates - current_dates
-    assert len(new_dates) == len(expected_dates) - len(seed_dates), (len(new_dates), len(expected_dates), len(seed_dates))
+    assert len(new_dates) == len(expected_decision_dates) - len(seed_dates), (len(new_dates), len(expected_decision_dates), len(seed_dates))
     assert len(new_dates) >= 230, len(new_dates)
 
     assert meta.get("fiscal_relevant_records") == sum(1 for row in rows if row.get("fiscal_relevant"))
@@ -179,6 +195,7 @@ def main() -> None:
         "status": "ok",
         "eligible_minutes_sources": len(eligible_rows),
         "parsed_sources": status_counts.get("parsed"),
+        "verified_no_motion_sources": status_counts.get("verified_no_motion_outcomes"),
         "parse_gaps": status_counts.get("parse_gap", 0),
         "errors": status_counts.get("error", 0),
         "decision_records": len(rows),

@@ -596,7 +596,7 @@ def build() -> dict[str, Any]:
     for name, payload in inputs.items():
         meta = payload.get("metadata") if isinstance(payload.get("metadata"), dict) else {}
         source_snapshot[name] = {
-            "path": str(PATHS[name].relative_to(ROOT)),
+            "path": PATHS[name].relative_to(ROOT).as_posix(),
             "parser_version": meta.get("parser_version"),
             "generated_at": meta.get("generated_at"),
             "dataset_status": meta.get("dataset_status"),
