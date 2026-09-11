@@ -1,0 +1,58 @@
+name: Build 020 Council Regional Table Probe
+
+on:
+  push:
+    branches: ['agent/build020-tax-payment-graph']
+    paths: ['.github/workflows/build020-council-regional-table-probe.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect Regional Council filtered table and pager
+        run: |
+          python - <<'PY'
+          import html, re
+          from urllib.parse import urljoin
+          from urllib.request import Request, urlopen
+
+          headers={'User-Agent':'Mozilla/5.0 (compatible; HalifaxData/0.20; +https://github.com/JeremyHennessy/HalifaxData)','Accept':'text/html,application/xhtml+xml'}
+          for page_num in [0,1]:
+            url=f'https://www.halifax.ca/city-hall/meetings?category=931&page={page_num}'
+            req=Request(url,headers=headers)
+            with urlopen(req,timeout=60) as r:
+              text=r.read().decode('utf-8',errors='replace'); final=r.geturl()
+            print('\n===== PAGE',page_num,final,'=====')
+            result=re.search(r'<h3[^>]*>\s*([\d,]+)\s+Results\s*</h3>',text,re.I)
+            print('result_count',result.group(1) if result else None)
+            # Identify the meetings listing table and show first rows as clean cells+links.
+            tables=re.findall(r'(<table\b[^>]*>.*?</table>)',text,re.I|re.S)
+            print('tables',len(tables))
+            for ti,table in enumerate(tables[:5]):
+              if 'Date' not in table or 'Agenda' not in table: continue
+              print('meeting_table_index',ti)
+              rows=re.findall(r'<tr\b[^>]*>(.*?)</tr>',table,re.I|re.S)
+              print('row_count_including_header',len(rows))
+              for ri,row in enumerate(rows[:12]):
+                cells=[]
+                for cell in re.findall(r'<t[dh]\b[^>]*>(.*?)</t[dh]>',row,re.I|re.S):
+                  value=html.unescape(re.sub(r'<[^>]+>',' ',cell))
+                  cells.append(' '.join(value.split()))
+                links=[]
+                for href in re.findall(r'href=["\']([^"\']+)',row,re.I):
+                  links.append(urljoin(final,html.unescape(href)))
+                print('ROW',ri,'CELLS',cells,'LINKS',links)
+            pager=[]
+            for href,label in re.findall(r'<a[^>]+href=["\']([^"\']*page=\d+[^"\']*)["\'][^>]*>(.*?)</a>',text,re.I|re.S):
+              clean=' '.join(html.unescape(re.sub(r'<[^>]+>',' ',label)).split())
+              pager.append((clean,urljoin(final,html.unescape(href))))
+            print('pager',pager[-30:])
+          PY
