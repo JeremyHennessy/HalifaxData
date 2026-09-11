@@ -8,8 +8,11 @@ audited statement pages and applies the established conservative numeric/normali
 rules with one source-specific correction: on three-column Budget/2018/2017 lines, the
 label ends before the first numeric column rather than before the 2018 column.
 
-It does not alter parsing semantics for any other source year. Image-backed schedules
-remain explicitly out of scope until separately validated.
+Eight OCR digit errors that are deterministically contradicted by the next year's
+text-native audited statement are corrected explicitly. Every correction preserves the
+raw OCR value and records the independent 2019 comparative source used to validate the
+replacement. It does not alter parsing semantics for any other source year. Image-backed
+schedules remain explicitly out of scope until separately validated.
 """
 from __future__ import annotations
 
@@ -17,6 +20,7 @@ import argparse
 import hashlib
 import io
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -39,16 +43,39 @@ SOURCE = {
     "status": "ocr-adapter-candidate",
     "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/180718afsc1211.pdf",
 }
+COMPARATOR_SOURCE = {
+    "id": "hrm-financials-2019",
+    "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/budget-finances/FS-March-31-2019-V7-Signed.pdf",
+    "role": "text-native next-year audited statement containing source-presented 2018 comparative values",
+}
 # PDF pages 8-11 correspond to statement pages 3-6: financial position,
 # operations, change in net financial assets, and cash flows.
 OCR_PAGES = [8, 9, 10, 11]
-OCR_DPI = 400
+OCR_DPI = 200
 OCR_PSM = 6
-ADAPTER_VERSION = "build020-financials-2018-ocr-v3"
+ADAPTER_VERSION = "build020-financials-2018-ocr-v4"
+NONWORD_RE = re.compile(r"[^a-z0-9]+")
+
+# Values are normalized CAD. These are not guessed corrections: each target is the
+# same line item's 2018 comparative printed in HRM's text-native 2019 audited statement.
+CORRECTIONS = {
+    ("financial_position", "accounts payable and accrued liabilities"): 106_700_000.0,
+    ("financial_position", "accumulated surplus"): 2_040_260_000.0,
+    ("financial_position", "investment in the halifax regional water commission"): 167_660_000.0,
+    ("financial_position", "loans deposits and advances"): 490_000.0,
+    ("financial_position", "net financial assets"): 163_419_000.0,
+    ("cash_flows", "annual surplus"): 83_815_000.0,
+    ("cash_flows", "increase decrease in accounts payable and accrued liabilities"): -67_000.0,
+    ("cash_flows", "before remeasurement gain loss"): -21_781_000.0,
+}
 
 
 def now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+
+
+def norm_label(value: str) -> str:
+    return " ".join(NONWORD_RE.sub(" ", str(value or "").lower()).split())
 
 
 def require_binary(name: str) -> str:
@@ -145,6 +172,45 @@ def parse_ocr_text_rows(
     return records
 
 
+def apply_validated_corrections(rows: list[dict]) -> int:
+    applied = 0
+    seen_keys: set[tuple[str, str]] = set()
+    for row in rows:
+        key = (str(row.get("statement_family") or ""), norm_label(row.get("line_item")))
+        target = CORRECTIONS.get(key)
+        if target is None:
+            continue
+        if key in seen_keys:
+            raise RuntimeError(f"Correction key matched multiple OCR rows: {key!r}")
+        seen_keys.add(key)
+        raw_normalized = float(row["current_year"])
+        raw_presented = float(row["source_presented_current_year"])
+        if raw_normalized == target:
+            raise RuntimeError(f"Correction no longer required for {key!r}; remove stale correction rule")
+        row["ocr_current_year"] = raw_normalized
+        row["ocr_source_presented_current_year"] = raw_presented
+        row["current_year"] = target
+        row["ocr_correction"] = {
+            "status": "validated_against_next_year_audited_comparative",
+            "raw_ocr_current_year": raw_normalized,
+            "validated_current_year": target,
+            "validation_source_id": COMPARATOR_SOURCE["id"],
+            "validation_source_url": COMPARATOR_SOURCE["url"],
+            "validation_source_role": COMPARATOR_SOURCE["role"],
+            "basis": "Same statement family and normalized line item; 2019 audited statement presents the 2018 amount as its comparative column.",
+        }
+        prov = dict(row.get("provenance") or {})
+        prov["validation_source_id"] = COMPARATOR_SOURCE["id"]
+        prov["validation_source_url"] = COMPARATOR_SOURCE["url"]
+        prov["ocr_correction_applied"] = True
+        row["provenance"] = prov
+        applied += 1
+    missing = set(CORRECTIONS) - seen_keys
+    if missing:
+        raise RuntimeError(f"Configured OCR corrections did not match candidate rows: {sorted(missing)!r}")
+    return applied
+
+
 def dedupe(rows: list[dict]) -> list[dict]:
     unique: dict[tuple, dict] = {}
     for row in rows:
@@ -224,6 +290,7 @@ def main() -> None:
                 "records": len(parsed),
             })
 
+    correction_count = apply_validated_corrections(rows)
     rows = dedupe(rows)
     families: dict[str, int] = {}
     for row in rows:
@@ -247,7 +314,9 @@ def main() -> None:
             "records": len(rows),
             "families": families,
             "page_status": page_status,
-            "scope": "2018-only OCR of the four authoritative primary statement pages, followed by Build 005 conservative numeric/normalization rules with a source-specific three-column label-boundary correction. Image-backed schedules and narrative notes remain out of scope.",
+            "validated_ocr_corrections": correction_count,
+            "correction_validation_source": COMPARATOR_SOURCE,
+            "scope": "2018-only OCR of the four authoritative primary statement pages, followed by Build 005 conservative numeric/normalization rules with a source-specific three-column label-boundary correction. Eight raw OCR digit errors are explicitly preserved and corrected only where the text-native 2019 audited statement independently prints the same 2018 comparative line item. Image-backed schedules and narrative notes remain out of scope.",
             "schedule_coverage": "not_released_from_ocr_candidate",
             "release_status": "candidate_not_production_until_validated_and_integrated",
         },
