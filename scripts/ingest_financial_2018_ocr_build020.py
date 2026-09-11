@@ -42,9 +42,9 @@ SOURCE = {
 # PDF pages 8-11 correspond to statement pages 3-6: financial position,
 # operations, change in net financial assets, and cash flows.
 OCR_PAGES = [8, 9, 10, 11]
-OCR_DPI = 200
+OCR_DPI = 400
 OCR_PSM = 6
-ADAPTER_VERSION = "build020-financials-2018-ocr-v2"
+ADAPTER_VERSION = "build020-financials-2018-ocr-v3"
 
 
 def now() -> str:
