@@ -1,0 +1,78 @@
+name: Build 020 Release Audited History Once
+
+on:
+  push:
+    branches: ['agent/build020-tax-payment-graph']
+    paths: ['.github/workflows/build020-release-audited-history-once.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Python dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Install OCR runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr poppler-utils
+      - name: Reproduce standard 2019-2025 audited history
+        run: python scripts/ingest_financial_history_build017.py
+      - name: Validate standard layer before combination
+        run: python scripts/validate_financial_history_build017.py
+      - name: Generate 2018 OCR candidate
+        run: python scripts/ingest_financial_2018_ocr_build020.py --output artifacts/build020-financials-2018-ocr.json
+      - name: Validate 2018 OCR candidate
+        run: python scripts/validate_financial_2018_ocr_build020.py --candidate artifacts/build020-financials-2018-ocr.json
+      - name: Build combined release candidate
+        run: |
+          python scripts/combine_financial_history_build020.py \
+            --base data/generated/financials.json \
+            --base-tables data/generated/financials_document_tables.json \
+            --ocr artifacts/build020-financials-2018-ocr.json \
+            --output artifacts/build020-financials-combined.json \
+            --table-output artifacts/build020-financials-document-tables-combined.json
+      - name: Validate combined candidate
+        run: |
+          python scripts/validate_financial_history_build020.py \
+            --base data/generated/financials.json \
+            --base-tables data/generated/financials_document_tables.json \
+            --combined artifacts/build020-financials-combined.json \
+            --combined-tables artifacts/build020-financials-document-tables-combined.json
+      - name: Promote validated candidate to checked-in release form
+        run: |
+          python scripts/promote_financial_history_build020.py \
+            --candidate artifacts/build020-financials-combined.json \
+            --candidate-tables artifacts/build020-financials-document-tables-combined.json \
+            --output data/generated/financials.json \
+            --table-output data/generated/financials_document_tables.json
+      - name: Validate released production shape
+        run: |
+          python scripts/validate_financial_history.py
+          python scripts/validate_financial_history_build017.py
+          python scripts/validate_audited_financial_sources_build020.py
+      - name: Assert release changed only generated audited artifacts
+        run: |
+          git diff --check
+          changed="$(git status --porcelain | awk '{print $2}' | sort)"
+          expected="$(printf '%s\n' data/generated/financials.json data/generated/financials_document_tables.json | sort)"
+          echo "Changed files:"
+          printf '%s\n' "$changed"
+          test "$changed" = "$expected"
+      - name: Commit validated generated audited history
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/generated/financials.json data/generated/financials_document_tables.json
+          test "$(git diff --cached --name-only | wc -l)" -eq 2
+          git commit -m 'Build 020: release validated 2018 audited primary statements'
+          git push origin HEAD:agent/build020-tax-payment-graph
