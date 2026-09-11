@@ -12,7 +12,22 @@ DEFAULT_CANDIDATE = ROOT / "artifacts/build020-council-archive.json"
 SEEDS_PATH = ROOT / "data/council_decision_sources.json"
 EXPECTED_CATEGORY = "931"
 EXPECTED_RESULT_COUNT = 249
+EXPECTED_MIN_DATE = "2016-01-12"
 EXPECTED_MAX_DATE = "2024-11-05"
+EXPECTED_BY_YEAR = {
+    "2016": 31,
+    "2017": 29,
+    "2018": 26,
+    "2019": 31,
+    "2020": 30,
+    "2021": 25,
+    "2022": 28,
+    "2023": 26,
+    "2024": 23,
+}
+EXPECTED_DATE_NOTES = {"Cancelled": 3, "Rescheduled": 1}
+EXPECTED_MINUTES = 245
+EXPECTED_MISSING_MINUTES = 4
 OFFICIAL_HOSTS = {"halifax.ca", "www.halifax.ca", "cdn.halifax.ca"}
 
 
@@ -39,23 +54,26 @@ def main() -> None:
     assert meta.get("records") == EXPECTED_RESULT_COUNT == len(rows), (meta.get("records"), len(rows))
     assert meta.get("page_size") == 15, meta
     assert meta.get("pages_fetched") == 17, meta
+    assert meta.get("min_meeting_date") == EXPECTED_MIN_DATE, meta
     assert meta.get("max_meeting_date") == EXPECTED_MAX_DATE, meta
-    assert str(meta.get("min_meeting_date") or "").startswith("2017-"), meta
+    assert meta.get("records_by_year") == EXPECTED_BY_YEAR, meta
+    assert meta.get("date_status_notes") == EXPECTED_DATE_NOTES, meta
+    assert meta.get("minutes_pdf_records") == EXPECTED_MINUTES, meta
+    assert meta.get("missing_minutes_records") == EXPECTED_MISSING_MINUTES, meta
     assert meta.get("release_status") == "candidate_not_production", meta
     assert "not Council decision extraction" in str(meta.get("scope") or ""), meta
-    assert "pre-2017" in str(meta.get("pre_2017_boundary") or "").lower(), meta
+    boundary = str(meta.get("earlier_archive_boundary") or "").lower()
+    assert "2016-01-12" in boundary and "does not assert completeness before" in boundary, meta
 
     years = sorted({row["meeting_date"][:4] for row in rows})
-    assert years == [str(year) for year in range(2017, 2025)], years
-    by_year = meta.get("records_by_year") or {}
-    assert sum(int(value) for value in by_year.values()) == len(rows), by_year
-    assert sorted(by_year) == years, by_year
-    assert meta.get("minutes_pdf_records") + meta.get("missing_minutes_records") == len(rows), meta
-    assert meta.get("minutes_pdf_records") >= 240, meta
+    assert years == list(EXPECTED_BY_YEAR), years
+    assert sum(int(value) for value in EXPECTED_BY_YEAR.values()) == len(rows)
 
     ids = set()
     agenda_urls = set()
     date_minutes_pairs = set()
+    missing_minutes_rows = []
+    note_counts: dict[str, int] = {}
     for index, row in enumerate(rows):
         meeting_id = row.get("archive_meeting_id")
         assert isinstance(meeting_id, str) and meeting_id.startswith("hrm-regional-council-archive-"), (index, meeting_id)
@@ -67,11 +85,20 @@ def main() -> None:
         assert row.get("source_kind") == "official_historical_meeting_table", index
         date = str(row.get("meeting_date") or "")
         assert len(date) == 10 and date[:4] in years, (index, date)
+        date_note = row.get("meeting_date_note_source")
+        if date_note:
+            note_counts[date_note] = note_counts.get(date_note, 0) + 1
+            assert date_note in EXPECTED_DATE_NOTES, (index, date_note)
+            assert clean_date_source(row.get("meeting_date_source"), date, date_note), (index, row.get("meeting_date_source"))
+        else:
+            assert clean_date_source(row.get("meeting_date_source"), date, None), (index, row.get("meeting_date_source"))
+
         agenda = row.get("agenda_url")
         assert agenda and (urlparse(agenda).hostname or "").lower() in OFFICIAL_HOSTS, (index, agenda)
         assert "/city-hall/regional-council/" in urlparse(agenda).path.lower(), (index, agenda)
         assert agenda not in agenda_urls, f"duplicate agenda/details URL: {agenda}"
         agenda_urls.add(agenda)
+
         minutes = row.get("minutes_url")
         if minutes:
             assert row.get("has_minutes_pdf") is True, index
@@ -84,45 +111,63 @@ def main() -> None:
         else:
             assert row.get("has_minutes_pdf") is False, index
             assert row.get("minutes_identity") is None, index
+            missing_minutes_rows.append(row)
+
         page_index = row.get("source_page_index")
         row_index = row.get("source_row_index")
         assert isinstance(page_index, int) and 0 <= page_index < meta.get("pages_fetched"), (index, page_index)
         assert isinstance(row_index, int) and row_index >= 1, (index, row_index)
         assert f"category={EXPECTED_CATEGORY}" in str(row.get("source_search_url") or ""), (index, row.get("source_search_url"))
 
-    # All six existing post-2016 hand-picked seed minutes must be present in the
-    # inventory with the same meeting date and normalized official PDF path. The
-    # 2016 seed is intentionally outside the current-site archive boundary.
+    assert note_counts == EXPECTED_DATE_NOTES, note_counts
+    assert len(missing_minutes_rows) == EXPECTED_MISSING_MINUTES, len(missing_minutes_rows)
+    # All four rows without minutes are explicitly labelled Cancelled/Rescheduled in
+    # Halifax's date cell; missing minutes are therefore source-described meeting-status
+    # rows, not silently lost PDFs.
+    assert all(row.get("meeting_date_note_source") in EXPECTED_DATE_NOTES for row in missing_minutes_rows), missing_minutes_rows
+
+    # Every existing hand-picked legacy seed (including the 2016 seed) must be found
+    # in the authoritative current-site table by exact date plus normalized PDF path.
     legacy = seeds.get("legacy_sources") or []
-    post_2016 = [seed for seed in legacy if str(seed.get("meeting_date") or "") >= "2017-01-01"]
-    assert len(post_2016) == 6, len(post_2016)
+    assert len(legacy) == 7, len(legacy)
     row_pairs = {(row["meeting_date"], row.get("minutes_identity")) for row in rows if row.get("minutes_identity")}
     missing_seeds = []
-    for seed in post_2016:
+    for seed in legacy:
         expected = (seed["meeting_date"], minutes_identity(seed.get("minutes_url")))
         if expected not in row_pairs:
             missing_seeds.append(expected)
     assert not missing_seeds, f"Known legacy seed minutes missing from official archive inventory: {missing_seeds!r}"
 
-    # Page accounting must reconcile to the exact advertised row count.
     page_status = meta.get("page_status") or []
     assert len(page_status) == meta.get("pages_fetched"), len(page_status)
     assert sum(int(item.get("rows") or 0) for item in page_status) == len(rows), page_status
     for item in page_status[:-1]:
         assert item.get("rows") == meta.get("page_size"), item
-    assert 1 <= page_status[-1].get("rows") <= meta.get("page_size"), page_status[-1]
+    assert page_status[-1].get("rows") == 9, page_status[-1]
 
     print(json.dumps({
         "status": "ok",
         "records": len(rows),
         "date_range": [meta["min_meeting_date"], meta["max_meeting_date"]],
         "years": years,
-        "records_by_year": by_year,
+        "records_by_year": EXPECTED_BY_YEAR,
+        "date_status_notes": note_counts,
         "minutes_pdf_records": meta["minutes_pdf_records"],
         "missing_minutes_records": meta["missing_minutes_records"],
-        "known_post_2016_seed_matches": len(post_2016),
+        "known_legacy_seed_matches": len(legacy),
         "pages_fetched": meta["pages_fetched"],
     }, indent=2))
+
+
+def clean_date_source(value: str | None, iso_date: str, note: str | None) -> bool:
+    try:
+        expected_date = __import__("datetime").datetime.strptime(iso_date, "%Y-%m-%d").strftime("%B %-d, %Y")
+    except ValueError:
+        # Windows is not used in CI, but avoid platform-specific %-d dependency in
+        # correctness by using a simple leading-zero replacement fallback.
+        expected_date = __import__("datetime").datetime.strptime(iso_date, "%Y-%m-%d").strftime("%B %d, %Y").replace(" 0", " ")
+    expected = expected_date if not note else f"{expected_date} {note}"
+    return str(value or "") == expected
 
 
 if __name__ == "__main__":
