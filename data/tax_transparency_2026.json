@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "build": "020",
+    "as_of": "2026-09-11",
+    "status": "authoritative_parameter_contract",
+    "purpose": "Support a transparent Nova Scotia salary deduction estimate and tax-dollar allocation view without implying that an individual's tax payment can be transaction-traced to a specific government expenditure.",
+    "calculation_semantics": "Annualized CRA payroll-deduction estimate for a Nova Scotia employee using standard claim-code-1 basic personal amounts, no RRSP/RPP/union/commission/bonus/special deductions, and no spouse/dependant or other personal credits. This is not a filed-return calculation or a substitute for CRA PDOC.",
+    "allocation_semantics": "Federal and Nova Scotia allocations are proportional illustrations using authoritative 2026-27 government expense plans. They show how an equal dollar of tax would be distributed if allocated in proportion to planned expenses; they do not trace the user's remittance to a specific program or transaction.",
+    "municipal_semantics": "Halifax does not levy municipal personal income tax. HRM values are property-tax rates per $100 of taxable assessment and are calculated separately from salary deductions.",
+    "currency": "CAD"
+  },
+  "sources": [
+    {
+      "id": "cra-t4032ns-2026",
+      "authority": "Canada Revenue Agency",
+      "title": "Payroll Deductions Tables - CPP, EI, and income tax deductions - Nova Scotia - 2026",
+      "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/payroll/t4032-payroll-deductions-tables/t4032ns-jan/t4032ns-january-general-information.html",
+      "supports": ["federal_brackets", "nova_scotia_brackets", "federal_basic_personal_amount", "nova_scotia_basic_personal_amount", "cpp", "cpp2", "ei", "canada_employment_amount"]
+    },
+    {
+      "id": "cra-t4127-2026",
+      "authority": "Canada Revenue Agency",
+      "title": "Payroll Deductions Formulas - 122nd Edition Effective January 1, 2026",
+      "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/payroll/t4127-payroll-deductions-formulas/t4127-jan/t4127-jan-payroll-deductions-formulas-computer-programs.html",
+      "supports": ["annual_taxable_income_formula", "cpp_additional_deduction", "base_cpp_ei_tax_credit", "federal_tax_formula", "provincial_tax_formula", "bpa_phase_down"]
+    },
+    {
+      "id": "canada-spring-update-2026",
+      "authority": "Department of Finance Canada",
+      "title": "Spring Economic Update 2026 - Annex 1 - Expense Outlook",
+      "url": "https://budget.canada.ca/update-miseajour/2026/report-rapport/anx1-en.html",
+      "supports": ["federal_2026_27_expense_allocation"]
+    },
+    {
+      "id": "ns-budget-2026-27-expense-shares",
+      "authority": "Government of Nova Scotia, Finance and Treasury Board",
+      "title": "Nova Scotia Budget 2026-27 - Table 5.9 Total Expenses",
+      "url": "https://www.novascotia.ca/sites/default/files/documents/6-4173/ftb-bfi-046-en-budget-2026-2027.pdf",
+      "supports": ["nova_scotia_2026_27_expense_allocation"]
+    },
+    {
+      "id": "hrm-budget-ratification-2026-03-31",
+      "authority": "Halifax Regional Council",
+      "title": "March 31, 2026 Regional Council - Ratification from Budget Committee - Proposed 2026/27 Budget",
+      "url": "https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2b525638-79db-4d72-8db3-9b4bde75cc13&lang=English",
+      "supports": ["hrm_2026_27_tax_rate_adoption"]
+    },
+    {
+      "id": "hrm-budget-resolution-2026-27",
+      "authority": "Halifax Regional Municipality",
+      "title": "Resolution for Approval of Operating & Capital Budgets and Tax Rates for Fiscal Year 2026/27",
+      "url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4584",
+      "supports": ["hrm_urban_general_rate", "hrm_suburban_general_rate", "hrm_rural_general_rate", "hrm_property_tax_revenue"]
+    },
+    {
+      "id": "hrm-budget-rate-presentation-2026-27",
+      "authority": "Halifax Regional Municipality",
+      "title": "2026/27 Budget tax-rate presentation",
+      "url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3976",
+      "supports": ["hrm_local_transit_rate", "hrm_strategic_infrastructure_climate_rate", "average_residential_tax_bill"]
+    }
+  ],
+  "salary_tax": {
+    "tax_year": 2026,
+    "province": "NS",
+    "federal": {
+      "brackets": [
+        {"upper": 58523, "rate": 0.14, "constant": 0},
+        {"upper": 117045, "rate": 0.205, "constant": 3804},
+        {"upper": 181440, "rate": 0.26, "constant": 10241},
+        {"upper": 258482, "rate": 0.29, "constant": 15685},
+        {"upper": null, "rate": 0.33, "constant": 26024}
+      ],
+      "basic_personal_amount": {
+        "maximum": 16452,
+        "minimum": 14829,
+        "phase_down_start": 181440,
+        "phase_down_end": 258482,
+        "phase_down_amount": 1623
+      },
+      "lowest_rate": 0.14,
+      "canada_employment_amount": 1501
+    },
+    "nova_scotia": {
+      "brackets": [
+        {"upper": 30995, "rate": 0.0879, "constant": 0},
+        {"upper": 61991, "rate": 0.1495, "constant": 1909},
+        {"upper": 97417, "rate": 0.1667, "constant": 2976},
+        {"upper": 157124, "rate": 0.175, "constant": 3784},
+        {"upper": null, "rate": 0.21, "constant": 9283}
+      ],
+      "basic_personal_amount": 11932,
+      "lowest_rate": 0.0879,
+      "note": "The standard payroll estimate does not apply Nova Scotia's return-level low-income tax reduction or personal credits not represented by claim code 1."
+    },
+    "cpp": {
+      "ympe": 74600,
+      "basic_exemption": 3500,
+      "combined_rate": 0.0595,
+      "combined_max": 4230.45,
+      "base_rate": 0.0495,
+      "base_max": 3519.45,
+      "first_additional_rate": 0.01,
+      "first_additional_max": 711.0,
+      "yampe": 85000,
+      "cpp2_rate": 0.04,
+      "cpp2_max": 416.0
+    },
+    "ei": {
+      "max_insurable_earnings": 68900,
+      "employee_rate": 0.0163,
+      "employee_max": 1123.07
+    }
+  },
+  "federal_spending_allocation": {
+    "fiscal_year": "2026-27",
+    "denominator_billion": 595.0,
+    "denominator_label": "Total expenses, including net actuarial losses",
+    "categories": [
+      {"category": "Major transfers to persons", "amount_billion": 153.3, "children": [
+        {"category": "Elderly benefits", "amount_billion": 89.3},
+        {"category": "Employment Insurance benefits", "amount_billion": 32.7},
+        {"category": "Canada Child Benefit", "amount_billion": 31.2}
+      ]},
+      {"category": "Transfers to provinces, territories and municipalities", "amount_billion": 115.6, "children": [
+        {"category": "Canada Health Transfer", "amount_billion": 57.4},
+        {"category": "Canada Social Transfer", "amount_billion": 17.9},
+        {"category": "Equalization", "amount_billion": 27.2},
+        {"category": "Territorial Formula Financing", "amount_billion": 5.8},
+        {"category": "Health agreements", "amount_billion": 4.3},
+        {"category": "Canada-wide early learning and child care", "amount_billion": 8.6},
+        {"category": "Build Communities Strong Fund - Community Stream", "amount_billion": 2.5},
+        {"category": "Other fiscal arrangements", "amount_billion": -8.2}
+      ]},
+      {"category": "Pollution pricing proceeds returned", "amount_billion": 0.2},
+      {"category": "Direct program expenses", "amount_billion": 267.1, "children": [
+        {"category": "Other transfer payments", "amount_billion": 121.5},
+        {"category": "Other direct program expenses", "amount_billion": 145.6}
+      ]},
+      {"category": "Public debt charges", "amount_billion": 58.7},
+      {"category": "Net actuarial losses", "amount_billion": 0.1}
+    ]
+  },
+  "nova_scotia_spending_allocation": {
+    "fiscal_year": "2026-27",
+    "unit": "percent_of_total_expenses",
+    "source_rounding_note": "Source-reported percentages are rounded and may not sum to exactly 100.0%.",
+    "categories": [
+      {"category": "Advanced Education", "share_pct": 2.9},
+      {"category": "Agriculture", "share_pct": 0.3},
+      {"category": "Communities, Culture, Tourism and Heritage", "share_pct": 0.9},
+      {"category": "Cyber Security and Digital Solutions", "share_pct": 1.7},
+      {"category": "Education and Early Childhood Development", "share_pct": 12.4},
+      {"category": "Emergency Management", "share_pct": 0.3},
+      {"category": "Energy", "share_pct": 0.3},
+      {"category": "Environment and Climate Change", "share_pct": 0.3},
+      {"category": "Finance and Treasury Board", "share_pct": 0.3},
+      {"category": "Fisheries and Aquaculture", "share_pct": 0.1},
+      {"category": "Growth and Development", "share_pct": 2.4},
+      {"category": "Health and Wellness", "share_pct": 35.5},
+      {"category": "Justice", "share_pct": 2.8},
+      {"category": "Labour, Skills and Immigration", "share_pct": 2.3},
+      {"category": "Municipal Affairs", "share_pct": 1.5},
+      {"category": "Natural Resources", "share_pct": 0.7},
+      {"category": "Opportunities and Social Development", "share_pct": 9.4},
+      {"category": "Public Service", "share_pct": 3.1},
+      {"category": "Public Works", "share_pct": 4.9},
+      {"category": "Seniors and Long-term Care", "share_pct": 8.3},
+      {"category": "Service Nova Scotia", "share_pct": 0.9},
+      {"category": "Restructuring Costs", "share_pct": 2.8},
+      {"category": "Refundable Tax Credits", "share_pct": 0.8},
+      {"category": "Pension Valuation Adjustment", "share_pct": -0.2},
+      {"category": "Debt Servicing Costs", "share_pct": 5.4}
+    ]
+  },
+  "halifax_property_tax": {
+    "fiscal_year": "2026-27",
+    "status": "adopted_by_regional_council_2026-03-31",
+    "rate_unit": "dollars_per_100_taxable_assessment",
+    "general_rates": {
+      "urban": 0.687,
+      "suburban": 0.654,
+      "rural": 0.654
+    },
+    "optional_or_area_components": {
+      "local_transit": 0.095,
+      "strategic_infrastructure_and_climate": 0.016
+    },
+    "average_urban_example": {
+      "assessment": 357500,
+      "components": ["urban", "local_transit", "strategic_infrastructure_and_climate"],
+      "combined_rate": 0.798,
+      "municipal_tax": 2852.85
+    },
+    "approved_property_tax_revenue": 1123266500,
+    "caveat": "A real HRM property-tax bill can include mandatory provincial, education, Halifax Water, fire protection, area rates or uniform charges. The initial calculator only applies explicitly selected municipal components and must not present that result as the complete property-tax bill."
+  },
+  "validation_controls": {
+    "salary_examples": [
+      {"salary": 50000, "federal_income_tax": 3985.14, "nova_scotia_income_tax": 4173.70, "cpp": 2766.75, "cpp2": 0.0, "ei": 815.0, "take_home": 38259.42},
+      {"salary": 100000, "federal_income_tax": 13301.59, "nova_scotia_income_tax": 12061.87, "cpp": 4230.45, "cpp2": 416.0, "ei": 1123.07, "take_home": 68867.01},
+      {"salary": 175000, "federal_income_tax": 31802.61, "nova_scotia_income_tax": 25773.43, "cpp": 4230.45, "cpp2": 416.0, "ei": 1123.07, "take_home": 111654.44}
+    ]
+  }
+}
