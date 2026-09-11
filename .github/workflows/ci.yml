@@ -67,6 +67,8 @@ jobs:
         run: python scripts/validate_data.py
       - name: Validate Build 020 tax transparency
         run: python scripts/validate_tax_transparency_2026.py
+      - name: Probe alternate official 2018 audited source
+        run: python scripts/probe_financial_2018_build020.py
       - name: Validate historical budgets
         run: python scripts/validate_budget_history.py
       - name: Validate audited financial history
