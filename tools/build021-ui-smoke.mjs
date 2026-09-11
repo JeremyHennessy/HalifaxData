@@ -20,7 +20,7 @@ try{
     const stats=await page.evaluate(()=>({rows:b21Payments().length,departments:b21Summary().departments,hrmRows:b21Summary().hrm_rows,waterRows:b21Summary().halifax_water_rows,hrmAmount:b21Summary().hrm_amount,waterAmount:b21Summary().halifax_water_amount,combined:b21Summary().combined_exact_payee_amount,navItems:document.querySelectorAll('.nav-item').length,tableRows:document.querySelectorAll('[data-build021-payments-table] tbody tr').length}));
     if(stats.rows!==21||stats.departments!==12||stats.hrmRows!==15||stats.waterRows!==6||stats.tableRows!==21) throw new Error(`${viewportName}: Build 021 row controls changed ${JSON.stringify(stats)}`);
     if(Math.abs(stats.hrmAmount-98487725.96)>.01||Math.abs(stats.waterAmount-4046146.59)>.01||Math.abs(stats.combined-102533872.55)>.01) throw new Error(`${viewportName}: Build 021 amount controls changed ${JSON.stringify(stats)}`);
-    if(stats.navItems!==8) throw new Error(`${viewportName}: approved navigation changed; expected 8 items, got ${stats.navItems}`);
+    if(stats.navItems!==11) throw new Error(`${viewportName}: approved Build 020 navigation changed; expected 11 items, got ${stats.navItems}`);
     const p=(await page.locator('[data-build021-province="ready"]').innerText()).toLowerCase();
     requirePhrases(p,['province → halifax cash payments','separate provincial accounting scope','cash-basis','not hrm expenses','not an hrm spending total','accumulated annual payee','halifax regional water commission'],`${viewportName} province panel`);
     const overview=await noOverflow(page,`${viewportName} overview`);
