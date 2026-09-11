@@ -1,0 +1,77 @@
+name: Build 020 Council Search Surface Probe
+
+on:
+  push:
+    branches: ['agent/build020-tax-payment-graph']
+    paths: ['.github/workflows/build020-council-search-surface-probe.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect official Halifax meeting-search surfaces
+        run: |
+          python - <<'PY'
+          import html
+          import re
+          from urllib.parse import urljoin
+          from urllib.request import Request, urlopen
+
+          urls=[
+            'https://www.halifax.ca/city-hall/regional-council',
+            'https://www.halifax.ca/city-hall/agendas-meetings-reports',
+          ]
+          headers={
+            'User-Agent':'Mozilla/5.0 (compatible; HalifaxData/0.20; +https://github.com/JeremyHennessy/HalifaxData)',
+            'Accept':'text/html,application/xhtml+xml'
+          }
+          for url in urls:
+            print('\n===== URL', url, '=====')
+            req=Request(url,headers=headers)
+            try:
+              with urlopen(req,timeout=60) as r:
+                body=r.read(); final=r.geturl(); status=r.status; ctype=r.headers.get('content-type')
+            except Exception as exc:
+              print('ERROR', type(exc).__name__, exc)
+              continue
+            text=body.decode('utf-8',errors='replace')
+            print('status',status,'bytes',len(body),'final',final,'content-type',ctype)
+            title=re.search(r'<title[^>]*>(.*?)</title>',text,re.I|re.S)
+            print('title', html.unescape(re.sub(r'<[^>]+>',' ',title.group(1))).strip() if title else None)
+            forms=[]
+            for m in re.finditer(r'<form\b([^>]*)>',text,re.I|re.S):
+              attrs=m.group(1)
+              action=re.search(r'\baction=["\']([^"\']*)',attrs,re.I)
+              method=re.search(r'\bmethod=["\']([^"\']*)',attrs,re.I)
+              classes=re.search(r'\bclass=["\']([^"\']*)',attrs,re.I)
+              forms.append((urljoin(final,action.group(1)) if action and action.group(1) else final, method.group(1) if method else None, classes.group(1) if classes else None))
+            print('forms',forms[:30])
+            iframes=[urljoin(final,x) for x in re.findall(r'<iframe[^>]+src=["\']([^"\']+)',text,re.I)]
+            print('iframes',iframes[:30])
+            scripts=[urljoin(final,x) for x in re.findall(r'<script[^>]+src=["\']([^"\']+)',text,re.I)]
+            print('interesting scripts',[x for x in scripts if re.search(r'(meeting|agenda|calendar|escribe|view|search)',x,re.I)][:50])
+            hrefs=[]
+            for href in re.findall(r'href=["\']([^"\']+)',text,re.I):
+              absolute=urljoin(final,html.unescape(href))
+              if re.search(r'(agenda|meeting|report|search|calendar|escribe)',absolute,re.I):
+                hrefs.append(absolute)
+            print('interesting hrefs')
+            for item in sorted(set(hrefs))[:150]: print(item)
+            low=text.lower()
+            for needle in ['search meetings','search meeting','agendas, meetings','meeting search','escribe','views-exposed-form','calendar']:
+              start=0; hits=0
+              while True:
+                idx=low.find(needle,start)
+                if idx<0 or hits>=8: break
+                snippet=re.sub(r'\s+',' ',text[max(0,idx-300):idx+700])
+                print('CONTEXT',needle,html.unescape(snippet))
+                start=idx+len(needle); hits+=1
+          PY
