@@ -9,6 +9,9 @@ on:
       - 'scripts/ingest_council_decisions.py'
       - 'scripts/ingest_council_decisions_postminutes_build022.py'
       - 'scripts/diagnose_council_postminutes_html_build022.py'
+      - 'scripts/validate_council_reference_extraction_build022.py'
+      - 'scripts/build_lifecycle_reconciliation_build019.py'
+      - 'scripts/validate_lifecycle_reconciliation_build019.py'
 
 permissions:
   contents: write
