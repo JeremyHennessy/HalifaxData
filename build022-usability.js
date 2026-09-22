@@ -6,6 +6,7 @@ state.build022Province={status:'loading',data:null,error:null};
 state.build022Tax={status:'loading',data:null,error:null};
 state.build022Freshness={status:'loading',data:null,error:null};
 let build022SourcesMerged=false;
+state.build022Disclosure=state.build022Disclosure||{overviewSupport:false,communityFunding:false,sourceRegistry:false};
 
 async function b22FetchJson(url){
   const response=await fetch(url,{cache:'no-store'});
@@ -156,6 +157,91 @@ function b22ProvinceSourcesPanel(){
   return `<section class="panel b22-context-sources" data-build022-context-sources><header class="panel-header"><div><h2>Additional provincial context sources</h2><p>Registered as a separate evidence layer so provincial cash payments cannot be mistaken for HRM expenditures.</p></div></header><div class="panel-body"><div class="rule-list">${sources.map(source=>`<div><strong>${escapeHtml(source.title)}</strong><span>${escapeHtml(source.fiscal_year||'')} · ${escapeHtml(source.evidence_type||'official fiscal context')}</span>${b22SourceLink(source.id)}</div>`).join('')}</div></div></section>`;
 }
 
+function b22DisclosureOpen(key,forceOpen=false){return Boolean(forceOpen||state.build022Disclosure?.[key]);}
+function b22DisclosureAction(details){
+  const action=details.querySelector(':scope > summary .b22-disclosure-action');
+  if(action) action.textContent=details.open?'Hide details':'Open details';
+}
+function b22CreateDisclosure({key,title,hint,elements,forceOpen=false}){
+  const valid=(elements||[]).filter(Boolean);
+  if(!valid.length) return null;
+  const existing=document.querySelector(`[data-build022-disclosure="${key}"]`);
+  if(existing) return existing;
+  const details=document.createElement('details');
+  details.className='b22-disclosure';
+  details.dataset.build022Disclosure=key;
+  details.open=b22DisclosureOpen(key,forceOpen);
+  const summary=document.createElement('summary');
+  summary.innerHTML=`<span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(hint)}</small></span><em class="b22-disclosure-action">${details.open?'Hide details':'Open details'}</em>`;
+  const first=valid[0];
+  first.parentNode.insertBefore(details,first);
+  details.append(summary,...valid);
+  details.addEventListener('toggle',()=>{
+    state.build022Disclosure[key]=details.open;
+    b22DisclosureAction(details);
+  });
+  return details;
+}
+function b22Headings(element){
+  return [...element.querySelectorAll('h2')].map(node=>normalize(node.textContent));
+}
+function b22WrapOverviewSupport(stack){
+  if(!stack||stack.querySelector('[data-build022-disclosure="overviewSupport"]')) return;
+  const wanted=new Set([
+    'authority-backed oversight',
+    'automated pattern engine',
+    'cross-domain corroboration',
+    'budget pressure snapshot',
+    'procurement concentration snapshot',
+    'data coverage & readiness',
+    'public-money reconciliation path',
+    'data-quality separation'
+  ]);
+  const elements=[...stack.children].filter(element=>{
+    if(element.matches('[data-build022-start]')) return false;
+    const headings=b22Headings(element);
+    return headings.some(heading=>wanted.has(heading));
+  });
+  const details=b22CreateDisclosure({
+    key:'overviewSupport',
+    title:'Supporting analysis, oversight & methodology',
+    hint:'Authority findings, pattern engine, budget/procurement snapshots, coverage and reconciliation.',
+    elements
+  });
+  const attention=[...stack.children].find(el=>normalize(el.querySelector('h2')?.textContent)==='what deserves attention?');
+  if(details&&attention) attention.insertAdjacentElement('afterend',details);
+}
+function b22WrapCommunityFunding(stack){
+  if(!stack||stack.querySelector('[data-build022-disclosure="communityFunding"]')) return;
+  const section=stack.querySelector(':scope > .b13-community-funding');
+  if(!section) return;
+  const forceOpen=Boolean(state.build013FundingQuery||(state.build013FundingType&&state.build013FundingType!=='all'));
+  b22CreateDisclosure({
+    key:'communityFunding',
+    title:'Community funding programs & historical awards',
+    hint:'2026/27 proposals, 2025/26 approved grants, museum funding and rural-transit support.',
+    elements:[section],
+    forceOpen
+  });
+}
+function b22WrapSourceRegistry(stack){
+  if(!stack||stack.querySelector('[data-build022-disclosure="sourceRegistry"]')) return;
+  const registry=[...stack.children].find(el=>normalize(el.querySelector('h2')?.textContent)==='source registry');
+  if(!registry) return;
+  const sourceCount=Array.isArray(state.sources?.sources)?state.sources.sources.length:0;
+  const categoryCount=new Set((state.sources?.sources||[]).map(source=>source.category).filter(Boolean)).size;
+  const forceOpen=Boolean(state.sourceQuery||(state.sourceCategory&&state.sourceCategory!=='all'));
+  const details=b22CreateDisclosure({
+    key:'sourceRegistry',
+    title:'Browse full source registry',
+    hint:`${numberFmt.format(sourceCount)} registered sources across ${numberFmt.format(categoryCount)} categories · search and filter inside.`,
+    elements:[registry],
+    forceOpen
+  });
+  const freshness=stack.querySelector(':scope > [data-build022-freshness]');
+  if(details&&freshness) freshness.insertAdjacentElement('afterend',details);
+}
+
 function b22WrapBenchmarkExplorer(){
   const stack=$('#content .page-stack');
   if(!stack||stack.querySelector('[data-build022-benchmark-details]')) return;
@@ -185,6 +271,7 @@ function b22EnhanceOverview(){
   const pattern=stack.querySelector(':scope > .b9-pattern-summary');
   if(attention&&authority) attention.insertAdjacentElement('afterend',authority);
   if(authority&&pattern) authority.insertAdjacentElement('afterend',pattern);
+  b22WrapOverviewSupport(stack);
 }
 
 function b22EnhanceBenchmarks(){
@@ -196,6 +283,7 @@ function b22EnhanceBenchmarks(){
     else stack.insertAdjacentHTML('beforeend',b22ProvincePanel()+b22TaxContextPanel());
   }
   b22WrapBenchmarkExplorer();
+  b22WrapCommunityFunding(stack);
 }
 function b22EnhanceSources(){
   const stack=$('#content .page-stack');
@@ -206,6 +294,7 @@ function b22EnhanceSources(){
     else stack.insertAdjacentHTML('afterbegin',b22FreshnessPanel());
   }
   if(!stack.querySelector('[data-build022-context-sources]')) stack.insertAdjacentHTML('beforeend',b22ProvinceSourcesPanel());
+  b22WrapSourceRegistry(stack);
 }
 
 const b22RenderBase=render;
