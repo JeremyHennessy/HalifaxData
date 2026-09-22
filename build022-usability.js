@@ -242,6 +242,22 @@ function b22WrapSourceRegistry(stack){
   if(details&&freshness) freshness.insertAdjacentElement('afterend',details);
 }
 
+function b22WrapSupplementalSources(stack){
+  if(!stack||stack.querySelector('[data-build022-disclosure="sourceFamilies"]')) return;
+  const freshness=stack.querySelector(':scope > [data-build022-freshness]');
+  const registry=stack.querySelector(':scope > [data-build022-disclosure="sourceRegistry"]');
+  const panels=[...stack.querySelectorAll(':scope > .panel')].filter(panel=>panel!==freshness);
+  if(!panels.length) return;
+  const details=b22CreateDisclosure({
+    key:'sourceFamilies',
+    title:'Additional source families & provenance',
+    hint:'Integrity, funding, quarterly reports, Council decisions, audited statements and provincial context.',
+    elements:panels
+  });
+  const anchor=registry||freshness;
+  if(details&&anchor) anchor.insertAdjacentElement('afterend',details);
+}
+
 function b22WrapBenchmarkExplorer(){
   const stack=$('#content .page-stack');
   if(!stack||stack.querySelector('[data-build022-benchmark-details]')) return;
@@ -295,6 +311,7 @@ function b22EnhanceSources(){
   }
   if(!stack.querySelector('[data-build022-context-sources]')) stack.insertAdjacentHTML('beforeend',b22ProvinceSourcesPanel());
   b22WrapSourceRegistry(stack);
+  b22WrapSupplementalSources(stack);
 }
 
 const b22RenderBase=render;
