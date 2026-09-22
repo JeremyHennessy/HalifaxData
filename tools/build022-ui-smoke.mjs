@@ -32,12 +32,16 @@ try{
       provinceRowsOnOverview:document.querySelectorAll('[data-build022-province-row]').length,
       supportOpen:document.querySelector('[data-build022-disclosure="overviewSupport"]')?.open,
       supportHasAuthority:Boolean(document.querySelector('[data-build022-disclosure="overviewSupport"] .b12-overview-authority')),
-      supportHasPattern:Boolean(document.querySelector('[data-build022-disclosure="overviewSupport"] .b9-pattern-summary'))
+      supportHasPattern:Boolean(document.querySelector('[data-build022-disclosure="overviewSupport"] .b9-pattern-summary')),
+      visibleLeadCards:document.querySelector('section.panel .b8-investigation-grid')?.children.length||0,
+      moreLeadsOpen:document.querySelector('[data-build022-more-leads]')?.open,
+      extraLeadCards:document.querySelectorAll('[data-build022-more-leads] [data-build008-investigation-id]').length
     }));
     if(overviewStats.navItems!==11) throw new Error(`${viewportName}: approved navigation changed; expected 11 items, got ${overviewStats.navItems}`);
     if(overviewStats.startCards!==3) throw new Error(`${viewportName}: Start here should expose three primary paths`);
     if(overviewStats.provinceRowsOnOverview!==0) throw new Error(`${viewportName}: raw provincial payee rows must not dominate Command Center`);
     if(overviewStats.supportOpen!==false||!overviewStats.supportHasAuthority||!overviewStats.supportHasPattern) throw new Error(`${viewportName}: supporting analysis must remain available but collapsed by default: ${JSON.stringify(overviewStats)}`);
+    if(overviewStats.visibleLeadCards!==6||overviewStats.moreLeadsOpen!==false||overviewStats.extraLeadCards!==3) throw new Error(`${viewportName}: Command Center must show six lead cards and keep three additional leads collapsed: ${JSON.stringify(overviewStats)}`);
     const order=await directPanelOrder(page);
     if(order.start<0||order.attention<0||order.attention!==order.start+1) throw new Error(`${viewportName}: What deserves attention must immediately follow Start here: ${JSON.stringify(order)}`);
     if(order.authority>=0&&order.authority<order.attention) throw new Error(`${viewportName}: oversight methodology precedes the primary investigation queue: ${JSON.stringify(order)}`);
