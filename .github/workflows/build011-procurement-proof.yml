@@ -48,7 +48,7 @@ jobs:
           data=json.loads(path.read_text(encoding='utf-8'))
           meta=data.get('metadata') or {}
           reports=data.get('reports') or []
-          rows=data.get('records') or []
+          rows=data.get('alternative_procurement') or []
           if meta.get('dataset_status') != 'official_quarterly_alternative_procurement_report_sections':
               raise SystemExit(f"unexpected dataset status: {meta.get('dataset_status')!r}")
           if meta.get('report_count') != 8 or len(reports) != 8:
