@@ -185,6 +185,29 @@ function b22CreateDisclosure({key,title,hint,elements,forceOpen=false}){
 function b22Headings(element){
   return [...element.querySelectorAll('h2')].map(node=>normalize(node.textContent));
 }
+function b22CompactAttention(attention){
+  if(!attention||attention.querySelector('[data-build022-more-leads]')) return;
+  const grid=attention.querySelector('.b8-investigation-grid');
+  if(!grid) return;
+  const cards=[...grid.children].filter(card=>card.matches('[data-build008-investigation-id]'));
+  if(cards.length<=6) return;
+  const details=document.createElement('details');
+  details.className='b22-more-leads';
+  details.dataset.build022MoreLeads='true';
+  details.open=Boolean(state.build022Disclosure?.moreLeads);
+  const summary=document.createElement('summary');
+  summary.innerHTML=`<span><strong>View ${cards.length-6} more review leads</strong><small>Additional ranked leads remain fully available.</small></span><em class="b22-disclosure-action">${details.open?'Hide details':'Open details'}</em>`;
+  const extraGrid=document.createElement('div');
+  extraGrid.className='b8-investigation-grid b22-more-leads-grid';
+  cards.slice(6).forEach(card=>extraGrid.appendChild(card));
+  details.append(summary,extraGrid);
+  grid.insertAdjacentElement('afterend',details);
+  details.addEventListener('toggle',()=>{
+    state.build022Disclosure.moreLeads=details.open;
+    b22DisclosureAction(details);
+  });
+}
+
 function b22WrapOverviewSupport(stack){
   if(!stack||stack.querySelector('[data-build022-disclosure="overviewSupport"]')) return;
   const wanted=new Set([
@@ -283,6 +306,7 @@ function b22EnhanceOverview(){
   const start=stack.querySelector('[data-build022-start]');
   const attention=[...stack.querySelectorAll(':scope > .panel')].find(el=>normalize(el.querySelector('h2')?.textContent)==='what deserves attention?');
   if(start&&attention&&attention.previousElementSibling!==start) start.insertAdjacentElement('afterend',attention);
+  b22CompactAttention(attention);
   const authority=stack.querySelector(':scope > .b12-overview-authority, :scope > [data-build012-overview]');
   const pattern=stack.querySelector(':scope > .b9-pattern-summary');
   if(attention&&authority) attention.insertAdjacentElement('afterend',authority);
