@@ -136,6 +136,32 @@ class PostMinutesParser(HTMLParser):
 
 
 
+
+EMBEDDED_MOVED_RE = re.compile(r"\bMOVED\s+by\b", re.I)
+EMBEDDED_RESULT_RE = re.compile(r"\bMOTION\s+PUT\s+AND\b", re.I)
+
+
+def expand_html_minutes_line(value: str) -> list[str]:
+    """Restore line boundaries that PDF extraction already exposed to the core parser."""
+    parts = [decisions.norm_line(value)]
+    for pattern in (EMBEDDED_MOVED_RE, EMBEDDED_RESULT_RE):
+        expanded: list[str] = []
+        for part in parts:
+            match = pattern.search(part)
+            if match and match.start() > 0:
+                prefix = decisions.norm_line(part[:match.start()])
+                suffix = decisions.norm_line(part[match.start():])
+                if prefix:
+                    expanded.append(prefix)
+                if suffix:
+                    expanded.append(suffix)
+            else:
+                expanded.append(part)
+        parts = expanded
+    return [part for part in parts if part]
+
+
+
 def html_to_lines(content: bytes) -> list[dict]:
     parser = PostMinutesParser()
     parser.feed(content.decode("utf-8", errors="replace"))
@@ -147,8 +173,9 @@ def html_to_lines(content: bytes) -> list[dict]:
             line_number += 1
             output.append({"text": header, "page": item_index, "line": line_number})
         for value in item["minute_lines"]:
-            line_number += 1
-            output.append({"text": value, "page": item_index, "line": line_number})
+            for expanded_value in expand_html_minutes_line(value):
+                line_number += 1
+                output.append({"text": expanded_value, "page": item_index, "line": line_number})
     return output
 
 
