@@ -466,8 +466,22 @@ def build() -> dict[str, Any]:
     for row in quarterly_awards:
         doc_id = text(row.get("report_document_id"))
         document = documents_by_id.get(doc_id)
+        document_match_method = "exact_document_id"
         if not document:
-            continue
+            registry_url = text(row.get("source_url_registry") or (row.get("provenance") or {}).get("source_url_registry"))
+            expected_token = f"documentid={doc_id}".lower()
+            if not doc_id or expected_token not in registry_url.lower():
+                continue
+            document = {
+                "document_id": doc_id,
+                "meeting_id": row.get("report_meeting_id"),
+                "title": row.get("report_title"),
+                "source_id": row.get("source_id") or "hrm-escribe",
+                "url": registry_url,
+                "provenance_status": "preserved_report_registry_identity",
+                "current_resolved_url": row.get("source_url_resolved") or row.get("source_url"),
+            }
+            document_match_method = "exact_preserved_report_document_id"
         record_key = (
             f"quarterly-award:doc{row.get('report_document_id')}:p{row.get('source_page')}:"
             f"t{row.get('source_table')}:r{row.get('source_row')}"
@@ -485,14 +499,18 @@ def build() -> dict[str, Any]:
             source_id=document.get("source_id"),
             locator=f"document_id={doc_id}",
             url=document.get("url"),
-            extra={"meeting_id": document.get("meeting_id")},
+            extra={
+                "meeting_id": document.get("meeting_id"),
+                "provenance_status": document.get("provenance_status") or "current_council_document_graph",
+                "current_resolved_url": document.get("current_resolved_url"),
+            },
         )
         add_direct_link(
             direct_links,
             link_type="award_report_document_provenance",
             left=left,
             right=right,
-            match_method="exact_document_id",
+            match_method=document_match_method,
             key_type="document_id",
             key_value=doc_id,
             interpretation="The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
