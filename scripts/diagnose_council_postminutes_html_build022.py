@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -151,6 +152,25 @@ def html_to_lines(content: bytes) -> list[dict]:
     return output
 
 
+def transport_normalized(value: object) -> str:
+    """Normalize only extraction-format differences demonstrated by the PDF/HTML control."""
+    text = decisions.norm_line(str(value or ""))
+    return re.sub(r"(?<=\\w)-\\s+(?=\\w)", "-", text)
+
+
+def semantic_fingerprint(row: dict) -> tuple[str, ...]:
+    return (
+        str(row.get("meeting_date") or ""),
+        transport_normalized(row.get("item_ref")),
+        transport_normalized(row.get("item_title")),
+        transport_normalized(row.get("mover")),
+        transport_normalized(row.get("seconder")),
+        transport_normalized(row.get("motion_text")),
+        transport_normalized(row.get("result_source")),
+        str(row.get("decision_status") or ""),
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--meeting-date", default=DEFAULT_DATE)
@@ -205,6 +225,10 @@ def main() -> None:
     new_ids = sorted(parsed_ids - expected_ids)
     by_expected_id = {row["decision_id"]: row for row in expected}
     by_parsed_id = {row["decision_id"]: row for row in parsed}
+    expected_semantic = {semantic_fingerprint(row) for row in expected}
+    parsed_semantic = {semantic_fingerprint(row) for row in parsed}
+    semantic_missing = sorted(expected_semantic - parsed_semantic)
+    semantic_new = sorted(parsed_semantic - expected_semantic)
     mismatch_details = {
         "missing_checked_rows": [
             {
@@ -234,14 +258,18 @@ def main() -> None:
         "mismatch_details": mismatch_details,
         "diagnostics": diagnostics,
         "equivalent_decision_ids": parsed_ids == expected_ids,
-        "principle": "HTML fallback is acceptable only if the established checked PDF-derived decision IDs are reproduced exactly.",
+        "semantic_missing_after_transport_normalization": semantic_missing,
+        "semantic_new_after_transport_normalization": semantic_new,
+        "semantic_equivalence": parsed_semantic == expected_semantic and len(parsed) == len(expected) and diagnostics.get("unpaired_result_lines") == 0,
+        "transport_normalization": "Collapse PDF extraction line-wrap spacing after an existing hyphen (for example By- law -> By-law); no names, amounts, item refs or decision results are inferred.",
+        "principle": "HTML fallback may proceed only when the established PDF-derived control set is semantically identical after the narrowly documented transport normalization.",
     }
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
-    if parsed_ids != expected_ids:
-        raise SystemExit("PostMinutes HTML did not reproduce the checked PDF-derived decision ID set exactly")
+    if not result["semantic_equivalence"]:
+        raise SystemExit("PostMinutes HTML did not reproduce the checked PDF-derived decision semantics under the documented transport normalization")
 
 
 if __name__ == "__main__":
