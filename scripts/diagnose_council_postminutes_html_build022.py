@@ -162,13 +162,18 @@ def semantic_fingerprint(row: dict) -> tuple[str, ...]:
     return (
         str(row.get("meeting_date") or ""),
         transport_normalized(row.get("item_ref")),
-        transport_normalized(row.get("item_title")),
         transport_normalized(row.get("mover")),
         transport_normalized(row.get("seconder")),
         transport_normalized(row.get("motion_text")),
         transport_normalized(row.get("result_source")),
         str(row.get("decision_status") or ""),
     )
+
+
+def title_compatible(checked_row: dict, html_row: dict) -> bool:
+    checked_title = transport_normalized(checked_row.get("item_title"))
+    html_title = transport_normalized(html_row.get("item_title"))
+    return bool(checked_title and html_title and html_title.startswith(checked_title))
 
 
 def main() -> None:
@@ -225,10 +230,21 @@ def main() -> None:
     new_ids = sorted(parsed_ids - expected_ids)
     by_expected_id = {row["decision_id"]: row for row in expected}
     by_parsed_id = {row["decision_id"]: row for row in parsed}
-    expected_semantic = {semantic_fingerprint(row) for row in expected}
-    parsed_semantic = {semantic_fingerprint(row) for row in parsed}
+    expected_by_semantic = {semantic_fingerprint(row): row for row in expected}
+    parsed_by_semantic = {semantic_fingerprint(row): row for row in parsed}
+    expected_semantic = set(expected_by_semantic)
+    parsed_semantic = set(parsed_by_semantic)
     semantic_missing = sorted(expected_semantic - parsed_semantic)
     semantic_new = sorted(parsed_semantic - expected_semantic)
+    title_mismatches = [
+        {
+            "fingerprint": fingerprint,
+            "checked_title": expected_by_semantic[fingerprint].get("item_title"),
+            "html_title": parsed_by_semantic[fingerprint].get("item_title"),
+        }
+        for fingerprint in sorted(expected_semantic & parsed_semantic)
+        if not title_compatible(expected_by_semantic[fingerprint], parsed_by_semantic[fingerprint])
+    ]
     mismatch_details = {
         "missing_checked_rows": [
             {
@@ -260,8 +276,9 @@ def main() -> None:
         "equivalent_decision_ids": parsed_ids == expected_ids,
         "semantic_missing_after_transport_normalization": semantic_missing,
         "semantic_new_after_transport_normalization": semantic_new,
-        "semantic_equivalence": parsed_semantic == expected_semantic and len(parsed) == len(expected) and diagnostics.get("unpaired_result_lines") == 0,
-        "transport_normalization": "Collapse PDF extraction line-wrap spacing after an existing hyphen (for example By- law -> By-law); no names, amounts, item refs or decision results are inferred.",
+        "title_prefix_mismatches": title_mismatches,
+        "semantic_equivalence": parsed_semantic == expected_semantic and not title_mismatches and len(parsed) == len(expected) and diagnostics.get("unpaired_result_lines") == 0,
+        "transport_normalization": "Collapse PDF extraction line-wrap spacing after an existing hyphen (for example By- law -> By-law). Decision identity fields must otherwise match exactly; checked PDF item titles must be preserved as prefixes of the fuller PostMinutes HTML titles.",
         "principle": "HTML fallback may proceed only when the established PDF-derived control set is semantically identical after the narrowly documented transport normalization.",
     }
     if args.output:
