@@ -123,6 +123,10 @@ async function assertAnalyticalViews(page, viewportName) {
 
   await assertText(page, 'benchmarks', ['HRM benchmark facts', '48', 'HRM funding facts', '14', 'Province program context', '212', 'Context ≠ Halifax']);
   if (await page.locator('[data-benchmark-origin]').count() < 1) throw new Error(`${viewportName}/benchmarks: no scoped municipal context rows rendered`);
+  const benchmarkDetails = page.locator('[data-build022-benchmark-details]');
+  if (await benchmarkDetails.count()) {
+    if (!(await benchmarkDetails.evaluate(element => element.open))) await benchmarkDetails.locator('summary').click();
+  }
   await page.locator('[data-benchmark-origin]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
   await closeDrawer(page);
