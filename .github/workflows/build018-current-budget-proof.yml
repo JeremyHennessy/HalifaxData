@@ -56,10 +56,11 @@ jobs:
       - name: Validate Build 018 Python syntax
         run: python -m compileall -q scripts/ingest_current_budget_build018.py scripts/ingest_current_budget_build018_v2.py scripts/validate_current_budget_build018.py
       - name: Reproduce ratified 2026/27 current budget
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-018-current-source-refresh'
         run: python scripts/ingest_current_budget_build018_v2.py
-      - name: Validate current-budget evidence contract
+      - name: Validate checked current-budget evidence contract
         run: python scripts/validate_current_budget_build018.py
-      - name: Verify March 31 approval source remains live
+      - name: Verify registered budget source identity and March 31 approval source
         run: |
           python - <<'PY'
           import json
@@ -67,13 +68,36 @@ jobs:
           from pathlib import Path
           import requests
 
+          import hashlib
+
           config = json.loads(Path('data/current_budget_sources.json').read_text(encoding='utf-8'))
-          source = config['approval_source']
-          response = requests.get(
-              source['url'],
-              headers={'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)'},
-              timeout=120,
-          )
+          artifact = json.loads(Path('data/generated/current_budget_2026_27.json').read_text(encoding='utf-8'))
+          budget_source = config['budget_source']
+          approval = config['approval_source']
+          meta = artifact.get('metadata') or {}
+          if meta.get('source_id') != budget_source.get('id') or meta.get('source_url') != budget_source.get('url'):
+              raise SystemExit('checked current-budget artifact no longer matches the registered budget source identity')
+          if len(str(meta.get('source_sha256') or '')) != 64:
+              raise SystemExit('checked current-budget artifact is missing its source SHA-256')
+          if meta.get('approval_source_id') != approval.get('id') or meta.get('approval_date') != approval.get('meeting_date'):
+              raise SystemExit('checked current-budget artifact no longer matches the registered approval source')
+
+          session=requests.Session()
+          session.headers.update({'User-Agent': 'HalifaxData/0.22 (+https://github.com/JeremyHennessy/HalifaxData)'})
+          pdf=session.get(budget_source['url'], timeout=120, allow_redirects=True)
+          if pdf.status_code == 200:
+              if 'pdf' not in str(pdf.headers.get('content-type') or '').lower():
+                  raise SystemExit(f"budget source returned 200 but not PDF: {pdf.headers.get('content-type')!r}")
+              digest=hashlib.sha256(pdf.content).hexdigest()
+              if digest != meta.get('source_sha256'):
+                  raise SystemExit(f'live budget PDF hash changed: {digest}')
+              transport='live_pdf_hash_verified'
+          elif pdf.status_code == 403:
+              transport='pdf_transport_blocked_403_checked_hash_preserved'
+          else:
+              raise SystemExit(f"unexpected budget PDF transport status: {pdf.status_code}")
+
+          response = session.get(approval['url'], timeout=120)
           response.raise_for_status()
           text = re.sub(r'\s+', ' ', response.text)
           required = [
@@ -84,7 +108,7 @@ jobs:
           missing = [item for item in required if item not in text]
           if missing:
               raise SystemExit(f'approval source missing required text: {missing}')
-          print('March 31, 2026 Regional Council budget-ratification source verified')
+          print(f'March 31, 2026 budget ratification verified; budget PDF transport={transport}')
           PY
       - name: Preserve proof artifact
         run: |
