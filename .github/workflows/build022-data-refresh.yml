@@ -102,6 +102,141 @@ jobs:
         run: |
           python scripts/build_lifecycle_investigations_build019.py
           python scripts/validate_lifecycle_investigations_build019.py
+      - name: Record exact Build 022 evidence delta
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+
+          def load(path):
+              return json.loads(Path(path).read_text(encoding='utf-8'))
+
+          checked_proc=load('/tmp/checked-procurement.json')
+          live_proc=load('data/generated/procurement.json')
+          checked_council=load('/tmp/checked-council.json')
+          live_council=load('data/generated/council.json')
+          checked_decisions=load('/tmp/checked-council-decisions.json')
+          live_decisions=load('data/generated/council_decisions.json')
+          checked_lifecycle=load('/tmp/checked-lifecycle-reconciliation.json')
+          live_lifecycle=load('data/generated/lifecycle_reconciliation.json')
+          checked_investigations=load('/tmp/checked-lifecycle-investigations.json')
+          live_investigations=load('data/generated/lifecycle_investigations.json')
+
+          def award_key(row):
+              return (
+                  row.get('award_id'),
+                  row.get('vendor_name'),
+                  row.get('awarded_date'),
+                  row.get('original_award_value'),
+              )
+
+          def evidence_signature(link):
+              e=link.get('evidence') or {}
+              return (
+                  link.get('identifier_type'),
+                  link.get('identifier_value'),
+                  e.get('domain'),
+                  e.get('record_type'),
+                  e.get('record_key'),
+                  link.get('source_field'),
+              )
+
+          checked_awards={award_key(row):row for row in checked_proc.get('records') or []}
+          live_awards={award_key(row):row for row in live_proc.get('records') or []}
+          new_awards=[live_awards[key] for key in sorted(set(live_awards)-set(checked_awards), key=str)]
+          missing_awards=[checked_awards[key] for key in sorted(set(checked_awards)-set(live_awards), key=str)]
+
+          checked_decision_ids={row['decision_id'] for row in checked_decisions.get('records') or []}
+          new_decision_rows=[
+              row for row in live_decisions.get('records') or []
+              if row.get('decision_id') not in checked_decision_ids
+          ]
+
+          old_links={evidence_signature(row):row for row in checked_lifecycle.get('identifier_links') or []}
+          new_links={evidence_signature(row):row for row in live_lifecycle.get('identifier_links') or []}
+          added_links=[new_links[key] for key in sorted(set(new_links)-set(old_links), key=str)]
+          removed_links=[old_links[key] for key in sorted(set(old_links)-set(new_links), key=str)]
+
+          def compact_link(row):
+              e=row.get('evidence') or {}
+              return {
+                  'identifier_type':row.get('identifier_type'),
+                  'identifier_value':row.get('identifier_value'),
+                  'domain':e.get('domain'),
+                  'record_type':e.get('record_type'),
+                  'record_key':e.get('record_key'),
+                  'label':e.get('label'),
+                  'meeting_date':e.get('meeting_date'),
+                  'awarded_date':e.get('awarded_date'),
+                  'vendor_name':e.get('vendor_name'),
+                  'source_field':row.get('source_field'),
+              }
+
+          old_inv={row['investigation_id']:row for row in checked_investigations.get('investigations') or []}
+          new_inv={row['investigation_id']:row for row in live_investigations.get('investigations') or []}
+          inv_changes=[]
+          for key in sorted(set(old_inv)&set(new_inv)):
+              before,after=old_inv[key],new_inv[key]
+              fields=('review_priority_score','priority','evidence_record_count','identifier_count')
+              changed={field:{'before':before.get(field),'after':after.get(field)} for field in fields if before.get(field)!=after.get(field)}
+              if changed:
+                  inv_changes.append({
+                      'investigation_id':key,
+                      'title':after.get('title'),
+                      'changes':changed,
+                      'review_reasons':after.get('review_reasons'),
+                      'domains':after.get('domains'),
+                  })
+
+          summary={
+              'procurement':{
+                  'checked_records':len(checked_awards),
+                  'live_records':len(live_awards),
+                  'new_awards':len(new_awards),
+                  'missing_awards':len(missing_awards),
+                  'new_award_rows':[
+                      {k:row.get(k) for k in ('award_id','vendor_name','awarded_date','original_award_value','description','entity')}
+                      for row in new_awards
+                  ],
+                  'missing_award_rows':[
+                      {k:row.get(k) for k in ('award_id','vendor_name','awarded_date','original_award_value','description','entity')}
+                      for row in missing_awards
+                  ],
+              },
+              'council':{
+                  'checked_meetings':len(checked_council.get('records') or []),
+                  'live_meetings':len(live_council.get('records') or []),
+                  'checked_decisions':len(checked_decision_ids),
+                  'live_decisions':len(live_decisions.get('records') or []),
+                  'new_decisions':len(new_decision_rows),
+                  'new_decisions_by_date':dict(sorted(Counter(row.get('meeting_date') for row in new_decision_rows).items())),
+                  'new_fiscal_relevant':sum(1 for row in new_decision_rows if row.get('fiscal_relevant')),
+                  'new_money_mentions':sum(1 for row in new_decision_rows if row.get('money_mentions')),
+              },
+              'lifecycle':{
+                  'checked_summary':checked_lifecycle.get('summary') or {},
+                  'live_summary':live_lifecycle.get('summary') or {},
+                  'added_identifier_links':len(added_links),
+                  'removed_identifier_links':len(removed_links),
+                  'added_links':[compact_link(row) for row in added_links],
+                  'removed_links':[compact_link(row) for row in removed_links],
+              },
+              'investigations':{
+                  'checked_summary':checked_investigations.get('summary') or {},
+                  'live_summary':live_investigations.get('summary') or {},
+                  'changed_existing_investigations':inv_changes,
+                  'new_investigation_ids':sorted(set(new_inv)-set(old_inv)),
+                  'removed_investigation_ids':sorted(set(old_inv)-set(new_inv)),
+              },
+              'interpretation':'This file describes source-backed release deltas only. It is not a finding of waste, misconduct, overpayment or illegality.'
+          }
+          Path('artifacts/build022-refresh/exact_delta.json').write_text(
+              json.dumps(summary,indent=2,ensure_ascii=False)+'\n',
+              encoding='utf-8'
+          )
+          print(json.dumps(summary,indent=2,ensure_ascii=False))
+          PY
       - name: Check pinned Build 019 controls before publishing changed evidence
         run: python scripts/validate_build019_release_controls.py
       - name: Validate established contracts
