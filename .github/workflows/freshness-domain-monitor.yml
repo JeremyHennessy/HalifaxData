@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: '47 11 * * 1'
   push:
-    branches: [main, 'agent/freshness-automation-expansion']
+    branches: [main, 'agent/freshness-automation-expansion', 'agent/build022-freshness-usability']
     paths:
       - '.github/workflows/freshness-domain-monitor.yml'
       - 'data/quarterly_financial_sources.json'
@@ -261,7 +261,7 @@ jobs:
       - name: Validate current Council document graph
         run: python scripts/validate_council.py
       - name: Reproduce decisions from currently posted approved minutes
-        run: python scripts/ingest_council_decisions.py --output data/generated/council_decisions.json
+        run: python scripts/ingest_council_decisions.py --output data/generated/council_decisions.json --reuse-legacy-from /tmp/checked-council-decisions.json
       - name: Validate approved-minute decision evidence
         run: python scripts/validate_council_decisions.py data/generated/council_decisions.json
       - name: Record Council freshness differences
