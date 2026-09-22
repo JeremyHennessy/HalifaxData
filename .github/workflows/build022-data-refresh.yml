@@ -41,10 +41,35 @@ jobs:
             scripts/build_lifecycle_reconciliation_build019_v4.py \
             scripts/enrich_lifecycle_components_build019.py \
             scripts/build_lifecycle_investigations_build019.py
-      - name: Preserve checked Council legacy controls
-        run: cp data/generated/council_decisions.json /tmp/checked-council-decisions.json
-      - name: Refresh Nova Scotia Halifax awarded tenders
-        run: python scripts/ingest_procurement.py
+      - name: Preserve checked release inputs
+        run: |
+          cp data/generated/council_decisions.json /tmp/checked-council-decisions.json
+          cp data/generated/procurement.json /tmp/checked-procurement.json
+      - name: Collect live Nova Scotia Halifax awarded tenders without publishing
+        run: |
+          mkdir -p artifacts/build022-refresh
+          python scripts/ingest_procurement.py --output artifacts/build022-refresh/procurement_live.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          checked=json.loads(Path('/tmp/checked-procurement.json').read_text(encoding='utf-8'))
+          live=json.loads(Path('artifacts/build022-refresh/procurement_live.json').read_text(encoding='utf-8'))
+          def key(row):
+              return (row.get('award_id'),row.get('vendor_name'),row.get('awarded_date'),row.get('original_award_value'))
+          checked_keys={key(row) for row in checked.get('records') or []}
+          live_keys={key(row) for row in live.get('records') or []}
+          summary={
+              'checked_records':len(checked_keys),
+              'live_records':len(live_keys),
+              'new_normalized_award_keys':len(live_keys-checked_keys),
+              'missing_from_live_normalized_award_keys':len(checked_keys-live_keys),
+              'source_query_record_count':(live.get('metadata') or {}).get('source_query_record_count'),
+              'publication_status':'review_candidate_only',
+              'reason':'Build 022 keeps procurement out of this release until stable lifecycle record identity is migrated separately.'
+          }
+          Path('artifacts/build022-refresh/procurement_diff.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(summary,indent=2))
+          PY
       - name: Refresh current Council meeting inventory
         run: python scripts/ingest_council.py
       - name: Refresh current Council document inventory
@@ -97,13 +122,17 @@ jobs:
               return json.loads(p.read_text(encoding='utf-8')) if p.exists() else {}
 
           procurement=load('data/generated/procurement.json')
+          procurement_live=load('artifacts/build022-refresh/procurement_live.json')
+          procurement_diff=load('artifacts/build022-refresh/procurement_diff.json')
           council=load('data/generated/council.json')
           decisions=load('data/generated/council_decisions.json')
           lifecycle=load('data/generated/lifecycle_reconciliation.json')
           investigations=load('data/generated/lifecycle_investigations.json')
           summary={
-              'procurement_records': len(procurement.get('records') or []),
-              'procurement_source_rows': (procurement.get('metadata') or {}).get('source_query_record_count'),
+              'procurement_checked_records': len(procurement.get('records') or []),
+              'procurement_live_records': len(procurement_live.get('records') or []),
+              'procurement_live_source_rows': (procurement_live.get('metadata') or {}).get('source_query_record_count'),
+              'procurement_diff': procurement_diff,
               'council_meetings': len(council.get('records') or []),
               'council_decisions': len(decisions.get('records') or []),
               'legacy_source_mode': (decisions.get('metadata') or {}).get('legacy_source_mode'),
@@ -114,7 +143,7 @@ jobs:
           Path('artifacts/build022-refresh/summary.json').write_text(json.dumps(summary, indent=2)+'\n', encoding='utf-8')
           print(json.dumps(summary, indent=2))
           PY
-          cp data/generated/procurement.json artifacts/build022-refresh/procurement.json || true
+          cp /tmp/checked-procurement.json artifacts/build022-refresh/procurement_checked.json || true
           cp data/generated/council.json artifacts/build022-refresh/council.json || true
           cp data/generated/council_documents.json artifacts/build022-refresh/council_documents.json || true
           cp data/generated/council_decisions.json artifacts/build022-refresh/council_decisions.json || true
@@ -126,7 +155,6 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add \
-            data/generated/procurement.json \
             data/generated/council.json \
             data/generated/council_documents.json \
             data/generated/council_decisions.json \
