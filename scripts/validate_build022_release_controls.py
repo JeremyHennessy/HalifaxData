@@ -179,10 +179,18 @@ def main() -> None:
         fail("investigation queue claims payment evidence")
 
     payment_meta = payment.get("metadata") or {}
-    if payment_meta.get("status") != "not_yet_verified_public_transaction_source":
-        fail("payment-source research status changed")
+    if payment_meta.get("status") != "transaction_source_not_yet_acquired_access_path_strengthened":
+        fail(f"payment-source research status changed: {payment_meta.get('status')!r}")
     if payment_meta.get("ready_for_transaction_analysis") is not False:
         fail("payment transaction analysis was enabled")
+    if payment_meta.get("verified_public_transaction_ledger") is not False:
+        fail("payment research incorrectly claims a verified public transaction ledger")
+    if payment_meta.get("verified_internal_transaction_records_exist") is not True:
+        fail("Build 020 internal AP record-existence evidence was lost")
+    if payment_meta.get("payment_facts_available_to_halifaxdata") != 0:
+        fail("payment facts became available without a validated transaction source")
+    if payment_meta.get("is_evidence_of_source_absence") is not False:
+        fail("payment research became an unsupported source-absence claim")
 
     print(json.dumps({
         "status": "ok",
