@@ -51,6 +51,12 @@ async function closeDrawer(page) {
     await page.waitForFunction(() => !document.querySelector('#evidence-drawer')?.open);
   }
 }
+async function openBuild022Disclosure(page, key) {
+  const details = page.locator(`[data-build022-disclosure="${key}"]`);
+  if (await details.count() && !(await details.evaluate(element => element.open))) {
+    await details.locator(':scope > summary').click();
+  }
+}
 async function assertText(page, route, phrases) {
   await openRoute(page, route);
   const text = await page.locator('#content').innerText();
@@ -75,7 +81,12 @@ async function assertReleasedDomainsReady(page, viewportName) {
 }
 
 async function assertAnalyticalViews(page, viewportName) {
-  await assertText(page, 'overview', ['What deserves attention?', 'Budget pressure snapshot', 'Procurement concentration snapshot', 'Data coverage & readiness']);
+  await openRoute(page, 'overview');
+  await openBuild022Disclosure(page, 'overviewSupport');
+  const overviewText = (await page.locator('#content').innerText()).toLowerCase();
+  for (const phrase of ['what deserves attention?', 'budget pressure snapshot', 'procurement concentration snapshot', 'data coverage & readiness']) {
+    if (!overviewText.includes(phrase)) throw new Error(`${viewportName}/overview: missing "${phrase}" after opening supporting analysis`);
+  }
   const overviewLeads = page.locator('#content [data-build008-investigation-id]');
   if (await overviewLeads.count() < 3) throw new Error(`${viewportName}/overview: expected cross-domain investigation cards`);
   await overviewLeads.first().click();
@@ -207,6 +218,7 @@ try {
     await closeDrawer(page);
 
     await openRoute(page, 'sources');
+    await openBuild022Disclosure(page, 'sourceRegistry');
     const sourceCards = page.locator('#content [data-source-id]');
     if (await sourceCards.count() < 1) throw new Error(`${viewportName}/sources: no source cards`);
     await sourceCards.first().click();
