@@ -100,6 +100,7 @@ try {
     await page.screenshot({ path: `${OUTPUT}/${viewportName}-build012-vendors.png`, fullPage: true });
 
     await openRoute(page, 'sources');
+    await openBuild022Disclosure(page, 'sourceFamilies');
     await page.waitForFunction(() => /integrity source coverage/i.test(document.querySelector('#content')?.innerText || ''), null, { timeout: 15000 });
     const sourceText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of ['integrity source coverage', 'office of the mayor expenses audit', 'capital budgeting audit', '2024 mayoral candidate campaign finance disclosure', 'campaign-to-vendor relationships asserted']) {
