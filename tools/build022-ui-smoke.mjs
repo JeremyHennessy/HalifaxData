@@ -77,8 +77,6 @@ try{
     await page.waitForSelector('[data-build022-freshness]');
     const freshnessText=(await page.locator('[data-build022-freshness]').innerText()).toLowerCase();
     requirePhrases(freshnessText,['source freshness & unresolved gaps','publication status','newer source not yet verified'],`${viewportName} freshness`);
-    const sourceText=(await page.locator('[data-build022-context-sources]').innerText()).toLowerCase();
-    requirePhrases(sourceText,['additional provincial context sources','public accounts volume 3','nova scotia budget 2026-27','separate evidence layer'],`${viewportName} source context`);
     const sourceRegistryStats=await page.evaluate(()=>({
       open:document.querySelector('[data-build022-disclosure="sourceRegistry"]')?.open,
       nestedCards:document.querySelectorAll('[data-build022-disclosure="sourceRegistry"] [data-source-id]').length,
@@ -87,6 +85,9 @@ try{
     }));
     if(sourceRegistryStats.open!==false||sourceRegistryStats.nestedCards<1) throw new Error(`${viewportName}: source registry must remain searchable and collapsed by default: ${JSON.stringify(sourceRegistryStats)}`);
     if(sourceRegistryStats.familiesOpen!==false||sourceRegistryStats.familyPanels<4) throw new Error(`${viewportName}: supplemental source families must remain available but collapsed by default: ${JSON.stringify(sourceRegistryStats)}`);
+    await page.locator('[data-build022-disclosure="sourceFamilies"] > summary').click();
+    const sourceText=(await page.locator('[data-build022-context-sources]').innerText()).toLowerCase();
+    requirePhrases(sourceText,['additional provincial context sources','public accounts volume 3','nova scotia budget 2026-27','separate evidence layer'],`${viewportName} source context`);
     const sources=await noOverflow(page,`${viewportName} sources`);
     await page.screenshot({path:`${OUTPUT}/${viewportName}-build022-sources.png`,fullPage:true});
 
