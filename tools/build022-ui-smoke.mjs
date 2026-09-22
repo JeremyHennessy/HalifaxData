@@ -47,7 +47,7 @@ try{
     await page.waitForSelector('[data-build022-province="ready"]');
     const province=page.locator('[data-build022-province="ready"]');
     const provinceText=(await province.innerText()).toLowerCase();
-    requirePhrases(provinceText,['province → halifax funding context','separate accounting scope','cash-basis','not hrm expenses','not an hrm accounts-payable ledger','halifax regional water commission'],`${viewportName} province context`);
+    requirePhrases(provinceText,['province → halifax funding context','separate accounting scope','cash-basis','not hrm expenses','not an hrm accounts-payable ledger','halifax water'],`${viewportName} province context`);
     const provinceStats=await page.evaluate(()=>({
       payeeRows:document.querySelectorAll('[data-build022-province-table] tbody tr').length,
       rawOpen:document.querySelector('[data-build022-province-details]')?.open,
