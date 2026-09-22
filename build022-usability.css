@@ -99,3 +99,19 @@
   .b22-disclosure[data-build022-disclosure="overviewSupport"]>.b12-overview-authority,
   .b22-disclosure[data-build022-disclosure="overviewSupport"]>.b9-pattern-summary{margin:9px}
 }
+
+.b22-more-leads{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--surface-soft,#f7f9fc);overflow:hidden}
+.b22-more-leads>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;cursor:pointer;list-style:none}
+.b22-more-leads>summary::-webkit-details-marker{display:none}
+.b22-more-leads>summary>span{display:flex;flex-direction:column;gap:3px}
+.b22-more-leads>summary strong{font-size:12px}
+.b22-more-leads>summary small{font-size:10px;color:var(--muted);font-weight:500}
+.b22-more-leads>summary::after{content:'+';font-size:18px;color:var(--muted)}
+.b22-more-leads[open]>summary::after{content:'−'}
+.b22-more-leads[open]>summary{border-bottom:1px solid var(--line)}
+.b22-more-leads-grid{padding:14px}
+@media (max-width:560px){
+  .b22-more-leads{margin-top:10px}
+  .b22-more-leads>summary{padding:12px 13px}
+  .b22-more-leads-grid{padding:10px}
+}
