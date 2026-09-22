@@ -201,6 +201,26 @@ def main() -> None:
 
     expected_ids = {row["decision_id"] for row in expected}
     parsed_ids = {row["decision_id"] for row in parsed}
+    missing_ids = sorted(expected_ids - parsed_ids)
+    new_ids = sorted(parsed_ids - expected_ids)
+    by_expected_id = {row["decision_id"]: row for row in expected}
+    by_parsed_id = {row["decision_id"]: row for row in parsed}
+    mismatch_details = {
+        "missing_checked_rows": [
+            {
+                key: by_expected_id[decision_id].get(key)
+                for key in ("decision_id", "item_ref", "item_title", "mover", "seconder", "motion_text", "result_source", "decision_status")
+            }
+            for decision_id in missing_ids
+        ],
+        "new_html_rows": [
+            {
+                key: by_parsed_id[decision_id].get(key)
+                for key in ("decision_id", "item_ref", "item_title", "mover", "seconder", "motion_text", "result_source", "decision_status")
+            }
+            for decision_id in new_ids
+        ],
+    }
     result = {
         "meeting_date": args.meeting_date,
         "meeting_id": meeting.get("meeting_id"),
@@ -209,8 +229,9 @@ def main() -> None:
         "synthetic_lines": len(lines),
         "expected_pdf_decisions": len(expected_ids),
         "parsed_html_decisions": len(parsed_ids),
-        "missing_from_html": sorted(expected_ids - parsed_ids),
-        "new_from_html": sorted(parsed_ids - expected_ids),
+        "missing_from_html": missing_ids,
+        "new_from_html": new_ids,
+        "mismatch_details": mismatch_details,
         "diagnostics": diagnostics,
         "equivalent_decision_ids": parsed_ids == expected_ids,
         "principle": "HTML fallback is acceptable only if the established checked PDF-derived decision IDs are reproduced exactly.",
