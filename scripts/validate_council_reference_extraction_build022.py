@@ -2,6 +2,14 @@
 """Regression controls for Build 022 Council reference extraction."""
 from __future__ import annotations
 
+import sys
+import types
+
+try:
+    import pdfplumber  # noqa: F401
+except ModuleNotFoundError:
+    sys.modules["pdfplumber"] = types.ModuleType("pdfplumber")
+
 from ingest_council_decisions import extract_refs
 
 FALSE_POSITIVES = [
