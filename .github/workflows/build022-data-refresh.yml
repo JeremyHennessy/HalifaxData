@@ -1,0 +1,143 @@
+name: Build 022 Controlled Data Refresh
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['agent/build022-freshness-usability']
+    paths:
+      - '.github/workflows/build022-data-refresh.yml'
+      - 'scripts/ingest_council_decisions.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build022-controlled-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install collector dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate refresh syntax
+        run: |
+          python -m compileall -q \
+            scripts/ingest_procurement.py \
+            scripts/ingest_council.py \
+            scripts/ingest_council_documents.py \
+            scripts/ingest_council_decisions.py \
+            scripts/build_entity_index_v4.py \
+            scripts/build_lifecycle_reconciliation_build019_v4.py \
+            scripts/enrich_lifecycle_components_build019.py \
+            scripts/build_lifecycle_investigations_build019.py
+      - name: Preserve checked Council legacy controls
+        run: cp data/generated/council_decisions.json /tmp/checked-council-decisions.json
+      - name: Refresh Nova Scotia Halifax awarded tenders
+        run: python scripts/ingest_procurement.py
+      - name: Refresh current Council meeting inventory
+        run: python scripts/ingest_council.py
+      - name: Refresh current Council document inventory
+        run: python scripts/ingest_council_documents.py
+      - name: Validate current Council graph
+        run: python scripts/validate_council.py
+      - name: Refresh approved Council decisions without refetching validated legacy PDFs
+        run: |
+          python scripts/ingest_council_decisions.py \
+            --output data/generated/council_decisions.json \
+            --reuse-legacy-from /tmp/checked-council-decisions.json
+      - name: Validate Council decision evidence
+        run: python scripts/validate_council_decisions.py
+      - name: Regenerate normalized entity index
+        run: |
+          python scripts/build_entity_index_v4.py
+          python scripts/validate_entity_index_v4.py
+      - name: Regenerate deterministic lifecycle graph
+        run: |
+          python scripts/build_lifecycle_reconciliation_build019_v4.py --output /tmp/lifecycle_base.json
+          python scripts/validate_lifecycle_reconciliation_build019.py /tmp/lifecycle_base.json
+          python scripts/validate_capital_identifier_policy_build019.py /tmp/lifecycle_base.json
+          python scripts/enrich_lifecycle_components_build019.py /tmp/lifecycle_base.json data/generated/lifecycle_reconciliation.json
+          python scripts/validate_lifecycle_reconciliation_build019.py
+          python scripts/validate_capital_identifier_policy_build019.py
+          python scripts/validate_lifecycle_components_build019.py
+      - name: Regenerate lifecycle investigation queue
+        run: |
+          python scripts/build_lifecycle_investigations_build019.py
+          python scripts/validate_lifecycle_investigations_build019.py
+      - name: Check pinned Build 019 controls before publishing changed evidence
+        run: python scripts/validate_build019_release_controls.py
+      - name: Validate established contracts
+        run: |
+          python scripts/validate_data.py
+          python scripts/validate_domain_status.py
+          git diff --check
+      - name: Record controlled refresh summary
+        if: always()
+        run: |
+          mkdir -p artifacts/build022-refresh
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          def load(path):
+              p=Path(path)
+              return json.loads(p.read_text(encoding='utf-8')) if p.exists() else {}
+
+          procurement=load('data/generated/procurement.json')
+          council=load('data/generated/council.json')
+          decisions=load('data/generated/council_decisions.json')
+          lifecycle=load('data/generated/lifecycle_reconciliation.json')
+          investigations=load('data/generated/lifecycle_investigations.json')
+          summary={
+              'procurement_records': len(procurement.get('records') or []),
+              'procurement_source_rows': (procurement.get('metadata') or {}).get('source_query_record_count'),
+              'council_meetings': len(council.get('records') or []),
+              'council_decisions': len(decisions.get('records') or []),
+              'legacy_source_mode': (decisions.get('metadata') or {}).get('legacy_source_mode'),
+              'lifecycle_summary': lifecycle.get('summary') or {},
+              'investigation_summary': investigations.get('summary') or {},
+              'interpretation': 'Counts are evidence-release controls. Awards and Council approvals are not vendor-payment facts.'
+          }
+          Path('artifacts/build022-refresh/summary.json').write_text(json.dumps(summary, indent=2)+'\n', encoding='utf-8')
+          print(json.dumps(summary, indent=2))
+          PY
+          cp data/generated/procurement.json artifacts/build022-refresh/procurement.json || true
+          cp data/generated/council.json artifacts/build022-refresh/council.json || true
+          cp data/generated/council_documents.json artifacts/build022-refresh/council_documents.json || true
+          cp data/generated/council_decisions.json artifacts/build022-refresh/council_decisions.json || true
+          cp data/generated/lifecycle_reconciliation.json artifacts/build022-refresh/lifecycle_reconciliation.json || true
+          cp data/generated/lifecycle_investigations.json artifacts/build022-refresh/lifecycle_investigations.json || true
+      - name: Publish validated refreshed evidence to branch
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            data/generated/procurement.json \
+            data/generated/council.json \
+            data/generated/council_documents.json \
+            data/generated/council_decisions.json \
+            data/generated/entity_index.json \
+            data/generated/lifecycle_reconciliation.json \
+            data/generated/lifecycle_investigations.json
+          if [ -z "$(git status --porcelain)" ]; then
+            echo 'No validated source-backed data changes to publish.'
+            exit 0
+          fi
+          git commit -m 'Build 022: publish validated current public-data refresh'
+          git push origin HEAD:'agent/build022-freshness-usability'
+      - name: Upload refresh evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build022-controlled-refresh-${{ github.sha }}
+          path: artifacts/build022-refresh
+          if-no-files-found: warn
+          retention-days: 14
