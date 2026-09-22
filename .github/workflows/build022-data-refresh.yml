@@ -35,12 +35,15 @@ jobs:
             scripts/ingest_council.py \
             scripts/ingest_council_documents.py \
             scripts/ingest_council_decisions.py \
+            scripts/validate_council_reference_extraction_build022.py \
             scripts/diagnose_council_postminutes_html_build022.py \
             scripts/ingest_council_decisions_postminutes_build022.py \
             scripts/build_entity_index_v4.py \
             scripts/build_lifecycle_reconciliation_build019_v4.py \
             scripts/enrich_lifecycle_components_build019.py \
             scripts/build_lifecycle_investigations_build019.py
+      - name: Validate Council reference extraction
+        run: python scripts/validate_council_reference_extraction_build022.py
       - name: Preserve checked release inputs
         run: |
           cp data/generated/council_decisions.json /tmp/checked-council-decisions.json
