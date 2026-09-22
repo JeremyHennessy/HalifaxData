@@ -24,87 +24,102 @@ UA = "HalifaxData Build022 PostMinutes equivalence (+https://github.com/JeremyHe
 
 
 class PostMinutesParser(HTMLParser):
+    VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.items: list[dict] = []
-        self.current: dict | None = None
-        self.container_depth = 0
-        self.counter_depth = 0
-        self.title_depth = 0
-        self.minutes_depth = 0
+        self.item_stack: list[dict] = []
+        self.counter_stack: list[dict] = []
+        self.title_stack: list[dict] = []
+        self.minutes_stack: list[dict] = []
+        self.tag_stack: list[tuple[str, dict]] = []
+        self.sequence = 0
 
     @staticmethod
     def _classes(attrs) -> set[str]:
         values = dict(attrs).get("class", "")
         return {value for value in str(values).split() if value}
 
-    def _break(self) -> None:
-        if self.current is None:
-            return
-        minutes = self.current["minutes"]
+    @staticmethod
+    def _break(item: dict) -> None:
+        minutes = item["minutes"]
         if minutes and minutes[-1] != "\n":
             minutes.append("\n")
 
     def handle_starttag(self, tag: str, attrs) -> None:
         classes = self._classes(attrs)
-        if self.current is not None:
-            self.container_depth += 1
-            if self.counter_depth:
-                self.counter_depth += 1
-            if self.title_depth:
-                self.title_depth += 1
-            if self.minutes_depth:
-                self.minutes_depth += 1
-                if tag in {"p", "br", "li"}:
-                    self._break()
+        frame: dict = {}
+
+        if self.minutes_stack and tag in {"p", "br", "li"}:
+            self._break(self.minutes_stack[-1])
 
         if "AgendaItemContainer" in classes:
-            if self.current is not None:
-                raise RuntimeError("Nested AgendaItemContainer encountered")
-            self.current = {"counter": [], "title": [], "minutes": []}
-            self.container_depth = 1
+            self.sequence += 1
+            item = {"counter": [], "title": [], "minutes": [], "sequence": self.sequence}
+            self.item_stack.append(item)
+            frame["container"] = item
 
-        if self.current is not None:
+        if self.item_stack:
+            current = self.item_stack[-1]
             if "AgendaItemCounter" in classes:
-                self.counter_depth = 1
+                self.counter_stack.append(current)
+                frame["counter"] = current
             if "AgendaItemTitle" in classes:
-                self.title_depth = 1
+                self.title_stack.append(current)
+                frame["title"] = current
             if "AgendaItemMinutes" in classes:
-                self.minutes_depth = 1
+                self.minutes_stack.append(current)
+                frame["minutes"] = current
+
+        if tag not in self.VOID_TAGS:
+            self.tag_stack.append((tag, frame))
 
     def handle_startendtag(self, tag: str, attrs) -> None:
         self.handle_starttag(tag, attrs)
-        self.handle_endtag(tag)
 
     def handle_data(self, data: str) -> None:
-        if self.current is None:
-            return
-        if self.counter_depth:
-            self.current["counter"].append(data)
-        if self.title_depth:
-            self.current["title"].append(data)
-        if self.minutes_depth:
-            self.current["minutes"].append(data)
+        if self.counter_stack:
+            self.counter_stack[-1]["counter"].append(data)
+        if self.title_stack:
+            self.title_stack[-1]["title"].append(data)
+        if self.minutes_stack:
+            self.minutes_stack[-1]["minutes"].append(data)
 
     def handle_endtag(self, tag: str) -> None:
-        if self.current is None:
+        if self.minutes_stack and tag in {"p", "li"}:
+            self._break(self.minutes_stack[-1])
+        if not self.tag_stack:
             return
 
-        if self.minutes_depth and tag in {"p", "li"}:
-            self._break()
+        frame = None
+        while self.tag_stack:
+            open_tag, candidate = self.tag_stack.pop()
+            if open_tag == tag:
+                frame = candidate
+                break
+        if frame is None:
+            return
 
-        if self.counter_depth:
-            self.counter_depth -= 1
-        if self.title_depth:
-            self.title_depth -= 1
-        if self.minutes_depth:
-            self.minutes_depth -= 1
-
-        self.container_depth -= 1
-        if self.container_depth == 0:
-            counter = decisions.norm_line("".join(self.current["counter"]))
-            title = decisions.norm_line("".join(self.current["title"]))
-            raw_minutes = "".join(self.current["minutes"])
+        if frame.get("counter") is not None:
+            item = frame["counter"]
+            if self.counter_stack and self.counter_stack[-1] is item:
+                self.counter_stack.pop()
+        if frame.get("title") is not None:
+            item = frame["title"]
+            if self.title_stack and self.title_stack[-1] is item:
+                self.title_stack.pop()
+        if frame.get("minutes") is not None:
+            item = frame["minutes"]
+            if self.minutes_stack and self.minutes_stack[-1] is item:
+                self.minutes_stack.pop()
+        if frame.get("container") is not None:
+            item = frame["container"]
+            if self.item_stack and self.item_stack[-1] is item:
+                self.item_stack.pop()
+            counter = decisions.norm_line("".join(item["counter"]))
+            title = decisions.norm_line("".join(item["title"]))
+            raw_minutes = "".join(item["minutes"])
             minute_lines = [
                 decisions.norm_line(line)
                 for line in raw_minutes.splitlines()
@@ -115,11 +130,9 @@ class PostMinutesParser(HTMLParser):
                     "counter": counter,
                     "title": title,
                     "minute_lines": minute_lines,
+                    "sequence": item["sequence"],
                 })
-            self.current = None
-            self.counter_depth = 0
-            self.title_depth = 0
-            self.minutes_depth = 0
+
 
 
 def html_to_lines(content: bytes) -> list[dict]:
@@ -127,7 +140,7 @@ def html_to_lines(content: bytes) -> list[dict]:
     parser.feed(content.decode("utf-8", errors="replace"))
     output: list[dict] = []
     line_number = 0
-    for item_index, item in enumerate(parser.items, start=1):
+    for item_index, item in enumerate(sorted(parser.items, key=lambda row: row['sequence']), start=1):
         header = decisions.norm_line(f"{item['counter']} {item['title']}")
         if header:
             line_number += 1
