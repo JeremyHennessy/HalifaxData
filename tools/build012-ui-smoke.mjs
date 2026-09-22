@@ -21,6 +21,13 @@ async function openRoute(page, route) {
   });
 }
 
+async function openBuild022Disclosure(page, key) {
+  const details = page.locator(`[data-build022-disclosure="${key}"]`);
+  if (await details.count() && !(await details.evaluate(element => element.open))) {
+    await details.locator(':scope > summary').click();
+  }
+}
+
 async function assertNoOverflow(page, viewportName, route) {
   const dimensions = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
@@ -43,6 +50,7 @@ try {
     });
 
     await openRoute(page, 'overview');
+    await openBuild022Disclosure(page, 'overviewSupport');
     await page.waitForFunction(() => /authority-backed oversight/i.test(document.querySelector('#content')?.innerText || ''), null, { timeout: 15000 });
     const overviewText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of ['authority-backed oversight', 'policy-noncompliance findings', 'substantiated-wrongdoing findings']) {
