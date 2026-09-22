@@ -155,7 +155,7 @@ def html_to_lines(content: bytes) -> list[dict]:
 def transport_normalized(value: object) -> str:
     """Normalize only extraction-format differences demonstrated by the PDF/HTML control."""
     text = decisions.norm_line(str(value or ""))
-    return re.sub(r"(?<=\\w)-\\s+(?=\\w)", "-", text)
+    return re.sub(r"(?<=\w)-\s+(?=\w)", "-", text)
 
 
 def semantic_fingerprint(row: dict) -> tuple[str, ...]:
@@ -173,7 +173,7 @@ def semantic_fingerprint(row: dict) -> tuple[str, ...]:
 def title_compatible(checked_row: dict, html_row: dict) -> bool:
     checked_title = transport_normalized(checked_row.get("item_title"))
     html_title = transport_normalized(html_row.get("item_title"))
-    return bool(checked_title and html_title and html_title.startswith(checked_title))
+    return (not checked_title and not html_title) or bool(checked_title and html_title and html_title.startswith(checked_title))
 
 
 def main() -> None:
