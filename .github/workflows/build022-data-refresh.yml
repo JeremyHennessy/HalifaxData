@@ -46,8 +46,13 @@ jobs:
         run: python scripts/validate_council_reference_extraction_build022.py
       - name: Preserve checked release inputs
         run: |
-          cp data/generated/council_decisions.json /tmp/checked-council-decisions.json
           cp data/generated/procurement.json /tmp/checked-procurement.json
+          cp data/generated/council.json /tmp/checked-council.json
+          cp data/generated/council_documents.json /tmp/checked-council-documents.json
+          cp data/generated/council_decisions.json /tmp/checked-council-decisions.json
+          cp data/generated/entity_index.json /tmp/checked-entity-index.json
+          cp data/generated/lifecycle_reconciliation.json /tmp/checked-lifecycle-reconciliation.json
+          cp data/generated/lifecycle_investigations.json /tmp/checked-lifecycle-investigations.json
       - name: Collect live Nova Scotia Halifax awarded tenders without publishing
         run: |
           mkdir -p artifacts/build022-refresh
@@ -116,7 +121,7 @@ jobs:
               return json.loads(Path(path).read_text(encoding='utf-8'))
 
           checked_proc=load('/tmp/checked-procurement.json')
-          live_proc=load('data/generated/procurement.json')
+          live_proc=load('artifacts/build022-refresh/procurement_live.json')
           checked_council=load('/tmp/checked-council.json')
           live_council=load('data/generated/council.json')
           checked_decisions=load('/tmp/checked-council-decisions.json')
