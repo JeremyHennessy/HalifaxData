@@ -12,6 +12,7 @@ on:
       - 'scripts/validate_council_reference_extraction_build022.py'
       - 'scripts/build_lifecycle_reconciliation_build019.py'
       - 'scripts/validate_lifecycle_reconciliation_build019.py'
+      - 'scripts/validate_build022_release_controls.py'
 
 permissions:
   contents: write
@@ -44,7 +45,8 @@ jobs:
             scripts/build_entity_index_v4.py \
             scripts/build_lifecycle_reconciliation_build019_v4.py \
             scripts/enrich_lifecycle_components_build019.py \
-            scripts/build_lifecycle_investigations_build019.py
+            scripts/build_lifecycle_investigations_build019.py \
+            scripts/validate_build022_release_controls.py
       - name: Validate Council reference extraction
         run: python scripts/validate_council_reference_extraction_build022.py
       - name: Preserve checked release inputs
@@ -248,8 +250,8 @@ jobs:
           )
           print(json.dumps(summary,indent=2,ensure_ascii=False))
           PY
-      - name: Check pinned Build 019 controls before publishing changed evidence
-        run: python scripts/validate_build019_release_controls.py
+      - name: Validate reviewed Build 022 release controls
+        run: python scripts/validate_build022_release_controls.py
       - name: Validate established contracts
         run: |
           python scripts/validate_data.py
