@@ -68,7 +68,11 @@ def main() -> None:
         source_status_by_key[key] = item
         if int(item.get("decision_records") or 0) < 1:
             fail(f"Source produced no decisions: {key}")
-        if int(item.get("pdf_pages") or 0) < 1:
+        source_format = str(item.get("source_format") or "approved_minutes_pdf")
+        if source_format == "postminutes_html":
+            if int(item.get("html_agenda_items") or 0) < 1:
+                fail(f"Invalid PostMinutes HTML agenda-item count: {key}")
+        elif int(item.get("pdf_pages") or 0) < 1:
             fail(f"Invalid PDF page count: {key}")
         sha = str(item.get("source_sha256") or "")
         if len(sha) != 64:
@@ -95,8 +99,14 @@ def main() -> None:
         motion_text = str(row.get("motion_text") or "").strip()
         if len(motion_text) < 8:
             fail(f"Missing motion text in {row.get('decision_id')}")
+        source_format = str(row.get("source_format") or "approved_minutes_pdf")
         if int(row.get("source_page") or 0) < 1:
-            fail(f"Missing source page in {row.get('decision_id')}")
+            fail(f"Missing source position in {row.get('decision_id')}")
+        if source_format == "postminutes_html":
+            if row.get("validation_status") != "parsed_from_approved_postminutes_html":
+                fail(f"PostMinutes HTML row lacks explicit approval validation status in {row.get('decision_id')}")
+            if not row.get("html_adapter_version"):
+                fail(f"PostMinutes HTML row lacks adapter version in {row.get('decision_id')}")
         url = str(row.get("source_url") or "")
         host = (urlparse(url).hostname or "").lower()
         if host not in OFFICIAL_HOSTS:

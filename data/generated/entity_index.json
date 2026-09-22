@@ -2,7 +2,7 @@
   "metadata": {
     "schema_version": "1.1.0",
     "normalization_version": "build005-entity-index-v4",
-    "generated_at": "2026-09-11T15:01:34+00:00",
+    "generated_at": "2026-09-22T15:17:49+00:00",
     "generation_time_semantics": "freshest_input_generated_at_for_deterministic_build",
     "input_artifacts": {
       "budget": {
@@ -61,15 +61,15 @@
       },
       "council": {
         "path": "data/generated/council.json",
-        "sha256": "f1d978fec6db8e6e1959b74e9df18c86ae73151d95b6ddb4f4ba50d4de0a3dc0",
-        "records": 79,
-        "generated_at": "2026-08-25T18:48:12+00:00"
+        "sha256": "8b23aeff9cb71951a5a7341cf192dbf671d39ececdb6eb9a8843a6e2a0f70742",
+        "records": 80,
+        "generated_at": "2026-09-22T15:17:46+00:00"
       },
       "council_documents": {
         "path": "data/generated/council_documents.json",
-        "sha256": "f58fdc6cdd8ddd74e5519fb861dc3996e15461bc121ffd2c8090a8f7461b4053",
-        "records": 895,
-        "generated_at": "2026-08-25T18:48:15+00:00"
+        "sha256": "2edfd24391dedb3d2499d015773ffbc02ad08f747b1372659eae4a8eee3629e3",
+        "records": 928,
+        "generated_at": "2026-09-22T15:17:49+00:00"
       }
     },
     "join_policy": {
@@ -108,10 +108,10 @@
       "budget_history": 346,
       "benchmarks": 108,
       "external_funding": 226,
-      "council": 79,
-      "council_documents": 895
+      "council": 80,
+      "council_documents": 928
     },
-    "record_link_count": 22941,
+    "record_link_count": 22975,
     "business_unit_count": 18,
     "person_name_cluster_count": 2130,
     "vendor_name_cluster_count": 2238,
@@ -122,14 +122,14 @@
     "unmatched_business_unit_label_count": 337,
     "unmatched_business_unit_record_count": 9371,
     "approved_input_count": 11,
-    "council_meeting_count": 79,
+    "council_meeting_count": 80,
     "budget_history_rows_linked": 346,
     "benchmark_hrm_rows_linked": 48,
     "benchmark_context_rows_intentionally_unlinked": 60,
     "external_funding_hrm_rows_linked": 14,
     "external_funding_context_rows_intentionally_unlinked": 212,
-    "council_rows_linked": 79,
-    "council_document_rows_linked": 895
+    "council_rows_linked": 80,
+    "council_document_rows_linked": 928
   },
   "organizations": [
     {
@@ -204840,6 +204840,16 @@
     },
     {
       "source_dataset": "council",
+      "source_record_ref": "council:2d24952c2bdaaf913b54",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council",
       "source_record_ref": "council:32b41162811f3430b966",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:f0996a5f-9614-4f60-8e75-728d90eb2452",
@@ -205640,6 +205650,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:04177045741109a95fe1",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:0476e59ca11098801dd5",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:3e344d1e-4c3a-49d8-a9a2-2526b8c2f455",
@@ -205653,6 +205673,16 @@
       "source_record_ref": "council_documents:04812f1c9ef8bcf9ef5a",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:46169864-4f90-4eaa-9963-e45c7949d242",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:04be6f86b35da2462c5b",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -205870,6 +205900,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:098ea075ef5f0a5b56d1",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:09c789b8ffb3350d7374",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:1ee73e42-6529-45f4-a5ff-b5c4783256ba",
@@ -206023,16 +206063,6 @@
       "source_record_ref": "council_documents:0e73191b3ded5c9db6a4",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:f6852e94-0418-4a9b-89b7-8561059e8d98",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:0ec5015864bda8fe84ae",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -206470,16 +206500,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:1adeebe73522d59f9d67",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:1b3dc76004586122c009",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:f6852e94-0418-4a9b-89b7-8561059e8d98",
@@ -206720,6 +206740,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:21bdc07c722f60921629",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:21d90d8a4482e49e9d87",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:e866d3cd-6dcc-4c39-baef-76e0c9aa76db",
@@ -206810,6 +206840,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:250710f8dc9cdb77ea8e",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:251d170684cb612a5229",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:1a28cfe1-6d4f-4147-a3a7-9d509900f217",
@@ -206833,6 +206873,16 @@
       "source_record_ref": "council_documents:259ca2a9c546ed837dbb",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:f0996a5f-9614-4f60-8e75-728d90eb2452",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:25c5ce5d9ac6580cafbe",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -206920,6 +206970,26 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:26cfa8667e93ce3a89a9",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:275894b9e5be08365f3c",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:27882d30b13b00db4cea",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:f6852e94-0418-4a9b-89b7-8561059e8d98",
@@ -206983,6 +207053,16 @@
       "source_record_ref": "council_documents:292b6c256457da34c221",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:01fb0bca-9175-4fbc-b6e5-f63a1a2131ea",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:293356635426d024e602",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -207113,6 +207193,16 @@
       "source_record_ref": "council_documents:2b9baaf57100413c0fd5",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:2dc5ed20-0349-47ab-89a0-a6d84e435b9a",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:2bf1de9ab215906a2260",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -207530,6 +207620,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:36b13e1cf3e2477795cd",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:37235d9d303c51e1d5cb",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:a05ecc8e-e63e-486a-890f-edf11c013d31",
@@ -207603,6 +207703,26 @@
       "source_record_ref": "council_documents:38e6513ddfa2622ef270",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:1a99836f-812a-4a9a-9fed-6e78ef8874d1",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:39307f24d4c14e4c38c1",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:395810254fe88fe65c00",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -207890,6 +208010,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:42ac2394afeb6a5f3f78",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:42fff6c5581a39abd4a2",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:1a99836f-812a-4a9a-9fed-6e78ef8874d1",
@@ -207940,16 +208070,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:44863dd9aaa1137b150e",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:44cc31ee6d228d674b34",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:280e8df2-bb2c-460e-979a-3f1dbf284274",
@@ -207983,16 +208103,6 @@
       "source_record_ref": "council_documents:45551aa0d8f29465f043",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:6ec28cbb-a265-4fee-b95c-40f9c64d1f39",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:45ad8be9c26f809b1f6a",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -208270,9 +208380,29 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:4d615102963761b411d2",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:4d9c4991062cac1a0c22",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:e248e251-4524-4549-a6d1-66a8d6ab2939",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:4dfcc5cc6aea9deab95a",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -208570,9 +208700,9 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:57d98db5942e269b2a7c",
+      "source_record_ref": "council_documents:580500be6fa65f2c2456",
       "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -208860,6 +208990,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:5e9da205e65755848393",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:5f5e52cf4cdd1cf8167a",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:cef8a63a-62a7-49c8-827f-b65d6285ffd4",
@@ -208980,16 +209120,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:630cc23d33ddbfcdfb94",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:6390a15b6758aafe5c9d",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:2b525638-79db-4d72-8db3-9b4bde75cc13",
@@ -209073,6 +209203,16 @@
       "source_record_ref": "council_documents:66a87a9daca8367a5638",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:64fcd53d-d4ec-44cd-9921-37c0eedc70f7",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:66d3d77389976f322c0d",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -209300,16 +209440,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:6dccd95acd208666c7a8",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:6e1f70cb0ccb1865c47e",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:f0996a5f-9614-4f60-8e75-728d90eb2452",
@@ -209333,6 +209463,16 @@
       "source_record_ref": "council_documents:6e649de1a60ca20ff319",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:7f90f57c-d936-49f1-af05-4d181fe2cb3a",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:6e86dfe4af9ceb99d6b6",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -209503,6 +209643,16 @@
       "source_record_ref": "council_documents:72e11c4dd4d14cff3497",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:0a546da9-4205-466d-85a7-71a2697b3cd1",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:73024b1a1d7b92d71316",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -209860,6 +210010,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:7bf47904b48a867757ba",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:7c1db84cb96096ec817e",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:2b525638-79db-4d72-8db3-9b4bde75cc13",
@@ -209990,6 +210150,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:7fe48213249af9731cbd",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:7febf6ce510ffad8af75",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:12be73ef-3727-4a0c-86a8-05f82372e57a",
@@ -210113,6 +210283,16 @@
       "source_record_ref": "council_documents:82303f3d605ff5c52fad",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:2b525638-79db-4d72-8db3-9b4bde75cc13",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:82c684816f7f8bbcb1ca",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -210780,6 +210960,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:93a2e9f4dc87cff48183",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:93a4e3baf8a97acbc8fd",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:e68dc45c-ff04-4026-9138-7faf9037a3ab",
@@ -210900,9 +211090,9 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:95b4c9dc8386a9a89432",
+      "source_record_ref": "council_documents:960d66d0e91db26af89f",
       "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -211040,26 +211230,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:989dc4011eb68bf337a5",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:993a191195cbc16f9958",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:99a9629b071d58f21e71",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
@@ -211160,6 +211330,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:9bd600f8562aa8690db4",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:9c60b8b682efa4101416",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:5b1a7f43-69e3-4607-9d5c-9aa0831d5049",
@@ -211203,16 +211383,6 @@
       "source_record_ref": "council_documents:9dd68eadcf83bf661dc0",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:1a99836f-812a-4a9a-9fed-6e78ef8874d1",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:9ddd76addccd4098e9e0",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -211273,6 +211443,16 @@
       "source_record_ref": "council_documents:9f7d178ee7578ea209cf",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:b313dd56-7b1b-406a-85b5-f92c331cac88",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:9fc2b7d414321b533128",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -211423,6 +211603,16 @@
       "source_record_ref": "council_documents:a614e023225cf93b9184",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:608fc036-486c-4b21-a9bb-ebefce5cdbfb",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:a65d3343c4ff05733478",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -211583,6 +211773,16 @@
       "source_record_ref": "council_documents:aa0c897abcac03d8588b",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:5d91eadb-bafb-4599-84b0-0521872e2065",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:aa21afe5053df594cb23",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -211780,6 +211980,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:b0c7afe50a138c81e116",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:b150957428b07139dd2c",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:f0996a5f-9614-4f60-8e75-728d90eb2452",
@@ -211833,6 +212043,16 @@
       "source_record_ref": "council_documents:b255f9cbdd7ec32fb5cf",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:1a28cfe1-6d4f-4147-a3a7-9d509900f217",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:b27496161ee2890fcf3c",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -212020,6 +212240,26 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:b7dfe72f864827744a55",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:b844dd24c8dee41d4e99",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:b861c843babdfef2e23a",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:e702c253-4757-42b1-8f10-404cebe18578",
@@ -212040,16 +212280,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:b8c366a2628116cd290b",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:b8db7c489975a95457db",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:447800f5-c3bf-426f-98e8-be080ece3a24",
@@ -212063,6 +212293,26 @@
       "source_record_ref": "council_documents:b9054b92d6364b6c1517",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:46169864-4f90-4eaa-9963-e45c7949d242",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:b91c5697a86c6fc4de4d",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:b91f3bfb628c799aa046",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -212220,9 +212470,9 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:bc52398fcd010f13e739",
+      "source_record_ref": "council_documents:bc7d5a8e6f8006084a8a",
       "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "council_meeting_id": "council-meeting:1338404b-b5af-4d13-996d-bb11be3fdcdb",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -212230,9 +212480,9 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:bc7d5a8e6f8006084a8a",
+      "source_record_ref": "council_documents:bc909fee1c66450f486b",
       "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:1338404b-b5af-4d13-996d-bb11be3fdcdb",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -212293,16 +212543,6 @@
       "source_record_ref": "council_documents:be5db73e58ccd7cb2c91",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:1a28cfe1-6d4f-4147-a3a7-9d509900f217",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:beab4f7639cd150fdef9",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -212530,16 +212770,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:c54b1f4bb4bef4d506bd",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:c568a25461c041c1b6ed",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:f6852e94-0418-4a9b-89b7-8561059e8d98",
@@ -212650,6 +212880,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:c904a2f627769dcb0ac5",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:c92b66b3fb8296193e32",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:e248e251-4524-4549-a6d1-66a8d6ab2939",
@@ -212700,6 +212940,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:cb1f7a03b7ed0534f4fe",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:cb5d4f041b44784983c9",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:e866d3cd-6dcc-4c39-baef-76e0c9aa76db",
@@ -212743,6 +212993,16 @@
       "source_record_ref": "council_documents:cc9702e311e8d8b356cb",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:6ec28cbb-a265-4fee-b95c-40f9c64d1f39",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:ccd55bd2b5abed73ca9e",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -212883,6 +213143,16 @@
       "source_record_ref": "council_documents:d079d77560608d2ceda3",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:1a28cfe1-6d4f-4147-a3a7-9d509900f217",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:d10bee28794298ddd2ca",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -213040,6 +213310,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:d5cb58cfac8faa630fb9",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:d6452e856d488317fa14",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:12be73ef-3727-4a0c-86a8-05f82372e57a",
@@ -213190,16 +213470,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:d8e735a2e3020bfb548c",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:d8f203ea987fd6d9bedd",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
@@ -213330,26 +213600,6 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:dcddcff7c6d9bcf5e45c",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:dd004321b370e410db73",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:dd38d9fde270b47df848",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:7f90f57c-d936-49f1-af05-4d181fe2cb3a",
@@ -213460,6 +213710,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:deb2c0437b1522869c10",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:dee7da25ef187c408dab",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:cef8a63a-62a7-49c8-827f-b65d6285ffd4",
@@ -213493,6 +213753,16 @@
       "source_record_ref": "council_documents:e002cbffc5df962a2503",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:3e344d1e-4c3a-49d8-a9a2-2526b8c2f455",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:e01459e878ba3a79040e",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -213600,6 +213870,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:e2a766b7631a35b91414",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:e2b102aec649259c29fe",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:59fd13ff-d78d-4cca-b017-7ae6c171a445",
@@ -213660,6 +213940,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:e3cee9bc7bf59cc85c27",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:e40a8f2905830d9b13ee",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:a21d5cef-c62b-4af6-a8e3-0413e93d91d4",
@@ -213703,6 +213993,16 @@
       "source_record_ref": "council_documents:e48a61df062270cd42b3",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:e248e251-4524-4549-a6d1-66a8d6ab2939",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:e4c1ab4f7cbde37de480",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -213920,6 +214220,16 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:ed1539a7f5f1cfebcc6b",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:ed9359a2423006d16d2b",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:4a6b228e-9d53-49d5-88bd-3ca088cabaac",
@@ -213943,6 +214253,16 @@
       "source_record_ref": "council_documents:ee1b0b519d616db8924c",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:a05ecc8e-e63e-486a-890f-edf11c013d31",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:ee3f0ccac5393fe7dcfa",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -214070,9 +214390,39 @@
     },
     {
       "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:f325b398374311a38b46",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
       "source_record_ref": "council_documents:f36897609977087bf142",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:7f90f57c-d936-49f1-af05-4d181fe2cb3a",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:f4445fcfbfdcd3854a46",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "join_methods": {
+        "organization": "official_source_scope",
+        "council_meeting": "official_escribe_meeting_id_exact"
+      }
+    },
+    {
+      "source_dataset": "council_documents",
+      "source_record_ref": "council_documents:f4953e71c41536660f72",
+      "organization_id": "org:halifax-regional-municipality",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -214230,9 +214580,9 @@
     },
     {
       "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:f9c86cf2c1dcbd761636",
+      "source_record_ref": "council_documents:f9d10faa43dbdd6c1b0b",
       "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -214363,16 +214713,6 @@
       "source_record_ref": "council_documents:fd0586d5cb4b683d262d",
       "organization_id": "org:halifax-regional-municipality",
       "council_meeting_id": "council-meeting:12be73ef-3727-4a0c-86a8-05f82372e57a",
-      "join_methods": {
-        "organization": "official_source_scope",
-        "council_meeting": "official_escribe_meeting_id_exact"
-      }
-    },
-    {
-      "source_dataset": "council_documents",
-      "source_record_ref": "council_documents:fd26223ed74ca8239adb",
-      "organization_id": "org:halifax-regional-municipality",
-      "council_meeting_id": "council-meeting:7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
       "join_methods": {
         "organization": "official_source_scope",
         "council_meeting": "official_escribe_meeting_id_exact"
@@ -286892,6 +287232,14 @@
       "meeting_name": "Budget Committee - Continuation",
       "meeting_type": "Budget Committee - Continuation",
       "start_date": "2026/02/13 09:30:00",
+      "identity_method": "official_escribe_meeting_id_exact"
+    },
+    {
+      "council_meeting_id": "council-meeting:4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "official_meeting_id": "4ee16362-bc71-448f-a211-ccc7c43577d0",
+      "meeting_name": "Halifax Regional Council",
+      "meeting_type": "Halifax Regional Council",
+      "start_date": "2026/09/15 10:00:00",
       "identity_method": "official_escribe_meeting_id_exact"
     },
     {

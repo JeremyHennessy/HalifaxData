@@ -40,6 +40,13 @@ async function closeDrawer(page) {
   }
 }
 
+async function openBuild022Disclosure(page, key) {
+  const details = page.locator(`[data-build022-disclosure="${key}"]`);
+  if (await details.count() && !(await details.evaluate(element => element.open))) {
+    await details.locator(':scope > summary').click();
+  }
+}
+
 async function assertNoOverflow(page, viewportName, route) {
   const dims = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
@@ -62,6 +69,7 @@ try {
     });
 
     await openRoute(page, 'benchmarks');
+    await openBuild022Disclosure(page, 'communityFunding');
     const fundingText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of [
       'community funding context', 'funding context, not suspicion scoring',
@@ -165,6 +173,8 @@ try {
     await page.screenshot({ path: `${OUTPUT}/${viewportName}-build013-investigations.png`, fullPage: true });
 
     await openRoute(page, 'sources');
+    await openBuild022Disclosure(page, 'sourceRegistry');
+    await openBuild022Disclosure(page, 'sourceFamilies');
     const sourceText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of ['build 013 context sources', 'community funding', 'procurement policy', 'complete grants or contract-amendment ledger', 'fiscal 2026 proposed awards']) {
       if (!sourceText.includes(phrase)) throw new Error(`${viewportName}/sources: missing "${phrase}"`);

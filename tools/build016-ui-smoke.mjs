@@ -12,6 +12,13 @@ await fs.mkdir(OUTPUT, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const report = { generated_at: new Date().toISOString(), base_url: BASE_URL, views: [], errors: [] };
 
+async function openBuild022Disclosure(page, key) {
+  const details = page.locator(`[data-build022-disclosure="${key}"]`);
+  if (await details.count() && !(await details.evaluate(element => element.open))) {
+    await details.locator(':scope > summary').click();
+  }
+}
+
 try {
   for (const [viewportName, viewport] of viewports) {
     const context = await browser.newContext({ viewport, deviceScaleFactor: 1 });
@@ -74,6 +81,7 @@ try {
     await page.screenshot({ path: `${OUTPUT}/${viewportName}-build016-council.png`, fullPage: true });
 
     await page.goto(`${BASE_URL}#sources`, { waitUntil: 'networkidle' });
+    await openBuild022Disclosure(page, 'sourceFamilies');
     await page.waitForFunction(() => document.querySelector('.b16-source-coverage'), null, { timeout: 20000 });
     const sourcesText = (await page.locator('.b16-source-coverage').innerText()).toLowerCase();
     for (const phrase of ['build 016 council decision coverage', 'pre-2024', 'incomplete seed', 'approved-minutes']) {

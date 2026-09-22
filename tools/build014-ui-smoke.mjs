@@ -36,6 +36,13 @@ async function closeDrawer(page) {
   }
 }
 
+async function openBuild022Disclosure(page, key) {
+  const details = page.locator(`[data-build022-disclosure="${key}"]`);
+  if (await details.count() && !(await details.evaluate(element => element.open))) {
+    await details.locator(':scope > summary').click();
+  }
+}
+
 async function assertNoOverflow(page, viewportName, route) {
   const dims = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
@@ -144,6 +151,7 @@ try {
     await page.screenshot({ path: `${OUTPUT}/${viewportName}-build014-investigations.png`, fullPage: true });
 
     await openRoute(page, 'sources');
+    await openBuild022Disclosure(page, 'sourceFamilies');
     const sourceText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of ['build 014 cao amendment source series', '12 identified official public hrm amendment-report pdfs', 'not a complete contract-amendment ledger', 'no vendor aliases or fuzzy contract links']) {
       if (!sourceText.includes(phrase)) throw new Error(`${viewportName}/sources: missing "${phrase}"`);

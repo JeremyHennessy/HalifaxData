@@ -50,13 +50,13 @@
       "council_decisions": {
         "path": "data/generated/council_decisions.json",
         "parser_version": "build016-council-decisions-v1",
-        "generated_at": "2026-08-27T00:00:00Z",
+        "generated_at": "2026-09-22T15:18:07+00:00",
         "dataset_status": "approved_minutes_motion_outcome_extraction"
       },
       "council_documents": {
         "path": "data/generated/council_documents.json",
         "parser_version": "build005-council-documents-v2",
-        "generated_at": "2026-08-25T18:48:15+00:00",
+        "generated_at": "2026-09-22T15:17:49+00:00",
         "dataset_status": "escribe_agenda_attachment_complete_scan"
       }
     },
@@ -72,17 +72,17 @@
   "summary": {
     "capital_schedule_ids": 52,
     "known_capital_ids_all_layers": 258,
-    "identifier_links": 2811,
+    "identifier_links": 2813,
     "direct_documentary_links": 98,
-    "reconciled_chain_count": 53,
-    "capital_identifier_chains": 33,
+    "reconciled_chain_count": 55,
+    "capital_identifier_chains": 35,
     "procurement_identifier_chains": 20,
     "purchase_order_chains": 0,
     "chain_domain_count_distribution": {
-      "2": 52,
+      "2": 54,
       "3": 1
     },
-    "linked_build018_capital_ids": 16,
+    "linked_build018_capital_ids": 17,
     "linked_procurement_refs": 20,
     "quarantined_council_identifier_links": 0,
     "authoritative_capital_ids": 258,
@@ -222,6 +222,29 @@
       "join_rule": "same explicit identifier only"
     },
     {
+      "chain_id": "b19-chain-38b46b8e3889260f8f84",
+      "identifier_type": "capital_project_account",
+      "identifier_value": "CE240001",
+      "domains": [
+        "capital",
+        "council"
+      ],
+      "domain_count": 2,
+      "record_types": [
+        "approved_council_decision",
+        "current_capital_project_sheet",
+        "prior_capital_project_sheet"
+      ],
+      "evidence_link_ids": [
+        "b19-6e76c0e37c1156c8e6e3",
+        "b19-02b48087a97051785ac4",
+        "b19-c58e8568f5129432ab3c"
+      ],
+      "evidence_record_count": 3,
+      "authoritative": true,
+      "join_rule": "same explicit identifier only"
+    },
+    {
       "chain_id": "b19-chain-8272057cece902307f57",
       "identifier_type": "capital_project_account",
       "identifier_value": "CI200003",
@@ -287,6 +310,29 @@
         "b19-3593e28d6153a0113ae0",
         "b19-580b97735da81e51f965",
         "b19-b5d1965df2d5e6dd1d4f"
+      ],
+      "evidence_record_count": 3,
+      "authoritative": true,
+      "join_rule": "same explicit identifier only"
+    },
+    {
+      "chain_id": "b19-chain-bdc9c48b18f2ff576dd9",
+      "identifier_type": "capital_project_account",
+      "identifier_value": "CI250009",
+      "domains": [
+        "capital",
+        "council"
+      ],
+      "domain_count": 2,
+      "record_types": [
+        "approved_council_decision",
+        "current_capital_multiyear_schedule",
+        "current_capital_project_sheet"
+      ],
+      "evidence_link_ids": [
+        "b19-7064c32a6c20ca73fb12",
+        "b19-3e28e945ca13289adb82",
+        "b19-dc762c54e4366fc8b7d6"
       ],
       "evidence_record_count": 3,
       "authoritative": true,
@@ -5033,6 +5079,38 @@
       "used_amount_for_matching": false
     },
     {
+      "link_id": "b19-c58e8568f5129432ab3c",
+      "identifier_type": "capital_project_account",
+      "identifier_value": "CE240001",
+      "raw_identifier": "CE240001",
+      "raw_identifiers": [
+        "CE240001"
+      ],
+      "evidence": {
+        "domain": "council",
+        "record_type": "approved_council_decision",
+        "record_key": "council-2026-08-25-2e7d5bef249aae2f18897e33",
+        "label": "Council motion · 2026-08-25 · item 15.2.1",
+        "source_id": "hrm-escribe",
+        "source_locator": "PostMinutes HTML agenda item 15.2.1 (synthetic parser position 26)",
+        "source_url": "https://pub-halifax.escribemeetings.com/Meeting.aspx?Id=7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa&Agenda=PostMinutes&lang=English",
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "meeting_date": "2026-08-25",
+        "item_ref": "15.2.1",
+        "decision_status": "passed_unanimously",
+        "source_item_ref": "15.2.1",
+        "source_item_title": "TMR2 Dual Band Radio 2026/2027 Capital Budget Transfer*",
+        "context_status": "exact_identifier_present_in_approved_motion_text",
+        "item_metadata_used_for_matching": false,
+        "motion_text_used_for_identifier_verification": true
+      },
+      "match_method": "exact_parser_extracted_identifier_intersection",
+      "source_field": "capital_account_refs",
+      "authoritative": true,
+      "used_name_for_matching": false,
+      "used_amount_for_matching": false
+    },
+    {
       "link_id": "b19-ac12c349a924a0ace8de",
       "identifier_type": "capital_project_account",
       "identifier_value": "CE240002",
@@ -7243,6 +7321,38 @@
       },
       "match_method": "exact_structured_identifier",
       "source_field": "project_account_id",
+      "authoritative": true,
+      "used_name_for_matching": false,
+      "used_amount_for_matching": false
+    },
+    {
+      "link_id": "b19-dc762c54e4366fc8b7d6",
+      "identifier_type": "capital_project_account",
+      "identifier_value": "CI250009",
+      "raw_identifier": "CI250009",
+      "raw_identifiers": [
+        "CI250009"
+      ],
+      "evidence": {
+        "domain": "council",
+        "record_type": "approved_council_decision",
+        "record_key": "council-2026-08-25-2e7d5bef249aae2f18897e33",
+        "label": "Council motion · 2026-08-25 · item 15.2.1",
+        "source_id": "hrm-escribe",
+        "source_locator": "PostMinutes HTML agenda item 15.2.1 (synthetic parser position 26)",
+        "source_url": "https://pub-halifax.escribemeetings.com/Meeting.aspx?Id=7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa&Agenda=PostMinutes&lang=English",
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "meeting_date": "2026-08-25",
+        "item_ref": "15.2.1",
+        "decision_status": "passed_unanimously",
+        "source_item_ref": "15.2.1",
+        "source_item_title": "TMR2 Dual Band Radio 2026/2027 Capital Budget Transfer*",
+        "context_status": "exact_identifier_present_in_approved_motion_text",
+        "item_metadata_used_for_matching": false,
+        "motion_text_used_for_identifier_verification": true
+      },
+      "match_method": "exact_parser_extracted_identifier_intersection",
+      "source_field": "capital_account_refs",
       "authoritative": true,
       "used_name_for_matching": false,
       "used_amount_for_matching": false
@@ -71517,7 +71627,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1113",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1113",
-        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88"
+        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71550,7 +71662,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1113",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1113",
-        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88"
+        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71583,7 +71697,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1113",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1113",
-        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88"
+        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71616,7 +71732,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1113",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1113",
-        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88"
+        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71649,7 +71767,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1113",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1113",
-        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88"
+        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71682,7 +71802,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1113",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1113",
-        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88"
+        "meeting_id": "b313dd56-7b1b-406a-85b5-f92c331cac88",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71715,7 +71837,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71748,7 +71872,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71781,7 +71907,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71814,7 +71942,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71847,7 +71977,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71880,7 +72012,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71913,7 +72047,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71946,7 +72082,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -71979,7 +72117,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72012,7 +72152,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72045,7 +72187,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72078,7 +72222,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=1990",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=1990",
-        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f"
+        "meeting_id": "d170b0da-a5f9-4e87-80c4-f58ea1f9b47f",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72111,7 +72257,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72144,7 +72292,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72177,7 +72327,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72210,7 +72362,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72243,7 +72397,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72276,7 +72432,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72309,7 +72467,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72342,7 +72502,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72375,7 +72537,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72408,7 +72572,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72441,7 +72607,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72474,7 +72642,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72507,7 +72677,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72540,7 +72712,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72573,7 +72747,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72606,7 +72782,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72639,7 +72817,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3093",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3093",
-        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939"
+        "meeting_id": "e248e251-4524-4549-a6d1-66a8d6ab2939",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72672,7 +72852,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3515",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3515",
-        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24"
+        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72705,7 +72887,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3515",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3515",
-        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24"
+        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72738,7 +72922,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3515",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3515",
-        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24"
+        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72771,7 +72957,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3515",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3515",
-        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24"
+        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72804,7 +72992,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3515",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3515",
-        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24"
+        "meeting_id": "447800f5-c3bf-426f-98e8-be080ece3a24",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72837,7 +73027,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3858",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
-        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab"
+        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72870,7 +73062,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3858",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
-        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab"
+        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72903,7 +73097,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3858",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
-        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab"
+        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72936,7 +73132,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3858",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
-        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab"
+        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -72969,7 +73167,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3858",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
-        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab"
+        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73002,7 +73202,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3858",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
-        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab"
+        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73035,7 +73237,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3858",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
-        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab"
+        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73068,7 +73272,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=3858",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=3858",
-        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab"
+        "meeting_id": "e68dc45c-ff04-4026-9138-7faf9037a3ab",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73101,7 +73307,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=455",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=455",
-        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445"
+        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73134,7 +73342,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=455",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=455",
-        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445"
+        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73167,7 +73377,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=455",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=455",
-        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445"
+        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73200,7 +73412,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=455",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=455",
-        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445"
+        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73233,7 +73447,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=455",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=455",
-        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445"
+        "meeting_id": "59fd13ff-d78d-4cca-b017-7ae6c171a445",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73266,7 +73482,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73299,7 +73517,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73332,7 +73552,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73365,7 +73587,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73398,7 +73622,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73431,7 +73657,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73464,7 +73692,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73497,7 +73727,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73530,7 +73762,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73563,7 +73797,9 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5001",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5001",
-        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b"
+        "meeting_id": "7e65d9a7-038b-4425-9656-d951b5fdbf0b",
+        "provenance_status": "current_council_document_graph",
+        "current_resolved_url": null
       },
       "match_method": "exact_document_id",
       "key_type": "document_id",
@@ -73596,9 +73832,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73629,9 +73867,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73662,9 +73902,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73695,9 +73937,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73728,9 +73972,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73761,9 +74007,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73794,9 +74042,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73827,9 +74077,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73860,9 +74112,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73893,9 +74147,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73926,9 +74182,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73959,9 +74217,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -73992,9 +74252,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -74025,9 +74287,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -74058,9 +74322,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -74091,9 +74357,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -74124,9 +74392,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -74157,9 +74427,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -74190,9 +74462,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -74223,9 +74497,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",
@@ -74256,9 +74532,11 @@
         "source_id": "hrm-escribe",
         "source_locator": "document_id=5716",
         "source_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5716",
-        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa"
+        "meeting_id": "7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa",
+        "provenance_status": "preserved_report_registry_identity",
+        "current_resolved_url": "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=5776"
       },
-      "match_method": "exact_document_id",
+      "match_method": "exact_preserved_report_document_id",
       "key_type": "document_id",
       "key_value": "5716",
       "interpretation": "The award row is parsed from this exact checked Council document. This link is provenance, not a claim that Council separately approved the award.",

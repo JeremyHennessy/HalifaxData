@@ -38,7 +38,8 @@ try {
   }
 
   const text = (await page.locator('#content').innerText()).toLowerCase();
-  if (!text.includes('automated pattern engine')) throw new Error('Build 009 overview did not recover after delayed required data');
+  const patternText = ((await page.locator('.b9-pattern-summary').textContent()) || '').toLowerCase();
+  if (!patternText.includes('automated pattern engine')) throw new Error('Build 009 overview did not recover after delayed required data');
   if (!text.includes('capital')) throw new Error('Build 010 Capital investigations did not render after delayed required data');
 
   console.log(JSON.stringify({
