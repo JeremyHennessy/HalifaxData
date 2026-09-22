@@ -65,6 +65,8 @@ jobs:
           node --check tools/build022-ui-smoke.mjs
       - name: Validate Python syntax
         run: python -m compileall -q scripts
+      - name: Validate Build 022 Council reference extraction
+        run: python scripts/validate_council_reference_extraction_build022.py
       - name: Validate established budget and compensation contracts
         run: python scripts/validate_data.py
       - name: Validate Build 020 tax transparency
