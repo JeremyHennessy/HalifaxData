@@ -323,12 +323,6 @@ def legacy_sources(registry: dict) -> list[dict]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUT)
-    parser.add_argument(
-        "--reuse-legacy-from",
-        type=Path,
-        default=None,
-        help="Preserve already-validated legacy seed records/status from an existing Council-decision artifact and refresh only the modern eSCRIBE window.",
-    )
     args = parser.parse_args()
 
     council = json.loads(COUNCIL_PATH.read_text(encoding="utf-8"))
@@ -345,43 +339,7 @@ def main() -> None:
 
     all_records: list[dict] = []
     source_status: list[dict] = []
-    sources_to_fetch = [*legacy, *modern]
-    legacy_source_mode = "refetched"
-
-    if args.reuse_legacy_from is not None:
-        checked = json.loads(args.reuse_legacy_from.read_text(encoding="utf-8"))
-        checked_records = [
-            row for row in checked.get("records", [])
-            if row.get("coverage_layer") == "legacy_seed_incomplete"
-        ]
-        checked_status = [
-            row for row in checked.get("source_status", [])
-            if row.get("coverage_layer") == "legacy_seed_incomplete"
-        ]
-        expected_source_ids = {row["source_id"] for row in legacy}
-        checked_status_ids = {row.get("source_id") for row in checked_status}
-        checked_record_ids = {row.get("source_id") for row in checked_records}
-        if checked_status_ids != expected_source_ids:
-            raise RuntimeError(
-                "Refusing legacy reuse: checked source-status IDs do not exactly match the registered legacy seed"
-            )
-        if not expected_source_ids.issubset(checked_record_ids):
-            raise RuntimeError(
-                "Refusing legacy reuse: at least one registered legacy source has no preserved decision records"
-            )
-        for item in checked_status:
-            if len(str(item.get("source_sha256") or "")) != 64 or int(item.get("pdf_pages") or 0) < 1:
-                raise RuntimeError("Refusing legacy reuse: preserved source status is missing a validated hash/page count")
-        all_records.extend(checked_records)
-        source_status.extend(checked_status)
-        sources_to_fetch = modern
-        legacy_source_mode = "preserved_checked_evidence"
-        print(
-            f"Preserving {len(checked_records)} validated legacy decisions from "
-            f"{len(checked_status)} registered source documents; refreshing modern approved minutes only."
-        )
-
-    for source in sources_to_fetch:
+    for source in [*legacy, *modern]:
         content, resolved_url = fetch_pdf(session, source["minutes_url"])
         sha = hashlib.sha256(content).hexdigest()
         source = {**source, "minutes_url": resolved_url, "source_sha256": sha}
@@ -429,13 +387,6 @@ def main() -> None:
             "modern_meetings_with_posted_minutes": len(modern),
             "legacy_seed_meetings": len(legacy),
             "legacy_seed_complete": False,
-            "legacy_source_mode": legacy_source_mode,
-            "legacy_source_refresh_note": (
-                "Legacy seed evidence was preserved from the checked artifact because those historical source bytes were already validated; "
-                "only the modern posted-minutes window was refreshed."
-                if legacy_source_mode == "preserved_checked_evidence"
-                else "Legacy and modern source documents were both fetched during this run."
-            ),
             "decision_records": len(all_records),
             "modern_decision_records": modern_records,
             "legacy_decision_records": legacy_records,
