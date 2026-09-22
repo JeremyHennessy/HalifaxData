@@ -7,6 +7,8 @@ on:
     paths:
       - '.github/workflows/build022-data-refresh.yml'
       - 'scripts/ingest_council_decisions.py'
+      - 'scripts/ingest_council_decisions_postminutes_build022.py'
+      - 'scripts/diagnose_council_postminutes_html_build022.py'
 
 permissions:
   contents: write
@@ -33,6 +35,8 @@ jobs:
             scripts/ingest_council.py \
             scripts/ingest_council_documents.py \
             scripts/ingest_council_decisions.py \
+            scripts/diagnose_council_postminutes_html_build022.py \
+            scripts/ingest_council_decisions_postminutes_build022.py \
             scripts/build_entity_index_v4.py \
             scripts/build_lifecycle_reconciliation_build019_v4.py \
             scripts/enrich_lifecycle_components_build019.py \
@@ -47,11 +51,13 @@ jobs:
         run: python scripts/ingest_council_documents.py
       - name: Validate current Council graph
         run: python scripts/validate_council.py
-      - name: Refresh approved Council decisions without refetching validated legacy PDFs
+      - name: Refresh approved Council decisions through controlled PostMinutes adapter
         run: |
-          python scripts/ingest_council_decisions.py \
+          mkdir -p artifacts/build022-refresh
+          python scripts/ingest_council_decisions_postminutes_build022.py \
+            --checked /tmp/checked-council-decisions.json \
             --output data/generated/council_decisions.json \
-            --reuse-legacy-from /tmp/checked-council-decisions.json
+            --summary-output artifacts/build022-refresh/council_incremental_summary.json
       - name: Validate Council decision evidence
         run: python scripts/validate_council_decisions.py
       - name: Regenerate normalized entity index
