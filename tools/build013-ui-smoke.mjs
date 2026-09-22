@@ -173,6 +173,7 @@ try {
     await page.screenshot({ path: `${OUTPUT}/${viewportName}-build013-investigations.png`, fullPage: true });
 
     await openRoute(page, 'sources');
+    await openBuild022Disclosure(page, 'sourceRegistry');
     const sourceText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of ['build 013 context sources', 'community funding', 'procurement policy', 'complete grants or contract-amendment ledger', 'fiscal 2026 proposed awards']) {
       if (!sourceText.includes(phrase)) throw new Error(`${viewportName}/sources: missing "${phrase}"`);
