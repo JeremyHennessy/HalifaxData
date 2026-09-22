@@ -179,7 +179,7 @@ function b22EnhanceOverview(){
     else stack.insertAdjacentHTML('afterbegin',b22StartHere());
   }
   const start=stack.querySelector('[data-build022-start]');
-  const attention=[...stack.querySelectorAll(':scope > .panel')].find(el=>normalize(el.querySelector('h2')?.textContent)==='what deserves attention');
+  const attention=[...stack.querySelectorAll(':scope > .panel')].find(el=>normalize(el.querySelector('h2')?.textContent)==='what deserves attention?');
   if(start&&attention&&attention.previousElementSibling!==start) start.insertAdjacentElement('afterend',attention);
   const authority=stack.querySelector(':scope > .b12-overview-authority, :scope > [data-build012-overview]');
   const pattern=stack.querySelector(':scope > .b9-pattern-summary');
