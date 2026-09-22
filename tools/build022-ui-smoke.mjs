@@ -77,9 +77,12 @@ try{
     requirePhrases(sourceText,['additional provincial context sources','public accounts volume 3','nova scotia budget 2026-27','separate evidence layer'],`${viewportName} source context`);
     const sourceRegistryStats=await page.evaluate(()=>({
       open:document.querySelector('[data-build022-disclosure="sourceRegistry"]')?.open,
-      nestedCards:document.querySelectorAll('[data-build022-disclosure="sourceRegistry"] [data-source-id]').length
+      nestedCards:document.querySelectorAll('[data-build022-disclosure="sourceRegistry"] [data-source-id]').length,
+      familiesOpen:document.querySelector('[data-build022-disclosure="sourceFamilies"]')?.open,
+      familyPanels:document.querySelectorAll('[data-build022-disclosure="sourceFamilies"] > .panel').length
     }));
     if(sourceRegistryStats.open!==false||sourceRegistryStats.nestedCards<1) throw new Error(`${viewportName}: source registry must remain searchable and collapsed by default: ${JSON.stringify(sourceRegistryStats)}`);
+    if(sourceRegistryStats.familiesOpen!==false||sourceRegistryStats.familyPanels<4) throw new Error(`${viewportName}: supplemental source families must remain available but collapsed by default: ${JSON.stringify(sourceRegistryStats)}`);
     const sources=await noOverflow(page,`${viewportName} sources`);
     await page.screenshot({path:`${OUTPUT}/${viewportName}-build022-sources.png`,fullPage:true});
 
