@@ -114,7 +114,7 @@ async function assertAnalyticalViews(page, viewportName) {
   await page.waitForSelector('#evidence-drawer[open]');
   await closeDrawer(page);
 
-  await assertText(page, 'council', ['Finance-tagged agenda attachments', '179']);
+  await assertText(page, 'council', ['Finance-tagged agenda attachments', '183']);
   if (await page.locator('[data-council-id]').count() < 1) throw new Error(`${viewportName}/council: no finance-context meetings rendered`);
   await page.locator('[data-council-id]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
