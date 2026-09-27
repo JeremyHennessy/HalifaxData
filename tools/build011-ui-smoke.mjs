@@ -56,7 +56,7 @@ try {
     await openRoute(page, 'vendors');
     const vendorsText = (await page.locator('#content').innerText()).toLowerCase();
     for (const phrase of [
-      '5,502', 'alternative procurement report evidence', '84', '$25.3m',
+      '5,517', 'alternative procurement report evidence', '84', '$25.3m',
       '8 quarterly reports', 'grouping-eligible value', '$24.3m',
       'identity unresolved', '4', 'separate procurement evidence layer',
       'not accounts-payable transactions', 'not final paid values',
