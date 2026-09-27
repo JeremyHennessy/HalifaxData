@@ -17,19 +17,35 @@ function b23Url(kind, id) {
   if (kind && id) { u.searchParams.set('evidence',kind); u.searchParams.set('id',id); }
   return u.href;
 }
-function b23Fingerprint(value) { return JSON.stringify(value); }
+function b23EvidenceValue(value) {
+  if (Array.isArray(value)) return value.map(b23EvidenceValue);
+  if (value && typeof value === 'object') return Object.fromEntries(Object.keys(value).sort()
+    .filter(key => !['retrieved_at','fetched_at','generated_at','downloaded_at','last_attempt','last_success'].includes(key))
+    .map(key => [key,b23EvidenceValue(value[key])]));
+  return value;
+}
+function b23Fingerprint(value) { return JSON.stringify(b23EvidenceValue(value)); }
+function b23LifecycleFact(id) {
+  const row=b19InvestigationRows().find(r=>r.investigation_id===id);if(!row)return null;
+  const keys=new Set((row.source_evidence||[]).map(r=>r.record_key));
+  const awards=getRows(datasetStatus('procurement').data).filter(r=>keys.has(r.record_id)).sort((a,b)=>a.record_id.localeCompare(b.record_id));
+  return {...row,public_award_evidence:awards};
+}
 function b23CurrentFact(item) {
-  if (item.kind === 'lifecycle') return b19InvestigationRows().find(r => r.investigation_id === item.id);
+  if (item.kind === 'lifecycle') return b23LifecycleFact(item.id);
   if (item.kind === 'spending') return getRows(datasetStatus('spending').data).find(r => r.record_id === item.id);
   return null;
 }
 function b23Changed(item) {
   if (!item.watch || !['lifecycle','spending'].includes(item.kind)) return '';
-  const ready = item.kind === 'lifecycle' ? state.build019LifecycleInvestigations?.status === 'ready' : datasetStatus('spending').status === 'ready';
+  const ready = item.kind === 'lifecycle' ? state.build019LifecycleInvestigations?.status === 'ready' && datasetStatus('procurement').status === 'ready' : datasetStatus('spending').status === 'ready';
   if (!ready) return 'Waiting for current evidence';
   const current = b23CurrentFact(item);
   if (!current) return 'Evidence no longer present in this release';
-  return b23Fingerprint(current) !== item.fingerprint ? 'Evidence changed since saved review — open to compare' : 'No evidence change since saved review';
+  let previous;try{previous=JSON.parse(item.fingerprint);}catch{return 'Saved evidence cannot be compared; open and save a new review';}
+  const now=b23EvidenceValue(current), before=b23EvidenceValue(previous);
+  const changed=[...new Set([...Object.keys(now),...Object.keys(before||{})])].filter(k=>JSON.stringify(now[k])!==JSON.stringify(before?.[k]));
+  return changed.length ? 'Evidence changed since saved review: '+changed.map(k=>k.replaceAll('_',' ')).join(', ') : 'No evidence change since saved review';
 }
 function b23Download(name, text, type='application/json') {
   const url = URL.createObjectURL(new Blob([text],{type})); const a = document.createElement('a');
@@ -52,7 +68,8 @@ openDrawer = function(args) {
   const id=context?.id || `${state.view}:${args.title}`;
   const kind=context?.kind || 'snapshot';
   const prior=b23Store.items.find(i=>i.kind===kind&&i.id===id);
-  b23Current={kind,id,title:args.title,url:context?b23Url(kind,id):location.href,
+  const watchable=['lifecycle','spending'].includes(kind);
+  b23Current={kind,id,title:args.title,url:watchable?b23Url(kind,id):(context?.savedSnapshot?.url||location.href),
     text:body.innerText,sources:[...body.querySelectorAll('a[href]')].map(a=>({label:a.textContent,url:a.href})),
     fact:context?.fact || null,fingerprint:context?b23Fingerprint(context.fact):null,release:b23Release,
     notes:prior?.notes||'',reviewer:prior?.reviewer||'',status:prior?.status||'needs-evidence',watch:prior?.watch||false};
@@ -60,7 +77,7 @@ openDrawer = function(args) {
     <label>Review status <select id="b23-status">${['needs-evidence','reviewed','dismissed'].map(v=>`<option ${b23Current.status===v?'selected':''}>${v}</option>`).join('')}</select></label>
     <label>Reviewer <input id="b23-reviewer" maxlength="120" value="${escapeHtml(b23Current.reviewer)}"></label>
     <label>Notes <textarea id="b23-notes" maxlength="20000" rows="4">${escapeHtml(b23Current.notes)}</textarea></label>
-    ${context?`<label><input type="checkbox" id="b23-watch" ${b23Current.watch?'checked':''}> Watch for changes when I next visit</label>`:''}
+    ${watchable?`<label><input type="checkbox" id="b23-watch" ${b23Current.watch?'checked':''}> Watch for changes when I next visit</label>`:''}
     <div class="b23-actions"><button id="b23-save">Save review</button><button data-b23-export="json">Export JSON</button><button data-b23-export="csv">Export CSV</button><button data-b23-export="brief">Evidence brief</button>${context?'<button id="b23-share-evidence">Copy evidence link</button>':''}</div><p id="b23-save-result" role="status"></p></section>`);
   function edited() { return {...b23Current,notes:$('#b23-notes').value,reviewer:$('#b23-reviewer').value,status:$('#b23-status').value,watch:!!$('#b23-watch')?.checked,updated_at:new Date().toISOString()}; }
   $('#b23-save').onclick=()=>{const item=edited();b23Store.items=b23Store.items.filter(i=>!(i.kind===item.kind&&i.id===item.id));b23Store.items.push(item);$('#b23-save-result').textContent=b23SaveStore()?'Review saved in this browser.':b23StorageError;};
@@ -68,14 +85,15 @@ openDrawer = function(args) {
   if ($('#b23-share-evidence')) $('#b23-share-evidence').onclick=async()=>{try{await navigator.clipboard.writeText(b23Current.url);$('#b23-save-result').textContent='Evidence link copied. Private notes are not included.';}catch{$('#b23-save-result').textContent=b23Current.url;}};
 };
 const b23OriginalLifecycle=b19ShowInvestigation;
-b19ShowInvestigation=function(id){const fact=b19InvestigationRows().find(r=>r.investigation_id===id);if(!fact)return;b23Context={kind:'lifecycle',id,fact};try{b23OriginalLifecycle(id);}finally{b23Context=null;}};
+b19ShowInvestigation=function(id){const fact=b23LifecycleFact(id);if(!fact)return;b23Context={kind:'lifecycle',id,fact};try{b23OriginalLifecycle(id);}finally{b23Context=null;}};
 const b23OriginalSpending=showSpendingRow;
 showSpendingRow=function(index){const fact=getRows(datasetStatus('spending').data)[index];if(!fact)return;b23Context={kind:'spending',id:fact.record_id,fact};try{b23OriginalSpending(index);}finally{b23Context=null;}};
 function b23OpenSaved(index) {
  const item=b23Store.items[index];if(!item)return;
  if(item.kind==='lifecycle'&&b23CurrentFact(item))return b19ShowInvestigation(item.id);
  if(item.kind==='spending'&&b23CurrentFact(item))return showSpendingRow(getRows(datasetStatus('spending').data).findIndex(r=>r.record_id===item.id));
- openDrawer({title:item.title,eyebrow:'SAVED EVIDENCE SNAPSHOT',html:`<p>Saved ${escapeHtml(item.updated_at)}. This is the saved snapshot; current evidence is unavailable here.</p><pre class="b23-snapshot">${escapeHtml(item.text)}</pre>`});
+ b23Context={kind:item.kind,id:item.id,fact:item.fact,savedSnapshot:item};
+ try{openDrawer({title:item.title,eyebrow:'SAVED EVIDENCE SNAPSHOT',html:`<p>Saved ${escapeHtml(item.updated_at)}. This is the saved snapshot; current evidence is unavailable here.</p><pre class="b23-snapshot">${escapeHtml(item.text)}</pre>`});b23Current={...b23Current,text:item.text,sources:item.sources,fingerprint:item.fingerprint};}finally{b23Context=null;}
 }
 async function b23Import(file) {
  if(!file||file.size>5000000)throw Error('Choose a workspace JSON backup smaller than 5 MB.');

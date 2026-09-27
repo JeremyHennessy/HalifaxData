@@ -19,3 +19,17 @@ assert.ok(vm.runInContext('b9SpendingSeries(rows).series.every(s=>s.points.every
 ctx.rows=[transit.points[0].row,transit.points[0].row,...transit.points.slice(1).map(p=>p.row)];
 assert.ok(vm.runInContext('b9SpendingSeries(rows).ambiguousDates>0',ctx));
 console.log(JSON.stringify({sameQuarterSeries:result.series.length,transitQ3Amounts:Array.from(transit.points,p=>p.row.amount),commentaryRejected:true,duplicateDateExcluded:true}));
+// Watching ignores collection timestamps but detects revisions to linked awards.
+const workspace=fs.readFileSync('build023-workspace.js','utf8');
+const award={record_id:'award-1',original_award_value:100,provenance:{retrieved_at:'old'}};
+const queue=[{investigation_id:'case-1',source_evidence:[{record_key:'award-1'}]}];
+Object.assign(ctx,{b19InvestigationRows:()=>queue,getRows:d=>d.records,datasetStatus:()=>({status:'ready',data:{records:[award]}}),state:{build019LifecycleInvestigations:{status:'ready'}}});
+vm.runInContext(workspace.slice(workspace.indexOf('function b23EvidenceValue'),workspace.indexOf('function b23Download')),ctx);
+vm.runInContext("saved={kind:'lifecycle',id:'case-1',watch:true,fingerprint:b23Fingerprint(b23LifecycleFact('case-1'))}",ctx);
+award.provenance.retrieved_at='new';
+assert.match(vm.runInContext('b23Changed(saved)',ctx),/No evidence change/);
+award.original_award_value=200;
+assert.match(vm.runInContext('b23Changed(saved)',ctx),/public award evidence/);
+queue.length=0;
+assert.match(vm.runInContext('b23Changed(saved)',ctx),/no longer present/);
+console.log('Watchlist detects award corrections and removals without timestamp-only alerts.');
