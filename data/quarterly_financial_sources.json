@@ -19,7 +19,9 @@
       "coverage": "Period ended June 30, 2023",
       "ingestion": "Council report PDF tables",
       "status": "ready",
-      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/231003rci04.pdf"
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/231003rci04.pdf",
+      "sha256": "38540c276f1d379d24000c03256a9e8503634b8ed4b1946e545d8508fb565864",
+      "snapshot": "data/source_documents/38540c276f1d379d24000c03256a9e8503634b8ed4b1946e545d8508fb565864.pdf"
     },
     {
       "id": "hrm-q2-2023-24",
@@ -31,7 +33,9 @@
       "coverage": "Period ended September 30, 2023",
       "ingestion": "Council report PDF tables",
       "status": "ready",
-      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/231128rci06.pdf"
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/231128rci06.pdf",
+      "sha256": "d050bb1beb302e76d5735e0e08fd9c168f58c0324cf11e36825ce5ce7e2fde98",
+      "snapshot": "data/source_documents/d050bb1beb302e76d5735e0e08fd9c168f58c0324cf11e36825ce5ce7e2fde98.pdf"
     },
     {
       "id": "hrm-q3-2023-24",
@@ -43,7 +47,9 @@
       "coverage": "Period ended December 31, 2023",
       "ingestion": "Council report PDF tables",
       "status": "ready",
-      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/240305rci05.pdf"
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/240305rci05.pdf",
+      "sha256": "799320b1a1c01b928943bd700d93023196b788774044db3bfd4c64c29eb59d9d",
+      "snapshot": "data/source_documents/799320b1a1c01b928943bd700d93023196b788774044db3bfd4c64c29eb59d9d.pdf"
     },
     {
       "id": "hrm-q2-2024-25",
@@ -55,7 +61,9 @@
       "coverage": "Period ended September 30, 2024",
       "ingestion": "Audit and Finance report PDF tables",
       "status": "ready",
-      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/241211afsc1321.pdf"
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/241211afsc1321.pdf",
+      "sha256": "9c2fe12fa8a5fcd01b690b0e05d8580890dc95fe7760ba84eefedc279cb1695b",
+      "snapshot": "data/source_documents/9c2fe12fa8a5fcd01b690b0e05d8580890dc95fe7760ba84eefedc279cb1695b.pdf"
     },
     {
       "id": "hrm-q3-2024-25",
@@ -67,7 +75,9 @@
       "coverage": "Period ended December 31, 2024",
       "ingestion": "Audit and Finance report PDF tables",
       "status": "ready",
-      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250218afsc1312.pdf"
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250218afsc1312.pdf",
+      "sha256": "4768128557e67d71d255bbe0544b581319fb35108ab3c602d2e48089fbcababc",
+      "snapshot": "data/source_documents/4768128557e67d71d255bbe0544b581319fb35108ab3c602d2e48089fbcababc.pdf"
     },
     {
       "id": "hrm-q1-2025-26",
@@ -79,7 +89,9 @@
       "coverage": "Period ended June 30, 2025; staff report dated September 11, 2025",
       "ingestion": "Audit and Finance report PDF tables",
       "status": "ready",
-      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250917afsc1313.pdf"
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250917afsc1313.pdf",
+      "sha256": "6c25c22017d450611b9288fbee900e1792b38b5009a6e68b97302adb5450e013",
+      "snapshot": "data/source_documents/6c25c22017d450611b9288fbee900e1792b38b5009a6e68b97302adb5450e013.pdf"
     },
     {
       "id": "hrm-q2-2025-26",
@@ -91,7 +103,9 @@
       "coverage": "Period ended September 30, 2025; staff report dated November 5, 2025",
       "ingestion": "Audit and Finance report PDF tables",
       "status": "ready",
-      "url": "https://cdn.halifax.ca/media/92446"
+      "url": "https://cdn.halifax.ca/media/92446",
+      "sha256": "5ecc6aa4ddb62048f74c58a3f7b2edb59fde94b45df45a0adb567a1edc396d8c",
+      "snapshot": "data/source_documents/5ecc6aa4ddb62048f74c58a3f7b2edb59fde94b45df45a0adb567a1edc396d8c.pdf"
     },
     {
       "id": "hrm-q3-2025-26",
@@ -103,7 +117,9 @@
       "coverage": "Period ended December 31, 2025; staff report dated February 12, 2026; forwarded by Audit and Finance February 25, 2026",
       "ingestion": "Audit and Finance staff-report PDF tables",
       "status": "ready",
-      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/260225afsc1313.pdf"
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/260225afsc1313.pdf",
+      "sha256": "aaab9fbdcd56587f0c0395fa5ec9f0eb989f29723bed0a49f114ff7adbed1005",
+      "snapshot": "data/source_documents/aaab9fbdcd56587f0c0395fa5ec9f0eb989f29723bed0a49f114ff7adbed1005.pdf"
     }
   ]
 }

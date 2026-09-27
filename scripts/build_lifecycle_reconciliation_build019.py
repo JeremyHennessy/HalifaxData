@@ -328,7 +328,7 @@ def build() -> dict[str, Any]:
         canonical = canonical_procurement_ref(raw)
         if not canonical:
             continue
-        record_key = f"public-award:{stable_hash(row.get('award_id'), row.get('vendor_name'), row.get('awarded_date'), index)}"
+        record_key = row["record_id"]
         evidence = evidence_ref(
             domain="procurement",
             record_type="public_tender_award",

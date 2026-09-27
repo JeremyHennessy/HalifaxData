@@ -102,7 +102,7 @@ async function assertAnalyticalViews(page, viewportName) {
   if ((await page.locator('#drawer-eyebrow').textContent())?.trim() !== 'HISTORICAL BUDGET EVIDENCE') throw new Error(`${viewportName}/budget: historical evidence drawer did not open`);
   await closeDrawer(page);
 
-  const spendingText = await assertText(page, 'spending', ['not invoice or accounts-payable transactions', '1,753', 'Quarterly spending movement analysis', 'ambiguous key/dates excluded']);
+  const spendingText = await assertText(page, 'spending', ['not invoice or accounts-payable transactions', '1,870', 'Quarterly spending movement analysis', 'ambiguous key/dates excluded']);
   if (!spendingText.toLowerCase().includes('comparable movement leads')) throw new Error(`${viewportName}/spending: hero metric was not converted to comparable movements`);
   const spendingHeaders = (await page.locator('#content table').first().locator('th').allTextContents()).map(text => text.trim());
   if (spendingHeaders.includes('Vendor') || spendingHeaders.includes('Project')) throw new Error(`${viewportName}/spending: unsupported transaction columns are present`);
@@ -112,7 +112,7 @@ async function assertAnalyticalViews(page, viewportName) {
   if (!(await page.locator('#drawer-body').innerText()).includes('Not a transaction')) throw new Error(`${viewportName}/spending: source-row transaction boundary missing`);
   await closeDrawer(page);
 
-  await assertText(page, 'vendors', ['5,502', 'Procurement concentration & repeat awards', 'Candidate vendor identity matches', 'Top collected award concentration']);
+  await assertText(page, 'vendors', ['5,517', 'Procurement concentration & repeat awards', 'Candidate vendor identity matches', 'Top collected award concentration']);
   if (await page.locator('.b8-procurement-analysis [data-build008-investigation-id]').count() < 1) throw new Error(`${viewportName}/vendors: no concentration/repeat-award cards rendered`);
 
   await assertText(page, 'projects', ['Historical-project boundary', '2,650']);

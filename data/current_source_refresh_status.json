@@ -1,20 +1,20 @@
 {
   "metadata": {
-    "build": "022",
-    "researched_at": "2026-09-22",
+    "build": "023",
+    "researched_at": "2026-09-26",
     "production_baseline": {
       "commit": "87f3edd6ca1870d0afaf3247be4d9a4adc2faf27",
       "release": "Build 020 production baseline",
-      "state": "Build 022 is a release candidate on agent/build022-freshness-usability; production GitHub Pages remains on main until merge and hosted acceptance."
+      "state": "Prior release retained; Build 023 is published only after exact-commit validation."
     },
     "release_candidate": {
-      "branch": "agent/build022-freshness-usability",
+      "branch": "agent/build023-correctness-workspace",
       "validated_data_commit": "ec629697d1048b604ee3448e8829d13f86f260a0",
       "controlled_refresh_run": 35746288279,
       "controlled_refresh_result": "success",
       "domain_monitor_run": 35746724996,
       "domain_monitor_result": "all seven independent jobs passed",
-      "release_boundary": "Council/calendar/entity/lifecycle refresh is validated. Live procurement freshness is review-candidate evidence only and was not published."
+      "release_boundary": "Corrected typed spending; 15 additional public awards after identity migration; unchanged 29 investigation IDs; no AP ledger."
     },
     "purpose": "Track current-public-source freshness without converting an unverified publication gap or transport failure into zero, overwriting historical provenance with replacement URLs, or promoting procurement/approval evidence into payment facts.",
     "status_semantics": {
@@ -91,20 +91,21 @@
       "status": "not_yet_verified",
       "production_through": "2025/26 Q3 (period ended December 31, 2025)",
       "verified_current_period": null,
-      "known_gap": "2024/25 Q1 remains explicitly missing from the checked series.",
-      "latest_check": "September 22 monitor reproduced and validated 1,753 conservative rows across eight registered reports. The latest checked period remains 2025/26 Q3.",
+      "known_gap": "2024/25 Q1 missing; Q4 2025/26 candidate identified but not parsed; 1,590 rows retained as unscored source evidence.",
+      "latest_check": "September 26: all eight archived reports re-extracted. 1,870 rows; 280 reconciled current YTD expense rows eligible for same-quarter comparisons. New 2025/26 Q4 report identified on the August 12 Audit Committee agenda; document access not yet verified.",
       "research_result": "Targeted official-source searches on September 22 did not verify a 2025/26 Q4/year-end report into the release candidate. Absence is not inferred.",
-      "next_action": "Continue discovery for an authoritative 2025/26 Q4/year-end report and ingest only after source and parser validation."
+      "next_action": "Retrieve the identified Q4 report through permitted official access and validate its distinct year-end layout."
     },
     {
       "domain": "procurement_awards",
-      "status": "verified_new_source",
-      "production_through": "5,502 checked normalized Nova Scotia awarded-tender rows",
+      "status": "verified_current",
+      "production_through": "5,517 public tender awards",
       "verified_current_period": "live comparison 2026-09-22",
-      "latest_check": "September 22 live Socrata query returned 6,321 Halifax-matching source rows and normalized 5,517 Halifax award rows versus 5,502 checked rows: 18 new normalized keys and 3 checked keys absent from the live normalized set.",
+      "latest_check": "September 26: 5,517 source-ID keyed awards; 15 additional records; no existing award removed. Exact-record encoding repairs preserve checked text and raw damaged source text.",
       "release_boundary": "The live procurement snapshot was not published in Build 022. The three apparent removals include source-text/encoding identity drift and require stable record-identity migration before a safe replacement.",
       "evidence_boundary": "Award records are procurement evidence, not accounts-payable transactions, invoices, final paid values, or findings of wrongdoing.",
-      "next_action": "Resolve source-text encoding/stable award identity, review the 18 additions and 3 missing-key cases, then publish procurement as its own controlled release."
+      "next_action": "Review subsequent refresh candidates and source revisions using immutable source IDs.",
+      "known_gap": "Awards remain distinct from current contract values and payments."
     },
     {
       "domain": "procurement_quarterly_awards",

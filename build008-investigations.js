@@ -82,7 +82,11 @@ function b8InvestigationCard(item, compact = false) {
 }
 
 function b8BudgetPressureInvestigations() {
-  const rows = (typeof budgetServiceRows === 'function' ? budgetServiceRows() : getRows(datasetStatus('budget').data).filter(row => row.record_type === 'service_area_budget'))
+  const current = typeof b18BudgetRows === 'function' && state.build018CurrentBudget?.status === 'ready';
+  const priorPeriod = current ? '2025/26' : '2024/25';
+  const currentPeriod = current ? '2026/27' : '2025/26';
+  const actualPeriod = current ? '2024/25' : '2023/24';
+  const rows = (current ? b18BudgetRows().filter(row => !b18BudgetWarning(row)).map(row => ({...row,business_unit:row.business_unit_source_heading})) : (typeof budgetServiceRows === 'function' ? budgetServiceRows() : []))
     .filter(row => !row.is_total && b8Number(row.prior_budget) != null && b8Number(row.current_budget) != null);
   const raw = rows.map(row => {
     const priorBudget = Number(row.prior_budget);
@@ -108,21 +112,21 @@ function b8BudgetPressureInvestigations() {
     const score = b8OverallScore({ materiality, deviation, persistence, evidence });
     const row = item.row;
     const details = [];
-    if (item.projectionDrift != null) details.push(`2024/25 projection ${b8SignedMoney(item.projectionDrift)} vs 2024/25 budget (${b8PercentFraction(item.projectionPct)})`);
-    details.push(`2025/26 budget ${b8SignedMoney(item.nextBudgetGrowth)} vs 2024/25 budget (${b8PercentFraction(item.budgetGrowthPct)})`);
+    if (item.projectionDrift != null) details.push(`${priorPeriod} projection ${b8SignedMoney(item.projectionDrift)} vs ${priorPeriod} budget (${b8PercentFraction(item.projectionPct)})`);
+    details.push(`${currentPeriod} budget ${b8SignedMoney(item.nextBudgetGrowth)} vs ${priorPeriod} budget (${b8PercentFraction(item.budgetGrowthPct)})`);
     return {
       id: `b8-budget-${b8Slug(`${row.business_unit}-${row.service_area}`)}`,
       domain: 'Budget', kind: 'fiscal', priority: b8Priority(score), score,
       materiality, deviation, persistence, evidence,
-      title: `${row.service_area} budget pressure`,
+      title: `${row.service_area} ${currentPeriod} budget pressure`,
       detail: details.join(' · '),
       materialityText: `${compactMoney(item.pressureAmount)} largest positive budget/projection movement`,
-      scope: `${row.business_unit} · source-backed service-area budget row`,
+      scope: `${row.business_unit} · ${currentPeriod} · source-backed service-area budget row`,
       sourceIds: [row.source_id],
       evidenceRows: [
         ['Business unit', row.business_unit], ['Service area', row.service_area],
-        ['2023/24 actual', money(row.prior_actual)], ['2024/25 budget', money(row.prior_budget)],
-        ['2024/25 projection', money(row.projection)], ['2025/26 budget', money(row.current_budget)],
+        [`${actualPeriod} actual`, money(row.prior_actual)], [`${priorPeriod} budget`, money(row.prior_budget)],
+        [`${priorPeriod} projection`, money(row.projection)], [`${currentPeriod} budget`, money(row.current_budget)],
         ['Projection drift', item.projectionDrift == null ? '—' : b8SignedMoney(item.projectionDrift)],
         ['Next-budget growth', b8SignedMoney(item.nextBudgetGrowth)], ['Source ID', row.source_id]
       ],
@@ -246,12 +250,12 @@ function b8SpendingMatchKey(row) {
   const label = typeof spendingLabel === 'function' ? spendingLabel(row) : (row.business_unit || row.category || row.account || row.record_type || 'row');
   const context = row.category || row.account || '';
   const tokenCount = Array.isArray(row.values) ? row.values.length : 0;
-  return [row.record_type || '', label, context, row.amount_semantics || '', tokenCount].map(normalize).join('||');
+  return [row.record_type || '', label, row.financial_scope, row.measure, row.accounting_basis, row.currency, row.quarter].map(normalize).join('||');
 }
 function b8SpendingMovementAnalysis(rows = getRows(datasetStatus('spending').data)) {
   const groups = new Map();
   for (const row of rows) {
-    if (!row.posting_date || b8Number(row.amount) == null) continue;
+    if (row.comparison_eligible !== true || row.measure !== 'current_ytd_actual' || !row.posting_date || b8Number(row.amount) == null) continue;
     const key = b8SpendingMatchKey(row);
     const group = groups.get(key) || { key, dates: new Map() };
     const date = String(row.posting_date);
@@ -292,7 +296,7 @@ function b8SpendingMovementAnalysis(rows = getRows(datasetStatus('spending').dat
       title: `${label} quarterly movement`,
       detail: `${dateOnly(item.prior.date)} → ${dateOnly(item.current.date)} · ${b8Direction(item.delta)} ${b8SignedMoney(item.delta)}${item.fraction == null ? '' : ` (${b8PercentFraction(item.fraction)})`}${item.persistent ? ' · repeated same-direction movement' : ''}`,
       materialityText: `${compactMoney(Math.abs(item.delta))} absolute matched-row movement`,
-      scope: `${humanize(row.record_type || 'summary row')} · exact normalized label/context/amount-semantics match`,
+      scope: `${humanize(row.record_type || 'summary row')} · same quarter, current YTD actuals, accounting basis and scope`,
       sourceIds: b8Unique([item.prior.row.source_id, item.current.row.source_id]),
       evidenceRows: [
         ['Matched source-row label', label], ['Record type', humanize(row.record_type)],

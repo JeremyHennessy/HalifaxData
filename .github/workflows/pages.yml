@@ -15,7 +15,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate:
+    uses: ./.github/workflows/ci.yml
+  browser:
+    uses: ./.github/workflows/ui-smoke.yml
   deploy:
+    needs: [validate, browser]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -24,10 +29,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Build exact-commit release bundle
+        run: python scripts/build_release_bundle.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: .site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
@@ -57,6 +64,8 @@ jobs:
           node tools/build018-ui-smoke.mjs
           node tools/build019-ui-smoke.mjs
           node tools/build022-ui-smoke.mjs
+          node tools/build023-ui-smoke.mjs
+          python scripts/verify_hosted_release.py "$HALIFAXDATA_URL" "$GITHUB_SHA"
       - name: Upload hosted UI evidence
         if: always()
         uses: actions/upload-artifact@v4

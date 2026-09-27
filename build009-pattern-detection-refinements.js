@@ -1,3 +1,4 @@
+/* Build 023: typed, same-quarter series; legacy corroboration retained below.
 /* Build 009 longitudinal-series and corroboration refinements.
  *
  * 1) PDF table context and token-count shape can change between quarterly reports
@@ -11,17 +12,12 @@
  * Build 008's stricter pairwise movement matcher remains unchanged underneath.
  */
 
-function b9SpendingSeriesKey(row) {
-  const label = typeof spendingLabel === 'function'
-    ? spendingLabel(row)
-    : (row.business_unit || row.category || row.account || row.record_type || 'row');
-  return [row.record_type || '', label, row.amount_semantics || ''].map(normalize).join('||');
-}
+function b9SpendingSeriesKey(row) { return b8SpendingMatchKey(row); }
 
 b9SpendingSeries = function b9SpendingSeriesRefined(rows = getRows(datasetStatus('spending').data)) {
   const groups = new Map();
   for (const row of rows) {
-    if (!row.posting_date || b8Number(row.amount) == null) continue;
+    if (row.comparison_eligible !== true || row.measure !== 'current_ytd_actual' || !row.posting_date || b8Number(row.amount) == null) continue;
     const key = b9SpendingSeriesKey(row);
     const group = groups.get(key) || { key, dates: new Map(), contexts: new Set(), tokenCounts: new Set() };
     const date = String(row.posting_date);
@@ -63,13 +59,13 @@ const b9SpendingTrajectoryInvestigationsBeforeRefinement = b9SpendingTrajectoryI
 b9SpendingTrajectoryInvestigations = function b9SpendingTrajectoryInvestigationsRefined(rows = getRows(datasetStatus('spending').data)) {
   const result = b9SpendingTrajectoryInvestigationsBeforeRefinement(rows);
   for (const item of result.investigations) {
-    item.scope = `${humanize(item.recordType || 'summary row')} · exact normalized record type + row label + amount semantics; non-unique dates excluded`;
+    item.scope = `${humanize(item.recordType || 'summary row')} · same-quarter current YTD actuals; matched scope, currency and accounting basis; non-unique dates excluded`;
     item.evidenceRows = [
       ...(item.evidenceRows || []),
-      ['Longitudinal series key', 'Exact record type + exact normalized row label + amount semantics'],
+      ['Longitudinal series key', 'Exact record type + label + financial scope + named measure + basis + currency + quarter'],
       ['PDF context/token shape used as join identity?', 'No — layout metadata may vary between reports; any resulting same-date ambiguity is excluded']
     ];
-    item.caveat = 'This trajectory joins only source rows with the same exact normalized record type, row label and amount semantics. PDF table context and monetary-token count are not used as longitudinal identity because report layouts can change; if relaxing those layout attributes creates multiple candidates on the same date, that date is excluded. This remains a quarterly summary-table comparison, not a transaction, invoice, vendor payment, project ledger, or proof of overspending.';
+    item.caveat = 'Only independently reconciled current YTD operating expenses for the same fiscal quarter are compared across years. Commentary, prior YTD columns, different quarter lengths and ambiguous same-date matches are excluded. These are summary-table facts, not payments or proof of overspending.';
   }
   return result;
 };

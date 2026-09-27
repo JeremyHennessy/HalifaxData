@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const rows=JSON.parse(fs.readFileSync('data/generated/spending.json')).records;
+const ctx={normalize:s=>String(s||'').trim().toLowerCase(),spendingLabel:r=>r.business_unit||r.raw_cells?.[0],b8Number:v=>v==null?null:Number(v)};
+vm.createContext(ctx);
+let source=fs.readFileSync('build008-investigations.js','utf8');
+vm.runInContext(source.slice(source.indexOf('function b8SpendingMatchKey'),source.indexOf('function b8SpendingMovementAnalysis')),ctx);
+source=fs.readFileSync('build009-pattern-detection-refinements.js','utf8');
+vm.runInContext(source.slice(source.indexOf('function b9SpendingSeriesKey'),source.indexOf('const b9SpendingTrajectoryInvestigationsBeforeRefinement')),ctx);
+ctx.rows=rows;
+const result=vm.runInContext('b9SpendingSeries(rows)',ctx);
+assert.ok(result.series.length>0);
+for(const s of result.series){assert.equal(new Set(s.points.map(p=>p.row.quarter)).size,1);assert.ok(s.points.every(p=>p.row.comparison_eligible&&p.row.measure==='current_ytd_actual'));}
+const transit=result.series.find(s=>s.points[0].row.business_unit==='Halifax Transit'&&s.points[0].row.quarter===3);
+assert.ok(transit);assert.deepEqual(Array.from(transit.points,p=>p.row.amount),[91100148,111079932,107928372]);
+ctx.rows=[...rows,{...transit.points[0].row,posting_date:'2020-12-31',amount:682900,measure:null,comparison_eligible:false}];
+assert.ok(vm.runInContext('b9SpendingSeries(rows).series.every(s=>s.points.every(p=>p.date!=="2020-12-31"))',ctx));
+ctx.rows=[transit.points[0].row,transit.points[0].row,...transit.points.slice(1).map(p=>p.row)];
+assert.ok(vm.runInContext('b9SpendingSeries(rows).ambiguousDates>0',ctx));
+console.log(JSON.stringify({sameQuarterSeries:result.series.length,transitQ3Amounts:Array.from(transit.points,p=>p.row.amount),commentaryRejected:true,duplicateDateExcluded:true}));

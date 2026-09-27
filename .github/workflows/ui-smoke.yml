@@ -1,8 +1,9 @@
 name: UI Smoke
 
 on:
+  workflow_call:
   push:
-    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph', 'agent/build-017-audited-financial-history', 'agent/build-018-current-source-refresh', 'agent/build-019-deterministic-lifecycle-reconciliation', 'agent/build022-freshness-usability']
+    branches: ['agent/build023-correctness-workspace', 'agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph', 'agent/build-017-audited-financial-history', 'agent/build-018-current-source-refresh', 'agent/build-019-deterministic-lifecycle-reconciliation', 'agent/build022-freshness-usability']
   pull_request:
     paths:
       - 'index.html'
@@ -92,6 +93,8 @@ jobs:
         run: node tools/build019-ui-smoke.mjs
       - name: Validate Build 022 usability hierarchy
         run: node tools/build022-ui-smoke.mjs
+      - name: Validate saved investigation workflow
+        run: node tools/build023-ui-smoke.mjs
       - name: Upload UI evidence
         if: always()
         uses: actions/upload-artifact@v4

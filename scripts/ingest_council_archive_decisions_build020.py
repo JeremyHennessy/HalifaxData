@@ -117,6 +117,10 @@ def main() -> None:
         try:
             content, resolved_url = base.fetch_pdf(session, source["minutes_url"])
             sha = hashlib.sha256(content).hexdigest()
+            archive_path = ROOT / 'data/source_documents' / (sha + '.pdf')
+            archive_path.parent.mkdir(parents=True, exist_ok=True)
+            archive_path.write_bytes(content)
+            base_status['source_snapshot'] = str(archive_path.relative_to(ROOT))
             source = {**source, "minutes_url": resolved_url, "source_sha256": sha}
             lines, page_count = base.read_pdf_lines(content)
             records, diagnostics = base.parse_decisions(lines, source)

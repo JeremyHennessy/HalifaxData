@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_call:
   push:
     branches: [main, 'agent/**']
   pull_request:
@@ -119,7 +120,14 @@ jobs:
       - name: Validate Build 019 lifecycle investigation queue
         run: python scripts/validate_lifecycle_investigations_build019.py
       - name: Validate Build 022 pinned release controls
-        run: python scripts/validate_build022_release_controls.py
+        run: python scripts/validate_build023_release_controls.py
+      - name: Validate current source freshness contract
+        run: python scripts/validate_current_source_refresh_status_build023.py
+      - name: Validate corrected financial and identity regressions
+        run: |
+          python scripts/test_build023_contracts.py
+          node tools/build023-model-test.mjs
+          node --check build023-workspace.js
       - name: Validate final normalized entity index
         run: |
           python scripts/build_entity_index_v4.py --check

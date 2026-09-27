@@ -1,4 +1,4 @@
-name: Build 010 Current Capital Proof
+name: Current Capital Availability and Evidence
 
 on:
   push:
@@ -45,7 +45,7 @@ jobs:
       - name: Validate Python syntax
         run: python -m compileall -q scripts
       - name: Collect official current capital evidence
-        run: python scripts/ingest_current_capital_v5.py --output artifacts/current_capital.json
+        run: python scripts/prove_current_capital_transport.py
       - name: Validate current capital contract
         run: python scripts/validate_current_capital.py artifacts/current_capital.json
       - name: Guard unsupported spend semantics
@@ -60,7 +60,7 @@ jobs:
           print('Current-capital proof preserves plan/budget-only evidence boundary.')
           PY
       - name: Publish verified branch artifact
-        if: github.event_name == 'push'
+        if: false # Superseded by reviewed refresh candidates; never auto-publish retained evidence
         run: |
           cp artifacts/current_capital.json data/generated/current_capital.json
           git config user.name "github-actions[bot]"
@@ -76,6 +76,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build010-current-capital-${{ github.sha }}
-          path: artifacts/current_capital.json
+          path: artifacts/current_capital*.json
           if-no-files-found: error
           retention-days: 14
