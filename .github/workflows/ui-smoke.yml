@@ -45,9 +45,11 @@ jobs:
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
+      - name: Build the exact release bundle
+        run: python scripts/build_release_bundle.py
       - name: Serve static application
         run: |
-          python -m http.server 8000 --bind 127.0.0.1 > /tmp/halifaxdata-http.log 2>&1 &
+          python -m http.server 8000 --bind 127.0.0.1 --directory .site > /tmp/halifaxdata-http.log 2>&1 &
           echo $! > /tmp/halifaxdata-http.pid
           for attempt in {1..20}; do
             if curl --fail --silent http://127.0.0.1:8000/ > /dev/null; then
