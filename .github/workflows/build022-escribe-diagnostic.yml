@@ -1,0 +1,72 @@
+name: Build 022 eSCRIBE Transport Diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['agent/build022-freshness-usability']
+    paths:
+      - '.github/workflows/build022-escribe-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install requests
+        run: python -m pip install --disable-pip-version-check requests==2.32.5
+      - name: Probe official PDF and PostMinutes HTML transports
+        run: |
+          mkdir -p artifacts/escribe-diagnostic
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import requests
+
+          targets=[
+              ('2024-11-12','59fd13ff-d78d-4cca-b017-7ae6c171a445','565'),
+              ('2026-07-14','0a546da9-4205-466d-85a7-71a2697b3cd1','5768'),
+              ('2026-08-25','7ec924d6-96b8-4dec-b65a-d1d6ce3e43fa','5938'),
+          ]
+          session=requests.Session()
+          session.headers.update({'User-Agent':'HalifaxData transport diagnostic (+https://github.com/JeremyHennessy/HalifaxData)'})
+          results=[]
+          for date,meeting_id,document_id in targets:
+              urls={
+                  'pdf':f'https://pub-halifax.escribemeetings.com/FileStream.ashx?DocumentId={document_id}',
+                  'html':f'https://pub-halifax.escribemeetings.com/Meeting.aspx?Id={meeting_id}&Agenda=PostMinutes&lang=English',
+              }
+              row={'date':date,'meeting_id':meeting_id,'document_id':document_id}
+              for kind,url in urls.items():
+                  try:
+                      response=session.get(url,timeout=60,allow_redirects=True)
+                      row[kind]={
+                          'status':response.status_code,
+                          'content_type':response.headers.get('content-type'),
+                          'bytes':len(response.content),
+                          'resolved_url':response.url,
+                      }
+                      if kind=='html' and response.ok:
+                          Path(f'artifacts/escribe-diagnostic/{date}.html').write_text(response.text,encoding='utf-8')
+                  except Exception as exc:
+                      row[kind]={'error':repr(exc)}
+              results.append(row)
+          Path('artifacts/escribe-diagnostic/results.json').write_text(json.dumps(results,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(results,indent=2))
+          if not all((row.get('html') or {}).get('status')==200 for row in results):
+              raise SystemExit('PostMinutes HTML is not consistently available; do not build an HTML fallback.')
+          PY
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build022-escribe-transport-${{ github.sha }}
+          path: artifacts/escribe-diagnostic
+          if-no-files-found: warn
+          retention-days: 7

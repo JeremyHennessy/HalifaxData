@@ -54,10 +54,11 @@ jobs:
       - name: Validate Build 018 current-capital Python syntax
         run: python -m compileall -q scripts/ingest_current_capital_build018.py scripts/validate_current_capital_build018.py
       - name: Reproduce approved-current 2026/27 capital schedule
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-018-current-source-refresh'
         run: python scripts/ingest_current_capital_build018.py
-      - name: Validate current-capital evidence contract
+      - name: Validate checked current-capital evidence contract
         run: python scripts/validate_current_capital_build018.py
-      - name: Verify March 31 capital-plan approval source remains live
+      - name: Verify registered capital source identity and March 31 approval source
         run: |
           python - <<'PY'
           import json
@@ -65,13 +66,47 @@ jobs:
           from pathlib import Path
           import requests
 
+          import hashlib
+
           config = json.loads(Path('data/current_capital_sources.json').read_text(encoding='utf-8'))
-          source = config['approval_source']
-          response = requests.get(
-              source['url'],
-              headers={'User-Agent': 'HalifaxData/0.18 (+https://github.com/JeremyHennessy/HalifaxData)'},
-              timeout=120,
-          )
+          artifact = json.loads(Path('data/generated/current_capital_2026_27_multiyear.json').read_text(encoding='utf-8'))
+          schedule = config['schedule_source']
+          approval = config['approval_source']
+          meta = artifact.get('metadata') or {}
+          if meta.get('source_id') != schedule.get('id'):
+              raise SystemExit('checked current-capital artifact lost registered source ID')
+          if meta.get('source_url_registry') != schedule.get('previous_indexed_attachment_url'):
+              raise SystemExit('checked current-capital artifact lost preserved registry attachment identity')
+          if meta.get('source_url_resolved') != schedule.get('known_live_attachment_url'):
+              raise SystemExit('checked current-capital artifact lost resolved attachment identity')
+          if len(str(meta.get('source_sha256') or '')) != 64:
+              raise SystemExit('checked current-capital artifact is missing its source SHA-256')
+
+          session=requests.Session()
+          session.headers.update({'User-Agent': 'HalifaxData/0.22 (+https://github.com/JeremyHennessy/HalifaxData)'})
+          agenda=session.get(schedule['agenda_url'], timeout=120)
+          agenda.raise_for_status()
+          agenda_text=re.sub(r'\s+', ' ', agenda.text)
+          if schedule['attachment_visible_title'] not in agenda_text:
+              raise SystemExit('capital agenda no longer exposes the exact registered attachment title')
+          document_id=schedule['known_live_attachment_url'].split('DocumentId=')[-1]
+          if f'DocumentId={document_id}' not in agenda.text:
+              raise SystemExit(f'capital agenda no longer references registered live DocumentId={document_id}')
+
+          pdf=session.get(schedule['known_live_attachment_url'], headers={'Referer': schedule['agenda_url']}, timeout=120)
+          if pdf.status_code == 200:
+              if 'pdf' not in str(pdf.headers.get('content-type') or '').lower():
+                  raise SystemExit(f"capital source returned 200 but not PDF: {pdf.headers.get('content-type')!r}")
+              digest=hashlib.sha256(pdf.content).hexdigest()
+              if digest != meta.get('source_sha256'):
+                  raise SystemExit(f'live capital PDF hash changed: {digest}')
+              transport='live_pdf_hash_verified'
+          elif pdf.status_code == 403:
+              transport='pdf_transport_blocked_403_checked_hash_preserved'
+          else:
+              raise SystemExit(f"unexpected capital PDF transport status: {pdf.status_code}")
+
+          response = session.get(approval['url'], timeout=120)
           response.raise_for_status()
           text = re.sub(r'\s+', ' ', response.text)
           required = [
@@ -82,7 +117,7 @@ jobs:
           missing = [item for item in required if item not in text]
           if missing:
               raise SystemExit(f'capital approval source missing required text: {missing}')
-          print('March 31, 2026 Regional Council Capital Plan ratification source verified')
+          print(f'March 31, 2026 Capital Plan ratification verified; capital PDF transport={transport}')
           PY
       - name: Preserve proof artifact
         run: |

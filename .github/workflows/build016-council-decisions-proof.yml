@@ -34,10 +34,19 @@ jobs:
       - name: Install collector dependencies
         run: python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate Python syntax
-        run: python -m compileall -q scripts/ingest_council_decisions.py scripts/validate_council_decisions.py
-      - name: Reproduce Council decision evidence from approved minutes
+        run: python -m compileall -q scripts/ingest_council_decisions.py scripts/validate_council_decisions.py scripts/diagnose_council_postminutes_html_build022.py
+      - name: Reproduce Council decision evidence from approved-minute PDFs on legacy Build 016 branch
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-016-council-approval-graph'
         run: python scripts/ingest_council_decisions.py
+      - name: Verify current PostMinutes HTML reproduces checked decision semantics
+        if: github.event_name != 'push' || github.ref_name != 'agent/build-016-council-approval-graph'
+        run: |
+          mkdir -p artifacts
+          python scripts/diagnose_council_postminutes_html_build022.py \
+            --meeting-date 2026-06-23 \
+            --output artifacts/postminutes-equivalence.json
       - name: Normalize checked-artifact generation timestamp
+        if: github.event_name == 'push' && github.ref_name == 'agent/build-016-council-approval-graph'
         run: |
           python - <<'PY'
           import json
@@ -48,7 +57,7 @@ jobs:
           data['metadata']['generated_at'] = registry['metadata']['last_researched'] + 'T00:00:00Z'
           path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
           PY
-      - name: Validate reproduced Council decision controls
+      - name: Validate checked Council decision controls
         run: python scripts/validate_council_decisions.py
       - name: Copy proof artifact
         run: |

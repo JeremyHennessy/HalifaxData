@@ -204,11 +204,11 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-2025-0573",
+          "source_locator": "row-skga~meka_3nxm",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:de999e400a129c5e5d4a",
+          "record_key": "public-award:f6ea47ba62695ae7f851c08e",
           "label": "SIR SANDFORD FLEMMING PARK – SHORELINE IMPROVEMENTS PHASE 5"
         }
       ],
@@ -840,11 +840,20 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-2024-0269",
+          "source_locator": "row-h4rs~qdt9_m85v",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:322eafb7d0c9de1fa09e",
+          "record_key": "public-award:f80658c490d6ea7503f15ab9",
+          "label": "RFP - Corporate Scheduling Project – Support Resources"
+        },
+        {
+          "source_id": "ns-awarded-tenders-socrata",
+          "source_locator": "row-u4qz~sc26_rg8y",
+          "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+          "domain": "procurement",
+          "record_type": "public_tender_award",
+          "record_key": "public-award:00aa32e86b576f818c0b9758",
           "label": "RFP - Corporate Scheduling Project – Support Resources"
         }
       ],
@@ -1879,11 +1888,11 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-18-186",
+          "source_locator": "row-ys7x.my6n-ejcn",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:7abb4acb586d0d4865af",
+          "record_key": "public-award:071fe4925289d32a7fbc814e",
           "label": "Design Consultant Services Wrights Cove Transit Terminal"
         }
       ],
@@ -1956,11 +1965,11 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-23-159",
+          "source_locator": "row-542f-mtpi.fbxx",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:43cb768e54e2e8289b26",
+          "record_key": "public-award:96a0d8e0ecbc55282b64fa81",
           "label": "Request for Proposal- Scotiabank Centre Digital Advertising and Public Address System"
         }
       ],
@@ -2033,11 +2042,11 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-22-169",
+          "source_locator": "row-ujm5_7xhe~x3w4",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:3915e6513d1766b76ce0",
+          "record_key": "public-award:13f8fb3d2fdfb3237e179900",
           "label": "Request for Tender- Acadia Centre HVAC Upgrades"
         }
       ],
@@ -2110,11 +2119,11 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-18-302",
+          "source_locator": "row-cwh3.fitm_53sz",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:51f30d8fef607e5d8e53",
+          "record_key": "public-award:f7a51b73f755cbb384fecbb1",
           "label": "Bayers Road Transit Priority Corridor- Detailed Design"
         }
       ],
@@ -2187,11 +2196,11 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-2023-176",
+          "source_locator": "row-xn48.arj4~wfcm",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:70ed566ce8068818d034",
+          "record_key": "public-award:8532ce0480da0b8db2521c46",
           "label": "Tender- Chocolate Lake Community Centre Upgrades"
         }
       ],
@@ -2264,11 +2273,11 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-2024-0034",
+          "source_locator": "row-drq9-5xw6-pugx",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:30bd1ebb288f913320d5",
+          "record_key": "public-award:28f13b665d086fc6cdd81281",
           "label": "New Floating Dock and Electrical"
         }
       ],
@@ -2341,11 +2350,11 @@
         },
         {
           "source_id": "ns-awarded-tenders-socrata",
-          "source_locator": "HRM-23-162",
+          "source_locator": "row-4657.uv3c.28am",
           "source_url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
           "domain": "procurement",
           "record_type": "public_tender_award",
-          "record_key": "public-award:c8ebb769661cc758004b",
+          "record_key": "public-award:0c2c43438885e48b93621605",
           "label": "Tender- Upper Hammonds Plains Community Centre Upgrades"
         }
       ],

@@ -19,7 +19,7 @@ ALLOWED_IDENTIFIER_METHODS = {
     "exact_parser_extracted_identifier_format_normalization",
     "exact_parser_extracted_identifier_intersection",
 }
-ALLOWED_DIRECT_METHODS = {"exact_document_id", "exact_meeting_id_and_item_ref"}
+ALLOWED_DIRECT_METHODS = {"exact_document_id", "exact_preserved_report_document_id", "exact_meeting_id_and_item_ref"}
 
 
 def fail(message: str) -> None:
@@ -129,6 +129,15 @@ def main() -> None:
             fail(f"direct link is not marked authoritative: {link_id}")
         if link.get("used_name_for_matching") is not False or link.get("used_amount_for_matching") is not False:
             fail(f"forbidden direct-link matching basis on {link_id}")
+        if link.get("match_method") == "exact_preserved_report_document_id":
+            if link.get("link_type") != "award_report_document_provenance" or link.get("key_type") != "document_id":
+                fail(f"preserved document identity used outside quarterly-award provenance on {link_id}")
+            right = link.get("right") or {}
+            if right.get("provenance_status") != "preserved_report_registry_identity":
+                fail(f"preserved document provenance lacks explicit registry-identity status on {link_id}")
+            token = f"documentid={link.get('key_value')}".lower()
+            if token not in str(right.get("source_url") or "").lower():
+                fail(f"preserved document provenance URL does not retain exact registry document ID on {link_id}")
         for side in ("left", "right"):
             evidence = link.get(side) or {}
             if not evidence.get("domain") or not evidence.get("record_type") or not evidence.get("record_key"):

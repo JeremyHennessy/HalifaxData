@@ -37,7 +37,7 @@ MOVED_RE = re.compile(r"^MOVED\s+by\s+(.+?),\s+seconded\s+by\s+(.+?)(?:\s*$)", r
 ITEM_RE = re.compile(r"^(\d{1,2}(?:\.\d{1,2}){1,4})\s+(.+)$")
 MONEY_RE = re.compile(r"\$\s*([0-9][0-9,]*(?:\.\d{1,2})?)")
 PROCUREMENT_RE = re.compile(
-    r"\b(?:RFP|RFQ|NRFP|RFSQ|TENDER|SOLICITATION|PO|CONTRACT)\s*(?:NO\.?|#|NUMBER)?\s*[:#-]?\s*([A-Z0-9][A-Z0-9-]{2,})\b",
+    r"\b(?:RFP|RFQ|NRFP|RFSQ|TENDER|SOLICITATION|PO|CONTRACT)\b\s*(?:NO\.?|#|NUMBER)?\s*[:#-]?\s*([A-Z0-9][A-Z0-9-]{2,})\b",
     re.I,
 )
 CASE_RE = re.compile(r"\b(?:CASE|PLPROJ|PLPPROJ)\s*(?:NO\.?|#)?\s*[:#-]?\s*([A-Z0-9-]{3,})\b", re.I)

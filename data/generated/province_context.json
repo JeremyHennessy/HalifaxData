@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "build": "021",
+    "dataset_status": "source_backed_provincial_cash_payment_context",
+    "researched_at": "2026-09-11",
+    "source_fiscal_year": "2024-25",
+    "source_basis": "cash",
+    "extraction_method": "Reviewed exact-payee transcription from Nova Scotia Public Accounts Volume 3; department, source section and PDF page retained.",
+    "is_hrm_accounts_payable": false,
+    "is_invoice_level": false,
+    "is_province_wide_complete_extract": false,
+    "creates_investigation_scores": false,
+    "hrm_payment_fact_count_change": 0
+  },
+  "sources": [
+    {
+      "id": "ns-public-accounts-2024-25-volume3",
+      "publisher": "Province of Nova Scotia",
+      "title": "Public Accounts Volume 3 — Supplementary Information 2024-25",
+      "url": "https://notices.novascotia.ca/files/public-accounts/2025/pa-supplementary-2025.pdf",
+      "fiscal_year": "2024-25",
+      "evidence_type": "cash_basis_accumulated_payee_payments",
+      "thresholds": {"salary": 25000, "travel": 3500, "other": 5000}
+    },
+    {
+      "id": "ns-budget-2026-27-expense-shares",
+      "publisher": "Government of Nova Scotia, Finance and Treasury Board",
+      "title": "Nova Scotia Budget 2026-27 — Table 5.9 Total Expenses",
+      "url": "https://www.novascotia.ca/sites/default/files/documents/6-4173/ftb-bfi-046-en-budget-2026-2027.pdf",
+      "fiscal_year": "2026-27",
+      "evidence_type": "planned_expense_context"
+    }
+  ],
+  "summary": {"payment_rows": 21, "departments": 12, "recipients": 2, "hrm_rows": 15, "halifax_water_rows": 6, "hrm_amount": 98487725.96, "halifax_water_amount": 4046146.59, "combined_exact_payee_amount": 102533872.55},
+  "source_section_totals": [
+    {"source_section": "grants_and_contributions", "label": "Grants and contributions", "row_count": 13, "amount": 89555869.88},
+    {"source_section": "other", "label": "Other payments", "row_count": 7, "amount": 12875541.01},
+    {"source_section": "external_secondments", "label": "External secondments", "row_count": 1, "amount": 102461.66}
+  ],
+  "department_totals": [
+    {"department": "Municipal Affairs", "row_count": 2, "amount": 82514176.1},
+    {"department": "Justice", "row_count": 4, "amount": 6364886.4},
+    {"department": "Public Works", "row_count": 2, "amount": 5240804.01},
+    {"department": "Opportunities and Social Development", "row_count": 2, "amount": 2794977.53},
+    {"department": "Emergency Management", "row_count": 2, "amount": 1965815.15},
+    {"department": "Education and Early Childhood Development", "row_count": 1, "amount": 1200000.0},
+    {"department": "Communities, Culture, Tourism and Heritage", "row_count": 1, "amount": 1165206.0},
+    {"department": "Energy", "row_count": 2, "amount": 704138.7},
+    {"department": "Public Service", "row_count": 1, "amount": 297966.36},
+    {"department": "Environment and Climate Change", "row_count": 1, "amount": 169941.15},
+    {"department": "Labour, Skills and Immigration", "row_count": 2, "amount": 94805.0},
+    {"department": "Natural Resources", "row_count": 1, "amount": 21156.15}
+  ],
+  "payments": [
+    {"id":"ma-hrm-grants-p200","department":"Municipal Affairs","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":80563357.1,"source_page":200},
+    {"id":"justice-hrm-other-p153","department":"Justice","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"other","amount":5320245.34,"source_page":153},
+    {"id":"pw-hrm-other-p370","department":"Public Works","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"other","amount":3423237.46,"source_page":370},
+    {"id":"osd-hrm-grants-p268","department":"Opportunities and Social Development","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":2789347.17,"source_page":268},
+    {"id":"ma-hw-grants-p200","department":"Municipal Affairs","recipient":"Halifax Regional Water Commission","recipient_type":"municipal_utility","source_section":"grants_and_contributions","amount":1950819.0,"source_page":200},
+    {"id":"emo-hrm-other-p78","department":"Emergency Management","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"other","amount":1830099.47,"source_page":78},
+    {"id":"pw-hw-other-p370","department":"Public Works","recipient":"Halifax Regional Water Commission","recipient_type":"municipal_utility","source_section":"other","amount":1817566.55,"source_page":370},
+    {"id":"eecd-hrm-grants-p67","department":"Education and Early Childhood Development","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":1200000.0,"source_page":67},
+    {"id":"ccth-hrm-grants-p30","department":"Communities, Culture, Tourism and Heritage","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":1165206.0,"source_page":30},
+    {"id":"justice-hrm-grants-p150","department":"Justice","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":776909.72,"source_page":150},
+    {"id":"energy-hrm-grants-p81","department":"Energy","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":636638.7,"source_page":81},
+    {"id":"ps-hrm-other-p322","department":"Public Service","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"other","amount":297966.36,"source_page":322},
+    {"id":"ecc-hrm-grants-p88","department":"Environment and Climate Change","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":169941.15,"source_page":88},
+    {"id":"justice-hw-other-p153","department":"Justice","recipient":"Halifax Regional Water Commission","recipient_type":"municipal_utility","source_section":"other","amount":165269.68,"source_page":153},
+    {"id":"emo-hrm-grants-p77","department":"Emergency Management","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":135715.68,"source_page":77},
+    {"id":"justice-hrm-secondment-p146","department":"Justice","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"external_secondments","amount":102461.66,"source_page":146},
+    {"id":"energy-hw-grants-p81","department":"Energy","recipient":"Halifax Regional Water Commission","recipient_type":"municipal_utility","source_section":"grants_and_contributions","amount":67500.0,"source_page":81},
+    {"id":"lsi-hrm-grants-p179","department":"Labour, Skills and Immigration","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"grants_and_contributions","amount":55444.0,"source_page":179},
+    {"id":"lsi-hw-grants-p179","department":"Labour, Skills and Immigration","recipient":"Halifax Regional Water Commission","recipient_type":"municipal_utility","source_section":"grants_and_contributions","amount":39361.0,"source_page":179},
+    {"id":"nr-hrm-other-p220","department":"Natural Resources","recipient":"Halifax Regional Municipality","recipient_type":"municipality","source_section":"other","amount":21156.15,"source_page":220},
+    {"id":"osd-hw-grants-p268","department":"Opportunities and Social Development","recipient":"Halifax Regional Water Commission","recipient_type":"municipal_utility","source_section":"grants_and_contributions","amount":5630.36,"source_page":268}
+  ],
+  "interpretation_boundaries": [
+    "Public Accounts values are Province of Nova Scotia cash-basis accumulated payee disclosures, not HRM expenditures.",
+    "Rows are not HRM accounts-payable, vendor-payment, cheque-register or invoice-level transactions.",
+    "The subset includes exact payee rows for Halifax Regional Municipality and Halifax Regional Water Commission only; it is not a complete measure of provincial support benefiting Halifax.",
+    "Grant, external-secondment and other-payment source sections remain distinct.",
+    "HRM payment facts remain zero; provincial evidence does not unlock HRM duplicate-invoice, split-payment, payment-timing or award-to-paid analyses.",
+    "Provincial values are never added to HRM operating, capital, quarterly-spending or audited totals."
+  ]
+}

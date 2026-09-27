@@ -277,7 +277,7 @@ function b9ProcurementPatternInvestigations(rows = getRows(datasetStatus('procur
 function b9SpendingSeries(rows = getRows(datasetStatus('spending').data)) {
   const groups = new Map();
   for (const row of rows) {
-    if (!row.posting_date || b8Number(row.amount) == null) continue;
+    if (row.comparison_eligible !== true || row.measure !== 'current_ytd_actual' || !row.posting_date || b8Number(row.amount) == null) continue;
     const key = b8SpendingMatchKey(row);
     const group = groups.get(key) || { key, dates: new Map() };
     const date = String(row.posting_date);

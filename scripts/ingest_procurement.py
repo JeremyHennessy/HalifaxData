@@ -8,6 +8,7 @@ match the count observed at the start of the run.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -62,6 +63,7 @@ def fetch_source_rows(session: requests.Session, expected_count: int) -> tuple[l
         response = session.get(
             SODA_AWARDED,
             params={
+                "$select": "*, :id as source_row_id",
                 "$limit": PAGE_SIZE,
                 "$offset": offset,
                 "$where": WHERE,
@@ -112,6 +114,8 @@ def normalize_rows(raw: list[dict]) -> tuple[list[dict], int, int]:
         categories = [clean(item.get(k)) for k in ("goods", "service", "construction") if clean(item.get(k))]
         rows.append(
             {
+                "record_id": "public-award:" + hashlib.sha256((SOURCE_ID + ":" + item["source_row_id"]).encode()).hexdigest()[:24],
+                "source_row_id": item["source_row_id"],
                 "award_id": award_id,
                 "solicitation": award_id,
                 "vendor_name": vendor,
@@ -123,17 +127,31 @@ def normalize_rows(raw: list[dict]) -> tuple[list[dict], int, int]:
                 "tender_close_date": item.get("tender_close_date"),
                 "awarded_date": item.get("awarded_date"),
                 "original_award_value": amount,
-                "current_contract_value": amount,
+                "current_contract_value": None,
+                "value_semantics": "original_award_only",
                 "source_id": SOURCE_ID,
                 "provenance": provenance(
                     SOURCE_ID,
                     SODA_AWARDED,
                     "api-record",
-                    award_id or vendor,
-                    "build005-procurement-v2",
+                    item["source_row_id"],
+                    "build023-procurement-source-id-v1",
                 ),
             }
         )
+    repairs_path = ROOT / 'data/procurement_identity_migration_build023.json'
+    if repairs_path.exists():
+        repairs = json.loads(repairs_path.read_text())['text_repairs']
+        by_id = {r['source_row_id']: r for r in rows}
+        for repair in repairs:
+            row = by_id.get(repair['source_row_id'])
+            field = repair.get('field', 'vendor_name')
+            raw = repair.get('source_text', repair.get('source_vendor_name'))
+            retained = repair.get('retained_text', repair.get('display_vendor_name'))
+            if row and row.get(field) == raw:
+                row[field + '_source'] = raw
+                row[field] = retained
+                row['text_quality'] = 'retained_checked_spelling_source_encoding_damage'
     return rows, retained_before_dedup, duplicates_removed
 
 
@@ -144,6 +162,11 @@ def main() -> None:
 
     source_count = fetch_source_count(session)
     raw, page_count = fetch_source_rows(session, source_count)
+    snapshot = json.dumps(raw, sort_keys=True, ensure_ascii=False).encode()
+    digest = hashlib.sha256(snapshot).hexdigest()
+    archive = ROOT / 'data/source_documents' / (digest + '.json')
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    archive.write_bytes(snapshot)
     rows, retained_before_dedup, duplicates_removed = normalize_rows(raw)
 
     if len(rows) < 100:
@@ -152,6 +175,8 @@ def main() -> None:
     payload = {
         "metadata": {
             "generated_at": now(),
+            "source_sha256": digest,
+            "source_snapshot": str(archive.relative_to(ROOT)),
             "dataset_status": "official_awarded_tenders_collection",
             "source_dataset_id": "m6ps-8j6u",
             "source_query_record_count": source_count,

@@ -1,0 +1,40 @@
+name: Build 022 PostMinutes HTML Equivalence
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['agent/build022-freshness-usability']
+    paths:
+      - 'scripts/diagnose_council_postminutes_html_build022.py'
+      - '.github/workflows/build022-postminutes-equivalence.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parser dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate diagnostic syntax
+        run: python -m compileall -q scripts/diagnose_council_postminutes_html_build022.py
+      - name: Prove checked June 23 decisions are identical from PostMinutes HTML
+        run: |
+          mkdir -p artifacts/build022-postminutes
+          python scripts/diagnose_council_postminutes_html_build022.py \
+            --meeting-date 2026-06-23 \
+            --output artifacts/build022-postminutes/equivalence.json
+      - name: Upload equivalence proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build022-postminutes-equivalence-${{ github.sha }}
+          path: artifacts/build022-postminutes
+          if-no-files-found: warn
+          retention-days: 14

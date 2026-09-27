@@ -1,3 +1,21 @@
+# Current release: Build 023
+
+Halifax public-finance evidence and investigation workspace. See [release details](docs/build023-correctness-workspace.md) for corrected spending semantics, stable identities, validation and source limitations.
+
+- Quarterly summaries: 1,870 source rows, 280 reconciled current YTD expense facts, eight archived reports.
+- Public tender awards: 5,517 source-ID keyed records; awards do not establish payments or current contract value.
+- Current Council: 1,040 approved-minute decisions; 29 lifecycle investigation IDs preserved.
+- Saved reviews: private browser storage with backup/import, evidence links and exports.
+- Publication: exact-commit data and desktop/mobile checks before Pages deployment, followed by hosted hash verification.
+
+## Reproduce and validate
+
+Use Python 3.12 and Node 22. Install `requirements.txt`. The canonical spending entry point is `scripts/ingest_quarterly_spending.py`; it reproduces content-addressed checked source PDFs. `scripts/ingest_procurement.py` collects a new publisher-ID snapshot. Rebuild lifecycle with `build_lifecycle_reconciliation_build019_v4.py`, `enrich_lifecycle_components_build019.py`, and `build_lifecycle_investigations_build019.py`; rebuild entity links with `build_entity_index_v4.py`.
+
+Run the validation commands in `.github/workflows/ci.yml`. Serve with `python -m http.server 8000`; run the Playwright suites in `.github/workflows/ui-smoke.yml`. `data-refresh.yml` prepares reviewed candidates; `pages.yml` controls publication. Historical build docs and immutable baseline branches are retained for audit. Roll back by reverting the release merge to the preceding validated commit and letting the same deployment gate run.
+
+---
+
 # HalifaxData
 
 HalifaxData is an evidence-first public-finance intelligence project for Halifax Regional Municipality (HRM). It is intended to reconstruct the lifecycle of public money from approved budget through Council changes, procurement, delivery and audited results, while preserving source provenance.

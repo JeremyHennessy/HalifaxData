@@ -1,8 +1,9 @@
 name: UI Smoke
 
 on:
+  workflow_call:
   push:
-    branches: ['agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph', 'agent/build-017-audited-financial-history', 'agent/build-018-current-source-refresh', 'agent/build-019-deterministic-lifecycle-reconciliation']
+    branches: ['agent/build023-correctness-workspace', 'agent/design-analysis-ui-verification-20260825', 'agent/build-011-procurement-lifecycle', 'agent/build012-integrity-oversight', 'agent/build-013-context-data-expansion', 'agent/build-014-cao-amendment-series', 'agent/build-015-current-fiscal-refresh', 'agent/build-016-council-approval-graph', 'agent/build-017-audited-financial-history', 'agent/build-018-current-source-refresh', 'agent/build-019-deterministic-lifecycle-reconciliation', 'agent/build022-freshness-usability']
   pull_request:
     paths:
       - 'index.html'
@@ -23,6 +24,7 @@ on:
       - 'tools/build017-ui-smoke.mjs'
       - 'tools/build018-ui-smoke.mjs'
       - 'tools/build019-ui-smoke.mjs'
+      - 'tools/build022-ui-smoke.mjs'
       - '.github/workflows/ui-smoke.yml'
 
 permissions:
@@ -43,9 +45,11 @@ jobs:
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
+      - name: Build the exact release bundle
+        run: python scripts/build_release_bundle.py
       - name: Serve static application
         run: |
-          python -m http.server 8000 --bind 127.0.0.1 > /tmp/halifaxdata-http.log 2>&1 &
+          python -m http.server 8000 --bind 127.0.0.1 --directory .site > /tmp/halifaxdata-http.log 2>&1 &
           echo $! > /tmp/halifaxdata-http.pid
           for attempt in {1..20}; do
             if curl --fail --silent http://127.0.0.1:8000/ > /dev/null; then
@@ -89,6 +93,10 @@ jobs:
         run: node tools/build018-ui-smoke.mjs
       - name: Validate Build 019 lifecycle investigations
         run: node tools/build019-ui-smoke.mjs
+      - name: Validate Build 022 usability hierarchy
+        run: node tools/build022-ui-smoke.mjs
+      - name: Validate saved investigation workflow
+        run: node tools/build023-ui-smoke.mjs
       - name: Upload UI evidence
         if: always()
         uses: actions/upload-artifact@v4

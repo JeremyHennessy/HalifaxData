@@ -1,0 +1,76 @@
+{
+  "archived_at": "2026-09-26",
+  "documents": [
+    {
+      "source_id": "hrm-q1-2023-24",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/231003rci04.pdf",
+      "sha256": "38540c276f1d379d24000c03256a9e8503634b8ed4b1946e545d8508fb565864",
+      "path": "data/source_documents/38540c276f1d379d24000c03256a9e8503634b8ed4b1946e545d8508fb565864.pdf",
+      "covered_period": "2023-06-30",
+      "parser_version": "build023-quarterly-geometry-v1"
+    },
+    {
+      "source_id": "hrm-q2-2023-24",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/231128rci06.pdf",
+      "sha256": "d050bb1beb302e76d5735e0e08fd9c168f58c0324cf11e36825ce5ce7e2fde98",
+      "path": "data/source_documents/d050bb1beb302e76d5735e0e08fd9c168f58c0324cf11e36825ce5ce7e2fde98.pdf",
+      "covered_period": "2023-09-30",
+      "parser_version": "build023-quarterly-geometry-v1"
+    },
+    {
+      "source_id": "hrm-q3-2023-24",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/240305rci05.pdf",
+      "sha256": "799320b1a1c01b928943bd700d93023196b788774044db3bfd4c64c29eb59d9d",
+      "path": "data/source_documents/799320b1a1c01b928943bd700d93023196b788774044db3bfd4c64c29eb59d9d.pdf",
+      "covered_period": "2023-12-31",
+      "parser_version": "build023-quarterly-geometry-v1"
+    },
+    {
+      "source_id": "hrm-q2-2024-25",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/241211afsc1321.pdf",
+      "sha256": "9c2fe12fa8a5fcd01b690b0e05d8580890dc95fe7760ba84eefedc279cb1695b",
+      "path": "data/source_documents/9c2fe12fa8a5fcd01b690b0e05d8580890dc95fe7760ba84eefedc279cb1695b.pdf",
+      "covered_period": "2024-09-30",
+      "parser_version": "build023-quarterly-geometry-v1"
+    },
+    {
+      "source_id": "hrm-q3-2024-25",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250218afsc1312.pdf",
+      "sha256": "4768128557e67d71d255bbe0544b581319fb35108ab3c602d2e48089fbcababc",
+      "path": "data/source_documents/4768128557e67d71d255bbe0544b581319fb35108ab3c602d2e48089fbcababc.pdf",
+      "covered_period": "2024-12-31",
+      "parser_version": "build023-quarterly-geometry-v1"
+    },
+    {
+      "source_id": "hrm-q1-2025-26",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250917afsc1313.pdf",
+      "sha256": "6c25c22017d450611b9288fbee900e1792b38b5009a6e68b97302adb5450e013",
+      "path": "data/source_documents/6c25c22017d450611b9288fbee900e1792b38b5009a6e68b97302adb5450e013.pdf",
+      "covered_period": "2025-06-30",
+      "parser_version": "build023-quarterly-geometry-v1"
+    },
+    {
+      "source_id": "hrm-q2-2025-26",
+      "url": "https://cdn.halifax.ca/media/92446",
+      "sha256": "5ecc6aa4ddb62048f74c58a3f7b2edb59fde94b45df45a0adb567a1edc396d8c",
+      "path": "data/source_documents/5ecc6aa4ddb62048f74c58a3f7b2edb59fde94b45df45a0adb567a1edc396d8c.pdf",
+      "covered_period": "2025-09-30",
+      "parser_version": "build023-quarterly-geometry-v1"
+    },
+    {
+      "source_id": "hrm-q3-2025-26",
+      "url": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/260225afsc1313.pdf",
+      "sha256": "aaab9fbdcd56587f0c0395fa5ec9f0eb989f29723bed0a49f114ff7adbed1005",
+      "path": "data/source_documents/aaab9fbdcd56587f0c0395fa5ec9f0eb989f29723bed0a49f114ff7adbed1005.pdf",
+      "covered_period": "2025-12-31",
+      "parser_version": "build023-quarterly-geometry-v1"
+    },
+    {
+      "source_id": "ns-awarded-tenders-socrata",
+      "url": "https://data.novascotia.ca/resource/m6ps-8j6u.json",
+      "sha256": "6b57a3d0e9ae6590599fc65ab34beaad068bb32a0e81e7a7c294ceff7d9ca13f",
+      "path": "data/source_documents/6b57a3d0e9ae6590599fc65ab34beaad068bb32a0e81e7a7c294ceff7d9ca13f.json",
+      "retrieved_at": "2026-09-26T23:00:45+00:00"
+    }
+  ]
+}

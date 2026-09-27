@@ -1,36 +1,41 @@
-name: Refresh public data
-
+name: Prepare reviewed data refresh
 on:
   workflow_dispatch:
   schedule:
     - cron: '17 10 * * 1'
-
 permissions:
   contents: write
-
+  pull-requests: write
+concurrency:
+  group: reviewed-data-refresh
+  cancel-in-progress: false
 jobs:
-  public-data:
+  candidate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - name: Refresh compensation disclosures
-        run: python scripts/ingest_compensation.py
-      - name: Refresh budget and audited actuals
-        run: python scripts/ingest_budget.py
-      - name: Validate all checked-in public data
-        run: python scripts/validate_data.py
-      - name: Commit verified changes
+      - name: Collect candidates and rebuild all dependents
+        run: python scripts/prepare_refresh_candidate.py
+      - name: Preserve candidate on a review branch
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet -- data/generated/compensation.json data/generated/budget.json; then
-            echo "No public-data changes"
-            exit 0
-          fi
+          set -euo pipefail
+          branch="agent/refresh-${GITHUB_RUN_ID}"
+          git checkout -b "$branch"
           git config user.name "halifaxdata-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/generated/compensation.json data/generated/budget.json
-          git commit -m "data: refresh public finance datasets"
-          git push
+          git add data
+          git commit -m "data: prepare reviewed refresh candidate"
+          git push origin "$branch"
+          cat > /tmp/refresh-body.md <<'EOF'
+          Automated source candidate with rebuilt entity and lifecycle artifacts.
+
+          Review `data/refresh_candidate_status.json`, source changes and current-release controls before merging. Failed collectors retain checked evidence. This workflow never writes directly to main. Pages runs full data and browser validation before deploying a merge.
+          EOF
+          gh pr create --base main --head "$branch" --title "Review public-data refresh" --body-file /tmp/refresh-body.md --draft

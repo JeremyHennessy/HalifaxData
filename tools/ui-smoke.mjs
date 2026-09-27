@@ -51,6 +51,12 @@ async function closeDrawer(page) {
     await page.waitForFunction(() => !document.querySelector('#evidence-drawer')?.open);
   }
 }
+async function openBuild022Disclosure(page, key) {
+  const details = page.locator(`[data-build022-disclosure="${key}"]`);
+  if (await details.count() && !(await details.evaluate(element => element.open))) {
+    await details.locator(':scope > summary').click();
+  }
+}
 async function assertText(page, route, phrases) {
   await openRoute(page, route);
   const text = await page.locator('#content').innerText();
@@ -75,7 +81,12 @@ async function assertReleasedDomainsReady(page, viewportName) {
 }
 
 async function assertAnalyticalViews(page, viewportName) {
-  await assertText(page, 'overview', ['What deserves attention?', 'Budget pressure snapshot', 'Procurement concentration snapshot', 'Data coverage & readiness']);
+  await openRoute(page, 'overview');
+  await openBuild022Disclosure(page, 'overviewSupport');
+  const overviewText = (await page.locator('#content').innerText()).toLowerCase();
+  for (const phrase of ['what deserves attention?', 'budget pressure snapshot', 'procurement concentration snapshot', 'data coverage & readiness']) {
+    if (!overviewText.includes(phrase)) throw new Error(`${viewportName}/overview: missing "${phrase}" after opening supporting analysis`);
+  }
   const overviewLeads = page.locator('#content [data-build008-investigation-id]');
   if (await overviewLeads.count() < 3) throw new Error(`${viewportName}/overview: expected cross-domain investigation cards`);
   await overviewLeads.first().click();
@@ -91,7 +102,7 @@ async function assertAnalyticalViews(page, viewportName) {
   if ((await page.locator('#drawer-eyebrow').textContent())?.trim() !== 'HISTORICAL BUDGET EVIDENCE') throw new Error(`${viewportName}/budget: historical evidence drawer did not open`);
   await closeDrawer(page);
 
-  const spendingText = await assertText(page, 'spending', ['not invoice or accounts-payable transactions', '1,753', 'Quarterly spending movement analysis', 'ambiguous key/dates excluded']);
+  const spendingText = await assertText(page, 'spending', ['not invoice or accounts-payable transactions', '1,870', 'Quarterly spending movement analysis', 'ambiguous key/dates excluded']);
   if (!spendingText.toLowerCase().includes('comparable movement leads')) throw new Error(`${viewportName}/spending: hero metric was not converted to comparable movements`);
   const spendingHeaders = (await page.locator('#content table').first().locator('th').allTextContents()).map(text => text.trim());
   if (spendingHeaders.includes('Vendor') || spendingHeaders.includes('Project')) throw new Error(`${viewportName}/spending: unsupported transaction columns are present`);
@@ -101,7 +112,7 @@ async function assertAnalyticalViews(page, viewportName) {
   if (!(await page.locator('#drawer-body').innerText()).includes('Not a transaction')) throw new Error(`${viewportName}/spending: source-row transaction boundary missing`);
   await closeDrawer(page);
 
-  await assertText(page, 'vendors', ['5,502', 'Procurement concentration & repeat awards', 'Candidate vendor identity matches', 'Top collected award concentration']);
+  await assertText(page, 'vendors', ['5,517', 'Procurement concentration & repeat awards', 'Candidate vendor identity matches', 'Top collected award concentration']);
   if (await page.locator('.b8-procurement-analysis [data-build008-investigation-id]').count() < 1) throw new Error(`${viewportName}/vendors: no concentration/repeat-award cards rendered`);
 
   await assertText(page, 'projects', ['Historical-project boundary', '2,650']);
@@ -114,7 +125,7 @@ async function assertAnalyticalViews(page, viewportName) {
   await page.waitForSelector('#evidence-drawer[open]');
   await closeDrawer(page);
 
-  await assertText(page, 'council', ['Finance-tagged agenda attachments', '179']);
+  await assertText(page, 'council', ['Finance-tagged agenda attachments', '183']);
   if (await page.locator('[data-council-id]').count() < 1) throw new Error(`${viewportName}/council: no finance-context meetings rendered`);
   await page.locator('[data-council-id]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
@@ -123,6 +134,10 @@ async function assertAnalyticalViews(page, viewportName) {
 
   await assertText(page, 'benchmarks', ['HRM benchmark facts', '48', 'HRM funding facts', '14', 'Province program context', '212', 'Context ≠ Halifax']);
   if (await page.locator('[data-benchmark-origin]').count() < 1) throw new Error(`${viewportName}/benchmarks: no scoped municipal context rows rendered`);
+  const benchmarkDetails = page.locator('[data-build022-benchmark-details]');
+  if (await benchmarkDetails.count()) {
+    if (!(await benchmarkDetails.evaluate(element => element.open))) await benchmarkDetails.locator('summary').click();
+  }
   await page.locator('[data-benchmark-origin]').first().click();
   await page.waitForSelector('#evidence-drawer[open]');
   await closeDrawer(page);
@@ -203,6 +218,7 @@ try {
     await closeDrawer(page);
 
     await openRoute(page, 'sources');
+    await openBuild022Disclosure(page, 'sourceRegistry');
     const sourceCards = page.locator('#content [data-source-id]');
     if (await sourceCards.count() < 1) throw new Error(`${viewportName}/sources: no source cards`);
     await sourceCards.first().click();

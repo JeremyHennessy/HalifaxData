@@ -1,0 +1,7 @@
+.b23-review label {display:block;margin:12px 0;font-size:14px;}
+.b23-review input:not([type=checkbox]),.b23-review textarea,.b23-review select {display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:9px;border:1px solid #cbd5e1;border-radius:6px;background:white;color:#172033;font:inherit;}
+.b23-actions {display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0;}
+.b23-actions button,#b23-workspace button {cursor:pointer;border:1px solid #cbd5e1;border-radius:6px;background:#f8fafc;color:#172033;padding:9px 12px;font:inherit;}
+.b23-actions input[type=file] {max-width:210px;}
+.b23-snapshot {white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;}
+tr[role=button]:focus-visible {outline:3px solid #216cc7;outline-offset:-3px;}
