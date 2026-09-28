@@ -32,7 +32,7 @@
       "procurement_public": {
         "path": "data/generated/procurement.json",
         "parser_version": null,
-        "generated_at": "2026-09-26T23:00:45+00:00",
+        "generated_at": "2026-09-28T18:11:34+00:00",
         "dataset_status": "official_awarded_tenders_collection"
       },
       "procurement_quarterly": {

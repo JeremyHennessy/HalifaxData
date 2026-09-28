@@ -1,0 +1,66 @@
+{
+  "last_attempt": "2026-09-28T18:10:15.006818+00:00",
+  "publication_status": "review_required",
+  "owner": "repository-maintainer",
+  "domains": [
+    {
+      "domain": "compensation",
+      "last_attempt": "2026-09-28T18:10:15.006818+00:00",
+      "last_success": "2026-09-28T18:10:15.006818+00:00",
+      "status": "fresh_candidate",
+      "checked_artifact_sha256_before": "0f77117b48632625c232e21a0e78de82dd581733885f4179db862ebb56b6c924",
+      "candidate_sha256": "0f77117b48632625c232e21a0e78de82dd581733885f4179db862ebb56b6c924",
+      "error": null
+    },
+    {
+      "domain": "budget",
+      "last_attempt": "2026-09-28T18:10:15.006818+00:00",
+      "last_success": "2026-09-28T18:10:15.006818+00:00",
+      "status": "fresh_candidate",
+      "checked_artifact_sha256_before": "b96eebb94f811a458bf4bed370dc3afaa6ff12cc00e7bcf0afc90f96ea7ff16d",
+      "candidate_sha256": "b96eebb94f811a458bf4bed370dc3afaa6ff12cc00e7bcf0afc90f96ea7ff16d",
+      "error": null
+    },
+    {
+      "domain": "procurement",
+      "last_attempt": "2026-09-28T18:10:15.006818+00:00",
+      "last_success": "2026-09-28T18:10:15.006818+00:00",
+      "status": "fresh_candidate",
+      "checked_artifact_sha256_before": "bb6ffe9b75519a95a253ba4510d4f561a07bbac2a1565493868c9d69f1a754a7",
+      "candidate_sha256": "098d395ea598ee688faffe6231ba80a258e6bf54c90f39be0f981d7ae4b8216b",
+      "error": null
+    }
+  ],
+  "validation": [
+    {
+      "validator": "validate_data.py",
+      "valid": true,
+      "error": null
+    },
+    {
+      "validator": "validate_spending.py",
+      "valid": true,
+      "error": null
+    },
+    {
+      "validator": "validate_lifecycle_reconciliation_build019.py",
+      "valid": true,
+      "error": null
+    },
+    {
+      "validator": "validate_lifecycle_components_build019.py",
+      "valid": true,
+      "error": null
+    },
+    {
+      "validator": "validate_lifecycle_investigations_build019.py",
+      "valid": true,
+      "error": null
+    },
+    {
+      "validator": "validate_entity_index_v4.py",
+      "valid": true,
+      "error": null
+    }
+  ]
+}
