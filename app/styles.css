@@ -9,3 +9,5 @@
 /* Keep every explanation depth visible rather than a clipped horizontal tab strip. */
 .capital-explanation-tabs{flex-wrap:wrap;overflow:visible}.capital-explanation-tabs a{white-space:normal;max-width:100%}
 .capital-explanation .card{margin-bottom:16px}.capital-explanation dt{overflow-wrap:anywhere}.capital-explanation dd{margin-left:18px}
+/* Source field names in equation prose can be longer than a mobile card. */
+.capital-explanation{overflow-wrap:anywhere}
