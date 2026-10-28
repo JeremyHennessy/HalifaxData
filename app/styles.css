@@ -17,3 +17,5 @@
 .housing-audit{min-width:0;overflow-wrap:anywhere}.housing-audit>.card{margin:20px 0}.housing-audit .timeline a{display:block}
 
 .ambulance-audit{min-width:0;overflow-wrap:anywhere}.ambulance-audit .card{margin:20px 0}.ambulance-audit details{margin:20px 0}.ambulance-audit .table-wrap{max-width:100%}
+
+.ambulance-service th{overflow-wrap:normal;word-break:normal}.ambulance-service th:nth-child(n+2){white-space:nowrap}
