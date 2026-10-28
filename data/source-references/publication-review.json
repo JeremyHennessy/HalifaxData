@@ -1,0 +1,21 @@
+{
+  "status": "accepted",
+  "bundleSha256": "0b51f63c17d60ad1214fa53660a74b67423f4cecdb6b7aa819d81b1b4fa8d47e",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "source-reference-coverage-independent-review-20261028",
+  "checks": [
+    "Replayed the retained-evidence coverage ledger and sanitized projection with identical hashes; 15 ledger and 12 projection tests passed independently.",
+    "Verified 139 reference identities at 121 distinct URLs, with four exact reference URLs linked to reviewed subsets and three supported by retained capture evidence.",
+    "Verified accepted artifact hashes and named deployment checkpoint evidence, preserving the distinction between manifest listing and individual artifact hash checks.",
+    "Checked separation of reference URLs, reviewed projections and application collection counts; publisher index pages are not treated as complete integrations.",
+    "Confirmed final release changes publication metadata only and excludes private filesystem paths, access-error bodies and internal permission instructions."
+  ],
+  "limits": [
+    "Frozen evidence catalogue checkpoint 2026-10-28T12:34:39Z; later work may not be represented.",
+    "Published-state fields refer to the named historical deployment checkpoint, not live source health, latest release availability or continuous refresh.",
+    "Four reviewed reference URLs is not a measure of the proportion of all government data ingested. No complete source integration is claimed.",
+    "SI006 contains reviewed primary-text facts without a retained source binary. Same-URL references and unresolved inventory geography labels remain explicit.",
+    "Factual source identifiers and coverage descriptions only; no blanket source reuse rights or publication of private records is authorized."
+  ]
+}

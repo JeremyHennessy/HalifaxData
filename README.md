@@ -39,3 +39,9 @@ Original raw captures and private investigations must remain outside this reposi
 ## Long-term scope
 
 Investigation and case review; financial reconciliation; procurement and vendor evidence; government decisions; all 16 Halifax districts with valid-time representation; provincial healthcare and public-service investigations. Validated policy simulations come later, after the investigative foundation.
+
+## Exact-reference coverage and procurement context
+
+The Sources page has a separately reviewed, frozen **2026-10-28 12:34:39 UTC** reconciliation: 139 original references, 121 distinct URLs, four exact URLs with reviewed subsets and three with retained capture evidence. These are not live completeness measures, working integrations or a proportion of government data. Publisher-family documents are listed separately; the existing application collection directory remains independent.
+
+An optional procurement methodology annotation preserves the captured 33,670 observations and explains recurring identifiers and the generic awarded-amount field, including a short reviewed surplus-sale description. It does not deduplicate records, establish expenditure, assign vendor risk or add an evidence collection. Both artifacts and their independent receipts are admitted by exact SHA-256 at build and runtime. The methodology also verifies its exact tender-index target. Optional context failures do not block the underlying collection directory or tender explorer.
