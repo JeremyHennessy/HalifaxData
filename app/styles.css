@@ -2,3 +2,4 @@
 [hidden]{display:none!important}
 /* Evidence tables and JSON may scroll inside their own panel, never widen the grid. */
 .case-layout>*{min-width:0}.prose{min-width:0}.table-wrap{max-width:100%;min-width:0}pre{max-width:100%;min-width:0}@media(max-width:760px){.case-layout{grid-template-columns:minmax(0,1fr)}}
+.purpose-context{margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}.purpose-context h3{margin-top:0}
