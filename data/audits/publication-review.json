@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "d0d9b05fe969ceec78cb87ff1a611f1650e878dc1501ded1ecaed01685402dbe",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "audit-status-independent-review-20261028",
+  "sourceSha256": "27e20aa761e6bcc6115eb53954b37aa1536347569d7b3b8d07d1760c764a5026",
+  "scope": "Source-attributed historical institutional audit status counts from Appendix II, pages 25\u201326 only",
+  "checks": [
+    "All 22 organization/audit numeric rows visually transcribed and matched to retained source pages",
+    "19 main organization/audit rows sum to 115 total and 96 completed; three additional organization rows represent one shared 2024 recommendation and remain separate",
+    "Appendix I limited-assurance scope and October 10, 2025 as-of date verified",
+    "March 9, 2026 conclusion date and official landing March 31, 2026 publication date verified",
+    "Independent replay identical; source PDF and receipt bytes pinned",
+    "No copied recommendation narratives, personal information, technical cybersecurity details or management responses",
+    "Final reviewed release differs from verified candidate only in publication review metadata"
+  ],
+  "limitations": [
+    "Historical report data, not current completion verification",
+    "Limited assurance applies to recommendations assessed completed since prior follow-up; no procedures or assurance on those reported not completed",
+    "Organization/audit counts are not independently deduplicated recommendation identities",
+    "No misconduct, legal breach or financial loss inferred from incomplete recommendations",
+    "Only this exact snapshot accepted; app integration and deployment require separate verification"
+  ]
+}

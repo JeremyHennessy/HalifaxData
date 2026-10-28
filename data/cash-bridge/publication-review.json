@@ -1,0 +1,24 @@
+{
+  "status": "accepted",
+  "bundleSha256": "ba4c70be68e44cd82c0ae8db503453310ed01e2c3897e7bb33c92e884ace05fd",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "nscc-cash-bridge-independent-review-20261028",
+  "scope": "46 numeric source cells and 14 reproducible internal accounting equations across two fiscal years",
+  "checks": [
+    "All 46 original numeric tokens independently matched using coordinate-cropped PDF extraction; both source pages visually inspected",
+    "All 14 equation input and output record references independently recomputed with exact integers and zero residuals",
+    "Both annual results match the exact accepted operating-statement records",
+    "Stock balances, cash flows, accrual results and reconciliation adjustments retain distinct types and periods",
+    "Five tests passed; exact replay and final publication-only metadata change verified",
+    "Aggregate institutional facts only; no bank details, private recipients, copied audit opinions or signatures"
+  ],
+  "limitations": [
+    "Internal published accounting arithmetic only, not independent verification of underlying bank transactions or business purposes",
+    "Zero residual does not establish fraud-control effectiveness or appropriateness of expenditures",
+    "Overlapping subtotals and stocks must not be added indiscriminately",
+    "CAD is contextual inference, explicitly distinguished from a printed currency code",
+    "No provincial departmental forecast reconciliation or vendor payment identification",
+    "Exact reviewed snapshot only; application integration and deployment require separate verification"
+  ]
+}

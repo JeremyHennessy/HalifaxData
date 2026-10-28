@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 private/
 .env*
+retained-code/

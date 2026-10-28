@@ -1,0 +1,23 @@
+{
+  "status": "accepted",
+  "bundleSha256": "354b302c0b2f3334868009590d24fa9110360ca409b6eba5e47a1fc1fa13a1e1",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "oic-budget-link-independent-review-20261028",
+  "scope": "Exact OIC-number link between a ministerial responsibility assignment and a later departmental budget-presentation change",
+  "checks": [
+    "Captured official Order 2025-366 text independently read; order and effective dates distinguished from recommendation date",
+    "Rendered budget PDF page 16 / printed 3.5 independently inspected; explicit same order number and April 1, 2026 presentation date confirmed",
+    "198,292 and 198,107 source-thousand values matched to distinct estimate/forecast columns; later source dash remains null",
+    "No fuzzy name/amount matching; explicit source-owned identifier links the records",
+    "Three tests pass and offline replay byte-identical",
+    "Final release differs only by explicit publication review metadata"
+  ],
+  "limitations": [
+    "Responsibility assignment is not an appropriation amount, expenditure approval or payment",
+    "Receiving-department amount not normalized; no equal offset or unchanged total funding claim",
+    "Historical budget figures are not audited actual spending or current forecasts",
+    "No finding about funding adequacy, waste or program outcomes",
+    "Exact snapshot only; app integration and deployment require separate verification"
+  ]
+}

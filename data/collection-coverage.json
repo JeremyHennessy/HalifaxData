@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "reviewed-collection-coverage-v1",
+  "guideReferenceCount": 139,
+  "supportingDocumentReferences": 4,
+  "countingNote": "Collections, documents, observations and source families are different units. Counts overlap and must not be added together.",
+  "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
+  "collections": [
+    {
+      "id": "cash-bridge",
+      "title": "NSCC cash/accrual explanation",
+      "relatedSourceIds": [],
+      "dataPath": "data/cash-bridge/case.json",
+      "dataSha256": "ba4c70be68e44cd82c0ae8db503453310ed01e2c3897e7bb33c92e884ace05fd",
+      "reviewPath": "data/cash-bridge/publication-review.json",
+      "reviewId": "nscc-cash-bridge-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 1,
+      "countUnit": "reviewed accounting explanation",
+      "route": "#/cash-bridge",
+      "scope": "46 source observations and 14 explicit equations across two years. Internal statement arithmetic, not underlying bank verification.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.nscc.ca/docs/about-nscc/publications/nscc-financial-statements-2026.pdf"
+      ]
+    },
+    {
+      "id": "authorizations",
+      "title": "Supplemental appropriation orders",
+      "relatedSourceIds": [],
+      "dataPath": "data/authorizations/records.json",
+      "dataSha256": "bca870a30c64807ef881d67d7c8680df748160bcd208b2f05bcdf4fc19f5c6c5",
+      "reviewPath": "data/authorizations/publication-review.json",
+      "reviewId": "supplemental-orders-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 2,
+      "countUnit": "reviewed orders",
+      "route": "#/authorizations",
+      "scope": "23 clauses in two separate fiscal years. Authorization, not payment; no combined fiscal-year total.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://novascotia.ca/apps/oic/OicFile/Details/21524",
+        "https://novascotia.ca/apps/oic/OicFile/Details/21525"
+      ]
+    },
+    {
+      "id": "foundation",
+      "title": "Financial statement facts",
+      "relatedSourceIds": [
+        "fiscal-document-01",
+        "fiscal-document-02",
+        "fiscal-document-03",
+        "fiscal-document-04"
+      ],
+      "dataPath": "data/foundation.json",
+      "dataSha256": "9daa91dae039dc3c20e1cab6dc1cedb5951ba3e1af9613f63dacd4c7ef2b2958",
+      "reviewPath": "data/publication-review.json",
+      "reviewId": "fresh-foundation-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 29,
+      "countUnit": "financial facts",
+      "route": "#/money",
+      "scope": "Primary text reviewed; source binary was not retained for these facts.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.novascotia.ca/sites/default/files/documents/1-4174/capital-plan-2026-2027-en.pdf",
+        "https://www.novascotia.ca/sites/default/files/documents/6-4173/ftb-bfi-046-en-budget-2026-2027.pdf",
+        "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf",
+        "https://www.sec.gov/Archives/edgar/data/842639/000119312526412238/d177978dex991.htm"
+      ]
+    },
+    {
+      "id": "tenders",
+      "title": "Procurement observations",
+      "relatedSourceIds": [
+        "guide-024"
+      ],
+      "dataPath": "data/tenders/tender-index.json",
+      "dataSha256": "4118d8b43061fafc195c9b65504f7ef8589edd4cfec93ddc62e9a3126bbce062",
+      "reviewPath": "data/tenders/publication-review.json",
+      "reviewId": "fresh-minimum-tender-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 33670,
+      "countUnit": "publisher observations",
+      "route": "#/tenders",
+      "scope": "Bounded captured snapshot; not every tender, contract or payment.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://data.novascotia.ca/Procurement-and-Contracts/Awarded-Public-Tenders/m6ps-8j6u"
+      ]
+    },
+    {
+      "id": "suppliers",
+      "title": "Reviewed supplier-label associations",
+      "relatedSourceIds": [
+        "guide-024"
+      ],
+      "dataPath": "data/suppliers/labels.json",
+      "dataSha256": "35cbc300c8e665e71cf113f1d2161a8e4b58a66899d4b1068639ec1bf2c4ead9",
+      "reviewPath": "data/suppliers/publication-review.json",
+      "reviewId": "fresh-supplier-label-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 4658,
+      "countUnit": "reviewed label associations",
+      "route": "#/tenders",
+      "scope": "71 exact reviewed labels only; not resolved legal owners or all suppliers.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://data.novascotia.ca/Procurement-and-Contracts/Awarded-Public-Tenders/m6ps-8j6u"
+      ]
+    },
+    {
+      "id": "municipal",
+      "title": "Historical municipal operating records",
+      "relatedSourceIds": [
+        "guide-011"
+      ],
+      "dataPath": "data/municipal/records.json",
+      "dataSha256": "11e06c5f27b27eeb0f64075d94fa082ca2b9a7fb366b2385397ec81ceba6e628",
+      "reviewPath": "data/municipal/publication-review.json",
+      "reviewId": "fresh-municipal-fiscal-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 555,
+      "countUnit": "municipality/type/year observations",
+      "route": "#/municipal",
+      "scope": "2013\u201314 through 2023\u201324 only; not current financial reporting.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://data.novascotia.ca/datasets/sbzw-ajrm"
+      ]
+    },
+    {
+      "id": "reporting",
+      "title": "Municipal reporting question",
+      "relatedSourceIds": [
+        "guide-011"
+      ],
+      "dataPath": "data/reporting-question/case.json",
+      "dataSha256": "65a96a5960ea14b439d41823f55a317c181398664233551514b00ad1374bde82",
+      "reviewPath": "data/reporting-question/publication-review.json",
+      "reviewId": "municipal-reporting-question-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 1,
+      "countUnit": "reviewed reporting question",
+      "route": "#/reporting-question/municipal-operating-balance-reporting-2019-20",
+      "scope": "Two 2019\u201320 source observations and separately reviewed provincial profiles.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://data.novascotia.ca/datasets/sbzw-ajrm",
+        "https://www.novascotia.ca/sites/default/files/documents/1-2787/municipality-county-colchester-municipal-profile-and-financial-condition-indicators-results-2020-en.pdf",
+        "https://www.novascotia.ca/sites/default/files/documents/1-2800/municipality-county-victoria-municipal-profile-and-financial-condition-indicators-results-2020-en.pdf"
+      ]
+    },
+    {
+      "id": "audits",
+      "title": "Historical audit follow-up",
+      "relatedSourceIds": [
+        "guide-042"
+      ],
+      "dataPath": "data/audits/records.json",
+      "dataSha256": "d0d9b05fe969ceec78cb87ff1a611f1650e878dc1501ded1ecaed01685402dbe",
+      "reviewPath": "data/audits/publication-review.json",
+      "reviewId": "audit-status-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 22,
+      "countUnit": "organization/audit rows",
+      "route": "#/audits",
+      "scope": "Assurance status date October 10, 2025; report published March 31, 2026. Not current completion status.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.oag-ns.ca/sites/default/files/2026-03/2026%20Follow-Up%20of%202021%202022%20and%202023%20Recommendations.pdf"
+      ]
+    },
+    {
+      "id": "budget",
+      "title": "Captured budget summary tables",
+      "relatedSourceIds": [
+        "fiscal-document-02"
+      ],
+      "dataPath": "data/budget-tables/records.json",
+      "dataSha256": "549807f3e2d26e9398d91abb663e6973c8c531a0d1ec7e2e69e702e0bbe21b07",
+      "reviewPath": "data/budget-tables/publication-review.json",
+      "reviewId": "independent-budget-addendum-tables-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 219,
+      "countUnit": "source cells",
+      "route": "#/budget-tables",
+      "scope": "Two tables of a 70-page addendum. Estimates and a historical forecast, not payments.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf"
+      ]
+    },
+    {
+      "id": "transfers",
+      "title": "Federal transfer factual projection",
+      "relatedSourceIds": [
+        "guide-023"
+      ],
+      "dataPath": "data/transfers/records.json",
+      "dataSha256": "435378cc7cc0d196fbac6c5dbea58a1c697632b71e96cde1ed51b408b9aa4804",
+      "reviewPath": "data/transfers/publication-review.json",
+      "reviewId": "federal-transfer-facts-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 358,
+      "countUnit": "source program/date cells",
+      "route": "#/transfers",
+      "scope": "Nova Scotia only; April 2023 through October 2026. Latest fiscal year is partial.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.canada.ca/en/department-finance/programs/federal-transfers/major-federal-transfers-monthly-payments-made-to-provinces-territories.html"
+      ]
+    },
+    {
+      "id": "transfer-links",
+      "title": "Budget-to-transfer program mappings",
+      "relatedSourceIds": [
+        "guide-023",
+        "fiscal-document-02"
+      ],
+      "dataPath": "data/transfers/links.json",
+      "dataSha256": "f02408efd4af24583643890e25eed3a006ffddd62cd9ea863ea538e03d2021e4",
+      "reviewPath": "data/transfers/links-review.json",
+      "reviewId": "transfer-budget-links-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 3,
+      "countUnit": "reviewed program/year mappings",
+      "route": "#/transfers",
+      "scope": "2025\u201326 only; not a shared transaction identifier or accounting reconciliation.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.canada.ca/en/department-finance/programs/federal-transfers/major-federal-transfers-monthly-payments-made-to-provinces-territories.html",
+        "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf"
+      ]
+    },
+    {
+      "id": "governance",
+      "title": "Government decision and presentation link",
+      "relatedSourceIds": [
+        "fiscal-document-02"
+      ],
+      "dataPath": "data/governance/case.json",
+      "dataSha256": "354b302c0b2f3334868009590d24fa9110360ca409b6eba5e47a1fc1fa13a1e1",
+      "reviewPath": "data/governance/publication-review.json",
+      "reviewId": "oic-budget-link-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 1,
+      "countUnit": "reviewed source-number connection",
+      "route": "#/governance/oic-2025-366-nscc-budget-presentation",
+      "scope": "One official order and one budget footnote; no expenditure authority or payment linkage.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://novascotia.ca/apps/oic/OicFile/Details/21179",
+        "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf"
+      ]
+    },
+    {
+      "id": "institution",
+      "title": "NSCC consolidated statement subset",
+      "relatedSourceIds": [],
+      "dataPath": "data/nscc/records.json",
+      "dataSha256": "f36c3866d89733be2b4f72b74313b1da41fff76b22f14f24457069c183a80de3",
+      "reviewPath": "data/nscc/publication-review.json",
+      "reviewId": "nscc-financials-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 54,
+      "countUnit": "institutional statement cells",
+      "route": "#/institution",
+      "scope": "One consolidated statement page; College and Foundation, budget/actual/prior comparative columns.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.nscc.ca/docs/about-nscc/publications/nscc-financial-statements-2026.pdf"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "status": "accepted",
+  "bundleSha256": "bca870a30c64807ef881d67d7c8680df748160bcd208b2f05bcdf4fc19f5c6c5",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "supplemental-orders-independent-review-20261028",
+  "scope": "23 institutional supplemental-appropriation clauses from two official orders and 46 numerical Schedule A cells",
+  "checks": [
+    "Both Schedule A images independently inspected and all 46 numeric cells visually transcribed and matched",
+    "HTML authorization text, source-stated Finance Act references and distinct fiscal years checked",
+    "Separate totals 523086000 and 249635000 reconcile to their own source schedules; no combined cross-year total",
+    "Recommendation September 22 and effective/order September 23, 2026 retained distinctly from fiscal-year end",
+    "Four tests and exact offline replay independently rerun; final release differs only in explicit publication review metadata",
+    "No signatures, logos, full order narratives or personal data included"
+  ],
+  "limitations": [
+    "Authorization is not proof of payment, invoice, reimbursement or service delivery",
+    "Column I basis remains unverified; no current complete-budget or fully reconciled base claim",
+    "Post-fiscal-year effective date is reported, not characterized as unlawful; statutory references are source-attributed, not independent legal interpretation",
+    "No combined cross-year spending sum or automatic addition to earlier budgets",
+    "No waste, misconduct, funding adequacy or service-performance finding",
+    "This exact snapshot only; app integration and deployment require separate verification"
+  ]
+}

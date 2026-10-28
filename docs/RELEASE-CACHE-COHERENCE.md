@@ -1,0 +1,11 @@
+# Coherent code across rapid releases
+
+Each build calculates a content address over the complete public JavaScript/CSS file set. The generated HTML loads `code/<content-address>/app/main.js` and the matching stylesheet. Relative module imports stay inside that same directory, so a new main module cannot silently obtain an older cached helper. Source data stays at its existing paths with no-cache requests, exact accepted-receipt hashes and schema checks. Evidence observation dates are not repurposed as code versions.
+
+The deployment workflow retains the current bundle plus up to six previous distinct code bundles. Retention reads only this site’s public release manifest and whitelisted JavaScript/CSS paths, verifies the prior manifest hashes and bundle identity, rejects redirects before dispatch, and enforces size limits. It never copies historical source datasets, raw research or private files. A failed retention check blocks deployment rather than silently discarding open-tab dependencies.
+
+Main workflows are serialized from retention through deployment so two rapid builds cannot retain the same predecessor and accidentally omit an intervening published bundle. A unique no-cache manifest request avoids stale retention discovery. Every retained asset remains in `release.json` and is checked during exact-commit live verification.
+
+Unversioned `app/` compatibility URLs remain present. Already-open tabs older than the seven-version retention window may need to reload; generated HTML provides an explicit reload state when a retired code bundle cannot load. Pre-strategy cached pages should also reload to obtain the new versioned entry point. This is bounded compatibility, not a promise that every historic URL lives forever.
+
+Hosted browser verification serves the real application under `/HalifaxData/`, asserts one versioned module/CSS directory, executes old and new dependency fixtures in isolation, checks compatibility URLs and exercises the missing-bundle reload state. Fixtures are created only in a separate test host, never in the deployable `dist/` artifact. Unit tests cover identity changes, path containment, verified code-only retention and the seven-version cap.

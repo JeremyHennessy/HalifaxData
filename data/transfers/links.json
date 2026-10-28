@@ -1,0 +1,266 @@
+{
+  "limits": [
+    "No source-owned transaction identifier links these documents; this is a reviewed program/jurisdiction/fiscal-year mapping, not an invoice match.",
+    "The provincial observations are historical forecasts as printed in the addendum, not audited actual receipts.",
+    "Federal primary-column totals are cash disclosures; health-transfer deductions and reimbursements remain in the underlying payment dataset.",
+    "The federal source explains allocation revisions and prior-year adjustments. Timing and accounting bridges are not independently established.",
+    "CAD for the federal table is an explicit contextual inference, not a literal currency code printed in the source.",
+    "No downstream contractor spending or measurable service outcome has been linked.",
+    "No discrepancy, missing cash, misconduct or legal breach is claimed."
+  ],
+  "links": [
+    {
+      "budget": {
+        "currency": "CAD",
+        "financialBasis": "budget_presentation_including_non_cash_adjustments",
+        "multiplier": 1000,
+        "observationId": "budget-table-005f569ae0d4abf88506b981",
+        "paymentEvidence": false,
+        "rawValue": "3464825",
+        "reportingPerimeter": "GRF presentation with separate consolidation/accounting adjustment; surplus rows include that adjustment",
+        "sourceLocator": {
+          "columnIndex": 1,
+          "lineInExtractedPage": 34,
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourcePdfSha256": "70062dc21b08f9d30e7c4d474a0c3a21c925be197b7731c6ed8a3ffb43f23747",
+          "transform": "pinned-pdf-budget-tables-v1"
+        },
+        "sourceSha256": "70062dc21b08f9d30e7c4d474a0c3a21c925be197b7731c6ed8a3ffb43f23747",
+        "sourceURL": "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf",
+        "stage": "forecast_as_presented_in_addendum"
+      },
+      "comparison": {
+        "accountingReconciliationEstablished": false,
+        "differenceAsLossOrWaste": null,
+        "equalNumericValues": true,
+        "reportedPrimaryPaymentSum": "3464825000",
+        "rule": "Side-by-side program and fiscal-year connection only. Matching numbers do not establish cash-to-accrual reconciliation, recipient booking, vendor payment or service delivery. Do not infer shortfall or overpayment from unequal numbers.",
+        "scaledBudgetNumber": "3464825000"
+      },
+      "fiscalYear": "2025-26",
+      "id": "ns-federal-transfer-budget-link-2025-26-eq",
+      "payments": {
+        "currency": "CAD",
+        "currencyBasis": "context_inferred_from_official_canadian_federal_transfer_program",
+        "currencyExplicitlySpecified": false,
+        "financialBasis": "source-reported cash payments; primary program column only",
+        "firstPaymentDate": "2025-04-16",
+        "lastPaymentDate": "2026-03-18",
+        "observationIds": [
+          "federal-transfer-b59bc4c2790ee11e4c96b24a",
+          "federal-transfer-701ad510cd6c95f116618d5a",
+          "federal-transfer-9cd804179d87d1b535974799",
+          "federal-transfer-d48eac15629d5a4a9a476089",
+          "federal-transfer-e74bc78591561c9716974fe4",
+          "federal-transfer-4ec1faa1d094de6de7a25661",
+          "federal-transfer-166c4357c679a99e1603639b",
+          "federal-transfer-d32e108d324af23fc88bcc4b",
+          "federal-transfer-bb95170e94b87c25efb5f750",
+          "federal-transfer-e19bd40aac0b799803f7df84",
+          "federal-transfer-d7c3142bf017ddea004dd369",
+          "federal-transfer-6ca2291621ec60a1bbae54a6",
+          "federal-transfer-b0a0b57cc072b9a9cfce080d",
+          "federal-transfer-8deb779c586d1bfd79d0280d",
+          "federal-transfer-2f5af2c8b642f4c115c0e24d",
+          "federal-transfer-c17f02caefd745614bed079d",
+          "federal-transfer-3de5e07a3178374fbf181768",
+          "federal-transfer-03c22d96c62c8177bc90a2fb",
+          "federal-transfer-8be433efdaa90d9669eeabc2",
+          "federal-transfer-f3ba160ed9bd27ca5b703587",
+          "federal-transfer-b1a44eb983c296057976cab7",
+          "federal-transfer-0a119dfde4c1df03bcd6a94a",
+          "federal-transfer-1a475038cc7bec8801c8d534",
+          "federal-transfer-fe8e522dbaecf3ef7ba83939"
+        ],
+        "paymentDateCount": 24,
+        "primaryColumnSum": "3464825000",
+        "sourceSha256": "c90896b9efb7fbe68f6e805510fb9e1ee110df50c5c08757d2e17c05993f8461",
+        "sourceURL": "https://www.canada.ca/en/department-finance/programs/federal-transfers/major-federal-transfers-monthly-payments-made-to-provinces-territories.html",
+        "sourceUnit": "dollars"
+      },
+      "programCode": "EQ",
+      "programMapping": {
+        "federalSourceLabel": "Equalization",
+        "method": "explicit controlled program mapping; not fuzzy vendor or beneficial-owner matching",
+        "provincialSourceLabel": "Equalization Payments",
+        "sourceOwnedSharedTransactionId": null
+      },
+      "recipientJurisdictionCode": "CA-NS"
+    },
+    {
+      "budget": {
+        "currency": "CAD",
+        "financialBasis": "budget_presentation_including_non_cash_adjustments",
+        "multiplier": 1000,
+        "observationId": "budget-table-06e0d739613e6252ca75c026",
+        "paymentEvidence": false,
+        "rawValue": "1435328",
+        "reportingPerimeter": "GRF presentation with separate consolidation/accounting adjustment; surplus rows include that adjustment",
+        "sourceLocator": {
+          "columnIndex": 1,
+          "lineInExtractedPage": 35,
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourcePdfSha256": "70062dc21b08f9d30e7c4d474a0c3a21c925be197b7731c6ed8a3ffb43f23747",
+          "transform": "pinned-pdf-budget-tables-v1"
+        },
+        "sourceSha256": "70062dc21b08f9d30e7c4d474a0c3a21c925be197b7731c6ed8a3ffb43f23747",
+        "sourceURL": "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf",
+        "stage": "forecast_as_presented_in_addendum"
+      },
+      "comparison": {
+        "accountingReconciliationEstablished": false,
+        "differenceAsLossOrWaste": null,
+        "equalNumericValues": false,
+        "reportedPrimaryPaymentSum": "1444265000",
+        "rule": "Side-by-side program and fiscal-year connection only. Matching numbers do not establish cash-to-accrual reconciliation, recipient booking, vendor payment or service delivery. Do not infer shortfall or overpayment from unequal numbers.",
+        "scaledBudgetNumber": "1435328000"
+      },
+      "fiscalYear": "2025-26",
+      "id": "ns-federal-transfer-budget-link-2025-26-cht",
+      "payments": {
+        "currency": "CAD",
+        "currencyBasis": "context_inferred_from_official_canadian_federal_transfer_program",
+        "currencyExplicitlySpecified": false,
+        "financialBasis": "source-reported cash payments; primary program column only",
+        "firstPaymentDate": "2025-04-16",
+        "lastPaymentDate": "2026-03-18",
+        "observationIds": [
+          "federal-transfer-4ba3eb74ec9bdc880e47c725",
+          "federal-transfer-d02dee066f5a5c6731c6b9b0",
+          "federal-transfer-807037db7e1bb2e1a7ed5f57",
+          "federal-transfer-df4100ef29e3b8fce13638dd",
+          "federal-transfer-f358f6541156c8c27aafbf07",
+          "federal-transfer-ce2d6e904cef7e5ffd499509",
+          "federal-transfer-f648484c28ca7f2eb5d8dc18",
+          "federal-transfer-0fb58a15792ef19e7f3f82be",
+          "federal-transfer-57ee17f73e21df99baad10e7",
+          "federal-transfer-542bff57f6de5377fc7e796b",
+          "federal-transfer-223b267e32aa9ac41afe7bd0",
+          "federal-transfer-79d007909f36db7090ef3270",
+          "federal-transfer-22c581094a1deaec017be517",
+          "federal-transfer-31e9acb1462703be857e49db",
+          "federal-transfer-4c5dc56287e95919e2c8ce21",
+          "federal-transfer-9c8fa4531a0ab973f421c815",
+          "federal-transfer-208f9d1c91a01d2d139bff4b",
+          "federal-transfer-562416df2473a292bd20a58b",
+          "federal-transfer-8d57e2452b590169fc2299f9",
+          "federal-transfer-9583f24a2a28ecf1d5cd63db",
+          "federal-transfer-1d948c1a684a1b0d7f16b421",
+          "federal-transfer-1bc14fd4f23e54b477d3b224",
+          "federal-transfer-a9ff484579a60e1a8353a53a",
+          "federal-transfer-72211acbc06bc99f542dc9df"
+        ],
+        "paymentDateCount": 24,
+        "primaryColumnSum": "1444265000",
+        "sourceSha256": "c90896b9efb7fbe68f6e805510fb9e1ee110df50c5c08757d2e17c05993f8461",
+        "sourceURL": "https://www.canada.ca/en/department-finance/programs/federal-transfers/major-federal-transfers-monthly-payments-made-to-provinces-territories.html",
+        "sourceUnit": "dollars"
+      },
+      "programCode": "CHT",
+      "programMapping": {
+        "federalSourceLabel": "Canada Health Transfer",
+        "method": "explicit controlled program mapping; not fuzzy vendor or beneficial-owner matching",
+        "provincialSourceLabel": "Canada Health Transfer",
+        "sourceOwnedSharedTransactionId": null
+      },
+      "recipientJurisdictionCode": "CA-NS"
+    },
+    {
+      "budget": {
+        "currency": "CAD",
+        "financialBasis": "budget_presentation_including_non_cash_adjustments",
+        "multiplier": 1000,
+        "observationId": "budget-table-b79244c5ae032b92881f8446",
+        "paymentEvidence": false,
+        "rawValue": "457125",
+        "reportingPerimeter": "GRF presentation with separate consolidation/accounting adjustment; surplus rows include that adjustment",
+        "sourceLocator": {
+          "columnIndex": 1,
+          "lineInExtractedPage": 36,
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourcePdfSha256": "70062dc21b08f9d30e7c4d474a0c3a21c925be197b7731c6ed8a3ffb43f23747",
+          "transform": "pinned-pdf-budget-tables-v1"
+        },
+        "sourceSha256": "70062dc21b08f9d30e7c4d474a0c3a21c925be197b7731c6ed8a3ffb43f23747",
+        "sourceURL": "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf",
+        "stage": "forecast_as_presented_in_addendum"
+      },
+      "comparison": {
+        "accountingReconciliationEstablished": false,
+        "differenceAsLossOrWaste": null,
+        "equalNumericValues": false,
+        "reportedPrimaryPaymentSum": "460026000",
+        "rule": "Side-by-side program and fiscal-year connection only. Matching numbers do not establish cash-to-accrual reconciliation, recipient booking, vendor payment or service delivery. Do not infer shortfall or overpayment from unequal numbers.",
+        "scaledBudgetNumber": "457125000"
+      },
+      "fiscalYear": "2025-26",
+      "id": "ns-federal-transfer-budget-link-2025-26-cst",
+      "payments": {
+        "currency": "CAD",
+        "currencyBasis": "context_inferred_from_official_canadian_federal_transfer_program",
+        "currencyExplicitlySpecified": false,
+        "financialBasis": "source-reported cash payments; primary program column only",
+        "firstPaymentDate": "2025-04-16",
+        "lastPaymentDate": "2026-03-18",
+        "observationIds": [
+          "federal-transfer-32bcb5c48e3894018cafd105",
+          "federal-transfer-001cac4d31839f5b85b1bed8",
+          "federal-transfer-5d2b31292a531f0f9e2248fb",
+          "federal-transfer-209d74506de54b0b3e50f585",
+          "federal-transfer-6b06e6e48d77959df53bbf17",
+          "federal-transfer-f07761451f892456680eae26",
+          "federal-transfer-b33b25c531111950aafeac29",
+          "federal-transfer-1ae20667b96262428009ab48",
+          "federal-transfer-6970d3a49b0d7b663c07eb54",
+          "federal-transfer-ddff36ad60b5571726de57dc",
+          "federal-transfer-b265f5271c23dfc6b817bce1",
+          "federal-transfer-465362147b507eee55fe032b",
+          "federal-transfer-04d02eab12fae87bc07977b7",
+          "federal-transfer-25aae12d2481d7fc1ca827db",
+          "federal-transfer-7ac32f5647d362af9adfd279",
+          "federal-transfer-a9fcf678d909d1d58bf1a2fe",
+          "federal-transfer-a2a7419f0e38a5862eece167",
+          "federal-transfer-58d9a1edf1e6b0a056366707",
+          "federal-transfer-b3b2cfd9cf1207c1b8e5b244",
+          "federal-transfer-6875155ad946be7f65221097",
+          "federal-transfer-83daf49e199ac51b465988be",
+          "federal-transfer-fe0a7a593604a62e4494c964",
+          "federal-transfer-941c436930c1a5cd9ffbbc46",
+          "federal-transfer-2e92b32da9927bda6e77b30f"
+        ],
+        "paymentDateCount": 24,
+        "primaryColumnSum": "460026000",
+        "sourceSha256": "c90896b9efb7fbe68f6e805510fb9e1ee110df50c5c08757d2e17c05993f8461",
+        "sourceURL": "https://www.canada.ca/en/department-finance/programs/federal-transfers/major-federal-transfers-monthly-payments-made-to-provinces-territories.html",
+        "sourceUnit": "dollars"
+      },
+      "programCode": "CST",
+      "programMapping": {
+        "federalSourceLabel": "Canada Social Transfer",
+        "method": "explicit controlled program mapping; not fuzzy vendor or beneficial-owner matching",
+        "provincialSourceLabel": "Canada Social Transfer",
+        "sourceOwnedSharedTransactionId": null
+      },
+      "recipientJurisdictionCode": "CA-NS"
+    }
+  ],
+  "nextEvidence": [
+    "Provincial public-account revenue recognition and cash-to-accrual bridge.",
+    "Program-specific allocation/revision notices and adjustment timing.",
+    "Downstream authorized expenditure records, with actual shared identifiers where available."
+  ],
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reason": "Reviewed factual projection only; exact independent acceptance receipt also required.",
+    "reviewId": "transfer-budget-links-independent-review-20261028",
+    "reviewType": "neutral_program_budget_payment_links",
+    "reviewedOn": "2026-10-28"
+  },
+  "rightsLimit": "This review does not establish a commercial redistribution licence for source material; copied source content or expanded reuse requires separate rights review.",
+  "schemaVersion": "program-budget-payment-links-v1",
+  "title": "Follow equalization from a provincial forecast to federal payment records"
+}

@@ -56,3 +56,13 @@ class ReportingAdmission(unittest.TestCase):
     else:b['consequentialAllegation']=True
     body=json.dumps(b).encode();(folder/'case.json').write_bytes(body);receipt['bundleSha256']=hashlib.sha256(body).hexdigest();(folder/'publication-review.json').write_text(json.dumps(receipt))
     with self.assertRaises(ValueError):reporting_files(root)
+
+class CollectionCoverage(unittest.TestCase):
+ def test_coverage_counts_and_receipts_are_rebuilt_without_changing_inventory(self):
+  from collection_coverage import build_collection_coverage
+  before=(ROOT/'data/foundation.json').read_bytes();coverage=build_collection_coverage(ROOT)
+  self.assertEqual(coverage['guideReferenceCount'],139)
+  self.assertEqual(len(coverage['collections']),13)
+  self.assertEqual(next(c for c in coverage['collections'] if c['id']=='tenders')['count'],33670)
+  self.assertEqual((ROOT/'data/foundation.json').read_bytes(),before)
+  self.assertTrue(all(not c['scheduledRefreshConfigured'] and not c['completeSourceCoverage'] for c in coverage['collections']))
