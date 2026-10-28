@@ -29,7 +29,7 @@ test('methodology is tied to exact accepted tender index, not a new collection',
  assert.equal(b.example.sourceRowId,'row-rzyy_crj2-ah2f');assert.equal(b.kind,'source_methodology_annotation_not_investigation');
  assert.match(b.amountCaveat,/Do not sum/);
  const coverage=JSON.parse(await read('data/collection-coverage.json'));
- assert.equal(coverage.collections.length,18);
+ assert.equal(coverage.collections.length,19);
  assert.ok(!coverage.collections.some(c=>Object.keys(CONTEXT).includes(c.id)));
 });
 for(const kind of Object.keys(CONTEXT)){
