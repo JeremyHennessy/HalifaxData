@@ -1,0 +1,15 @@
+{
+  "url": "https://data.novascotia.ca/robots.txt",
+  "attemptedAt": "2026-10-28T12:00:00+00:00",
+  "headersReceivedAt": "2026-10-28T12:00:01+00:00",
+  "completedAt": "2026-10-28T12:00:02+00:00",
+  "status": 200,
+  "complete": true,
+  "disposition": "received_for_semantic_review",
+  "headers": {
+    "content-type": "text/plain"
+  },
+  "bodyBytes": 47,
+  "bodySha256": "0216d1015d7e583478b4927ee5dcc7a2be752223bb67ef1e240812b8e052be77",
+  "testFixtureOnly": true
+}

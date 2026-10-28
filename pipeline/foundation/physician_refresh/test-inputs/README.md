@@ -1,0 +1,1 @@
+Synthetic offline test responses reconstructed from the already admitted public category facts. Metadata and receipt timing are test fixtures, not retained source responses or evidence of retrieval. Never publish or use these as source admission.

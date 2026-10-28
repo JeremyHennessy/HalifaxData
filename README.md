@@ -55,3 +55,7 @@ One optional original M10687 approval context is tied to Churchill Drive project
 ### Additional original Water approval contexts
 
 Cowie Hill and Akerley now have separately reviewed, optional original-decision contexts on their existing project rows. Cowie’s explicit original/additional-funding chain reproduces an inclusive revised total, numerically matching the later staff budget without asserting complete accounting reconciliation. Akerley preserves the report’s Design Work label, the broader rehabilitation approval and a later budget of unreconciled scope. Each context independently verifies its exact parent bytes, project number, matter references, dates and receipt. Failure of one cannot suppress the others or the six-row report. No project, regulatory-reference or collection count is added.
+
+## Offline pipeline foundation (inactive)
+
+`pipeline/foundation` adds reviewed historical arithmetic checks, retained robots-policy matching and a disabled candidate collector. Its 139 offline tests are included explicitly in `npm test`. No scheduler, source fetch, public finding or new collection is activated. The public build allowlist is unchanged; package fixtures, generated reports and runtime state must stay outside `dist`. See `docs/OFFLINE-PIPELINE-FOUNDATION.md`.

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.novascotia.ca/api/views/xpt9-p9is.json",
+  "attemptedAt": "2026-10-28T12:00:00+00:00",
+  "headersReceivedAt": "2026-10-28T12:00:01+00:00",
+  "completedAt": "2026-10-28T12:00:02+00:00",
+  "status": 200,
+  "complete": true,
+  "disposition": "received_for_semantic_review",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "bodyBytes": 599,
+  "bodySha256": "fb62512b7c5ab5f82c6feb6612940deed4a97ff927efe658f7814d7a43ad9fac",
+  "testFixtureOnly": true
+}
