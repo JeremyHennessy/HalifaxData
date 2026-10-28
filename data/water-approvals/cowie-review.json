@@ -1,0 +1,22 @@
+{
+  "status": "accepted",
+  "bundleSha256": "034bf64dafc13d6243b02f8d3a67f0739f82912b426ec2387b4039ef161adcbc",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "halifax-water-cowie-approval-chain-publication-review-20261028",
+  "checks": [
+    "Independently viewed all four original decision-letter pages; verified matters M09997 and M10305, dates April 8 and November 24, 2021, and the explicit later-letter reference to the earlier approval.",
+    "Verified prior reported funding 300000 plus first approval 7610000 equals original estimate 7910000; additional approval 800000 yields stated revised total 8710000.",
+    "Verified exact accepted parent project 300002718, both matter/date references and later reported budget 8710000; linkage is not inferred from matching amounts.",
+    "Nine tests including source/receipt/parent tamper rejection and optimized-Python rejection passed independently; deterministic replay preserves the artifact.",
+    "Projection is limited to institutional facts, attributed explanations and source locators, excluding signatures, personal contacts and original letter bodies."
+  ],
+  "limits": [
+    "Numeric agreement with the later budget is not a complete tax, contingency or accounting-basis reconciliation; later amendment history remains incomplete.",
+    "Prior capital-budget approval documents, contractor awards, payments and delivery records are not established by these two letters.",
+    "Funding components and inclusive totals overlap and must not be summed as additional spending. No loss, savings or wrongdoing conclusion is supported.",
+    "Dollar denomination is source-reported with ISO currency unspecified.",
+    "Optional exact-project context adds no collection, project or matter-reference count.",
+    "Narrow factual projection only; no general source-document republication licence is asserted."
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "halifax-water-cowie-approval-chain-v1",
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "reviewId": "halifax-water-cowie-approval-chain-publication-review-20261028",
+    "reviewedOn": "2026-10-28",
+    "consequentialAllegation": false
+  },
+  "id": "halifax-water-cowie-approval-chain",
+  "title": "Cowie Hill Reservoir: original and additional-funding approvals",
+  "integration": {
+    "mode": "optional_nested_context",
+    "parentCollectionId": "halifax-water-regulatory-project-closeouts-2023-24",
+    "parentBundleSha256": "57eac399c2d4438ef38089422730852c5e244502680d1a645e21317aa10f17cb",
+    "parentRecordId": "halifax-water-project-300002718-2024-closeout",
+    "addsCollectionCount": false,
+    "addsProjectCount": false,
+    "addsMatterReferenceCount": false,
+    "existingReportValuesUnchanged": true
+  },
+  "sources": [
+    {
+      "id": "cowie-m09997",
+      "publisher": "Nova Scotia Utility and Review Board",
+      "title": "Board Decision Letter: Cowie Hill Reservoir Replacement",
+      "matterId": "M09997",
+      "decisionDate": "2021-04-08",
+      "databaseDocumentNumber": "83194",
+      "pdfFooterDocumentNumber": "281043",
+      "url": "https://uarb.novascotia.ca/fmi/webd/UARB15",
+      "locator": "Exact matter M09997 → Key Documents → Public Board Decision Letter 83194",
+      "sha256": "2e256b73f0949347d03b9caac0bd311ee092874bc2ebff7224ee74c977b3f961",
+      "retrievedAt": "2026-10-28T13:50:08Z",
+      "pdfPages": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "cowie-m10305",
+      "publisher": "Nova Scotia Utility and Review Board",
+      "title": "Board Decision Letter: Cowie Hill Reservoir Replacement — Additional Funding",
+      "matterId": "M10305",
+      "decisionDate": "2021-11-24",
+      "databaseDocumentNumber": "84948",
+      "pdfFooterDocumentNumber": "289244",
+      "url": "https://uarb.novascotia.ca/fmi/webd/UARB15",
+      "locator": "Exact matter M10305 → Key Documents → Public Board Decision Letter 84948",
+      "sha256": "ce8a6f521ec163287fc86c6eaf55dddaa53b33d0f4c75454de326d974eed47da",
+      "retrievedAt": "2026-10-28T13:47:51Z",
+      "pdfPages": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "cowie-staff-report",
+      "publisher": "Halifax Water",
+      "title": "Board public package, September 26, 2024",
+      "url": "https://halifaxwater.ca/sites/default/files/2024-10/Public%20Package%20-%20September%2026%2C%202024.pdf",
+      "sha256": "2f0874884eab65a0200379a71caa4b6d27615ea51753749bf1c4786ff38b7886",
+      "pdfPage": 39
+    }
+  ],
+  "projectNumberAsReported": "300002718",
+  "projectLink": {
+    "basis": "Staff report explicitly lists both matter IDs and dates. Each original letter verifies its own matter and date; M10305 expressly cites M09997 and the April 8 approval.",
+    "matterDatePairs": [
+      {
+        "matterId": "M09997",
+        "date": "2021-04-08"
+      },
+      {
+        "matterId": "M10305",
+        "date": "2021-11-24"
+      }
+    ],
+    "projectNumberPresentInLetters": false,
+    "notAmountMatched": true
+  },
+  "facts": [
+    {
+      "id": "cowie-prior",
+      "sourceId": "cowie-m09997",
+      "pdfPages": [
+        2
+      ],
+      "label": "Previously approved project funding",
+      "stage": "prior_budget_funding_reported_in_decision",
+      "value": 300000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "cowie-first",
+      "sourceId": "cowie-m09997",
+      "pdfPages": [
+        2
+      ],
+      "label": "Approval of proposed project and source of funds",
+      "stage": "regulatory_project_and_funding_approval",
+      "value": 7610000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "cowie-initial-total",
+      "sourceId": "cowie-m09997",
+      "pdfPages": [
+        2
+      ],
+      "label": "Original total estimate including previously approved funding",
+      "stage": "original_estimated_total_project_cost",
+      "value": 7910000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "cowie-additional",
+      "sourceId": "cowie-m10305",
+      "pdfPages": [
+        2
+      ],
+      "label": "Additional project funding and source approved",
+      "stage": "additional_regulatory_funding_approval",
+      "value": 800000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "cowie-revised-total",
+      "sourceId": "cowie-m10305",
+      "pdfPages": [
+        2
+      ],
+      "label": "Total revised project cost stated by Board",
+      "stage": "revised_total_project_cost_in_approval",
+      "value": 8710000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "cowie-reported-budget",
+      "sourceId": "cowie-staff-report",
+      "pdfPages": [
+        39
+      ],
+      "label": "Later project budget as reported",
+      "stage": "staff_report_project_budget",
+      "value": 8710000,
+      "unit": "source_dollars",
+      "currency": null
+    }
+  ],
+  "revisionChain": {
+    "relationship": "explicit_additional_funding_and_revised_total",
+    "earlierMatterId": "M09997",
+    "laterMatterId": "M10305",
+    "sourceId": "cowie-m10305",
+    "pdfPages": [
+      1,
+      2
+    ],
+    "initialFundingEquation": "300,000 + 7,610,000 = 7,910,000",
+    "revisionEquation": "7,910,000 + 800,000 = 8,710,000",
+    "notAllFactsAdditive": true,
+    "revisedTotalIncludesEarlierFunding": true,
+    "revisionReasonAsAttributed": "The later Board letter recounts Halifax Water’s explanation that bids exceeded the pre-tender estimate, chiefly for the concrete reservoir, amid pandemic-related material and labour pricing uncertainty. This explanation is attributed, not independently audited.",
+    "additionalSourceAsApproved": "Surpluses in previously closed projects and projects deferred or cancelled; proposed source approved by Board."
+  },
+  "budgetComparison": {
+    "reportedBudgetNumericallyMatchesRevisedApprovalTotal": true,
+    "value": 8710000,
+    "currency": null,
+    "basis": "Explicit project/matter chain plus equal stated totals; not merely an amount-based entity match.",
+    "fullAccountingBasisReconciled": false,
+    "taxAndContingencyBasisEstablished": false,
+    "laterAmendmentHistoryComplete": false
+  },
+  "conditionsAndLimits": {
+    "approvalQualification": "Both approvals based on information provided; proposed source of funds approved. No separately numbered conditions stated in these letters.",
+    "designScope": "Original letter accepts proposed 2.4 MG prestressed concrete reservoir design; no completed-delivery inspection inferred.",
+    "originalPriorApprovalDocumentsCaptured": false,
+    "scope": "Two original decision letters only; not all exhibits, prior capital-budget approvals, later amendments, contracts, bank payments or delivery records.",
+    "financial": "These approval/estimate/budget stages are not cash payments. Do not add component approvals to inclusive totals or subtract staff expenditure to allege a loss or verified savings.",
+    "currency": "Letters use dollars; explicit currency code and detailed tax basis not established in these two letters.",
+    "publication": "Institutional paraphrase and numbers only. Full letters, signatures and contact details not republished; public listing is not an open-licence grant."
+  },
+  "attribution": "Nova Scotia Utility and Review Board decision letters and Halifax Water staff report; no endorsement implied."
+}
