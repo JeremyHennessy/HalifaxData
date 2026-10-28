@@ -30,6 +30,8 @@ export function filterReferences(bundle,{q='',group='',stage=''}={}){
  return rows;
 }
 export const OPTIONAL_COLLECTION_ROUTES={
+ 'physician-categories':'#/health-spending?view=physicians',
+ 'nshealth':'#/health-spending?view=nshealth',
  'richmond-register':'#/richmond-register',
  'water-projects':'#/water-projects',
  'municipal-capital':'#/municipal-capital',

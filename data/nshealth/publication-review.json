@@ -1,0 +1,22 @@
+{
+  "status": "accepted",
+  "bundleSha256": "9ec619b70614e8696fa920b7c040e269c749f4c0e2029d9b1e8993ae0b7da8ac",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "nshealth-expense-budget-independent-review-20261028",
+  "checks": [
+    "Independently visually compared 78 numeric cells on original PDF pages 7, 33 and 34, including explicit Canadian-dollar thousands and source columns.",
+    "Verified PSAS and NS Health plus PDDP consolidation in Note 2, budget alignment in Note 24 and reclassified comparative context in Note 25; checked June 29, 2026 audit date.",
+    "Independently recomputed six component identities and nine actual-minus-budget differences; three matching totals are explicitly nonadditive.",
+    "Fourteen tests and exact candidate replay passed independently; final release differs only in publication metadata.",
+    "Projection contains aggregate institutional figures and independently written context, excluding patient, employee, supplier identity and original document imagery."
+  ],
+  "limits": [
+    "Service and object classifications represent the same expense totals and cannot be added together.",
+    "Budget bridge is presentation alignment, not an independently verified appropriation instrument.",
+    "Variances do not establish unauthorized spending, inefficiency, missing cash or service failure.",
+    "Accrual expense aggregates are not a payment ledger or verified ambulance-contract mapping.",
+    "Historical consolidated NS Health and PDDP scope excludes a claim of all provincial healthcare or combined IWK accounts.",
+    "Narrow factual projection only; no blanket report reproduction rights asserted."
+  ]
+}

@@ -63,3 +63,8 @@ Hosted collection-failure checks use `tests/reviewed-count.mjs`, an explicit val
 ## Offline pipeline foundation (inactive)
 
 `pipeline/foundation` adds reviewed historical arithmetic checks, retained robots-policy matching and a disabled candidate collector. Its 139 offline tests are included explicitly in `npm test`. No scheduler, source fetch, public finding or new collection is activated. The public build allowlist is unchanged; package fixtures, generated reports and runtime state must stay outside `dist`. See `docs/OFFLINE-PIPELINE-FOUNDATION.md`.
+
+## Separate health-source views
+`#/health-spending` defaults to 435 historical province-wide physician payment category/year observations. Original year/category labels, signed decimals, six negative values and 63 explicit zeroes remain intact. Currency, category overlap and cash/accrual basis are unestablished: no dollar symbol, totals, shares, trends, recipient matching or invented period dates.
+
+A separate NS Health view contains 78 consolidated statement cells in explicitly stated **CAD thousands**, covering NS Health plus PDDP. Service and expense-type classifications overlap and must not be added. Note24 bridges the budget to the consolidated presentation; actual-minus-budget differences are descriptive, not legal or cash-loss findings. Optional same-statement Note21 context preserves a printed dash and prior blank as nonnumeric even though six current-year components sum to zero. The two source collections have independent exact artifact/receipt gates; Note21 adds no collection or source count. No offline refresh is activated. Wrapped mobile bodies/tabs, exact accessible select names, raw-source-hash fixtures, export and isolated-failure journeys are required release checks.

@@ -1,0 +1,512 @@
+{
+  "schemaVersion": "nshealth-funding-basis-bridge-v1",
+  "id": "nshealth-2026-funding-basis-context",
+  "title": "Annual surplus and the operating-funding measure are different",
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reviewId": "nshealth-funding-basis-independent-review-20261028",
+    "reviewType": "source_attributed_accounting_basis_explanation",
+    "reviewedOn": "2026-10-28",
+    "requiresMatchingIndependentReceipt": true
+  },
+  "target": {
+    "expenseBundleSha256": "9ec619b70614e8696fa920b7c040e269c749f4c0e2029d9b1e8993ae0b7da8ac",
+    "expenseBundleId": "nshealth-2026-expense-budget-context",
+    "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d",
+    "sameInstitutionAndStatementOnly": true
+  },
+  "source": {
+    "title": "Nova Scotia Health Consolidated Financial Statements, March 31, 2026",
+    "url": "https://www.nshealth.ca/sites/default/files/documents/26%20-%20NSH%20FY26%20Financial%20Statements%20-%20FINAL.pdf",
+    "sha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d",
+    "receiptSha256": "77bee14ba394e5e934fb59ca9057745d0d8cd33a4387a0961a46dbebedfdb683",
+    "retrievedAt": "2026-10-28T14:11:31.890496+00:00",
+    "pages": 34,
+    "auditReportDate": "2026-06-29",
+    "auditReportLocator": {
+      "pdfPages": [
+        3,
+        4,
+        5
+      ]
+    },
+    "attribution": "Source: Nova Scotia Health, consolidated financial statements; amounts independently re-expressed from stated tables."
+  },
+  "summary": "Note 21 adjusts the annual surplus for capital-related accounting items. The six 2026 numeric inputs sum to zero; the printed operating-funding result is a dash and remains nonnumeric in this projection. This is not a claim of spare cash or payment correctness.",
+  "facts": [
+    {
+      "id": "nshealth-note21-r1-2026",
+      "sourceLabel": "Annual surplus, reported on the consolidated statement of operations",
+      "sourceColumn": "2026",
+      "rawToken": "182,354",
+      "value": "182354",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2026-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 1,
+        "column": "2026"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r1-2025",
+      "sourceLabel": "Annual surplus, reported on the consolidated statement of operations",
+      "sourceColumn": "2025",
+      "rawToken": "163,556",
+      "value": "163556",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2025-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 1,
+        "column": "2025"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r2-2026",
+      "sourceLabel": "Amortization",
+      "sourceColumn": "2026",
+      "rawToken": "93,809",
+      "value": "93809",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2026-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 2,
+        "column": "2026"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r2-2025",
+      "sourceLabel": "Amortization",
+      "sourceColumn": "2025",
+      "rawToken": "83,706",
+      "value": "83706",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2025-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 2,
+        "column": "2025"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r3-2026",
+      "sourceLabel": "Capital grants",
+      "sourceColumn": "2026",
+      "rawToken": "(282,641)",
+      "value": "-282641",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2026-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 3,
+        "column": "2026"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r3-2025",
+      "sourceLabel": "Capital grants",
+      "sourceColumn": "2025",
+      "rawToken": "(252,279)",
+      "value": "-252279",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2025-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 3,
+        "column": "2025"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r4-2026",
+      "sourceLabel": "Disposal of tangible capital assets",
+      "sourceColumn": "2026",
+      "rawToken": "909",
+      "value": "909",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2026-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 4,
+        "column": "2026"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r4-2025",
+      "sourceLabel": "Disposal of tangible capital assets",
+      "sourceColumn": "2025",
+      "rawToken": "1,361",
+      "value": "1361",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2025-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 4,
+        "column": "2025"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r5-2026",
+      "sourceLabel": "Capital Costs expensed",
+      "sourceColumn": "2026",
+      "rawToken": "1,100",
+      "value": "1100",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2026-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 5,
+        "column": "2026"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r5-2025",
+      "sourceLabel": "Capital Costs expensed",
+      "sourceColumn": "2025",
+      "rawToken": "2,639",
+      "value": "2639",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2025-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 5,
+        "column": "2025"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r6-2026",
+      "sourceLabel": "Capital transfers",
+      "sourceColumn": "2026",
+      "rawToken": "4,469",
+      "value": "4469",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2026-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 6,
+        "column": "2026"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r6-2025",
+      "sourceLabel": "Capital transfers",
+      "sourceColumn": "2025",
+      "rawToken": null,
+      "value": null,
+      "availability": "blank",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2025-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 6,
+        "column": "2025"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r7-2026",
+      "sourceLabel": "Operating funding (deficit) surplus, as defined by the Act",
+      "sourceColumn": "2026",
+      "rawToken": "-",
+      "value": null,
+      "availability": "source_dash",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2026-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 7,
+        "column": "2026"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-note21-r7-2025",
+      "sourceLabel": "Operating funding (deficit) surplus, as defined by the Act",
+      "sourceColumn": "2025",
+      "rawToken": "(1,017)",
+      "value": "-1017",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2025-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 31,
+        "printedPage": 31,
+        "note": "21",
+        "row": 7,
+        "column": "2025"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-statement-annual-surplus-2026",
+      "sourceLabel": "Annual surplus",
+      "sourceColumn": "2026",
+      "rawToken": "182,354",
+      "value": "182354",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2026-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 7,
+        "printedPage": 7,
+        "table": "Consolidated Statement of Operations",
+        "rowLabel": "Annual surplus",
+        "column": "2026"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    },
+    {
+      "id": "nshealth-statement-annual-surplus-2025",
+      "sourceLabel": "Annual surplus",
+      "sourceColumn": "2025",
+      "rawToken": "163,556",
+      "value": "163556",
+      "availability": "reported_number",
+      "unit": "thousands_of_Canadian_dollars",
+      "currency": "CAD",
+      "multiplier": 1000,
+      "currencyBasis": "explicit_source_label",
+      "measureType": "flow",
+      "periodEnd": "2025-03-31",
+      "periodStart": null,
+      "periodBasis": "Annual year ended March 31; start date not separately printed",
+      "stage": "source_reported_audited_note_or_statement",
+      "sourceLocator": {
+        "pdfPage": 7,
+        "printedPage": 7,
+        "table": "Consolidated Statement of Operations",
+        "rowLabel": "Annual surplus",
+        "column": "2025"
+      },
+      "sourceSnapshotSha256": "7139704b83705b60baef78c906c79b5cacd8dd391a7ec8c55e28317a1339729d"
+    }
+  ],
+  "sameMeasureLinks": [
+    {
+      "leftFactId": "nshealth-note21-r1-2026",
+      "rightFactId": "nshealth-statement-annual-surplus-2026",
+      "relationship": "Exact same-statement annual-surplus caption and year; Note 21 explicitly references the statement",
+      "equal": true,
+      "mustNotAddTogether": true
+    },
+    {
+      "leftFactId": "nshealth-note21-r1-2025",
+      "rightFactId": "nshealth-statement-annual-surplus-2025",
+      "relationship": "Exact same-statement annual-surplus caption and year; Note 21 explicitly references the statement",
+      "equal": true,
+      "mustNotAddTogether": true
+    }
+  ],
+  "calculations": [
+    {
+      "id": "nshealth-note21-2026-component-arithmetic",
+      "inputFactIds": [
+        "nshealth-note21-r1-2026",
+        "nshealth-note21-r2-2026",
+        "nshealth-note21-r3-2026",
+        "nshealth-note21-r4-2026",
+        "nshealth-note21-r5-2026",
+        "nshealth-note21-r6-2026"
+      ],
+      "operation": "Sum the six signed numeric values printed in Note 21, 2026 column",
+      "calculatedResult": "0",
+      "unit": "thousands_of_Canadian_dollars",
+      "sourceResultFactId": "nshealth-note21-r7-2026",
+      "sourceReportedValue": null,
+      "sourceResultRawToken": "-",
+      "comparisonToReportedResult": "not_performed_source_result_is_dash",
+      "status": "component_arithmetic_explained_only"
+    },
+    {
+      "id": "nshealth-note21-2025-component-arithmetic",
+      "inputFactIds": [
+        "nshealth-note21-r1-2025",
+        "nshealth-note21-r2-2025",
+        "nshealth-note21-r3-2025",
+        "nshealth-note21-r4-2025",
+        "nshealth-note21-r5-2025",
+        "nshealth-note21-r6-2025"
+      ],
+      "calculatedResult": null,
+      "sourceResultFactId": "nshealth-note21-r7-2025",
+      "sourceReportedValue": "-1017",
+      "status": "insufficient_evidence",
+      "reason": "2025 Capital transfers cell is blank; no full bridge is calculated and blank is not treated as zero."
+    }
+  ],
+  "legalContext": {
+    "sourceAttribution": "Note 21 labels its operating-funding measure as defined by the Health Authorities Act and describes a reconciliation requirement. This projection does not independently verify the applicable statutory version or legal compliance.",
+    "sourceLocator": {
+      "pdfPage": 31,
+      "note": "21"
+    },
+    "applicableLawVersionVerified": false
+  },
+  "limitations": [
+    "Calculated zero is not substituted for the source dash. The two facts remain separately represented.",
+    "A surplus, budget variance and this operating-funding measure are not interchangeable cash balances, payments or judgments of spending legality.",
+    "No underlying transaction accuracy, vendor identity, service quality, disposal purpose or cash availability is verified by this arithmetic.",
+    "2025 comparative amounts follow the 2026 statement presentation; Note 25 reclassification context still applies.",
+    "This is supplemental accounting context for the same accepted institution/source, not a new source, new investigation or confirmed misconduct finding."
+  ],
+  "nextRecords": [
+    "Source clarification of the dash and blank presentation conventions before interpreting them as numeric zero.",
+    "Applicable statutory definition/version and institution accounting bridge documentation before making legal or cash-availability interpretations."
+  ],
+  "rightsScope": "Candidate projection is numerical facts, institution/category labels, precise source locators and independently written context only; no report facsimile, logos, signatures, personal contact details or extended narrative. Not a blanket licence for source reproduction."
+}

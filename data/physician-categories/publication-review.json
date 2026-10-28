@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "637075be4bdcfa7d12171898382db0d58b8f9f28e7f8b3833f146df239347768",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "physician-payment-categories-independent-review-20261028",
+  "scope": "435 historical province-wide physician-payment category/year observations, not recipient or transaction records",
+  "checks": [
+    "All 435 source CSV rows independently matched to exact labels, decimal tokens, record numbers and canonical row hashes",
+    "Exact dataset/year/payment-type/subcategory natural key unique; local IDs are not official transaction identifiers",
+    "Six signed negative values and 63 explicit zeroes preserved",
+    "All category labels reviewed; no individual physician, patient or payee identities projected",
+    "Ten offline tests passed; final changes restricted to release and publication metadata",
+    "Official Open Government Licence Nova Scotia version 1.1 checked; attribution included and personal information/official-symbol exclusions respected"
+  ],
+  "limitations": [
+    "Currency remains unestablished; USD source display metadata is not economic currency evidence",
+    "Source-reported payments do not establish cash/accrual, gross/net, tax basis or bank settlement",
+    "No totals, shares, trends or category/year aggregation authorized; parent/subcategory overlap unresolved",
+    "Original reporting-year labels retained without invented period start/end dates",
+    "Province-wide only; no Halifax/district allocation, recipient matching or budget-to-payment join",
+    "Historical frozen CSV, not a live transaction ledger or comprehensive spending coverage",
+    "Application admission, decimal display and hosted behavior require separate verification"
+  ]
+}
