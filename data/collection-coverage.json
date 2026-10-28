@@ -17,7 +17,7 @@
       "count": 6,
       "countUnit": "historical project rows, not payments",
       "route": "#/water-projects",
-      "scope": "Six source-reported cumulative project costs through March 31, 2024, with source budgets and ten regulatory matter references. One optional independently reviewed original decision adds context, not a collection or project count. Not annual cash payments, independently inspected delivery or all utility spending.",
+      "scope": "Six source-reported cumulative project costs through March 31, 2024, with source budgets and ten regulatory matter references. Optional independently reviewed original project decisions add context, not collection or project counts. Not annual cash payments, independently inspected delivery or all utility spending.",
       "completeSourceCoverage": false,
       "scheduledRefreshConfigured": false,
       "sourceURLs": [

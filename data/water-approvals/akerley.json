@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "halifax-water-akerley-approval-context-v1",
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "reviewId": "halifax-water-akerley-publication-review-20261028",
+    "reviewedOn": "2026-10-28",
+    "consequentialAllegation": false
+  },
+  "id": "halifax-water-akerley-approval-context",
+  "title": "Akerley Reservoir: original rehabilitation approval scope",
+  "integration": {
+    "mode": "optional_nested_context",
+    "parentCollectionId": "halifax-water-regulatory-project-closeouts-2023-24",
+    "parentBundleSha256": "57eac399c2d4438ef38089422730852c5e244502680d1a645e21317aa10f17cb",
+    "parentRecordId": "halifax-water-project-300003356-2024-closeout",
+    "addsCollectionCount": false,
+    "addsProjectCount": false,
+    "addsMatterReferenceCount": false,
+    "existingReportValuesUnchanged": true
+  },
+  "sources": [
+    {
+      "id": "akerley-m10446",
+      "publisher": "Nova Scotia Utility and Review Board",
+      "title": "Board Decision Letter: Akerley Reservoir Rehabilitation Project",
+      "matterId": "M10446",
+      "decisionDate": "2022-03-04",
+      "databaseDocumentNumber": "85728",
+      "pdfFooterDocumentNumber": "292340",
+      "url": "https://uarb.novascotia.ca/fmi/webd/UARB15",
+      "locator": "Exact matter M10446 → Key Documents → Public Board Decision Letter 85728",
+      "sha256": "71818d1a843ed15c08bf2892eaea4321ad5026d77a05be8660b89210245b103e",
+      "retrievedAt": "2026-10-28T13:57:52Z",
+      "pdfPages": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "akerley-staff-report",
+      "publisher": "Halifax Water",
+      "title": "Board public package, September 26, 2024",
+      "url": "https://halifaxwater.ca/sites/default/files/2024-10/Public%20Package%20-%20September%2026%2C%202024.pdf",
+      "sha256": "2f0874884eab65a0200379a71caa4b6d27615ea51753749bf1c4786ff38b7886",
+      "pdfPage": 39
+    }
+  ],
+  "projectNumberAsReported": "300003356",
+  "projectLink": {
+    "matterId": "M10446",
+    "decisionDate": "2022-03-04",
+    "basis": "Staff report explicitly references M10446 and Mar 4/22; original letter independently verifies both. Akerley rehabilitation title corroborates the explicit link, not an amount-based match.",
+    "projectNumberPresentInLetter": false
+  },
+  "titles": {
+    "reportTitleAsReported": "Akerley Reservoir Rehabilitation ‐ Design Work",
+    "decisionTitle": "Akerley Reservoir Rehabilitation Project",
+    "interpretation": "The staff label includes Design Work; the original approval describes the rehabilitation project, including potential floor work. Preserve both labels rather than silently renaming the report record or treating approval as design-only."
+  },
+  "facts": [
+    {
+      "id": "akerley-approved-total",
+      "sourceId": "akerley-m10446",
+      "pdfPages": [
+        2
+      ],
+      "label": "Project and proposed funding source approved",
+      "stage": "regulatory_project_funding_approval",
+      "value": 8930000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "akerley-prior-budget",
+      "sourceId": "akerley-m10446",
+      "pdfPages": [
+        2
+      ],
+      "label": "Funding included in 2021/22 capital budget",
+      "stage": "funding_plan_prior_year_component",
+      "value": 200000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "akerley-current-budget",
+      "sourceId": "akerley-m10446",
+      "pdfPages": [
+        2
+      ],
+      "label": "Funding included in 2022/23 capital budget",
+      "stage": "funding_plan_current_year_component",
+      "value": 7430000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "akerley-surplus-funding",
+      "sourceId": "akerley-m10446",
+      "pdfPages": [
+        2
+      ],
+      "label": "Surpluses in closed, deferred or cancelled projects",
+      "stage": "funding_plan_surplus_component",
+      "value": 1300000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "akerley-staff-budget",
+      "sourceId": "akerley-staff-report",
+      "pdfPages": [
+        39
+      ],
+      "label": "Later staff report project budget",
+      "stage": "staff_report_project_budget",
+      "value": 8520000,
+      "unit": "source_dollars",
+      "currency": null
+    }
+  ],
+  "fundingPlan": {
+    "sourceFactIds": [
+      "akerley-prior-budget",
+      "akerley-current-budget",
+      "akerley-surplus-funding"
+    ],
+    "equation": "200,000 + 7,430,000 + 1,300,000 = 8,930,000",
+    "total": 8930000,
+    "currency": null,
+    "unit": "source_dollars",
+    "componentsIncludedInApprovalTotal": true,
+    "notAllFactsAdditive": true
+  },
+  "approvalScope": {
+    "basis": "Pre-tender estimated project cost; Board approves project and proposed source of funds based on information provided.",
+    "floorProvision": "Letter explains requested funding includes potential floor repairs and provisional pricing for full-floor replacement/rehabilitation if needed after inspection. It does not establish which floor work was ultimately necessary, tendered, paid or completed.",
+    "inspectionContext": "Letter attributes the deferred pre-tender interior inspection to operational needs during another water-treatment project and winter draining/refilling risks; future inspection was planned. These are source-reported reasons, not independent delivery findings.",
+    "revisionScope": "Letter describes an estimate increase from the earlier budget basis to the approved request; no separate earlier regulatory approval or later amendment was acquired.",
+    "conditions": "No separately numbered conditions stated; approval qualification and provisional floor-work scope retained."
+  },
+  "budgetComparison": {
+    "originalApproval": 8930000,
+    "laterStaffBudget": 8520000,
+    "currency": null,
+    "sameAccountingBasisEstablished": false,
+    "laterRevisionsVerified": false,
+    "explanation": "Later staff project budget differs from original approval; revised allocation, scope, tax and amendment history have not been reconciled. No subtraction is presented as a saving, loss or overrun."
+  },
+  "limits": {
+    "notPaymentOrAward": true,
+    "notIndependentDeliveryAcceptance": true,
+    "taxAndContingencyBasisEstablished": false,
+    "currencyCodeExplicitlyEstablished": false,
+    "fullAmendmentHistoryChecked": false,
+    "scope": "One exact original public decision letter and explicit accepted staff-report reference only. Original exhibits, later budget changes, contracts and payment records not acquired."
+  },
+  "attribution": "Institutional facts attributed to Nova Scotia Utility and Review Board and Halifax Water; no endorsement implied. Full-letter republication rights not established; signatures/contact details excluded."
+}

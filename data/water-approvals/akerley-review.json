@@ -1,0 +1,23 @@
+{
+  "status": "accepted",
+  "bundleSha256": "58bdbf5f4dd51874cc4dd6b18764207af5149b83d3ab6dca2336588b859db91b",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "halifax-water-akerley-publication-review-20261028",
+  "checks": [
+    "Independently viewed both original M10446 letter pages, verifying March 4, 2022, database document 85728 and PDF footer 292340.",
+    "Verified approved estimated project and proposed funding sources total 8930000, comprising 200000, 7430000 and 1300000; components are included rather than additional to the total.",
+    "Verified potential floor-work provision and source-attributed inspection constraints without inferring work actually performed.",
+    "Verified exact parent project 300003356 and matter/date link, retaining the staff Design Work title and later 8520000 budget separately from rehabilitation approval.",
+    "Eight tests and deterministic replay passed independently, including source, receipt and parent pin rejection.",
+    "Institutional factual projection excludes personal contacts, signatures and full original document text."
+  ],
+  "limits": [
+    "Later budget scope, revisions, tax and contingency bases remain unreconciled; no subtraction as loss, savings or overrun.",
+    "Approval and funding-plan components are not awards, cash payments or independent delivery acceptance.",
+    "Source dollars retain unspecified ISO currency.",
+    "Only the exact original letter and accepted staff reference are linked; no complete amendment history or original exhibits claimed.",
+    "Optional nested context adds no collection, project or matter-reference count.",
+    "Narrow attributed factual projection only; no blanket original-document republication licence asserted."
+  ]
+}

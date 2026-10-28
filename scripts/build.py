@@ -18,6 +18,7 @@ from cash_publication import cash_files
 from purpose_publication import purpose_files
 from reference_publication import reference_files
 from water_publication import water_files
+from water_approvals_publication import water_approval_files
 from capital_publication import capital_files
 from capital_explanation_publication import capital_explanation_files
 from collection_coverage import build_collection_coverage
@@ -25,7 +26,7 @@ from code_bundles import assemble,version_html,digest
 from review_receipts import validate_receipt
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
-FILES=['index.html','app/main.js','app/finder.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/municipal-capital.js','app/capital-explanation.js','app/reporting.js','app/audits.js','app/housing-audit.js','app/ambulance.js','app/shelburne.js','app/budget-tables.js','app/transfers.js','app/governance.js','app/institution.js','app/authorizations.js','app/authorization-trace.js','app/authorization-purpose.js','app/cash-bridge.js','app/coverage.js','app/source-references.js','app/water-projects.js','data/collection-coverage.json','app/styles.css','data/foundation.json','data/publication-review.json']
+FILES=['index.html','app/main.js','app/finder.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/municipal-capital.js','app/capital-explanation.js','app/reporting.js','app/audits.js','app/housing-audit.js','app/ambulance.js','app/shelburne.js','app/budget-tables.js','app/transfers.js','app/governance.js','app/institution.js','app/authorizations.js','app/authorization-trace.js','app/authorization-purpose.js','app/cash-bridge.js','app/coverage.js','app/source-references.js','app/water-projects.js','app/water-approvals.js','data/collection-coverage.json','app/styles.css','data/foundation.json','data/publication-review.json']
 def build():
     bundle=json.loads((ROOT/'data/foundation.json').read_text())
     assert bundle['schemaVersion']=='halifaxdata-evidence-v1'
@@ -45,7 +46,7 @@ def build():
     assert re.fullmatch('[0-9a-f]{40}',source_commit),'Exact source commit required'
     coverage=build_collection_coverage(ROOT)
     (ROOT/'data/collection-coverage.json').write_text(json.dumps(coverage,indent=2)+'\n')
-    files=FILES+water_files(ROOT)+reference_files(ROOT)+tender_files(ROOT)+supplier_files(ROOT)+municipal_files(ROOT)+reporting_files(ROOT)+audit_files(ROOT)+housing_files(ROOT)+ambulance_files(ROOT)+shelburne_files(ROOT)+budget_files(ROOT)+transfer_files(ROOT)+governance_files(ROOT)+institution_files(ROOT)+authorization_files(ROOT)+cash_files(ROOT)+purpose_files(ROOT)+capital_files(ROOT)+capital_explanation_files(ROOT)
+    files=FILES+water_approval_files(ROOT)+water_files(ROOT)+reference_files(ROOT)+tender_files(ROOT)+supplier_files(ROOT)+municipal_files(ROOT)+reporting_files(ROOT)+audit_files(ROOT)+housing_files(ROOT)+ambulance_files(ROOT)+shelburne_files(ROOT)+budget_files(ROOT)+transfer_files(ROOT)+governance_files(ROOT)+institution_files(ROOT)+authorization_files(ROOT)+cash_files(ROOT)+purpose_files(ROOT)+capital_files(ROOT)+capital_explanation_files(ROOT)
     current_code,code_releases,code_assets=assemble(ROOT,files)
     OUT.mkdir(exist_ok=True)
     known=set(files+list(code_assets)+['release.json','.nojekyll'])
