@@ -190,7 +190,7 @@
       "count": 22,
       "countUnit": "organization/audit rows",
       "route": "#/audits",
-      "scope": "Assurance status date October 10, 2025; report published March 31, 2026. Not current completion status.",
+      "scope": "Assurance status date October 10, 2025; report published March 31, 2026. Not current completion status. The 22 organization/audit rows comprise 19 main rows and three organization rows for one shared recommendation; row counts are not recommendation counts.",
       "completeSourceCoverage": false,
       "scheduledRefreshConfigured": false,
       "sourceURLs": [
