@@ -1,0 +1,92 @@
+name: Verify fresh evidence application
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: node --check app/main.js
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Test resident journeys
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory dist >/tmp/halifaxdata-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for i in $(seq 1 20); do curl --fail --silent http://127.0.0.1:4173/ >/dev/null && break; sleep 1; done
+          npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fresh-watchdog-browser-evidence
+          path: artifacts/browser
+          if-no-files-found: warn
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-public-site
+          path: dist
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: dist
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Deploy only the tested artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify exact live source commit
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import json,os,time,urllib.request
+          base=os.environ['SITE_URL'].rstrip('/')
+          expected=os.environ['EXPECTED_SHA']
+          for attempt in range(12):
+              try:
+                  request=urllib.request.Request(base+'/release.json?commit='+expected,headers={'Cache-Control':'no-cache'})
+                  release=json.load(urllib.request.urlopen(request,timeout=20))
+                  if release['sourceCommitSha']==expected:
+                      import hashlib
+                      for path,sha in release['files'].items():
+                          body=urllib.request.urlopen(base+'/'+path+'?commit='+expected,timeout=20).read()
+                          assert hashlib.sha256(body).hexdigest()==sha,path
+                      print('Live exact-commit manifest and every public asset verified:',expected)
+                      break
+              except Exception as exc:
+                  print(type(exc).__name__,str(exc))
+              time.sleep(10)
+          else:raise SystemExit('Live deployment did not match tested commit')
+          PY

@@ -1,0 +1,2665 @@
+{
+  "workbookSha256": "62ba594e68f12f6ae32dd7e9380919c6a8c76062369ec232e0a1ceb475dbfb64",
+  "inventory": [
+    {
+      "row": 2,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Public Accounts Vol 1 - consolidated statements",
+        "https://www.novascotia.ca/public-accounts",
+        "PDF / annual reports",
+        "Actual revenue, expenses, debt and budget comparison",
+        "Province",
+        "Public",
+        "P0",
+        "Accounting basis and consolidation differ from cash-payments detail",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 3,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Public Accounts Vol 2 - agencies and enterprises",
+        "https://www.novascotia.ca/public-accounts",
+        "PDF / annual reports",
+        "Health authorities, entities, agencies and government enterprises",
+        "Province",
+        "Public",
+        "P0",
+        "Avoid double-counting consolidated entities",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 4,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Public Accounts Vol 3 - supplementary payments",
+        "https://www.novascotia.ca/public-accounts",
+        "PDF / annual reports",
+        "Named payments, supplier disclosures, compensation and travel above thresholds",
+        "Province",
+        "Public",
+        "P0",
+        "Cash basis, thresholds and redaction; not complete AP ledger",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 5,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "2025-26 supplementary payment report candidate direct file",
+        "https://notices.novascotia.ca/files/public-accounts/2026/pa-supplementary-2026.pdf",
+        "PDF",
+        "Example direct annual file for payments parsing",
+        "Province",
+        "Public / URL unconfirmed",
+        "P1",
+        "Page path identified but successful direct file retrieval not verified",
+        "URL identified only",
+        "Annual"
+      ]
+    },
+    {
+      "row": 6,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Budget 2026-27 and departmental estimates",
+        "https://www.novascotia.ca/documents/budget-documents-2026-2027",
+        "PDF / budget",
+        "Authorized spending; departmental detail, fiscal plan",
+        "Province",
+        "Public",
+        "P0",
+        "Budget != actual; supplementary changes may occur",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 7,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Capital Plan 2026-27",
+        "https://www.novascotia.ca/sites/default/files/documents/1-4174/capital-plan-2026-2027-en.pdf",
+        "PDF",
+        "Hospital, road, school capital investments and multiyear costs",
+        "Province",
+        "Public",
+        "P0",
+        "Planned allocations are not necessarily expenditures",
+        "Source identified in official budget",
+        "Annual"
+      ]
+    },
+    {
+      "row": 8,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Government and Crown business plans and accountability",
+        "https://www.novascotia.ca/government-business-plans-and-accountability-reporting",
+        "PDF / HTML",
+        "Commitments, plans, targets and results",
+        "Province",
+        "Public",
+        "P0",
+        "Metrics and targets vary by agency and year",
+        "Official page located",
+        "Annual"
+      ]
+    },
+    {
+      "row": 9,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Municipal finance and statistics",
+        "https://www.novascotia.ca/programs-and-services/municipal-finance-and-statistics",
+        "PDF / HTML",
+        "Comparable municipal audited financial health and indicators",
+        "All municipalities",
+        "Public",
+        "P0",
+        "Different fiscal periods; validate latest municipality coverage",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 10,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Municipal property tax rates",
+        "https://data.novascotia.ca/Municipalities/Municipal-Property-Tax-Rates/ure8-3w7m/about_data",
+        "Socrata API / CSV",
+        "Municipal residential and commercial rates over time",
+        "All municipalities",
+        "Public API",
+        "P0",
+        "Additional area rates apply; provider cautions use as general reference",
+        "Dataset metadata inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 11,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Municipal financial condition indicators (2024)",
+        "https://www.novascotia.ca/documents/municipal-indicators-municipality-reports-2024",
+        "PDF / reports",
+        "Municipality financial conditions and year-on-year comparison",
+        "All municipalities",
+        "Public",
+        "P1",
+        "As published 2023-24; not a live current snapshot",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 12,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Municipal operating expenses open dataset",
+        "https://data.novascotia.ca/datasets/sbzw-ajrm",
+        "Socrata / dataset",
+        "Operating expenses across municipalities",
+        "All municipalities",
+        "Public; dataset lookup pending",
+        "P1",
+        "Exact dataset availability/columns need API test",
+        "Search result identified",
+        "Annual"
+      ]
+    },
+    {
+      "row": 13,
+      "values": [
+        "Finances, budgets & revenue",
+        "Nova Scotia",
+        "Financial condition indicator visualization",
+        "https://data.novascotia.ca/d/44ah-ugrd/visualization",
+        "Socrata / data",
+        "Tax arrears, debt, transfers, reserves, fiscal metrics",
+        "All municipalities",
+        "Public / data view",
+        "P1",
+        "Visualization may need underlying dataset verification",
+        "Search result identified",
+        "Annual"
+      ]
+    },
+    {
+      "row": 14,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax",
+        "Municipal Budget & Finance portal",
+        "https://www.halifax.ca/city-hall/budget-finances",
+        "PDF / HTML",
+        "Municipal budgets, tax information, reporting and accounts",
+        "HRM",
+        "Public",
+        "P0",
+        "Documents may be revised; identify adopted versions",
+        "Official domain path identified; fetch testing pending",
+        "Annual / periodic"
+      ]
+    },
+    {
+      "row": 15,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax",
+        "2026-27 approved Council budget motion",
+        "https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=2b525638-79db-4d72-8db3-9b4bde75cc13&lang=English",
+        "Meeting records",
+        "Resolution approving tax rates and operating/capital budget",
+        "HRM",
+        "Public",
+        "P0",
+        "Motion text not equivalent to full enacted schedule; read attachments",
+        "Official meeting record inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 16,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax",
+        "2026-27 Council department budget hearings",
+        "https://pub-halifax.escribemeetings.com/Meeting.aspx?Agenda=Agenda&Id=85a70dd2-2c04-450e-bc34-f1ebb903767c&lang=English",
+        "Meeting docs / PDFs",
+        "Detailed departmental 2026/27 spending proposals and explanations",
+        "HRM",
+        "Public",
+        "P0",
+        "Proposed, not necessarily approved",
+        "Official meeting record inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 17,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax",
+        "2026-27 budget adjustment list (example)",
+        "https://pub-halifax.escribemeetings.com/filestream.ashx?DocumentId=4405",
+        "PDF / decision attachment",
+        "Proposed tax implications, cut/add options and alternative funding",
+        "HRM",
+        "Public",
+        "P0",
+        "Do not present options as approved absent vote",
+        "Official document surfaced in indexed search",
+        "Annual"
+      ]
+    },
+    {
+      "row": 18,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax",
+        "2025-26 Final Budget and Business Plan",
+        "https://www.halifax.ca/sites/default/files/documents/city-hall/budget-finances/final-2025-26-budget-business-plan.pdf",
+        "PDF",
+        "Department-by-department base and changes; historical comparison",
+        "HRM",
+        "Public",
+        "P1",
+        "Different fiscal year; 2026/27 authoritative replacement needed",
+        "Official PDF text found",
+        "Annual"
+      ]
+    },
+    {
+      "row": 19,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax",
+        "Municipal tax-rate GIS table",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Tax_Rates/FeatureServer",
+        "ArcGIS feature service",
+        "Municipal rate types and geospatial tax contexts",
+        "HRM",
+        "Public REST listing",
+        "P1",
+        "Schema, date coverage and mapping still to test",
+        "Service directory listed",
+        "Varies"
+      ]
+    },
+    {
+      "row": 20,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax",
+        "HRM tax-bill detail by account",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HRM_Tax_Bill_Info/FeatureServer/0",
+        "ArcGIS table",
+        "Assessment, rates, billed amounts, tax year",
+        "HRM",
+        "Public REST / privacy review",
+        "P1",
+        "Sensitive address/account field handling; source last edited Dec 2025",
+        "Layer metadata inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 21,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax Water",
+        "Halifax Water reports and publications",
+        "https://halifaxwater.ca/publications-reports",
+        "PDF / reports",
+        "Utility finances, capital plans, water service measures",
+        "HRM utility service area",
+        "Public",
+        "P0",
+        "Separate utility budget and regulatory framework",
+        "Official page identified",
+        "Annual"
+      ]
+    },
+    {
+      "row": 22,
+      "values": [
+        "Finances, budgets & revenue",
+        "Halifax Water",
+        "Halifax Water regulator and rates",
+        "https://halifaxwater.ca/publications-reports",
+        "PDF / applications",
+        "Rate proceedings and proposed/approved tariff changes",
+        "Utility service area",
+        "Public",
+        "P1",
+        "Proposed rate increases != approved",
+        "Official publications page identified",
+        "As filed"
+      ]
+    },
+    {
+      "row": 23,
+      "values": [
+        "Finances, budgets & revenue",
+        "Canada",
+        "Federal transfers to Nova Scotia",
+        "https://www.canada.ca/en/department-finance/programs/federal-transfers/major-federal-transfers.html",
+        "HTML tables",
+        "Health, social and equalization fiscal transfers",
+        "Province",
+        "Public",
+        "P0",
+        "Federal to provincial transfers; do not double-count NS revenues",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 24,
+      "values": [
+        "Finances, budgets & revenue",
+        "Canada",
+        "Federal transfer payments - month-by-month",
+        "https://www.canada.ca/en/department-finance/programs/federal-transfers/major-federal-transfers-monthly-payments-made-to-provinces-territories.html",
+        "HTML tables",
+        "Cash-transfer timings from federal government",
+        "Province",
+        "Public",
+        "P1",
+        "Dates differ from fiscal recognition",
+        "Official page inspected",
+        "Monthly"
+      ]
+    },
+    {
+      "row": 25,
+      "values": [
+        "Contracts, grants & entities",
+        "Nova Scotia",
+        "Awarded Public Tenders dataset",
+        "https://data.novascotia.ca/Procurement-and-Contracts/Awarded-Public-Tenders/m6ps-8j6u",
+        "Socrata API / CSV",
+        "Vendor, award amount, buying entity, date, category",
+        "Province",
+        "Public API",
+        "P0",
+        "Award != payment or final cost; some contracts excluded",
+        "Dataset page identified",
+        "Monthly"
+      ]
+    },
+    {
+      "row": 26,
+      "values": [
+        "Contracts, grants & entities",
+        "Nova Scotia",
+        "Public Tender Notices",
+        "https://www.novascotia.ca/find-public-tender-notices",
+        "Search / notices",
+        "Solicitations, bid contexts and tender conditions",
+        "Province",
+        "Public interface",
+        "P0",
+        "Closed tenders may have limited documents",
+        "Official page identified",
+        "Continuous"
+      ]
+    },
+    {
+      "row": 27,
+      "values": [
+        "Contracts, grants & entities",
+        "Nova Scotia",
+        "Alternative procurement award notices",
+        "https://www.novascotia.ca/find-alternative-procurement-award-notices",
+        "Search / notices",
+        "Noncompetitive procurement notices and justifications",
+        "Province",
+        "Public interface",
+        "P0",
+        "Lawful exception != improper award",
+        "Official page located",
+        "As filed"
+      ]
+    },
+    {
+      "row": 28,
+      "values": [
+        "Contracts, grants & entities",
+        "Nova Scotia",
+        "Provincial procurement program and rules",
+        "https://www.novascotia.ca/programs-and-services/procurement",
+        "HTML / policies",
+        "Procurement frameworks, exceptions and thresholds",
+        "Province",
+        "Public",
+        "P1",
+        "Rules may change historically; use rules effective on award date",
+        "Official page identified",
+        "As revised"
+      ]
+    },
+    {
+      "row": 29,
+      "values": [
+        "Contracts, grants & entities",
+        "Nova Scotia",
+        "Grants management control policy",
+        "https://notices.novascotia.ca/files/corporate-admin-policy-manual/200-3-6.pdf",
+        "PDF / policy",
+        "Grant oversight, classification, monitoring controls",
+        "Province",
+        "Public",
+        "P1",
+        "Rules, not individual grant disbursements",
+        "Official PDF indexed",
+        "As revised"
+      ]
+    },
+    {
+      "row": 30,
+      "values": [
+        "Contracts, grants & entities",
+        "Nova Scotia",
+        "Registry of Joint Stock Companies",
+        "https://www.novascotia.ca/search-business-or-non-profit-information-filed-registry-joint-stock-companies",
+        "Search / registrations",
+        "Company identity, agents, directors, dates, registration",
+        "Province",
+        "Public searchable; documents possibly paid",
+        "P0",
+        "Matching names != proof of beneficial ownership",
+        "Official page inspected",
+        "As filed"
+      ]
+    },
+    {
+      "row": 31,
+      "values": [
+        "Contracts, grants & entities",
+        "Nova Scotia",
+        "Lobbyist Registry",
+        "https://www.novascotia.ca/search-registry-lobbyists",
+        "Search / registrations",
+        "Organizations lobbying and subjects/agencies lobbied",
+        "Province",
+        "Public searchable",
+        "P1",
+        "Registration alone does not imply improper influence",
+        "Official page inspected",
+        "As filed"
+      ]
+    },
+    {
+      "row": 32,
+      "values": [
+        "Contracts, grants & entities",
+        "Halifax",
+        "Halifax bids & tenders portal",
+        "https://halifax.bidsandtenders.ca/",
+        "Tender portal",
+        "RFPs, bids, contract opportunities and procurement status",
+        "HRM",
+        "Public / registration for some downloads",
+        "P0",
+        "Bid submissions may be commercially confidential",
+        "Official portal identified",
+        "Continuous"
+      ]
+    },
+    {
+      "row": 33,
+      "values": [
+        "Contracts, grants & entities",
+        "Halifax",
+        "HRM quarterly contract award reports example",
+        "https://cdn.halifax.ca/sites/default/files/documents/city-hall/regional-council/230307rci03.pdf",
+        "PDF / council reports",
+        "Awards, vendor, tender and bid comparisons where reported",
+        "HRM",
+        "Public",
+        "P0",
+        "Old sample; systematically discover current quarterly records",
+        "Official PDF identified",
+        "Quarterly"
+      ]
+    },
+    {
+      "row": 34,
+      "values": [
+        "Contracts, grants & entities",
+        "Halifax",
+        "District Capital Funds administrative order",
+        "https://www.halifax.ca/sites/default/files/documents/city-hall/legislation-by-laws/2017-009-ADM.pdf",
+        "PDF / policy",
+        "District discretionary capital account rules",
+        "HRM districts",
+        "Public",
+        "P1",
+        "Need actual allocations and projects from council records",
+        "Official policy identified",
+        "As amended"
+      ]
+    },
+    {
+      "row": 35,
+      "values": [
+        "Contracts, grants & entities",
+        "Canada",
+        "Federal proactive grants and contributions",
+        "https://search.open.canada.ca/grants/",
+        "Open government search / data",
+        "Federal awards to nonprofits, municipalities, firms",
+        "Canada / NS filtered",
+        "Public",
+        "P1",
+        "Excludes some federal-provincial transfers and downstream subawards",
+        "Official page inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 36,
+      "values": [
+        "Contracts, grants & entities",
+        "Canada",
+        "Federal government contract disclosures",
+        "https://search.open.canada.ca/contracts/",
+        "Open government search",
+        "Federal contracts involving NS providers or local projects",
+        "Canada / NS filtered",
+        "Public / direct page not checked",
+        "P2",
+        "Verify data API and filters before building",
+        "Canonical domain and URL pattern; untested",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 37,
+      "values": [
+        "Contracts, grants & entities",
+        "Canada",
+        "Registered charities information and filings",
+        "https://www.canada.ca/en/revenue-agency/services/charities-giving/charities-listings.html",
+        "Search / returns",
+        "Recipient nonprofit finances and annual filings",
+        "Canada / NS filtered",
+        "Public / interface",
+        "P2",
+        "Nonprofits and charities are not identical populations",
+        "Official index path; retrieval untested",
+        "Annual"
+      ]
+    },
+    {
+      "row": 38,
+      "values": [
+        "Votes, representation & investigations",
+        "Halifax",
+        "Council and committee meeting portal",
+        "https://pub-halifax.escribemeetings.com/",
+        "HTML agendas / minutes / PDF",
+        "Motions, staff reports, attachment documents, votes",
+        "HRM",
+        "Public",
+        "P0",
+        "Minutes are official; agendas and proposed motions not final votes",
+        "Official page inspected",
+        "Weekly"
+      ]
+    },
+    {
+      "row": 39,
+      "values": [
+        "Votes, representation & investigations",
+        "Halifax",
+        "Council procedure / recorded votes rule",
+        "https://www.halifax.ca/sites/default/files/documents/city-hall/legislation-by-laws/AO1.pdf",
+        "PDF / law",
+        "Vote recording and procedure rules",
+        "HRM",
+        "Public",
+        "P1",
+        "Confirm current consolidated order",
+        "Official PDF indexed",
+        "As amended"
+      ]
+    },
+    {
+      "row": 40,
+      "values": [
+        "Votes, representation & investigations",
+        "Halifax",
+        "Municipal Auditor General",
+        "https://hrmauditorgeneral.ca/",
+        "Reports / PDF",
+        "Audits, findings and corrective recommendations",
+        "HRM",
+        "Public",
+        "P0",
+        "Recommendations need separate completion verification",
+        "Official site identified",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 41,
+      "values": [
+        "Votes, representation & investigations",
+        "Halifax",
+        "District and councillor lookup",
+        "https://www.halifax.ca/city-hall/districts-councillors/district-look",
+        "Website",
+        "Current elected district representative mapping",
+        "HRM",
+        "Public / web fetch limited",
+        "P0",
+        "Term start/end dates must be preserved",
+        "Official site index found",
+        "Election / changes"
+      ]
+    },
+    {
+      "row": 42,
+      "values": [
+        "Votes, representation & investigations",
+        "Halifax",
+        "2024 municipal election financial disclosure example",
+        "https://cdn.halifax.ca/sites/default/files/documents/city-hall/elections/2024-election-financial-disclosure-district-7.pdf",
+        "PDF / filings",
+        "Candidate election fundraising and campaign spending",
+        "HRM districts",
+        "Public",
+        "P1",
+        "Privacy: donor residential addresses must not be bulk republished",
+        "Official PDF identified",
+        "Per election"
+      ]
+    },
+    {
+      "row": 43,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "Office of the Auditor General",
+        "https://www.oag-ns.ca/",
+        "PDF reports",
+        "Independent audit observations, recommendations and follow-ups",
+        "Province",
+        "Public",
+        "P0",
+        "Different audit scopes/periods; allegations not automatically proven",
+        "Official page identified",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 44,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "2026 Education assessment audit",
+        "https://www.oag-ns.ca/media/news-releases/2026/student-assessment-results-should-drive-change-school-system-ag",
+        "Audit report summary",
+        "Documented lack of outcome targets/use of assessments",
+        "Province",
+        "Public",
+        "P1",
+        "Audit-specific findings; do not generalize to all programs",
+        "Official news release inspected",
+        "Sept 2026"
+      ]
+    },
+    {
+      "row": 45,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "Nova Scotia Legislature",
+        "https://nslegislature.ca/",
+        "Bills, Hansard, debates, committees",
+        "Bills, amendments, votes, minister statements and oversight",
+        "Province",
+        "Public / individual indexes to test",
+        "P0",
+        "Party whipped votes, dates and amendments require context",
+        "Official legislature domain referenced in primary records",
+        "Sessions"
+      ]
+    },
+    {
+      "row": 46,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "Elections Nova Scotia",
+        "https://electionsnovascotia.ca/",
+        "Reports / filings / election data",
+        "Elections, campaign finance, elected MLA districts",
+        "Province",
+        "Public; detailed data interface test needed",
+        "P1",
+        "Candidate donations != unlawful influence",
+        "Official elections domain identified",
+        "As filed"
+      ]
+    },
+    {
+      "row": 47,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "FOIPOP released records search",
+        "https://openinformation.novascotia.ca/",
+        "Search / documents",
+        "Previously released information beyond routine publications",
+        "Province",
+        "Public search",
+        "P0",
+        "Selection biases; documents may be partial/redacted",
+        "Official archive located",
+        "Ongoing"
+      ]
+    },
+    {
+      "row": 48,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "Provincial FOIPOP request guidance",
+        "https://www.novascotia.ca/apply-access-information-under-freedom-information-and-protection-privacy-foipop-act-form-1",
+        "Application / process",
+        "Request missing invoices, decision memos, final costs",
+        "Province",
+        "Request / potential fees",
+        "P1",
+        "Exceptions, cost and timelines; cannot assume release",
+        "Official page inspected",
+        "On request"
+      ]
+    },
+    {
+      "row": 49,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "Information and Privacy Commissioner (OIPC)",
+        "https://oipc.novascotia.ca/access-to-information",
+        "Guidance / reviews",
+        "Access rights, appeal processes and privacy safeguards",
+        "Province & municipalities",
+        "Public",
+        "P1",
+        "Provincial and municipal access statutes differ",
+        "Official page inspected",
+        "As revised"
+      ]
+    },
+    {
+      "row": 50,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "Provincial electoral boundaries dataset",
+        "https://data.novascotia.ca/datasets/7bqh-hssn",
+        "GeoJSON / download",
+        "Municipal boundary foundation, NOT MLA districts",
+        "All municipalities",
+        "Public download",
+        "P1",
+        "Use municipal not MLA boundary; exact fields need schema verification",
+        "Official dataset identified",
+        "As updated"
+      ]
+    },
+    {
+      "row": 51,
+      "values": [
+        "Votes, representation & investigations",
+        "Nova Scotia",
+        "Nova Scotia Gazette and regulations",
+        "https://novascotia.ca/just/regulations/",
+        "Laws / documents",
+        "Formal legal approvals, regulations and effective dates",
+        "Province",
+        "Public / URL not fetched",
+        "P2",
+        "Law effective date often differs from bill passage",
+        "Official site path proposed; verify before ingestion",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 52,
+      "values": [
+        "Votes, representation & investigations",
+        "Halifax",
+        "2024 polling district / councillor geography",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/ADM_Polling_District/FeatureServer",
+        "ArcGIS polygons",
+        "Spatially attribute district, councillor and projects",
+        "HRM",
+        "Public REST",
+        "P0",
+        "Boundary vintage and historic representation essential",
+        "Service page inspected",
+        "Election cycle"
+      ]
+    },
+    {
+      "row": 53,
+      "values": [
+        "Votes, representation & investigations",
+        "Halifax",
+        "Historic HRM polling districts 2020",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Polling_Districts_2020/FeatureServer",
+        "ArcGIS polygons",
+        "Historic district boundaries and prior votes/complaints",
+        "HRM",
+        "Public REST listing",
+        "P1",
+        "Service exists; schema and original intent untested",
+        "Service directory listed",
+        "Historical"
+      ]
+    },
+    {
+      "row": 54,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Cityworks service requests",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Cityworks_Service_Requests/FeatureServer",
+        "ArcGIS REST service",
+        "Reported resident/service issues by dates, status, resolution and district",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Sensitive locations and respondent personal information require redaction",
+        "Layer fields inspected",
+        "Near-term / last data edit Sep 2026"
+      ]
+    },
+    {
+      "row": 55,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Cityworks work orders",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Cityworks_Work_Orders/FeatureServer",
+        "ArcGIS REST service",
+        "Maintenance tasks, locations, start and finish dates, status",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Work orders are not invoices or actual costs",
+        "Layer fields inspected",
+        "Near-term / last data edit Oct 2026"
+      ]
+    },
+    {
+      "row": 56,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Cityworks work order custom fields",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Cityworks_Work_Orders_Custom_Fields/FeatureServer",
+        "ArcGIS REST service",
+        "Extended work-order details linked by WORKORDERID",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Join quality, one-to-many cardinality and field sensitivity to test",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 57,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Service request custom fields",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Cityworks_Service_Requests_Custom_Fields/FeatureServer",
+        "ArcGIS REST service",
+        "Additional request context for matching work orders",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Linking ID and sensitive text must be evaluated",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 58,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "311 call volume",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/311_Call_Volumes/FeatureServer",
+        "ArcGIS REST service",
+        "Volumes of phone contacts and service pressure",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Calls do not equal unique service cases",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 59,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "311 call details",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/311_Call_Details/FeatureServer",
+        "ArcGIS REST service",
+        "Call disposition and contact load",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Not equivalent to maintenance outcomes; minimize privacy risk",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 60,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Issued building permits",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/PPLC_Issued_Building_Permits/FeatureServer",
+        "ArcGIS REST service",
+        "Permit issuance and construction activity by area",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Approval != completed construction",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 61,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Permit processing time",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/PPLC_Permit_Processing_Times/FeatureServer",
+        "ArcGIS REST service",
+        "Measure regulatory processing delays",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Schema inspected; ensure start/end definitions consistent",
+        "Service page inspected",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 62,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Planning/building inspections",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/PPLC_Inspections/FeatureServer",
+        "ArcGIS REST service",
+        "Inspection volumes, outcomes and delays",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Check if includes enforcement details and privacy",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 63,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Planning applications geolocated",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/PPLC_Planning_Applications_Geolocated/FeatureServer",
+        "ArcGIS REST service",
+        "Land-use development case analysis",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Location and application status may change",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 64,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Residential standards violations",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/PPLC_Residential_Standards_Violations/FeatureServer",
+        "ArcGIS REST service",
+        "Bylaw enforcement and habitability indicators",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Violations may be allegations vs findings",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 65,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Residential rental registry",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Residential_Rental_Registry/FeatureServer",
+        "ArcGIS REST service",
+        "Rental inventory and bylaw coverage",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Property-level address and tenancy privacy safeguards",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 66,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Municipally owned land",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HRM_Owned_Land/FeatureServer",
+        "ArcGIS REST service",
+        "Public asset inventory and possible use",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Ownership is not proof of developability",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 67,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Government-owned properties",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Government_Owned_Properties/FeatureServer",
+        "ArcGIS REST service",
+        "Cross-government facilities and assets",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Use appropriate government ownership effective dates",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 68,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Halifax Water land holdings",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Halifax_Water_Owned_Land/FeatureServer",
+        "ArcGIS REST service",
+        "Utility property inventory and investment footprint",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Not proof of project budget",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 69,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Municipal building energy usage",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HRM_Building_Energy_Usage/FeatureServer",
+        "ArcGIS REST service",
+        "Spending efficiency proxies and climate targets",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Usage != billed expense; validate units and coverage",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 70,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Automated passenger counts",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Transit_Automated_Passenger_Counts/FeatureServer",
+        "ArcGIS REST service",
+        "Ridership at route/time granularity",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Provider warns of sensor errors and removed observations",
+        "Layer fields inspected",
+        "Oct 2026 update"
+      ]
+    },
+    {
+      "row": 71,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Ferry passenger counts",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Transit_Ferry_Passenger_Counts/FeatureServer",
+        "ArcGIS REST service",
+        "Ferry service demand against investment",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Check service cutovers and granularity",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 72,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Overloaded transit incidents",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Transit_Passenger_Overload_Incidents/FeatureServer",
+        "ArcGIS REST service",
+        "Overcrowding and service-demand mismatches",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Operator definitions, route changes matter",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 73,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Bus routes",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Transit_Bus_Routes/FeatureServer",
+        "ArcGIS REST service",
+        "Geographic service reach, transport gaps",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Published routes may not reflect emergency detours",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 74,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Bus stops",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Bus_Stops_2/FeatureServer",
+        "ArcGIS REST service",
+        "Access and travel distance to transit",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Completeness and stop service status to verify",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 75,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Traffic collisions",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Traffic_Collisions/FeatureServer",
+        "ArcGIS REST service",
+        "Road-safety outcomes in investment analysis",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Reporting coverage and severity definitions may change",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 76,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Traffic calming assessments",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Traffic_Calming_Assessments/FeatureServer",
+        "ArcGIS REST service",
+        "Road safety complaints/assessments and measures",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Assessment != completed mitigation",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 77,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Road safety countermeasures",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Road_Safety_Countermeasures_Tracking/FeatureServer",
+        "ArcGIS REST service",
+        "Project action/status tracking and outcomes",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Verify dates; not all projects may be covered",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 78,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Street closures",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Street_Closures/FeatureServer",
+        "ArcGIS REST service",
+        "Public works disruptions and projects",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Temporary operational data, no complete cost",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 79,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Fire first-response events",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HRFE_Incident_Initial_Response/FeatureServer",
+        "ArcGIS REST service",
+        "Emergency response and service coverage",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Suppressed/geocoded incidents may have privacy",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 80,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Fire causes and origins",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HRFE_Fire_Cause_and_Origin/FeatureServer",
+        "ArcGIS REST service",
+        "Fire prevention outcomes",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Small counts can identify households; aggregate",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 81,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Crime dataset",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Crime/FeatureServer",
+        "ArcGIS REST service",
+        "Public safety outcomes by geographic area",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Not an indicator of councillor performance; prevention/recording bias",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 82,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Beach-water quality",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Beach_Water_Quality/FeatureServer",
+        "ArcGIS REST service",
+        "Water quality and environmental service outcomes",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Sampling times/sites vary",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 83,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Coastal flood exposure projection",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Coastal_Flood_Extent_1_in_100_year_2100/FeatureServer",
+        "ArcGIS REST service",
+        "Infrastructure risk and resilience investments",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Scenario, not current measured flood",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 84,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "2021 census tracts",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Census_2021_Census_Tracts/FeatureServer",
+        "ArcGIS REST service",
+        "District demographic spatial joins",
+        "HRM / districts",
+        "Public service listing",
+        "P0",
+        "Census geography never perfectly overlaps Council districts",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 85,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Multiple deprivation by area",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Canadian_Index_of_Multiple_Deprivation_2021/FeatureServer",
+        "ArcGIS REST service",
+        "Adjust comparisons for population socioeconomic factors",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Ecological proxy; not individual-level characteristics",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 86,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Tree equity score",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Tree_Equity_Score_by_DA/FeatureServer",
+        "ArcGIS REST service",
+        "Equity and cooling projects",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Modelled metric with assumptions",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 87,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Municipal strategic performance indicators",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/strategic_performance_snapshot/FeatureServer",
+        "ArcGIS REST service",
+        "Track city strategic measures",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Metric definitions and currency need verification",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 88,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Municipal land parcels with accounts",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HRM_Parcel_Polygon_with_Accounts/FeatureServer",
+        "ArcGIS REST service",
+        "Connect land/asset/assessment geography",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Personal/ownership identifiers require data handling controls",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 89,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Arena bookings",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Parks_and_Recreation_Arena_Bookings/FeatureServer",
+        "ArcGIS REST service",
+        "Facility utilization of publicly funded recreation assets",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Bookings not actual attendance",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 90,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Public washrooms",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HRM_Public_Washrooms/FeatureServer",
+        "ArcGIS REST service",
+        "Local amenity distribution",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Operating status/hours may differ",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 91,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Snow contracts service areas",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Municipal_Facilities_Snow_Contract_Areas/FeatureServer",
+        "ArcGIS REST service",
+        "Contract area context for winter maintenance",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Areas do not establish spending or contractor performance",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 92,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Public works right of way permits",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/PPLC_Issued_Public_Works_ROW_Permits/FeatureServer",
+        "ArcGIS REST service",
+        "Construction and right-of-way disruption",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Permit != contractor paid amount",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 93,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "HRM capital projects legacy map",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Capital_Projects/FeatureServer",
+        "ArcGIS REST service",
+        "Historical capital projects/location",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "WARNING: data described as not currently updated; not live project status",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 94,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Area-level HRM tax rates",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Tax_Rates/FeatureServer",
+        "ArcGIS REST service",
+        "Regional/local taxes and special-area rates",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Confirm latest as-of period; different from bill actual",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 95,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Community council boundaries",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/CommunityCouncilBoundaries/FeatureServer",
+        "ArcGIS REST service",
+        "Geographic accountability for local governance",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Different from election districts",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 96,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Planning applications tabular",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/PPLC_Planning_Applications/FeatureServer",
+        "ArcGIS REST service",
+        "Case files, application statuses and decisions",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "Relate to council decisions on unique application ID",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 97,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Fire station locations",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/FireStations/FeatureServer",
+        "ArcGIS REST service",
+        "Service-area equity and facility footprint",
+        "HRM / districts",
+        "Public service listing",
+        "P2",
+        "Station location != deployed staffing",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 98,
+      "values": [
+        "Halifax operations & assets",
+        "Halifax",
+        "Installed traffic calming measures",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Traffic_Calming_Infrastructure/FeatureServer",
+        "ArcGIS REST service",
+        "Compare assessments to implementation",
+        "HRM / districts",
+        "Public service listing",
+        "P1",
+        "No causality without pre/post comparison",
+        "Official service directory listed",
+        "Undetermined"
+      ]
+    },
+    {
+      "row": 99,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nova Scotia",
+        "Action for Health public indicators",
+        "https://data.novascotia.ca/datasets/m9ng-y7cu",
+        "Socrata data / indicators",
+        "Hospital, ER, surgery, continuing care and ambulance reported outcomes",
+        "Province / zones",
+        "Public API",
+        "P0",
+        "Auditor found data-quality and target weaknesses",
+        "Official dataset identified",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 100,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nova Scotia Health",
+        "NS Health accountability and statistics index",
+        "https://www.nshealth.ca/about-nova-scotia-health/reports-statistics-and-accountability",
+        "HTML / PDF",
+        "Central library for annual reports, audited statements, staffing, metrics",
+        "Province",
+        "Public",
+        "P0",
+        "Not all measures available at each facility",
+        "Official page inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 101,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nova Scotia Health",
+        "NS Health audited financial statements",
+        "https://www.nshealth.ca/about-nova-scotia-health/reports-statistics-and-accountability",
+        "PDF",
+        "Separate operating budgets and actuals for health authority",
+        "Province",
+        "Public",
+        "P0",
+        "Integrate with consolidated provincial accounts without double count",
+        "Official index inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 102,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nova Scotia Health",
+        "Need a Family Practice Registry monthly updates",
+        "https://www.nshealth.ca/about-nova-scotia-health/reports-statistics-and-accountability",
+        "PDF / monthly reports",
+        "Unattached patients by zone / period",
+        "Province / zones",
+        "Public",
+        "P0",
+        "Voluntary registry; not census of all unattached residents",
+        "Official index inspected",
+        "Monthly"
+      ]
+    },
+    {
+      "row": 103,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nova Scotia Health",
+        "Healthcare executive expense disclosures",
+        "https://www.nshealth.ca/about-nova-scotia-health/reports-statistics-and-accountability",
+        "PDF / reports",
+        "Travel/hospitality and senior expenses",
+        "Province",
+        "Public",
+        "P1",
+        "Coverage/threshold and publication frequency vary",
+        "Official index inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 104,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nova Scotia Health",
+        "Physician recruitment annual reports",
+        "https://www.nshealth.ca/about-nova-scotia-health/reports-statistics-and-accountability",
+        "PDF / reports",
+        "Recruitment by specialty/period; capacity changes",
+        "Province / zones",
+        "Public",
+        "P1",
+        "Net additions not same as full-time equivalent care",
+        "Official index inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 105,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nova Scotia Health",
+        "2025-26 annual report",
+        "https://www.nshealth.ca/202526-annual-report",
+        "PDF / annual report",
+        "Results, service capacity and workforce spending",
+        "Province",
+        "Public",
+        "P1",
+        "Organizational self-report; compare independent sources",
+        "Official report identified",
+        "Annual"
+      ]
+    },
+    {
+      "row": 106,
+      "values": [
+        "Healthcare & social outcomes",
+        "IWK",
+        "IWK annual reports",
+        "https://iwkhealth.ca/about/accountability-transparency/annual-reports",
+        "HTML / reports",
+        "Children's/women's hospital governance and activity",
+        "Province",
+        "Public",
+        "P0",
+        "IWK is separate from NS Health; avoid double count",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 107,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nova Scotia",
+        "Long-term care inspection reports",
+        "https://novascotia.ca/dhw/ccs/ltc-inspection-reports/",
+        "PDF / inspection records",
+        "LTC inspections and violations",
+        "Facility locations",
+        "Public reports",
+        "P1",
+        "No reported violation doesn't prove absence of risk",
+        "Official page found",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 108,
+      "values": [
+        "Healthcare & social outcomes",
+        "Canada - CIHI",
+        "National Health Expenditure Trends",
+        "https://www.cihi.ca/en/national-health-expenditure-trends",
+        "Tables / downloads",
+        "Provincial comparative healthcare spending",
+        "Province / Canada",
+        "Public",
+        "P0",
+        "Comparability and definitions differ from public accounts",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 109,
+      "values": [
+        "Healthcare & social outcomes",
+        "Canada - CIHI",
+        "Wait times in Canada 2026",
+        "https://www.cihi.ca/en/wait-times-in-canada-2026",
+        "Tables / dashboards",
+        "Standardized wait times and interventions",
+        "Province / facility as published",
+        "Public",
+        "P1",
+        "Definitions vary; not full referral-to-treatment timeline",
+        "Official page identified",
+        "Annual"
+      ]
+    },
+    {
+      "row": 110,
+      "values": [
+        "Healthcare & social outcomes",
+        "Canada - CIHI",
+        "Health spending data hub",
+        "https://www.cihi.ca/en/topics/health-spending",
+        "Downloads / research",
+        "Operating expenditure categories and trends",
+        "Canada / province",
+        "Public",
+        "P1",
+        "Do not infer local hospital cost from provincial share",
+        "Official page inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 111,
+      "values": [
+        "Healthcare & social outcomes",
+        "Halifax",
+        "Halifax homeless housing needs assessment 2025 supplement",
+        "https://cdn.halifax.ca/sites/default/files/documents/about-the-city/regional-community-planning/2025-hrm-housing-needs-assessment-supplement.pdf",
+        "PDF / needs assessment",
+        "Homelessness, shelter barriers, demand and policy context",
+        "HRM",
+        "Public",
+        "P1",
+        "By-name person-level records are private and should not be collected",
+        "Official PDF indexed",
+        "Report"
+      ]
+    },
+    {
+      "row": 112,
+      "values": [
+        "Healthcare & social outcomes",
+        "Nonprofit",
+        "AHANS By Name List explanation",
+        "https://www.ahans.ca/faq",
+        "HTML / method",
+        "Methods and coverage of local homelessness counts",
+        "HRM",
+        "Public methodology, individual data restricted",
+        "P2",
+        "The underlying household-level BNL is confidential",
+        "Official page inspected",
+        "As revised"
+      ]
+    },
+    {
+      "row": 113,
+      "values": [
+        "Population, housing, taxes & property",
+        "Canada - Statistics Canada",
+        "Statistics Canada Web Data Service API",
+        "https://www.statcan.gc.ca/en/developers/wds",
+        "Official API / CSV",
+        "Census, income, housing, migration, GDP and labour denominators",
+        "Canada / NS / subprovincial",
+        "Public API",
+        "P0",
+        "Census vintage, privacy suppression and small-area uncertainty",
+        "Official API docs identified",
+        "Mixed"
+      ]
+    },
+    {
+      "row": 114,
+      "values": [
+        "Population, housing, taxes & property",
+        "Canada - Statistics Canada",
+        "StatCan WDS API user guide",
+        "https://www.statcan.gc.ca/en/developers/wds/user-guide",
+        "API documentation",
+        "Automated downloads, vectors and versioning",
+        "Canada",
+        "Public",
+        "P1",
+        "API rate limits and changed table IDs",
+        "Official guide identified",
+        "As revised"
+      ]
+    },
+    {
+      "row": 115,
+      "values": [
+        "Population, housing, taxes & property",
+        "Canada - CRA",
+        "Income and GST/HST statistics",
+        "https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/income-statistics-gst-hst-statistics.html",
+        "Aggregate tax tables",
+        "Income, taxes and benefits by area and bracket",
+        "Province / FSA / census area",
+        "Public aggregated",
+        "P0",
+        "Not individual tax returns; reporting lag and suppression",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 116,
+      "values": [
+        "Population, housing, taxes & property",
+        "Canada - CRA",
+        "CRA individual tax statistics by area",
+        "https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/income-statistics-gst-hst-statistics.html",
+        "Tables / CSV",
+        "Income distributions by FSA and census geography",
+        "Province / FSA / census area",
+        "Public aggregated",
+        "P1",
+        "FSA geography not district; ecological fallacy risk",
+        "Official parent page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 117,
+      "values": [
+        "Population, housing, taxes & property",
+        "Nova Scotia",
+        "Property Valuation Services assessment lookups",
+        "https://www.pvsc.ca/find-assessment",
+        "Searchable records",
+        "Current assessed values, assessment year and location",
+        "Province",
+        "Searchable; bulk rights uncertain",
+        "P1",
+        "Residential private-account treatment and access terms",
+        "Official source found",
+        "Annual"
+      ]
+    },
+    {
+      "row": 118,
+      "values": [
+        "Population, housing, taxes & property",
+        "Nova Scotia",
+        "PVSC data disclosure",
+        "https://www.pvsc.ca/data-disclosure",
+        "Reports / data policy",
+        "Available property assessment aggregate/download types",
+        "Province",
+        "Public index",
+        "P1",
+        "Bulk access and terms require review",
+        "Official page identified",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 119,
+      "values": [
+        "Population, housing, taxes & property",
+        "Nova Scotia",
+        "Property Online land registry",
+        "https://www.novascotia.ca/programs-and-services/property-online",
+        "Search / property titles",
+        "Property deeds and land ownership documentation",
+        "Province",
+        "Subscription / fee",
+        "P2",
+        "Paid and regulated access; avoid home-owner profiling",
+        "Official page inspected",
+        "As filed"
+      ]
+    },
+    {
+      "row": 120,
+      "values": [
+        "Population, housing, taxes & property",
+        "Nova Scotia",
+        "2026 housing action plan",
+        "https://novascotia.ca/action-for-housing/",
+        "Dashboard / reports",
+        "Provincial housing construction/support commitments",
+        "Province",
+        "Public",
+        "P1",
+        "Announced vs funded vs completed separately",
+        "Official site identified",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 121,
+      "values": [
+        "Population, housing, taxes & property",
+        "Canada - CMHC",
+        "CMHC rental market reports",
+        "https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/market-reports/rental-market-reports-major-centres?ap=a1-p1",
+        "Data tables / Excel",
+        "Rents, vacancy and market supply by geography",
+        "Halifax CMA",
+        "Public",
+        "P1",
+        "CMA includes East Hants; not identical to HRM",
+        "Official page identified",
+        "Annual"
+      ]
+    },
+    {
+      "row": 122,
+      "values": [
+        "Population, housing, taxes & property",
+        "Nova Scotia",
+        "Municipal boundary polygons",
+        "https://data.novascotia.ca/datasets/7bqh-hssn",
+        "GeoJSON / data",
+        "Reliable municipal boundary joins",
+        "Province",
+        "Public API",
+        "P0",
+        "Use geographic version valid at observation date",
+        "Official dataset identified",
+        "As changed"
+      ]
+    },
+    {
+      "row": 123,
+      "values": [
+        "Population, housing, taxes & property",
+        "Halifax",
+        "2021 census small-area boundaries",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Census_2021_Census_Tracts/FeatureServer",
+        "ArcGIS polygons",
+        "Census tract joins to districts and services",
+        "HRM",
+        "Public REST",
+        "P0",
+        "Many-to-many tract-district; don't simply assign whole tracts",
+        "Service directory inspected",
+        "Census"
+      ]
+    },
+    {
+      "row": 124,
+      "values": [
+        "Population, housing, taxes & property",
+        "Halifax",
+        "Index of multiple deprivation (2021)",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Canadian_Index_of_Multiple_Deprivation_2021/FeatureServer",
+        "ArcGIS feature service",
+        "Socioeconomic contextual factors for equity analysis",
+        "HRM",
+        "Public REST",
+        "P1",
+        "Model estimates at neighborhood not individual level",
+        "Service directory inspected",
+        "Census / periodic"
+      ]
+    },
+    {
+      "row": 125,
+      "values": [
+        "Population, housing, taxes & property",
+        "Halifax",
+        "Halifax housing-needs assessment",
+        "https://cdn.halifax.ca/sites/default/files/documents/about-the-city/regional-community-planning/2025-hrm-housing-needs-assessment-supplement.pdf",
+        "PDF",
+        "Demographic demand, gaps and qualitative evidence",
+        "HRM",
+        "Public",
+        "P1",
+        "Do not present voluntary survey as population census",
+        "Official PDF indexed",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 126,
+      "values": [
+        "Population, housing, taxes & property",
+        "Halifax",
+        "Building permits activity layer",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/PPLC_Issued_Building_Permits/FeatureServer",
+        "ArcGIS dataset",
+        "Physical development activity and residential project geography",
+        "HRM",
+        "Public REST listing",
+        "P1",
+        "Permits may expire without occupancy",
+        "Service directory inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 127,
+      "values": [
+        "Education, environment & safety",
+        "Nova Scotia",
+        "Education enrolment by region & grade 2025-26",
+        "https://stats-summary.ednet.ns.ca/enrolments-region-level",
+        "HTML statistical table",
+        "Demand for schooling and capital planning",
+        "RCE / region",
+        "Public",
+        "P1",
+        "Education regions not council districts",
+        "Official page inspected",
+        "Annual"
+      ]
+    },
+    {
+      "row": 128,
+      "values": [
+        "Education, environment & safety",
+        "Nova Scotia",
+        "Education document depot",
+        "https://www.ednet.ns.ca/document-depot",
+        "Reports / PDF",
+        "Historic school enrolment, policy and performance",
+        "Province / schools",
+        "Public",
+        "P1",
+        "Multiple vintages; some old reports not current",
+        "Official page inspected",
+        "Annual / historic"
+      ]
+    },
+    {
+      "row": 129,
+      "values": [
+        "Education, environment & safety",
+        "Nova Scotia",
+        "School provincial assessments audit",
+        "https://www.oag-ns.ca/media/news-releases/2026/student-assessment-results-should-drive-change-school-system-ag",
+        "Audit report",
+        "Accountability and outcome evaluation for education",
+        "Province",
+        "Public",
+        "P1",
+        "Read full audit scope and response",
+        "Official news release inspected",
+        "Sept 2026"
+      ]
+    },
+    {
+      "row": 130,
+      "values": [
+        "Education, environment & safety",
+        "Nova Scotia",
+        "Environmental Registry",
+        "https://novascotia.ca/nse/dept/envregistry.asp",
+        "Search / request",
+        "Approvals, enforcement, contaminated sites and orders",
+        "Province / site",
+        "Public index; many records request/fee",
+        "P1",
+        "Request fees and restrictions; not bulk open data",
+        "Official page inspected",
+        "As filed"
+      ]
+    },
+    {
+      "row": 131,
+      "values": [
+        "Education, environment & safety",
+        "Nova Scotia",
+        "Environmental inspections and enforcement",
+        "https://novascotia.ca/nse/inspection-compliance-enforcement/",
+        "HTML / records",
+        "Regulatory oversight methodology, approvals and complaints",
+        "Province",
+        "Public",
+        "P1",
+        "Not every inspection outcome is available online",
+        "Official page inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 132,
+      "values": [
+        "Education, environment & safety",
+        "Halifax",
+        "HRM climate action projects mapping",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HalifACT_Actions/FeatureServer",
+        "ArcGIS table",
+        "Climate action commitments and location",
+        "HRM",
+        "Public REST",
+        "P2",
+        "Planned and implemented actions differ",
+        "Service directory inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 133,
+      "values": [
+        "Education, environment & safety",
+        "Halifax",
+        "HRM municipal building energy",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/HRM_Building_Energy_Usage/FeatureServer",
+        "ArcGIS data",
+        "Building energy use as a performance input",
+        "HRM",
+        "Public REST",
+        "P2",
+        "Energy usage is not municipal electricity bill amount",
+        "Service directory inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 134,
+      "values": [
+        "Education, environment & safety",
+        "Halifax",
+        "HRM water quality data",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Beach_Water_Quality/FeatureServer",
+        "ArcGIS data",
+        "Recreation water monitoring results",
+        "HRM",
+        "Public REST",
+        "P2",
+        "Local sampling schedule and closure differ",
+        "Service directory inspected",
+        "Seasonal"
+      ]
+    },
+    {
+      "row": 135,
+      "values": [
+        "Education, environment & safety",
+        "Halifax",
+        "Fire response zones",
+        "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/ArcGIS/rest/services/Fire_Response_Zones/FeatureServer",
+        "ArcGIS polygons",
+        "Emergency coverage context and resource allocation",
+        "HRM",
+        "Public REST",
+        "P2",
+        "Boundary alone not actual crew coverage",
+        "Service directory inspected",
+        "Periodic"
+      ]
+    },
+    {
+      "row": 136,
+      "values": [
+        "Access gaps and request routes",
+        "Nova Scotia",
+        "FOIPOP request application",
+        "https://www.novascotia.ca/apply-access-information-under-freedom-information-and-protection-privacy-foipop-act-form-1",
+        "Official request form",
+        "Invoices, contract amendments, project evaluations not routinely published",
+        "Province",
+        "Application + fee",
+        "P1",
+        "Exemptions for cabinet, privacy, privilege and third parties",
+        "Official page inspected",
+        "On request"
+      ]
+    },
+    {
+      "row": 137,
+      "values": [
+        "Access gaps and request routes",
+        "Halifax",
+        "Municipal access rights under MGA / FOIPOP",
+        "https://oipc.novascotia.ca/faq",
+        "Guidance and requests",
+        "Get unreleased payment/project/council administrative records",
+        "HRM",
+        "Request process",
+        "P1",
+        "Specific municipal Part XX MGA rights; do not equate with provincial FOIPOP",
+        "Official page inspected",
+        "On request"
+      ]
+    },
+    {
+      "row": 138,
+      "values": [
+        "Access gaps and request routes",
+        "Nova Scotia",
+        "Property Online subscription",
+        "https://www.novascotia.ca/subscribe-property-online",
+        "Paid records service",
+        "Obtain selected official title and transaction records",
+        "Province",
+        "Paid subscription",
+        "P3",
+        "Do not subscribe or scrape without user approval",
+        "Official page identified",
+        "On request"
+      ]
+    },
+    {
+      "row": 139,
+      "values": [
+        "Access gaps and request routes",
+        "Nova Scotia",
+        "Municipal Reporting System",
+        "https://municipal-reporting.novascotia.ca/",
+        "Authenticated portal",
+        "Underlying municipal reporting source",
+        "Province",
+        "Restricted / login",
+        "P3",
+        "Not public API; use published indicator data instead",
+        "Official portal identified",
+        "Annual"
+      ]
+    },
+    {
+      "row": 140,
+      "values": [
+        "Access gaps and request routes",
+        "Nova Scotia",
+        "Health Data Nova Scotia controlled access",
+        "https://www.dal.ca/sites/hdns.html",
+        "Controlled research",
+        "Longitudinal individual-level health analysis",
+        "Province",
+        "Research ethics/approval",
+        "P3",
+        "No access without approval, do not include patient identifiers",
+        "Program known; URL not verified",
+        "On approval"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "fiscal-document-01",
+      "originalResearchId": "ns-budget-2026-27-original",
+      "title": "Original Budget 2026–27",
+      "url": "https://www.novascotia.ca/sites/default/files/documents/6-4173/ftb-bfi-046-en-budget-2026-2027.pdf",
+      "publisher": "Government of Nova Scotia, Finance and Treasury Board",
+      "accessNote": "Original budget exact URL on access hold; reviewed text predates hold."
+    },
+    {
+      "id": "fiscal-document-02",
+      "originalResearchId": "ns-budget-2026-27-addendum",
+      "title": "Budget 2026–27 Addendum",
+      "url": "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf",
+      "publisher": "Government of Nova Scotia, Finance and Treasury Board",
+      "accessNote": "Primary text independently reviewed; current availability not rechecked by this build."
+    },
+    {
+      "id": "fiscal-document-03",
+      "originalResearchId": "ns-public-accounts-2025-26-sec",
+      "title": "2025–26 Consolidated Financial Statements filed as Exhibit 99.1",
+      "url": "https://www.sec.gov/Archives/edgar/data/842639/000119312526412238/d177978dex991.htm",
+      "publisher": "Province of Nova Scotia; public host US Securities and Exchange Commission",
+      "accessNote": "Primary text independently reviewed; current availability not rechecked by this build."
+    },
+    {
+      "id": "fiscal-document-04",
+      "originalResearchId": "ns-capital-plan-2026-27",
+      "title": "Capital Plan 2026–27",
+      "url": "https://www.novascotia.ca/sites/default/files/documents/1-4174/capital-plan-2026-2027-en.pdf",
+      "publisher": "Government of Nova Scotia, Finance and Treasury Board",
+      "accessNote": "Primary text independently reviewed; current availability not rechecked by this build."
+    }
+  ],
+  "verifiedFacts": [
+    {
+      "candidate_id": "original-2026-27-total_revenue",
+      "source_id": "ns-budget-2026-27-original",
+      "source_locator": "Table2.1 printedp3/PDFp6",
+      "verified_value": 17354266,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "original-2026-27-departmental_expenses",
+      "source_id": "ns-budget-2026-27-original",
+      "source_locator": "Table2.1 printedp3/PDFp6",
+      "verified_value": 17770390,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "original-2026-27-total_expenses",
+      "source_id": "ns-budget-2026-27-original",
+      "source_locator": "Table2.1 printedp3/PDFp6",
+      "verified_value": 18932152,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "original-2026-27-consolidation_accounting_adjustment",
+      "source_id": "ns-budget-2026-27-original",
+      "source_locator": "Table2.1 printedp3/PDFp6",
+      "verified_value": 386936,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "original-2026-27-surplus_deficit_before_contingency",
+      "source_id": "ns-budget-2026-27-original",
+      "source_locator": "Table2.1 printedp3/PDFp6",
+      "verified_value": -1190950,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "original-2026-27-contingency_balance_effect",
+      "source_id": "ns-budget-2026-27-original",
+      "source_locator": "Table2.1 printedp3/PDFp6",
+      "verified_value": -50000,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "original-2026-27-surplus_deficit_after_contingency",
+      "source_id": "ns-budget-2026-27-original",
+      "source_locator": "Table2.1 printedp3/PDFp6",
+      "verified_value": -1240950,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "amended-2026-27-total_revenue",
+      "source_id": "ns-budget-2026-27-addendum",
+      "source_locator": "Table2.1 printedp1/PDFp2",
+      "verified_value": 17354266,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "amended-2026-27-departmental_expenses",
+      "source_id": "ns-budget-2026-27-addendum",
+      "source_locator": "Table2.1 printedp1/PDFp2",
+      "verified_value": 17823982,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "amended-2026-27-total_expenses",
+      "source_id": "ns-budget-2026-27-addendum",
+      "source_locator": "Table2.1 printedp1/PDFp2",
+      "verified_value": 18985744,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "amended-2026-27-consolidation_accounting_adjustment",
+      "source_id": "ns-budget-2026-27-addendum",
+      "source_locator": "Table2.1 printedp1/PDFp2",
+      "verified_value": 386936,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "amended-2026-27-surplus_deficit_before_contingency",
+      "source_id": "ns-budget-2026-27-addendum",
+      "source_locator": "Table2.1 printedp1/PDFp2",
+      "verified_value": -1244542,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "amended-2026-27-contingency_balance_effect",
+      "source_id": "ns-budget-2026-27-addendum",
+      "source_locator": "Table2.1 printedp1/PDFp2",
+      "verified_value": -50000,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "amended-2026-27-surplus_deficit_after_contingency",
+      "source_id": "ns-budget-2026-27-addendum",
+      "source_locator": "Table2.1 printedp1/PDFp2",
+      "verified_value": -1294542,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "adjusted_estimate-2025-26-total_revenue",
+      "source_id": "ns-public-accounts-2025-26-sec",
+      "source_locator": "Statement2 printedp76; source column2026 adjusted_estimate",
+      "verified_value": 17561724,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "adjusted_estimate-2025-26-total_expenses",
+      "source_id": "ns-public-accounts-2025-26-sec",
+      "source_locator": "Statement2 printedp76; source column2026 adjusted_estimate",
+      "verified_value": 18259223,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "adjusted_estimate-2025-26-contingency_expense",
+      "source_id": "ns-public-accounts-2025-26-sec",
+      "source_locator": "Statement2 printedp76; source column2026 adjusted_estimate",
+      "verified_value": 200000,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "adjusted_estimate-2025-26-surplus_deficit",
+      "source_id": "ns-public-accounts-2025-26-sec",
+      "source_locator": "Statement2 printedp76; source column2026 adjusted_estimate",
+      "verified_value": -897499,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "audited_actual-2025-26-total_revenue",
+      "source_id": "ns-public-accounts-2025-26-sec",
+      "source_locator": "Statement2 printedp76; source column2026 audited_actual",
+      "verified_value": 17979862,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "audited_actual-2025-26-total_expenses",
+      "source_id": "ns-public-accounts-2025-26-sec",
+      "source_locator": "Statement2 printedp76; source column2026 audited_actual",
+      "verified_value": 19386901,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "audited_actual-2025-26-surplus_deficit",
+      "source_id": "ns-public-accounts-2025-26-sec",
+      "source_locator": "Statement2 printedp76; source column2026 audited_actual",
+      "verified_value": -1407039,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "actual-2025-26-net-debt",
+      "source_id": "ns-public-accounts-2025-26-sec",
+      "source_locator": "Statement1 printedp75; Statement3 printedp77",
+      "verified_value": 24096694,
+      "unit": "CAD_thousands",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "capital-2026-27-capital_plan_total",
+      "source_id": "ns-capital-plan-2026-27",
+      "source_locator": "Capital Funding Summary printedp2/PDFp6",
+      "verified_value": 3500.2,
+      "unit": "CAD_millions",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "capital-2026-27-highways_structures",
+      "source_id": "ns-capital-plan-2026-27",
+      "source_locator": "Capital Funding Summary printedp2/PDFp6",
+      "verified_value": 476.1,
+      "unit": "CAD_millions",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "capital-2026-27-buildings_land",
+      "source_id": "ns-capital-plan-2026-27",
+      "source_locator": "Capital Funding Summary printedp2/PDFp6",
+      "verified_value": 2318.3,
+      "unit": "CAD_millions",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "capital-2026-27-information_technology",
+      "source_id": "ns-capital-plan-2026-27",
+      "source_locator": "Capital Funding Summary printedp2/PDFp6",
+      "verified_value": 111.3,
+      "unit": "CAD_millions",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "capital-2026-27-vehicles_equipment",
+      "source_id": "ns-capital-plan-2026-27",
+      "source_locator": "Capital Funding Summary printedp2/PDFp6",
+      "verified_value": 29.9,
+      "unit": "CAD_millions",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "capital-2026-27-capital_grants",
+      "source_id": "ns-capital-plan-2026-27",
+      "source_locator": "Capital Funding Summary printedp2/PDFp6",
+      "verified_value": 495.2,
+      "unit": "CAD_millions",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    },
+    {
+      "candidate_id": "capital-2026-27-capital_contingency",
+      "source_id": "ns-capital-plan-2026-27",
+      "source_locator": "Capital Funding Summary printedp2/PDFp6",
+      "verified_value": 69.4,
+      "unit": "CAD_millions",
+      "status": "independently_verified_primary_text",
+      "visual_verified": false
+    }
+  ]
+}

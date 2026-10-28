@@ -36,4 +36,4 @@ Original raw captures and private investigations must remain outside this reposi
 
 ## Long-term scope
 
-Investigation and case review; financial reconciliation; procurement and vendor evidence; government decisions; all16 Halifax districts with valid-time representation; provincial healthcare and public-service investigations. Validated policy simulations come later, after the investigative foundation.
+Investigation and case review; financial reconciliation; procurement and vendor evidence; government decisions; all 16 Halifax districts with valid-time representation; provincial healthcare and public-service investigations. Validated policy simulations come later, after the investigative foundation.

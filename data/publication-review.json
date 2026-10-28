@@ -1,0 +1,26 @@
+{
+  "status": "accepted",
+  "bundleSha256": "9daa91dae039dc3c20e1cab6dc1cedb5951ba3e1af9613f63dacd4c7ef2b2958",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "fresh-foundation-review-20261028",
+  "scope": "139 reference sources, four bounded primary fiscal documents,29numeric facts and one neutral budget-version comparison only",
+  "checks": [
+    "Original workbook139rows/hash exact",
+    "29facts exact match independent primary-text research",
+    "Compatible53.592million estimate revision, notpayment/waste",
+    "Source dash retained null",
+    "Accounting periods/bases/perimeters and stock-flow distinct",
+    "No private tender records, supplier/descriptions or828privateflags",
+    "Publication neutral-case whitelist and finite numeric/unit guards",
+    "Deterministic output, original source access holds retained",
+    "SI011 single limitation correction verified against newly captured official metadata08e7a0ea7c741fe626ba07597e105240e0258e84be0499c48ef2c6919edd39ef: service-category columns present; no values integrated"
+  ],
+  "limitations": [
+    "Primary source binaries were not retained; no binary hash or visual verification claimed",
+    "No approval of named consequential allegations",
+    "Does not accept any future tender projection or modified bundle",
+    "App/browser/security CI is separate"
+  ],
+  "supersedesBundleSha256": "a65f9ea4272e45b0eaeec1d6890234e5ab097e2a306cecc826400df42b6e653b"
+}
