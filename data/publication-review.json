@@ -1,0 +1,26 @@
+{
+  "status": "accepted",
+  "bundleSha256": "9daa91dae039dc3c20e1cab6dc1cedb5951ba3e1af9613f63dacd4c7ef2b2958",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "fresh-foundation-review-20261028",
+  "scope": "139 reference sources, four bounded primary fiscal documents, 29 numeric facts and one neutral budget-version comparison only",
+  "checks": [
+    "All 139 original workbook rows and the workbook hash verified",
+    "29 facts matched to independent primary-source text research",
+    "Compatible $53.592 million estimate revision verified; not a payment or waste finding",
+    "Source dash retained as null, not zero",
+    "Accounting periods, bases, reporting perimeters and stock/flow distinctions retained",
+    "Only reviewed public fields included; private research excluded",
+    "Neutral-case publication whitelist and finite numeric/unit validation tested",
+    "Deterministic output and source access holds retained",
+    "SI011 description corrected against captured official metadata: service-category columns exist, but their values are not integrated in this foundation bundle"
+  ],
+  "limitations": [
+    "Source binaries were not retained for this foundation snapshot; its records do not claim binary hashes or visual verification",
+    "No approval of named consequential allegations",
+    "Does not accept any future tender projection or modified bundle",
+    "App/browser/security CI is separate"
+  ],
+  "supersedesBundleSha256": "a65f9ea4272e45b0eaeec1d6890234e5ab097e2a306cecc826400df42b6e653b"
+}
