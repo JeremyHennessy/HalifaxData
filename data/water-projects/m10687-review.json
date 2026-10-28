@@ -1,0 +1,22 @@
+{
+  "status": "accepted",
+  "bundleSha256": "f2c81193e22ebb8a0da58ebf0ed0ce4faa2cdd6b04943212f4bcbf2df4a6c2d8",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "halifax-water-m10687-scope-publication-review-20261028",
+  "checks": [
+    "Independently viewed public application page 2 and non-confidential response pages 44\u201346; verified exact matter, excluded HRM estimate, July 13 estimate and August 12 filing context.",
+    "Verified displayed percentage bases and exact decimal rounding to printed cents, total 8825169.84 and separate funding deductions reproducing 8218000.",
+    "Verified original six approved facts, funding plan and exact parent project binding remain unchanged; prior accepted artifact is preserved.",
+    "Nine tests and deterministic replay passed independently, including source and receipt/listing tampering rejection.",
+    "Public projection contains institutional facts and attributed paraphrases only; no confidential exhibit, personal contact details or complete source documents."
+  ],
+  "limits": [
+    "Nearest-thousand rounding of the pre-deduction total is an explicitly labelled inference, not an expressly documented rule.",
+    "Pre-decision estimate clarification does not reconcile the later 9805000 budget or establish a subsequent amendment, payment, overrun, loss or delivery.",
+    "Source dollar amounts retain unspecified ISO currency; displayed percentage arithmetic is not independent tax-policy verification.",
+    "Overlapping subtotals, components, approval and prior funding must not be added together as spending.",
+    "Optional context adds no collection, project or matter-reference count.",
+    "Narrow factual projection only; no blanket licence or original-document republication permission."
+  ]
+}

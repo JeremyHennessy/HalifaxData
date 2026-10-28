@@ -1,0 +1,24 @@
+{
+  "status": "accepted",
+  "bundleSha256": "57eac399c2d4438ef38089422730852c5e244502680d1a645e21317aa10f17cb",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "halifax-water-project-closeout-independent-review-20261028",
+  "checks": [
+    "Verified the complete 28463978-byte official PDF against its exact hash and successful complete-response receipt; its initial prefix matches the separately preserved incomplete capture.",
+    "Rendered and independently inspected PDF page39, matching six project labels/numbers, ten regulatory matter references, eighteen numerical cells and six blank Over Budget cells.",
+    "Verified wrapped Burnside date and matter text without assigning unsupported date-to-order pairings; explicit zero remains distinct from blanks.",
+    "Read report context on PDF pages35,37 and38, separating staff filing recommendations, reporting population and cumulative cost measurement.",
+    "Recomputed all row differences and the separate water/wastewater narrative reconciliations; 13 tests and deterministic candidate replay passed independently.",
+    "Verified final release changes publication metadata only."
+  ],
+  "limits": [
+    "Historical staff-reported cumulative project costs through March31,2024, not annual cash payments, invoices or bank-cleared expenditure.",
+    "Project budget original-versus-revised basis and tax treatment remain unverified; CAD is explicitly contextual inference.",
+    "Reported completed/placed-in-service/fiscally-closed population is not independently inspected delivery or acquired individual acceptance documentation.",
+    "Regulatory identifiers are source-reported references; original orders, date-to-matter pairings and a board filing decision are not verified by this projection.",
+    "Six selected projects are not all utility spending. Budgets, costs, differences and overlapping subtotals must not be added together.",
+    "No supplier/tender/payment joins, wider-total discrepancy finding, procurement-quality conclusion or service-outcome inference is admitted.",
+    "Narrow numerical and public-project factual projection only; no package facsimiles, signatures, staff contacts or blanket reuse licence."
+  ]
+}
