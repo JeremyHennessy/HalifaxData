@@ -1,0 +1,783 @@
+{
+  "schemaVersion": "explained-capital-movement-v1",
+  "id": "annapolis-capital-movement-2021-2022",
+  "title": "Explaining capital-asset movement: Municipality of the County of Annapolis",
+  "status": "explained_by_verified_records",
+  "statusLabel": "Explained by verified records",
+  "statusScope": "Only the displayed numerical movement and same-report table reconciliation. This does not establish disposal legitimacy, asset-level purpose or underlying transaction accuracy.",
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reviewId": "annapolis-capital-movement-independent-review-20261028",
+    "reviewType": "source_attributed_internal_capital_reconciliation",
+    "reviewedOn": "2026-10-28",
+    "requiresMatchingIndependentReceipt": true
+  },
+  "target": {
+    "bundleSha256": "4136b3b3cd3f48c8d6ebf044f5657f5a8825169b6af9983461ff044e8189109f",
+    "recordId": "municipal-capital-2022-p46-r5",
+    "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+    "municipalityType": "county_or_district",
+    "fiscalYear": "2021-2022"
+  },
+  "source": {
+    "title": "Municipal Statistics Annual Report 2021\u20132022",
+    "publisher": "Nova Scotia Department of Municipal Affairs and Housing",
+    "url": "https://www.novascotia.ca/sites/default/files/documents/1-1352/municipal-statistics-annual-report-2021-2022-en.pdf",
+    "sha256": "26b44a91c4f696eadf546da073c80e21c14fc2e7cfee1b1f931d532e98dba9ea",
+    "tables": [
+      {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1"
+      },
+      {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3"
+      }
+    ],
+    "accountingContextLocator": "PDF page 23 / printed page 17, section 3.1",
+    "basis": "Source-reported consolidated historical financial information from municipal Financial Information Returns",
+    "currency": null,
+    "unitMultiplier": null
+  },
+  "summary": "The reported asset-value reduction reconciles with additions, disposals/write-downs and amortization. The adjacent fund table also matches the same municipality\u2019s balances and additions. These arithmetic checks do not identify which assets were disposed of or written down, or why.",
+  "facts": [
+    {
+      "id": "municipal-capital-2022-p46-r5-gross_cost_opening",
+      "measure": "gross_cost_opening",
+      "sourceColumn": 1,
+      "sourceLabel": "Gross Cost as at March 31, 2021",
+      "rawValue": "70,518,946",
+      "value": "70518946",
+      "availability": "reported",
+      "measureType": "stock",
+      "periodStart": null,
+      "periodEnd": null,
+      "asOf": "2021-03-31",
+      "sourceStatedAsOf": null,
+      "dateStatus": "source_explicit",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "municipal-capital-2022-p46-r5-additions",
+      "measure": "additions",
+      "sourceColumn": 2,
+      "sourceLabel": "Additions",
+      "rawValue": "14,462,229",
+      "value": "14462229",
+      "availability": "reported",
+      "measureType": "period_movement",
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "asOf": null,
+      "sourceStatedAsOf": null,
+      "dateStatus": "table_period_context",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "municipal-capital-2022-p46-r5-disposals_write_downs",
+      "measure": "disposals_write_downs",
+      "sourceColumn": 3,
+      "sourceLabel": "Disposals / Write-Downs (Negative)",
+      "rawValue": "-22,540,929",
+      "value": "-22540929",
+      "availability": "reported",
+      "measureType": "period_movement",
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "asOf": null,
+      "sourceStatedAsOf": null,
+      "dateStatus": "table_period_context",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "municipal-capital-2022-p46-r5-gross_cost_closing",
+      "measure": "gross_cost_closing",
+      "sourceColumn": 4,
+      "sourceLabel": "Gross Cost as at March 31, 2022",
+      "rawValue": "62,440,246",
+      "value": "62440246",
+      "availability": "reported",
+      "measureType": "stock",
+      "periodStart": null,
+      "periodEnd": null,
+      "asOf": "2022-03-31",
+      "sourceStatedAsOf": null,
+      "dateStatus": "source_explicit",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "municipal-capital-2022-p46-r5-accumulated_amortization_opening",
+      "measure": "accumulated_amortization_opening",
+      "sourceColumn": 5,
+      "sourceLabel": "Accumulated Amortization as at March 31, 2021",
+      "rawValue": "23,983,280",
+      "value": "23983280",
+      "availability": "reported",
+      "measureType": "stock",
+      "periodStart": null,
+      "periodEnd": null,
+      "asOf": "2021-03-31",
+      "sourceStatedAsOf": null,
+      "dateStatus": "source_explicit",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "municipal-capital-2022-p46-r5-annual_amortization",
+      "measure": "annual_amortization",
+      "sourceColumn": 6,
+      "sourceLabel": "Annual Amortization",
+      "rawValue": "1,351,812",
+      "value": "1351812",
+      "availability": "reported",
+      "measureType": "period_movement",
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "asOf": null,
+      "sourceStatedAsOf": null,
+      "dateStatus": "table_period_context",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "municipal-capital-2022-p46-r5-amortization_adjustments_disposals",
+      "measure": "amortization_adjustments_disposals",
+      "sourceColumn": 7,
+      "sourceLabel": "Adjustments / Disposals",
+      "rawValue": "-2,614,788",
+      "value": "-2614788",
+      "availability": "reported",
+      "measureType": "period_movement",
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "asOf": null,
+      "sourceStatedAsOf": null,
+      "dateStatus": "table_period_context",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "municipal-capital-2022-p46-r5-accumulated_amortization_second_column",
+      "measure": "accumulated_amortization_second_column",
+      "sourceColumn": 8,
+      "sourceLabel": "Accumulated Amortization as at March 31, 2022",
+      "rawValue": "22,720,304",
+      "value": "22720304",
+      "availability": "reported",
+      "measureType": "stock",
+      "periodStart": null,
+      "periodEnd": null,
+      "asOf": "2022-03-31",
+      "sourceStatedAsOf": null,
+      "dateStatus": "source_explicit",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "municipal-capital-2022-p46-r5-net_book_value",
+      "measure": "net_book_value",
+      "sourceColumn": 9,
+      "sourceLabel": "Net Book Value as at March 31, 2022",
+      "rawValue": "39,719,942",
+      "value": "39719942",
+      "availability": "reported",
+      "measureType": "stock",
+      "periodStart": null,
+      "periodEnd": null,
+      "asOf": "2022-03-31",
+      "sourceStatedAsOf": null,
+      "dateStatus": "source_explicit",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceLocator": {
+        "pdfPage": 46,
+        "printedPage": 40,
+        "table": "3.6.1",
+        "row": 5
+      },
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis"
+    },
+    {
+      "id": "annapolis-capital-2022-fund-1-cost",
+      "measure": "cost",
+      "fund": "General",
+      "rawValue": "44,027,330",
+      "value": "44027330",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-1-accumulated_amortization",
+      "measure": "accumulated_amortization",
+      "fund": "General",
+      "rawValue": "18,508,939",
+      "value": "18508939",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-1-net_book_value",
+      "measure": "net_book_value",
+      "fund": "General",
+      "rawValue": "25,518,391",
+      "value": "25518391",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-1-additions",
+      "measure": "additions",
+      "fund": "General",
+      "rawValue": "13,727,048",
+      "value": "13727048",
+      "measureType": "period_movement",
+      "asOf": null,
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-2-cost",
+      "measure": "cost",
+      "fund": "Water",
+      "rawValue": "18,412,916",
+      "value": "18412916",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-2-accumulated_amortization",
+      "measure": "accumulated_amortization",
+      "fund": "Water",
+      "rawValue": "4,211,365",
+      "value": "4211365",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-2-net_book_value",
+      "measure": "net_book_value",
+      "fund": "Water",
+      "rawValue": "14,201,551",
+      "value": "14201551",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-2-additions",
+      "measure": "additions",
+      "fund": "Water",
+      "rawValue": "735,181",
+      "value": "735181",
+      "measureType": "period_movement",
+      "asOf": null,
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-3-cost",
+      "measure": "cost",
+      "fund": "Electric",
+      "rawValue": "0",
+      "value": "0",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-3-accumulated_amortization",
+      "measure": "accumulated_amortization",
+      "fund": "Electric",
+      "rawValue": "0",
+      "value": "0",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-3-net_book_value",
+      "measure": "net_book_value",
+      "fund": "Electric",
+      "rawValue": "0",
+      "value": "0",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-3-additions",
+      "measure": "additions",
+      "fund": "Electric",
+      "rawValue": "0",
+      "value": "0",
+      "measureType": "period_movement",
+      "asOf": null,
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-4-cost",
+      "measure": "cost",
+      "fund": "Other Municipal Reporting Entities",
+      "rawValue": "0",
+      "value": "0",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-4-accumulated_amortization",
+      "measure": "accumulated_amortization",
+      "fund": "Other Municipal Reporting Entities",
+      "rawValue": "0",
+      "value": "0",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-4-net_book_value",
+      "measure": "net_book_value",
+      "fund": "Other Municipal Reporting Entities",
+      "rawValue": "0",
+      "value": "0",
+      "measureType": "stock",
+      "asOf": "2022-03-31",
+      "periodStart": null,
+      "periodEnd": null,
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    },
+    {
+      "id": "annapolis-capital-2022-fund-4-additions",
+      "measure": "additions",
+      "fund": "Other Municipal Reporting Entities",
+      "rawValue": "0",
+      "value": "0",
+      "measureType": "period_movement",
+      "asOf": null,
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null,
+      "sourceMunicipalityLabel": "Municipality of the County of Annapolis",
+      "sourceLocator": {
+        "pdfPage": 48,
+        "printedPage": 42,
+        "table": "3.6.3",
+        "rowLabel": "Municipality of the County of Annapolis"
+      }
+    }
+  ],
+  "derivedFacts": [
+    {
+      "id": "annapolis-capital-opening-net-book-value",
+      "measure": "derived_opening_net_book_value",
+      "value": "46535666",
+      "measureType": "stock",
+      "asOf": "2021-03-31",
+      "calculation": {
+        "operation": "subtract",
+        "inputIds": [
+          "municipal-capital-2022-p46-r5-gross_cost_opening",
+          "municipal-capital-2022-p46-r5-accumulated_amortization_opening"
+        ]
+      },
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null
+    },
+    {
+      "id": "annapolis-capital-net-book-movement",
+      "measure": "derived_net_book_movement",
+      "value": "-6815724",
+      "measureType": "period_movement",
+      "periodStart": "2021-04-01",
+      "periodEnd": "2022-03-31",
+      "calculation": {
+        "operation": "subtract",
+        "inputIds": [
+          "municipal-capital-2022-p46-r5-net_book_value",
+          "annapolis-capital-opening-net-book-value"
+        ]
+      },
+      "currency": null,
+      "unit": "unlabelled_source_monetary_number",
+      "unitMultiplier": null
+    }
+  ],
+  "equations": [
+    {
+      "id": "gross-cost-roll-forward",
+      "formula": "opening gross cost + additions + signed disposals/write-downs = closing gross cost",
+      "calculated": "62440246",
+      "reportedOrDerivedComparator": "62440246",
+      "residual": "0",
+      "meaning": "Internal book-cost arithmetic, not cash flow",
+      "inputIds": [
+        "municipal-capital-2022-p46-r5-gross_cost_opening",
+        "municipal-capital-2022-p46-r5-additions",
+        "municipal-capital-2022-p46-r5-disposals_write_downs",
+        "municipal-capital-2022-p46-r5-gross_cost_closing"
+      ]
+    },
+    {
+      "id": "accumulated-amortization-roll-forward",
+      "formula": "opening accumulated amortization + annual amortization + signed adjustments/disposals = closing accumulated amortization",
+      "calculated": "22720304",
+      "reportedOrDerivedComparator": "22720304",
+      "residual": "0",
+      "meaning": "Internal accumulated-amortization arithmetic",
+      "inputIds": [
+        "municipal-capital-2022-p46-r5-accumulated_amortization_opening",
+        "municipal-capital-2022-p46-r5-annual_amortization",
+        "municipal-capital-2022-p46-r5-amortization_adjustments_disposals",
+        "municipal-capital-2022-p46-r5-accumulated_amortization_second_column"
+      ]
+    },
+    {
+      "id": "closing-net-book-value",
+      "formula": "closing gross cost - closing accumulated amortization = closing net book value",
+      "calculated": "39719942",
+      "reportedOrDerivedComparator": "39719942",
+      "residual": "0",
+      "meaning": "Net carrying value, not sale proceeds",
+      "inputIds": [
+        "municipal-capital-2022-p46-r5-gross_cost_closing",
+        "municipal-capital-2022-p46-r5-accumulated_amortization_second_column",
+        "municipal-capital-2022-p46-r5-net_book_value"
+      ]
+    },
+    {
+      "id": "net-book-movement",
+      "formula": "additions + signed disposals/write-downs - annual amortization - signed amortization adjustments/disposals = closing net book value - derived opening net book value",
+      "calculated": "-6815724",
+      "reportedOrDerivedComparator": "-6815724",
+      "residual": "0",
+      "meaning": "Explains numerical change without asserting its underlying cause",
+      "inputIds": [
+        "municipal-capital-2022-p46-r5-additions",
+        "municipal-capital-2022-p46-r5-disposals_write_downs",
+        "municipal-capital-2022-p46-r5-annual_amortization",
+        "municipal-capital-2022-p46-r5-amortization_adjustments_disposals",
+        "annapolis-capital-opening-net-book-value",
+        "municipal-capital-2022-p46-r5-net_book_value"
+      ]
+    },
+    {
+      "id": "fund-total-cost",
+      "formula": "General + Water + Electric + Other Municipal Reporting Entities cost = same municipality consolidated gross_cost_closing",
+      "calculated": "62440246",
+      "reportedOrDerivedComparator": "62440246",
+      "residual": "0",
+      "meaning": "Four disjoint fund columns only; consolidated row not added to components",
+      "inputIds": [
+        "annapolis-capital-2022-fund-1-cost",
+        "annapolis-capital-2022-fund-2-cost",
+        "annapolis-capital-2022-fund-3-cost",
+        "annapolis-capital-2022-fund-4-cost",
+        "municipal-capital-2022-p46-r5-gross_cost_closing"
+      ]
+    },
+    {
+      "id": "fund-total-accumulated_amortization",
+      "formula": "General + Water + Electric + Other Municipal Reporting Entities accumulated_amortization = same municipality consolidated accumulated_amortization_second_column",
+      "calculated": "22720304",
+      "reportedOrDerivedComparator": "22720304",
+      "residual": "0",
+      "meaning": "Four disjoint fund columns only; consolidated row not added to components",
+      "inputIds": [
+        "annapolis-capital-2022-fund-1-accumulated_amortization",
+        "annapolis-capital-2022-fund-2-accumulated_amortization",
+        "annapolis-capital-2022-fund-3-accumulated_amortization",
+        "annapolis-capital-2022-fund-4-accumulated_amortization",
+        "municipal-capital-2022-p46-r5-accumulated_amortization_second_column"
+      ]
+    },
+    {
+      "id": "fund-total-net_book_value",
+      "formula": "General + Water + Electric + Other Municipal Reporting Entities net_book_value = same municipality consolidated net_book_value",
+      "calculated": "39719942",
+      "reportedOrDerivedComparator": "39719942",
+      "residual": "0",
+      "meaning": "Four disjoint fund columns only; consolidated row not added to components",
+      "inputIds": [
+        "annapolis-capital-2022-fund-1-net_book_value",
+        "annapolis-capital-2022-fund-2-net_book_value",
+        "annapolis-capital-2022-fund-3-net_book_value",
+        "annapolis-capital-2022-fund-4-net_book_value",
+        "municipal-capital-2022-p46-r5-net_book_value"
+      ]
+    },
+    {
+      "id": "fund-total-additions",
+      "formula": "General + Water + Electric + Other Municipal Reporting Entities additions = same municipality consolidated additions",
+      "calculated": "14462229",
+      "reportedOrDerivedComparator": "14462229",
+      "residual": "0",
+      "meaning": "Four disjoint fund columns only; consolidated row not added to components",
+      "inputIds": [
+        "annapolis-capital-2022-fund-1-additions",
+        "annapolis-capital-2022-fund-2-additions",
+        "annapolis-capital-2022-fund-3-additions",
+        "annapolis-capital-2022-fund-4-additions",
+        "municipal-capital-2022-p46-r5-additions"
+      ]
+    }
+  ],
+  "known": [
+    "Opening net carrying value calculated from the reported cost and amortization is 46,535,666; reported closing net carrying value is 39,719,942, a numerical decrease of 6,815,724 in unlabelled source units.",
+    "Eight roll-forward and fund-to-consolidated comparisons have zero numerical residual.",
+    "The exact municipality and fiscal period match within this report; the County of Annapolis is not the Town of Annapolis Royal."
+  ],
+  "unknown": [
+    "Asset-level nature, reasons and approvals for the combined disposals/write-downs amount.",
+    "Any sale consideration, proceeds or payments; carrying value does not establish these.",
+    "Currency and scale are not explicitly stated for these tables; no conversion is applied."
+  ],
+  "nextStep": "Review the municipality\u2019s corresponding audited asset/disposal schedules and notes. If a specific transaction is identified, seek its exact approval/agreement and any compatible accounting or cash records before drawing further conclusions.",
+  "limitations": [
+    "A fall in carrying value is not by itself evidence of waste, cash loss or wrongdoing.",
+    "Gross cost, accumulated amortization, net carrying value and additions are different measures. Do not mix them or add consolidated totals to component funds.",
+    "Zero arithmetic residuals do not independently verify accounting appropriateness or underlying transactions.",
+    "Historical 2021\u20132022 data, not current asset condition or proof of project delivery."
+  ],
+  "rightsScope": "Reexpressed numerical facts, public institution labels, source locators and concise independent explanation only. No report facsimile, logos, personal details or extended source narrative; no blanket licence for source-content reproduction."
+}
