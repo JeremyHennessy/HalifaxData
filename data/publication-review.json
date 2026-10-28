@@ -4,20 +4,20 @@
   "reviewer": "independent_fresh_data_review",
   "reviewedOn": "2026-10-28",
   "evidenceId": "fresh-foundation-review-20261028",
-  "scope": "139 reference sources, four bounded primary fiscal documents,29numeric facts and one neutral budget-version comparison only",
+  "scope": "139 reference sources, four bounded primary fiscal documents, 29 numeric facts and one neutral budget-version comparison only",
   "checks": [
-    "Original workbook139rows/hash exact",
-    "29facts exact match independent primary-text research",
-    "Compatible53.592million estimate revision, notpayment/waste",
-    "Source dash retained null",
-    "Accounting periods/bases/perimeters and stock-flow distinct",
-    "No private tender records, supplier/descriptions or828privateflags",
-    "Publication neutral-case whitelist and finite numeric/unit guards",
-    "Deterministic output, original source access holds retained",
-    "SI011 single limitation correction verified against newly captured official metadata08e7a0ea7c741fe626ba07597e105240e0258e84be0499c48ef2c6919edd39ef: service-category columns present; no values integrated"
+    "All 139 original workbook rows and the workbook hash verified",
+    "29 facts matched to independent primary-source text research",
+    "Compatible $53.592 million estimate revision verified; not a payment or waste finding",
+    "Source dash retained as null, not zero",
+    "Accounting periods, bases, reporting perimeters and stock/flow distinctions retained",
+    "Only reviewed public fields included; private research excluded",
+    "Neutral-case publication whitelist and finite numeric/unit validation tested",
+    "Deterministic output and source access holds retained",
+    "SI011 description corrected against captured official metadata: service-category columns exist, but their values are not integrated in this foundation bundle"
   ],
   "limitations": [
-    "Primary source binaries were not retained; no binary hash or visual verification claimed",
+    "Source binaries were not retained for this foundation snapshot; its records do not claim binary hashes or visual verification",
     "No approval of named consequential allegations",
     "Does not accept any future tender projection or modified bundle",
     "App/browser/security CI is separate"
