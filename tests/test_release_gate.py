@@ -41,3 +41,18 @@ class TenderReviewScope(unittest.TestCase):
    receipt=json.loads((ROOT/'data/tenders/publication-review.json').read_text());receipt['fieldNames']=['vendor']
    (folder/'publication-review.json').write_text(json.dumps(receipt))
    with self.assertRaisesRegex(ValueError,'Review field scope'):tender_files(root)
+
+class ReportingAdmission(unittest.TestCase):
+ def test_case_inputs_and_nested_fields_are_bound_to_public_rows(self):
+  from reporting_publication import reporting_files
+  self.assertEqual(len(reporting_files(ROOT)),2)
+  for change in ('private','input','claim'):
+   with tempfile.TemporaryDirectory() as tmp:
+    root=pathlib.Path(tmp);folder=root/'data/reporting-question';folder.mkdir(parents=True)
+    (root/'data/municipal').mkdir();shutil.copyfile(ROOT/'data/municipal/records.json',root/'data/municipal/records.json')
+    b=json.loads((ROOT/'data/reporting-question/case.json').read_text());receipt=json.loads((ROOT/'data/reporting-question/publication-review.json').read_text())
+    if change=='private':b['publication']['privateNotes']='unreviewed'
+    elif change=='input':b['evidence'][0]['portal']['operatingBalance']='123'
+    else:b['consequentialAllegation']=True
+    body=json.dumps(b).encode();(folder/'case.json').write_bytes(body);receipt['bundleSha256']=hashlib.sha256(body).hexdigest();(folder/'publication-review.json').write_text(json.dumps(receipt))
+    with self.assertRaises(ValueError):reporting_files(root)

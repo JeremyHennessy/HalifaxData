@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "35cbc300c8e665e71cf113f1d2161a8e4b58a66899d4b1068639ec1bf2c4ead9",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "fresh-supplier-label-review-20261028",
+  "captureManifestSha256": "adf68b025049c1ddc7df054ba1a7ea1be99f22bd05e71db751cf69a2c52e0afd",
+  "orderedSourceDigest": "281d5dc65ea0c0d8c8cf486550aae84784f10c0a3be61bb8f4cf44f3b08c76c7",
+  "proposalSha256": "35bb7b20ed745f444e31b7e188750d681b9f55805c4c39bcd66a61c50b778dc4",
+  "scope": "71 exact business-role supplier labels on 4,658 exact source observations from this capture only",
+  "checks": [
+    "Each exact label contextually reviewed in official procurement supplier role",
+    "All 4,658 row associations compared against the raw source supplier field",
+    "No alias merging, legal identity or beneficial owner claim",
+    "Strict observation ID, source row ID and label only; descriptions withheld",
+    "Standalone source, licence attribution and limits included",
+    "Independent replay byte-identical; changed proposal and partial corpus reject without output"
+  ],
+  "limitations": [
+    "Supplier appearance does not imply misconduct, risk or performance",
+    "Other labels are unreviewed, not suspicious or absent",
+    "Amounts and payment links remain unverified; no monetary totals",
+    "New capture/labels/contents require new review; UI/CI are separate"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "11e06c5f27b27eeb0f64075d94fa082ca2b9a7fb366b2385397ec81ceba6e628",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "fresh-municipal-fiscal-review-20261028",
+  "captureManifestSha256": "81b48f10aed0b4148d7d3980c201d9793179ac0096c51e4e4c15b12a75486d32",
+  "metadataSha256": "08e7a0ea7c741fe626ba07597e105240e0258e84be0499c48ef2c6919edd39ef",
+  "scope": "555 municipality/type/year aggregate observations and 23 exact source monetary fields only",
+  "checks": [
+    "All 12,765 measure slots compared to original source rows; 10,750 values present",
+    "Two exact source passes, receipt body hashes/lengths and independent replay verified",
+    "All 48 municipality labels reviewed; municipality type retained to prevent name collisions",
+    "Currency display metadata separate from unverified actual unit/basis",
+    "Missing/null/zero distinct; no private arithmetic flags projected",
+    "OGL\u2013NS attribution and coverage/definition-change limitations retained"
+  ],
+  "limitations": [
+    "Not all government spending or cash payments",
+    "2013\u201314 through 2023\u201324 only; not current",
+    "Unreviewed arithmetic questions are excluded from this public dataset",
+    "No inter-source monetary sums or inferred misconduct",
+    "Changed bytes require new review; app/CI verification separate"
+  ]
+}

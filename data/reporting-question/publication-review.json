@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "65a96a5960ea14b439d41823f55a317c181398664233551514b00ad1374bde82",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "municipal-reporting-question-independent-review-20261028",
+  "scope": "One neutral, unresolved source-reporting reconciliation question concerning two 2019\u201320 municipal operating-fund records",
+  "checks": [
+    "Both provincial profile pages visually inspected, with annual operating amounts distinguished from consolidated amounts",
+    "Original portal row identities, fiscal years, municipal types and three numeric inputs independently verified",
+    "Both residuals independently recalculated without cross-source monetary subtraction",
+    "Profile PDF hashes, source URLs and retrieval receipts verified",
+    "Rounded profile displays preserved, not promoted to exact underlying amounts",
+    "Source candidate replay identical; final release differs only by explicit review publication metadata",
+    "No private research counts, personal information, allegations or inferred cash transfers included"
+  ],
+  "limitations": [
+    "The arithmetic rule is an analyst consistency test, not a verified publisher equation",
+    "Transfer/sign definitions and exact accounting mapping remain unverified",
+    "Original FIR cells, revision history and publisher explanation remain outstanding",
+    "No missing cash, waste, wrongdoing or individual responsibility established",
+    "This acceptance applies only to this exact neutral-question snapshot; not future automated cases",
+    "App integration, public presentation and deployment require separate verification"
+  ]
+}

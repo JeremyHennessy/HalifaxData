@@ -1,0 +1,17 @@
+import {verifiedJSON} from './tenders.js';
+const rowKeys=["currency", "currencyDisplayMetadata", "exactAccountingPolicyVerified", "fiscalYearLabel", "id", "measures", "multiplier", "municipalityLabel", "municipalityType", "provenance", "scope", "sourceRowId", "sourceURL", "stage", "unit"];
+const measureKeys=["annual_surplus_deficit_", "assessable_property_taxes_net_of_school_board_appropriations_corrections_housing_deficits_", "conditional_transfers_from_federal_or_provincial_governments_or_agencies", "conditional_transfers_from_other_governments", "conditional_transfers_from_other_local_governments", "environmental_development_services", "environmental_health_services", "extraordinary_or_special_items", "general_government_services", "grants_in_lieu_of_taxes", "net_property_taxes_and_payments_in_lieu_of_taxes", "operating_surplus_deficit_before_financing_and_transfers", "other_revenue_from_own_sources", "protective_services", "public_health_services", "recreation_and_cultural_services", "sales_of_services", "services_provided_to_other_governments", "total_expenditures", "total_financing_and_transfers", "total_revenues", "transportation_services", "unconditional_transfers_from_other_governments"];
+const topKeys=["attribution", "coverage", "licenceURL", "limitations", "records", "schemaVersion", "sourceId", "sourceURL"];
+const exact=(value,keys)=>value&&typeof value==='object'&&!Array.isArray(value)&&Object.keys(value).sort().join('|')===[...keys].sort().join('|');
+export function validateMunicipal(b,review){
+ if(!exact(b,topKeys)||b.schemaVersion!=='municipal-fiscal-observations-v1'||review.status!=='accepted'||b.coverage.notCurrent!==true||b.coverage.complete!==false)throw new Error('Unreviewed municipal coverage');
+ const ids=new Set(),keys=new Set();
+ for(const row of b.records){
+  if(!exact(row,rowKeys)||!exact(row.measures,measureKeys)||row.currency!==null||row.multiplier!==null||row.exactAccountingPolicyVerified!==false||row.stage!=='reported_fir_observation'||row.unit!=='source_reported_monetary_unit'||row.provenance.captureManifestSha256!==review.captureManifestSha256)throw new Error('Unverified municipal definitions');
+  const key=JSON.stringify([row.municipalityLabel,row.municipalityType,row.fiscalYearLabel]);if(ids.has(row.id)||keys.has(key))throw new Error('Duplicate municipality/type/year');ids.add(row.id);keys.add(key);
+  for(const m of Object.values(row.measures)){if(!exact(m,['presence','rawValue'])||(m.presence==='missing'?m.rawValue!==null:m.presence!=='present'||typeof m.rawValue!=='string'||! /^-?\d+(?:\.\d+)?$/.test(m.rawValue)))throw new Error('Invalid exact municipal measure');}
+ }
+ if(ids.size!==b.coverage.recordCount||keys.size!==b.coverage.municipalityTypeYearKeys)throw new Error('Incomplete municipal observations');return b;
+}
+export function filterMunicipal(rows,{query='',type='',year=''}={}){const q=query.trim().toLocaleLowerCase('en-CA');return rows.filter(r=>(!q||r.municipalityLabel.toLocaleLowerCase('en-CA').includes(q))&&(!type||r.municipalityType===type)&&(!year||r.fiscalYearLabel===year));}
+export async function getMunicipal(signal,fetcher=fetch){const review=await verifiedJSON('data/municipal/publication-review.json',null,null,signal,fetcher);if(review.status!=='accepted'||!/^[a-f0-9]{64}$/.test(review.bundleSha256))throw new Error('Municipal publication review unavailable');const bundle=validateMunicipal(await verifiedJSON('data/municipal/records.json',review.bundleSha256,null,signal,fetcher,2000000),review);return{bundle,review};}

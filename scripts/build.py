@@ -2,10 +2,13 @@
 import hashlib,json,pathlib,shutil,os,re,subprocess
 from public_schema import validate_public_shape
 from tender_publication import tender_files
+from supplier_publication import supplier_files
+from municipal_publication import municipal_files
+from reporting_publication import reporting_files
 from review_receipts import validate_receipt
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
-FILES=['index.html','app/main.js','app/model.js','app/tenders.js','app/styles.css','data/foundation.json','data/publication-review.json']
+FILES=['index.html','app/main.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/reporting.js','app/styles.css','data/foundation.json','data/publication-review.json']
 def build():
     bundle=json.loads((ROOT/'data/foundation.json').read_text())
     assert bundle['schemaVersion']=='halifaxdata-evidence-v1'
@@ -23,7 +26,7 @@ def build():
     assert review['bundleSha256']==hashlib.sha256((ROOT/'data/foundation.json').read_bytes()).hexdigest(),'Review does not match bundle bytes'
     source_commit=os.environ.get('SOURCE_COMMIT_SHA') or subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     assert re.fullmatch('[0-9a-f]{40}',source_commit),'Exact source commit required'
-    files=FILES+tender_files(ROOT)
+    files=FILES+tender_files(ROOT)+supplier_files(ROOT)+municipal_files(ROOT)+reporting_files(ROOT)
     OUT.mkdir(exist_ok=True)
     known=set(files+['release.json','.nojekyll'])
     for path in OUT.rglob('*'):
@@ -39,5 +42,5 @@ def build():
     (OUT/'.nojekyll').write_text('')
     release={'schemaVersion':1,'release':'fresh-foundation-1','sourceCommitSha':source_commit,'evidenceAsOf':bundle['asOf'],'files':hashes,'scope':'Neutral reviewed evidence; not comprehensive government coverage'}
     (OUT/'release.json').write_text(json.dumps(release,indent=2)+'\n')
-    print(json.dumps({'publicFiles':len(files)+2,'financialFacts':len(bundle['moneyFacts']),'guideReferences':139,'publishedComparisons':len(bundle['investigations'])}))
+    print(json.dumps({'publicFiles':len(files)+2,'financialFacts':len(bundle['moneyFacts']),'guideReferences':139,'publishedComparisons':len(bundle['investigations']),'reviewedReportingQuestions':int((ROOT/'data/reporting-question/case.json').exists())}))
 if __name__=='__main__':build()

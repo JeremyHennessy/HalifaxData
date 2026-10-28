@@ -1,0 +1,114 @@
+{
+  "attribution": "Portal records contain information licensed under the Open Government Licence \u2013 Nova Scotia. Profile facts are attributed to the provincial Department of Municipal Affairs and Housing; original PDFs remain linked, not republished.",
+  "confirmedFacts": [
+    "Each portal row has a nonzero arithmetic residual.",
+    "The two residuals are equal in magnitude and opposite in sign.",
+    "Colchester provincial profile displays -$1.6 million; Victoria displays $0 thousand. These are rounded source displays."
+  ],
+  "consequentialAllegation": false,
+  "evidence": [
+    {
+      "fiscalYear": "2019-20",
+      "municipality": "Colchester",
+      "municipalityType": "Rural Municipality",
+      "portal": {
+        "calculatedBalance": "-1616260",
+        "currency": null,
+        "equationResidual": "-1616260",
+        "exactAccountingPolicyVerified": false,
+        "financingAndTransfers": "-5015912",
+        "operatingBalance": "3399652",
+        "rawSha256": "348492645897dd7e38e4a1e411664d2cb1b9d9454fe884ec6def048f8664cbe2",
+        "reportedAnnualBalance": "0",
+        "retrievedAt": "2026-10-28T04:06:14.420766+00:00",
+        "sourceRowId": "row-bfqt_4mvn~ne38",
+        "sourceURL": "https://data.novascotia.ca/datasets/sbzw-ajrm",
+        "unit": "source_reported_monetary_unit"
+      },
+      "profile": {
+        "basis": "2019-20 municipal profile, citing Financial Information Return",
+        "currency": null,
+        "label": "Annual operating surplus (deficit)",
+        "multiplier": "1000000",
+        "pdfPage": 18,
+        "precision": "rounded display; exact underlying value not independently obtained",
+        "printedPage": "15",
+        "rawSha256": "84552caafebd54af88c86dc755cc3ac088c0ac379a803b83842c043293569530",
+        "rawValue": "-1.6",
+        "reportedDisplay": "-$1.6 million",
+        "retrievedAt": "2026-10-28T04:24:07.983635+00:00",
+        "sourceURL": "https://www.novascotia.ca/sites/default/files/documents/1-2787/municipality-county-colchester-municipal-profile-and-financial-condition-indicators-results-2020-en.pdf",
+        "unit": "source_dollar_display"
+      }
+    },
+    {
+      "fiscalYear": "2019-20",
+      "municipality": "Victoria",
+      "municipalityType": "Rural Municipality",
+      "portal": {
+        "calculatedBalance": "0",
+        "currency": null,
+        "equationResidual": "1616260",
+        "exactAccountingPolicyVerified": false,
+        "financingAndTransfers": "-108783",
+        "operatingBalance": "108783",
+        "rawSha256": "348492645897dd7e38e4a1e411664d2cb1b9d9454fe884ec6def048f8664cbe2",
+        "reportedAnnualBalance": "-1616260",
+        "retrievedAt": "2026-10-28T04:06:14.420766+00:00",
+        "sourceRowId": "row-rkw2-279d_muty",
+        "sourceURL": "https://data.novascotia.ca/datasets/sbzw-ajrm",
+        "unit": "source_reported_monetary_unit"
+      },
+      "profile": {
+        "basis": "2019-20 municipal profile, citing Financial Information Return",
+        "currency": null,
+        "label": "Annual operating surplus (deficit)",
+        "multiplier": "1000",
+        "pdfPage": 18,
+        "precision": "rounded display; exact underlying value not independently obtained",
+        "printedPage": "15",
+        "rawSha256": "5279b0b9c150debd1a493d9ac5bee66fe5832ad62cdef360e8887a96cdf16fed",
+        "rawValue": "0",
+        "reportedDisplay": "$0 thousand",
+        "retrievedAt": "2026-10-28T04:24:14.602133+00:00",
+        "sourceURL": "https://www.novascotia.ca/sites/default/files/documents/1-2800/municipality-county-victoria-municipal-profile-and-financial-condition-indicators-results-2020-en.pdf",
+        "unit": "source_dollar_display"
+      }
+    }
+  ],
+  "hypotheses": [
+    "Possible source alignment or transcription issue.",
+    "Different reporting definitions, omitted adjustments or later revisions may explain the apparent inconsistency."
+  ],
+  "id": "municipal-operating-balance-reporting-2019-20",
+  "nextRecords": [
+    "Original 2019-20 FIR operating-fund schedules for both municipalities.",
+    "Dataset transformation, revision history and field definitions.",
+    "Explanation from the source publisher, only if a separately authorized inquiry is made."
+  ],
+  "notEstablished": [
+    "No transfer between these municipalities is established.",
+    "No missing cash, waste, unlawful action or individual responsibility is established.",
+    "Exact original FIR cells and subsequent source revisions have not been obtained.",
+    "The rounded profile display is not treated as an exact underlying amount."
+  ],
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reason": "Reviewed neutral reporting question only; release additionally requires matching independent acceptance receipt.",
+    "reviewId": "municipal-reporting-question-independent-review-20261028",
+    "reviewType": "neutral_source_reporting_question",
+    "reviewedOn": "2026-10-28"
+  },
+  "responses": [],
+  "rule": {
+    "expression": "operating_surplus_deficit_before_financing_and_transfers + total_financing_and_transfers - annual_surplus_deficit_",
+    "id": "reported_operating_balance_equation_v1",
+    "scope": "Analyst consistency test within each source row; accounting mapping and transfer/sign definitions remain unverified. No cross-source monetary subtraction or payment claim"
+  },
+  "schemaVersion": "source-reporting-question-v1",
+  "sourceLicenceURL": "https://support.novascotia.ca/services/open-data-portal-licence",
+  "status": "documented_source_reporting_difference",
+  "summary": "Two portal rows do not reconcile under our stated arithmetic test. Provincial profiles citing the same fiscal-year Financial Information Returns show different annual-balance displays. The cause is unresolved; this is a reporting question, not evidence of missing money.",
+  "title": "Two municipal operating-balance records need reconciliation"
+}
