@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "55164a83769afa426568901932d863ccad8b16d87ebc988e3199ee6bf11e6a2e",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "housing-contract-audit-independent-review-20261028",
+  "scope": "Source-attributed historical institutional procurement audit and exact recommendation follow-up",
+  "checks": [
+    "Original audit text and source locators independently checked; monetary and procedural context visually checked on PDF pages 17 and 18",
+    "Five monetary facts preserve award, pilot cost and overlapping award-component distinctions",
+    "Six historical chronology entries and original audit period/conclusion date checked",
+    "Four recommendation identifiers matched to the exact accepted follow-up audit title and completed range, not inferred corporate identity",
+    "Seven focused offline tests passed; final release differs only in publication metadata",
+    "Projection excludes personal details and preserves anonymous supplier aliases without procurement-row matching"
+  ],
+  "limitations": [
+    "No original tender or contract identifiers, transaction-level payments or complete spending chain are established",
+    "425,000 award component overlaps later awards; do not add all monetary observations",
+    "CAD is contextual inference, not an explicit currency code in the source",
+    "Historical recommendation completion as of 2025-10-10 is not current compliance or validation of underlying transactions",
+    "Institutional observations are attributed to the auditor; no criminal or individual misconduct determination by the application",
+    "Rights scope covers concise independently expressed factual context, not blanket report reproduction",
+    "UI admission and presentation require separate verification"
+  ]
+}

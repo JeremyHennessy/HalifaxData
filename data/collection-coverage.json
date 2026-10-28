@@ -6,6 +6,28 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "housing-audit",
+      "title": "Housing service-contract audit progression",
+      "relatedSourceIds": [
+        "guide-042"
+      ],
+      "dataPath": "data/housing-audit/progression.json",
+      "dataSha256": "55164a83769afa426568901932d863ccad8b16d87ebc988e3199ee6bf11e6a2e",
+      "reviewPath": "data/housing-audit/publication-review.json",
+      "reviewId": "housing-contract-audit-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 4,
+      "countUnit": "exact recommendation connections",
+      "route": "#/audits?case=housing-contracts",
+      "scope": "Five differently scoped amounts and the original institutional audit linked to four historical recommendation statuses. Company A/B/C remain anonymous; no payment or vendor-ID links, no current-compliance claim.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://oag-ns.ca/sites/default/files/2023-01/Interactive%20Full%20Report_3_0.pdf",
+        "https://www.oag-ns.ca/sites/default/files/2026-03/2026%20Follow-Up%20of%202021%202022%20and%202023%20Recommendations.pdf"
+      ]
+    },
+    {
       "id": "municipal-capital",
       "title": "Historical municipal capital assets",
       "relatedSourceIds": [],
