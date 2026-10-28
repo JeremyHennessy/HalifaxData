@@ -1,0 +1,33 @@
+{
+  "attribution": "Short source-attributed purpose wording and independent contextual explanation derived from official OIC 2026-335. Original source linked.",
+  "provenance": {
+    "pdfPage": 2,
+    "pdfSha256": "06e7eb1faa413a262e2a44805e4440f4ac79097ce65be65e455b919d3f5bfa63",
+    "pdfURL": "https://novascotia.ca/apps/oic/OicAttachment/DownLoadFile?OicID=21524",
+    "sourceLocator": "OIC 2026-335, clause (k)",
+    "sourceSha256": "12d9db2a2653a17ca7c9aeaa6b28f15c22c939121f6e87dc36f6e4bebbaf5bd2",
+    "sourceURL": "https://novascotia.ca/apps/oic/OicFile/Details/21524",
+    "targetAmountLocator": "Schedule A, PDF page 3, Restructuring Costs, Column II"
+  },
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reviewId": "authorization-purpose-independent-review-20261028",
+    "reviewType": "source_attributed_authorization_purpose",
+    "reviewedOn": "2026-10-28"
+  },
+  "purpose": {
+    "explanation": "The order attributes this supplemental appropriation primarily to higher corporate initiatives. It does not provide an initiative-by-initiative or payee breakdown for this line. This is an authorization, not a verified payment total.",
+    "heading": "Stated purpose",
+    "qualifier": "primarily",
+    "scopeLimit": "This describes what this order says, not every record government may hold. No conclusion about waste or wrongdoing follows from the broad label.",
+    "sourcePhrase": "primarily due to higher corporate initiatives"
+  },
+  "schemaVersion": "authorization-purpose-context-v1",
+  "target": {
+    "bundleSha256": "bca870a30c64807ef881d67d7c8680df748160bcd208b2f05bcdf4fc19f5c6c5",
+    "clause": "k",
+    "orderNumber": "2026-335",
+    "recordId": "oic-2026-335-clause-k"
+  }
+}
