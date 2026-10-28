@@ -21,3 +21,5 @@
 .ambulance-service th{overflow-wrap:normal;word-break:normal}.ambulance-service th:nth-child(n+2){white-space:nowrap}
 
 .shelburne-grants{min-width:0;overflow-wrap:anywhere}.shelburne-grants .card,.shelburne-grants details{margin:20px 0}
+
+.source-reference-context,.procurement-methodology{min-width:0;overflow-wrap:anywhere}.source-reference-context details,.procurement-methodology details{margin:16px 0}.source-reference-context .card{min-width:0}

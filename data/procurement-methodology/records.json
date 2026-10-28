@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "procurement-source-quality-annotation-v1",
+  "id": "procurement-source-quality-20261028",
+  "kind": "source_methodology_annotation_not_investigation",
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reviewId": "procurement-source-quality-independent-review-20261028",
+    "reviewType": "source_methodology_context",
+    "reviewedOn": "2026-10-28",
+    "requiresMatchingIndependentReceipt": true
+  },
+  "target": {
+    "tenderIndexSha256": "4118d8b43061fafc195c9b65504f7ef8589edd4cfec93ddc62e9a3126bbce062",
+    "sourceId": "guide-024",
+    "captureDate": "2026-10-28"
+  },
+  "title": "Tender records are not a payment ledger",
+  "summary": "An awarded-amount field does not by itself establish money spent. Tender identifiers can recur while source observations remain distinct; the application preserves those rows instead of treating them as duplicate payments.",
+  "sourceURL": "https://data.novascotia.ca/Procurement-and-Contracts/Awarded-Public-Tenders/m6ps-8j6u",
+  "attribution": "Contains information licensed under the Open Government Licence \u2013 Nova Scotia.",
+  "licenceURL": "https://support.novascotia.ca/services/open-data-portal-licence",
+  "snapshotFacts": {
+    "observationCount": 33670,
+    "distinctSourceRowIds": 33670,
+    "distinctTenderStrings": 32002,
+    "repeatedExactPublisherLabelTenderGroups": 518
+  },
+  "countMeaning": "Counts describe one captured dataset, not suspicious contracts or current procurement totals. A literal publisher label is not a verified legal entity. Recurring tender strings are not globally unique contract identifiers.",
+  "amountCaveat": "The generic awarded-amount field can occur on sale records as well as procurement records. Currency, tax, unit/total basis and money direction require source context. Do not sum it as government expenditure or assume sale proceeds were received.",
+  "example": {
+    "observationId": "tender-observation-0adcc462db59b9d9c2c3fbe9",
+    "sourceRowId": "row-rzyy_crj2-ah2f",
+    "tenderId": "MID2024-01",
+    "sourceDescription": "Sale of Surplus Equipment",
+    "sourcePageSha256": "0dc9368f2a6a8c7b2d8e0537e728bf3336dc231796ba8e42a357fcf3395d4ee3",
+    "sourceRowIndex": 888,
+    "retrievedAt": "2026-10-28T02:55:50.266843+00:00",
+    "interpretation": "This source description identifies a sale. It does not independently establish item/lot details, actual proceeds, payment direction or receipt.",
+    "noRiskInference": true
+  },
+  "identityCaveat": "Preserve source-row identity and snapshot provenance. Exact publisher label plus tender string is only a research grouping; a contract/lot identifier or documented crosswalk is needed for stronger joins.",
+  "lifecycleCaveat": "The captured fields do not include explicit contract, amendment, lot or award-status identifiers. Date variation alone does not prove amendments. One snapshot is not a contract history.",
+  "limitations": [
+    "No observations were removed or merged by this quality review.",
+    "Repeated rows, tender strings, dates or amounts do not establish duplicate payments, contract splitting or misconduct.",
+    "No vendor risk ranking, ownership inference, invoice verification or new finding/collection count is created.",
+    "The example is a source-context illustration, not an allegation about a supplier or public institution.",
+    "No new records or source requests were added by this annotation."
+  ],
+  "rightsScope": "Aggregate factual counts and a short non-personal source description with exact public observation identifiers; no vendor labels, personal data or raw private records."
+}

@@ -1,0 +1,21 @@
+{
+  "status": "accepted",
+  "bundleSha256": "96e6302b93413c98f54c2ea92f82f7a313a74144df5bb5a909f8b41ecae58f4c",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "procurement-source-quality-independent-review-20261028",
+  "checks": [
+    "Independently replayed the underlying retained-record grouping assessment and the minimal public annotation; 12 grouping and six annotation tests passed.",
+    "Verified exact captured source-page bytes for the sale example and distinct source-row identities, without merging records.",
+    "Checked the example observation and source-row identifiers against the exact accepted public tender index and hash-verified shards.",
+    "Confirmed source counts describe observation granularity rather than suspicious contracts, payments or current totals.",
+    "Verified final release changes publication metadata only; no vendor names, individual amounts or private research paths are projected."
+  ],
+  "limits": [
+    "Bound only to tender index 4118d8b43061fafc195c9b65504f7ef8589edd4cfec93ddc62e9a3126bbce062 and its captured snapshot.",
+    "A surplus-sale description does not establish proceeds received, payment direction, item identity or an accounting basis for summing amounts.",
+    "Repeated identifiers or selected business fields do not establish duplicate payments, contract splitting, amendments or misconduct.",
+    "This is source-methodology context, not a new investigation, supplier risk score or evidence-collection count.",
+    "Only aggregate factual counts and the short non-personal source description are admitted, with source attribution and licence link retained."
+  ]
+}
