@@ -1,6 +1,7 @@
 """Build a separate receipt-bound collection layer without changing the reference inventory."""
 import hashlib,json
 COLLECTIONS=[
+ ('municipal-capital','Historical municipal capital assets',[],'data/municipal-capital/records.json','data/municipal-capital/publication-review.json','records','source rows: 49 municipalities and 3 overlapping aggregates','#/municipal-capital','Historical 2021–22 capital assets, not operating expenses or cash payments. Currency and scale unknown; excluded placeholders and conflicting dates preserved.'),
  ('cash-bridge','NSCC cash/accrual explanation',[],'data/cash-bridge/case.json','data/cash-bridge/publication-review.json',None,'reviewed accounting explanation','#/cash-bridge','46 source observations and 14 explicit equations across two years. Internal statement arithmetic, not underlying bank verification.'),
  ('authorizations','Supplemental appropriation orders',[],'data/authorizations/records.json','data/authorizations/publication-review.json','orders','reviewed orders','#/authorizations','23 clauses in two separate fiscal years. Authorization, not payment; no combined fiscal-year total.'),
  ('foundation','Financial statement facts',['fiscal-document-01','fiscal-document-02','fiscal-document-03','fiscal-document-04'],'data/foundation.json','data/publication-review.json','moneyFacts','financial facts','#/money','Primary text reviewed; source binary was not retained for these facts.'),
