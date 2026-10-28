@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "4e2fcac3ab7323a0ff09bd75f9b3435d5ef82c3f9c377be3a7497f60589acea9",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "shelburne-paid-grants-independent-review-20261028",
+  "scope": "36 source-reported paid organization/program grant rows and separately stated table total for Town of Shelburne 2024-25",
+  "checks": [
+    "All 36 labels, row order and monetary tokens independently compared using PDF table geometry and visual original",
+    "Exact Decimal detail sum reconciles to source total 68,301.98; total is not an extra record or payment",
+    "Public organization/program labels inspected; no individual recipient or legal-identity expansion",
+    "General grant-policy context retains exclusions and does not establish row-specific approval",
+    "Thirteen offline tests passed; final differs only in release/publication metadata"
+  ],
+  "limitations": [
+    "Source-reported paid is not independently verified bank settlement or transaction-level audited evidence",
+    "ISO currency, accounting basis, tax/in-kind treatment and precise period boundaries remain unestablished",
+    "Source labels are not verified legal recipients; local IDs are not official transactions or decisions",
+    "Complete displayed table does not establish all municipal spending or grants coverage",
+    "Policy source is general context only, not an exact decision-to-payment join",
+    "Town of Shelburne is not Halifax; no geographic reallocation, trend, score or wrongdoing inference",
+    "Rights scope covers attributed factual values only; no blanket source reproduction licence",
+    "Application admission, exact-decimal total presentation and hosted UI require separate verification"
+  ]
+}
