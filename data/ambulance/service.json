@@ -1,0 +1,568 @@
+{
+  "schemaVersion": "ambulance-service-evidence-v1",
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reviewId": "ambulance-service-independent-review-20261028",
+    "reviewType": "source_attributed_historical_service_measures",
+    "reviewedOn": "2026-10-28",
+    "requiresMatchingIndependentReceipt": true
+  },
+  "id": "ambulance-service-evidence-2022",
+  "title": "Ground ambulance service: historical standards, response compliance and hospital offloads",
+  "summary": "The same audit documents compensation and service performance, but does not establish that compensation changes caused service results. Hospital offload measures and ambulance-provider response standards have different responsibilities and populations.",
+  "source": {
+    "publisher": "Office of the Auditor General of Nova Scotia",
+    "url": "https://oag-ns.ca/sites/default/files/2023-09/2023%20Ground%20Ambulance%20Services%20Interactive.pdf",
+    "title": "Ground Ambulance Services: Department of Health and Wellness and Emergency Medical Care Inc.",
+    "sha256": "957d83f76d240704f93c5521d2ed3f8cd5e9b8db08625c4b178263c9219aad8f",
+    "receiptSha256": "66d6c3a08e748a95b62ad0a323a835ff800edf3bcec21ec814a22285ad4d8cf3",
+    "retrievedAt": "2026-10-28T12:04:18.250725+00:00",
+    "reportMonth": "2023-09",
+    "auditConclusionDate": "2023-08-17"
+  },
+  "institutionalLink": {
+    "acceptedCompensationBundleSha256": "b50fb2055dc53c46244a8aca3e6d523e76c5599180be0f6322f58c347b618e92",
+    "acceptedCompensationId": "ambulance-contract-compensation-2017-2022",
+    "basis": "Same original report and expressly named Department of Health and Wellness / Emergency Medical Care Inc. institutional contract context",
+    "linkType": "documented_institutional_context_only",
+    "causalSpendingRelationshipEstablished": false,
+    "contractOrTransactionId": null
+  },
+  "responseDefinition": {
+    "summary": "Elapsed time from call taken to ambulance arrival on scene; priority and contract community category determine the threshold. Emergency uses lights/sirens; urgent does not.",
+    "locator": {
+      "pdfPage": 22,
+      "paragraphs": [
+        "1.16",
+        "1.17",
+        "1.18"
+      ]
+    },
+    "exemptions": "Source permits exclusions for circumstances beyond provider control, including severe weather, disasters, specified technology failures and peak capacity.",
+    "exemptionsLocator": {
+      "pdfPage": 39,
+      "paragraphs": [
+        "1.76",
+        "1.77"
+      ]
+    },
+    "monitoringLimit": "Report says departmental contractual-response monitoring stopped in August 2022. These July results are historical, not current compliance.",
+    "monitoringLocator": {
+      "pdfPage": 39,
+      "paragraph": "1.78"
+    }
+  },
+  "responseStandards": [
+    {
+      "id": "ambulance-standard-emergency-1",
+      "priority": "emergency",
+      "communityCategoryAsReported": "1",
+      "communityTypeAsReported": "Urban",
+      "withinMinutes": 9,
+      "targetPercent": 80,
+      "locator": {
+        "pdfPage": 22,
+        "printedPage": 22,
+        "table": "Response Times Performance Standards"
+      },
+      "effectiveDatesEstablished": false
+    },
+    {
+      "id": "ambulance-standard-emergency-2",
+      "priority": "emergency",
+      "communityCategoryAsReported": "2",
+      "communityTypeAsReported": "Suburban",
+      "withinMinutes": 15,
+      "targetPercent": 80,
+      "locator": {
+        "pdfPage": 22,
+        "printedPage": 22,
+        "table": "Response Times Performance Standards"
+      },
+      "effectiveDatesEstablished": false
+    },
+    {
+      "id": "ambulance-standard-emergency-3",
+      "priority": "emergency",
+      "communityCategoryAsReported": "3",
+      "communityTypeAsReported": "Rural",
+      "withinMinutes": 30,
+      "targetPercent": 80,
+      "locator": {
+        "pdfPage": 22,
+        "printedPage": 22,
+        "table": "Response Times Performance Standards"
+      },
+      "effectiveDatesEstablished": false
+    },
+    {
+      "id": "ambulance-standard-urgent-1",
+      "priority": "urgent",
+      "communityCategoryAsReported": "1",
+      "communityTypeAsReported": "Urban",
+      "withinMinutes": 15,
+      "targetPercent": 80,
+      "locator": {
+        "pdfPage": 22,
+        "printedPage": 22,
+        "table": "Response Times Performance Standards"
+      },
+      "effectiveDatesEstablished": false
+    },
+    {
+      "id": "ambulance-standard-urgent-2",
+      "priority": "urgent",
+      "communityCategoryAsReported": "2",
+      "communityTypeAsReported": "Suburban",
+      "withinMinutes": 20,
+      "targetPercent": 80,
+      "locator": {
+        "pdfPage": 22,
+        "printedPage": 22,
+        "table": "Response Times Performance Standards"
+      },
+      "effectiveDatesEstablished": false
+    },
+    {
+      "id": "ambulance-standard-urgent-3",
+      "priority": "urgent",
+      "communityCategoryAsReported": "3",
+      "communityTypeAsReported": "Rural",
+      "withinMinutes": 40,
+      "targetPercent": 80,
+      "locator": {
+        "pdfPage": 22,
+        "printedPage": 22,
+        "table": "Response Times Performance Standards"
+      },
+      "effectiveDatesEstablished": false
+    }
+  ],
+  "responseResults": [
+    {
+      "id": "ambulance-response-2022-07-emergency",
+      "priority": "emergency",
+      "sourcePeriodLabel": "July 2022",
+      "periodType": "calendar_month",
+      "reportedOnTimePercent": 69,
+      "targetPercent": 90,
+      "geography": "Consolidated Nova Scotia community categories",
+      "measure": "Contractual on-time response compliance, not mean or percentile minutes",
+      "sourceStage": "Department calculation reproduced in auditor report; graph explicitly labelled unaudited",
+      "denominator": "Eligible responses after exemptions; exact count and raw exemptions unavailable in this slice",
+      "denominatorCount": null,
+      "locator": {
+        "pdfPage": 39,
+        "printedPage": 39,
+        "paragraph": "1.78"
+      },
+      "targetLocator": {
+        "pdfPage": 38,
+        "paragraph": "1.73"
+      }
+    },
+    {
+      "id": "ambulance-response-2022-07-urgent",
+      "priority": "urgent",
+      "sourcePeriodLabel": "July 2022",
+      "periodType": "calendar_month",
+      "reportedOnTimePercent": 64,
+      "targetPercent": 90,
+      "geography": "Consolidated Nova Scotia community categories",
+      "measure": "Contractual on-time response compliance, not mean or percentile minutes",
+      "sourceStage": "Department calculation reproduced in auditor report; graph explicitly labelled unaudited",
+      "denominator": "Eligible responses after exemptions; exact count and raw exemptions unavailable in this slice",
+      "denominatorCount": null,
+      "locator": {
+        "pdfPage": 39,
+        "printedPage": 39,
+        "paragraph": "1.78"
+      },
+      "targetLocator": {
+        "pdfPage": 38,
+        "paragraph": "1.73"
+      }
+    }
+  ],
+  "offloadStandard": {
+    "thresholdMinutes": 30,
+    "sourceYear": "2021",
+    "wordingStrength": "strive to meet a target, as described in the auditor report; not a newly inferred absolute legal deadline",
+    "directiveRecipientAsReported": "Nova Scotia Health",
+    "iwkDirectiveApplicabilityIndependentlyEstablished": false,
+    "responsibility": "Hospital transfer of care is not an EMCI performance standard. The performance table includes IWK separately; this does not establish applicability of the Nova Scotia Health directive to IWK.",
+    "targetPercent": null,
+    "locator": {
+      "pdfPage": 42,
+      "paragraph": "1.86"
+    },
+    "responsibilityLocator": {
+      "pdfPage": 27,
+      "paragraph": "1.34"
+    },
+    "originalDirectiveAcquired": false
+  },
+  "offloadDefinition": {
+    "summary": "Interval from ambulance arrival at emergency department to recorded transfer of care to the hospital team. Arrival uses GPS; transfer time is manually recorded.",
+    "locator": {
+      "pdfPage": 27,
+      "paragraphs": [
+        "1.31",
+        "1.32"
+      ]
+    },
+    "exclusions": [
+      "Source excludes offload intervals shorter than two minutes and longer than twelve hours.",
+      "Missing transfer-of-care times and inconsistent manual recording reduce source confidence; these are not independently repaired."
+    ],
+    "qualityLocator": {
+      "pdfPage": 57,
+      "paragraphs": [
+        "1.143",
+        "1.144",
+        "1.145"
+      ]
+    },
+    "excludedRecordCountsFor2022Hospitals": null,
+    "excludedCountsLimit": "Report-wide quality review spans April 2017\u2013December 2022; those counts cannot serve as the denominator adjustment for this 2022 hospital table."
+  },
+  "offloadResults": [
+    {
+      "id": "ambulance-offload-2022-r1",
+      "institutionAsReported": "St. Martha\u2019s Regional Hospital (Antigonish)",
+      "role": "hospital",
+      "rawOffloads": "2,809",
+      "offloadCount": 2809,
+      "rawPercentage": "68%",
+      "withinThresholdPercent": 68,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 1
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r2",
+      "institutionAsReported": "Aberdeen Hospital (New Glasgow)",
+      "role": "hospital",
+      "rawOffloads": "4,241",
+      "offloadCount": 4241,
+      "rawPercentage": "67%",
+      "withinThresholdPercent": 67,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 2
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r3",
+      "institutionAsReported": "IWK Health Centre* (Halifax)",
+      "role": "hospital",
+      "rawOffloads": "1,155",
+      "offloadCount": 1155,
+      "rawPercentage": "63%",
+      "withinThresholdPercent": 63,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": "Patients aged 16 years and younger only",
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 3
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r4",
+      "institutionAsReported": "Yarmouth Regional Hospital",
+      "role": "hospital",
+      "rawOffloads": "4,530",
+      "offloadCount": 4530,
+      "rawPercentage": "40%",
+      "withinThresholdPercent": 40,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 4
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r5",
+      "institutionAsReported": "Cumberland Regional Health Care Centre (Amherst)",
+      "role": "hospital",
+      "rawOffloads": "3,159",
+      "offloadCount": 3159,
+      "rawPercentage": "33%",
+      "withinThresholdPercent": 33,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 5
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r6",
+      "institutionAsReported": "Valley Regional Hospital (Kentville)",
+      "role": "hospital",
+      "rawOffloads": "6,851",
+      "offloadCount": 6851,
+      "rawPercentage": "26%",
+      "withinThresholdPercent": 26,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 6
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r7",
+      "institutionAsReported": "Cape Breton Regional Hospital (Sydney)",
+      "role": "hospital",
+      "rawOffloads": "11,162",
+      "offloadCount": 11162,
+      "rawPercentage": "24%",
+      "withinThresholdPercent": 24,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 7
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r8",
+      "institutionAsReported": "South Shore Regional Hospital (Bridgewater)",
+      "role": "hospital",
+      "rawOffloads": "4,751",
+      "offloadCount": 4751,
+      "rawPercentage": "20%",
+      "withinThresholdPercent": 20,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 8
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r9",
+      "institutionAsReported": "Colchester East Hants Health Centre (Truro)",
+      "role": "hospital",
+      "rawOffloads": "6,420",
+      "offloadCount": 6420,
+      "rawPercentage": "15%",
+      "withinThresholdPercent": 15,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 9
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r10",
+      "institutionAsReported": "Queen Elizabeth II Health Sciences Centre \u2013 Halifax Infirmary",
+      "role": "hospital",
+      "rawOffloads": "15,610",
+      "offloadCount": 15610,
+      "rawPercentage": "9%",
+      "withinThresholdPercent": 9,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 10
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r11",
+      "institutionAsReported": "Dartmouth General Hospital",
+      "role": "hospital",
+      "rawOffloads": "8,936",
+      "offloadCount": 8936,
+      "rawPercentage": "8%",
+      "withinThresholdPercent": 8,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 11
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r12",
+      "institutionAsReported": "Cobequid Community Health Centre (Lower Sackville)",
+      "role": "hospital",
+      "rawOffloads": "3,564",
+      "offloadCount": 3564,
+      "rawPercentage": "8%",
+      "withinThresholdPercent": 8,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Reported offloads for this hospital, after source exclusions; not all ambulance calls",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 12
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r13",
+      "institutionAsReported": "Average",
+      "role": "aggregate",
+      "rawOffloads": "-",
+      "offloadCount": null,
+      "rawPercentage": "23%",
+      "withinThresholdPercent": 23,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Published aggregate for the listed twelve-hospital population after source exclusions; not an unweighted mean or additional hospital",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 13
+      }
+    },
+    {
+      "id": "ambulance-offload-2022-r14",
+      "institutionAsReported": "Total",
+      "role": "aggregate",
+      "rawOffloads": "73,188",
+      "offloadCount": 73188,
+      "rawPercentage": "-",
+      "withinThresholdPercent": null,
+      "thresholdMinutes": 30,
+      "sourcePeriodLabel": "2022",
+      "periodType": "calendar_year",
+      "geography": "Nova Scotia: listed tertiary and regional hospitals only",
+      "denominator": "Published aggregate for the listed twelve-hospital population after source exclusions; not an unweighted mean or additional hospital",
+      "populationNote": null,
+      "precision": "Counts as published; percentages rounded to whole percentage points",
+      "locator": {
+        "pdfPage": 29,
+        "printedPage": 29,
+        "row": 14
+      }
+    }
+  ],
+  "checks": [
+    {
+      "id": "hospital-count-total",
+      "rule": "Sum 12 hospital offload counts, excluding published aggregate rows",
+      "inputIds": [
+        "ambulance-offload-2022-r1",
+        "ambulance-offload-2022-r2",
+        "ambulance-offload-2022-r3",
+        "ambulance-offload-2022-r4",
+        "ambulance-offload-2022-r5",
+        "ambulance-offload-2022-r6",
+        "ambulance-offload-2022-r7",
+        "ambulance-offload-2022-r8",
+        "ambulance-offload-2022-r9",
+        "ambulance-offload-2022-r10",
+        "ambulance-offload-2022-r11",
+        "ambulance-offload-2022-r12"
+      ],
+      "calculatedCount": 73188,
+      "sourceTotalRecordId": "ambulance-offload-2022-r14",
+      "sourceTotal": 73188,
+      "equal": true
+    }
+  ],
+  "limitations": [
+    "Historical 2022 measures, not current service performance or clinical patient outcomes.",
+    "Response compliance percentages are not average response minutes. Community targets are 80%; consolidated emergency/urgent target is 90%. Do not substitute one for the other.",
+    "July response data are reproduced departmental calculations labelled unaudited; raw eligible call and exemption counts are not available here.",
+    "The 30-minute hospital offload target is a different measure and institutional responsibility, not the provider response threshold or a legal liability conclusion.",
+    "The offload table covers twelve tertiary/regional hospitals, not all hospitals or all emergency responses. IWK population is age-limited.",
+    "Whole percentages are rounded. Do not infer exact successful-offload counts or recompute the source aggregate by taking an unweighted mean.",
+    "The hospital total and Average are overlapping aggregate rows, not additional hospitals. Dash cells remain null.",
+    "Compensation uses fiscal-year labels while these results use calendar periods; no per-dollar outcome ratio, causal inference, annual trend or matched-period financial comparison is established.",
+    "The original contract and directives are not independently acquired; source-attributed descriptions do not establish present legal obligations."
+  ],
+  "nextEvidenceNeeded": [
+    "Lawfully available original contract schedules and directives with effective dates.",
+    "Period-matched departmental response calculations and exemption review records.",
+    "Hospital offload denominator/exclusion documentation and later verified performance releases.",
+    "A defensible causal evaluation would require broader costs, staffing, hospital capacity and other confounders, not just compensation totals."
+  ],
+  "rightsScope": "Numerical institutional facts, source identifiers and concise independently written context only; no patient information, report facsimile, logos or extended narrative. No blanket source-content reproduction licence."
+}

@@ -1,0 +1,27 @@
+{
+  "status": "accepted",
+  "bundleSha256": "dc4226a5232e68a489c9e094676d012499d8cfa5b89706f2ea0d34ffc23dfe12",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "ambulance-service-independent-review-20261028",
+  "scope": "Historical source-attributed ambulance response standards, July 2022 compliance and 2022 hospital offload measures",
+  "checks": [
+    "All twelve hospital count/percentage rows and two aggregate rows visually compared to original report page 29",
+    "Twelve hospital counts independently sum to the reported 73,188 without double counting aggregates",
+    "Six community response thresholds and separate 80 percent and consolidated 90 percent targets checked",
+    "July 2022 departmental 69/64 percent results, unaudited label and exemptions context checked",
+    "Hospital offload definition, exclusions, manual-recording limits, IWK age restriction and Nova Scotia Health directive recipient retained",
+    "Eleven focused tests passed; final release differs only in publication metadata"
+  ],
+  "limitations": [
+    "Historical service measures are not current compliance or clinical patient outcomes",
+    "Published rounded percentages cannot produce exact successful-offload counts or an unweighted aggregate",
+    "Listed hospital population excludes other facilities; IWK includes patients aged 16 and younger only",
+    "Directive applicability to IWK not independently established; hospital offload responsibility differs from provider response standards",
+    "July results have unknown raw denominator and exemptions; report-wide exclusion counts cannot be applied to this table",
+    "Institutional context link to compensation is not a causal spending-to-outcome relationship or matched fiscal/calendar comparison",
+    "No original contract/directive or present legal obligation independently established",
+    "Rights limited to factual institutional projection and concise attribution, not report reproduction",
+    "Application admission, distinct populations and hosted presentation require separate verification"
+  ]
+}

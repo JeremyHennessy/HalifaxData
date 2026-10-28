@@ -15,3 +15,7 @@
 .authorization-trace{min-width:0;overflow-wrap:anywhere}.trace-summary,.trace-checklist,.trace-evidence{max-width:850px}.trace-stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:0;list-style:none}.trace-stages li{border:1px dashed var(--line);border-radius:8px;padding:16px;min-width:0}.trace-stages .linked{border-style:solid;background:var(--light)}.trace-stages h3{font-size:16px}.trace-stages p{margin-bottom:0}.trace-checklist{margin-top:30px}.trace-evidence{margin-top:28px}@media(max-width:760px){.trace-stages{grid-template-columns:1fr}.trace-stages li{padding:14px}.trace-stages h3{margin-bottom:8px}}
 
 .housing-audit{min-width:0;overflow-wrap:anywhere}.housing-audit>.card{margin:20px 0}.housing-audit .timeline a{display:block}
+
+.ambulance-audit{min-width:0;overflow-wrap:anywhere}.ambulance-audit .card{margin:20px 0}.ambulance-audit details{margin:20px 0}.ambulance-audit .table-wrap{max-width:100%}
+
+.ambulance-service th{overflow-wrap:normal;word-break:normal}.ambulance-service th:nth-child(n+2){white-space:nowrap}
