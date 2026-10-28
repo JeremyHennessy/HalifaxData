@@ -6,6 +6,44 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "physician-categories",
+      "title": "Historical physician payment categories",
+      "relatedSourceIds": [],
+      "dataPath": "data/physician-categories/records.json",
+      "dataSha256": "637075be4bdcfa7d12171898382db0d58b8f9f28e7f8b3833f146df239347768",
+      "reviewPath": "data/physician-categories/publication-review.json",
+      "reviewId": "physician-payment-categories-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 435,
+      "countUnit": "province-wide category/year observations, not recipients",
+      "route": "#/health-spending?view=physicians",
+      "scope": "435 historical physician payment category/year observations. Currency and category overlap unestablished: no sums, shares, trends, recipient identities or institutional-account joins.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://data.novascotia.ca/datasets/xpt9-p9is"
+      ]
+    },
+    {
+      "id": "nshealth",
+      "title": "NS Health consolidated expenses and budget basis",
+      "relatedSourceIds": [],
+      "dataPath": "data/nshealth/records.json",
+      "dataSha256": "9ec619b70614e8696fa920b7c040e269c749f4c0e2029d9b1e8993ae0b7da8ac",
+      "reviewPath": "data/nshealth/publication-review.json",
+      "reviewId": "nshealth-expense-budget-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 78,
+      "countUnit": "statement cells including overlapping classifications and budget bridge",
+      "route": "#/health-spending?view=nshealth",
+      "scope": "NS Health and PDDP consolidated scope. Explicit CAD thousands, recognized expenses not vendor payments. Service/object tables overlap; Note24 aligns budget basis. Optional Note21 adds accounting context, not collection counts. No physician-dataset join.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.nshealth.ca/sites/default/files/documents/26%20-%20NSH%20FY26%20Financial%20Statements%20-%20FINAL.pdf"
+      ]
+    },
+    {
       "id": "richmond-register",
       "title": "County of Richmond organization register",
       "relatedSourceIds": [],

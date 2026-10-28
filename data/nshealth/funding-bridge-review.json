@@ -1,0 +1,22 @@
+{
+  "status": "accepted",
+  "bundleSha256": "948a879fe1dce70cff7aff8c83829d8e23d578a93d6296f49a8c9af75b9a0613",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "nshealth-funding-basis-independent-review-20261028",
+  "checks": [
+    "Independently viewed original PDF page 31 Note 21 and verified all fourteen note cells, including signed capital grants, the 2026 result dash and blank 2025 capital transfers cell.",
+    "Verified the two annual-surplus amounts against the same statement on PDF page 7; links identify the same measures and must not be added together.",
+    "Independently recomputed the six signed 2026 numeric inputs as zero, without substituting zero for the printed source dash or reporting a residual against it.",
+    "Ten tests and deterministic replay passed; original PDF, receipt and accepted expense-bundle hashes remain pinned.",
+    "Final release differs from the reviewed candidate only in publication metadata."
+  ],
+  "limits": [
+    "The 2025 blank input prevents a complete bridge calculation; blank and dash remain nonnumeric.",
+    "The source-attributed Health Authorities Act description is not an independent statutory-version or legal-compliance finding.",
+    "Amounts are explicitly thousands of Canadian dollars, with annual source periods and comparative reclassification context preserved.",
+    "An annual surplus, operating-funding result and cash balance are not interchangeable. This does not verify transaction accuracy, cash availability, vendor payments or service delivery.",
+    "Supplemental same-institution accounting context, not a new source, collection or allegation.",
+    "Narrow numerical facts and independently written context only; no blanket report reproduction licence."
+  ]
+}
