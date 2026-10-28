@@ -1,0 +1,24 @@
+{
+  "status": "accepted",
+  "bundleSha256": "549807f3e2d26e9398d91abb663e6973c8c531a0d1ec7e2e69e702e0bbe21b07",
+  "reviewer": "independent-review-agent",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "independent-budget-addendum-tables-review-20261028",
+  "sourcePdfSha256": "70062dc21b08f9d30e7c4d474a0c3a21c925be197b7731c6ed8a3ffb43f23747",
+  "checks": [
+    "58 source tests pass",
+    "Byte-identical offline replay",
+    "All 219 raw tokens and normalized values independently extracted using PDF coordinate crops, not production line parser",
+    "Both rendered pages visually inspected: headers, labels, dash meanings, columns and accounting context",
+    "Receipt HTTP200, byte count and source PDF hash verified",
+    "70-page document, only two tables and 73 rows represented"
+  ],
+  "limitations": [
+    "Estimates and historical forecast are not payments or audited actuals",
+    "Six dash slots remain null, not zero",
+    "Repeated summary rows are not additive independent expenditures",
+    "March 10 is announcement date, not verified publication date",
+    "No finding of waste or misconduct",
+    "Acceptance binds this exact snapshot only"
+  ]
+}

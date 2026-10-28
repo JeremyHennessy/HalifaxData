@@ -1,0 +1,713 @@
+{
+  "attribution": "Independently re-expressed numerical facts and government entity identifiers from Nova Scotia Orders in Council 2026-335 and 2026-336 and their Schedule A tables. Original records linked; no signatures, logos, full order text or source page images republished.",
+  "coverage": {
+    "appropriationClauses": 23,
+    "orders": 2,
+    "scheduleCells": 46
+  },
+  "limits": [
+    "These are documented supplemental appropriations, not invoices, vendor payments or proof of project delivery.",
+    "The two orders apply to different fiscal years. No combined cross-year spending total is presented.",
+    "The effective date of the 2025\u201326 order follows that fiscal year end. This timing is reported, not characterized as unlawful. The current legal provisions have not been independently interpreted here.",
+    "Column I is preserved without claiming it is original budget, revised budget, actual spending or a fully reconciled base.",
+    "No addition to March budget forecasts is presented as a current complete budget; intervening approvals and accounting perimeter may differ.",
+    "Recoverable expenditure descriptions do not establish whether reimbursements occurred. Detailed purpose narratives are not republished.",
+    "No conclusion about waste, misconduct, funding adequacy or service performance follows from these authorizations."
+  ],
+  "orders": [
+    {
+      "effectiveDate": "2026-09-23",
+      "fiscalYear": "2025-26",
+      "fiscalYearEnd": "2026-03-31",
+      "id": "oic-2026-335",
+      "orderDate": "2026-09-23",
+      "orderNumber": "2026-335",
+      "pdfRetrievedAt": "2026-10-28T05:04:04.181296+00:00",
+      "pdfSha256": "06e7eb1faa413a262e2a44805e4440f4ac79097ce65be65e455b919d3f5bfa63",
+      "pdfURL": "https://novascotia.ca/apps/oic/OicAttachment/DownLoadFile?OicID=21524",
+      "recommendationDate": "2026-09-22",
+      "records": [
+        {
+          "appropriatedEntityAsReported": "Agriculture",
+          "clause": "a",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "50,946,000",
+            "rawValue": "50946000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-a",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "599,000",
+          "rawValue": "599000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "a",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Agriculture"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Communities, Culture, Tourism and Heritage",
+          "clause": "b",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "207,870,000",
+            "rawValue": "207870000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-b",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "482,000",
+          "rawValue": "482000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "b",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Communities, Culture, Tourism and Heritage"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Emergency Management",
+          "clause": "c",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "64,084,000",
+            "rawValue": "64084000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-c",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "13,781,000",
+          "rawValue": "13781000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "c",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Emergency Management"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Energy",
+          "clause": "d",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "53,613,000",
+            "rawValue": "53613000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-d",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "4,657,000",
+          "rawValue": "4657000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "d",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Energy"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Finance and Treasury Board",
+          "clause": "e",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "48,406,000",
+            "rawValue": "48406000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-e",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "33,514,000",
+          "rawValue": "33514000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "e",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Finance and Treasury Board"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Justice",
+          "clause": "f",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "504,308,000",
+            "rawValue": "504308000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-f",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "5,249,000",
+          "rawValue": "5249000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "f",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Justice"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Opportunities and Social Development",
+          "clause": "g",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "1,676,809,000",
+            "rawValue": "1676809000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-g",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "240,000",
+          "rawValue": "240000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "g",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Opportunities and Social Development"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Public Works",
+          "clause": "h",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "842,469,000",
+            "rawValue": "842469000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-h",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "40,452,000",
+          "rawValue": "40452000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "h",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Public Works"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Service Nova Scotia",
+          "clause": "i",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "173,709,000",
+            "rawValue": "173709000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-i",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "1,265,000",
+          "rawValue": "1265000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "i",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Service Nova Scotia"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Government Contributions to Benefit Plans",
+          "clause": "j",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "8,828,000",
+            "rawValue": "8828000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-j",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "749,000",
+          "rawValue": "749000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "j",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Government Contributions to Benefit Plans"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Restructuring Costs",
+          "clause": "k",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "723,447,000",
+            "rawValue": "723447000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-k",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "420,632,000",
+          "rawValue": "420632000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "k",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Restructuring Costs"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Refundable Tax Credits",
+          "clause": "l",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "163,836,000",
+            "rawValue": "163836000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2025-26",
+          "id": "oic-2026-335-clause-l",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "1,466,000",
+          "rawValue": "1466000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "l",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Refundable Tax Credits"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        }
+      ],
+      "reportedSupplementalTotal": "523086000",
+      "retrievedAt": "2026-10-28T05:03:13.143841+00:00",
+      "sourceOwnedRecordId": "21524",
+      "sourceSha256": "12d9db2a2653a17ca7c9aeaa6b28f15c22c939121f6e87dc36f6e4bebbaf5bd2",
+      "sourceURL": "https://novascotia.ca/apps/oic/OicFile/Details/21524",
+      "statutoryReferenceAsReported": "Finance Act, Acts of 2010 chapter 2, section 28",
+      "totalReconciles": true
+    },
+    {
+      "effectiveDate": "2026-09-23",
+      "fiscalYear": "2026-27",
+      "fiscalYearEnd": "2027-03-31",
+      "id": "oic-2026-336",
+      "orderDate": "2026-09-23",
+      "orderNumber": "2026-336",
+      "pdfRetrievedAt": "2026-10-28T05:04:08.837918+00:00",
+      "pdfSha256": "23d1aecf6417fe70076e5de17ed95077a184d8499a6656e54ca02f8ed29ab0ad",
+      "pdfURL": "https://novascotia.ca/apps/oic/OicAttachment/DownLoadFile?OicID=21525",
+      "recommendationDate": "2026-09-22",
+      "records": [
+        {
+          "appropriatedEntityAsReported": "Agriculture",
+          "clause": "a",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "48,048,000",
+            "rawValue": "48048000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-a",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "26,045,000",
+          "rawValue": "26045000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "a",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Agriculture"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Communities, Culture, Tourism and Heritage",
+          "clause": "b",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "162,930,000",
+            "rawValue": "162930000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-b",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "2,142,000",
+          "rawValue": "2142000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "b",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Communities, Culture, Tourism and Heritage"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Energy",
+          "clause": "c",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "45,982,000",
+            "rawValue": "45982000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-c",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "6,200,000",
+          "rawValue": "6200000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "c",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Energy"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Health and Wellness",
+          "clause": "d",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "6,714,896,000",
+            "rawValue": "6714896000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-d",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "125,297,000",
+          "rawValue": "125297000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "d",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Health and Wellness"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Justice",
+          "clause": "e",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "536,519,000",
+            "rawValue": "536519000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-e",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "1,320,000",
+          "rawValue": "1320000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "e",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Justice"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Natural Resources",
+          "clause": "f",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "131,455,000",
+            "rawValue": "131455000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-f",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "2,700,000",
+          "rawValue": "2700000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "f",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Natural Resources"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Seniors and Long Term Care",
+          "clause": "g",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "1,606,407,000",
+            "rawValue": "1606407000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-g",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "62,026,000",
+          "rawValue": "62026000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "g",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Seniors and Long Term Care"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Service Nova Scotia",
+          "clause": "h",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "172,758,000",
+            "rawValue": "172758000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-h",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "5,125,000",
+          "rawValue": "5125000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "h",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Service Nova Scotia"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Elections Nova Scotia",
+          "clause": "i",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "4,424,000",
+            "rawValue": "4424000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-i",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "1,928,000",
+          "rawValue": "1928000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "i",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Elections Nova Scotia"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Debt Servicing Costs",
+          "clause": "j",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "1,030,107,000",
+            "rawValue": "1030107000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-j",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "15,527,000",
+          "rawValue": "15527000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "j",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Debt Servicing Costs"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        },
+        {
+          "appropriatedEntityAsReported": "Refundable Tax Credits",
+          "clause": "k",
+          "columnIAsReported": {
+            "meaning": "Source column I; its precise basis is not independently established here.",
+            "rawToken": "160,569,000",
+            "rawValue": "160569000"
+          },
+          "currency": "CAD",
+          "currencyBasis": "context_inferred_from_official_nova_scotia_appropriation_order",
+          "currencyExplicitlySpecified": false,
+          "fiscalYear": "2026-27",
+          "id": "oic-2026-336-clause-k",
+          "measureType": "authorization_flow",
+          "multiplier": 1,
+          "paymentEvidence": false,
+          "rawToken": "1,325,000",
+          "rawValue": "1325000",
+          "sourceColumn": "II",
+          "sourceLocator": {
+            "htmlClause": "k",
+            "pdfSchedulePage": 3,
+            "schedule": "A",
+            "scheduleRowLabel": "Refundable Tax Credits"
+          },
+          "stage": "supplemental_appropriation_authorized",
+          "unit": "source_dollars"
+        }
+      ],
+      "reportedSupplementalTotal": "249635000",
+      "retrievedAt": "2026-10-28T05:03:17.157149+00:00",
+      "sourceOwnedRecordId": "21525",
+      "sourceSha256": "960d5ea58ca06b058e2ec754efa68ecd9593daeabbe61a46d431ebe8d94ec060",
+      "sourceURL": "https://novascotia.ca/apps/oic/OicFile/Details/21525",
+      "statutoryReferenceAsReported": "Finance Act, Acts of 2010 chapter 2, section 27",
+      "totalReconciles": true
+    }
+  ],
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reviewId": "supplemental-orders-independent-review-20261028",
+    "reviewType": "source_attributed_supplemental_appropriation_facts",
+    "reviewedOn": "2026-10-28"
+  },
+  "schemaVersion": "supplemental-appropriations-v1"
+}

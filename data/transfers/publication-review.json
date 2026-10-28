@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "435378cc7cc0d196fbac6c5dbea58a1c697632b71e96cde1ed51b408b9aa4804",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "federal-transfer-facts-independent-review-20261028",
+  "scope": "Transformed Nova Scotia numeric transfer facts: 43 months, 86 payment dates and 358 source slots",
+  "checks": [
+    "All 358 raw cells independently matched using a separate standard-library HTML parser, including nested header and variable deduction/reimbursement columns",
+    "All fiscal-year/program sums checked as integer arithmetic; full-year coverage separately tested",
+    "Three controlled program mappings bind jurisdiction, fiscal year, program and exact source observation identifiers",
+    "All linked 24-date payment populations and scaled forecast values independently recomputed",
+    "Contextual CAD inference explicitly distinguished from source-specified currency",
+    "Retained Canada.ca terms inspected; transformed factual projection includes original source attribution and links, not narrative, original tables or logos",
+    "Final release changes only explicit review metadata and rights limitation; numeric evidence unchanged"
+  ],
+  "limitations": [
+    "Not a commercial redistribution licence for source material; expanded copying/reuse requires separate rights review",
+    "Cash disclosures are not provincial accrued revenue, verified recipient booking or downstream spending",
+    "Primary CHT-column sums exclude separately retained deductions/reimbursements",
+    "Matching equalization numbers do not establish cash-to-accrual reconciliation; unequal numbers are not loss or overpayment evidence",
+    "No shared transaction identifier asserted; only program/jurisdiction/year mapping",
+    "This exact snapshot only; public app integration requires separate verification"
+  ]
+}

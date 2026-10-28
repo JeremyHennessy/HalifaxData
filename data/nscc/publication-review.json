@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "f36c3866d89733be2b4f72b74313b1da41fff76b22f14f24457069c183a80de3",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "nscc-financials-independent-review-20261028",
+  "scope": "54 source cells from one consolidated institutional statement, including 52 numeric values and two source dashes",
+  "checks": [
+    "All 54 raw tokens independently matched using coordinate-cropped PDF extraction and source page visually inspected",
+    "Audit report date and audited actual column independently checked; budget and prior comparative remain separate stages",
+    "Six accumulated-surplus stock balances have correct opening/closing as-of dates; 48 flow observations have correct fiscal periods",
+    "Foundation consolidation, recognition policy and comparative reclassification context inspected",
+    "Source dash remains null; no implicit zero in component checks",
+    "Five tests passed and replay identical; final release differs only by publication review metadata",
+    "Only aggregate institutional facts and concise accounting context, no personal salary/student/donor details or copied audit opinion/signatures/logos"
+  ],
+  "limitations": [
+    "CAD is explicitly contextual inference rather than a currency code printed in the source",
+    "Recognized revenue is not necessarily same-year cash receipt",
+    "College budget differs from provincial departmental estimates; no payer-recipient shortfall reconciliation established",
+    "Do not add stocks, flows, components and subtotals together",
+    "No funding adequacy, legal compliance, waste or program outcome finding",
+    "Exact snapshot only; app integration and deployment require separate verification"
+  ]
+}

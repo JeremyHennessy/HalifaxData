@@ -4,6 +4,9 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+concurrency:
+  group: halifaxdata-release-${{ github.ref }}
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
@@ -22,15 +25,20 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm test
       - run: node --check app/main.js
+      - name: Retain prior verified code-only bundles
+        run: python3 scripts/retain_code.py
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - name: Test resident journeys
         run: |
-          python3 -m http.server 4173 --bind 127.0.0.1 --directory dist >/tmp/halifaxdata-server.log 2>&1 &
+          mkdir -p artifacts/host/HalifaxData
+          cp -R dist/. artifacts/host/HalifaxData/
+          python3 tests/create_cache_fixture.py artifacts/host/cache-fixture
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory artifacts/host >/tmp/halifaxdata-server.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID"' EXIT
           for i in $(seq 1 20); do curl --fail --silent http://127.0.0.1:4173/ >/dev/null && break; sleep 1; done
-          npm run test:browser
+          BASE_URL=http://127.0.0.1:4173/HalifaxData CACHE_FIXTURE_URL=http://127.0.0.1:4173/cache-fixture npm run test:browser
       - uses: actions/upload-artifact@v4
         if: always()
         with:

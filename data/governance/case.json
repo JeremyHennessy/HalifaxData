@@ -1,0 +1,88 @@
+{
+  "attribution": "Source facts: Nova Scotia Executive Council Order 2025-366 and the provincial 2026\u201327 budget addendum, printed p 3.5. Original records are linked; no government logos or full order/budget pages are republished.",
+  "budget": {
+    "departmentAsReported": "Advanced Education",
+    "destinationDepartmentAsReported": "Labour, Skills and Immigration",
+    "footnote": "A",
+    "observations": [
+      {
+        "fiscalYear": "2025-26",
+        "multiplier": 1000,
+        "presence": "present",
+        "rawToken": "198,292",
+        "rawValue": "198292",
+        "stage": "estimate_as_printed",
+        "unit": "CAD_thousands"
+      },
+      {
+        "fiscalYear": "2025-26",
+        "multiplier": 1000,
+        "presence": "present",
+        "rawToken": "198,107",
+        "rawValue": "198107",
+        "stage": "forecast_as_printed",
+        "unit": "CAD_thousands"
+      },
+      {
+        "fiscalYear": "2026-27",
+        "multiplier": 1000,
+        "presence": "source_dash",
+        "rawToken": "--- (A)",
+        "rawValue": null,
+        "stage": "amended_estimate_as_printed",
+        "unit": "CAD_thousands"
+      }
+    ],
+    "paymentEvidence": false,
+    "pdfPage": 16,
+    "presentationChangeDateAsReported": "2026-04-01",
+    "printedPage": "3.5",
+    "program": "Nova Scotia Community College",
+    "sourceSha256": "70062dc21b08f9d30e7c4d474a0c3a21c925be197b7731c6ed8a3ffb43f23747",
+    "sourceURL": "https://www.novascotia.ca/sites/default/files/documents/7-4172/budget-addendum-2026-27-en.pdf"
+  },
+  "connectionMethod": "The budget footnote explicitly cites the same Order-in-Council number as the captured official order. No name-similarity or amount-only match.",
+  "decision": {
+    "assignedMinisterialPortfolio": "Labour, Skills and Immigration",
+    "decisionType": "ministerial_responsibility_assignment",
+    "effectiveDateAsReported": "2025-12-16",
+    "financialAmountAuthorized": null,
+    "orderDate": "2025-12-16",
+    "orderNumber": "2025-366",
+    "paymentEvidence": false,
+    "program": "Nova Scotia Community College",
+    "recommendationDateAsReported": "2025-12-04",
+    "responsibleInstitutionAsReported": "Governor in Council",
+    "retrievedAt": "2026-10-28T04:44:52.113082+00:00",
+    "sourceOwnedRecordId": "21179",
+    "sourceSha256": "1c8b6eb64d702e979ba2a0368c9a98dac402a1d48e0231ddcd006f0d9673a160",
+    "sourceURL": "https://novascotia.ca/apps/oic/OicFile/Details/21179",
+    "summary": "The order assigns responsibility for the college and administration of its governing Act to the Labour, Skills and Immigration minister."
+  },
+  "explanation": "The provincial addendum links the dash to a change in departmental presentation. The legal assignment date and the later budget-presentation date are distinct. A dash in this department is not evidence that all college funding became zero.",
+  "id": "oic-2025-366-nscc-budget-presentation",
+  "limits": [
+    "This order is a responsibility assignment, not an appropriation amount, expenditure approval, contract award or payment record.",
+    "The receiving department budget line has not been independently normalized in this slice; no fully offsetting amount or unchanged funding level is claimed.",
+    "The source dash remains nonnumeric, not zero.",
+    "Historical estimate and forecast figures are not audited actual expenditures or current forecasts.",
+    "No conclusion about the adequacy of college funding or program outcomes follows from this link alone."
+  ],
+  "nextEvidence": [
+    "Receiving department appropriation and program schedule for 2026\u201327.",
+    "Actual authorized expenditures and payments to the college.",
+    "Comparable program outcomes and accounting-perimeter bridge."
+  ],
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reason": "Exact source-number governance/presentation link; matching independent receipt required.",
+    "reviewId": "oic-budget-link-independent-review-20261028",
+    "reviewType": "neutral_documented_governance_presentation_link",
+    "reviewedOn": "2026-10-28"
+  },
+  "schemaVersion": "oic-budget-link-v1",
+  "sharedSourceIdentifier": "2025-366",
+  "status": "documented_governance_and_presentation_link",
+  "title": "A department change explains this college budget-line dash"
+}
