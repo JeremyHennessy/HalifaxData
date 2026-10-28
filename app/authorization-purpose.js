@@ -1,0 +1,16 @@
+import {verifiedJSON} from './tenders.js';
+export const PURPOSE_SHA='79afb0f7c7d12af087f024db289caa6d6a0520c4d7ffc9100fdf5229d301a920';
+const TARGET_SHA='bca870a30c64807ef881d67d7c8680df748160bcd208b2f05bcdf4fc19f5c6c5';
+const shape=(v,keys)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join('|')===keys.split(' ').sort().join('|');
+export function validatePurpose(b,review,authorizations,authorizationReview){
+ if(!shape(b,'schemaVersion publication target purpose provenance attribution')||!shape(b.publication,'allowed consequentialAllegation reviewId reviewType reviewedOn')||!shape(b.target,'bundleSha256 clause orderNumber recordId')||!shape(b.purpose,'heading sourcePhrase explanation qualifier scopeLimit')||!shape(b.provenance,'pdfPage pdfSha256 pdfURL sourceLocator sourceSha256 sourceURL targetAmountLocator'))throw new Error('Unexpected purpose annotation fields');
+ const p=b.publication,t=b.target,s=b.provenance;
+ if(b.schemaVersion!=='authorization-purpose-context-v1'||review.status!=='accepted'||review.bundleSha256!==PURPOSE_SHA||p.allowed!==true||p.consequentialAllegation!==false||p.reviewType!=='source_attributed_authorization_purpose'||p.reviewId!==review.evidenceId||p.reviewedOn!==review.reviewedOn)throw new Error('Purpose annotation review mismatch');
+ if(t.bundleSha256!==TARGET_SHA||authorizationReview.bundleSha256!==TARGET_SHA||authorizationReview.status!=='accepted'||t.orderNumber!=='2026-335'||t.recordId!=='oic-2026-335-clause-k'||t.clause!=='k')throw new Error('Purpose annotation target mismatch');
+ const orders=authorizations.orders.filter(o=>o.orderNumber===t.orderNumber),o=orders[0],rows=o?.records.filter(r=>r.id===t.recordId&&r.clause===t.clause);
+ if(orders.length!==1||rows.length!==1||rows[0].rawValue!=='420632000'||rows[0].appropriatedEntityAsReported!=='Restructuring Costs'||rows[0].paymentEvidence!==false||s.sourceURL!==o.sourceURL||s.pdfURL!==o.pdfURL||s.sourceSha256!==o.sourceSha256||s.pdfSha256!==o.pdfSha256||s.pdfPage!==2||s.sourceLocator!=='OIC 2026-335, clause (k)'||s.targetAmountLocator!=='Schedule A, PDF page 3, Restructuring Costs, Column II')throw new Error('Purpose annotation source binding mismatch');
+ if(b.purpose.heading!=='Stated purpose'||b.purpose.sourcePhrase!=='primarily due to higher corporate initiatives'||b.purpose.qualifier!=='primarily'||![b.purpose.explanation,b.purpose.scopeLimit,b.attribution].every(x=>typeof x==='string'&&x.length>0&&x.length<1000))throw new Error('Unsupported purpose wording');
+ return b;
+}
+export function purposeFor(annotation,order,record){return annotation&&annotation.target.orderNumber===order.orderNumber&&annotation.target.recordId===record.id&&annotation.target.clause===record.clause?annotation.purpose:null;}
+export async function getPurpose(authorizations,authorizationReview,signal,fetcher=fetch){const review=await verifiedJSON('data/authorization-purpose/publication-review.json',null,null,signal,fetcher);if(review.bundleSha256!==PURPOSE_SHA)throw new Error('Purpose annotation is not the accepted snapshot');const bundle=validatePurpose(await verifiedJSON('data/authorization-purpose/annotation.json',PURPOSE_SHA,null,signal,fetcher),review,authorizations,authorizationReview);return{bundle,review};}

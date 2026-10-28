@@ -1,0 +1,22 @@
+{
+  "status": "accepted",
+  "bundleSha256": "79afb0f7c7d12af087f024db289caa6d6a0520c4d7ffc9100fdf5229d301a920",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "authorization-purpose-independent-review-20261028",
+  "scope": "One source-attributed purpose annotation attached to exact OIC 2026-335 clause k authorization record",
+  "checks": [
+    "Exact short purpose phrase and primarily qualifier checked against retained official order",
+    "Target accepted bundle, order number, clause and record identity preserved",
+    "Purpose source is clause k on PDF page 2; amount locator is Schedule A page 3 Column II",
+    "Public release retains approved wording and public provenance only, with no private research reference",
+    "Original authorization source bundle unchanged"
+  ],
+  "limitations": [
+    "Authorization is not a verified payment total",
+    "The order provides no initiative-by-initiative or payee breakdown for this line; this does not establish absence of other government records",
+    "No new investigation, risk score, beneficiary inference or wrongdoing finding",
+    "Metadata integration must bind to the exact reviewed target; no fuzzy account-name join",
+    "Exact snapshot only; application integration and deployment require separate verification"
+  ]
+}
