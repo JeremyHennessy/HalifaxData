@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "bundleSha256": "6e723fc4cef52be5d24c3245bf3cf58aaf2819cfc69237daae469d4c8738777c",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "annapolis-capital-movement-independent-review-20261028",
+  "scope": "Historical numerical capital-asset reconciliation for the Municipality of the County of Annapolis, 2021\u20132022",
+  "checks": [
+    "Exact accepted capital record, municipality type, fiscal year and source PDF bound without fuzzy identity matching",
+    "Nine previously reviewed capital figures and 16 fund-table figures checked against original source pages 46 and 48",
+    "Two derived facts and eight equation graphs independently recomputed with signed integer arithmetic",
+    "Four fund columns compared with consolidated figures without double counting",
+    "Fourteen focused offline tests passed; final release differs only in publication metadata",
+    "Only numerical facts, public institution labels, precise source locators and concise independent explanation projected"
+  ],
+  "limitations": [
+    "Explained status applies only to numerical movement and same-report table reconciliation, not disposal legitimacy, purpose or underlying transaction accuracy",
+    "Opening net carrying value is derived, not a separately reported source figure",
+    "Currency and scale remain unknown; no currency symbols, inferred multiplier or cash-flow interpretation",
+    "Historical 2021\u20132022 report does not establish current asset condition or delivery",
+    "No finding of waste, cash loss, misconduct or verified sale proceeds",
+    "Rights scope is this factual projection only, not blanket source reproduction permission",
+    "Application admission, display correctness and hosted visual behavior require separate verification"
+  ]
+}

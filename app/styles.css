@@ -5,3 +5,9 @@
 .purpose-context{margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}.purpose-context h3{margin-top:0}
 .brief-amount{font-size:clamp(1.2rem,2vw,1.65rem);font-weight:750;line-height:1.35}.authorization-expanded{margin-top:24px}.authorization-detail{min-width:0}.authorization-expanded>.authorization-detail{padding-top:20px}.money-question h2{font-size:1.2rem;margin:0}
 .capital-record>.grid{margin:20px 0}.capital-record .card{padding:18px}.capital-value{font-weight:750;font-size:1.3rem;overflow-wrap:anywhere}.capital-record>details{margin:18px 0}
+
+/* Keep every explanation depth visible rather than a clipped horizontal tab strip. */
+.capital-explanation-tabs{flex-wrap:wrap;overflow:visible}.capital-explanation-tabs a{white-space:normal;max-width:100%}
+.capital-explanation .card{margin-bottom:16px}.capital-explanation dt{overflow-wrap:anywhere}.capital-explanation dd{margin-left:18px}
+/* Source field names in equation prose can be longer than a mobile card. */
+.capital-explanation{overflow-wrap:anywhere}
