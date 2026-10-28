@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "halifax-water-regulatory-decision-context-v1",
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "reviewId": "halifax-water-m10687-publication-review-20261028",
+    "consequentialAllegation": false,
+    "reviewedOn": "2026-10-28"
+  },
+  "id": "halifax-water-m10687-decision-context",
+  "title": "Original regulatory approval context: Churchill Drive transmission main",
+  "integration": {
+    "mode": "optional_nested_context",
+    "parentBundleSha256": "57eac399c2d4438ef38089422730852c5e244502680d1a645e21317aa10f17cb",
+    "parentCollectionId": "halifax-water-regulatory-project-closeouts-2023-24",
+    "parentRecordId": "halifax-water-project-300003121-2024-closeout",
+    "addsCollectionCount": false,
+    "addsProjectCount": false,
+    "addsMatterReferenceCount": false,
+    "existingReportValuesUnchanged": true
+  },
+  "sources": [
+    {
+      "id": "m10687-decision-letter",
+      "publisher": "Nova Scotia Utility and Review Board",
+      "title": "Board Decision Letter: Churchill Drive Transmission Main Upgrades",
+      "url": "https://uarb.novascotia.ca/fmi/webd/UARB15",
+      "locator": "Go Directly to Matter M10687 → Key Documents → Board Decision Letter 08/22/2022 → document87197",
+      "sha256": "58b4be284a5043dd621e3725d9a2429f67a2548db5f7be56978760c44bc956dc",
+      "date": "2022-08-22",
+      "databaseDocumentNumber": "87197",
+      "pdfFooterDocumentNumber": "297709",
+      "retrievedAt": "2026-10-28T13:19:54Z"
+    },
+    {
+      "id": "halifax-water-2024-board-report",
+      "publisher": "Halifax Water",
+      "title": "Board public package, September 26, 2024",
+      "url": "https://halifaxwater.ca/sites/default/files/2024-10/Public%20Package%20-%20September%2026%2C%202024.pdf",
+      "sha256": "2f0874884eab65a0200379a71caa4b6d27615ea51753749bf1c4786ff38b7886",
+      "pdfPage": 39
+    }
+  ],
+  "matterId": "M10687",
+  "decisionDate": "2022-08-22",
+  "decisionType": "Board Decision Letter",
+  "historicalIssuer": "Nova Scotia Utility and Review Board",
+  "currentDatabaseHost": "Nova Scotia Energy and Regulatory Boards Tribunal",
+  "projectLink": {
+    "projectNumberAsReported": "300003121",
+    "matterReferenceExact": true,
+    "approvalDateExact": true,
+    "basis": "Staff report explicitly lists M10687 and Aug 22/22 for this project. The original letter has the same matter and date; Churchill Drive description corroborates the link.",
+    "projectNumberPresentInLetter": false,
+    "notFuzzyTitleJoin": true
+  },
+  "facts": [
+    {
+      "id": "m10687-approved-estimate",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        1,
+        2
+      ],
+      "stage": "approved_estimated_capital_expenditure_request",
+      "value": 8825000,
+      "unit": "source_dollars",
+      "currency": null,
+      "basis": "Including net HST; request and proposed funding plan approved. Not award, cash payment, final actual cost or independently established unconditional ceiling."
+    },
+    {
+      "id": "m10687-funding-1",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Lead Line Replacement Program",
+      "value": 146000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-funding-2",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Integrated Wastewater Projects",
+      "value": 40000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-funding-3",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Integrated Stormwater Projects",
+      "value": 36000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-funding-4",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Transmission Mains Upgrade – Churchill",
+      "value": 8218000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-funding-5",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Previously Spent (Preliminary Design/CN)",
+      "value": 385000,
+      "unit": "source_dollars",
+      "currency": null
+    }
+  ],
+  "fundingPlan": {
+    "sourceFactIds": [
+      "m10687-funding-1",
+      "m10687-funding-2",
+      "m10687-funding-3",
+      "m10687-funding-4",
+      "m10687-funding-5"
+    ],
+    "total": 8825000,
+    "unit": "source_dollars",
+    "currency": null,
+    "previousSpendIncluded": 385000,
+    "previousSpendIsAdditional": false
+  },
+  "scopeNotes": {
+    "tax": "Original estimated approval includes net HST. Source dollar notation retained; currency code not explicitly stated.",
+    "sourceArithmetic": "Printed estimate total $8,825,000; seven printed cost components sum $8,825,170. The $170 difference is unreconciled; percentage bases/rounding are not fully specified. No correction or overrun inference.",
+    "laterBudget": "Staff report project budget $9,805,000 has unreconciled scope relative to this original approval. Later amendments, revised scope and budget basis were not established.",
+    "laterCumulativeSpend": "Staff report cumulative expenditure remains a distinct measure; no subtraction against original approval as an overrun, loss or unlawful expenditure is supported.",
+    "approvalScope": "Approval covers request and proposed funding plan based on information provided. Letter describes required CN cost-sharing and HRM street-work sharing; does not establish subsequent execution or payment.",
+    "delivery": "Construction timing was planned, not independent proof of completion or acceptance.",
+    "coverage": "Only this one original decision letter verified; other reported matters remain references unless separately reviewed."
+  },
+  "prohibitions": {
+    "aggregateAcrossFinancialStages": true,
+    "inferOverspendOrLoss": true,
+    "inferNoLaterAmendments": true,
+    "republishFullLetterOrSignaturesOrContacts": true
+  },
+  "attribution": "Institutional facts attributed to the Nova Scotia Utility and Review Board decision letter and Halifax Water staff report. No endorsement implied; full source document republication rights not established."
+}

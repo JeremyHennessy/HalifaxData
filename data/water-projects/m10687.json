@@ -1,0 +1,305 @@
+{
+  "schemaVersion": "halifax-water-regulatory-decision-context-v2",
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "reviewId": "halifax-water-m10687-scope-publication-review-20261028",
+    "consequentialAllegation": false,
+    "reviewedOn": "2026-10-28"
+  },
+  "id": "halifax-water-m10687-decision-context",
+  "title": "Original regulatory approval context: Churchill Drive transmission main",
+  "integration": {
+    "mode": "optional_nested_context",
+    "parentBundleSha256": "57eac399c2d4438ef38089422730852c5e244502680d1a645e21317aa10f17cb",
+    "parentCollectionId": "halifax-water-regulatory-project-closeouts-2023-24",
+    "parentRecordId": "halifax-water-project-300003121-2024-closeout",
+    "addsCollectionCount": false,
+    "addsProjectCount": false,
+    "addsMatterReferenceCount": false,
+    "existingReportValuesUnchanged": true
+  },
+  "sources": [
+    {
+      "id": "m10687-decision-letter",
+      "publisher": "Nova Scotia Utility and Review Board",
+      "title": "Board Decision Letter: Churchill Drive Transmission Main Upgrades",
+      "url": "https://uarb.novascotia.ca/fmi/webd/UARB15",
+      "locator": "Go Directly to Matter M10687 → Key Documents → Board Decision Letter 08/22/2022 → document87197",
+      "sha256": "58b4be284a5043dd621e3725d9a2429f67a2548db5f7be56978760c44bc956dc",
+      "date": "2022-08-22",
+      "databaseDocumentNumber": "87197",
+      "pdfFooterDocumentNumber": "297709",
+      "retrievedAt": "2026-10-28T13:19:54Z"
+    },
+    {
+      "id": "halifax-water-2024-board-report",
+      "publisher": "Halifax Water",
+      "title": "Board public package, September 26, 2024",
+      "url": "https://halifaxwater.ca/sites/default/files/2024-10/Public%20Package%20-%20September%2026%2C%202024.pdf",
+      "sha256": "2f0874884eab65a0200379a71caa4b6d27615ea51753749bf1c4786ff38b7886",
+      "pdfPage": 39
+    },
+    {
+      "id": "m10687-public-application-h1",
+      "publisher": "Halifax Water, filed with Nova Scotia Utility and Review Board",
+      "title": "Application, July 18, 2022",
+      "url": "https://uarb.novascotia.ca/fmi/webd/UARB15",
+      "locator": "Exact matter M10687 → Exhibits → Public H-1",
+      "sha256": "c17c1c6fead04bffc3eb5516a8a32ac57382660ca6ea8fb7d50e9ca31291b6cb",
+      "pdfPages": [
+        2,
+        8
+      ],
+      "retrievedAt": "2026-10-28T13:33:06Z"
+    },
+    {
+      "id": "m10687-public-responses-h2",
+      "publisher": "Halifax Water, filed with Nova Scotia Utility and Review Board",
+      "title": "Non-confidential information-request responses, August 12, 2022",
+      "url": "https://uarb.novascotia.ca/fmi/webd/UARB15",
+      "locator": "Exact matter M10687 → Exhibits → Public H-2 → IR-9 and IR-10",
+      "sha256": "2082b1bd91f9bf0cc58a928d0c60bede1edbfd3cd5a0b5b482383fe93d253f15",
+      "pdfPages": [
+        44,
+        45,
+        46
+      ],
+      "retrievedAt": "2026-10-28T13:34:15Z"
+    }
+  ],
+  "matterId": "M10687",
+  "decisionDate": "2022-08-22",
+  "decisionType": "Board Decision Letter",
+  "historicalIssuer": "Nova Scotia Utility and Review Board",
+  "currentDatabaseHost": "Nova Scotia Energy and Regulatory Boards Tribunal",
+  "projectLink": {
+    "projectNumberAsReported": "300003121",
+    "matterReferenceExact": true,
+    "approvalDateExact": true,
+    "basis": "Staff report explicitly lists M10687 and Aug 22/22 for this project. The original letter has the same matter and date; Churchill Drive description corroborates the link.",
+    "projectNumberPresentInLetter": false,
+    "notFuzzyTitleJoin": true
+  },
+  "facts": [
+    {
+      "id": "m10687-approved-estimate",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        1,
+        2
+      ],
+      "stage": "approved_estimated_capital_expenditure_request",
+      "value": 8825000,
+      "unit": "source_dollars",
+      "currency": null,
+      "basis": "Including net HST; request and proposed funding plan approved. Not award, cash payment, final actual cost or independently established unconditional ceiling."
+    },
+    {
+      "id": "m10687-funding-1",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Lead Line Replacement Program",
+      "value": 146000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-funding-2",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Integrated Wastewater Projects",
+      "value": 40000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-funding-3",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Integrated Stormwater Projects",
+      "value": 36000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-funding-4",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Transmission Mains Upgrade – Churchill",
+      "value": 8218000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-funding-5",
+      "sourceId": "m10687-decision-letter",
+      "pdfPages": [
+        2
+      ],
+      "stage": "approved_proposed_funding_plan_component",
+      "label": "Previously Spent (Preliminary Design/CN)",
+      "value": 385000,
+      "unit": "source_dollars",
+      "currency": null
+    },
+    {
+      "id": "m10687-excluded-hrm-estimate",
+      "sourceId": "m10687-public-application-h1",
+      "pdfPages": [
+        2
+      ],
+      "label": "HRM street recapitalization estimate excluded from requested funding",
+      "value": 2431111.25,
+      "unit": "source_dollars",
+      "currency": null,
+      "stage": "excluded_other_agency_estimate_before_contingencies_overhead_net_hst"
+    },
+    {
+      "id": "m10687-updated-estimate-base",
+      "sourceId": "m10687-public-responses-h2",
+      "pdfPages": [
+        45
+      ],
+      "label": "Subtotal before contingency",
+      "value": 7854373.75,
+      "unit": "source_dollars",
+      "currency": null,
+      "stage": "estimated_cost_subtotal"
+    },
+    {
+      "id": "m10687-updated-estimate-contingency",
+      "sourceId": "m10687-public-responses-h2",
+      "pdfPages": [
+        45
+      ],
+      "label": "5% contingency",
+      "value": 392718.69,
+      "unit": "source_dollars",
+      "currency": null,
+      "stage": "estimated_cost_component"
+    },
+    {
+      "id": "m10687-updated-estimate-taxbase",
+      "sourceId": "m10687-public-responses-h2",
+      "pdfPages": [
+        45
+      ],
+      "label": "Subtotal before net HST and overhead/interest",
+      "value": 8382092.44,
+      "unit": "source_dollars",
+      "currency": null,
+      "stage": "estimated_cost_subtotal"
+    },
+    {
+      "id": "m10687-updated-estimate-hst",
+      "sourceId": "m10687-public-responses-h2",
+      "pdfPages": [
+        45
+      ],
+      "label": "Net HST 4.286%",
+      "value": 359256.48,
+      "unit": "source_dollars",
+      "currency": null,
+      "stage": "estimated_cost_component"
+    },
+    {
+      "id": "m10687-updated-estimate-overhead",
+      "sourceId": "m10687-public-responses-h2",
+      "pdfPages": [
+        45
+      ],
+      "label": "Overhead/interest 1%",
+      "value": 83820.92,
+      "unit": "source_dollars",
+      "currency": null,
+      "stage": "estimated_cost_component"
+    },
+    {
+      "id": "m10687-additional-funding",
+      "sourceId": "m10687-public-responses-h2",
+      "pdfPages": [
+        45
+      ],
+      "label": "Funding required for 2022/23 (ROUNDED), after separate/prior funding deductions",
+      "value": 8218000,
+      "unit": "source_dollars",
+      "currency": null,
+      "stage": "additional_funding_request_component"
+    }
+  ],
+  "fundingPlan": {
+    "sourceFactIds": [
+      "m10687-funding-1",
+      "m10687-funding-2",
+      "m10687-funding-3",
+      "m10687-funding-4",
+      "m10687-funding-5"
+    ],
+    "total": 8825000,
+    "unit": "source_dollars",
+    "currency": null,
+    "previousSpendIncluded": 385000,
+    "previousSpendIsAdditional": false
+  },
+  "scopeNotes": {
+    "tax": "Original estimated approval includes net HST. Public updated estimate displays 4.286% net HST and 1% overhead against a subtotal of $8,382,092.44; arithmetic reproduces printed cents. Currency code not explicitly stated.",
+    "sourceArithmetic": "Original letter components sum $8,825,170 against printed $8,825,000. Updated pre-decision estimate in public H-2 has cents sum $8,825,169.84; nearest-thousand rounding reproduces printed total. Final funding line says ROUNDED, but total rounding rule remains an inference. No extra spending or overrun is established.",
+    "laterBudget": "Staff report project budget $9,805,000 has unreconciled scope relative to this original approval. Later amendments, revised scope and budget basis were not established.",
+    "laterCumulativeSpend": "Staff report cumulative expenditure remains a distinct measure; no subtraction against original approval as an overrun, loss or unlawful expenditure is supported.",
+    "approvalScope": "Approval covers request and proposed funding plan based on information provided. Letter describes required CN cost-sharing and HRM street-work sharing; does not establish subsequent execution or payment.",
+    "delivery": "Construction timing was planned, not independent proof of completion or acceptance.",
+    "coverage": "Only this one original decision letter verified; other reported matters remain references unless separately reviewed.",
+    "researchGap": "The public H-1/H-2 records clarify the original approval estimate, not the later $9,805,000 project-budget basis. A dated approved budget revision, project ledger reconciliation or explicitly linked later regulatory decision is still needed; none is inferred from this bounded review."
+  },
+  "prohibitions": {
+    "aggregateAcrossFinancialStages": true,
+    "inferOverspendOrLoss": true,
+    "inferNoLaterAmendments": true,
+    "republishFullLetterOrSignaturesOrContacts": true
+  },
+  "attribution": "Institutional facts attributed to the Nova Scotia Utility and Review Board decision letter and Halifax Water staff report. No endorsement implied; full source document republication rights not established.",
+  "versionHistory": {
+    "supersedesSha256": "d58bbf98772baa5b3ba9400d08c6799d1fe2565b27234c1c12f0ff23329d3a78",
+    "priorArtifactPreserved": true,
+    "change": "Add exact public H-1/H-2 scope and updated estimate evidence; clarify percentage bases and rounding inference. Original approval, parent linkage and later-budget unknown status unchanged."
+  },
+  "approvalScopeSupplement": {
+    "sourceFactIds": [
+      "m10687-excluded-hrm-estimate",
+      "m10687-updated-estimate-base",
+      "m10687-updated-estimate-contingency",
+      "m10687-updated-estimate-taxbase",
+      "m10687-updated-estimate-hst",
+      "m10687-updated-estimate-overhead",
+      "m10687-additional-funding"
+    ],
+    "updatedEstimateDate": "2022-07-13",
+    "filedDate": "2022-08-12",
+    "updateBasis": "IR-9 and IR-10 explicitly direct the reader to the July 13 updated estimate to reconcile the older application attachment and separate-funding differences. This is a pre-decision estimate update, not a later amendment to the August 22 approval.",
+    "deductionEquation": "8,825,000 - 146,000 - 40,000 - 36,000 - 385,000 = 8,218,000",
+    "percentageCalculations": {
+      "contingency": "5% × 7,854,373.75 = 392,718.6875, printed 392,718.69",
+      "netHst": "4.286% × 8,382,092.44 = 359,256.4819784, printed 359,256.48",
+      "overheadInterest": "1% × 8,382,092.44 = 83,820.9244, printed 83,820.92"
+    },
+    "percentageBasisStatus": "Arithmetic inference from displayed subtotals and percentages, reproducing printed cents; not an independently quoted tax-policy rule.",
+    "centsSum": "8825169.84",
+    "printedTotal": "8825000.00",
+    "difference": "169.84",
+    "roundingStatus": "Final funding line explicitly says ROUNDED. Rounding the pre-deduction cents sum to nearest thousand reproduces printed total, but exact rounding rule for the total is inferred, not expressly stated.",
+    "later9805000BudgetReconciled": false
+  }
+}

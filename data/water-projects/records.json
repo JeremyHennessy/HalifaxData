@@ -1,0 +1,425 @@
+{
+  "schemaVersion": "halifax-water-project-closeout-v1",
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reviewId": "halifax-water-project-closeout-independent-review-20261028",
+    "reviewType": "source_attributed_historical_project_closeouts",
+    "reviewedOn": "2026-10-28",
+    "requiresMatchingIndependentReceipt": true
+  },
+  "id": "halifax-water-regulatory-project-closeouts-2023-24",
+  "title": "Halifax Water: six reported capital project closeouts with regulatory references",
+  "source": {
+    "publisher": "Halifax Water",
+    "url": "https://halifaxwater.ca/sites/default/files/2024-10/Public%20Package%20-%20September%2026%2C%202024.pdf",
+    "title": "Halifax Water Board public package, September 26, 2024",
+    "sha256": "2f0874884eab65a0200379a71caa4b6d27615ea51753749bf1c4786ff38b7886",
+    "receiptSha256": "17220601a02aca5d741196080a4db9d7972b1129324f046ad0248188d89eee5a",
+    "retrievedAt": "2026-10-28T13:07:28.650558+00:00",
+    "boardPackageDate": "2024-09-26",
+    "staffReportDate": "2024-09-04"
+  },
+  "scope": {
+    "selection": "All six project rows on PDF page 39 containing an explicit NSUARB matter number; their five-water/one-wastewater subtotals reconcile to the report\u2019s large-project narrative.",
+    "reportingPopulationPeriod": {
+      "start": "2023-04-01",
+      "end": "2024-03-31"
+    },
+    "costMeasurement": "Cumulative project expenditure to March 31, 2024; potentially includes prior-year funded work, not expenditure confined to the reporting year.",
+    "budgetBasis": "Source labels Project Budget; original versus amended/final budget basis is not independently established.",
+    "completionBasis": "Staff-reported completed/placed-in-service/fiscally-closed population; not independently inspected delivery or individual acceptance.",
+    "populationLocator": {
+      "pdfPage": 37,
+      "item": "Audit and Finance Committee Item 8",
+      "section": "Discussion"
+    },
+    "fundingContext": "Staff report describes funding from current/prior capital budgets and surplus funding sources; underlying funding decisions were not acquired."
+  },
+  "records": [
+    {
+      "id": "halifax-water-project-300002718-2024-closeout",
+      "projectNumberAsReported": "300002718",
+      "projectNameAsReported": "Cowie Hill Reservoir Replacement",
+      "serviceGroup": "water",
+      "regulatoryApprovalDateTextAsReported": "Apr 8/21 & Nov 24/21",
+      "regulatoryMatterTextAsReported": "M09997 & M10305",
+      "regulatoryMatterIdsAsReported": [
+        "M09997",
+        "M10305"
+      ],
+      "dateToMatterPairingIndependentlyVerified": false,
+      "originalRegulatoryOrdersAcquired": false,
+      "cumulativeAmountSpent": {
+        "rawValue": "$8,137,679",
+        "value": 8137679,
+        "stage": "staff_reported_cumulative_project_expenditure",
+        "asOf": "2024-03-31",
+        "startDate": null,
+        "isAnnualCashPayment": false
+      },
+      "projectBudget": {
+        "rawValue": "$8,710,000",
+        "value": 8710000,
+        "stage": "source_project_budget",
+        "originalVersusRevisedBasisVerified": false
+      },
+      "overBudgetAsReported": {
+        "rawValue": "",
+        "value": null,
+        "availability": "blank_as_reported"
+      },
+      "underBudgetAsReported": {
+        "rawValue": "\u2010$572,321",
+        "value": -572321,
+        "availability": "reported"
+      },
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_official_Nova_Scotia_utility_financial_report",
+      "sourceUnit": "dollars_as_displayed_with_dollar_sign",
+      "unitMultiplier": 1,
+      "taxBasis": "unknown",
+      "sourceLocator": {
+        "pdfPage": 39,
+        "attachmentPage": "1 of 2",
+        "table": "Capital Project Spending Summary",
+        "rowProjectNumber": "300002718"
+      },
+      "reportedPopulation": "Included in staff reporting on projects completed, placed in service and fiscally closed during the reporting year; individual completion date and acceptance certificate not acquired."
+    },
+    {
+      "id": "halifax-water-project-300003121-2024-closeout",
+      "projectNumberAsReported": "300003121",
+      "projectNameAsReported": "CHAIN CTRL TRANS\u2010PENINSULA LOW UPSIZE \u2010 Churchill Drive Corridor",
+      "serviceGroup": "water",
+      "regulatoryApprovalDateTextAsReported": "Aug 22/22",
+      "regulatoryMatterTextAsReported": "M10687",
+      "regulatoryMatterIdsAsReported": [
+        "M10687"
+      ],
+      "dateToMatterPairingIndependentlyVerified": false,
+      "originalRegulatoryOrdersAcquired": false,
+      "cumulativeAmountSpent": {
+        "rawValue": "$8,868,337",
+        "value": 8868337,
+        "stage": "staff_reported_cumulative_project_expenditure",
+        "asOf": "2024-03-31",
+        "startDate": null,
+        "isAnnualCashPayment": false
+      },
+      "projectBudget": {
+        "rawValue": "$9,805,000",
+        "value": 9805000,
+        "stage": "source_project_budget",
+        "originalVersusRevisedBasisVerified": false
+      },
+      "overBudgetAsReported": {
+        "rawValue": "",
+        "value": null,
+        "availability": "blank_as_reported"
+      },
+      "underBudgetAsReported": {
+        "rawValue": "\u2010$936,663",
+        "value": -936663,
+        "availability": "reported"
+      },
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_official_Nova_Scotia_utility_financial_report",
+      "sourceUnit": "dollars_as_displayed_with_dollar_sign",
+      "unitMultiplier": 1,
+      "taxBasis": "unknown",
+      "sourceLocator": {
+        "pdfPage": 39,
+        "attachmentPage": "1 of 2",
+        "table": "Capital Project Spending Summary",
+        "rowProjectNumber": "300003121"
+      },
+      "reportedPopulation": "Included in staff reporting on projects completed, placed in service and fiscally closed during the reporting year; individual completion date and acceptance certificate not acquired."
+    },
+    {
+      "id": "halifax-water-project-300003356-2024-closeout",
+      "projectNumberAsReported": "300003356",
+      "projectNameAsReported": "Akerley Reservoir Rehabilitation \u2010 Design Work",
+      "serviceGroup": "water",
+      "regulatoryApprovalDateTextAsReported": "Mar 4/22",
+      "regulatoryMatterTextAsReported": "M10446",
+      "regulatoryMatterIdsAsReported": [
+        "M10446"
+      ],
+      "dateToMatterPairingIndependentlyVerified": false,
+      "originalRegulatoryOrdersAcquired": false,
+      "cumulativeAmountSpent": {
+        "rawValue": "$5,342,682",
+        "value": 5342682,
+        "stage": "staff_reported_cumulative_project_expenditure",
+        "asOf": "2024-03-31",
+        "startDate": null,
+        "isAnnualCashPayment": false
+      },
+      "projectBudget": {
+        "rawValue": "$8,520,000",
+        "value": 8520000,
+        "stage": "source_project_budget",
+        "originalVersusRevisedBasisVerified": false
+      },
+      "overBudgetAsReported": {
+        "rawValue": "",
+        "value": null,
+        "availability": "blank_as_reported"
+      },
+      "underBudgetAsReported": {
+        "rawValue": "\u2010$3,177,318",
+        "value": -3177318,
+        "availability": "reported"
+      },
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_official_Nova_Scotia_utility_financial_report",
+      "sourceUnit": "dollars_as_displayed_with_dollar_sign",
+      "unitMultiplier": 1,
+      "taxBasis": "unknown",
+      "sourceLocator": {
+        "pdfPage": 39,
+        "attachmentPage": "1 of 2",
+        "table": "Capital Project Spending Summary",
+        "rowProjectNumber": "300003356"
+      },
+      "reportedPopulation": "Included in staff reporting on projects completed, placed in service and fiscally closed during the reporting year; individual completion date and acceptance certificate not acquired."
+    },
+    {
+      "id": "halifax-water-project-300003764-2024-closeout",
+      "projectNumberAsReported": "300003764",
+      "projectNameAsReported": "BRIARWOOD CRES WM RENEW",
+      "serviceGroup": "water",
+      "regulatoryApprovalDateTextAsReported": "Jul 19/22",
+      "regulatoryMatterTextAsReported": "M11200",
+      "regulatoryMatterIdsAsReported": [
+        "M11200"
+      ],
+      "dateToMatterPairingIndependentlyVerified": false,
+      "originalRegulatoryOrdersAcquired": false,
+      "cumulativeAmountSpent": {
+        "rawValue": "$1,221,624",
+        "value": 1221624,
+        "stage": "staff_reported_cumulative_project_expenditure",
+        "asOf": "2024-03-31",
+        "startDate": null,
+        "isAnnualCashPayment": false
+      },
+      "projectBudget": {
+        "rawValue": "$1,386,000",
+        "value": 1386000,
+        "stage": "source_project_budget",
+        "originalVersusRevisedBasisVerified": false
+      },
+      "overBudgetAsReported": {
+        "rawValue": "",
+        "value": null,
+        "availability": "blank_as_reported"
+      },
+      "underBudgetAsReported": {
+        "rawValue": "\u2010$164,376",
+        "value": -164376,
+        "availability": "reported"
+      },
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_official_Nova_Scotia_utility_financial_report",
+      "sourceUnit": "dollars_as_displayed_with_dollar_sign",
+      "unitMultiplier": 1,
+      "taxBasis": "unknown",
+      "sourceLocator": {
+        "pdfPage": 39,
+        "attachmentPage": "1 of 2",
+        "table": "Capital Project Spending Summary",
+        "rowProjectNumber": "300003764"
+      },
+      "reportedPopulation": "Included in staff reporting on projects completed, placed in service and fiscally closed during the reporting year; individual completion date and acceptance certificate not acquired."
+    },
+    {
+      "id": "halifax-water-project-300003930-2024-closeout",
+      "projectNumberAsReported": "300003930",
+      "projectNameAsReported": "Burnside Dr WM \u2010 2023 Exten (23/24)",
+      "serviceGroup": "water",
+      "regulatoryApprovalDateTextAsReported": "Nov 4/21 - Mar 15/22 - Mar 27/23 - Apr 21/23",
+      "regulatoryMatterTextAsReported": "M10304 / M10490 / M11060 / M11006",
+      "regulatoryMatterIdsAsReported": [
+        "M10304",
+        "M10490",
+        "M11060",
+        "M11006"
+      ],
+      "dateToMatterPairingIndependentlyVerified": false,
+      "originalRegulatoryOrdersAcquired": false,
+      "cumulativeAmountSpent": {
+        "rawValue": "$5,700,000",
+        "value": 5700000,
+        "stage": "staff_reported_cumulative_project_expenditure",
+        "asOf": "2024-03-31",
+        "startDate": null,
+        "isAnnualCashPayment": false
+      },
+      "projectBudget": {
+        "rawValue": "$5,700,000",
+        "value": 5700000,
+        "stage": "source_project_budget",
+        "originalVersusRevisedBasisVerified": false
+      },
+      "overBudgetAsReported": {
+        "rawValue": "",
+        "value": null,
+        "availability": "blank_as_reported"
+      },
+      "underBudgetAsReported": {
+        "rawValue": "$0",
+        "value": 0,
+        "availability": "reported"
+      },
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_official_Nova_Scotia_utility_financial_report",
+      "sourceUnit": "dollars_as_displayed_with_dollar_sign",
+      "unitMultiplier": 1,
+      "taxBasis": "unknown",
+      "sourceLocator": {
+        "pdfPage": 39,
+        "attachmentPage": "1 of 2",
+        "table": "Capital Project Spending Summary",
+        "rowProjectNumber": "300003930"
+      },
+      "reportedPopulation": "Included in staff reporting on projects completed, placed in service and fiscally closed during the reporting year; individual completion date and acceptance certificate not acquired."
+    },
+    {
+      "id": "halifax-water-project-600002308-2024-closeout",
+      "projectNumberAsReported": "600002308",
+      "projectNameAsReported": "Herring Cove WWTF \u2010 Fine Screens \u2010 New Perforated Plate Screens",
+      "serviceGroup": "wastewater",
+      "regulatoryApprovalDateTextAsReported": "Jul 26/22",
+      "regulatoryMatterTextAsReported": "M10650",
+      "regulatoryMatterIdsAsReported": [
+        "M10650"
+      ],
+      "dateToMatterPairingIndependentlyVerified": false,
+      "originalRegulatoryOrdersAcquired": false,
+      "cumulativeAmountSpent": {
+        "rawValue": "$1,335,538",
+        "value": 1335538,
+        "stage": "staff_reported_cumulative_project_expenditure",
+        "asOf": "2024-03-31",
+        "startDate": null,
+        "isAnnualCashPayment": false
+      },
+      "projectBudget": {
+        "rawValue": "$1,500,000",
+        "value": 1500000,
+        "stage": "source_project_budget",
+        "originalVersusRevisedBasisVerified": false
+      },
+      "overBudgetAsReported": {
+        "rawValue": "",
+        "value": null,
+        "availability": "blank_as_reported"
+      },
+      "underBudgetAsReported": {
+        "rawValue": "\u2010$164,462",
+        "value": -164462,
+        "availability": "reported"
+      },
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_official_Nova_Scotia_utility_financial_report",
+      "sourceUnit": "dollars_as_displayed_with_dollar_sign",
+      "unitMultiplier": 1,
+      "taxBasis": "unknown",
+      "sourceLocator": {
+        "pdfPage": 39,
+        "attachmentPage": "1 of 2",
+        "table": "Capital Project Spending Summary",
+        "rowProjectNumber": "600002308"
+      },
+      "reportedPopulation": "Included in staff reporting on projects completed, placed in service and fiscally closed during the reporting year; individual completion date and acceptance certificate not acquired."
+    }
+  ],
+  "reconciliations": [
+    {
+      "id": "halifax-water-regulatory-subset-water",
+      "serviceGroup": "water",
+      "projectRecordIds": [
+        "halifax-water-project-300002718-2024-closeout",
+        "halifax-water-project-300003121-2024-closeout",
+        "halifax-water-project-300003356-2024-closeout",
+        "halifax-water-project-300003764-2024-closeout",
+        "halifax-water-project-300003930-2024-closeout"
+      ],
+      "calculatedCumulativeSpent": 29270322,
+      "calculatedProjectBudgets": 34121000,
+      "calculatedBudgetLessSpent": 4850678,
+      "narrativeCumulativeSpent": 29270322,
+      "narrativeNetSurplus": 4850678,
+      "narrativeLocator": {
+        "pdfPage": 38,
+        "item": "Audit and Finance Committee Item 8",
+        "attachmentPage": "2 of 2",
+        "paragraph": "Second attached report, projects over $1,000,000"
+      },
+      "equal": true,
+      "isAdditionalMoney": false
+    },
+    {
+      "id": "halifax-water-regulatory-subset-wastewater",
+      "serviceGroup": "wastewater",
+      "projectRecordIds": [
+        "halifax-water-project-600002308-2024-closeout"
+      ],
+      "calculatedCumulativeSpent": 1335538,
+      "calculatedProjectBudgets": 1500000,
+      "calculatedBudgetLessSpent": 164462,
+      "narrativeCumulativeSpent": 1335538,
+      "narrativeNetSurplus": 164462,
+      "narrativeLocator": {
+        "pdfPage": 38,
+        "item": "Audit and Finance Committee Item 8",
+        "attachmentPage": "2 of 2",
+        "paragraph": "Second attached report, projects over $1,000,000"
+      },
+      "equal": true,
+      "isAdditionalMoney": false
+    }
+  ],
+  "decisionContext": {
+    "boardReportLocator": {
+      "pdfPage": 35,
+      "item": "Board Item 4.4"
+    },
+    "committeeReportLocator": {
+      "pdfPage": 37,
+      "item": "Committee Item 8"
+    },
+    "status": "Staff recommendation to approve filing with the regulator, not proof of a board vote, filing acceptance or new project authorization.",
+    "boardDecisionVerified": false,
+    "regulatoryOrderTextVerified": false
+  },
+  "known": [
+    "Source-owned project numbers and regulatory matter references are explicitly associated in the same official table.",
+    "The selected six rows reconcile internally and to the narrative large-project subtotals. This is a documented reporting link, not independent verification of each underlying authorization or transaction."
+  ],
+  "limitations": [
+    "Project budgets, cumulative costs and reported budget differences are different measures; do not add them together or add subtotals to their project rows.",
+    "All six Over Budget cells are blank, not source zeros. The Burnside Under Budget cell explicitly shows zero and is retained as zero.",
+    "Amounts are source-reported expenditure, not invoices, bank-cleared payments or contractor receipts. No supplier or procurement tender join is established.",
+    "Regulatory matter IDs/date text are preserved as reported; multiple dates and matters are not independently paired or validated against original orders.",
+    "Below-budget or zero-difference reporting does not establish procurement quality, project value, disposal legitimacy or absence of issues.",
+    "The wider summary population and other package sections are not normalized here; these six rows are not all utility spending.",
+    "Currency code is contextual inference; taxes and original/revised budget basis are not independently established.",
+    "No current utility performance or service-quality causal conclusion follows from these historical cost figures."
+  ],
+  "nextEvidenceNeeded": [
+    "Original NSUARB orders for the exact reported matter identifiers, including approved scope and amendments.",
+    "Project completion/acceptance documentation and actual in-service dates.",
+    "Exact contracts, change orders and project-linked payment ledgers before asserting an expenditure-to-contractor chain.",
+    "Board minutes or filing receipt if the filing recommendation is to be treated as an enacted decision."
+  ],
+  "rightsScope": "Numerical facts, public project/regulatory identifiers, short project labels and independently written accounting context only; no report facsimile, signatures, staff contacts or extended narrative. No blanket reuse licence established."
+}

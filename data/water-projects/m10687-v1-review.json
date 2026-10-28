@@ -1,0 +1,24 @@
+{
+  "status": "accepted",
+  "bundleSha256": "d58bbf98772baa5b3ba9400d08c6799d1fe2565b27234c1c12f0ff23329d3a78",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "halifax-water-m10687-publication-review-20261028",
+  "checks": [
+    "Independently viewed both original Board Decision Letter pages and verified matter M10687, August 22, 2022 decision date, database document 87197 and separate PDF footer 297709.",
+    "Verified approved estimated request 8825000 including net HST and five funding components summing 8825000; previously spent 385000 remains included rather than additional.",
+    "Verified exact source-reported matter/date link to project 300003121 on the retained Halifax Water report page 39, without claiming the project number appears in the letter.",
+    "Verified the public builder pins the accepted parent bundle and exact project/matter/date; eight public tests and deterministic replay passed independently.",
+    "Reviewed the source arithmetic caveat: seven printed cost components sum 8825170 versus printed 8825000, with rounding/bases unresolved and no loss or overrun inference.",
+    "Confirmed institutional facts only, no personal names, signatures, contacts, full-letter body or private paths; no added collection/project/matter count."
+  ],
+  "limits": [
+    "Optional context bound only to parent bundle 57eac399c2d4438ef38089422730852c5e244502680d1a645e21317aa10f17cb and record halifax-water-project-300003121-2024-closeout.",
+    "Original approval, proposed funding plan, later project budget and cumulative expenditure are distinct stages; no cross-stage overspend, loss or unlawful-expenditure conclusion is supported.",
+    "Later amendments, changed scope and explanation of the later 9805000 budget remain unverified.",
+    "Currency code is unspecified; the original estimate includes net HST, not a verified tax basis for every later amount.",
+    "Decision is a Board Decision Letter, not a separately verified statutory order or unconditional cost ceiling.",
+    "Cost-sharing requirements and planned construction do not establish executed agreements, payments or delivery.",
+    "Narrow attributed factual projection only; no general licence or permission to reproduce the letter, signatures or contacts."
+  ]
+}

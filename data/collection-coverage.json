@@ -6,6 +6,25 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "water-projects",
+      "title": "Halifax Water: six historical project closeouts",
+      "relatedSourceIds": [],
+      "dataPath": "data/water-projects/records.json",
+      "dataSha256": "57eac399c2d4438ef38089422730852c5e244502680d1a645e21317aa10f17cb",
+      "reviewPath": "data/water-projects/publication-review.json",
+      "reviewId": "halifax-water-project-closeout-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 6,
+      "countUnit": "historical project rows, not payments",
+      "route": "#/water-projects",
+      "scope": "Six source-reported cumulative project costs through March 31, 2024, with source budgets and ten regulatory matter references. One optional independently reviewed original decision adds context, not a collection or project count. Not annual cash payments, independently inspected delivery or all utility spending.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://halifaxwater.ca/sites/default/files/2024-10/Public%20Package%20-%20September%2026%2C%202024.pdf"
+      ]
+    },
+    {
       "id": "shelburne-grants",
       "title": "Town of Shelburne grants: approval and paid disclosures",
       "relatedSourceIds": [],

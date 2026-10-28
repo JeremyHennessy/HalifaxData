@@ -30,6 +30,7 @@ export function filterReferences(bundle,{q='',group='',stage=''}={}){
  return rows;
 }
 export const OPTIONAL_COLLECTION_ROUTES={
+ 'water-projects':'#/water-projects',
  'municipal-capital':'#/municipal-capital',
  'housing-audit':'#/audits?case=housing-contracts',
  ambulance:'#/audits?case=ambulance-contract',
