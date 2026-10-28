@@ -6,3 +6,8 @@ __pycache__/
 private/
 .env*
 retained-code/
+
+# Disabled offline foundation runtime outputs must never be committed.
+pipeline/foundation/physician_refresh/refresh-state.private/
+*.candidate.private.json
+*.run.private.json

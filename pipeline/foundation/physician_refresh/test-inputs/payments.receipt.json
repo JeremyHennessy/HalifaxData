@@ -1,0 +1,15 @@
+{
+  "url": "https://data.novascotia.ca/api/views/xpt9-p9is/rows.csv?accessType=DOWNLOAD",
+  "attemptedAt": "2026-10-28T12:00:00+00:00",
+  "headersReceivedAt": "2026-10-28T12:00:01+00:00",
+  "completedAt": "2026-10-28T12:00:02+00:00",
+  "status": 200,
+  "complete": true,
+  "disposition": "received_for_semantic_review",
+  "headers": {
+    "content-type": "text/csv"
+  },
+  "bodyBytes": 33279,
+  "bodySha256": "0d192de4f5837776c7374465bb3cc9f90ec2965fd4ca34fe16567c80cc1efa03",
+  "testFixtureOnly": true
+}
