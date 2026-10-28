@@ -1,0 +1,27 @@
+{
+  "status": "accepted",
+  "bundleSha256": "b50fb2055dc53c46244a8aca3e6d523e76c5599180be0f6322f58c347b618e92",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "ambulance-compensation-independent-review-20261028",
+  "scope": "Historical auditor-reported ground-ambulance compensation, contract terms and two recommendation follow-up links",
+  "checks": [
+    "All 24 source table slots visually checked against original PDF page 60: 16 monetary numeric cells, five rates, two not-applicable cells and one blank",
+    "Rounded-million scaling, separate percentage rates, component/total and annual/five-year roles checked without additive double counting",
+    "Original contract-change footnote and fee-calculation paragraphs checked; original contract and amendment are not claimed acquired",
+    "Exact original recommendation identifiers matched to retained follow-up page 20 and accepted institution/audit record",
+    "Historical departmental responses and no-assurance-on-incomplete limitation checked",
+    "Ten focused offline tests passed; final release differs only in publication metadata"
+  ],
+  "limitations": [
+    "Compensation is auditor-reported paid, not independently verified bank or invoice evidence",
+    "Rounded published figures are not exact payment amounts; contextual CAD inference remains explicit",
+    "Rates are not money; totals overlap components and annual figures; N/A and blank are not zero",
+    "Fiscal-year labels retained with no independently established boundary dates",
+    "Compensation subset is not the entire operating budget or total emergency-services contract value",
+    "Historical not-completed recommendations do not establish unlawful costs or current compliance status",
+    "No procurement-corpus join, tender identifier, patient or staff-level data projected",
+    "Rights scope is numerical institutional facts and concise original source-attributed context only",
+    "Application admission and hosted display require separate verification"
+  ]
+}
