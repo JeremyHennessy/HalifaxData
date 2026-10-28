@@ -1,0 +1,27 @@
+{
+  "status": "accepted",
+  "indexSha256": "4118d8b43061fafc195c9b65504f7ef8589edd4cfec93ddc62e9a3126bbce062",
+  "captureManifestSha256": "adf68b025049c1ddc7df054ba1a7ea1be99f22bd05e71db751cf69a2c52e0afd",
+  "orderedSourceDigest": "281d5dc65ea0c0d8c8cf486550aae84784f10c0a3be61bb8f4cf44f3b08c76c7",
+  "fieldNames": [
+    "id",
+    "sourceRowId",
+    "tenderId",
+    "publisherEntityLabel",
+    "dateFields",
+    "reportedAmount",
+    "categories"
+  ],
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "fresh-minimum-tender-review-20261028",
+  "scope": "Exact 34 shards and seven-field projection of this reviewed snapshot only",
+  "limitations": [
+    "No suppliers, descriptions or private cases",
+    "Unknown currency, tax and unit basis; no sums or payment claims",
+    "239 raw publisher labels are not verified legal entities",
+    "Source identifiers are not unique contract IDs",
+    "Not all procurement: RFIs included; cancelled and multi-vendor tenders excluded",
+    "New capture or changed field contents require a new review"
+  ]
+}
