@@ -10,7 +10,9 @@ This repository starts from an empty history. Its application, evidence contract
 
 Trace public revenue, budget requests, approvals, government decisions, contracts, vendors, amendments, disclosed payments, delivery and outcomes. Identify reproducible accountability questions without treating anomalies as proof of misconduct.
 
-The initial foundation is intentionally bounded: a transparent source register, searchable source-linked financial facts, and a neutral documented budget comparison. It is not a complete financial ledger or a claim that all research sources are integrated.
+The implementation is intentionally bounded: a transparent 139-reference source register, 29 source-linked fiscal facts, a neutral budget comparison, 33,670 reviewed tender observations, a 71-label supplier subset, 555 historical municipal operating records, and a reviewed unresolved reporting question. These are different record types—not a complete financial ledger or 139 working integrations.
+
+Each collection has an exact-byte independent review receipt and explicit limitations. Application tests, hosted browser checks and live asset verification are separate gates; a local implementation is not a claim of deployed functionality.
 
 ## Evidence principles
 

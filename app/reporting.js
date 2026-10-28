@@ -1,0 +1,15 @@
+import {verifiedJSON} from './tenders.js';
+const keys=["attribution", "confirmedFacts", "consequentialAllegation", "evidence", "hypotheses", "id", "nextRecords", "notEstablished", "publication", "responses", "rule", "schemaVersion", "sourceLicenceURL", "status", "summary", "title"];
+const evidenceKeys=["fiscalYear", "municipality", "municipalityType", "portal", "profile"];
+const portalKeys=["calculatedBalance", "currency", "equationResidual", "exactAccountingPolicyVerified", "financingAndTransfers", "operatingBalance", "rawSha256", "reportedAnnualBalance", "retrievedAt", "sourceRowId", "sourceURL", "unit"];
+const profileKeys=["basis", "currency", "label", "multiplier", "pdfPage", "precision", "printedPage", "rawSha256", "rawValue", "reportedDisplay", "retrievedAt", "sourceURL", "unit"];
+const exact=(v,keys)=>v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).sort().join('|')===[...keys].sort().join('|');
+export function validateReporting(b,review){
+ if(!exact(b,keys)||!exact(b.publication,['allowed','consequentialAllegation','reason','reviewId','reviewType','reviewedOn'])||!exact(b.rule,['expression','id','scope'])||!Array.isArray(b.evidence)||b.evidence.length!==2||b.schemaVersion!=='source-reporting-question-v1'||b.status!=='documented_source_reporting_difference'||b.consequentialAllegation!==false||review.status!=='accepted'||b.publication.allowed!==true||b.publication.consequentialAllegation!==false||b.publication.reviewType!=='neutral_source_reporting_question'||b.publication.reviewId!==review.evidenceId||b.publication.reviewedOn!==review.reviewedOn||b.responses.length!==0)throw new Error('Reporting question has not passed its specific review');
+ const seen=new Set();for(const e of b.evidence){if(!exact(e,evidenceKeys)||!exact(e.portal,portalKeys)||!exact(e.profile,profileKeys)||seen.has(e.portal.sourceRowId))throw new Error('Unreviewed case evidence');seen.add(e.portal.sourceRowId);const p=e.portal;
+  if(p.currency!==null||e.profile.currency!==null||p.exactAccountingPolicyVerified!==false||e.profile.precision!=='rounded display; exact underlying value not independently obtained')throw new Error('Unverified financial interpretation');
+  for(const k of ['operatingBalance','financingAndTransfers','reportedAnnualBalance','calculatedBalance','equationResidual'])if(typeof p[k]!=='string'||! /^-?\d+$/.test(p[k]))throw new Error('Invalid exact arithmetic input');
+  if(BigInt(p.operatingBalance)+BigInt(p.financingAndTransfers)!==BigInt(p.calculatedBalance)||BigInt(p.calculatedBalance)-BigInt(p.reportedAnnualBalance)!==BigInt(p.equationResidual))throw new Error('Case arithmetic does not reproduce');
+ }return b;
+}
+export async function getReporting(signal,fetcher=fetch){const review=await verifiedJSON('data/reporting-question/publication-review.json',null,null,signal,fetcher);if(review.status!=='accepted'||!/^[a-f0-9]{64}$/.test(review.bundleSha256))throw new Error('Reporting question review unavailable');return{review,bundle:validateReporting(await verifiedJSON('data/reporting-question/case.json',review.bundleSha256,null,signal,fetcher),review)};}
