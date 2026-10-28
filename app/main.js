@@ -110,7 +110,7 @@ function tenders(route){
 function richmondRegister(route){
  const controller=new AbortController();tenderController=controller;
  const depth=['simple','detail','evidence'].includes(route.params.get('depth'))?route.params.get('depth'):'simple',q=route.params.get('q')||'',sectionFilter=route.params.get('section')||'',from=route.params.get('from')||'',to=route.params.get('to')||'';
- const status=el('p',{class:'results-count',role:'status','aria-live':'polite'},'Checking the reviewed organization register…'),body=el('div');
+ const status=el('p',{class:'results-count',role:'status','aria-live':'polite'},'Checking the reviewed organization register…'),body=el('div',{class:'richmond-register'});
  Promise.resolve().then(async()=>{try{
   const {bundle:b,review}=await getRichmond(controller.signal);if(controller.signal.aborted)return;
   let rows;try{rows=filterRichmond(b,{q,section:sectionFilter,from,to});}catch(error){status.textContent='Search filters need correction.';body.replaceChildren(callout(error.message),link('Reset register search','#/richmond-register'));return;}
