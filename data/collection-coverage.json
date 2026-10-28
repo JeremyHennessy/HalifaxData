@@ -6,6 +6,26 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "shelburne-grants",
+      "title": "Town of Shelburne grants: approval and paid disclosures",
+      "relatedSourceIds": [],
+      "dataPath": "data/shelburne/paid.json",
+      "dataSha256": "4e2fcac3ab7323a0ff09bd75f9b3435d5ef82c3f9c377be3a7497f60589acea9",
+      "reviewPath": "data/shelburne/paid-review.json",
+      "reviewId": "shelburne-paid-grants-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 36,
+      "countUnit": "separately reported paid rows; approval schedule is another evidence stage",
+      "route": "#/shelburne-grants",
+      "scope": "One grouped grant story with independently reviewed paid and approval projections. Town of Shelburne, not Halifax. The approval schedule arithmetic is unresolved; no recipient-level payment joins, spending variance or loss established. Each projection is checked separately when opened.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://shelburnens.ca/images/2025/2024-25_Grants_Paid.pdf",
+        "https://shelburnens.ca/policies/1291-grants-to-organizations-policy-1/file.html"
+      ]
+    },
+    {
       "id": "ambulance",
       "title": "Ground ambulance compensation and audit context",
       "relatedSourceIds": [

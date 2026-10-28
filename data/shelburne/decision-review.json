@@ -1,0 +1,21 @@
+{
+  "status": "accepted",
+  "bundleSha256": "a259a520a95ff06fc5b765a3a5af17aa66e9f358e2c4df6981764e0cec0d1281",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "shelburne-grant-decision-independent-review-20261028",
+  "checks": [
+    "Independently compared all 35 source labels, purposes and amounts with the original May 9 minutes pages 7\u20138.",
+    "Recomputed the displayed detail sum of 68201.98 against the separately preserved printed total of 67201.98.",
+    "Verified the carried M24-212 motion and the bounded May 21 prior-minutes and general-budget approvals against source pages.",
+    "Verified the separate accepted paid disclosure totals 68301.98 without constructing row-level payment joins.",
+    "Reviewed the offline normalizer, ran 12 decision tests, and verified the final release changes publication metadata only."
+  ],
+  "limits": [
+    "Historical source-attributed factual projection and unresolved internal-document arithmetic question, not a payment error, overspending or loss finding.",
+    "The printed total, calculated schedule sum and separate paid total are not interchangeable.",
+    "No complete amendment history, official transaction identifiers, bank clearance or recipient legal-identity resolution has been established.",
+    "Dollar symbols are retained without inventing an ISO currency code.",
+    "Narrow factual projection only; no general source reproduction licence or permission to publish source documents, private correspondence or personal data is asserted."
+  ]
+}
