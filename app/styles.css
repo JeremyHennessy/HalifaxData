@@ -3,3 +3,4 @@
 /* Evidence tables and JSON may scroll inside their own panel, never widen the grid. */
 .case-layout>*{min-width:0}.prose{min-width:0}.table-wrap{max-width:100%;min-width:0}pre{max-width:100%;min-width:0}@media(max-width:760px){.case-layout{grid-template-columns:minmax(0,1fr)}}
 .purpose-context{margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}.purpose-context h3{margin-top:0}
+.brief-amount{font-size:clamp(1.2rem,2vw,1.65rem);font-weight:750;line-height:1.35}.authorization-expanded{margin-top:24px}.authorization-detail{min-width:0}.authorization-expanded>.authorization-detail{padding-top:20px}.money-question h2{font-size:1.2rem;margin:0}
