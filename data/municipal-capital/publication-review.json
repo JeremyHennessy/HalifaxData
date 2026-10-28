@@ -1,0 +1,27 @@
+{
+  "status": "accepted",
+  "bundleSha256": "4136b3b3cd3f48c8d6ebf044f5657f5a8825169b6af9983461ff044e8189109f",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "municipal-capital-assets-independent-review-20261028",
+  "scope": "52 historical capital-asset table rows: 49 municipality rows and three overlapping published aggregates",
+  "checks": [
+    "All 468 original numeric tokens independently matched using coordinate-based PDF text extraction; both table pages visually inspected",
+    "459 reported numeric values and nine excluded Mahone Bay zero placeholders preserved; excluded normalized values remain null",
+    "Methodology context checked on PDF page 23 and source table year headings checked, not inferred from filename or contents page",
+    "Town second accumulated-amortization header conflict retained without silent correction",
+    "Exact PDF and capture receipt hashes, URL and complete HTTP 200 response bound before retrieval timestamp use",
+    "Eight offline tests passed; separate release differs only in publication and rights-scope metadata",
+    "Projection contains numerical facts, public municipality labels and concise original context, not source facsimiles or personal details"
+  ],
+  "limitations": [
+    "Historical 2021\u20132022 snapshot, not current asset condition or project delivery",
+    "Currency and monetary scale not established; do not format as dollars or apply inferred multiplier",
+    "Published aggregate rows overlap municipality rows; do not sum all rows or measures",
+    "Source-excluded Mahone Bay placeholders are not evidence of zero assets",
+    "Conflicting printed town amortization date leaves normalized asOf null",
+    "No exact entity crosswalk, payment ledger, vendor link or wrongdoing finding",
+    "Rights review covers this factual projection only, not blanket reproduction permission",
+    "Application integration, display correctness and deployment require separate verification"
+  ]
+}

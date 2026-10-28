@@ -6,6 +6,25 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "municipal-capital",
+      "title": "Historical municipal capital assets",
+      "relatedSourceIds": [],
+      "dataPath": "data/municipal-capital/records.json",
+      "dataSha256": "4136b3b3cd3f48c8d6ebf044f5657f5a8825169b6af9983461ff044e8189109f",
+      "reviewPath": "data/municipal-capital/publication-review.json",
+      "reviewId": "municipal-capital-assets-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 52,
+      "countUnit": "source rows: 49 municipalities and 3 overlapping aggregates",
+      "route": "#/municipal-capital",
+      "scope": "Historical 2021\u201322 capital assets, not operating expenses or cash payments. Currency and scale unknown; excluded placeholders and conflicting dates preserved.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.novascotia.ca/sites/default/files/documents/1-1352/municipal-statistics-annual-report-2021-2022-en.pdf"
+      ]
+    },
+    {
       "id": "cash-bridge",
       "title": "NSCC cash/accrual explanation",
       "relatedSourceIds": [],
