@@ -6,6 +6,7 @@ from supplier_publication import supplier_files
 from municipal_publication import municipal_files
 from reporting_publication import reporting_files
 from audit_publication import audit_files
+from housing_publication import housing_files
 from budget_publication import budget_files
 from transfer_publication import transfer_files
 from governance_publication import governance_files
@@ -20,7 +21,7 @@ from code_bundles import assemble,version_html,digest
 from review_receipts import validate_receipt
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
-FILES=['index.html','app/main.js','app/finder.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/municipal-capital.js','app/capital-explanation.js','app/reporting.js','app/audits.js','app/budget-tables.js','app/transfers.js','app/governance.js','app/institution.js','app/authorizations.js','app/authorization-trace.js','app/authorization-purpose.js','app/cash-bridge.js','app/coverage.js','data/collection-coverage.json','app/styles.css','data/foundation.json','data/publication-review.json']
+FILES=['index.html','app/main.js','app/finder.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/municipal-capital.js','app/capital-explanation.js','app/reporting.js','app/audits.js','app/housing-audit.js','app/budget-tables.js','app/transfers.js','app/governance.js','app/institution.js','app/authorizations.js','app/authorization-trace.js','app/authorization-purpose.js','app/cash-bridge.js','app/coverage.js','data/collection-coverage.json','app/styles.css','data/foundation.json','data/publication-review.json']
 def build():
     bundle=json.loads((ROOT/'data/foundation.json').read_text())
     assert bundle['schemaVersion']=='halifaxdata-evidence-v1'
@@ -40,7 +41,7 @@ def build():
     assert re.fullmatch('[0-9a-f]{40}',source_commit),'Exact source commit required'
     coverage=build_collection_coverage(ROOT)
     (ROOT/'data/collection-coverage.json').write_text(json.dumps(coverage,indent=2)+'\n')
-    files=FILES+tender_files(ROOT)+supplier_files(ROOT)+municipal_files(ROOT)+reporting_files(ROOT)+audit_files(ROOT)+budget_files(ROOT)+transfer_files(ROOT)+governance_files(ROOT)+institution_files(ROOT)+authorization_files(ROOT)+cash_files(ROOT)+purpose_files(ROOT)+capital_files(ROOT)+capital_explanation_files(ROOT)
+    files=FILES+tender_files(ROOT)+supplier_files(ROOT)+municipal_files(ROOT)+reporting_files(ROOT)+audit_files(ROOT)+housing_files(ROOT)+budget_files(ROOT)+transfer_files(ROOT)+governance_files(ROOT)+institution_files(ROOT)+authorization_files(ROOT)+cash_files(ROOT)+purpose_files(ROOT)+capital_files(ROOT)+capital_explanation_files(ROOT)
     current_code,code_releases,code_assets=assemble(ROOT,files)
     OUT.mkdir(exist_ok=True)
     known=set(files+list(code_assets)+['release.json','.nojekyll'])

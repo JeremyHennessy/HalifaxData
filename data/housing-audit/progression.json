@@ -1,0 +1,371 @@
+{
+  "schemaVersion": "housing-contract-audit-progression-v1",
+  "publication": {
+    "allowed": true,
+    "consequentialAllegation": false,
+    "reviewId": "housing-contract-audit-independent-review-20261028",
+    "reviewType": "source_attributed_historical_audit_progression",
+    "reviewedOn": "2026-10-28",
+    "requiresMatchingIndependentReceipt": true
+  },
+  "id": "housing-contract-audit-2023-progression",
+  "title": "Housing service procurement: original audit and recommendation follow-up",
+  "source": {
+    "title": "Metropolitan Regional Housing Authority \u2013 Examination of Service Contract Awards",
+    "publisher": "Office of the Auditor General of Nova Scotia",
+    "url": "https://oag-ns.ca/sites/default/files/2023-01/Interactive%20Full%20Report_3_0.pdf",
+    "sha256": "16c83b779f0e04ae6a7c310378f68c8d71fe7a71c6a55f443028ad6d871b7ac7",
+    "receiptSha256": "abb26ad3d1fdf507d4ff7aec1dd50f8a780c0bdcb128dee9de18d30fc966b794",
+    "retrievedAt": "2026-10-28T11:55:08.894229+00:00",
+    "reportMonth": "2023-01",
+    "auditConclusionDate": "2022-12-16",
+    "auditPeriod": {
+      "start": "2020-03-01",
+      "end": "2022-06-30"
+    },
+    "assurance": "reasonable assurance, Appendix I page 20",
+    "historicalInstitution": "Metropolitan Regional Housing Authority",
+    "historicalDepartment": "Department of Municipal Affairs and Housing"
+  },
+  "moneyFacts": [
+    {
+      "id": "housing-audit-2023-company-a-award",
+      "sourceSupplierAlias": "Company A",
+      "supplierIdentityResolved": false,
+      "rawValue": "$996,000",
+      "value": "996000",
+      "sourceUnit": "dollars",
+      "unitMultiplier": 1,
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_Nova_Scotia_public_procurement_audit",
+      "stage": "audit_reported_contract_award",
+      "scope": "One anonymized supplier\u2019s three schedules",
+      "paymentEvidence": false,
+      "sourceLocator": {
+        "pdfPage": 17,
+        "printedPage": 17,
+        "paragraph": "1.32"
+      }
+    },
+    {
+      "id": "housing-audit-2023-company-b-award",
+      "sourceSupplierAlias": "Company B",
+      "supplierIdentityResolved": false,
+      "rawValue": "$233,671",
+      "value": "233671",
+      "sourceUnit": "dollars",
+      "unitMultiplier": 1,
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_Nova_Scotia_public_procurement_audit",
+      "stage": "audit_reported_contract_award",
+      "scope": "One anonymized supplier\u2019s four schedules",
+      "paymentEvidence": false,
+      "sourceLocator": {
+        "pdfPage": 17,
+        "printedPage": 17,
+        "paragraph": "1.32"
+      }
+    },
+    {
+      "id": "housing-audit-2023-company-c-award",
+      "sourceSupplierAlias": "Company C",
+      "supplierIdentityResolved": false,
+      "rawValue": "$90,000",
+      "value": "90000",
+      "sourceUnit": "dollars",
+      "unitMultiplier": 1,
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_Nova_Scotia_public_procurement_audit",
+      "stage": "audit_reported_contract_award",
+      "scope": "One anonymized supplier\u2019s one schedule",
+      "paymentEvidence": false,
+      "sourceLocator": {
+        "pdfPage": 17,
+        "printedPage": 17,
+        "paragraph": "1.32"
+      }
+    },
+    {
+      "id": "housing-audit-2023-pilot-cost",
+      "sourceSupplierAlias": null,
+      "supplierIdentityResolved": false,
+      "rawValue": "$83,643",
+      "value": "83643",
+      "sourceUnit": "dollars",
+      "unitMultiplier": 1,
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_Nova_Scotia_public_procurement_audit",
+      "stage": "audit_reported_pilot_cost",
+      "scope": "Separate tenant-services pilot, April 24\u2013July 24, 2020; not an invoice/payment ledger",
+      "paymentEvidence": false,
+      "sourceLocator": {
+        "pdfPage": 17,
+        "printedPage": 17,
+        "paragraph": "1.35"
+      }
+    },
+    {
+      "id": "housing-audit-2023-pilot-related-award-component",
+      "sourceSupplierAlias": "Company A",
+      "supplierIdentityResolved": false,
+      "rawValue": "$425,000",
+      "value": "425000",
+      "sourceUnit": "dollars",
+      "unitMultiplier": 1,
+      "currency": "CAD",
+      "currencyExplicitlySpecified": false,
+      "currencyBasis": "context_inferred_from_Nova_Scotia_public_procurement_audit",
+      "stage": "audit_reported_contract_award_component",
+      "scope": "Part of later awarded contracts; not additional to Company A award or total awards",
+      "paymentEvidence": false,
+      "sourceLocator": {
+        "pdfPage": 18,
+        "printedPage": 18,
+        "paragraph": "1.37"
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "id": "housing-audit-2023-pilot-start",
+      "date": "2020-04-24",
+      "datePrecision": "day",
+      "event": "Tenant-services pilot began",
+      "sourceLocator": {
+        "pdfPage": 17,
+        "printedPage": 17,
+        "paragraph": "1.35"
+      },
+      "basis": "Auditor-reported chronology, not original tender document ingestion"
+    },
+    {
+      "id": "housing-audit-2023-pilot-end",
+      "date": "2020-07-24",
+      "datePrecision": "day",
+      "event": "Tenant-services pilot ended",
+      "sourceLocator": {
+        "pdfPage": 17,
+        "printedPage": 17,
+        "paragraph": "1.35"
+      },
+      "basis": "Auditor-reported chronology, not original tender document ingestion"
+    },
+    {
+      "id": "housing-audit-2023-security-tender",
+      "date": "2020-08-01",
+      "datePrecision": "day",
+      "event": "Security-services tender issued",
+      "sourceLocator": {
+        "pdfPage": 16,
+        "printedPage": 16,
+        "paragraph": "1.28"
+      },
+      "basis": "Auditor-reported chronology, not original tender document ingestion"
+    },
+    {
+      "id": "housing-audit-2023-tenant-tender",
+      "date": "2020-08-10",
+      "datePrecision": "day",
+      "event": "Separate tenant-services tender issued",
+      "sourceLocator": {
+        "pdfPage": 16,
+        "printedPage": 16,
+        "paragraph": "1.28"
+      },
+      "basis": "Auditor-reported chronology, not original tender document ingestion"
+    },
+    {
+      "id": "housing-audit-2023-combined-tender",
+      "date": "2020-08-20",
+      "datePrecision": "day",
+      "event": "Two tenders combined; submission deadline extended",
+      "sourceLocator": {
+        "pdfPage": 16,
+        "printedPage": 16,
+        "paragraph": "1.28"
+      },
+      "basis": "Auditor-reported chronology, not original tender document ingestion"
+    },
+    {
+      "id": "housing-audit-2023-awards",
+      "date": "2020-10",
+      "datePrecision": "month",
+      "event": "Security-service contracts awarded",
+      "sourceLocator": {
+        "pdfPage": 11,
+        "printedPage": 11,
+        "paragraph": "1.3"
+      },
+      "basis": "Auditor-reported chronology, not original tender document ingestion"
+    }
+  ],
+  "auditorReportedObservations": [
+    {
+      "id": "initiation-approval",
+      "summary": "Auditor reported appropriate management approval to initiate procurement.",
+      "locator": {
+        "pdfPage": 16,
+        "paragraph": "1.27"
+      }
+    },
+    {
+      "id": "scope-and-signing",
+      "summary": "Auditor reported award scope consistent with tender amendments and approval by the acting role.",
+      "locator": {
+        "pdfPage": 17,
+        "paragraph": "1.34"
+      }
+    },
+    {
+      "id": "scoring-context",
+      "summary": "Tender allowed limiting schedules per bidder; scoring guidance did not assess capability or capacity.",
+      "locator": {
+        "pdfPage": 17,
+        "paragraphs": [
+          "1.33",
+          "1.34"
+        ]
+      }
+    },
+    {
+      "id": "pilot-documentation",
+      "summary": "Auditor reported a purchase order after services began and no formal pilot agreement.",
+      "locator": {
+        "pdfPage": 18,
+        "paragraph": "1.37"
+      }
+    },
+    {
+      "id": "pilot-caution",
+      "summary": "Insufficient justification documents did not itself establish an inappropriate decision; formal evaluation was absent.",
+      "locator": {
+        "pdfPage": 18,
+        "paragraphs": [
+          "1.40",
+          "1.41"
+        ]
+      }
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "housing-audit-2023-recommendation-1.1",
+      "sourceRecommendationId": "1.1",
+      "summary": "Conflict handling and documented reporting procedures",
+      "sourceLocator": {
+        "pdfPage": 15,
+        "printedPage": 15,
+        "heading": "Recommendation 1.1"
+      },
+      "followUp": {
+        "targetBundleSha256": "d0d9b05fe969ceec78cb87ff1a611f1650e878dc1501ded1ecaed01685402dbe",
+        "targetRecordId": "audit-status-a173db69c280a78c2cc9fab2",
+        "sourceRange": "1.1 to 1.4",
+        "status": "reported_completed",
+        "statusAsOf": "2025-10-10",
+        "currentComplianceVerified": false,
+        "assurance": "limited assurance; see report Appendix I",
+        "institutionLabelAsReported": "Growth and Development"
+      }
+    },
+    {
+      "id": "housing-audit-2023-recommendation-1.2",
+      "sourceRecommendationId": "1.2",
+      "summary": "Conflict disclosures in public tenders",
+      "sourceLocator": {
+        "pdfPage": 16,
+        "printedPage": 16,
+        "heading": "Recommendation 1.2"
+      },
+      "followUp": {
+        "targetBundleSha256": "d0d9b05fe969ceec78cb87ff1a611f1650e878dc1501ded1ecaed01685402dbe",
+        "targetRecordId": "audit-status-a173db69c280a78c2cc9fab2",
+        "sourceRange": "1.1 to 1.4",
+        "status": "reported_completed",
+        "statusAsOf": "2025-10-10",
+        "currentComplianceVerified": false,
+        "assurance": "limited assurance; see report Appendix I",
+        "institutionLabelAsReported": "Growth and Development"
+      }
+    },
+    {
+      "id": "housing-audit-2023-recommendation-1.3",
+      "sourceRecommendationId": "1.3",
+      "summary": "Bidder capability and capacity in scoring",
+      "sourceLocator": {
+        "pdfPage": 17,
+        "printedPage": 17,
+        "heading": "Recommendation 1.3"
+      },
+      "followUp": {
+        "targetBundleSha256": "d0d9b05fe969ceec78cb87ff1a611f1650e878dc1501ded1ecaed01685402dbe",
+        "targetRecordId": "audit-status-a173db69c280a78c2cc9fab2",
+        "sourceRange": "1.1 to 1.4",
+        "status": "reported_completed",
+        "statusAsOf": "2025-10-10",
+        "currentComplianceVerified": false,
+        "assurance": "limited assurance; see report Appendix I",
+        "institutionLabelAsReported": "Growth and Development"
+      }
+    },
+    {
+      "id": "housing-audit-2023-recommendation-1.4",
+      "sourceRecommendationId": "1.4",
+      "summary": "Documented alternative procurement and measurable pilot objectives",
+      "sourceLocator": {
+        "pdfPage": 19,
+        "printedPage": 19,
+        "heading": "Recommendation 1.4"
+      },
+      "followUp": {
+        "targetBundleSha256": "d0d9b05fe969ceec78cb87ff1a611f1650e878dc1501ded1ecaed01685402dbe",
+        "targetRecordId": "audit-status-a173db69c280a78c2cc9fab2",
+        "sourceRange": "1.1 to 1.4",
+        "status": "reported_completed",
+        "statusAsOf": "2025-10-10",
+        "currentComplianceVerified": false,
+        "assurance": "limited assurance; see report Appendix I",
+        "institutionLabelAsReported": "Growth and Development"
+      }
+    }
+  ],
+  "followUpSource": {
+    "url": "https://www.oag-ns.ca/sites/default/files/2026-03/2026%20Follow-Up%20of%202021%202022%20and%202023%20Recommendations.pdf",
+    "sha256": "27e20aa761e6bcc6115eb53954b37aa1536347569d7b3b8d07d1760c764a5026",
+    "acceptedBundleSha256": "d0d9b05fe969ceec78cb87ff1a611f1650e878dc1501ded1ecaed01685402dbe",
+    "recordId": "audit-status-a173db69c280a78c2cc9fab2",
+    "reportPublishedOn": "2026-03-31",
+    "statusAsOf": "2025-10-10",
+    "conclusionDate": "2026-03-09",
+    "reportedCompleted": 4,
+    "reportedTotal": 4,
+    "currentComplianceVerified": false,
+    "linkBasis": "Exact January 2023 audit title and recommendation identifiers 1.1\u20131.4 in original report and follow-up row. Not an inferred legal-entity or procurement-contract join."
+  },
+  "coverage": {
+    "moneyFacts": 5,
+    "timelineEvents": 6,
+    "recommendationLinks": 4,
+    "procurementContractIdLinks": 0,
+    "directPaymentRecords": 0
+  },
+  "limitations": [
+    "Suppliers remain Company A/B/C as anonymized by the auditor. No matching to vendor names or procurement rows by amounts, dates or descriptions.",
+    "Award amounts, pilot cost and an award component are different accounting concepts. The 425,000 component overlaps later awards and must not be added to them. No paid amount is established.",
+    "The auditor described approvals and tender amendments; their original identifiers/documents are not present in this projection.",
+    "The source\u2019s 1.3 million wording is rounded; it is not an exact comparator for the three supplier award values.",
+    "The 2026 follow-up reports historical recommendation completion with limited assurance, not current compliance or proof every underlying contract was appropriate.",
+    "Audit observations are source-attributed institutional findings, not this app\u2019s criminal, corruption or individual misconduct determinations.",
+    "No personal property, tenant, income-support, employee identity or contact information is projected."
+  ],
+  "nextEvidenceNeeded": [
+    "Original procurement and purchase-order identifiers through a lawful non-deanonymizing institutional record, if publicly available.",
+    "Contract amendment and verified expenditure/payment records with defined scope; do not infer these from award values.",
+    "Any later official follow-up for current institutional status."
+  ],
+  "rightsScope": "Independently reexpressed institutional numeric facts, source locators and concise audit context. No report facsimile, extended narrative, logos or personal details; no blanket source-content reproduction licence."
+}
