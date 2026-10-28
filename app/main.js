@@ -186,7 +186,7 @@ function capitalExplanation(route){
  const controller=new AbortController();tenderController=controller;
  const depth=['simple','detail','evidence'].includes(route.params.get('depth'))?route.params.get('depth'):'simple';
  const status=paragraph('Checking the reviewed explanation and its exact capital record…','results-count');status.setAttribute('role','status');const body=el('section',{class:'prose capital-explanation'});
- const tabs=el('nav',{class:'tabs','aria-label':'Capital explanation depth'},...['simple','detail','evidence'].map((d,i)=>el('a',{href:'#/capital-explanation?depth='+d,'aria-current':d===depth?'page':null},['30-second brief','The full picture','Original evidence'][i])));
+ const tabs=el('nav',{class:'tabs capital-explanation-tabs','aria-label':'Capital explanation depth'},...['simple','detail','evidence'].map((d,i)=>el('a',{href:'#/capital-explanation?depth='+d,'aria-current':d===depth?'page':null},['30-second brief','The full picture','Original evidence'][i])));
  Promise.resolve().then(async()=>{try{
   const capital=await getCapital(controller.signal);const {bundle:b,review,facts}=await getCapitalExplanation(capital.bundle,controller.signal);if(controller.signal.aborted)return;
   status.replaceChildren(badge(b.statusLabel,'neutral'),paragraph(b.statusScope,'small'));
