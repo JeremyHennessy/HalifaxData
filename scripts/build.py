@@ -17,7 +17,7 @@ from code_bundles import assemble,version_html,digest
 from review_receipts import validate_receipt
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
-FILES=['index.html','app/main.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/reporting.js','app/audits.js','app/budget-tables.js','app/transfers.js','app/governance.js','app/institution.js','app/authorizations.js','app/cash-bridge.js','app/coverage.js','data/collection-coverage.json','app/styles.css','data/foundation.json','data/publication-review.json']
+FILES=['index.html','app/main.js','app/finder.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/reporting.js','app/audits.js','app/budget-tables.js','app/transfers.js','app/governance.js','app/institution.js','app/authorizations.js','app/cash-bridge.js','app/coverage.js','data/collection-coverage.json','app/styles.css','data/foundation.json','data/publication-review.json']
 def build():
     bundle=json.loads((ROOT/'data/foundation.json').read_text())
     assert bundle['schemaVersion']=='halifaxdata-evidence-v1'
