@@ -12,3 +12,5 @@ test('missing optional Richmond receipt removes only one collection and retains 
 test('explicit hosted baseline is validated separately from page-rendered counts',()=>{assert.equal(REVIEWED_COLLECTION_BASELINE,19);assert.equal(read('data/collection-coverage.json').collections.length,19);assert.match('18 reviewed evidence collections',collectionCountPattern(1));assert.match('19 review-bound collections',collectionCountPattern(0,true));const browser=fs.readFileSync('tests/browser.mjs','utf8');assert.ok(browser.includes("innerText(),'19 reviewed evidence collections'"));});
 
 test('Richmond long evidence identifiers wrap within the mobile source body',()=>{assert.match(fs.readFileSync('app/main.js','utf8'),/body=el\('div',\{class:'richmond-register'\}\)/);assert.match(fs.readFileSync('app/styles.css','utf8'),/\.richmond-register\{min-width:0;overflow-wrap:anywhere\}/);});
+
+test('register section exposes a stable accessible name without option text',()=>{assert.ok(fs.readFileSync('app/main.js','utf8').includes("el('select',{name:'section','aria-label':'Register section'}"));});
