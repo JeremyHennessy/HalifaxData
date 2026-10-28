@@ -1,0 +1,23 @@
+{
+  "status": "accepted",
+  "bundleSha256": "90cf613e0e8054e47dab52d29b8a90bfea359745c96bfbe9cfc30e8d488cc4ca",
+  "reviewer": "independent_fresh_data_review",
+  "reviewedOn": "2026-10-28",
+  "evidenceId": "richmond-organization-register-independent-review-20261028",
+  "checks": [
+    "Visually inspected all seven original PDF pages and independently re-extracted coordinate rows for every one of the 85 included register entries.",
+    "Matched cheque number, vendor ID and source label, date, source register section, audit code and amount; confirmed included rows have no source void marker.",
+    "Reviewed all 54 exact organization-role label keys and exclusion of natural-person, source-redacted, sensitive-context and unreviewed labels.",
+    "Replayed the offline projection with identical hash, verified 85 unique section/cheque keys and the exact-decimal filtered face-amount sum of 482855.06; 17 tests passed independently.",
+    "Verified final release changes only the authorized publication metadata; source bodies and accepted evidence are unchanged."
+  ],
+  "limits": [
+    "Only the selected organization-role entries from the January 2026 County of Richmond register are admitted; not all municipal spending or all source recipients.",
+    "Issued cheque or online register entries do not establish bank clearance, accrued expense, delivery, ultimate beneficiary or a verified payment-to-decision connection.",
+    "Source dollar symbols are retained; ISO currency, tax treatment and accounting basis are not established.",
+    "Absence of a void marker does not establish an entry was never voided or adjusted.",
+    "Vendor and cheque identifiers are source-system identifiers, not verified legal-registration identities or bank account numbers.",
+    "Filtered face-amount totals are not source-wide totals, loss findings or value-for-money conclusions.",
+    "Narrow attributed organization financial facts only; no broad reproduction licence, raw PDF republication, private user metadata or personal/redacted records are admitted."
+  ]
+}

@@ -62,7 +62,7 @@ class CollectionCoverage(unittest.TestCase):
   from collection_coverage import build_collection_coverage
   before=(ROOT/'data/foundation.json').read_bytes();coverage=build_collection_coverage(ROOT)
   self.assertEqual(coverage['guideReferenceCount'],139)
-  self.assertEqual(len(coverage['collections']),18)
+  self.assertEqual(len(coverage['collections']),19)
   self.assertEqual(next(c for c in coverage['collections'] if c['id']=='tenders')['count'],33670)
   self.assertEqual((ROOT/'data/foundation.json').read_bytes(),before)
   self.assertTrue(all(not c['scheduledRefreshConfigured'] and not c['completeSourceCoverage'] for c in coverage['collections']))

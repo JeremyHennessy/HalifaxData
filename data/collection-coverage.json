@@ -6,6 +6,25 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "richmond-register",
+      "title": "County of Richmond organization register",
+      "relatedSourceIds": [],
+      "dataPath": "data/richmond-register/records.json",
+      "dataSha256": "90cf613e0e8054e47dab52d29b8a90bfea359745c96bfbe9cfc30e8d488cc4ca",
+      "reviewPath": "data/richmond-register/publication-review.json",
+      "reviewId": "richmond-organization-register-independent-review-20261028",
+      "reviewedOn": "2026-10-28",
+      "count": 85,
+      "countUnit": "organization-role cheque or online register entries",
+      "route": "#/richmond-register",
+      "scope": "85 selected organization-role entries from January 2026 in the County of Richmond, not Halifax. Not the full register, cleared payments, accrued expenses, legal-entity identities or verified contract/decision links.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://www.richmondcounty.ca/documents/municipal-documents/finance/cheques-issued/2026-cheques-issued/3761-2026-01-january-cheques-issued/file.html"
+      ]
+    },
+    {
       "id": "water-projects",
       "title": "Halifax Water: six historical project closeouts",
       "relatedSourceIds": [],
