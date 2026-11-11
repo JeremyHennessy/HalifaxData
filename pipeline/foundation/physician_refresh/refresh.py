@@ -32,10 +32,23 @@ def validate_receipt(body,receipt,url,mime):
  require(receipt.get('bodyBytes')==len(body) and receipt.get('bodySha256')==sha(body),'Body provenance mismatch')
  require(receipt.get('headers',{}).get('content-type','').split(';',1)[0].strip().lower()==mime,'Unexpected source content type')
  require(receipt.get('headers',{}).get('content-encoding','identity')=='identity','Unexpected encoding')
+ headers=receipt.get('headers',{})
+ if 'content-length' in headers:
+  length=headers['content-length']
+  require(isinstance(length,str) and re.fullmatch(r'[0-9]+',length.strip(' \t')) is not None,'Content length is malformed')
+  require((length.strip(' \t').lstrip('0') or '0')==str(len(body)),'Content length does not match retained body')
  times=[datetime.datetime.fromisoformat(receipt[k].replace('Z','+00:00')) for k in ('attemptedAt','headersReceivedAt','completedAt')]
  require(all(t.tzinfo is not None for t in times) and times[0]<=times[1]<=times[2] and (times[2]-times[0]).total_seconds()<=40,'Invalid chronology or bounded-time limit')
  require(not re.search(rb'captcha|access.denied|request rejected|challenge-platform|cf-chl',body,re.I),'Access/challenge body; hold without retry')
  return times
+
+def csv_rows(body):
+ try:
+  reader=csv.DictReader(io.StringIO(body.decode('utf-8',errors='strict'),newline=''),strict=True)
+  require(reader.fieldnames==FIELDS,'CSV columns changed')
+  yield from reader
+ except (csv.Error,UnicodeDecodeError) as error:
+  raise Hold('Malformed source CSV; separate review required') from error
 
 
 def assess(csv_body,metadata_body,csv_receipt,metadata_receipt,baseline_root=None):
@@ -52,10 +65,8 @@ def assess(csv_body,metadata_body,csv_receipt,metadata_receipt,baseline_root=Non
  require([c.get('name') for c in columns]==FIELDS and [c.get('fieldName') for c in columns]==API_FIELDS and [c.get('dataTypeName') for c in columns]==['text','text','text','number'],'Schema changed; separate review required')
  old={ (r['reportingYearLabel'],r['paymentType'],r['paymentSubcategory']):r for r in baseline['records']}
  allowed={(k[1],k[2]) for k in old}
- reader=csv.DictReader(io.StringIO(csv_body.decode('utf-8',errors='strict'),newline=''))
- require(reader.fieldnames==FIELDS,'CSV columns changed')
  new={}
- for index,row in enumerate(reader,1):
+ for index,row in enumerate(csv_rows(csv_body),1):
   require(index<=2000 and set(row)==set(FIELDS) and all(isinstance(row[k],str) for k in FIELDS),'Row cap/schema exceeded')
   key=tuple(row[k] for k in FIELDS[:3]);year=key[0];match=re.fullmatch(r'(20\d{2})-(20\d{2})',year)
   require(match is not None and int(match[2])==int(match[1])+1,'Invalid reporting year')

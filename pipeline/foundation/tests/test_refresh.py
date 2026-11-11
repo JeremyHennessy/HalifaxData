@@ -1,4 +1,4 @@
-import unittest,json,pathlib,copy,hashlib,tempfile,shutil
+import unittest,json,pathlib,copy,hashlib,tempfile,shutil,csv,io,subprocess,sys
 from physician_refresh.refresh import assess,Hold,load_baseline,ROOT,CSV_URL,META_URL
 CAP=ROOT/'test-inputs'
 class RefreshTests(unittest.TestCase):
@@ -32,6 +32,49 @@ class RefreshTests(unittest.TestCase):
  def test_bad_amount(self):
   self.set_csv(self.csv.replace(b'287075013.00',b'NaN',1))
   with self.assertRaises(Hold):self.run_case()
+ def test_unterminated_quoted_amount_held(self):
+  head,amount=self.csv.rstrip(b'\n').rsplit(b',',1)
+  self.set_csv(head+b',"'+amount)
+  with self.assertRaisesRegex(Hold,'Malformed source CSV'):self.run_case()
+ def test_malformed_quote_not_silently_repaired(self):
+  self.set_csv(self.csv.replace(b'287075013.00',b'"287075013".00',1))
+  with self.assertRaisesRegex(Hold,'Malformed source CSV'):self.run_case()
+ def test_valid_quoted_csv_and_crlf(self):
+  output=io.StringIO(newline='');writer=csv.writer(output,quoting=csv.QUOTE_ALL,lineterminator='\r\n')
+  writer.writerows(csv.reader(io.StringIO(self.csv.decode(),newline='')))
+  self.set_csv(output.getvalue().encode());result=self.run_case()
+  self.assertEqual(result['diff']['candidateRecords'],435);self.assertEqual(result['diff']['changedAmounts'],[])
+ def test_valid_csv_without_terminal_newline(self):
+  self.set_csv(self.csv.rstrip(b'\n'));result=self.run_case()
+  self.assertEqual(result['diff']['candidateRecords'],435);self.assertEqual(result['diff']['changedAmounts'],[])
+ def test_retained_content_length_matches(self):
+  for receipt,body in ((self.cr,self.csv),(self.mr,self.meta)):
+   receipt['headers']['content-length']=' \t000'+str(len(body))+'\t '
+  self.assertFalse(self.run_case()['publicationAllowed'])
+ def test_retained_content_length_mismatch_held(self):
+  for receipt,body in ((self.cr,self.csv),(self.mr,self.meta)):
+   for value in (len(body)-1,len(body)+1,0):
+    with self.subTest(url=receipt['url'],value=value):
+     receipt['headers']['content-length']=str(value)
+     with self.assertRaisesRegex(Hold,'Content length'):self.run_case()
+   del receipt['headers']['content-length']
+ def test_retained_content_length_malformed_held(self):
+  for receipt in (self.cr,self.mr):
+   for value in ('',' ','+1','-1','1.0','1, 1','unknown','\u0661','1\n',None,True,1,['1'],'9'*5000):
+    with self.subTest(url=receipt['url'],value=str(value)[:30]):
+     receipt['headers']['content-length']=value
+     with self.assertRaisesRegex(Hold,'Content length'):self.run_case()
+   del receipt['headers']['content-length']
+ def test_candidate_cli_withholds_invalid_body_evidence(self):
+  head,amount=self.csv.rstrip(b'\n').rsplit(b',',1)
+  for body,length in ((head+b',"'+amount,None),(self.csv.replace(b'287075013.00',b'"287075013".00',1),None),(self.csv,str(len(self.csv)+1))):
+   with self.subTest(length=length),tempfile.TemporaryDirectory() as directory:
+    capture=pathlib.Path(directory)/'capture';shutil.copytree(CAP,capture);output=pathlib.Path(directory)/'candidate.json';receipt=copy.deepcopy(self.cr)
+    receipt.update(bodyBytes=len(body),bodySha256=hashlib.sha256(body).hexdigest())
+    if length is not None:receipt['headers']['content-length']=length
+    (capture/'payments.body').write_bytes(body);(capture/'payments.receipt.json').write_text(json.dumps(receipt))
+    result=subprocess.run([sys.executable,'-m','physician_refresh.prepare_candidate','--capture',str(capture),'--output',str(output)],cwd=ROOT.parent,capture_output=True,text=True)
+    self.assertEqual(result.returncode,2,result.stderr);self.assertIn('Candidate withheld:',result.stderr);self.assertNotIn('Traceback',result.stderr);self.assertFalse(output.exists())
  def test_null_not_zero(self):
   self.set_csv(self.csv.replace(b'287075013.00',b'',1))
   with self.assertRaises(Hold):self.run_case()
