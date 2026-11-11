@@ -1,12 +1,12 @@
 {
   "schemaVersion": "pipeline-foundation-package-v1",
   "status": "pending_independent_integration_review",
-  "tests": 149,
+  "tests": 157,
   "networkInvoked": false,
   "transportEnabled": false,
   "publicBuildFilesAdded": 0,
   "files": {
-    "README.md": "c234da3f7aafacdf21523885bb5a672f5b315fa131aab375a4734258135815e1",
+    "README.md": "a6134aa8c1fd7681a7d5d614e864c243a2bfb24675939adf007fd4b6ce8e5874",
     "fixtures/capital-explanation/annotation.json": "6e723fc4cef52be5d24c3245bf3cf58aaf2819cfc69237daae469d4c8738777c",
     "fixtures/capital-explanation/publication-review.json": "934ff3a57d42ccf83c02232c599e4561feaf60246762501de7321ad02a3c74b5",
     "fixtures/reporting-question/case.json": "65a96a5960ea14b439d41823f55a317c181398664233551514b00ad1374bde82",
@@ -20,7 +20,7 @@
     "physician_refresh/baseline/records.json": "637075be4bdcfa7d12171898382db0d58b8f9f28e7f8b3833f146df239347768",
     "physician_refresh/collector.py": "2e64ad061a6e0ce2b270fdb8e219ac43e5fc1cce6773da3e22af1dc2550c85be",
     "physician_refresh/prepare_candidate.py": "696088b2b5f6f38c8be473caaba8e5ee5403a3ed455e22c39b2513d9ccfce23f",
-    "physician_refresh/refresh.py": "b7c93c7c7612fe0f4d5f0c8a79f558f40750b9084b482ed31e079c33a630b238",
+    "physician_refresh/refresh.py": "eedb1225c74b6ac0592c57a0e8100a80b3262e2145b4a895069aa7e3fe203056",
     "physician_refresh/test-inputs/README.md": "ae2d0fc92aad77fc24f6e5209d600e20fb0e0a0ca7ffdadd90bdf6521f3e929a",
     "physician_refresh/test-inputs/metadata.body": "fb62512b7c5ab5f82c6feb6612940deed4a97ff927efe658f7814d7a43ad9fac",
     "physician_refresh/test-inputs/metadata.receipt.json": "1e71dbe090164078bcac34077a5cab5bc10a2614a2c7fb9c795b5584f804383d",
@@ -35,13 +35,13 @@
     "tests/test_collector.py": "ba35d750791b73e80917091fe31b336f205fb7edf21d9e1ecaa4ea07aabd1329",
     "tests/test_engine.py": "a41282625b9283a7bb044c4295186391696a95e00d114d6337d3d8be1f9e6abf",
     "tests/test_package_boundary.py": "858b83dc0acc5d137f8d9cba5960599c68ea5f88aec735608a5122c3e716f2e7",
-    "tests/test_refresh.py": "efb618659d001f16a2bc3ec8dcf0316fb9c4809796f06e992cca1ee1b78f58c4",
+    "tests/test_refresh.py": "ac7cb0215d4846959b6efa0b288ec67bde11409c9aa98058f0b53bcae3e727db",
     "tests/test_robots.py": "0d12d711faeb3701aba98579cb0d0d0f91cb5578c0c4abffd3e609027f3196fb",
     "watchdog_checks/__init__.py": "c51981cee8c4cda2f9ad23ac18a8f70845198292ddf50b5d3e3ee4da85bf7384",
     "watchdog_checks/__main__.py": "8678489a549949bbc256b61474b38381c2a070743743553e083f5d5ebb88ca0a",
     "watchdog_checks/adapters.py": "ab96c111a15a0288b447c71fac39852f05758f2f80f3ada651726474e752e28e",
     "watchdog_checks/contracts.py": "e858b582cb2b2bf7b2bb27e736746e16f365d97b018499ef5220d25261923954",
     "watchdog_checks/engine.py": "518a4e888a6598c1c3c9137c19828b95959226a252cbf036126d3deaad8f6308",
-    "physician_refresh/REFRESH-COMPARISON.md": "487966cdc8b1ee4ebb858c989cdda1ba887a57a0fb3b40ef673b821a6f8c1c84"
+    "physician_refresh/REFRESH-COMPARISON.md": "465480bd74dd3ed80359f2c1685bef2cbc7d001f6fcf9b80ff5cde3a18b4b199"
   }
 }

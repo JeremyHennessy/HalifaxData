@@ -14,7 +14,7 @@ Python3.11+ standard library, no AI calls, dependencies or installed schedules. 
 python3 pipeline/foundation/run_tests.py
 ```
 
-Copy this package into `pipeline/foundation` and append the command above to the existing `npm test` script. Do not replace existing app tests. The complete package currently has149offline tests; actual app-plus-package counts must be verified after integration.
+Copy this package into `pipeline/foundation` and append the command above to the existing `npm test` script. Do not replace existing app tests. The complete package currently has 157 offline tests; actual app-plus-package counts must be verified after integration.
 
 The build must retain its explicit public allowlist. Do not add this directory, test inputs, baseline copies, generated reports or runtime state to public assets, collection counts or CI uploads. No existing public evidence bytes need change for this code-only integration.
 

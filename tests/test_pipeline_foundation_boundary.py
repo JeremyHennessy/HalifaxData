@@ -2,7 +2,7 @@
 import hashlib,json,pathlib,subprocess,sys,unittest
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 PACKAGE=ROOT/'pipeline/foundation'
-MANIFEST_SHA='f80bd78fc31d21b7010c25619398d2608adb5c9e6aec04d2a9742effe043de9b'
+MANIFEST_SHA='f1bb4a5ed874b484fd29b626d33cca23df15336120b8f62f4573eb26f48b238d'
 class PipelineFoundationBoundary(unittest.TestCase):
  def test_exact_reviewed_package(self):
   body=(PACKAGE/'PACKAGE-MANIFEST.json').read_bytes();self.assertEqual(hashlib.sha256(body).hexdigest(),MANIFEST_SHA)
