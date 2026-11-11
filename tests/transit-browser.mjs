@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';import assert from 'node:assert/strict';import {collectionCountPattern} from './reviewed-count.mjs';
-const ready=(p,n=17)=>p.waitForFunction(n=>document.querySelector('main')?.dataset.route===location.hash&&document.querySelector('.results-count')?.textContent.startsWith(n+' matching evidence rows'),n);
+const ready=(p,n=17)=>p.waitForFunction(n=>document.querySelector('main')?.dataset.route===location.hash&&document.querySelector('.results-count')?.textContent.startsWith(n+' matching evidence '+(n===1?'row':'rows')),n);
 const fits=async p=>assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 export async function transitJourneys(page,width,root,out,report){
  await page.goto(root+'/#/transit');await ready(page);assert.equal(await page.locator('.transit-reliability').count(),7);assert.equal(await page.locator('.transit-access').count(),10);assert.match(await page.locator('main').innerText(),/71%.*85%.*14 percentage points/);await fits(page);await page.screenshot({path:`${out}/${width}-transit-annual.png`,fullPage:true});

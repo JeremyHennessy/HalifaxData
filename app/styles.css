@@ -64,3 +64,15 @@
 .transit .field { flex-basis: 180px; }
 .transit .metric { font-size: 32px; line-height: 1.2; color: var(--ink); }
 .transit .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+
+/* Sharing is local to the applied view: no dialog, navigation or external widget. */
+.view-sharing{margin:0 0 24px;max-width:760px;min-width:0}
+.view-sharing-panel{margin-top:12px;padding:18px;border:1px solid var(--line);border-radius:8px;background:var(--white);min-width:0}
+.view-sharing-panel p{font-size:13px;line-height:1.6;margin:0 0 12px}
+.view-sharing-panel label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+.view-sharing-panel input{min-width:0;max-width:100%;font-size:13px}
+.view-sharing-panel #view-sharing-limits{font-size:12px;color:var(--muted);margin:10px 0 16px}
+.view-sharing-actions{display:flex;gap:10px;flex-wrap:wrap}
+.view-sharing-panel .view-sharing-status{margin:12px 0 0}
+.view-sharing-panel .view-sharing-status:empty{margin:0}
+@media print{.view-sharing{display:none!important}}
