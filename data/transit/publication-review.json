@@ -1,0 +1,28 @@
+{
+  "status": "accepted",
+  "reviewer": "independent_source_data_review",
+  "reviewedOn": "2026-11-11",
+  "evidenceId": "halifax-transit-annual-independent-review-20261111",
+  "bundleSha256": "bf72517583e3f9bec89fe5a776046df268b877d35a0bae6791f0bc0fcad72fb9",
+  "sourceSha256": "2f6df924c46bef304aabe14842ac0ae21f0552f556943ea24b029b7bb8d24542",
+  "scope": "Exact records.json bytes only: seven annual conventional-bus on-time percentages and ten Access-A-Bus category/year counts, with source metadata and bounded interpretation. UI, integration and deployment are separate.",
+  "checks": [
+    "Read complete candidate and compared all 17 values and year/category labels against the retained official PDF. Independently inspected rendered pixels of physical PDF pages 41 and 49.",
+    "Physical page 41 is Attachment B printed page 8. Access-A-Bus chart legend and stacked colors match: blue Actual Trips Operated; red Not Provided; green Cancelled; purple No Shows; cyan User Trip Refusals. Both fiscal years and all ten values agree.",
+    "Physical page 49 is Attachment B printed page 16. All seven Annual Overall On Time Performance bars agree. The 2024/25 target is 85%, actual is 71%, and source-rounded arithmetic gives a 14 percentage-point gap.",
+    "Observed-timepoint-arrival definition, three-minute-late boundary, unestablished early-arrival boundary, absent observation counts and historical comparability caveats are accurately bounded.",
+    "Inspected rendered physical pages 1, 2 and 32: cover report dated July 8, 2025; Transportation Standing Committee dated August 21, 2025; parent title Halifax Transit 2024/25 Q4 KPI Report; Attachment B annual-report identity; annual 71% identified as conventional-bus performance.",
+    "Searched the complete retained PDF text for Not Provided, Cancelled and User Trip Refusals. Occurrences are the quarterly and annual category charts, without detailed definitions; no combined-demand or cancellation-rate interpretation is supported or included.",
+    "Recomputed retained PDF SHA-256 and byte count and matched candidate metadata. Candidate sourceURL matches the supplied requested official URL.",
+    "Fiscal-year labels are preserved without inferred exact period endpoints. Report, committee, retrieval and review dates are separate. No contact details, signatures, chart images, broad source text or consequential allegations are projected."
+  ],
+  "limitations": [
+    "Online source URL and redirects were not independently re-tested. No new source requests were made. Review establishes correspondence to retained source bytes, not current online availability.",
+    "RetrievedOn 2026-11-11 is supplied capture metadata consistent with this task; no independent network retrieval or capture timestamp attestation was performed.",
+    "Target is accepted for 2024/25 only; historical year-specific target policy and method comparability are not verified.",
+    "Access-A-Bus categories do not establish causes, responsibility, unique riders, total demand or unmet demand. Cancelled is not a conventional-service cancellation measure.",
+    "No current-service claim, independent audit, causation or passenger-delay inference is approved. Q4 observations and other report metrics are outside this collection.",
+    "Only numerical facts, short labels and original attributed context are approved; broad reuse rights for the source document are not established.",
+    "Approval applies only to the exact bundle hash above. Any data change requires fresh review. UI, tests, deployment, refresh schedules, collectors and source holds are outside this receipt."
+  ]
+}
