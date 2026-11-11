@@ -11,3 +11,6 @@ retained-code/
 pipeline/foundation/physician_refresh/refresh-state.private/
 *.candidate.private.json
 *.run.private.json
+
+# Private migration review manifests are not public evidence.
+*.migration.private.json

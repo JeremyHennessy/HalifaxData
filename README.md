@@ -92,3 +92,7 @@ The independently reviewed [winter-operations explorer](docs/HRM-WINTER-OPERATIO
 ### Check collection readiness without fetching
 
 `npm run collection:readiness` explains why ingestion remains inactive, verifies the checked repository boundaries and baseline provenance, and surfaces retained access-hold statements. Missing private state is never treated as clearance. A successful diagnostic does not authorize collection or publication. See [collection readiness](docs/COLLECTION-READINESS.md) for the separate operational requirements.
+
+### Rehearse private state inventories
+
+`npm run collection:migration-plan` prepares a non-authorizing offline review plan. Explicit frozen private snapshots can be inventoried without writing state; conflicting versions, retained holds and incomplete histories remain unresolved. No history, durable destination or collector is created. See [private-state migration preparation](docs/COLLECTION-STATE-MIGRATION.md).
