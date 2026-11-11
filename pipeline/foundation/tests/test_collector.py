@@ -10,7 +10,7 @@ class FakeTransport:
  def __init__(self,clock):self.clock=clock;self.calls=[];self.override={}
  def request(self,url,cap,timeout):
   self.calls.append(url);self.clock.t+=1;name=next(n for n,u,c in ENDPOINTS if u==url)
-  r={'headersReceivedAt':utc(self.clock.wall()),'headersComplete':True,'status':200,'responseURL':url,'complete':True,'error':None,'headers':{'content-type':'text/plain' if name=='robots' else 'application/json' if name=='metadata' else 'text/csv'},'body':(CAP/(name+'.body')).read_bytes()}
+  r={'workerTermination':'confirmed','headersReceivedAt':utc(self.clock.wall()),'headersComplete':True,'status':200,'responseURL':url,'complete':True,'error':None,'headers':{'content-type':'text/plain' if name=='robots' else 'application/json' if name=='metadata' else 'text/csv'},'body':(CAP/(name+'.body')).read_bytes()}
   r.update(self.override.get(name,{}));return r
 class CollectorTests(unittest.TestCase):
  def setUp(self):self.tmp=tempfile.TemporaryDirectory();self.state=pathlib.Path(self.tmp.name)/'state';self.clock=FakeClock();self.t=FakeTransport(self.clock)

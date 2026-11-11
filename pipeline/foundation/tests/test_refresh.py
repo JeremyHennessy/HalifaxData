@@ -64,7 +64,7 @@ class RefreshTests(unittest.TestCase):
   m=json.loads(self.meta);m['owner']['displayName']='different';self.set_meta(m)
   with self.assertRaises(Hold):self.run_case()
  def test_over_forty_seconds_held(self):
-  self.cr['completedAt']='2026-10-28T12:00:41+00:00'
+  self.cr['completedAt']='2026-10-28T12:00:43.000001+00:00'
   with self.assertRaises(Hold):self.run_case()
  def test_metadata_columns_changed(self):
   m=json.loads(self.meta);m['columns'][0]['name']='Person';self.set_meta(m)
@@ -79,4 +79,70 @@ class RefreshTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    shutil.copytree(ROOT/'baseline',pathlib.Path(d)/'base');(pathlib.Path(d)/'base/records.json').write_text('{}')
    with self.assertRaises(Hold):load_baseline(pathlib.Path(d)/'base')
+ def set_times(self,receipt,start,headers,end):
+  import datetime
+  origin=datetime.datetime(2026,10,28,12,tzinfo=datetime.timezone.utc)
+  for key,seconds in zip(('attemptedAt','headersReceivedAt','completedAt'),(start,headers,end)):
+   receipt[key]=(origin+datetime.timedelta(seconds=seconds)).isoformat()
+ def test_pair_boundary_and_overlap(self):
+  self.set_times(self.cr,2,3,4);self.assertFalse(self.run_case()['publicationAllowed'])
+  self.set_times(self.cr,1.999999,3,4)
+  with self.assertRaises(Hold):self.run_case()
+ def test_reversed_and_distant_pairs(self):
+  for start in (-10,86400):
+   with self.subTest(start=start):
+    self.set_times(self.cr,start,start+1,start+2)
+    with self.assertRaises(Hold):self.run_case()
+ def test_pair_150_second_boundary(self):
+  self.set_times(self.cr,148,149,150);self.assertEqual(self.run_case()['captureComparison']['elapsedSeconds'],150)
+  self.set_times(self.cr,148,149,150.000001)
+  with self.assertRaises(Hold):self.run_case()
+ def test_individual_40_second_boundary(self):
+  for receipt in (self.mr,self.cr):
+   with self.subTest(url=receipt['url']):
+    self.set_times(self.mr,0,1,40);self.set_times(self.cr,40,41,80)
+    self.assertFalse(self.run_case()['publicationAllowed'])
+    receipt['completedAt']=receipt['completedAt'].replace('+00:00','.000001+00:00')
+    with self.assertRaises(Hold):self.run_case()
+ def test_timezone_equivalence_and_missing_timezone(self):
+  self.cr.update(attemptedAt='2026-10-28T08:00:02-04:00',headersReceivedAt='2026-10-28T13:00:03+01:00',completedAt='2026-10-28T12:00:04Z')
+  self.assertEqual(self.run_case()['captureComparison']['elapsedSeconds'],4)
+  self.cr['attemptedAt']='2026-10-28T12:00:02'
+  with self.assertRaises(Hold):self.run_case()
+ def test_adverse_optional_transport_fields(self):
+  for receipt in (self.mr,self.cr):
+   for field,value in [('responseURL','https://example.invalid'),('responseURL',None),('headersComplete',False),('transportError','failure'),('transportError',''),('workerTermination','unknown'),('workerTermination',None)]:
+    with self.subTest(url=receipt['url'],field=field,value=value):
+     receipt[field]=value
+     with self.assertRaises(Hold):self.run_case()
+     del receipt[field]
+ def test_missing_and_positive_transport_fields(self):
+  result=self.run_case();self.assertIn('unknown',result['captureComparison']['optionalTransportEvidence'])
+  for receipt in (self.mr,self.cr):receipt.update(responseURL=receipt['url'],headersComplete=True,transportError=None,workerTermination='confirmed')
+  self.assertFalse(self.run_case()['publicationAllowed'])
+ def coverage(self):return self.run_case()['coverageComparison']
+ def test_year_union_removed_new_unchanged(self):
+  rows=self.csv.splitlines();year=rows[1].split(b',')[0];replacement=b'2025-2026'
+  self.set_csv(b'\n'.join([rows[0]]+[r.replace(year,replacement,1) if r.startswith(year+b',') else r for r in rows[1:]])+b'\n')
+  r=self.run_case();years=r['coverageComparison']['years'];by_year={x['reportingYearLabel']:x for x in years}
+  self.assertEqual(list(by_year),sorted(by_year));old=by_year[year.decode()];new=by_year[replacement.decode()]
+  self.assertEqual(old['candidateRecords'],0);self.assertEqual(len(old['removedKeys']),old['baselineRecords']);self.assertEqual(new['baselineRecords'],0);self.assertEqual(len(new['addedKeys']),new['candidateRecords'])
+  for y in years:
+   if y not in (old,new):self.assertEqual(y['addedKeys']+y['removedKeys']+y['changedKeys'],[])
+  self.assertEqual(sum(y['baselineRecords'] for y in years),r['diff']['baselineRecords']);self.assertEqual(sum(y['candidateRecords'] for y in years),r['diff']['candidateRecords'])
+  for local,glob in [('addedKeys','addedKeys'),('removedKeys','removedKeys')]:self.assertEqual([k for y in years for k in y[local]],r['diff'][glob])
+  self.assertFalse(r['coverageComparison']['sourceCompletenessEstablished']);self.assertFalse(r['coverageComparison']['financialSumComputed']);self.assertFalse(r['captureComparison']['atomicSnapshotEstablished']);self.assertFalse(r['captureComparison']['wholeAttemptBudgetVerified']);self.assertFalse(r['captureComparison']['robotsAdmissionVerified']);self.assertFalse(r['publicationAllowed'])
+ def test_year_changed_amount_and_reordered_rows(self):
+  self.set_csv(self.csv.replace(b'287075013.00',b'287075014.00',1));r=self.run_case();coverage=r['coverageComparison']
+  self.assertEqual([k for y in coverage['years'] for k in y['changedKeys']],[x['key'] for x in r['diff']['changedAmounts']])
+  self.assertEqual(sum(len(y['changedKeys']) for y in coverage['years']),1)
+  lines=self.csv.splitlines();self.set_csv(b'\n'.join(lines[:1]+list(reversed(lines[1:])))+b'\n');self.assertEqual(self.coverage(),coverage)
+ def test_equal_year_count_key_replacement(self):
+  import unittest.mock
+  baseline=copy.deepcopy(load_baseline());record=baseline['records'][0];year=record['reportingYearLabel'];original=record['paymentSubcategory'];record['paymentSubcategory']='Baseline-only reviewed subcategory'
+  # This synthetic baseline models a historical key replaced by another already-known key.
+  with unittest.mock.patch('physician_refresh.refresh.load_baseline',return_value=baseline):
+   result=self.run_case();y=next(x for x in result['coverageComparison']['years'] if x['reportingYearLabel']==year)
+   self.assertEqual(y['baselineRecords'],y['candidateRecords']);self.assertEqual(len(y['addedKeys']),1);self.assertEqual(len(y['removedKeys']),1);self.assertEqual(y['changedKeys'],[])
+
 if __name__=='__main__':unittest.main()

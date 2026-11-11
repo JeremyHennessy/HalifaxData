@@ -14,7 +14,7 @@ Python3.11+ standard library, no AI calls, dependencies or installed schedules. 
 python3 pipeline/foundation/run_tests.py
 ```
 
-Copy this package into `pipeline/foundation` and append the command above to the existing `npm test` script. Do not replace existing app tests. The complete package currently has139offline tests; actual app-plus-package counts must be verified after integration.
+Copy this package into `pipeline/foundation` and append the command above to the existing `npm test` script. Do not replace existing app tests. The complete package currently has149offline tests; actual app-plus-package counts must be verified after integration.
 
 The build must retain its explicit public allowlist. Do not add this directory, test inputs, baseline copies, generated reports or runtime state to public assets, collection counts or CI uploads. No existing public evidence bytes need change for this code-only integration.
 
@@ -37,3 +37,7 @@ Generated detector reports and refreshed candidates always remain unreviewed and
 ## Separate operational review needed
 
 This package does not authorize a new source call. Before enabling any manual transport, establish a durable hosted canonical state, migrate the original source/hold history without resetting cadence, verify the complete app test/build boundary and review the activation change. No credentials, spending, automatic publication, alerts or cron activation are part of this package.
+
+## Paired capture and year-coverage review
+
+Offline candidate preparation now rejects reversed or separated metadata/CSV captures and explicit adverse transport observations. A deterministic year-by-year comparison exposes added, removed and amount-changed keys, including entirely new or missing reporting years. It does not claim source completeness or compute financial totals. See `physician_refresh/REFRESH-COMPARISON.md`. The transport remains disabled; source/hold history still requires separate operational review.
