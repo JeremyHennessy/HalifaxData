@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "halifax-transit-financial-context-v1",
+  "title": "Halifax Transit: revenue plans and cost measures",
+  "parentArtifact": "data/transit/records.json",
+  "parentSha256": "bf72517583e3f9bec89fe5a776046df268b877d35a0bae6791f0bc0fcad72fb9",
+  "sourceTitle": "Halifax Transit 2024/25 Year End Performance Measures Report",
+  "sourceAttachment": "Attachment B to Halifax Transit 2024/25 Q4 KPI Report",
+  "publisher": "Halifax Regional Municipality / Halifax Transit",
+  "sourceURL": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250821tsc1312.pdf",
+  "sourceSha256": "2f6df924c46bef304aabe14842ac0ae21f0552f556943ea24b029b7bb8d24542",
+  "sourceBytes": 1400965,
+  "coverReportDate": "2025-07-08",
+  "committeeMeetingDate": "2025-08-21",
+  "reportingYearAsReported": "2024/25",
+  "retrievedOn": "2026-11-11",
+  "currentStatusVerified": false,
+  "scope": "Optional financial context from the same historical staff report as the service evidence. Four revenue comparisons and five cost/recovery measures are distinct, overlapping observations, not additional collections, ledger transactions or payments.",
+  "units": {
+    "money": "source dollars as displayed with $",
+    "currencyCode": null,
+    "currencyExplicitlyEstablished": false,
+    "amountScale": 1,
+    "ratioInputsRounded": true
+  },
+  "revenueContext": {
+    "description": "The annual report compares actual revenue with planned budget revenue for each service and for Halifax Transit overall. The source labels the measure revenue; these figures are not treated as all funding, net operating results, audited receipts or cash collected.",
+    "actualBasis": "staff_reported_actual_revenue",
+    "planBasis": "staff_reported_planned_budget_revenue",
+    "accountingBasis": null,
+    "specificCouncilApprovalVerified": false,
+    "annualExpensesEstablished": false,
+    "includesAllFundingEstablished": false,
+    "sourceReportedOverallAbovePlanPercent": "1.5",
+    "sourcePrintedPage": 4,
+    "sourcePdfPage": 37
+  },
+  "revenueRecords": [
+    {
+      "id": "transit-revenue-conventional-2024-25",
+      "serviceAsReported": "Conventional",
+      "yearAsReported": "2024/25",
+      "actual": 33751558,
+      "planned": 33400400,
+      "actualMinusPlanned": 351158,
+      "isOverall": false,
+      "printedPage": 4,
+      "pdfPage": 37
+    },
+    {
+      "id": "transit-revenue-ferry-2024-25",
+      "serviceAsReported": "Ferry",
+      "yearAsReported": "2024/25",
+      "actual": 2803087,
+      "planned": 2602400,
+      "actualMinusPlanned": 200687,
+      "isOverall": false,
+      "printedPage": 4,
+      "pdfPage": 37
+    },
+    {
+      "id": "transit-revenue-access-2024-25",
+      "serviceAsReported": "Access-A-Bus",
+      "yearAsReported": "2024/25",
+      "actual": 260349,
+      "planned": 258000,
+      "actualMinusPlanned": 2349,
+      "isOverall": false,
+      "printedPage": 4,
+      "pdfPage": 37
+    },
+    {
+      "id": "transit-revenue-overall-2024-25",
+      "serviceAsReported": "Halifax Transit overall",
+      "yearAsReported": "2024/25",
+      "actual": 36814993,
+      "planned": 36260800,
+      "actualMinusPlanned": 554193,
+      "isOverall": true,
+      "printedPage": 5,
+      "pdfPage": 38
+    }
+  ],
+  "costContext": {
+    "description": "The annual KPI table reports rounded expense per passenger, revenue per passenger and cost recovery. Bus & Ferry excludes Access-A-Bus. All and Bus & Ferry recovery figures overlap and must not be added. The report does not establish the underlying annual expense, passenger or recovery calculations here.",
+    "passengerDenominatorEstablished": false,
+    "costRecoveryDefinitionEstablished": false,
+    "unroundedInputsAvailable": false,
+    "cashBasisEstablished": false,
+    "causeOfChangesEstablished": false,
+    "printedPage": 1,
+    "pdfPage": 34
+  },
+  "costRecords": [
+    {
+      "id": "transit-expense-per-passenger",
+      "measureAsReported": "Operating Expense per Passenger",
+      "divisionAsReported": "Bus & Ferry",
+      "priorYearAsReported": "23/24",
+      "priorRaw": "6.23",
+      "currentYearAsReported": "24/25",
+      "currentRaw": "6.72",
+      "sourceReportedChangePercent": "+7.8",
+      "unit": "source dollars per passenger",
+      "printedPage": 1,
+      "pdfPage": 34
+    },
+    {
+      "id": "transit-revenue-per-passenger",
+      "measureAsReported": "Passenger Revenue per Passenger",
+      "divisionAsReported": "Bus & Ferry",
+      "priorYearAsReported": "23/24",
+      "priorRaw": "1.82",
+      "currentYearAsReported": "24/25",
+      "currentRaw": "1.81",
+      "sourceReportedChangePercent": "-0.2",
+      "unit": "source dollars per passenger",
+      "printedPage": 1,
+      "pdfPage": 34
+    },
+    {
+      "id": "transit-recovery-bus-ferry",
+      "measureAsReported": "Cost Recovery",
+      "divisionAsReported": "Bus & Ferry",
+      "priorYearAsReported": "23/24",
+      "priorRaw": "29",
+      "currentYearAsReported": "24/25",
+      "currentRaw": "27",
+      "sourceReportedChangePercent": "-7.4",
+      "unit": "percent",
+      "printedPage": 1,
+      "pdfPage": 34
+    },
+    {
+      "id": "transit-recovery-all",
+      "measureAsReported": "Cost Recovery",
+      "divisionAsReported": "All",
+      "priorYearAsReported": "23/24",
+      "priorRaw": "27",
+      "currentYearAsReported": "24/25",
+      "currentRaw": "25",
+      "sourceReportedChangePercent": "-7.6",
+      "unit": "percent",
+      "printedPage": 1,
+      "pdfPage": 34
+    }
+  ],
+  "maintenance": {
+    "id": "transit-annual-maintenance-cost-2024-25",
+    "measureAsReported": "Bus Maintenance Cost per Kilometre",
+    "scope": "Conventional and paratransit vehicles, as identified by the covering report. This is a maintenance rate, not total transit operating cost.",
+    "yearAsReported": "2024/25",
+    "actualRaw": "1.28",
+    "budgetRaw": "1.33",
+    "unit": "source dollars per kilometre",
+    "sourceReportedBelowBudgetPercent": "3",
+    "printedPage": 7,
+    "pdfPage": 40,
+    "scopePdfPage": 2,
+    "interpretation": "The report states 3% below budget. The displayed rates are rounded: that source percentage is retained, not recalculated from the rounded pair. No kilometres, annual maintenance total, cash savings or causal link to reliability is inferred."
+  },
+  "reconciliation": {
+    "id": "transit-revenue-display-reconciliation-2024-25",
+    "componentIds": [
+      "transit-revenue-conventional-2024-25",
+      "transit-revenue-ferry-2024-25",
+      "transit-revenue-access-2024-25"
+    ],
+    "totalId": "transit-revenue-overall-2024-25",
+    "actualComponentSum": 36814994,
+    "actualReportedTotal": 36814993,
+    "componentSumMinusReportedTotal": 1,
+    "plannedComponentSum": 36260800,
+    "plannedReportedTotal": 36260800,
+    "basis": "Exact arithmetic on the displayed whole-dollar figures. The component actuals sum to one source dollar more than the reported overall actual. Both are retained unchanged. The report does not explain this display difference; no correction, missing-money claim or material financial finding is inferred."
+  },
+  "limits": [
+    "Historical 2024/25 staff reporting, not independently audited financial results, a current budget or current service performance. Report, committee, retrieval and review dates remain distinct.",
+    "Revenue is not all operating funding, surplus or money available to spend. No annual expenses, payment ledger, vendor identity, legal expenditure authority or cash-basis reconciliation is established.",
+    "Actual-minus-planned revenue is a descriptive difference within the same report, not profit, savings, an unauthorized amount or a service-quality finding.",
+    "Service-specific revenue and the overall revenue overlap. Read either the service breakdown or the reported overall total; never add them together. Preserve the one-dollar displayed-total difference.",
+    "Expense and revenue per passenger, cost recovery and maintenance cost per kilometre have different scopes and denominators. Do not multiply or divide these rounded indicators to invent annual spending, ridership, subsidy or missing funding.",
+    "Source-reported percentage changes and maintenance comparison are retained because underlying unrounded inputs are unavailable. They may not reproduce exactly from the displayed rounded values. A percentage-point change is different from a relative percent change.",
+    "These financial measures do not explain the cause of service reliability or Access-A-Bus booking outcomes. No financial record is joined to individual trips, contracts or audit recommendations.",
+    "No new source request, collection refresh, source-hold clearance or scheduler activation is implied. Original service evidence remains independently reviewed and unchanged."
+  ],
+  "sourceRights": {
+    "broadReuseLicenceEstablished": false,
+    "projection": "Only numerical facts, short identifiers and original attributed explanation are published. Source pages, charts, graphics, signatures and contact details are not republished."
+  },
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "consequentialAllegation": false,
+    "reviewId": "halifax-transit-finance-independent-review-20261111",
+    "reviewedOn": "2026-11-11"
+  }
+}

@@ -108,3 +108,7 @@ The independently reviewed [Transit service explorer](docs/TRANSIT-SERVICE.md) a
 ### Share an applied evidence view
 
 “Share this view” copies the current route, applied filters and reading depth, with a selectable address when automatic clipboard access is unavailable. Closing it preserves the view and history. The panel distinguishes a view link from a frozen evidence snapshot and points to reviewed downloads/receipts where provided. No third-party share service or source collection is activated. See [view sharing](docs/SHARE-VIEWS.md).
+
+### Trace Transit revenue plans and reported results
+
+The optional [Transit financial context](docs/TRANSIT-FINANCE.md) compares four 2024/25 actual/planned revenue pairs and preserves five separate cost/recovery measures from the already retained annual report. The reported overall revenue is 554,193 source dollars above plan, not profit or available cash. A one-dollar component-total difference is disclosed without correction or allegation. Original relative changes, rounded inputs, overlapping scopes and unknown expense/denominator/accounting bases remain explicit. Exact independent context/receipt and parent gates, filtered export and isolated-failure checks preserve the 26 collections and inactive collector.

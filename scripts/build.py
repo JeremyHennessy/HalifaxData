@@ -11,6 +11,7 @@ from hrm_audit_context_publication import hrm_audit_context_files
 from hrm_capital_publication import hrm_capital_files
 from hrm_winter_publication import hrm_winter_files
 from transit_publication import transit_files
+from transit_finance_publication import transit_finance_files
 from hrm_facilities_publication import hrm_facilities_files
 from housing_publication import housing_files
 from ambulance_publication import ambulance_files
@@ -34,7 +35,7 @@ from code_bundles import assemble,version_html,digest
 from review_receipts import validate_receipt
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
-FILES=['app/transit.js','index.html','app/main.js','app/navigation.js','app/view-sharing.js','app/finder.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/municipal-capital.js','app/capital-explanation.js','app/reporting.js','app/audits.js','app/hrm-audits.js','app/hrm-audit-context.js','app/hrm-capital.js','app/hrm-facilities.js','app/hrm-winter.js','app/housing-audit.js','app/ambulance.js','app/shelburne.js','app/budget-tables.js','app/transfers.js','app/governance.js','app/institution.js','app/authorizations.js','app/authorization-trace.js','app/authorization-purpose.js','app/cash-bridge.js','app/coverage.js','app/source-references.js','app/physician-categories.js','app/nshealth.js','app/richmond-register.js','app/water-projects.js','app/water-approvals.js','data/collection-coverage.json','app/styles.css','data/foundation.json','data/publication-review.json']
+FILES=['app/transit-finance.js','app/transit.js','index.html','app/main.js','app/navigation.js','app/view-sharing.js','app/finder.js','app/model.js','app/tenders.js','app/suppliers.js','app/municipal.js','app/municipal-capital.js','app/capital-explanation.js','app/reporting.js','app/audits.js','app/hrm-audits.js','app/hrm-audit-context.js','app/hrm-capital.js','app/hrm-facilities.js','app/hrm-winter.js','app/housing-audit.js','app/ambulance.js','app/shelburne.js','app/budget-tables.js','app/transfers.js','app/governance.js','app/institution.js','app/authorizations.js','app/authorization-trace.js','app/authorization-purpose.js','app/cash-bridge.js','app/coverage.js','app/source-references.js','app/physician-categories.js','app/nshealth.js','app/richmond-register.js','app/water-projects.js','app/water-approvals.js','data/collection-coverage.json','app/styles.css','data/foundation.json','data/publication-review.json']
 def build():
     bundle=json.loads((ROOT/'data/foundation.json').read_text())
     assert bundle['schemaVersion']=='halifaxdata-evidence-v1'
@@ -54,7 +55,7 @@ def build():
     assert re.fullmatch('[0-9a-f]{40}',source_commit),'Exact source commit required'
     coverage=build_collection_coverage(ROOT)
     (ROOT/'data/collection-coverage.json').write_text(json.dumps(coverage,indent=2)+'\n')
-    files=FILES+transit_files(ROOT)+hrm_winter_files(ROOT)+hrm_facilities_files(ROOT)+hrm_audit_context_files(ROOT)+hrm_capital_files(ROOT)+hrm_audit_files(ROOT)+water_approval_files(ROOT)+health_files(ROOT)+richmond_files(ROOT)+water_files(ROOT)+reference_files(ROOT)+tender_files(ROOT)+supplier_files(ROOT)+municipal_files(ROOT)+reporting_files(ROOT)+audit_files(ROOT)+housing_files(ROOT)+ambulance_files(ROOT)+shelburne_files(ROOT)+budget_files(ROOT)+transfer_files(ROOT)+governance_files(ROOT)+institution_files(ROOT)+authorization_files(ROOT)+cash_files(ROOT)+purpose_files(ROOT)+capital_files(ROOT)+capital_explanation_files(ROOT)
+    files=FILES+transit_finance_files(ROOT)+transit_files(ROOT)+hrm_winter_files(ROOT)+hrm_facilities_files(ROOT)+hrm_audit_context_files(ROOT)+hrm_capital_files(ROOT)+hrm_audit_files(ROOT)+water_approval_files(ROOT)+health_files(ROOT)+richmond_files(ROOT)+water_files(ROOT)+reference_files(ROOT)+tender_files(ROOT)+supplier_files(ROOT)+municipal_files(ROOT)+reporting_files(ROOT)+audit_files(ROOT)+housing_files(ROOT)+ambulance_files(ROOT)+shelburne_files(ROOT)+budget_files(ROOT)+transfer_files(ROOT)+governance_files(ROOT)+institution_files(ROOT)+authorization_files(ROOT)+cash_files(ROOT)+purpose_files(ROOT)+capital_files(ROOT)+capital_explanation_files(ROOT)
     current_code,code_releases,code_assets=assemble(ROOT,files)
     OUT.mkdir(exist_ok=True)
     known=set(files+list(code_assets)+['release.json','.nojekyll'])

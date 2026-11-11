@@ -76,3 +76,14 @@
 .view-sharing-panel .view-sharing-status{margin:12px 0 0}
 .view-sharing-panel .view-sharing-status:empty{margin:0}
 @media print{.view-sharing{display:none!important}}
+
+/* Financial context remains separate from service evidence and fits narrow screens. */
+.transit-views { flex-wrap: wrap; }
+.transit-finance .card { min-width: 0; }
+.transit-finance dl { margin-bottom: 1rem; }
+.transit-finance dd { margin-left: 0; margin-bottom: 1rem; }
+.transit-finance .transit-revenue-overall { border-left: 4px solid var(--teal); margin-bottom: 1.5rem; }
+.transit-finance .transit-reconciliation { margin-block: 1.5rem; }
+.transit-finance-depth { flex-wrap: wrap; }
+.transit-finance-depth a { white-space: normal; }
+.transit-finance .finance-reset { display: inline-block; margin: 10px 0; }
