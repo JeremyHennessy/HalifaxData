@@ -33,3 +33,7 @@ A same-attempt robots allow match is separate from authorization and never remov
 5. Keep candidate output private and publication-disallowed. A successful fetch or clean arithmetic comparison is not a publication decision. Independent exact-byte evidence review, public allowlist checks, application/browser checks and exact deployed-asset verification remain separate gates.
 
 No collector setting, source hold, accepted baseline, evidence artifact, collection count, public bundle or deployment schedule is changed by the diagnostic. Repository tests cover both the current inactive state and mutated/missing/symlinked inputs, unknown history, workflow drift, private-state handling and non-authorizing exit codes.
+
+## Prepare a migration review without changing state
+
+The separate [offline state-migration planner](COLLECTION-STATE-MIGRATION.md) inventories explicitly supplied frozen private copies and preserves conflicts, unknown history and hold/cadence evidence. With no inputs it reports the pinned known baseline and outstanding requirements only. It does not select storage, move state, establish complete history, clear restrictions or activate collection.
