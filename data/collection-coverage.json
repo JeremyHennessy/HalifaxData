@@ -6,6 +6,25 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "hrm-audits",
+      "title": "HRM follow-up of three 2024 audits",
+      "relatedSourceIds": [],
+      "dataPath": "data/hrm-audits/records.json",
+      "dataSha256": "f9171cfa466d09389976cb38172b735ea22488ac161db77463b726f1f7c893a4",
+      "reviewPath": "data/hrm-audits/publication-review.json",
+      "reviewId": "hrm-follow-up-independent-review-20261111",
+      "reviewedOn": "2026-11-11",
+      "count": 32,
+      "countUnit": "historical recommendation-status rows from three named HRM audits",
+      "route": "#/audits?view=hrm",
+      "scope": "32 historical recommendation statuses in the October 2026 HRM follow-up: 14 reported completed, 44% as printed. Status-as-of is unknown; September letter/graphic dates are distinct. Limited assurance, lower than an audit. Separate from provincial organization/audit rows; no combined recommendation total.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Follow-up_Review_2024_Audits.pdf"
+      ]
+    },
+    {
       "id": "physician-categories",
       "title": "Historical physician payment categories",
       "relatedSourceIds": [],
