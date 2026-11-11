@@ -104,3 +104,7 @@ The global “Skip to content” link focuses and scrolls the current main regio
 ### Historical Halifax Transit service evidence
 
 The independently reviewed [Transit service explorer](docs/TRANSIT-SERVICE.md) adds a 26th collection at `#/transit`: seven annual on-time percentages and ten Access-A-Bus category/year counts. The 2024/25 result of 71% against an 85% target is shown as a descriptive 14 percentage-point gap. Observed timepoints are not complete trips; booking categories remain separate and incompletely defined. Historical staff reporting is not an independent audit or current service assessment. Search, year/group filters, source-bound JSON export, independent exact-byte admission and isolated-failure tests preserve these limits without activating collection.
+
+### Share an applied evidence view
+
+“Share this view” copies the current route, applied filters and reading depth, with a selectable address when automatic clipboard access is unavailable. Closing it preserves the view and history. The panel distinguishes a view link from a frozen evidence snapshot and points to reviewed downloads/receipts where provided. No third-party share service or source collection is activated. See [view sharing](docs/SHARE-VIEWS.md).
