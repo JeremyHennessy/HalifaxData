@@ -80,3 +80,7 @@ The HRM follow-up view includes optional, independently reviewed context from th
 ### HRM facility-assessment evidence
 
 The independently reviewed [facility assessment explorer](docs/HRM-FACILITIES.md) adds a 24th collection at `#/hrm-facilities`: nine source-category rows, two separate historical assessment groups, unknown table observation date and attributed management context. Search, group filters, three reading depths and source-bound JSON export preserve the limits; no combined total, denominator, current safety claim or new refresh job is introduced.
+
+### HRM winter-operations evidence
+
+The independently reviewed [winter-operations explorer](docs/HRM-WINTER-OPERATIONS.md) adds a 25th collection at `#/hrm-winter`: two historical cost/event summaries and five separate contractor-report sample categories. In-house costs remain unknown, source-dollar millions retain their reported precision, and each report category keeps its own denominator. Search, group filters, source-bound export and original-page locators preserve the difference between cost coverage, document receipt and actual service performance. No current-service claim, combined compliance rate, cost-per-event comparison or source refresh is introduced.

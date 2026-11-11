@@ -1,0 +1,11 @@
+# Historical HRM winter-operations evidence
+
+The separately admitted `#/hrm-winter` collection contains two fiscal-year summaries and five contractor-report sample categories from the June 2025 Management of Winter Operations Audit. The 25 reviewed collections remain separate from the frozen 139-reference inventory. Seven rows are not seven contracts or seven comparable observations.
+
+Printed page 21 / PDF page 22 reports contractor financial costs of $29.4 million for 2022-23 and $30.4 million for 2023-24, with 17 and 18 HRM-declared weather events respectively. Both in-house cost cells remain explicitly Unknown. The original million-unit precision and dollar symbol are retained; currency code and cash/accrual basis remain unestablished. The application does not calculate full program costs, per-event costs, efficiency comparisons, cross-year totals or trends. The audit explains that centrally captured in-house figures omitted salaries and fleet costs.
+
+Printed page 12 / PDF page 13 reports five document categories, with obtained/expected counts 12/30, 0/10, 0/9, 59/60 and 58/90. Original applicable-contract labels and the three-zone-per-date sampling footnote remain visible. Different denominators are not combined. These contractor-report tests are distinct from supervisor-report tests elsewhere in the audit. Receipt does not establish document quality or clearing performance, and no vendor identity is attached to a sample result.
+
+The June 11, 2025 letter, November 1, 2022-April 30, 2024 audit window, original fiscal-year labels and November 11, 2026 retrieval/review dates are separately identified. No precise sample observation date or current status is invented. Brief management plans are attributed, not verified completion.
+
+Search, group filters, three reading depths, original-page links and source-bound JSON export retain the complete accepted bundle and independent receipt. Exact artifact and receipt SHA-256 pins apply at build and runtime. Missing or mismatched optional evidence removes only this collection from coverage and search; source values are withheld until admission. No raw PDF, images, recommendation prose, personal details or new allegations are published. Existing evidence, source holds, inactive transport and scheduler remain unchanged.

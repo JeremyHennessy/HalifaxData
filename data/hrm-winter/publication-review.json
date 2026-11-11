@@ -1,0 +1,30 @@
+{
+  "status": "accepted",
+  "reviewer": "independent_source_and_final_data_review",
+  "reviewedOn": "2026-11-11",
+  "evidenceId": "hrm-winter-operations-independent-review-20261111",
+  "scope": "Two historical year summaries and five contractor-report sample categories from the June 2025 HRM Management of Winter Operations Audit, with brief attributed cost, sampling and management-response context.",
+  "limitations": [
+    "Historical source facts only, not current service conditions, clearing outcomes, safety findings, individual vendor claims, legal breach, financial loss or personal wrongdoing. The seven records are two different record types, not seven contracts or a spending ledger.",
+    "The year labels, audit window, report month, letter date, retrieval date and review date are distinct. The precise sample observation date is not established and currentStatusVerified remains false.",
+    "Contractor financial costs are reported to one decimal million. They are not exact payments, invoice totals, budgets or full program costs. The dollar symbol is preserved without asserting a currency code or cash/accrual basis. In-house costs remain Unknown, never zero. No cross-year total, trend, cost-per-event arithmetic or efficiency comparison is accepted.",
+    "Each report category has its own applicable-contract scope and expected-count denominator. No combined rate, population extrapolation, vendor ranking or inference of service-standard compliance is accepted. Documents obtained do not establish document quality or snow-clearing performance.",
+    "Management responses are historical plans, not independently verified implementation or recommendation completion. No cross-collection join is accepted.",
+    "No broad reuse licence is established. Acceptance covers numerical facts, short source identifiers and brief original attributed paraphrases, not republication of the PDF, page images, recommendation prose, signatures or contacts.",
+    "Only the exact bundle hash below is accepted. Application integration, rendered context, publication gates and deployment need separate verification; this is not a legal licence determination or approval of expanded allegations.",
+    "The retained source was inspected offline. The supplied official source URL, landing URL and retrieval date were not independently re-tested online. No source holds, collectors, refreshes or schedulers were touched."
+  ],
+  "bundleSha256": "9819d900353771f6acae841a960d5e3ce4bfaf62eef60f06ea51ad5b7269b091",
+  "sourceSha256": "6ea71b5adfb05d2583caef8d73beff541f7c83f64efd7eb5cecdff0e77e5ab11",
+  "checks": [
+    "Independently rendered retained PDF pages 1, 2, 7, 12, 13, 14, 22 and 24 and inspected their actual pixels, with independently extracted text as a supplementary check. Verified retained source SHA-256 and 931768-byte size.",
+    "Cover and headers establish Management of Winter Operations Audit, June 2025; PDF page 2 establishes June 11, 2025 letter date and Office of the Auditor General, Halifax Regional Municipality publisher.",
+    "Printed page 21 / PDF page 22 table: 2022-23 has 17 declared weather events, Unknown in-house financial costs and $29.4 million contractor financial costs; 2023-24 has 18, Unknown and $30.4 million respectively. Source footnotes attribute events to Public Works weather event calendars and contractor costs to HRM SAP.",
+    "Printed page 12 / PDF page 13 table: Operational Plan (Weather event), All, 12/30; Operations Status (Weather event), Sidewalk Only, 0/10; Post Event Summary (Weather event), Two Contracts, 0/9; Morning Report (Daily), Streets Only, 59/60; Contractor Diary (Weekly), All, 58/90. Candidate preserves all labels, scopes, frequencies and obtained/expected counts.",
+    "Printed page 11 / PDF page 12 identifies nine contracts and 30 reviewed dates, comprising 10 weather events and 20 non-weather events. Printed page 12 / PDF page 13 footnote establishes three sampled contract zones per date, coverage of all contracts across testing and differing expected counts according to sampled contract requirements. Candidate does not extrapolate the sample.",
+    "Printed page 6 / PDF page 7 states that centrally captured in-house costs exclude staff salaries and fleet equipment. Recommendation 2 management response is Agree and supports the paraphrase about a policy identifying performance data, collection processes and indicators.",
+    "Printed page 13 / PDF page 14 Recommendation 7 management response is Agree and supports the paraphrase about revising required reports and centrally tracking reporting compliance. Neither management response is treated as verified implementation.",
+    "Printed page 23 / PDF page 24 establishes a performance audit covering November 1, 2022 through April 30, 2024 and reasonable assurance under CSAE 3001 Direct Engagements. Methods include interviews, review of plans, policies and agreements, and sampled contract files. Scope concerns road and sidewalk clearing operations and contracts, excluding municipal-facility clearing, procurement of snow-clearing services and equipment, and assessment of service standards themselves.",
+    "Read the entire candidate JSON and checked source-derived fields, all numerical facts, page citations, seven distinct record IDs, two groups, date and assurance boundaries, publication metadata, null cost unknowns, management context and rights limits. Candidate data was not edited; recomputed bundle hash remains exactly the supplied candidate hash."
+  ]
+}
