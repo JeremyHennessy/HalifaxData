@@ -88,3 +88,7 @@ The independently reviewed [winter-operations explorer](docs/HRM-WINTER-OPERATIO
 ### Browse existing evidence by topic
 
 `#/find` groups the existing reviewed directory into six overlapping navigation topics, with collection-only shortcuts, combined filters and shareable URLs. Counts follow available accepted collections; they are not source-record totals. Collection cards show accepted review receipts and distinguish review dates from source periods/current status. The 25 collections and 29 foundation financial descriptions retain their exact identities and evidence limits. See [evidence directory](docs/EVIDENCE-FINDER.md).
+
+### Check collection readiness without fetching
+
+`npm run collection:readiness` explains why ingestion remains inactive, verifies the checked repository boundaries and baseline provenance, and surfaces retained access-hold statements. Missing private state is never treated as clearance. A successful diagnostic does not authorize collection or publication. See [collection readiness](docs/COLLECTION-READINESS.md) for the separate operational requirements.
