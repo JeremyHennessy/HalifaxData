@@ -1,0 +1,31 @@
+{
+  "status": "accepted",
+  "reviewer": "independent_source_and_final_data_review",
+  "reviewedOn": "2026-11-11",
+  "evidenceId": "hrm-capital-independent-review-20261111",
+  "scope": "Three source-attributed business-unit aggregate rows representing 12 sampled projects, separate reported totals and two overlapping documentation-test populations from the June 2026 HRM Capital Budgeting Audit; brief attributed management-response context only.",
+  "limitations": [
+    "Historical budget and workplan figures, not payments, actual expenses, overruns, losses or proof of wrongdoing. No amount is assigned to the insufficient-information subsets.",
+    "The three rows aggregate 5, 5 and 2 sampled projects. The reported total is not a fourth additive record, and total workplan includes both budget columns. No individual project identities or amounts are established.",
+    "The documentation-test populations overlap; overlap among the deficient subsets is not disclosed. Counts cannot be summed as distinct deficient projects or extrapolated to all HRM projects.",
+    "The audit examined the capital-budgeting administrative process and supporting evidence, not individual technical estimate accuracy, project-management efficiency or delivery outcomes.",
+    "Cover/header June 2026, letter June 10, 2026 and audit period April 1, 2024 through March 31, 2025 remain distinct. Retrieval and review dates do not make this a current-condition snapshot.",
+    "Management acceptance and planned improvements are attributed historical responses, not verified implementation. No management completion dates or current implementation are established.",
+    "A broad reuse licence is not established. Acceptance covers only attributed factual data, short source identifiers and brief original paraphrases. No PDF, page images, signatures, contact details or recommendation prose may accompany this projection.",
+    "Only the exact bundle hash is accepted. App integration, rendered context, publication gates and deployment require separate verification. This is not acceptance of consequential allegations, personal wrongdoing claims or new narrative expansions.",
+    "The retained source was inspected offline. Source-host accessibility, official landing-page links, the supplied retrieval date and current recommendation status were not independently re-tested online. No refresh, source transport, collector or scheduler was changed."
+  ],
+  "bundleSha256": "a33e4b93da00253b70125f4a34163cffa996a2cad8dacfb514ed6a150b6def7e",
+  "sourceSha256": "c18a7243e04556e25f9e99ae5c5fdfde8bc509663ed3ddfdd726e7c6481912af",
+  "checks": [
+    "Independently rendered and visually inspected PDF pages 1, 2, 10, 11, 14, 19 and 20; verified all final field citations and the documentation footnote.",
+    "Printed page 10 / PDF page 11: Public Works 5 projects, 30199000 carry-forward, 68395000 capital budget, 98594000 workplan; Property, Fleet and Equipment 5, 9097000, 37235000, 46332000; Strategic Infrastructure and Transportation Planning 2, 1995000, 2000000, 3995000.",
+    "Reported totals 12, 41291000, 107630000 and 148921000 reconcile exactly with the three aggregate rows. Each row and total also reconcile carry-forward plus capital budget to workplan. Dollar signs are printed; no currency code is inferred.",
+    "Current workplan tests: 6 sufficient and 6 insufficient, 12 total, printed 50% insufficient. Carryover tests: 3 sufficient and 6 insufficient, 9 total, printed rounded 67% insufficient. Footnote places one project with 11 carryover sub-projects inside the sufficient group; eight had detailed breakdowns and three lacked supporting documentation.",
+    "Printed pages 9 and 13 / PDF pages 10 and 14 support both Accept responses and the two brief original management-response paraphrases. No recommendation prose is reproduced.",
+    "Printed pages 18 and 19 / PDF pages 19 and 20 support the audit scope, period, outside-period information and CSAE 3001 Direct Engagements standard. This is a performance audit, not the separate October 2026 follow-up review.",
+    "Retained PDF is 868537 bytes with matching SHA-256. Embedded metadata title and subject are placeholders; June 22, 2026 creation/modification metadata is not substituted for the visible report month or letter date. No embedded author identity is published.",
+    "Compared final bundle to candidate SHA-256 3f078259be7a5dc3ecbfda8e233790621475c9736ab32048a9ff97bfa643f4c1: records, reported totals, documentation counts, dates and management paraphrases are unchanged. Replaced provisional metadata with conditional publication contract; clarified test-population overlap and added date limitation; updated rights and currency-note wording without changing source facts.",
+    "Read final JSON in full and computed its SHA-256 directly from final bytes. Acceptance is limited to the bounded official-source factual projection; consequential narrative remains outside this receipt."
+  ]
+}
