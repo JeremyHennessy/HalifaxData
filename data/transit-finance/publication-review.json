@@ -1,0 +1,29 @@
+{
+  "status": "accepted",
+  "reviewer": "independent_transit_finance_source_review",
+  "reviewedOn": "2026-11-11",
+  "evidenceId": "halifax-transit-finance-independent-review-20261111",
+  "bundleSha256": "b1a7dfb335afe1c0880d993af9273470681a376f4a94c49ad5eb7f45567103b2",
+  "sourceSha256": "2f6df924c46bef304aabe14842ac0ae21f0552f556943ea24b029b7bb8d24542",
+  "scope": "Exact context.json bytes only: four annual actual/planned revenue pairs, four annual KPI comparisons and one maintenance-rate comparison, with metadata, arithmetic and bounded interpretation. Code, UI, release and deployment are outside this receipt.",
+  "checks": [
+    "Independently inspected rendered pixels of retained official PDF physical pages 1, 2, 34, 37, 38 and 40. Physical pages 34, 37, 38 and 40 match Attachment B printed pages 1, 4, 5 and 7.",
+    "All eight revenue values match the 2024/25 Actual vs Planned charts: Conventional 33751558/33400400; Ferry 2803087/2602400; Access-A-Bus 260349/258000; Halifax Transit overall 36814993/36260800. Source narrative labels planned budget revenue and reports overall 1.5% above plan.",
+    "Recomputed every actual-minus-planned difference: 351158, 200687, 2349 and 554193. Component actuals sum to 36814994, one source dollar above the printed overall 36814993; planned components and total both equal 36260800. Candidate retains source values without correction, allegation or double counting.",
+    "Annual KPI table matches 23/24 and 24/25 values and source-reported relative percent changes: operating expense per passenger 6.23/6.72 (+7.8%); passenger revenue per passenger 1.82/1.81 (-0.2%); Bus & Ferry recovery 29%/27% (-7.4%); All recovery 27%/25% (-7.6%). Short measure identifiers preserve the source meaning. Bus & Ferry exclusion of Access-A-Bus is explicit in the source.",
+    "Maintenance chart and narrative match annual 2024/25 average 1.28 and budget 1.33 source dollars per kilometre and source-reported 3% below budget. Covering report physical page 2 identifies conventional and paratransit vehicles. No quarterly maintenance figures were substituted.",
+    "Source-reported percentage changes are retained rather than recomputed from rounded displays. Relative percent and percentage-point change are distinguished. Underlying unrounded calculations, passenger denominator and recovery definition are not established; no annual spending, funding, subsidy or ridership is derived.",
+    "Cover report is dated July 8, 2025, Transportation Standing Committee August 21, 2025, with Halifax Transit 2024/25 Q4 KPI Report title and Attachment B annual report identified on page 2. Reporting-year labels remain distinct from report, committee, retrieval and review dates.",
+    "Recomputed retained source SHA-256 and 1400965-byte count. Parent records.json SHA-256 matches bf72517583e3f9bec89fe5a776046df268b877d35a0bae6791f0bc0fcad72fb9 and its existing independent receipt. Candidate was not modified.",
+    "Reviewed full candidate boundaries: source dollars only, no inferred currency code, no accounting/cash-basis claim, no verified council approval, annual expenses or all-funding assertion, no surplus/savings/causal inference, no ledger or payment treatment, and no broad source-image or document reproduction."
+  ],
+  "limitations": [
+    "No network request was made. SourceURL is supplied official-source metadata, not an independently re-tested URL or redirect chain. Review confirms retained source correspondence, not current online availability.",
+    "RetrievedOn 2026-11-11 is supplied capture metadata; no independent retrieval timestamp attestation was performed. Historical reporting is not current budget or current service verification.",
+    "Rounded display precision may explain non-reproduction of percentages, but this review does not establish the underlying calculations or the cause of the one-dollar display discrepancy.",
+    "These are staff-reported revenue and cost measures, not independently audited accounts, cash collections, all operating funding, annual expense totals, surplus or legally authorized spending. Scopes and denominators must remain separate.",
+    "Service revenue and overall revenue overlap, as do Bus & Ferry and All recovery scopes. No additive totals across overlapping records or inferred causal connection to service reliability or Access-A-Bus outcomes are approved.",
+    "Broad source reuse rights are unestablished. Acceptance covers numerical facts, short labels and original attributed explanation only, not source pages, graphics, signatures or contact details.",
+    "Acceptance applies only to the exact bundle hash above. Changed evidence bytes require fresh review. UI, integration tests, code, release, deployment, collection refresh, source holds and scheduler activation are not accepted by this receipt."
+  ]
+}
