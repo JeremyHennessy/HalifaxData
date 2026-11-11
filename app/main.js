@@ -1,3 +1,4 @@
+import {bindSkipLink} from './navigation.js';
 import {getWinter,filterWinter,winterExport,WINTER_HASH,WINTER_REVIEW_HASH} from './hrm-winter.js';
 import {getFacilities,filterFacilities,facilitiesExport,FACILITIES_HASH,FACILITIES_REVIEW_HASH} from './hrm-facilities.js';
 import {getPhysician,filterPhysician} from './physician-categories.js';
@@ -31,6 +32,7 @@ import {getSupplierLabels} from './suppliers.js';
 import {getTenderIndex,loadTenderRows,filterTenders,verifiedJSON} from './tenders.js';
 import {validateBundle,routeFrom,safeURL,searchRows,pageRows,displayMoney,scaleDecimal,formatRaw,publicCase,difference} from './model.js';
 const main=document.querySelector('main');
+bindSkipLink(document.querySelector('.skip'),main);
 let data=null;
 let reporting=null;
 let governance=null;

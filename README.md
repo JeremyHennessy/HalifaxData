@@ -96,3 +96,7 @@ The independently reviewed [winter-operations explorer](docs/HRM-WINTER-OPERATIO
 ### Rehearse private state inventories
 
 `npm run collection:migration-plan` prepares a non-authorizing offline review plan. Explicit frozen private snapshots can be inventoried without writing state; conflicting versions, retained holds and incomplete histories remain unresolved. No history, durable destination or collector is created. See [private-state migration preparation](docs/COLLECTION-STATE-MIGRATION.md).
+
+### Keyboard skip navigation
+
+The global “Skip to content” link focuses and scrolls the current main region without replacing the hash route. Active filters, evidence depth, browser history and in-flight evidence requests remain intact. The handler is installed before evidence loading. Synthetic tests cover repeated activation and the startup binding; the browser suite covers keyboard focus, subsequent Tab navigation, Back/Forward and activation during an interrupted response at each supported viewport.
