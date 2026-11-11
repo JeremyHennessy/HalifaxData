@@ -84,3 +84,7 @@ The independently reviewed [facility assessment explorer](docs/HRM-FACILITIES.md
 ### HRM winter-operations evidence
 
 The independently reviewed [winter-operations explorer](docs/HRM-WINTER-OPERATIONS.md) adds a 25th collection at `#/hrm-winter`: two historical cost/event summaries and five separate contractor-report sample categories. In-house costs remain unknown, source-dollar millions retain their reported precision, and each report category keeps its own denominator. Search, group filters, source-bound export and original-page locators preserve the difference between cost coverage, document receipt and actual service performance. No current-service claim, combined compliance rate, cost-per-event comparison or source refresh is introduced.
+
+### Browse existing evidence by topic
+
+`#/find` groups the existing reviewed directory into six overlapping navigation topics, with collection-only shortcuts, combined filters and shareable URLs. Counts follow available accepted collections; they are not source-record totals. Collection cards show accepted review receipts and distinguish review dates from source periods/current status. The 25 collections and 29 foundation financial descriptions retain their exact identities and evidence limits. See [evidence directory](docs/EVIDENCE-FINDER.md).
