@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "hrm-audit-followup-status-v1",
+  "title": "HRM follow-up of three 2024 audits",
+  "publisher": "Office of the Auditor General, Halifax Regional Municipality",
+  "sourceURL": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Follow-up_Review_2024_Audits.pdf",
+  "landingURL": "https://hrmauditorgeneral.ca/follow-up",
+  "sourceSha256": "c8ea434d59f1527e6804b11dbff512fb413c72e5c67434a9948b2999b921acb6",
+  "sourceBytes": 599344,
+  "retrievedOn": "2026-11-11",
+  "reportMonth": "2026-10",
+  "letterDate": "2026-09-11",
+  "summaryGraphicMonth": "2026-09",
+  "statusObservationAsOf": null,
+  "scope": "Three named 2024 HRM audits only; 32 recommendation statuses attributed to the October 2026 follow-up report, not all HRM recommendations.",
+  "reportedSummary": {
+    "recommendations": 32,
+    "completed": 14,
+    "completionPercent": 44,
+    "printedPage": 3,
+    "pdfPage": 4
+  },
+  "assurance": {
+    "level": "limited assurance",
+    "methodologyPrintedPage": 10,
+    "methodologyPdfPage": 11,
+    "summary": "Review-level assurance based on discussions and limited testing, lower than an audit."
+  },
+  "limits": [
+    "Historical source-attributed statuses. The report cover/header says October 2026, the letter is dated September 11, 2026 and the summary graphic says September 2026; none is silently converted into a status-as-of date.",
+    "No current implementation claim, financial loss, legal breach or personal wrongdoing is inferred.",
+    "Original recommendation prose, signatures and contact details are not reproduced.",
+    "No automatic refresh is enabled. This is one manually retrieved, independently review-bound snapshot; retrieval and review dates do not make its statuses current.",
+    "These 32 recommendation-status rows belong only to the three named 2024 HRM audits. They are separate from the provincial organization/audit rows and must not be combined into a recommendation total.",
+    "Reported completion percentages are preserved as printed, including rounded 14/32 = 44%, 7/8 = 88%, 4/14 = 29% and 3/10 = 30%. They are not a current-performance ranking."
+  ],
+  "audits": [
+    {
+      "id": "diversity-inclusion",
+      "auditTitle": "Diversity and Inclusion",
+      "originalAuditMonth": "2024-12",
+      "businessUnitAsReported": "The Office of Diversity & Inclusion",
+      "reportedTotal": 8,
+      "reportedCompleted": 7,
+      "reportedCompletionPercent": 88,
+      "summaryPrintedPage": 3,
+      "completedRecommendationNumbers": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "summaryPdfPage": 4
+    },
+    {
+      "id": "enterprise-risk",
+      "auditTitle": "Enterprise Risk Management",
+      "originalAuditMonth": "2024-07",
+      "businessUnitAsReported": "Legal, Risk & Insurance Services",
+      "reportedTotal": 14,
+      "reportedCompleted": 4,
+      "reportedCompletionPercent": 29,
+      "summaryPrintedPage": 3,
+      "completedRecommendationNumbers": [
+        8,
+        10,
+        11,
+        12
+      ],
+      "summaryPdfPage": 4
+    },
+    {
+      "id": "business-continuity",
+      "auditTitle": "Management of Business Continuity",
+      "originalAuditMonth": "2024-07",
+      "businessUnitAsReported": "Community Safety",
+      "reportedTotal": 10,
+      "reportedCompleted": 3,
+      "reportedCompletionPercent": 30,
+      "summaryPrintedPage": 3,
+      "completedRecommendationNumbers": [
+        2,
+        8,
+        9
+      ],
+      "summaryPdfPage": 4
+    }
+  ],
+  "records": [
+    {
+      "id": "hrm-2024-diversity-inclusion-01",
+      "auditId": "diversity-inclusion",
+      "recommendationNumber": 1,
+      "statusAsReported": "Completed",
+      "printedPage": 4,
+      "pdfPage": 5,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-diversity-inclusion-02",
+      "auditId": "diversity-inclusion",
+      "recommendationNumber": 2,
+      "statusAsReported": "Incomplete",
+      "printedPage": 4,
+      "pdfPage": 5,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-diversity-inclusion-03",
+      "auditId": "diversity-inclusion",
+      "recommendationNumber": 3,
+      "statusAsReported": "Completed",
+      "printedPage": 4,
+      "pdfPage": 5,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-diversity-inclusion-04",
+      "auditId": "diversity-inclusion",
+      "recommendationNumber": 4,
+      "statusAsReported": "Completed",
+      "printedPage": 4,
+      "pdfPage": 5,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-diversity-inclusion-05",
+      "auditId": "diversity-inclusion",
+      "recommendationNumber": 5,
+      "statusAsReported": "Completed",
+      "printedPage": 4,
+      "pdfPage": 5,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-diversity-inclusion-06",
+      "auditId": "diversity-inclusion",
+      "recommendationNumber": 6,
+      "statusAsReported": "Completed",
+      "printedPage": 4,
+      "pdfPage": 5,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-diversity-inclusion-07",
+      "auditId": "diversity-inclusion",
+      "recommendationNumber": 7,
+      "statusAsReported": "Completed",
+      "printedPage": 4,
+      "pdfPage": 5,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-diversity-inclusion-08",
+      "auditId": "diversity-inclusion",
+      "recommendationNumber": 8,
+      "statusAsReported": "Completed",
+      "printedPage": 5,
+      "pdfPage": 6,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-01",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 1,
+      "statusAsReported": "Incomplete",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-02",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 2,
+      "statusAsReported": "Incomplete",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-03",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 3,
+      "statusAsReported": "Incomplete",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-04",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 4,
+      "statusAsReported": "Incomplete",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-05",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 5,
+      "statusAsReported": "Incomplete",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-06",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 6,
+      "statusAsReported": "Incomplete",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-07",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 7,
+      "statusAsReported": "Incomplete",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-08",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 8,
+      "statusAsReported": "Completed",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-09",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 9,
+      "statusAsReported": "Incomplete",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-10",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 10,
+      "statusAsReported": "Completed",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-11",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 11,
+      "statusAsReported": "Completed",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-12",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 12,
+      "statusAsReported": "Completed",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-13",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 13,
+      "statusAsReported": "Incomplete",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-enterprise-risk-14",
+      "auditId": "enterprise-risk",
+      "recommendationNumber": 14,
+      "statusAsReported": "Incomplete",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-01",
+      "auditId": "business-continuity",
+      "recommendationNumber": 1,
+      "statusAsReported": "Incomplete",
+      "printedPage": 8,
+      "pdfPage": 9,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-02",
+      "auditId": "business-continuity",
+      "recommendationNumber": 2,
+      "statusAsReported": "Completed",
+      "printedPage": 8,
+      "pdfPage": 9,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-03",
+      "auditId": "business-continuity",
+      "recommendationNumber": 3,
+      "statusAsReported": "Incomplete",
+      "printedPage": 8,
+      "pdfPage": 9,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-04",
+      "auditId": "business-continuity",
+      "recommendationNumber": 4,
+      "statusAsReported": "Incomplete",
+      "printedPage": 8,
+      "pdfPage": 9,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-05",
+      "auditId": "business-continuity",
+      "recommendationNumber": 5,
+      "statusAsReported": "Incomplete",
+      "printedPage": 8,
+      "pdfPage": 9,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-06",
+      "auditId": "business-continuity",
+      "recommendationNumber": 6,
+      "statusAsReported": "Incomplete",
+      "printedPage": 8,
+      "pdfPage": 9,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-07",
+      "auditId": "business-continuity",
+      "recommendationNumber": 7,
+      "statusAsReported": "Incomplete",
+      "printedPage": 8,
+      "pdfPage": 9,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-08",
+      "auditId": "business-continuity",
+      "recommendationNumber": 8,
+      "statusAsReported": "Completed",
+      "printedPage": 9,
+      "pdfPage": 10,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-09",
+      "auditId": "business-continuity",
+      "recommendationNumber": 9,
+      "statusAsReported": "Completed",
+      "printedPage": 9,
+      "pdfPage": 10,
+      "currentStatusVerified": false
+    },
+    {
+      "id": "hrm-2024-business-continuity-10",
+      "auditId": "business-continuity",
+      "recommendationNumber": 10,
+      "statusAsReported": "Incomplete",
+      "printedPage": 9,
+      "pdfPage": 10,
+      "currentStatusVerified": false
+    }
+  ],
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "consequentialAllegation": false,
+    "reviewType": "source_attributed_historical_hrm_recommendation_status",
+    "reviewId": "hrm-follow-up-independent-review-20261111",
+    "reviewedOn": "2026-11-11"
+  },
+  "sourceRights": {
+    "reuseLicence": "not_established",
+    "projection": "Attributed numeric status facts and short source identifiers only; no original recommendation narratives, signatures, contact information, PDF or page images."
+  }
+}

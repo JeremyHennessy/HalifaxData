@@ -29,3 +29,10 @@
 .richmond-register{min-width:0;overflow-wrap:anywhere}
 
 .health-spending{min-width:0;overflow-wrap:anywhere}
+
+/* Independent HRM source view: long evidence identifiers and tabs wrap on mobile. */
+.hrm-audits{min-width:0;overflow-wrap:anywhere}
+.hrm-status-row{min-width:0}
+.audit-source-tabs,.hrm-audit-tabs{flex-wrap:wrap}
+.audit-source-tabs a,.hrm-audit-tabs a{white-space:normal}
+.hrm-audits .field,.hrm-audits select{min-width:0;max-width:100%}

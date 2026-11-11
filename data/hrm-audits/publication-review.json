@@ -1,0 +1,30 @@
+{
+  "status": "accepted",
+  "reviewer": "independent_source_and_final_data_review",
+  "reviewedOn": "2026-11-11",
+  "evidenceId": "hrm-follow-up-independent-review-20261111",
+  "scope": "Exact factual projection of 32 source-attributed historical recommendation statuses from three named 2024 HRM audits in the October 2026 follow-up report; printed pages 3-10 only.",
+  "limitations": [
+    "Historical statuses reported in this source, not current implementation verification. No exact status-as-of date is established.",
+    "The October 2026 cover/header, September 11, 2026 letter and September 2026 summary graphic are separate source dates; retrieval and review dates do not make the statuses current.",
+    "Review-level limited assurance applies, based on discussions and limited testing, lower assurance than an audit.",
+    "These 32 recommendations cover only the three named HRM audits. They are not all HRM recommendations and must not be combined with provincial organization/audit row counts.",
+    "No financial loss, legal breach, misconduct, personal wrongdoing, current-performance ranking or recommendation completion date is inferred.",
+    "A broad source reuse licence is not established. Acceptance covers only the attributed factual projection and short source identifiers, with no recommendation narratives, personal/contact details, signatures, PDF or page images.",
+    "Only the exact bundle hash is accepted. App integration, rendered presentation, publication gates and deployment require separate verification. Source-host accessibility and the supplied retrieval record were not independently re-tested online."
+  ],
+  "bundleSha256": "f9171cfa466d09389976cb38172b735ea22488ac161db77463b726f1f7c893a4",
+  "sourceSha256": "c8ea434d59f1527e6804b11dbff512fb413c72e5c67434a9948b2999b921acb6",
+  "checks": [
+    "Visually checked all 32 recommendation numbers and check/cross status symbols against the source legends on retained rendered pages 4-10; all final records match.",
+    "Diversity and Inclusion, December 2024: 7 of 8 Completed, specifically 1, 3, 4, 5, 6, 7 and 8; printed percentage 88%.",
+    "Enterprise Risk Management, July 2024: 4 of 14 Completed, specifically 8, 10, 11 and 12; printed percentage 29%.",
+    "Management of Business Continuity, July 2024: 3 of 10 Completed, specifically 2, 8 and 9; printed percentage 30%.",
+    "Every audit name, original month, reported business unit and recommendation-level printed/PDF page locator matches the retained source. No missing or duplicate recommendation numbers exist within the three audit groups.",
+    "The source summary on printed page 3 / PDF page 4 reports 14 of 32 completed and 44%; all row totals, group totals and printed rounded percentages reconcile.",
+    "Independently rendered and inspected the cover, dated letter and methodology. The three separate date fields, null statusObservationAsOf and limited-assurance statement are supported.",
+    "Retained PDF size is 599344 bytes and its SHA-256 matches sourceSha256. The final bundle SHA-256 was computed directly from the reviewed bytes.",
+    "Compared final artifact with independently reviewed candidate SHA-256 8814aec395df932838a56cbaf9cf28a0b1dc0165b07da329b071a28616d3a26f. All 32 records and source factual metadata are unchanged; added summary PDF locators match source page 4.",
+    "Read the entire final JSON including the revised limits, sourceRights statement and conditional publication metadata. No original recommendation prose, signatures, contact details, management responses or current-status claims are present."
+  ]
+}
