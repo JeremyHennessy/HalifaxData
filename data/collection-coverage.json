@@ -6,6 +6,25 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "hrm-capital",
+      "title": "HRM capital-budget audit: tested business-unit aggregates",
+      "relatedSourceIds": [],
+      "dataPath": "data/hrm-capital/records.json",
+      "dataSha256": "a33e4b93da00253b70125f4a34163cffa996a2cad8dacfb514ed6a150b6def7e",
+      "reviewPath": "data/hrm-capital/publication-review.json",
+      "reviewId": "hrm-capital-independent-review-20261111",
+      "reviewedOn": "2026-11-11",
+      "count": 3,
+      "countUnit": "business-unit aggregates of tested projects",
+      "route": "#/hrm-capital",
+      "scope": "Three business-unit aggregates representing 12 tested projects, not 12 identified project rows or the entire Capital Plan. Budget and workplan amounts, not payments or losses. Documentation tests overlap; management acceptance is not implementation. No cross-collection totals.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Capital_Budgeting_Audit.pdf"
+      ]
+    },
+    {
       "id": "hrm-audits",
       "title": "HRM follow-up of three 2024 audits",
       "relatedSourceIds": [],

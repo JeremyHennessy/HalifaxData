@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "hrm-capital-audit-sample-v1",
+  "status": "accepted_factual_projection",
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "consequentialAllegation": false,
+    "reviewType": "source_attributed_historical_hrm_capital_budget_sample",
+    "reviewId": "hrm-capital-independent-review-20261111",
+    "reviewedOn": "2026-11-11"
+  },
+  "title": "HRM capital-budget audit: tested business-unit aggregates",
+  "publisher": "Office of the Auditor General, Halifax Regional Municipality",
+  "sourceTitle": "Capital Budgeting Audit",
+  "sourceURL": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Capital_Budgeting_Audit.pdf",
+  "landingURL": "https://hrmauditorgeneral.ca/published-reports",
+  "sourceSha256": "c18a7243e04556e25f9e99ae5c5fdfde8bc509663ed3ddfdd726e7c6481912af",
+  "sourceBytes": 868537,
+  "retrievedOn": "2026-11-11",
+  "reportMonth": "2026-06",
+  "letterDate": "2026-06-10",
+  "auditPeriod": {
+    "start": "2024-04-01",
+    "end": "2025-03-31",
+    "printedPage": 18,
+    "pdfPage": 19,
+    "outsidePeriodInformationConsidered": true
+  },
+  "assurance": {
+    "type": "performance audit",
+    "standard": "CSAE 3001 Direct Engagements",
+    "printedPage": 19,
+    "pdfPage": 20
+  },
+  "scope": "Three business-unit aggregate rows representing 12 tested projects in the 2025-26 Capital Plan. Individual project identities and amounts are not disclosed in this table. This is not a project ledger or the entire Capital Plan.",
+  "recordUnit": "business-unit aggregate of tested projects",
+  "amountUnit": {
+    "sourceSymbol": "$",
+    "scale": 1,
+    "currencyCode": null,
+    "currencyNote": "Dollar sign reproduced from the table; no currency code is asserted without an explicit source statement."
+  },
+  "evidenceStage": "capital_budget_and_workplan_as_reported_in_performance_audit",
+  "columns": [
+    {
+      "key": "carryForwardBudget",
+      "sourceLabel": "2024-25 Carry-forward Budget",
+      "periodLabel": "2024-25",
+      "stage": "carry-forward budget"
+    },
+    {
+      "key": "capitalBudget",
+      "sourceLabel": "2025-26 Capital Budget",
+      "periodLabel": "2025-26",
+      "stage": "capital budget"
+    },
+    {
+      "key": "totalWorkplan",
+      "sourceLabel": "Total Workplan in 2025-26 Capital Plan",
+      "periodLabel": "2025-26",
+      "stage": "total workplan including carry-forward"
+    }
+  ],
+  "records": [
+    {
+      "id": "hrm-capital-2026-public-works",
+      "businessUnitAsReported": "Public Works",
+      "projectsTested": 5,
+      "carryForwardBudget": 30199000,
+      "capitalBudget": 68395000,
+      "totalWorkplan": 98594000,
+      "sourceTable": "Projects Tested in Business Units",
+      "printedPage": 10,
+      "pdfPage": 11
+    },
+    {
+      "id": "hrm-capital-2026-property-fleet-equipment",
+      "businessUnitAsReported": "Property, Fleet and Equipment",
+      "projectsTested": 5,
+      "carryForwardBudget": 9097000,
+      "capitalBudget": 37235000,
+      "totalWorkplan": 46332000,
+      "sourceTable": "Projects Tested in Business Units",
+      "printedPage": 10,
+      "pdfPage": 11
+    },
+    {
+      "id": "hrm-capital-2026-strategic-infrastructure-transportation-planning",
+      "businessUnitAsReported": "Strategic Infrastructure and Transportation Planning",
+      "projectsTested": 2,
+      "carryForwardBudget": 1995000,
+      "capitalBudget": 2000000,
+      "totalWorkplan": 3995000,
+      "sourceTable": "Projects Tested in Business Units",
+      "printedPage": 10,
+      "pdfPage": 11
+    }
+  ],
+  "reportedTotal": {
+    "sourceLabel": "Total Projects Tested",
+    "projectsTested": 12,
+    "carryForwardBudget": 41291000,
+    "capitalBudget": 107630000,
+    "totalWorkplan": 148921000,
+    "printedPage": 10,
+    "pdfPage": 11
+  },
+  "documentationTests": [
+    {
+      "id": "current-workplans",
+      "sourceColumn": "2025-26 Workplan",
+      "sufficientInformation": 6,
+      "insufficientInformation": 6,
+      "totalProjects": 12,
+      "reportedInsufficientPercent": 50,
+      "printedPage": 10,
+      "pdfPage": 11
+    },
+    {
+      "id": "carryover-workplans",
+      "sourceColumn": "Carryover Workplan from 2024-25",
+      "sufficientInformation": 3,
+      "insufficientInformation": 6,
+      "totalProjects": 9,
+      "reportedInsufficientPercent": 67,
+      "footnote": "The sufficient-information group includes one project with 11 carryover sub-projects: eight had detailed cost breakdowns and three lacked supporting documentation.",
+      "printedPage": 10,
+      "pdfPage": 11
+    }
+  ],
+  "finding": {
+    "attribution": "HRM Auditor General",
+    "summary": "The audit reported insufficient information for six of 12 current-year workplans and six of nine carryover workplans. The two test populations overlap; the overlap among projects with insufficient information is not disclosed. These counts must not be added to claim 12 distinct deficient projects.",
+    "printedPage": 10,
+    "pdfPage": 11
+  },
+  "managementResponses": [
+    {
+      "recommendationNumber": 4,
+      "responseAsReported": "Accept",
+      "summary": "Management agreed to set minimum estimating standards using a corporate checklist informed by existing practices, with asset groups adding industry-specific requirements.",
+      "printedPage": 9,
+      "pdfPage": 10,
+      "implementationVerified": false
+    },
+    {
+      "recommendationNumber": 5,
+      "responseAsReported": "Accept",
+      "summary": "Management agreed to clarify responsibility for risk- and materiality-based quality review before capital-plan submission, and said further improvement depends on funding and implementing integrated technologies.",
+      "printedPage": 13,
+      "pdfPage": 14,
+      "implementationVerified": false
+    }
+  ],
+  "limits": [
+    "Budget and workplan amounts are not invoices, payments, actual expenditures, overruns, financial losses, or proof of wrongdoing.",
+    "No amount is assigned to the insufficient-documentation subset: the source does not identify which projects or business-unit amounts belong to that subset.",
+    "Do not add the two budget columns to the total-workplan column; the latter includes both. The reported total is a summary, not a fourth additive business-unit record.",
+    "The 12 current-workplan tests and nine carryover tests overlap and must not be summed into a unique-project count.",
+    "The audit assessed the budgeting administrative process through recommendations to Council; it did not assess technical accuracy of individual cost estimates, project-management efficiency, or delivery outcomes (printed p.18/PDF p.19).",
+    "Sample findings must not be extrapolated to all HRM projects. The table does not name individual projects or establish specific approval instruments.",
+    "Management acceptance is not implementation; current implementation and recommendation completion were not verified.",
+    "This June 2026 audit is separate from the October 2026 follow-up of three 2024 audits. No recommendation identities or completion totals are joined.",
+    "No automatic refresh, collector or scheduler activation is proposed.",
+    "The June 2026 report month, June 10, 2026 letter date and April 2024 to March 2025 audit period are separate dates. Retrieval and review dates do not establish current conditions or implementation."
+  ],
+  "sourceRights": {
+    "reuseLicence": "not_established",
+    "projection": "Attributed numerical facts, short source identifiers, and brief original paraphrases only. No source PDF, page images, signatures, contacts, or recommendation prose are included."
+  }
+}

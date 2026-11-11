@@ -1,6 +1,7 @@
 """Build a separate receipt-bound collection layer without changing the reference inventory."""
 import hashlib,json
 COLLECTIONS=[
+ ('hrm-capital','HRM capital-budget audit: tested business-unit aggregates',[],'data/hrm-capital/records.json','data/hrm-capital/publication-review.json','records','business-unit aggregates of tested projects','#/hrm-capital','Three business-unit aggregates representing 12 tested projects, not 12 identified project rows or the entire Capital Plan. Budget and workplan amounts, not payments or losses. Documentation tests overlap; management acceptance is not implementation. No cross-collection totals.'),
  ('hrm-audits','HRM follow-up of three 2024 audits',[],'data/hrm-audits/records.json','data/hrm-audits/publication-review.json','records','historical recommendation-status rows from three named HRM audits','#/audits?view=hrm','32 historical recommendation statuses in the October 2026 HRM follow-up: 14 reported completed, 44% as printed. Status-as-of is unknown; September letter/graphic dates are distinct. Limited assurance, lower than an audit. Separate from provincial organization/audit rows; no combined recommendation total.'),
  ('physician-categories','Historical physician payment categories',[],'data/physician-categories/records.json','data/physician-categories/publication-review.json','records','province-wide category/year observations, not recipients','#/health-spending?view=physicians','435 historical physician payment category/year observations. Currency and category overlap unestablished: no sums, shares, trends, recipient identities or institutional-account joins.'),
  ('nshealth','NS Health consolidated expenses and budget basis',[],'data/nshealth/records.json','data/nshealth/publication-review.json','facts','statement cells including overlapping classifications and budget bridge','#/health-spending?view=nshealth','NS Health and PDDP consolidated scope. Explicit CAD thousands, recognized expenses not vendor payments. Service/object tables overlap; Note24 aligns budget basis. Optional Note21 adds accounting context, not collection counts. No physician-dataset join.'),
@@ -28,6 +29,9 @@ def build_collection_coverage(root):
     for identity,title,related,path,receipt_path,count_key,unit,route,scope in COLLECTIONS:
         file=root/path
         if not file.exists():continue
+        if identity=='hrm-capital':
+            from hrm_capital_publication import hrm_capital_files
+            hrm_capital_files(root)
         if identity=='hrm-audits':
             from hrm_audit_publication import hrm_audit_files
             hrm_audit_files(root)
