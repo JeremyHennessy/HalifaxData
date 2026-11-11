@@ -6,6 +6,25 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "hrm-facilities",
+      "title": "HRM facility audit: historical assessment tables",
+      "relatedSourceIds": [],
+      "dataPath": "data/hrm-facilities/records.json",
+      "dataSha256": "8ccd3f5b682889544c934ec39c67a8dad71add122f5a79c161e4192bf3f08282",
+      "reviewPath": "data/hrm-facilities/publication-review.json",
+      "reviewId": "hrm-facility-assessments-independent-review-20261111",
+      "reviewedOn": "2026-11-11",
+      "count": 9,
+      "countUnit": "construction-year categories within two reported assessment groups",
+      "route": "#/hrm-facilities",
+      "scope": "Nine construction-year category rows in two historical groups: 96 never assessed and 91 not reassessed for over ten years. Separate reported groups, not a combined total, rate or current building-safety finding. Status observation date unknown; management plans are attributed, not verified implementation. No cross-collection joins.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Facility_Management_Audit_Report.pdf"
+      ]
+    },
+    {
       "id": "hrm-capital",
       "title": "HRM capital-budget audit: tested business-unit aggregates",
       "relatedSourceIds": [],

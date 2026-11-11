@@ -1,0 +1,29 @@
+{
+  "status": "accepted",
+  "reviewer": "independent_source_and_final_data_review",
+  "reviewedOn": "2026-11-11",
+  "evidenceId": "hrm-facility-assessments-independent-review-20261111",
+  "scope": "Nine construction-year category rows in two historical facility-assessment tables from the October 2026 HRM Facility Management Audit, separate group totals and separate recorded-assessment observation, with brief attributed management context.",
+  "limitations": [
+    "Historical source-reported assessment records only, not current facility conditions, a reconciled property register, identified buildings, safety findings, missed maintenance, losses, legal breach or personal wrongdoing.",
+    "The 96 never-assessed and 91 not-reassessed totals summarize their own tables. No combined total, percentage, ranking or municipal-wide denominator is accepted. The separate 220 recorded assessments are not an additional category or denominator.",
+    "October 31, 2025 belongs only to the separate 220 observation. The precise observation date of the 96 and 91 tables is not explicitly established. Report month, letter date, audit period, management milestones, retrieval date and review date are distinct.",
+    "Management agreement and reported first-year assessment completion are attributed historical statements, not independently verified implementation, recommendation completion or resolution of the historical tables.",
+    "No broad reuse licence is established. Acceptance is limited to numerical facts, short source labels and brief original paraphrases with attribution. It does not authorize republication of the PDF, page images, report prose, recommendation text, signatures or contact information.",
+    "Only the exact bundle hash below is accepted. Application integration, rendered context, publication gates and deployment require separate verification. No consequential allegations or narrative expansion are accepted.",
+    "The retained source was inspected offline. The supplied official source and landing URLs and retrieval date were not independently re-tested online. No held sources were contacted, and no refresh, collector or scheduler was activated."
+  ],
+  "bundleSha256": "8ccd3f5b682889544c934ec39c67a8dad71add122f5a79c161e4192bf3f08282",
+  "sourceSha256": "bbe4378abb2b5ef128f9f2c33762884694e477df0043926d57da8e4a8586c636",
+  "checks": [
+    "Independently rendered retained PDF pages 1, 2, 10, 12, 13 and 23 and inspected their actual pixels; independently extracted text as a supplementary check. Verified retained PDF SHA-256 and 1797841-byte size.",
+    "Printed page 11 / PDF page 12: Buildings Never Assessed has No construction year available 30, Before 2000 43, 2000 to 2009 5, 2010 to 2019 9, and 2020 to 2026 9. The five rows sum to the separately printed total 96.",
+    "Printed page 11 / PDF page 12: Buildings Not Reassessed has No construction year available 11, Before 2000 68, 2000 to 2009 6, and 2010 to 2013 6. The four rows sum to the separately printed total 91. Surrounding text explicitly describes over ten years without reassessment.",
+    "Printed page 11 / PDF page 12 separately states HRM records show 220 facilities assessed as of October 31, 2025. Candidate preserves the date only for that observation, leaves table statusObservationAsOf null and currentStatusVerified false, and creates no denominator or additive category.",
+    "Printed pages 11 and 12 / PDF pages 12 and 13 support the brief management paraphrase: consultant engaged in June 2025, annual assessment of 20% over five years, and management-reported one-year completion in July 2026. Recommendation 5 response is Agree and supports the brief policy, procedures and responsibilities paraphrase; implementationVerified remains false.",
+    "Printed page 22 / PDF page 23 establishes performance audit, CSAE 3001 Direct Engagements, April 1, 2023 through March 31, 2025 audit period with outside-period information considered, and HRM-owned facilities maintained by Building Maintenance and Operations or managed by Facility Asset Renewal; new construction was considered only for handover.",
+    "Cover and page headers establish October 2026 report month; PDF page 2 letter is October 14, 2026. Publisher and source title match visible source identifiers. Printed page 9 / PDF page 10 supports the explicit data-quality limitation.",
+    "Read the complete final candidate JSON, checked all source-derived fields and citations, nine distinct category IDs, separate group membership and arithmetic, date and assurance boundaries, conditional publication metadata and rights limits. No individual building identities, cross-collection joins or unsupported current-condition claims are supplied. Candidate data was not edited.",
+    "Computed final bundle SHA-256 directly from its bytes and confirmed it remains identical to the supplied candidate hash. Acceptance is a bounded factual-source and data review, not a legal licence determination or integration/deployment approval."
+  ]
+}
