@@ -87,7 +87,7 @@ The independently reviewed [winter-operations explorer](docs/HRM-WINTER-OPERATIO
 
 ### Browse existing evidence by topic
 
-`#/find` groups the existing reviewed directory into six overlapping navigation topics, with collection-only shortcuts, combined filters and shareable URLs. Counts follow available accepted collections; they are not source-record totals. Collection cards show accepted review receipts and distinguish review dates from source periods/current status. The 25 collections and 29 foundation financial descriptions retain their exact identities and evidence limits. See [evidence directory](docs/EVIDENCE-FINDER.md).
+`#/find` groups the existing reviewed directory into six overlapping navigation topics, with collection-only shortcuts, combined filters and shareable URLs. Counts follow available accepted collections; they are not source-record totals. Collection cards show accepted review receipts and distinguish review dates from source periods/current status. The 26 collections and 29 foundation financial descriptions retain their exact identities and evidence limits. See [evidence directory](docs/EVIDENCE-FINDER.md).
 
 ### Check collection readiness without fetching
 
@@ -100,3 +100,7 @@ The independently reviewed [winter-operations explorer](docs/HRM-WINTER-OPERATIO
 ### Keyboard skip navigation
 
 The global “Skip to content” link focuses and scrolls the current main region without replacing the hash route. Active filters, evidence depth, browser history and in-flight evidence requests remain intact. The handler is installed before evidence loading. Synthetic tests cover repeated activation and the startup binding; the browser suite covers keyboard focus, subsequent Tab navigation, Back/Forward and activation during an interrupted response at each supported viewport.
+
+### Historical Halifax Transit service evidence
+
+The independently reviewed [Transit service explorer](docs/TRANSIT-SERVICE.md) adds a 26th collection at `#/transit`: seven annual on-time percentages and ten Access-A-Bus category/year counts. The 2024/25 result of 71% against an 85% target is shown as a descriptive 14 percentage-point gap. Observed timepoints are not complete trips; booking categories remain separate and incompletely defined. Historical staff reporting is not an independent audit or current service assessment. Search, year/group filters, source-bound JSON export, independent exact-byte admission and isolated-failure tests preserve these limits without activating collection.

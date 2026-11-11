@@ -4,7 +4,7 @@ import {searchRows} from './model.js';
 export const topics=[
  {id:'budgets',label:'Budgets & accounts',collectionIds:['foundation','budget','authorizations','institution','cash-bridge','governance','nshealth','municipal','municipal-capital','hrm-capital']},
  {id:'contracts',label:'Contracts & suppliers',collectionIds:['tenders','suppliers','richmond-register','ambulance','housing-audit','hrm-winter']},
- {id:'municipal',label:'Municipal services',collectionIds:['hrm-winter','hrm-facilities','hrm-capital','hrm-audits','water-projects','richmond-register','shelburne-grants','municipal-capital','municipal','reporting']},
+ {id:'municipal',label:'Municipal services',collectionIds:['transit','hrm-winter','hrm-facilities','hrm-capital','hrm-audits','water-projects','richmond-register','shelburne-grants','municipal-capital','municipal','reporting']},
  {id:'health-housing',label:'Health & housing',collectionIds:['physician-categories','nshealth','ambulance','housing-audit']},
  {id:'oversight',label:'Audits & oversight',collectionIds:['audits','hrm-audits','hrm-capital','hrm-facilities','hrm-winter','ambulance','housing-audit','reporting','governance']},
  {id:'transfers-grants',label:'Transfers & grants',collectionIds:['transfers','transfer-links','shelburne-grants']}
@@ -26,6 +26,7 @@ export function collectionTopics(directory){
  return topics.map(t=>({id:t.id,label:t.label,count:directory.filter(r=>r.kind==='collection'&&r.topics.includes(t.id)).length})).filter(t=>t.count>0);
 }
 export const questions=[
+ ['How reliable was Halifax Transit in its annual report?','transit','Compare the 2024/25 on-time result and target; keep Access-A-Bus category counts separate.'],
  ['What spending was authorized?','authorizations','Inspect approved amounts without treating them as payments.'],
  ['Who appears in procurement records?','tenders','Search source observations; awards are not final bills.'],
  ['Do the published figures agree?','reporting','Review an unresolved municipal reporting question and its competing explanations.'],

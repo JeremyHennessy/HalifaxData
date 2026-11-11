@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "halifax-transit-annual-service-v1",
+  "title": "Halifax Transit: historical reliability and accessible-trip counts",
+  "sourceTitle": "Halifax Transit 2024/25 Year End Performance Measures Report",
+  "sourceAttachment": "Attachment B to Halifax Transit 2024/25 Q4 KPI Report",
+  "publisher": "Halifax Regional Municipality / Halifax Transit",
+  "sourceURL": "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250821tsc1312.pdf",
+  "sourceSha256": "2f6df924c46bef304aabe14842ac0ae21f0552f556943ea24b029b7bb8d24542",
+  "sourceBytes": 1400965,
+  "coverReportDate": "2025-07-08",
+  "committeeMeetingDate": "2025-08-21",
+  "reportingYearAsReported": "2024/25",
+  "retrievedOn": "2026-11-11",
+  "currentStatusVerified": false,
+  "groups": [
+    {
+      "id": "reliability",
+      "label": "Annual on-time performance"
+    },
+    {
+      "id": "accessible-trips",
+      "label": "Access-A-Bus trip categories"
+    }
+  ],
+  "reliabilityContext": {
+    "definition": "The report measures the percentage of observed arrivals at designated timepoints that are no more than three minutes later than scheduled. Timepoints are terminals and selected stops with scheduled arrival times.",
+    "scope": "The covering report identifies this as conventional bus on-time performance. It is not the percentage of entire trips completed on time, a measure of all stops, or a live arrival prediction.",
+    "earlyArrivalBoundaryEstablished": false,
+    "observationCounts": null,
+    "historicalComparabilityVerified": false,
+    "currentYearTarget": {
+      "yearAsReported": "2024/25",
+      "percent": 85,
+      "actualPercent": 71,
+      "gapPercentagePoints": 14,
+      "calculation": "85 - 71 = 14 percentage points",
+      "basis": "Descriptive arithmetic using the source-rounded annual result and target, not a 14% change or a count of late trips. The target is established here for 2024/25; no year-specific historical target is assigned."
+    },
+    "printedPage": 16,
+    "pdfPage": 49
+  },
+  "accessContext": {
+    "summary": "The annual chart reports five Access-A-Bus trip categories separately for 2023/24 and 2024/25. These are category/year counts, not unique riders.",
+    "categoryDefinitionsEstablished": false,
+    "combinedDemandTotalEstablished": false,
+    "unservedDemandRateEstablished": false,
+    "interpretation": "The cited report does not define the booking categories in sufficient detail to identify reasons, responsibility or unmet demand. Cancelled is an Access-A-Bus category, not cancelled conventional-bus service. Not Provided, Cancelled and User Trip Refusals remain distinct. No combined total, cancellation rate or user-level inference is calculated.",
+    "printedPage": 8,
+    "pdfPage": 41
+  },
+  "sourceRights": {
+    "broadReuseLicenceEstablished": false,
+    "projection": "Only numerical facts, short source labels and original attributed explanation are published. The PDF, charts, page images, signatures and contact information are not republished."
+  },
+  "limits": [
+    "This is one historical staff performance report, not an independent audit or a current service assessment. Source publication, reporting periods, retrieval and independent review dates are distinct.",
+    "The annual on-time percentages are rounded as published. The number of observations, early-arrival treatment and year-to-year method comparability are not established in this projection. No weighted multi-year average, causal trend or route-level finding is inferred.",
+    "The 85% target and 71% result support a descriptive 14 percentage-point gap for 2024/25 only. This is not a percentage change, a late-trip count or an estimate of individual passenger delay.",
+    "Access-A-Bus booking categories have no sufficiently detailed definitions in the cited report. No unique-rider count, combined demand total, unmet-demand rate, cancellation blame or conventional-service cancellation count is inferred.",
+    "The 17 rows are seven annual percentage observations and ten category/year counts, not 17 comparable service events. They must not be added together or linked to budgets, payments, vehicle maintenance or audit recommendations.",
+    "This selected annual subset excludes the separate Q4 report, other annual metrics and newer reporting. No new source collector, refresh schedule or hold clearance is introduced."
+  ],
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "consequentialAllegation": false,
+    "reviewId": "halifax-transit-annual-independent-review-20261111",
+    "reviewedOn": "2026-11-11"
+  },
+  "records": [
+    {
+      "id": "transit-on-time-2018-19",
+      "groupId": "reliability",
+      "yearAsReported": "2018/19",
+      "measureAsReported": "Annual Overall On Time Performance",
+      "value": 78,
+      "unit": "percent",
+      "printedPage": 16,
+      "pdfPage": 49
+    },
+    {
+      "id": "transit-on-time-2019-20",
+      "groupId": "reliability",
+      "yearAsReported": "2019/20",
+      "measureAsReported": "Annual Overall On Time Performance",
+      "value": 78,
+      "unit": "percent",
+      "printedPage": 16,
+      "pdfPage": 49
+    },
+    {
+      "id": "transit-on-time-2020-21",
+      "groupId": "reliability",
+      "yearAsReported": "2020/21",
+      "measureAsReported": "Annual Overall On Time Performance",
+      "value": 88,
+      "unit": "percent",
+      "printedPage": 16,
+      "pdfPage": 49
+    },
+    {
+      "id": "transit-on-time-2021-22",
+      "groupId": "reliability",
+      "yearAsReported": "2021/22",
+      "measureAsReported": "Annual Overall On Time Performance",
+      "value": 84,
+      "unit": "percent",
+      "printedPage": 16,
+      "pdfPage": 49
+    },
+    {
+      "id": "transit-on-time-2022-23",
+      "groupId": "reliability",
+      "yearAsReported": "2022/23",
+      "measureAsReported": "Annual Overall On Time Performance",
+      "value": 79,
+      "unit": "percent",
+      "printedPage": 16,
+      "pdfPage": 49
+    },
+    {
+      "id": "transit-on-time-2023-24",
+      "groupId": "reliability",
+      "yearAsReported": "2023/24",
+      "measureAsReported": "Annual Overall On Time Performance",
+      "value": 73,
+      "unit": "percent",
+      "printedPage": 16,
+      "pdfPage": 49
+    },
+    {
+      "id": "transit-on-time-2024-25",
+      "groupId": "reliability",
+      "yearAsReported": "2024/25",
+      "measureAsReported": "Annual Overall On Time Performance",
+      "value": 71,
+      "unit": "percent",
+      "printedPage": 16,
+      "pdfPage": 49
+    },
+    {
+      "id": "transit-access-actual-trips-operated-2023-24",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2023/24",
+      "measureAsReported": "Actual Trips Operated",
+      "value": 155324,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-actual-trips-operated-2024-25",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2024/25",
+      "measureAsReported": "Actual Trips Operated",
+      "value": 157381,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-not-provided-2023-24",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2023/24",
+      "measureAsReported": "Not Provided",
+      "value": 5892,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-not-provided-2024-25",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2024/25",
+      "measureAsReported": "Not Provided",
+      "value": 6974,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-cancelled-2023-24",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2023/24",
+      "measureAsReported": "Cancelled",
+      "value": 42459,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-cancelled-2024-25",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2024/25",
+      "measureAsReported": "Cancelled",
+      "value": 39294,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-no-shows-2023-24",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2023/24",
+      "measureAsReported": "No Shows",
+      "value": 6015,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-no-shows-2024-25",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2024/25",
+      "measureAsReported": "No Shows",
+      "value": 5763,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-user-trip-refusals-2023-24",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2023/24",
+      "measureAsReported": "User Trip Refusals",
+      "value": 576,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    },
+    {
+      "id": "transit-access-user-trip-refusals-2024-25",
+      "groupId": "accessible-trips",
+      "yearAsReported": "2024/25",
+      "measureAsReported": "User Trip Refusals",
+      "value": 879,
+      "unit": "reported category count",
+      "printedPage": 8,
+      "pdfPage": 41
+    }
+  ]
+}

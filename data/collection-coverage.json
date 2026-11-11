@@ -6,6 +6,25 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "transit",
+      "title": "Halifax Transit: historical reliability and accessible-trip counts",
+      "relatedSourceIds": [],
+      "dataPath": "data/transit/records.json",
+      "dataSha256": "bf72517583e3f9bec89fe5a776046df268b877d35a0bae6791f0bc0fcad72fb9",
+      "reviewPath": "data/transit/publication-review.json",
+      "reviewId": "halifax-transit-annual-independent-review-20261111",
+      "reviewedOn": "2026-11-11",
+      "count": 17,
+      "countUnit": "historical annual percentage observations and Access-A-Bus category/year counts",
+      "route": "#/transit",
+      "scope": "Seven historical annual on-time percentages and ten separate Access-A-Bus category/year counts. The 2024/25 target gap is descriptive arithmetic. Observation counts, booking-category definitions, combined demand and current service are unestablished; no totals, causal trend or unique-rider inference.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://cdn.halifax.ca/sites/default/files/documents/city-hall/standing-committees/250821tsc1312.pdf"
+      ]
+    },
+    {
       "id": "hrm-winter",
       "title": "HRM winter operations: historical costs and report samples",
       "relatedSourceIds": [],

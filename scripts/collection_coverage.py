@@ -1,6 +1,7 @@
 """Build a separate receipt-bound collection layer without changing the reference inventory."""
 import hashlib,json
 COLLECTIONS=[
+ ('transit', 'Halifax Transit: historical reliability and accessible-trip counts', [], 'data/transit/records.json', 'data/transit/publication-review.json', 'records', 'historical annual percentage observations and Access-A-Bus category/year counts', '#/transit', 'Seven historical annual on-time percentages and ten separate Access-A-Bus category/year counts. The 2024/25 target gap is descriptive arithmetic. Observation counts, booking-category definitions, combined demand and current service are unestablished; no totals, causal trend or unique-rider inference.') ,
  ('hrm-winter', 'HRM winter operations: historical costs and report samples', [], 'data/hrm-winter/records.json', 'data/hrm-winter/publication-review.json', 'records', 'historical year summaries and contractor-report sample categories', '#/hrm-winter', 'Two historical year summaries and five contractor-report sample categories from the June 2025 audit. In-house cost is unknown; contractor amounts retain source-dollar millions. Reporting denominators differ. No complete program cost, cost-per-event, combined compliance rate, service-performance inference or current-status claim.'),
  ('hrm-facilities', 'HRM facility audit: historical assessment tables', [], 'data/hrm-facilities/records.json', 'data/hrm-facilities/publication-review.json', 'records', 'construction-year categories within two reported assessment groups', '#/hrm-facilities', 'Nine construction-year category rows in two historical groups: 96 never assessed and 91 not reassessed for over ten years. Separate reported groups, not a combined total, rate or current building-safety finding. Status observation date unknown; management plans are attributed, not verified implementation. No cross-collection joins.'),
  ('hrm-capital','HRM capital-budget audit: tested business-unit aggregates',[],'data/hrm-capital/records.json','data/hrm-capital/publication-review.json','records','business-unit aggregates of tested projects','#/hrm-capital','Three business-unit aggregates representing 12 tested projects, not 12 identified project rows or the entire Capital Plan. Budget and workplan amounts, not payments or losses. Documentation tests overlap; management acceptance is not implementation. No cross-collection totals.'),
@@ -31,6 +32,9 @@ def build_collection_coverage(root):
     for identity,title,related,path,receipt_path,count_key,unit,route,scope in COLLECTIONS:
         file=root/path
         if not file.exists():continue
+        if identity=='transit':
+            from transit_publication import transit_files
+            transit_files(root)
         if identity=='hrm-winter':
             from hrm_winter_publication import hrm_winter_files
             hrm_winter_files(root)
