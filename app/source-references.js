@@ -29,7 +29,7 @@ export function filterReferences(bundle,{q='',group='',stage=''}={}){
  if(stage==='capture')rows=rows.filter(r=>r.retainedCaptureEvidenceVerified);
  return rows;
 }
-export const OPTIONAL_COLLECTION_ROUTES={'hrm-facilities':'#/hrm-facilities','hrm-capital':'#/hrm-capital','hrm-audits':'#/audits?view=hrm',
+export const OPTIONAL_COLLECTION_ROUTES={'hrm-winter':'#/hrm-winter','hrm-facilities':'#/hrm-facilities','hrm-capital':'#/hrm-capital','hrm-audits':'#/audits?view=hrm',
  'physician-categories':'#/health-spending?view=physicians',
  'nshealth':'#/health-spending?view=nshealth',
  'richmond-register':'#/richmond-register',

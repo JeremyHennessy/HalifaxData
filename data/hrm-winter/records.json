@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "hrm-winter-operations-tables-v1",
+  "status": "accepted_factual_projection",
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "consequentialAllegation": false,
+    "reviewType": "source_attributed_historical_winter_operations_tables",
+    "reviewId": "hrm-winter-operations-independent-review-20261111",
+    "reviewedOn": "2026-11-11"
+  },
+  "title": "HRM winter operations: historical costs and report samples",
+  "publisher": "Office of the Auditor General, Halifax Regional Municipality",
+  "sourceTitle": "Management of Winter Operations Audit",
+  "sourceURL": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Management_of_Winter_Operations_Audit_Report.pdf",
+  "landingURL": "https://hrmauditorgeneral.ca/published-reports",
+  "sourceSha256": "6ea71b5adfb05d2583caef8d73beff541f7c83f64efd7eb5cecdff0e77e5ab11",
+  "sourceBytes": 931768,
+  "retrievedOn": "2026-11-11",
+  "reportMonth": "2025-06",
+  "letterDate": "2025-06-11",
+  "auditPeriod": {
+    "start": "2022-11-01",
+    "end": "2024-04-30",
+    "printedPage": 23,
+    "pdfPage": 24
+  },
+  "assurance": {
+    "type": "performance audit",
+    "level": "reasonable assurance",
+    "standard": "CSAE 3001 Direct Engagements",
+    "printedPage": 23,
+    "pdfPage": 24
+  },
+  "auditScope": {
+    "summary": "Management of road and sidewalk snow/ice clearing operations and contracts. Municipal-facility clearing, procurement and assessment of the standards themselves were outside scope.",
+    "printedPage": 23,
+    "pdfPage": 24
+  },
+  "scope": "Two historical year summaries and five contractor-report sample categories from the June 2025 audit. These are different record types, not seven contracts or a complete spending ledger.",
+  "recordUnit": "historical year summary or contractor-report sample category",
+  "statusObservationAsOf": null,
+  "currentStatusVerified": false,
+  "groups": [
+    {
+      "id": "costs",
+      "label": "Historical cost and event context"
+    },
+    {
+      "id": "reports",
+      "label": "Contractor-report receipt samples"
+    }
+  ],
+  "records": [
+    {
+      "id": "hrm-winter-cost-2022-23",
+      "groupId": "costs",
+      "yearAsReported": "2022-23",
+      "declaredWeatherEvents": 17,
+      "eventAttribution": "Public Works weather event calendars, as reported by the Auditor General",
+      "contractorCostRaw": "29.4",
+      "unit": "million",
+      "sourceCurrencySymbol": "$",
+      "currency": null,
+      "accountingBasis": null,
+      "inHouseCostRaw": null,
+      "inHouseCostAsReported": "Unknown",
+      "costAttribution": "HRM SAP, as reported by the Auditor General",
+      "printedPage": 21,
+      "pdfPage": 22
+    },
+    {
+      "id": "hrm-winter-cost-2023-24",
+      "groupId": "costs",
+      "yearAsReported": "2023-24",
+      "declaredWeatherEvents": 18,
+      "eventAttribution": "Public Works weather event calendars, as reported by the Auditor General",
+      "contractorCostRaw": "30.4",
+      "unit": "million",
+      "sourceCurrencySymbol": "$",
+      "currency": null,
+      "accountingBasis": null,
+      "inHouseCostRaw": null,
+      "inHouseCostAsReported": "Unknown",
+      "costAttribution": "HRM SAP, as reported by the Auditor General",
+      "printedPage": 21,
+      "pdfPage": 22
+    },
+    {
+      "id": "hrm-winter-report-1",
+      "groupId": "reports",
+      "reportAsReported": "Operational Plan",
+      "frequencyAsReported": "Weather event",
+      "applicableContractsAsReported": "All",
+      "reportsObtained": 12,
+      "reportsExpected": 30,
+      "printedPage": 12,
+      "pdfPage": 13
+    },
+    {
+      "id": "hrm-winter-report-2",
+      "groupId": "reports",
+      "reportAsReported": "Operations Status",
+      "frequencyAsReported": "Weather event",
+      "applicableContractsAsReported": "Sidewalk Only",
+      "reportsObtained": 0,
+      "reportsExpected": 10,
+      "printedPage": 12,
+      "pdfPage": 13
+    },
+    {
+      "id": "hrm-winter-report-3",
+      "groupId": "reports",
+      "reportAsReported": "Post Event Summary",
+      "frequencyAsReported": "Weather event",
+      "applicableContractsAsReported": "Two Contracts",
+      "reportsObtained": 0,
+      "reportsExpected": 9,
+      "printedPage": 12,
+      "pdfPage": 13
+    },
+    {
+      "id": "hrm-winter-report-4",
+      "groupId": "reports",
+      "reportAsReported": "Morning Report",
+      "frequencyAsReported": "Daily",
+      "applicableContractsAsReported": "Streets Only",
+      "reportsObtained": 59,
+      "reportsExpected": 60,
+      "printedPage": 12,
+      "pdfPage": 13
+    },
+    {
+      "id": "hrm-winter-report-5",
+      "groupId": "reports",
+      "reportAsReported": "Contractor Diary",
+      "frequencyAsReported": "Weekly",
+      "applicableContractsAsReported": "All",
+      "reportsObtained": 58,
+      "reportsExpected": 90,
+      "printedPage": 12,
+      "pdfPage": 13
+    }
+  ],
+  "costContext": {
+    "summary": "The auditor reports that staff salaries and fleet equipment were excluded from centrally captured in-house costs. The published table leaves both in-house totals unknown.",
+    "attribution": "Auditor General, describing management information",
+    "printedPage": 6,
+    "pdfPage": 7,
+    "currency": null,
+    "accountingBasis": null,
+    "fullProgramCostEstablished": false,
+    "costPerEventEstablished": false
+  },
+  "sampleContext": {
+    "datesReviewed": 30,
+    "weatherEventDates": 10,
+    "nonWeatherEventDates": 20,
+    "contractZonesPerDate": 3,
+    "allContractsCoveredBySampling": true,
+    "contractCount": 9,
+    "summary": "Three contract zones were sampled per date; all contracts were covered across testing. Expected counts differ with each sampled contract reporting requirement. These are counts of documents obtained, not measured snow-clearing outcomes.",
+    "printedPages": [
+      11,
+      12
+    ],
+    "pdfPages": [
+      12,
+      13
+    ],
+    "populationExtrapolationAllowed": false,
+    "combinedRateAllowed": false
+  },
+  "managementContext": [
+    {
+      "recommendationNumber": 2,
+      "responseAsReported": "Agree",
+      "summary": "Management planned a policy defining performance data, collection processes and indicators.",
+      "implementationVerified": false,
+      "printedPage": 6,
+      "pdfPage": 7
+    },
+    {
+      "recommendationNumber": 7,
+      "responseAsReported": "Agree",
+      "summary": "Management planned to revise required reports and centrally track reporting compliance.",
+      "implementationVerified": false,
+      "printedPage": 13,
+      "pdfPage": 14
+    }
+  ],
+  "limits": [
+    "Historical source facts only. Report month, letter date, audit period and retrieval/review dates are different. The precise observation date for the report samples is not established, and current service conditions are not verified.",
+    "The two fiscal-year labels are retained as printed, without invented start/end dates. The audit window spans November 2022 to April 2024 and is not a replacement for those labels.",
+    "Contractor amounts are source-reported financial costs rounded to one decimal million, not exact cash payments, invoice totals, budgets or complete program costs. The source dollar symbol is preserved; an explicit currency code and cash/accrual basis are not established.",
+    "In-house costs are explicitly Unknown, never zero. No in-house-versus-contractor efficiency comparison, total program cost, per-event calculation, cross-year sum, trend or loss is established.",
+    "Each report category has its own applicable-contract scope and expected-count denominator. No sum, overall compliance rate, vendor ranking or whole-population extrapolation is accepted.",
+    "Document receipt does not establish report quality, clearing performance, safety, service-standard compliance, amounts owed, financial loss or personal wrongdoing. No individual contractor identity is assigned to these sample results.",
+    "Management responses are attributed plans, not evidence of implementation or current recommendation completion. No join is made to other audit-follow-up collections."
+  ],
+  "sourceRights": {
+    "broadReuseLicenceEstablished": false,
+    "projection": "Numerical facts, short source identifiers and brief original paraphrases with attribution only. No PDF, page images, recommendation prose, signatures or contacts are republished."
+  }
+}

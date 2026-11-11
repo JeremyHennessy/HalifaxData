@@ -6,6 +6,25 @@
   "refreshNote": "No source-ingestion refresh schedule is configured in this repository. Review dates do not make historical records current.",
   "collections": [
     {
+      "id": "hrm-winter",
+      "title": "HRM winter operations: historical costs and report samples",
+      "relatedSourceIds": [],
+      "dataPath": "data/hrm-winter/records.json",
+      "dataSha256": "9819d900353771f6acae841a960d5e3ce4bfaf62eef60f06ea51ad5b7269b091",
+      "reviewPath": "data/hrm-winter/publication-review.json",
+      "reviewId": "hrm-winter-operations-independent-review-20261111",
+      "reviewedOn": "2026-11-11",
+      "count": 7,
+      "countUnit": "historical year summaries and contractor-report sample categories",
+      "route": "#/hrm-winter",
+      "scope": "Two historical year summaries and five contractor-report sample categories from the June 2025 audit. In-house cost is unknown; contractor amounts retain source-dollar millions. Reporting denominators differ. No complete program cost, cost-per-event, combined compliance rate, service-performance inference or current-status claim.",
+      "completeSourceCoverage": false,
+      "scheduledRefreshConfigured": false,
+      "sourceURLs": [
+        "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Management_of_Winter_Operations_Audit_Report.pdf"
+      ]
+    },
+    {
       "id": "hrm-facilities",
       "title": "HRM facility audit: historical assessment tables",
       "relatedSourceIds": [],

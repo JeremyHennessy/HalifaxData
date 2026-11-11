@@ -48,3 +48,9 @@
 .hrm-facilities { min-width: 0; overflow-wrap: anywhere; }
 .hrm-facilities .field, .hrm-facilities select { min-width: 0; max-width: 100%; }
 .hrm-facilities .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+
+/* Winter evidence retains readable amounts, identifiers and review hashes. */
+.hrm-winter { min-width: 0; overflow-wrap: anywhere; }
+.hrm-winter .field, .hrm-winter select { min-width: 0; max-width: 100%; }
+.hrm-winter .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.hrm-winter .winter-management, .hrm-winter .winter-cost-context, .hrm-winter .winter-sample-context { margin-block: 1rem; }
