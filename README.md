@@ -62,7 +62,7 @@ Cowie Hill and Akerley now have separately reviewed, optional original-decision 
 Hosted collection-failure checks use `tests/reviewed-count.mjs`, an explicit validated release baseline, rather than scattered literal totals. The homepage additionally asserts its independently fixed expected label, so a wrong manifest and wrong page cannot validate one another.
 ## Offline pipeline foundation (inactive)
 
-`pipeline/foundation` adds reviewed historical arithmetic checks, retained robots-policy matching and a disabled candidate collector. Its 139 offline tests are included explicitly in `npm test`. No scheduler, source fetch, public finding or new collection is activated. The public build allowlist is unchanged; package fixtures, generated reports and runtime state must stay outside `dist`. See `docs/OFFLINE-PIPELINE-FOUNDATION.md`.
+`pipeline/foundation` adds reviewed historical arithmetic checks, retained robots-policy matching and a disabled candidate collector. Its 149 offline tests are included explicitly in `npm test`. No scheduler, source fetch, public finding or new collection is activated. The public build allowlist is unchanged; package fixtures, generated reports and runtime state must stay outside `dist`. See `docs/OFFLINE-PIPELINE-FOUNDATION.md`.
 
 ## Separate health-source views
 `#/health-spending` defaults to 435 historical province-wide physician payment category/year observations. Original year/category labels, signed decimals, six negative values and 63 explicit zeroes remain intact. Currency, category overlap and cash/accrual basis are unestablished: no dollar symbol, totals, shares, trends, recipient matching or invented period dates.
