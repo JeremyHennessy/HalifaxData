@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "hrm-annual-audit-context-v1",
+  "title": "Separate annual-report performance measure",
+  "source": {
+    "publisher": "Office of the Auditor General, Halifax Regional Municipality",
+    "title": "2025-26 Annual Report and 2026-27 Audit Priorities",
+    "url": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/2025-26_Annual_Report_and_2026-27_Audit_Priorities.pdf",
+    "sha256": "f0f22cddff14327f72c5af379172c7ef46a5e90041f16e179b7d1949746a3f4d",
+    "bytes": 222532,
+    "retrievedOn": "2026-11-11",
+    "printedPage": 3,
+    "pdfPage": 4
+  },
+  "measure": {
+    "periodAsReported": "2025-26",
+    "description": "Recommendations implemented after 18 months",
+    "resultPercent": 70,
+    "targetPercent": 80,
+    "recommendationDenominator": null,
+    "statusObservationAsOf": null,
+    "currentStatusVerified": false
+  },
+  "parent": {
+    "path": "data/hrm-audits/records.json",
+    "sha256": "f9171cfa466d09389976cb38172b735ea22488ac161db77463b726f1f7c893a4",
+    "relationship": "Separate historical measure from the same publisher; not a shared recommendation cohort."
+  },
+  "explanation": "The annual report pairs its 70% result with an 80% target for implementation after 18 months. It describes improvement from the previous year’s 43%, while noting five years below target. This is a separate historical performance measure, not a result for the three audits in the October 2026 follow-up above.",
+  "limits": [
+    "The annual-report page does not give the underlying recommendation count or an exact status observation date. Neither is inferred.",
+    "Do not combine the 70% annual-report measure with the 44% follow-up summary, subtract them to claim a trend, or apply this target to a different cohort.",
+    "No result against the 2026-2030 action plan is established here. No current completion, financial loss, legal breach or personal wrongdoing is inferred."
+  ],
+  "sourceRights": {
+    "reuseLicence": "not_established",
+    "projection": "Attributed numeric facts, short source identifiers and original explanation only. No report prose, PDF, page images, signatures or contact details are republished."
+  },
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "consequentialAllegation": false,
+    "reviewType": "source_attributed_historical_performance_context",
+    "reviewId": "hrm-annual-performance-independent-review-20261111",
+    "reviewedOn": "2026-11-11"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "reviewer": "independent_source_and_context_data_review",
+  "reviewedOn": "2026-11-11",
+  "evidenceId": "hrm-annual-performance-independent-review-20261111",
+  "scope": "Exact historical annual-report performance context: the 2025-26 result of 70% and target of 80% for recommendations implemented after 18 months, plus the report-attributed comparison with the previous 43% and five years below target, from printed page 3 / PDF page 4. Parent linkage is checked against the retained 2026 follow-up data without combining cohorts.",
+  "limitations": [
+    "The source page gives neither an underlying recommendation denominator nor an exact status observation date. Neither is inferred, and current implementation is not verified.",
+    "The 70% annual-report measure is separate from the 44% October 2026 follow-up summary. This review does not establish a shared cohort, a trend between these percentages, or applicability of the annual-report target to the follow-up cohort. The comparison with the previous 43% and the five-year statement are attributed to the annual report, not independently reconstructed from recommendation-level data.",
+    "No 2026-2030 action-plan result, financial loss, legal breach, personal wrongdoing or current completion claim is established. The excluded action-plan source was not accessed or assessed.",
+    "A broad source reuse licence is not established. Acceptance covers attributed numeric facts, short source identifiers and original explanation, not republication of report prose, PDF, page images, signatures or contact details.",
+    "Only the exact context bundle hash is accepted. This is a source-and-data review, not a UI, integration, deployment or publication-gate review. The supplied source URL and retrieval date were not independently re-tested online. No newest-report claim is made by the artifact or this receipt. Parent source facts were not independently re-audited against its PDF in this review."
+  ],
+  "bundleSha256": "76f5e0bc8beabc514c352b51569871b2f108020cbf7de173184c0166e44359a9",
+  "sourceSha256": "f0f22cddff14327f72c5af379172c7ef46a5e90041f16e179b7d1949746a3f4d",
+  "checks": [
+    "Independently rendered and visually inspected PDF page 4 of the retained 2025-26 annual report. The performance table identifies the period as 2025-26, the measure as recommendations implemented after 18 months, its target as 80%, and its result as 70%. The printed page number is 3.",
+    "Visually checked the accompanying performance paragraph. It explicitly describes improvement from the previous year's 43% and states that the implementation rate has been below 80% for the past five years. The candidate attributes both points to the report without asserting a trend against the separate 44% follow-up.",
+    "Read extracted text from the complete retained annual report. Its title and publisher identification match the context metadata. The report lists Management of Business Continuity and Enterprise Risk Management follow-ups as in progress and lists Diversity and Inclusion for 2026-27 follow-up, supporting separation from the October 2026 three-audit result.",
+    "Computed the retained PDF SHA-256 directly and verified its 222532-byte size against source metadata. Computed the accepted context bundle SHA-256 directly from its unchanged bytes.",
+    "Computed the SHA-256 of data/hrm-audits/records.json and confirmed the exact parent linkage. Its October 2026 report month, 14-of-32 / 44% summary and three named 2024 audit scope remain separate from this annual-report context.",
+    "Read every revised context field, explanation, limit, source-rights statement and publication condition. Null denominator and observation date, false currentStatusVerified, independent receipt requirement and absence of consequential allegations are consistent with the bounded evidence.",
+    "Confirmed that the candidate contains no original recommendation narratives, report PDF, page images, signatures or contact details, and no calculated cross-cohort trend or result for the excluded action plan."
+  ]
+}

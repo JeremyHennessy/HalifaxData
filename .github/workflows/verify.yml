@@ -29,7 +29,11 @@ jobs:
       - name: Retain prior verified code-only bundles
         run: python3 scripts/retain_code.py
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
+      # ubuntu-24.04 supplies Chromium's required shared libraries. Avoid a full
+      # apt refresh for supplemental fonts; browser launch/journeys still fail
+      # the release if a required runtime library is missing.
+      - name: Install pinned Chromium
+        run: npx playwright install chromium
       - name: Test resident journeys
         run: |
           mkdir -p artifacts/host/HalifaxData
