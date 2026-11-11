@@ -76,3 +76,7 @@ The report month, September 11 letter, September summary graphic, and November 1
 
 ### Separate annual audit performance context
 The HRM follow-up view includes optional, independently reviewed context from the Auditor General's 2025–26 annual report: 70% implemented after 18 months against that report's 80% target. It is explicitly separate from the October 2026 three-audit snapshot; no cross-cohort trend or action-plan result is inferred. The denominator and precise status date remain unknown. Exact context/receipt pins, isolated failure handling, separate evidence export and mobile/browser checks preserve the existing collection count.
+
+### HRM facility-assessment evidence
+
+The independently reviewed [facility assessment explorer](docs/HRM-FACILITIES.md) adds a 24th collection at `#/hrm-facilities`: nine source-category rows, two separate historical assessment groups, unknown table observation date and attributed management context. Search, group filters, three reading depths and source-bound JSON export preserve the limits; no combined total, denominator, current safety claim or new refresh job is introduced.

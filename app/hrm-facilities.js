@@ -1,0 +1,21 @@
+import {verifiedJSON} from './tenders.js';
+export const FACILITIES_HASH='8ccd3f5b682889544c934ec39c67a8dad71add122f5a79c161e4192bf3f08282';
+export const FACILITIES_REVIEW_HASH='ff92bc3468bf56f6ade4e1ffe2f9288edfbedf194ce1f424c28c00f7e7c199ff';
+export const FACILITIES_SOURCE_HASH='bbe4378abb2b5ef128f9f2c33762884694e477df0043926d57da8e4a8586c636';
+export const FACILITIES_SCOPE='Nine construction-year category rows in two historical groups: 96 never assessed and 91 not reassessed for over ten years. Separate reported groups, not a combined total, rate or current building-safety finding. Status observation date unknown; management plans are attributed, not verified implementation. No cross-collection joins.';
+export const FACILITIES_UNIT='construction-year categories within two reported assessment groups';
+const need=(ok,message)=>{if(!ok)throw Error(message);};
+export function validateFacilities(b,r){
+ need(r.status==='accepted'&&r.bundleSha256===FACILITIES_HASH&&r.sourceSha256===FACILITIES_SOURCE_HASH&&b.publication.allowed===true&&b.publication.reviewId===r.evidenceId&&b.publication.reviewedOn===r.reviewedOn,'Facility independent review mismatch');
+ need(b.schemaVersion==='hrm-facility-assessment-tables-v1'&&b.sourceSha256===FACILITIES_SOURCE_HASH&&b.sourceBytes===1797841&&b.sourceTitle==='Facility Management Audit'&&b.reportMonth==='2026-10'&&b.letterDate==='2026-10-14'&&b.auditPeriod.start==='2023-04-01'&&b.auditPeriod.end==='2025-03-31'&&b.statusObservationAsOf===null&&b.currentStatusVerified===false,'Facility source or dates mismatch');
+ const expected=[['never-assessed','No construction year available',30],['never-assessed','Before 2000',43],['never-assessed','2000 to 2009',5],['never-assessed','2010 to 2019',9],['never-assessed','2020 to 2026',9],['not-reassessed','No construction year available',11],['not-reassessed','Before 2000',68],['not-reassessed','2000 to 2009',6],['not-reassessed','2010 to 2013',6]];
+ need(b.records.length===9&&new Set(b.records.map(r=>r.id)).size===9,'Facility category count mismatch');
+ b.records.forEach((row,i)=>need(JSON.stringify([row.groupId,row.constructionYearAsReported,row.facilityCount])===JSON.stringify(expected[i])&&row.printedPage===11&&row.pdfPage===12,'Facility bounded category mismatch'));
+ need(b.groups.length===2,'Facility group count mismatch');
+ b.groups.forEach((g,i)=>need(g.id===['never-assessed','not-reassessed'][i]&&g.label===['Buildings Never Assessed','Buildings Not Reassessed'][i]&&g.count===[96,91][i]&&g.printedPage===11&&g.pdfPage===12&&b.records.filter(r=>r.groupId===g.id).reduce((n,r)=>n+r.facilityCount,0)===g.count,'Facility separate group mismatch'));
+ need(b.separateSourceObservation.count===220&&b.separateSourceObservation.asOf==='2025-10-31'&&b.managementContext.implementationVerified===false,'Facility context or implementation boundary mismatch');return b;
+}
+export function filterFacilities(b,q='',group=''){const query=q.trim().toLocaleLowerCase('en-CA');return b.records.filter(r=>(!group||r.groupId===group)&&[r.id,r.constructionYearAsReported,b.groups.find(g=>g.id===r.groupId).label].some(v=>v.toLocaleLowerCase('en-CA').includes(query)));}
+export function facilitiesExport(bundle,review,q='',group=''){return{bundle,review,filters:{q,group},matchingRecordIds:filterFacilities(bundle,q,group).map(r=>r.id),scope:FACILITIES_SCOPE};}
+export async function getFacilities(signal,fetcher=fetch){const review=await verifiedJSON('data/hrm-facilities/publication-review.json',FACILITIES_REVIEW_HASH,null,signal,fetcher);return{review,bundle:validateFacilities(await verifiedJSON('data/hrm-facilities/records.json',FACILITIES_HASH,null,signal,fetcher),review)};}
+export function validateFacilitiesCoverage(c,{bundle:b,review:r}){need(c.id==='hrm-facilities'&&c.title===b.title&&c.relatedSourceIds.length===0&&c.dataPath==='data/hrm-facilities/records.json'&&c.reviewPath==='data/hrm-facilities/publication-review.json'&&c.dataSha256===FACILITIES_HASH&&c.reviewId===r.evidenceId&&c.reviewedOn===r.reviewedOn&&c.count===9&&c.countUnit===FACILITIES_UNIT&&c.route==='#/hrm-facilities'&&c.scope===FACILITIES_SCOPE&&c.completeSourceCoverage===false&&c.scheduledRefreshConfigured===false&&JSON.stringify(c.sourceURLs)===JSON.stringify([b.sourceURL]),'Facility directory metadata mismatch');return c;}

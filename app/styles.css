@@ -43,3 +43,8 @@
 .capital-audit-tabs a { white-space: normal; }
 
 .hrm-capital .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+
+/* Facility evidence keeps long hashes and category identifiers within every viewport. */
+.hrm-facilities { min-width: 0; overflow-wrap: anywhere; }
+.hrm-facilities .field, .hrm-facilities select { min-width: 0; max-width: 100%; }
+.hrm-facilities .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }

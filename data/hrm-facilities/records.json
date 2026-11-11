@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "hrm-facility-assessment-tables-v1",
+  "status": "accepted_factual_projection",
+  "publication": {
+    "allowed": true,
+    "requiresMatchingIndependentReceipt": true,
+    "consequentialAllegation": false,
+    "reviewType": "source_attributed_historical_facility_assessment_tables",
+    "reviewId": "hrm-facility-assessments-independent-review-20261111",
+    "reviewedOn": "2026-11-11"
+  },
+  "title": "HRM facility audit: historical assessment tables",
+  "publisher": "Office of the Auditor General, Halifax Regional Municipality",
+  "sourceTitle": "Facility Management Audit",
+  "sourceURL": "https://hrmauditorgeneral.ca/themes/user/site/default/asset/img/common/Facility_Management_Audit_Report.pdf",
+  "landingURL": "https://hrmauditorgeneral.ca/published-reports",
+  "sourceSha256": "bbe4378abb2b5ef128f9f2c33762884694e477df0043926d57da8e4a8586c636",
+  "sourceBytes": 1797841,
+  "retrievedOn": "2026-11-11",
+  "reportMonth": "2026-10",
+  "letterDate": "2026-10-14",
+  "auditPeriod": {
+    "start": "2023-04-01",
+    "end": "2025-03-31",
+    "outsidePeriodInformationConsidered": true,
+    "printedPage": 22,
+    "pdfPage": 23
+  },
+  "assurance": {
+    "type": "performance audit",
+    "standard": "CSAE 3001 Direct Engagements",
+    "printedPage": 22,
+    "pdfPage": 23
+  },
+  "auditScope": {
+    "summary": "HRM-owned facilities maintained by Building Maintenance and Operations or managed by Facility Asset Renewal; new construction considered only for handover.",
+    "printedPage": 22,
+    "pdfPage": 23
+  },
+  "scope": "Nine construction-year category rows from two historical assessment tables, not nine buildings, a complete property register or current facility conditions.",
+  "recordUnit": "construction-year category within a reported assessment group",
+  "evidenceStage": "source_reported_historical_assessment_status",
+  "statusObservationAsOf": null,
+  "currentStatusVerified": false,
+  "groups": [
+    {
+      "id": "never-assessed",
+      "label": "Buildings Never Assessed",
+      "count": 96,
+      "context": "Source-reported buildings never assessed.",
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "not-reassessed",
+      "label": "Buildings Not Reassessed",
+      "count": 91,
+      "context": "Source-reported buildings not reassessed for over ten years.",
+      "printedPage": 11,
+      "pdfPage": 12
+    }
+  ],
+  "records": [
+    {
+      "id": "hrm-facilities-never-assessed-1",
+      "groupId": "never-assessed",
+      "constructionYearAsReported": "No construction year available",
+      "facilityCount": 30,
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "hrm-facilities-never-assessed-2",
+      "groupId": "never-assessed",
+      "constructionYearAsReported": "Before 2000",
+      "facilityCount": 43,
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "hrm-facilities-never-assessed-3",
+      "groupId": "never-assessed",
+      "constructionYearAsReported": "2000 to 2009",
+      "facilityCount": 5,
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "hrm-facilities-never-assessed-4",
+      "groupId": "never-assessed",
+      "constructionYearAsReported": "2010 to 2019",
+      "facilityCount": 9,
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "hrm-facilities-never-assessed-5",
+      "groupId": "never-assessed",
+      "constructionYearAsReported": "2020 to 2026",
+      "facilityCount": 9,
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "hrm-facilities-not-reassessed-1",
+      "groupId": "not-reassessed",
+      "constructionYearAsReported": "No construction year available",
+      "facilityCount": 11,
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "hrm-facilities-not-reassessed-2",
+      "groupId": "not-reassessed",
+      "constructionYearAsReported": "Before 2000",
+      "facilityCount": 68,
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "hrm-facilities-not-reassessed-3",
+      "groupId": "not-reassessed",
+      "constructionYearAsReported": "2000 to 2009",
+      "facilityCount": 6,
+      "printedPage": 11,
+      "pdfPage": 12
+    },
+    {
+      "id": "hrm-facilities-not-reassessed-4",
+      "groupId": "not-reassessed",
+      "constructionYearAsReported": "2010 to 2013",
+      "facilityCount": 6,
+      "printedPage": 11,
+      "pdfPage": 12
+    }
+  ],
+  "separateSourceObservation": {
+    "count": 220,
+    "unit": "facilities recorded as assessed",
+    "asOf": "2025-10-31",
+    "attribution": "HRM records, as reported by the Auditor General",
+    "printedPage": 11,
+    "pdfPage": 12,
+    "relationship": "Separate contextual count, not a denominator for the two tables or an additional category row."
+  },
+  "managementContext": {
+    "attribution": "Management, as reported by the Auditor General",
+    "summary": "Management reported engaging a consultant in June 2025 for annual assessments of 20% of facilities over five years, and said the first year was completed in July 2026.",
+    "recommendationNumber": 5,
+    "responseAsReported": "Agree",
+    "responseSummary": "Management planned to expand its facility policy and accompanying procedures and responsibilities.",
+    "implementationVerified": false,
+    "printedPages": [
+      11,
+      12
+    ],
+    "pdfPages": [
+      12,
+      13
+    ]
+  },
+  "limits": [
+    "The counts describe historical assessment records. They do not establish unsafe buildings, missed maintenance, financial loss, legal breach or personal wrongdoing.",
+    "The precise observation date for the 96 and 91 table totals is not explicitly established. The nearby October 31, 2025 date is attached only to the separate count of 220 recorded assessments; it is not silently applied to both tables.",
+    "The nine rows are categories, not identified facilities. Reported group totals are summaries, not extra additive rows. No combined total, rate, municipal-wide denominator or ranking is supplied.",
+    "Preserve the source construction-year labels, including 2020 to 2026 and 2010 to 2013. No construction dates, ages, addresses or individual building identities are inferred.",
+    "The source also reports data-quality concerns (printed p.9/PDF p.10). These tables are attributed audit findings, not an independently reconciled facility register.",
+    "The report month, letter date, audit period, separate assessment observation, management-reported milestones, retrieval and review dates serve different purposes. Review does not establish current conditions.",
+    "Management agreement and its reported first-year completion do not verify implementation or resolve these historical table counts. No recommendation completion status or result against the assessment plan is inferred.",
+    "This is a separate audit collection. No facility, project, recommendation or financial identities are joined to other collections. No source refresh, collector or scheduler is activated."
+  ],
+  "sourceRights": {
+    "reuseLicence": "not_established",
+    "projection": "Attributed numerical facts, short source labels and brief original paraphrases only. No report prose, PDF, page images, signatures, contact details or recommendation text are republished."
+  }
+}
